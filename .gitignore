@@ -1,0 +1,28 @@
+### vscode ###
+.vscode/*
+*.code-workspace
+.history/
+
+### intellij ###
+.idea/
+
+### eclipse ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+.recommenders
+.settings/
+.classpath
+.project
+
+### gradle ###
+.gradle
+**/build/
+!gradle-wrapper.jar
+.gradletasknamecache
