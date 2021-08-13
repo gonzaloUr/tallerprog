@@ -1,4 +1,4 @@
-image: openjdk:8
+image: gradle:7.1.1-jdk8
 
 variables:
   GRADLE_OPTS: "-Dorg.gradle.daemon=false"
@@ -8,7 +8,7 @@ before_script:
 
 build tarea1:
   stage: build
-  script: ./gradlew --build-cache :tarea1:assemble
+  script: gradlew --build-cache :tarea1:assemble
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
@@ -18,7 +18,7 @@ build tarea1:
 
 test tarea1:
   stage: test
-  script: ./gradlew :tarea1:check
+  script: gradlew :tarea1:check
   cache:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
