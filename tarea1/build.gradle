@@ -18,7 +18,7 @@ dependencies {
 }
 
 application {
-    mainClass = 'com.entrenamosuy.tarea1.Main'
+    mainClass = 'com.entrenamosuy.tarea1.view.App'
 }
 
 test {
