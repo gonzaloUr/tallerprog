@@ -14,8 +14,20 @@ public class ControladorActividadClase implements IControladorActividadClase {
     @Override
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
             LocalDateTime fecha) {
-        // TODO Auto-generated method stub
-        
+        Manejador maneja = Manejador.getInstance();
+        Map actividades = maneja.getActividades();
+        try {
+            if (actividades.containsKey(nombre)){
+                throw();
+            }
+            else {
+            Actividad act = new Actividad; //...          
+            actividades.put(nombre,nuevaActividad); //agrego la nueva actividad al map
+            }
+        } 
+        catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     @Override
