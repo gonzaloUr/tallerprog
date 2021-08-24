@@ -2,31 +2,15 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
-
-
-
-public void registrarUsuario(String n, String ap, String ci) throws UsuarioRepetidoException {
-    ManejadorUsuario mu = ManejadorUsuario.getinstance();
-    Usuario u = mu.obtenerUsuario(ci);
-    if (u != null)
-        throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
-
-    u = new Usuario(n, ap, ci);
-    mu.addUsuario(u);
-}
-
-
-
-
-
-
-
 
 
 public class ControladorUsuario implements IControladorUsuario {
@@ -56,10 +40,10 @@ public class ControladorUsuario implements IControladorUsuario {
         Map<String, Socio> mapa = man.getSocios();
         if (mapa != null) {
             Set<Triple<String, String, String>> res;
-            it = mapa.entrySet().iterator();
+            Iterator<Entry<String, Socio>> it = mapa.entrySet().iterator();
             while(it.hasNext()) {
-                Socio s = it.next();
-                Triple<String, String, String> trip = new Triple<String, String, String>(s.nombre, s.nickname, s.apellido);
+                Socio s = (Socio) it.next();
+                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido());
                 res.add(trip);
             }
             return res;
