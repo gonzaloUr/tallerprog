@@ -9,13 +9,13 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
-import exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
 
 public interface IControladorUsuario {
     
-    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException;
+    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, String descripcion, String bio, URL link) throws NombreYaExisteException;
 
-    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException;
+    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws NombreYaExisteException;
 
     void modificarDatosUsuario(String nombre, String apellido, LocalDateTime nacimiento);
         

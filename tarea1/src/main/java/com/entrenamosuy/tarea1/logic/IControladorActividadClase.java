@@ -3,6 +3,7 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -12,11 +13,11 @@ import java.time.LocalDateTime;
 
 public interface IControladorActividadClase {
 
-    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDateTime fecha);
+    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDateTime fecha) throws NombreYaExisteException;
 
     void crearInstitucion(String nombre, String descripcion, URL url);
 
-    void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores, int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro);
+    void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores, int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws NombreYaExisteException;
 
     void registarseSinCuponera(String socio, String clase, LocalDateTime fechaRegistro);
 

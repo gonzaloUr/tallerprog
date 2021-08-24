@@ -13,14 +13,14 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
-import exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
 
 
 public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            Institucion institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException {
+            Institucion institucion, String descripcion, String bio, URL link) throws NombreYaExisteException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
         Map<Email, Profesor> profesE = man.getProfesoresMail();
@@ -36,15 +36,15 @@ public class ControladorUsuario implements IControladorUsuario {
         	man.setProfesoresMail(profesE);
         }
         else if(!noExisteN){
-        	throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
+        	throw new NombreYaExisteException("Ya existe un ususario con ese nickname.");
         }
         else {
-        	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
+        	throw new NombreYaExisteException("Ya existe un usuario con ese correo electronico.");
         }
     }
 
     @Override
-    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException {
+    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws NombreYaExisteException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
         Map<Email, Profesor> profesE = man.getProfesoresMail();
@@ -60,10 +60,10 @@ public class ControladorUsuario implements IControladorUsuario {
         	man.setSociosMail(sociosE);
         }
         else if(!noExisteN){
-        	throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
+        	throw new NombreYaExisteException("Ya existe un ususario con ese nickname.");
         }
         else {
-        	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
+        	throw new NombreYaExisteException("Ya existe un usuario con ese correo electronico.");
         }
         
     }
