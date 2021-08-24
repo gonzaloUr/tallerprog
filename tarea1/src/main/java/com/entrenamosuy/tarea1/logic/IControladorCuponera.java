@@ -4,12 +4,33 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.data.DataCuponera;
+import com.entrenamosuy.tarea1.exceptions.NoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 
 public interface IControladorCuponera {
-    
-    void crearCuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin, int descuento);
 
-    Set<Pair<String, String>> cuponerasUsables(String clase, String socio);
+    /**
+     * Crea una nueva cuponera, si nombre no esta disponible tira CuponeraRepetidaException.
+     * 
+     * @param nombre Nombre unico de la cuponera.
+     * @param descripcion Descripcion de la cuponera.
+     * @param inicio Comienzo de validez.
+     * @param fin Fin de validez.
+     * @param descuento Porcentaje de descuento.
+     * @throws CuponeraRepetidaException
+     */
+    void crearCuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin, int descuento) throws CuponeraRepetidaException;
+
+    /**
+     * Retorna el nombre y la descripcion de todas las cuponeras en el sistema las cuales tienen a actividad
+     * compuesta por clase y le pertenecen a socio.
+     *
+     * @param clase Clase a buscar cuponeras para.
+     * @param activida Actividad a buscar cuponeras para.
+     * @param socio Socio cuyas cuponeras se quieren utilizar.
+     * @return Un  set de pares de la forma (nombre, descripcion).
+     */
+    Set<Pair<String, String>> cuponerasUsables(String clase, String actividad, String socio) throws NoEncontradoException;
 
     Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion);
 
