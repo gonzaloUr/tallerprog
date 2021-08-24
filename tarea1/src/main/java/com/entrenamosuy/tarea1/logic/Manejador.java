@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.util.Map;
+import com.entrenamosuy.tarea1.data.Email;
 
 public final class Manejador {
     
@@ -22,8 +23,12 @@ public final class Manejador {
     private Map<String, Institucion> instituciones;
 
     private Map<String, Profesor> profesores;
+    
+    private Map<Email, Profesor> profesoresMail;
 
     private Map<String, Socio> socios;
+    
+    private Map<Email, Socio> sociosMail;
 
     private Manejador() {}
 
@@ -70,6 +75,14 @@ public final class Manejador {
     public void setProfesores(Map<String, Profesor> profesores) {
         this.profesores = profesores;
     }
+    
+    public Map<Email, Profesor> getProfesoresMail() {
+        return profesoresMail;
+    }
+
+    public void setProfesoresMail(Map<Email, Profesor> profesores) {
+        this.profesoresMail = profesores;
+    }
 
     public Map<String, Socio> getSocios() {
         return socios;
@@ -77,5 +90,13 @@ public final class Manejador {
 
     public void setSocios(Map<String, Socio> socios) {
         this.socios = socios;
+    }
+    
+    public Map<Email, Socio> getSociosMail() {
+        return sociosMail;
+    }
+
+    public void setSociosMail(Map<Email, Socio> socios) {
+        this.sociosMail = socios;
     }
 }

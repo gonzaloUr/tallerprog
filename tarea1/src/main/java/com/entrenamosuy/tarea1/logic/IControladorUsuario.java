@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
+
 import java.util.Set;
 import java.time.LocalDateTime;
 
@@ -8,12 +9,13 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
+import exceptions.UsuarioRepetidoException;
 
 public interface IControladorUsuario {
     
-    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, String institucion, String descripcion, String bio, URL link);
+    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException;
 
-    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento);
+    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException;
 
     void modificarDatosUsuario(String nombre, String apellido, LocalDateTime nacimiento);
         

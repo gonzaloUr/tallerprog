@@ -16,24 +16,20 @@ public class Profesor extends Usuario {
 
     private URL sitioWeb;
 
-    private Set<Institucion> instituciones;
+    private Institucion institucion;
 
     private Set<Clase> clasesDictadas;
 
     public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            String descripcion, String biografia, URL sitioWeb, Set<Institucion> instituciones, Set<Clase> clasesDictadas) {
+            String descripcion, String biografia, URL sitioWeb, Institucion institucion) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
-        this.instituciones = instituciones;
-        this.clasesDictadas = clasesDictadas;
+        this.institucion = institucion;
+        this.clasesDictadas = Collections.emptySet();
     }
 
-    public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            String descripcion, String biografia, URL sitioWeb) {
-        this(nickname, nombre, apellido, correo, nacimiento, descripcion, biografia, sitioWeb, Collections.emptySet(), Collections.emptySet());
-    }
 
     public String getDescripcion() {
         return descripcion;
