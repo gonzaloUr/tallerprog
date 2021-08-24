@@ -15,19 +15,15 @@ public class ControladorActividadClase implements IControladorActividadClase {
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
             LocalDateTime fecha) {
         Manejador maneja = Manejador.getInstance();
-        Map actividades = maneja.getActividades();
-        try {
-            if (actividades.containsKey(nombre)){
-                throw();
-            }
-            else {
-            Actividad act = new Actividad; //...          
-            actividades.put(nombre,nuevaActividad); //agrego la nueva actividad al map
-            }
-        } 
-        catch (Exception e) {
-            //TODO: handle exception
+        Map actividades = maneja.getActividades();   //Tengo que especificar los tipos del map? Tengo que importar el paquete map? 
+        if (actividades.containsKey(nombre)){
+            throw new YaExisteActividad("La actividad llamada " + nombre + " ya existe.");
         }
+        else {
+            Actividad act = new Actividad(nombre,descripcion,duracion,fecha,costo);          
+            actividades.put(nombre,nuevaActividad);
+        }
+        
     }
 
     @Override
@@ -39,8 +35,10 @@ public class ControladorActividadClase implements IControladorActividadClase {
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
             int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) {
-        // TODO Auto-generated method stub
-        
+        Manejador maneja = Manejador.getInstance();
+        Map actividades = maneja.getActividades();   
+        Actividad actividad = actividades.get(nombreActividad);
+        actividad.crearClase(nombre,inicio,nombreProfesores,cantMin,cantMax,acceso,fechaRegistro);
     }
 
     @Override

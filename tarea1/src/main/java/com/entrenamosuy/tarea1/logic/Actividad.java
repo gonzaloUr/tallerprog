@@ -64,6 +64,11 @@ public class Actividad {
         this.costo = costo;
     }
 
+    public void crearClase(String nombre, LocalDateTime inicio, Set<String> nombreProfesores, int cantMin, 
+        int cantMax, URL acceso, LocalDateTime fechaRegistro){
+
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre);
