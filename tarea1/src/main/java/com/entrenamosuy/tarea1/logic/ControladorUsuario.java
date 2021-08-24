@@ -9,6 +9,26 @@ import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
 
+
+
+public void registrarUsuario(String n, String ap, String ci) throws UsuarioRepetidoException {
+    ManejadorUsuario mu = ManejadorUsuario.getinstance();
+    Usuario u = mu.obtenerUsuario(ci);
+    if (u != null)
+        throw new UsuarioRepetidoException("El usuario " + ci + " ya esta registrado");
+
+    u = new Usuario(n, ap, ci);
+    mu.addUsuario(u);
+}
+
+
+
+
+
+
+
+
+
 public class ControladorUsuario implements IControladorUsuario {
 
     @Override
@@ -31,9 +51,21 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public Set<Triple<String, String, String>> obtenerDescSocios() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException {
+        Manejador man = Manejador.getInstance();
+        Map<String, Socio> mapa = man.getSocios();
+        if (mapa != null) {
+            Set<Triple<String, String, String>> res;
+            it = mapa.entrySet().iterator();
+            while(it.hasNext()) {
+                Socio s = it.next();
+                Triple<String, String, String> trip = new Triple<String, String, String>(s.nombre, s.nickname, s.apellido);
+                res.add(trip);
+            }
+            return res;
+        }
+        else  
+            throw new SociosVacioException("No hay socios en el sistema");
     }
 
     @Override
