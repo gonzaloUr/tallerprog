@@ -1,6 +1,5 @@
-package exceptions;
+package com.entrenamosuy.tarea1.exceptions;
 
-@SuppressWarnings("serial")
 public class UsuarioRepetidoException extends Exception {
 	
 	public UsuarioRepetidoException(String mensaje) {

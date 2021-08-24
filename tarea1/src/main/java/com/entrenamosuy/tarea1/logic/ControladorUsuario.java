@@ -8,13 +8,16 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
+import java.util.HashSet;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.util.Triple;
-import exceptions.UsuarioRepetidoException;
-
 
 public class ControladorUsuario implements IControladorUsuario {
 
@@ -69,7 +72,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarDatosUsuario(String nombre, String apellido, LocalDateTime nacimiento) {
+    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDateTime nacimiento) {
         // TODO Auto-generated method stub
         
     }
@@ -79,7 +82,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
         if (mapa != null) {
-            Set<Triple<String, String, String>> res;
+            Set<Triple<String, String, String>> res = new HashSet<>();
             Iterator<Entry<String, Socio>> it = mapa.entrySet().iterator();
             while(it.hasNext()) {
                 Socio s = (Socio) it.next();
@@ -88,7 +91,7 @@ public class ControladorUsuario implements IControladorUsuario {
             }
             return res;
         }
-        else  
+        else
             throw new SociosVacioException("No hay socios en el sistema");
     }
 
@@ -97,7 +100,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
         if (mapa != null) {
-            Set<Triple<String, String, String>> res;
+            Set<Triple<String, String, String>> res = new HashSet<>();
             Iterator<Entry<String, Profesor>> it = mapa.entrySet().iterator();
             while(it.hasNext()) {
                 Profesor p = (Profesor) it.next();
@@ -111,20 +114,20 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public DataUsuario consultarSocio(String nickname) throws SocioNoExisteException{
+    public DataUsuario consultarSocio(String nickname) throws UsuarioNoEncontradoException {
         Manejador man = Manejador.getInstance();
-        Map<String, Socio> mapa = man.getSocio();
+        Map<String, Socio> mapa = man.getSocios();
         Socio p = mapa.get(nickname);
         if (p != null) {
             DataUsuario r = p.getDataUsuario(); //Implementarlo en la clase Usuario/Socio
             return r;
         }
         else
-            throw new SocioNoExisteException("No existe un socio con ese nickname en el sistema");
+            throw new UsuarioNoEncontradoException("No existe un socio con ese nickname en el sistema");
     }
 
     @Override
-    public DataProfesor consultarProfesor(String nickname) throws ProfesorNoExisteException{
+    public DataProfesor consultarProfesor(String nickname) throws UsuarioNoEncontradoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
         Profesor p = mapa.get(nickname);
@@ -133,7 +136,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return r;
         }
         else
-            throw new ProfesorNoExisteException("No existe un profesor con ese nickname en el sistema");
+            throw new UsuarioNoEncontradoException("No existe un profesor con ese nickname en el sistema");
 
     }
 }

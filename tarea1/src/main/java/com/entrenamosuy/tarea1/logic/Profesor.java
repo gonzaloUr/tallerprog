@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.Email;
 
 public class Profesor extends Usuario {
@@ -55,12 +56,12 @@ public class Profesor extends Usuario {
         this.sitioWeb = sitioWeb;
     }
 
-    public Set<Institucion> getInstituciones() {
-        return instituciones;
+    public Institucion getInstitucion() {
+        return institucion;
     }
 
-    public void setInstituciones(Set<Institucion> instituciones) {
-        this.instituciones = instituciones;
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
     }
 
     public Set<Clase> getClasesDictadas() {
@@ -75,7 +76,7 @@ public class Profesor extends Usuario {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + Objects.hash(biografia, clasesDictadas, descripcion, instituciones, sitioWeb);
+        result = prime * result + Objects.hash(biografia, clasesDictadas, descripcion, institucion, sitioWeb);
         return result;
     }
 
@@ -89,7 +90,12 @@ public class Profesor extends Usuario {
             return false;
         Profesor other = (Profesor) obj;
         return Objects.equals(biografia, other.biografia) && Objects.equals(clasesDictadas, other.clasesDictadas)
-                && Objects.equals(descripcion, other.descripcion) && Objects.equals(instituciones, other.instituciones)
+                && Objects.equals(descripcion, other.descripcion) && Objects.equals(institucion, other.institucion)
                 && Objects.equals(sitioWeb, other.sitioWeb);
+    }
+
+
+    public DataProfesor getDataProfesor() {
+        return null;
     }
 }

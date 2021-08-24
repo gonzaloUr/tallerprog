@@ -5,7 +5,9 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
+import com.entrenamosuy.tarea1.util.Pair;
 
 public class Socio extends Usuario {
 
@@ -58,5 +60,13 @@ public class Socio extends Usuario {
             return false;
         Socio other = (Socio) obj;
         return Objects.equals(compras, other.compras) && Objects.equals(registros, other.registros);
+    }
+
+    public Set<Pair<String, String>> cuponerasValidas(Clase c, Actividad a) {
+        return null;
+    }
+
+    public DataUsuario getDataUsuario() {
+        return null;
     }
 }

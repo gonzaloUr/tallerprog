@@ -13,39 +13,51 @@ public class DataProfesor extends DataUsuario {
 
     private final URL sitioWeb;
 
+    private final Set<DataActividad> actividades;
+
     public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
             Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb) {
-        super(nickname, nombre, apellido, correo, nacimiento, actividades);
+        super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
-   }
+        this.actividades = actividades;
+    }
 
-   public String getDescripcion() {
-       return descripcion;
-   }
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-   public String getBiografia() {
-       return biografia;
-   }
+    public String getBiografia() {
+        return biografia;
+    }
 
-   public URL getSitioWeb() {
-       return sitioWeb;
-   }
+    public URL getSitioWeb() {
+        return sitioWeb;
+    }
 
-   @Override
-   public int hashCode() {
-       return Objects.hash(super.hashCode(), descripcion, biografia, sitioWeb);
-   }
+    public Set<DataActividad> getActividades() {
+        return actividades;
+    }
 
-   @Override
-   public boolean equals(Object obj) {
-       if (this == obj)
-           return true;
-       if (obj == null || getClass() != obj.getClass())
-           return false;
-       DataProfesor other = (DataProfesor) obj;
-       return super.equals(other) && descripcion.equals(other.descripcion)
-               && biografia.equals(other.biografia) && sitioWeb.equals(other.sitioWeb);
-   }
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + Objects.hash(actividades, biografia, descripcion, sitioWeb);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        DataProfesor other = (DataProfesor) obj;
+        return Objects.equals(actividades, other.actividades) && Objects.equals(biografia, other.biografia)
+                && Objects.equals(descripcion, other.descripcion) && Objects.equals(sitioWeb, other.sitioWeb);
+    }
 }
