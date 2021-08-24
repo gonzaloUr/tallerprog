@@ -11,8 +11,10 @@ import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
 public interface IControladorUsuario {
@@ -87,7 +89,7 @@ public interface IControladorUsuario {
      * @param nombre Nombre del socio.
      * @return El DataUsuario correspondiente a nombre.
      */
-    DataUsuario consultarSocio(String nombre) throws UsuarioNoEncontradoException;
+    DataUsuario consultarSocio(String nombre) throws SocioNoEncontradoException;
 
     /**
      * Retorna el DataProfesor asociado al nombre pasado o tira una excepcion si no
@@ -96,5 +98,5 @@ public interface IControladorUsuario {
      * @param nombre Nombre del profesor.
      * @return El DataProfesor correspondiente a nombre.
      */
-    DataProfesor consultarProfesor(String nombre) throws UsuarioNoEncontradoException;
+    DataProfesor consultarProfesor(String nombre) throws ProfesorNoEncontradoException;
 }

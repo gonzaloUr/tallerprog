@@ -15,8 +15,9 @@ import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
 public class ControladorUsuario implements IControladorUsuario {
@@ -114,7 +115,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public DataUsuario consultarSocio(String nickname) throws UsuarioNoEncontradoException {
+    public DataUsuario consultarSocio(String nickname) throws SocioNoEncontradoException {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
         Socio p = mapa.get(nickname);
@@ -123,11 +124,11 @@ public class ControladorUsuario implements IControladorUsuario {
             return r;
         }
         else
-            throw new UsuarioNoEncontradoException("No existe un socio con ese nickname en el sistema");
+            throw new SocioNoEncontradoException("No existe un socio con ese nickname en el sistema");
     }
 
     @Override
-    public DataProfesor consultarProfesor(String nickname) throws UsuarioNoEncontradoException {
+    public DataProfesor consultarProfesor(String nickname) throws ProfesorNoEncontradoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
         Profesor p = mapa.get(nickname);
@@ -136,7 +137,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return r;
         }
         else
-            throw new UsuarioNoEncontradoException("No existe un profesor con ese nickname en el sistema");
+            throw new ProfesorNoEncontradoException("No existe un profesor con ese nickname en el sistema");
 
     }
 }

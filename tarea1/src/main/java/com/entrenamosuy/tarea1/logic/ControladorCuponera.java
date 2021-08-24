@@ -7,7 +7,7 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.NoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Pair;
 
 public class ControladorCuponera implements IControladorCuponera {
@@ -34,7 +34,7 @@ public class ControladorCuponera implements IControladorCuponera {
             throw new ClaseNoEncontradaException(clase);
 
         if (s == null)
-            throw new UsuarioNoEncontradoException(socio);
+            throw new SocioNoEncontradoException(socio);
 
         if (a == null)
             throw new ActividadNoEncontradaException(actividad);
