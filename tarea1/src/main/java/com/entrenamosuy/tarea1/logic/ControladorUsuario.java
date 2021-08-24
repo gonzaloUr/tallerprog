@@ -3,14 +3,18 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
+
 import java.util.Map;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
 import exceptions.UsuarioRepetidoException;
+
 
 public class ControladorUsuario implements IControladorUsuario {
 
@@ -130,5 +134,6 @@ public class ControladorUsuario implements IControladorUsuario {
         }
         else
             throw new ProfesorNoExisteException("No existe un profesor con ese nickname en el sistema");
+
     }
 }
