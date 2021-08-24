@@ -53,20 +53,47 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public Set<Triple<String, String, String>> obtenerDescProfesores() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException {
+        Manejador man = Manejador.getInstance();
+        Map<String, Profesor> mapa = man.getProfesores();
+        if (mapa != null) {
+            Set<Triple<String, String, String>> res;
+            Iterator<Entry<String, Profesor>> it = mapa.entrySet().iterator();
+            while(it.hasNext()) {
+                Profesor p = (Profesor) it.next();
+                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido());
+                res.add(trip);
+            }
+            return res;
+        }
+        else  
+            throw new ProfesoresVacioException("No hay profesores en el sistema");
+        
     }
 
     @Override
-    public DataUsuario consultarSocio(String nombre) {
-        // TODO Auto-generated method stub
-        return null;
+    public DataUsuario consultarSocio(String nombre) throws SocioNoExisteException{
+        Manejador man = Manejador.getInstance();
+        Map<String, Profesor> mapa = man.getSocios();
+        Socio p = mapa.get(nombre);
+        if (p != null) {
+            DataProfesor r = p.getDataProfesor(); //Implementarlo en la clase Profesor
+            return r;
+        }
+        else
+            throw new SocioNoExisteException("No existe un profesor con ese nombre en el sistema");
     }
 
     @Override
-    public DataProfesor consultarProfesor(String nombre) {
-        // TODO Auto-generated method stub
-        return null;
+    public DataProfesor consultarProfesor(String nombre) throws ProfesorNoExisteException{
+        Manejador man = Manejador.getInstance();
+        Map<String, Profesor> mapa = man.getProfesores();
+        Profesor p = mapa.get(nombre);
+        if (p != null) {
+            DataProfesor r = p.getDataProfesor(); //Implementarlo en la clase Profesor
+            return r;
+        }
+        else
+            throw new ProfesorNoExisteException("No existe un profesor con ese nombre en el sistema");
     }
 }
