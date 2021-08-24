@@ -3,6 +3,7 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Iterator;
 
 import java.util.Map;
@@ -14,6 +15,10 @@ import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
 import exceptions.UsuarioRepetidoException;
+import exceptions.SociosVacioException;
+import exceptions.SocioNoExisteException;
+import exceptions.ProfesoresVacioException;
+import exceptions.ProfesorNoExisteException;
 
 
 public class ControladorUsuario implements IControladorUsuario {
@@ -79,7 +84,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
         if (mapa != null) {
-            Set<Triple<String, String, String>> res;
+            Set<Triple<String, String, String>> res = Collections.emptySet();
             Iterator<Entry<String, Socio>> it = mapa.entrySet().iterator();
             while(it.hasNext()) {
                 Socio s = (Socio) it.next();
@@ -97,7 +102,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
         if (mapa != null) {
-            Set<Triple<String, String, String>> res;
+            Set<Triple<String, String, String>> res = Collections.emptySet();
             Iterator<Entry<String, Profesor>> it = mapa.entrySet().iterator();
             while(it.hasNext()) {
                 Profesor p = (Profesor) it.next();
@@ -113,7 +118,7 @@ public class ControladorUsuario implements IControladorUsuario {
     @Override
     public DataUsuario consultarSocio(String nickname) throws SocioNoExisteException{
         Manejador man = Manejador.getInstance();
-        Map<String, Socio> mapa = man.getSocio();
+        Map<String, Socio> mapa = man.getSocios();
         Socio p = mapa.get(nickname);
         if (p != null) {
             DataUsuario r = p.getDataUsuario(); //Implementarlo en la clase Usuario/Socio

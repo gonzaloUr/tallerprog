@@ -10,6 +10,10 @@ import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Triple;
 import exceptions.UsuarioRepetidoException;
+import exceptions.SociosVacioException;
+import exceptions.SocioNoExisteException;
+import exceptions.ProfesoresVacioException;
+import exceptions.ProfesorNoExisteException;
 
 public interface IControladorUsuario {
     
@@ -25,7 +29,7 @@ public interface IControladorUsuario {
      * 
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
      */
-    Set<Triple<String, String, String>> obtenerDescSocios();
+    Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException;
 
     /**
      * Retorna el nickname, nombre y apellido de todos los profesores en
@@ -33,7 +37,7 @@ public interface IControladorUsuario {
      * 
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
      */
-    Set<Triple<String, String, String>> obtenerDescProfesores();
+    Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException;
 
     /**
      * Retorna el DataUsuario asociado al nombre pasado o tira una excepcion si no
@@ -42,7 +46,7 @@ public interface IControladorUsuario {
      * @param nombre Nombre del socio.
      * @return El DataUsuario correspondiente a nombre.
      */
-    DataUsuario consultarSocio(String nombre);
+    DataUsuario consultarSocio(String nombre) throws SocioNoExisteException;
 
     /**
      * Retorna el DataProfesor asociado al nombre pasado o tira una excepcion si no
@@ -51,5 +55,5 @@ public interface IControladorUsuario {
      * @param nombre Nombre del profesor.
      * @return El DataProfesor correspondiente a nombre.
      */
-    DataProfesor consultarProfesor(String nombre);
+    DataProfesor consultarProfesor(String nombre) throws ProfesorNoExisteException;
 }
