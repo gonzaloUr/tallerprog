@@ -60,7 +60,7 @@ public class Actividad {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(float costo) {
         this.costo = costo;
     }
     

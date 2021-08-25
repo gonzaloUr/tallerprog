@@ -8,7 +8,7 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
@@ -36,7 +36,7 @@ public interface IControladorUsuario {
      * @throws InstitucionNoEncontradaException
      */
     void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, 
-        String descripcion, String bio, URL link) throws NombreYaExisteException, InstitucionNoEncontradaException;
+        String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException;
 
     /**
      * Crea un nuevo socio en el sistema, si nickname o el correo ya estan usados se tira la excepcion
@@ -49,7 +49,7 @@ public interface IControladorUsuario {
      * @param nacimiento Fecha de nacimiento del socio.
      * @throws NombreYaExisteException
      */
-    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws NombreYaExisteException;
+    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException;
 
     /**
      * Se modifica el nombre, apellido y fecha de nacimiento del usuario identificado por el nickname pasado a
