@@ -2,7 +2,13 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.entrenamosuy.tarea1.data.DataActividad;
+import com.entrenamosuy.tarea1.data.DataClase;
+import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.data.DescActividad;
 
 public class Actividad {
@@ -17,12 +23,15 @@ public class Actividad {
 
     private float costo;
 
-    public Actividad(String nombre, String descripcion, Duration duracion, LocalDateTime fechaRegistro, float costo) {
+    private Set<Clase> clases;
+
+    public Actividad(String nombre, String descripcion, Duration duracion, LocalDateTime fechaRegistro, float costo, Set<Clase> clases) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
         this.fechaRegistro = fechaRegistro;
         this.costo = costo;
+        this.clases = clases;
     }
 
     public String getNombre() {
@@ -65,14 +74,33 @@ public class Actividad {
         this.costo = costo;
     }
 
+    public Set<Clase> getClases() {
+        return clases;
+    }
+
+    public void setClases(Set<Clase> clases) {
+        this.clases = clases;
+    }
+
+    public DataActividad getDataActividad() { //TODO Haciendo
+        Set<DataCuponera> cuponeras = new HashSet<>();
+        Set<DataClase> clases = new HashSet<>();
+        DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion,this.fechaRegistro, this.costo, clases, cuponeras);
+        return res;
+    }
+
     public DescActividad getDescActividad() {
         DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
         return res;
     }
+
+    public void agregarClase(Clase cl) {
+        this.clases.add(cl);
+    }
     
     @Override
     public int hashCode() {
-        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre);
+        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre, clases);
     }
 
     @Override

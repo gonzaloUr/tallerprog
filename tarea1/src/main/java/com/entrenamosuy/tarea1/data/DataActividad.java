@@ -15,13 +15,13 @@ public class DataActividad {
 
     private final LocalDateTime registro;
 
-    private final int costo;
+    private final float costo;
 
     private final Set<DataClase> clases;
 
     private final Set<DataCuponera> cuponeras;
 
-    public DataActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, int costo,
+    public DataActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, float costo,
             Set<DataClase> clases, Set<DataCuponera> cuponeras) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -48,7 +48,7 @@ public class DataActividad {
         return registro;
     }
 
-    public int getCosto() {
+    public float getCosto() {
         return costo;
     }
 

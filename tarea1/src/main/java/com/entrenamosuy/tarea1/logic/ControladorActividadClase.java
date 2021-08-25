@@ -24,7 +24,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (actividades.containsKey(nombre)) {
             throw new UsuarioRepetidoException("La actividad llamada " + nombre + " ya existe.");
         } else {
-            Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
+            Set<Clase> clases =  new HashSet<>();// SET DE CLASES VACIO. Las actividades ahora ven sus clases.
+            Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo, clases);
             actividades.put(nombre, nuevaActividad);
             // me falta linkear la institucion a la actividad o al reves
         }
@@ -56,9 +57,9 @@ public class ControladorActividadClase implements IControladorActividadClase {
                 profes.add(p);              
             }                                         // ACA CREAMOS LA CLASE CON LOS PROFESORES
             Set<Registro> registros = new HashSet<>();
-            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // Tambien linkeamos la clase con la actividad
+            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // TAMBIEN SE HACE EL LINK DE CLASE A ACTIVIDAD
             clases.put(nombre, nuevaClase);
-            //falta linkear la clase a actividad o viceversa
+            actividad.agregarClase(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
         }
     }
 

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -112,7 +113,13 @@ public class Profesor extends Usuario {
     public DataProfesor getDataProfesor() {
         String institucionNombre = this.getInstitucion().getNombre();
         Set<DataActividad> actividades = new HashSet<>();
-
+        Set<Actividad> acti = this.getActividad();
+        Iterator<Actividad> it = acti.iterator();
+        while(it.hasNext()) {
+            Actividad a = it.next();
+            DataActividad dataA = a.getDataActividad(); // TODO DataActividad en actividad
+            actividades.add(dataA);
+        }     
         DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
         return res;
     }
