@@ -109,16 +109,12 @@ public class Profesor extends Usuario {
                 && Objects.equals(sitioWeb, other.sitioWeb);
     }
 
-
     public DataProfesor getDataProfesor() {
         String institucionNombre = this.getInstitucion().getNombre();
         Set<DataActividad> actividades = new HashSet<>();
 
         DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
-        
-
         return res;
-
     }
 
     public DescProfesor getDescProfesor() {
