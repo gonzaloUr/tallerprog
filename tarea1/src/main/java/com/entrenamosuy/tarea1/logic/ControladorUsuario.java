@@ -31,7 +31,8 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
         boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
         if(noExisteN && noExisteE) {
-        	Profesor nuevo = new Profesor(nickname, nombre, apellido, correo, nacimiento,descripcion, bio, link, institucion);
+        	Set<Actividad> actividades = new HashSet<>();
+            Profesor nuevo = new Profesor(nickname, nombre, apellido, correo, nacimiento,descripcion, bio, link, institucion, actividades);
         	profes.put(nickname, nuevo);
         	man.setProfesores(profes);
         	profesE.put(correo, nuevo);

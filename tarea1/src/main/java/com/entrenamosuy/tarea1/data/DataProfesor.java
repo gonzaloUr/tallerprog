@@ -15,19 +15,26 @@ public class DataProfesor extends DataUsuario {
 
     private final Set<DataActividad> actividades;
 
+    private final String institucionNombre;
+
     public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb) {
+            Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb, String institucionNombre) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.actividades = actividades;
+        this.institucionNombre = institucionNombre;
     }
 
     public String getDescripcion() {
         return descripcion;
     }
 
+    public String getInstitucionNombre() {
+        return institucionNombre;
+    }
+    
     public String getBiografia() {
         return biografia;
     }
@@ -44,7 +51,7 @@ public class DataProfesor extends DataUsuario {
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + Objects.hash(actividades, biografia, descripcion, sitioWeb);
+        result = prime * result + Objects.hash(actividades, biografia, descripcion, sitioWeb, institucionNombre);
         return result;
     }
 

@@ -3,12 +3,14 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.data.Email;
+import com.entrenamosuy.tarea1.data.DataActividad;
 
 public class Profesor extends Usuario {
 
@@ -22,14 +24,18 @@ public class Profesor extends Usuario {
 
     private Set<Clase> clasesDictadas;
 
+    private Set<Actividad> actividades;
+
     public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            String descripcion, String biografia, URL sitioWeb, Institucion institucion) {
+            String descripcion, String biografia, URL sitioWeb, Institucion institucion, 
+            Set<Actividad> actividades) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.institucion = institucion;
         this.clasesDictadas = Collections.emptySet();
+        this.actividades = actividades;
     }
 
 
@@ -73,11 +79,19 @@ public class Profesor extends Usuario {
         this.clasesDictadas = clasesDictadas;
     }
 
+    public void setActividad(Set<Actividad> actividades) {
+        this.actividades = actividades;
+    }
+
+    public Set<Actividad> getActividad() {
+        return actividades;
+    }
+
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = super.hashCode();
-        result = prime * result + Objects.hash(biografia, clasesDictadas, descripcion, institucion, sitioWeb);
+        result = prime * result + Objects.hash(biografia, clasesDictadas, descripcion, institucion, sitioWeb, actividades);
         return result;
     }
 
@@ -97,7 +111,14 @@ public class Profesor extends Usuario {
 
 
     public DataProfesor getDataProfesor() {
-        return null;
+        String institucionNombre = this.getInstitucion().getNombre();
+        Set<DataActividad> actividades = new HashSet<>();
+
+        DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
+        
+
+        return res;
+
     }
 
     public DescProfesor getDescProfesor() {
