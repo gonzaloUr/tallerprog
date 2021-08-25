@@ -5,6 +5,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
+//import com.entrenamosuy.tarea1.logic.Actividad;
+//import com.entrenamosuy.tarea1.logic.Profesor;
+import com.entrenamosuy.tarea1.logic.Registro;
+
 public class DataClase {
     
     private final String nombre;
@@ -15,22 +19,22 @@ public class DataClase {
 
     private final URL accesoURL;
 
-    private final LocalDateTime registro;
+    private final Set<Registro> registro;
 
     private final DescActividad actividad;
 
     private final Set<DescProfesor> profesores;
 
     public DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
-            LocalDateTime registro, DescActividad actividad, Set<DescProfesor> profesores) {
+            Set<Registro> set, DescActividad actividad2, Set<DescProfesor> set2) {
         this.nombre = nombre;
         this.inicio = inicio;
         this.cantMin = cantMin;
         this.cantMax = cantMax;
         this.accesoURL = accesoURL;
-        this.registro = registro;
-        this.actividad = actividad;
-        this.profesores = profesores;
+        this.registro = set;
+        this.actividad = actividad2;
+        this.profesores = set2;
     }
 
     @Override

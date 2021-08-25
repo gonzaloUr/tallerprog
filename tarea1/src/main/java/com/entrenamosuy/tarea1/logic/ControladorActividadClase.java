@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -36,7 +37,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
+    public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nicknameProfesores,
             int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
@@ -46,8 +47,16 @@ public class ControladorActividadClase implements IControladorActividadClase {
             throw new UsuarioRepetidoException("La clase llamada " + nombre + " ya existe.");
         }
         else {
+            Set<Profesor> profes = new HashSet<>();   // ACA CREAMOS LA CLASE CON LOS PROFESORES
+            Map<String, Profesor> profesores = maneja.getProfesores();
+            Iterator<String> it = nicknameProfesores.iterator();
+            while(it.hasNext()) {
+                String nomP = it.next();
+                Profesor p = profesores.get(nomP);
+                profes.add(p);              
+            }                                         // ACA CREAMOS LA CLASE CON LOS PROFESORES
             Set<Registro> registros = new HashSet<>();
-            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros);
+            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // Tambien linkeamos la clase con la actividad
             clases.put(nombre, nuevaClase);
             //falta linkear la clase a actividad o viceversa
         }

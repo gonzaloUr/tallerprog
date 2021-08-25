@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.net.URL;
 import java.util.Set;
 import java.util.Objects;
-import java.util.Collections;
+//import java.util.Collections;
 import com.entrenamosuy.tarea1.data.DataClase;
+import com.entrenamosuy.tarea1.data.DescProfesor;
+import com.entrenamosuy.tarea1.data.DescActividad;
 
 public class Clase {
 
@@ -21,8 +23,13 @@ public class Clase {
 
     private Set<Registro> registros;
 
+    private Set<Profesor> profesores;
+
+    private Actividad actividad;
+
     public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
-                 URL acceso, LocalDateTime fechaRegistro, Set<Registro> registros) {
+                 URL acceso, LocalDateTime fechaRegistro, Set<Registro> registros, 
+                 Set<Profesor> profesores, Actividad actividad) {
         this.nombre = nombre;
         this.inicio = inicio;
         this.cantMin = cantMin;
@@ -30,12 +37,14 @@ public class Clase {
         this.acceso = acceso;
         this.fechaRegistro = fechaRegistro;
         this.registros = registros;
+        this.profesores = profesores;
+        this.actividad = actividad;
     }
 
-    public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
+/*    public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
                  URL acceso, LocalDateTime fechaRegistro) {
         this(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, Collections.emptySet());
-    }
+    }*/
 
     public String getNombre() {
         return nombre;
@@ -93,6 +102,23 @@ public class Clase {
         this.registros = registros;
     }
 
+    public Set<Profesor> getProfesores() {
+        return profesores;
+    }
+    
+
+    public void setProfesores(Set<Profesor> profesores) {
+        this.profesores = profesores;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(acceso, cantMax, cantMin, fechaRegistro, inicio, nombre, registros);
@@ -113,6 +139,14 @@ public class Clase {
     }
 
     public DataClase getDataClase() {
-        return null;
+        Set<DescProfesor> profes = null ;
+        DescActividad act = null;
+        DataClase res = new DataClase(this.getNombre(), this.getInicio(), this.getCantMin(), this.getCantMax(), this.getAcceso(),
+            this.getRegistros(), act, profes);
+        return res;
+
+
+      //  public DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
+           // LocalDateTime registro, DescActividad actividad, Set<DescProfesor> profesores)
     }
 }
