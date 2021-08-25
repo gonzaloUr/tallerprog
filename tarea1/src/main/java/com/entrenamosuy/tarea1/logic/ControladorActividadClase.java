@@ -1,13 +1,12 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -15,19 +14,18 @@ import com.entrenamosuy.tarea1.util.Triple;
 public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
-    public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, int costo,
-            LocalDateTime fecha) throws NombreYaExisteException {
+    public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
+            LocalDateTime fecha) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
-        Map<String, Actividad> actividades = maneja.getActividades();   //Tengo que especificar los tipos del map? Tengo que importar el paquete map? 
-        if (actividades.containsKey(nombre)){
-            throw new NombreYaExisteException("La actividad llamada " + nombre + " ya existe.");
+        Map<String, Actividad> actividades = maneja.getActividades(); // Tengo que especificar los tipos del map? Tengo
+                                                                      // que importar el paquete map?
+        if (actividades.containsKey(nombre)) {
+            throw new UsuarioRepetidoException("La actividad llamada " + nombre + " ya existe.");
+        } else {
+            Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
+            actividades.put(nombre, nuevaActividad);
+            // me falta linkear la institucion a la actividad o al reves
         }
-        else {
-            Actividad nuevaActividad = new Actividad(nombre,descripcion,duracion,fecha,costo);          
-            actividades.put(nombre,nuevaActividad);
-            //me falta linkear la institucion a la actividad o al reves
-        }
-        
     }
 
     @Override
@@ -38,17 +36,16 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws NombreYaExisteException{
+            int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
         Actividad actividad = actividades.get(nombreActividad);
         Map<String, Clase> clases = maneja.getClases();
         if (clases.containsKey(nombre)){
-            throw new NombreYaExisteException("La clase llamada " + nombre + " ya existe.");
+            throw new UsuarioRepetidoException("La clase llamada " + nombre + " ya existe.");
         }
         else {
-            //aca falta crear un set vacio llamado registros
-            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros);
+            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro);
             clases.put(nombre, nuevaClase);
             //falta linkear la clase a actividad o viceversa
         }
@@ -89,4 +86,5 @@ public class ControladorActividadClase implements IControladorActividadClase {
         // TODO Auto-generated method stub
         return null;
     }
+
 }

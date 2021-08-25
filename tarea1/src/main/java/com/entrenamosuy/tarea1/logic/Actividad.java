@@ -14,9 +14,9 @@ public class Actividad {
 
     private LocalDateTime fechaRegistro;
 
-    private int costo;
+    private float costo;
 
-    public Actividad(String nombre, String descripcion, Duration duracion, LocalDateTime fechaRegistro, int costo) {
+    public Actividad(String nombre, String descripcion, Duration duracion, LocalDateTime fechaRegistro, float costo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -56,11 +56,11 @@ public class Actividad {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public int getCosto() {
+    public float getCosto() {
         return costo;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(float costo) {
         this.costo = costo;
     }
     

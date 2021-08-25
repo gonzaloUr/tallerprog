@@ -37,7 +37,7 @@ public interface IControladorUsuario {
      * @throws InstitucionNoEncontradaException
      */
     void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, 
-        String descripcion, String bio, URL link) throws NombreYaExisteException, InstitucionNoEncontradaException;
+        String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException;
 
     /**
      * Crea un nuevo socio en el sistema, si nickname o el correo ya estan usados se tira la excepcion
@@ -50,7 +50,7 @@ public interface IControladorUsuario {
      * @param nacimiento Fecha de nacimiento del socio.
      * @throws NombreYaExisteException
      */
-    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws NombreYaExisteException;
+    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException;
 
     /**
      * Se modifica el nombre, apellido y fecha de nacimiento del usuario identificado por el nickname pasado a

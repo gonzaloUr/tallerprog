@@ -19,17 +19,12 @@ import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Triple;
-<<<<<<< HEAD
-import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
-
-=======
->>>>>>> 85ffd272f33d60246ea93eb50f0c90cd59b9abee
 
 public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
-            Institucion institucion, String descripcion, String bio, URL link) throws NombreYaExisteException {
+            Institucion institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
         Map<Email, Profesor> profesE = man.getProfesoresMail();
@@ -45,15 +40,15 @@ public class ControladorUsuario implements IControladorUsuario {
         	man.setProfesoresMail(profesE);
         }
         else if(!noExisteN){
-        	throw new NombreYaExisteException("Ya existe un ususario con ese nickname.");
+        	throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
         }
         else {
-        	throw new NombreYaExisteException("Ya existe un usuario con ese correo electronico.");
+        	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
         }
     }
 
     @Override
-    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws NombreYaExisteException {
+    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
         Map<Email, Profesor> profesE = man.getProfesoresMail();
@@ -69,10 +64,10 @@ public class ControladorUsuario implements IControladorUsuario {
         	man.setSociosMail(sociosE);
         }
         else if(!noExisteN){
-        	throw new NombreYaExisteException("Ya existe un ususario con ese nickname.");
+        	throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
         }
         else {
-        	throw new NombreYaExisteException("Ya existe un usuario con ese correo electronico.");
+        	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
         }
         
     }
