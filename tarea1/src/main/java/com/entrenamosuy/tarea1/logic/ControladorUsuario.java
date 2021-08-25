@@ -1,23 +1,21 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-
 import java.time.LocalDateTime;
-import java.util.Iterator;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
-import com.entrenamosuy.tarea1.data.DataUsuario;
+import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
 public class ControladorUsuario implements IControladorUsuario {
@@ -115,12 +113,12 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public DataUsuario consultarSocio(String nickname) throws SocioNoEncontradoException {
+    public DataSocio consultarSocio(String nickname) throws SocioNoEncontradoException {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
         Socio p = mapa.get(nickname);
         if (p != null) {
-            DataUsuario r = p.getDataUsuario(); //Implementarlo en la clase Usuario/Socio
+            DataSocio r = p.getDataSocio(); //Implementarlo en la clase Usuario/Socio
             return r;
         }
         else

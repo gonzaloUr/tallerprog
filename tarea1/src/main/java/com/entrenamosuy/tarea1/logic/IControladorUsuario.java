@@ -1,20 +1,19 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-
-import java.util.Set;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
 public interface IControladorUsuario {
