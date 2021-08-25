@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.net.URL;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -15,7 +15,7 @@ public class DataProfesor extends DataUsuario {
 
     private final Set<DataActividad> actividades;
 
-    public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
+    public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
             Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;

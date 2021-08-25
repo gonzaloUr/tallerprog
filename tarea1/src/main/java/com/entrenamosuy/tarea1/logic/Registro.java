@@ -9,9 +9,20 @@ public class Registro {
 
     private float costo;
 
-    public Registro(LocalDateTime fecha, int costo) {
+    private Clase claseAsociada;
+
+    public Registro(LocalDateTime fecha, int costo, Clase claseAsociada) {
         this.fecha = fecha;
         this.costo = costo;
+        this.claseAsociada = claseAsociada;
+    }
+
+    public Clase getClaseAsociada() {
+        return claseAsociada;
+    }
+ 
+    public void setClaseAsociada(Clase claseAsociada) {
+        this.claseAsociada = claseAsociada;
     }
 
     public LocalDateTime getFecha() {
@@ -43,6 +54,7 @@ public class Registro {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fecha, costo);
+        return Objects.hash(fecha, costo, claseAsociada);
     }
 }
+

@@ -2,10 +2,13 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
 
 import com.entrenamosuy.tarea1.data.DataSocio;
+import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Pair;
 
@@ -67,6 +70,16 @@ public class Socio extends Usuario {
     }
 
     public DataSocio getDataSocio() {
-        return null;
+        Set<Registro> reg = this.getRegistros();
+        Iterator<Registro> it = reg.iterator();
+            Set<DataClase> claseReg = new HashSet<>();
+            while(it.hasNext()) {
+                Registro r = it.next();
+                Clase c = r.getClaseAsociada();
+                DataClase dataClase = c.getDataClase(); // IMPLEMENTAR en Clase
+                claseReg.add(dataClase);  
+            }
+        DataSocio res = new DataSocio(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), claseReg);
+        return res;
     }
 }

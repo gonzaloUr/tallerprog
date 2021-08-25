@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class DataUsuario {
@@ -13,15 +14,18 @@ public class DataUsuario {
 
     private final Email correo;
 
-    private final LocalDate nacimiento;
+    private final LocalDateTime nacimiento;
 
-    public DataUsuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) {
+    public DataUsuario(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento2) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.nacimiento = nacimiento;
+        this.nacimiento = nacimiento2;
     }
+
+   // public DataUsuario(String nickname2, String nombre2, String apellido2, Email correo2, LocalDateTime localDateTime) {
+   // }
 
     public String getNickname() {
         return nickname;
@@ -39,7 +43,7 @@ public class DataUsuario {
         return correo;
     }
 
-    public LocalDate getNacimiento() {
+    public LocalDateTime getNacimiento() {
         return nacimiento;
     }
 

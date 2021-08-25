@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.Set;
 import java.util.Objects;
 import java.util.Collections;
+import com.entrenamosuy.tarea1.data.DataClase;
 
 public class Clase {
 
@@ -109,5 +110,9 @@ public class Clase {
         return Objects.equals(acceso, other.acceso) && cantMax == other.cantMax && cantMin == other.cantMin
                 && Objects.equals(fechaRegistro, other.fechaRegistro) && Objects.equals(inicio, other.inicio)
                 && Objects.equals(nombre, other.nombre) && Objects.equals(registros, other.registros);
+    }
+
+    public DataClase getDataClase() {
+        return null;
     }
 }

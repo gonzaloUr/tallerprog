@@ -10,7 +10,6 @@ import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataSocio;
-import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.NombreYaExisteException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;

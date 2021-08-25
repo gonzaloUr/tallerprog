@@ -1,20 +1,25 @@
 package com.entrenamosuy.tarea1.data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+//import com.entrenamosuy.tarea1.logic.Clase;
 
 public class DataSocio extends DataUsuario {
  
     private final Set<DataClase> clases;
 
-    public DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            Set<DataClase> clases) {
-        super(nickname, nombre, apellido, correo, nacimiento);
-        this.clases = clases;
+    public DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime localDateTime,
+            Set<DataClase> claseReg) {
+        super(nickname, nombre, apellido, correo, localDateTime);
+        this.clases = claseReg;
     }
 
-    public Set<DataClase> getClases() {
+/*    public DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
+			Set<Clase> claseReg) {
+	}*/
+
+	public Set<DataClase> getClases() {
         return clases;
     }
 
@@ -37,4 +42,6 @@ public class DataSocio extends DataUsuario {
         DataSocio other = (DataSocio) obj;
         return Objects.equals(clases, other.clases);
     }
+
+
 }

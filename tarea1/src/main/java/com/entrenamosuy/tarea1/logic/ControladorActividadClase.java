@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
@@ -15,7 +16,7 @@ import com.entrenamosuy.tarea1.util.Triple;
 public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
-    public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, int costo,
+    public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
             LocalDateTime fecha) throws NombreYaExisteException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   //Tengo que especificar los tipos del map? Tengo que importar el paquete map? 
@@ -47,7 +48,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             throw new NombreYaExisteException("La clase llamada " + nombre + " ya existe.");
         }
         else {
-            //aca falta crear un set vacio llamado registros
+            Set<Registro> registros = new HashSet<>();
             Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros);
             clases.put(nombre, nuevaClase);
             //falta linkear la clase a actividad o viceversa
@@ -89,4 +90,11 @@ public class ControladorActividadClase implements IControladorActividadClase {
         // TODO Auto-generated method stub
         return null;
     }
+
+   /* @Override
+    public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
+            LocalDateTime fecha) throws NombreYaExisteException {
+        // TODO Auto-generated method stub
+        
+    }*/
 }
