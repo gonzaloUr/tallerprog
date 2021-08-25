@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
-import com.entrenamosuy.tarea1.data.DataUsuario;
+import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Pair;
 
@@ -66,7 +66,7 @@ public class Socio extends Usuario {
         return null;
     }
 
-    public DataUsuario getDataUsuario() {
+    public DataSocio getDataSocio() {
         return null;
     }
 }
