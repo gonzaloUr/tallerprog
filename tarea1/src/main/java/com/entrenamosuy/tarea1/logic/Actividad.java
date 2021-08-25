@@ -3,6 +3,7 @@ package com.entrenamosuy.tarea1.logic;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -82,9 +83,19 @@ public class Actividad {
         this.clases = clases;
     }
 
-    public DataActividad getDataActividad() { //TODO Haciendo
-        Set<DataCuponera> cuponeras = new HashSet<>();
+    public DataActividad getDataActividad() { 
+        Set<DataCuponera> cuponeras = new HashSet<>();//TODO Hacer
+
+
+
         Set<DataClase> clases = new HashSet<>();
+        Set<Clase> cs = this.clases;
+        Iterator<Clase> it = cs.iterator();
+        while(it.hasNext()) {
+            Clase c = it.next();
+            DataClase dc = c.getDataClase();
+            clases.add(dc);              
+        }
         DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion,this.fechaRegistro, this.costo, clases, cuponeras);
         return res;
     }
