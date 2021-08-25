@@ -7,6 +7,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
+import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.data.Email;
 
 public class Profesor extends Usuario {
@@ -97,5 +98,10 @@ public class Profesor extends Usuario {
 
     public DataProfesor getDataProfesor() {
         return null;
+    }
+
+    public DescProfesor getDescProfesor() {
+        DescProfesor res = new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
+        return res; 
     }
 }

@@ -3,6 +3,8 @@ package com.entrenamosuy.tarea1.logic;
 import java.time.LocalDateTime;
 import java.net.URL;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 //import java.util.Collections;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -139,14 +141,18 @@ public class Clase {
     }
 
     public DataClase getDataClase() {
-        Set<DescProfesor> profes = null ;
-        DescActividad act = null;
+        Set<DescProfesor> descProfes = new HashSet<>();
+        Set<Profesor> profes = this.getProfesores(); 
+        Iterator<Profesor> it = profes.iterator();
+            while(it.hasNext()) {
+                Profesor p = it.next();
+                DescProfesor dp = p.getDescProfesor();
+                descProfes.add(dp);              
+            }
+        Actividad acti = this.getActividad();
+        DescActividad act = acti.getDescActividad();
         DataClase res = new DataClase(this.getNombre(), this.getInicio(), this.getCantMin(), this.getCantMax(), this.getAcceso(),
-            this.getRegistros(), act, profes);
+            this.getRegistros(), act, descProfes);
         return res;
-
-
-      //  public DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
-           // LocalDateTime registro, DescActividad actividad, Set<DescProfesor> profesores)
     }
 }

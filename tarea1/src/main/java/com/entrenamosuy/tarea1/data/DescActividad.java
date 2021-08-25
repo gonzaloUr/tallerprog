@@ -14,9 +14,9 @@ public class DescActividad {
 
     private final LocalDateTime registro;
 
-    private final int costo;
+    private final float costo;
 
-    public DescActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, int costo) {
+    public DescActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, float costo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -40,7 +40,7 @@ public class DescActividad {
         return registro;
     }
 
-    public int getCosto() {
+    public float getCosto() {
         return costo;
     }
 

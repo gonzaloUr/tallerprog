@@ -3,6 +3,7 @@ package com.entrenamosuy.tarea1.logic;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import com.entrenamosuy.tarea1.data.DescActividad;
 
 public class Actividad {
 
@@ -62,6 +63,11 @@ public class Actividad {
 
     public void setCosto(float costo) {
         this.costo = costo;
+    }
+
+    public DescActividad getDescActividad() {
+        DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
+        return res;
     }
     
     @Override
