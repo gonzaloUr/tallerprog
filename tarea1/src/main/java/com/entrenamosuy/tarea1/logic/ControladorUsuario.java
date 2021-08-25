@@ -118,7 +118,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Map<String, Socio> mapa = man.getSocios();
         Socio p = mapa.get(nickname);
         if (p != null) {
-            DataSocio r = p.getDataSocio(); //Implementarlo en la clase Usuario/Socio
+            DataSocio r = p.getDataSocio();
             return r;
         }
         else

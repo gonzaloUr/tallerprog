@@ -123,7 +123,7 @@ public class Clase {
 
     @Override
     public int hashCode() {
-        return Objects.hash(acceso, cantMax, cantMin, fechaRegistro, inicio, nombre, registros);
+        return Objects.hash(acceso, cantMax, cantMin, fechaRegistro, inicio, nombre, registros, profesores, actividad);
     }
 
     @Override
