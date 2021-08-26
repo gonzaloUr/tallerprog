@@ -1,27 +1,27 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Compra {
     
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     private Socio socio;
 
     private Cuponera cuponera;
 
-    public Compra(LocalDateTime fecha, Socio socio, Cuponera cuponera) {
+    public Compra(LocalDate fecha, Socio socio, Cuponera cuponera) {
         this.fecha = fecha;
         this.socio = socio;
         this.cuponera = cuponera;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

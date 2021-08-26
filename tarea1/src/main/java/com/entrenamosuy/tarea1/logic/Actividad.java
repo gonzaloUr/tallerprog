@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
@@ -20,13 +20,13 @@ public class Actividad {
 
     private Duration duracion;
 
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     private float costo;
 
     private Set<Clase> clases;
 
-    public Actividad(String nombre, String descripcion, Duration duracion, LocalDateTime fechaRegistro, float costo, Set<Clase> clases) {
+    public Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro, float costo, Set<Clase> clases) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -59,11 +59,11 @@ public class Actividad {
         this.duracion = duracion;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
@@ -35,7 +35,7 @@ public interface IControladorUsuario {
      * @throws NombreYaExisteException
      * @throws InstitucionNoEncontradaException
      */
-    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento, Institucion institucion, 
+    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Institucion institucion, 
         String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException;
 
     /**
@@ -49,7 +49,7 @@ public interface IControladorUsuario {
      * @param nacimiento Fecha de nacimiento del socio.
      * @throws NombreYaExisteException
      */
-    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException;
+    void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) throws UsuarioRepetidoException;
 
     /**
      * Se modifica el nombre, apellido y fecha de nacimiento del usuario identificado por el nickname pasado a
@@ -61,7 +61,7 @@ public interface IControladorUsuario {
      * @param nacimiento Nueva fecha de nacimiento para el usuario, si es null no se actualiza.
      * @throws UsuarioNoEncontradoException
      */
-    void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDateTime nacimiento) throws UsuarioNoEncontradoException;
+    void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) throws UsuarioNoEncontradoException;
         
     /**
      * Retorna el nickname, nombre y apellido de todos los socios en

@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,7 +27,7 @@ public class Profesor extends Usuario {
 
     private Set<Actividad> actividades;
 
-    public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
+    public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
             String descripcion, String biografia, URL sitioWeb, Institucion institucion, 
             Set<Actividad> actividades) {
         super(nickname, nombre, apellido, correo, nacimiento);

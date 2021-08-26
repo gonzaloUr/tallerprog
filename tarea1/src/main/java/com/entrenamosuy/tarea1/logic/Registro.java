@@ -1,17 +1,17 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Registro {
 
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     private float costo;
 
     private Clase claseAsociada;
 
-    public Registro(LocalDateTime fecha, int costo, Clase claseAsociada) {
+    public Registro(LocalDate fecha, int costo, Clase claseAsociada) {
         this.fecha = fecha;
         this.costo = costo;
         this.claseAsociada = claseAsociada;
@@ -25,11 +25,11 @@ public class Registro {
         this.claseAsociada = claseAsociada;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

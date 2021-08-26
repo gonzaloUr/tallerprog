@@ -3,7 +3,7 @@ package com.entrenamosuy.tarea1.logic;
 import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,7 +17,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
-            LocalDateTime fecha) throws UsuarioRepetidoException {
+            LocalDate fecha) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades(); // Tengo que especificar los tipos del map? Tengo
                                                                       // que importar el paquete map?
@@ -38,8 +38,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nicknameProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws UsuarioRepetidoException {
+    public void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nicknameProfesores,
+            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
         Actividad actividad = actividades.get(nombreActividad);
@@ -64,13 +64,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public void registarseSinCuponera(String socio, String clase, LocalDateTime fechaRegistro) {
+    public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDateTime fechaRegistro) {
+    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro) {
         // TODO Auto-generated method stub
         
     }

@@ -1,11 +1,12 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
@@ -21,7 +22,7 @@ import com.entrenamosuy.tarea1.util.Triple;
 public class ControladorUsuario implements IControladorUsuario {
 
     @Override
-    public void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
+    public void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
             Institucion institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
@@ -47,16 +48,34 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) throws UsuarioRepetidoException {
+    public void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) throws UsuarioRepetidoException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> profes = man.getProfesores();
         Map<Email, Profesor> profesE = man.getProfesoresMail();
         Map<String, Socio> socios = man.getSocios();
         Map<Email, Socio> sociosE = man.getSociosMail();
-        boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
-        boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
+        boolean noExisteE;
+        boolean noExisteN;
+        if (!profes.isEmpty() || !socios.isEmpty()) {
+            noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
+        } else if (!profes.isEmpty() && socios.isEmpty()) {
+            noExisteN = (profes.get(nickname) == null);
+        } else if (profes.isEmpty() && !socios.isEmpty()) {
+            noExisteN = (socios.get(nickname) == null);
+        } else {
+            noExisteN = true;
+        }
+        if (!profes.isEmpty() || !socios.isEmpty()) {
+            noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
+        } else if (!profesE.isEmpty() && sociosE.isEmpty()) {
+            noExisteE = (profesE.get(correo) == null);
+        } else if (profesE.isEmpty() && !sociosE.isEmpty()) {
+            noExisteE = (sociosE.get(correo) == null);
+        } else {
+            noExisteE = true;
+        }
         if(noExisteN && noExisteE) {
-        	Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento);
+        	Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento, new HashSet<>(), new HashSet<>());//modificado para que tenga sentido con la clase Socio
         	socios.put(nickname, nuevo);
         	man.setSocios(socios);
         	sociosE.put(correo, nuevo);
@@ -72,7 +91,7 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDateTime nacimiento) {
+    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) {
         // TODO Auto-generated method stub
         
     }

@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
+import java.time.LocalDate;
+//import java.util.Collections;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
@@ -18,15 +18,11 @@ public class Socio extends Usuario {
 
     private Set<Compra> compras;
 
-    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
+    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
             Set<Registro> registros, Set<Compra> compras) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.registros = registros;
         this.compras = compras;
-    }
-
-    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) {
-        this(nickname, nombre, apellido, correo, nacimiento, Collections.emptySet(), Collections.emptySet());
     }
 
     public Set<Registro> getRegistros() {

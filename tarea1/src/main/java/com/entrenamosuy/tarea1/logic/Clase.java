@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.net.URL;
 import java.util.Set;
 import java.util.HashSet;
@@ -15,13 +15,13 @@ public class Clase {
 
     private String nombre;
 
-    private LocalDateTime inicio;
+    private LocalDate inicio;
 
     private int cantMin, cantMax;
     
     private URL acceso;
 
-    private LocalDateTime fechaRegistro;
+    private LocalDate fechaRegistro;
 
     private Set<Registro> registros;
 
@@ -29,8 +29,8 @@ public class Clase {
 
     private Actividad actividad;
 
-    public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
-                 URL acceso, LocalDateTime fechaRegistro, Set<Registro> registros, 
+    public Clase(String nombre, LocalDate inicio, int cantMin, int cantMax,
+                 URL acceso, LocalDate fechaRegistro, Set<Registro> registros, 
                  Set<Profesor> profesores, Actividad actividad) {
         this.nombre = nombre;
         this.inicio = inicio;
@@ -43,8 +43,8 @@ public class Clase {
         this.actividad = actividad;
     }
 
-/*    public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
-                 URL acceso, LocalDateTime fechaRegistro) {
+/*    public Clase(String nombre, LocalDate inicio, int cantMin, int cantMax,
+                 URL acceso, LocalDate fechaRegistro) {
         this(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, Collections.emptySet());
     }*/
 
@@ -56,11 +56,11 @@ public class Clase {
         this.nombre = nombre;
     }
 
-    public LocalDateTime getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDateTime inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
@@ -88,11 +88,11 @@ public class Clase {
         this.acceso = acceso;
     }
 
-    public LocalDateTime getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.data.DataCuponera;
@@ -19,7 +19,7 @@ public interface IControladorCuponera {
      * @param descuento Porcentaje de descuento.
      * @throws CuponeraRepetidaException
      */
-    void crearCuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin, int descuento) throws CuponeraRepetidaException;
+    void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento) throws CuponeraRepetidaException;
 
     /**
      * Retorna el nombre y la descripcion de todas las cuponeras en el sistema las cuales tienen a actividad

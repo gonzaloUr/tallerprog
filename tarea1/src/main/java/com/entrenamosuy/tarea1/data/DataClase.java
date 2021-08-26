@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +13,7 @@ public class DataClase {
     
     private final String nombre;
 
-    private final LocalDateTime inicio;
+    private final LocalDate inicio;
 
     private final int cantMin, cantMax;
 
@@ -25,7 +25,7 @@ public class DataClase {
 
     private final Set<DescProfesor> profesores;
 
-    public DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
+    public DataClase(String nombre, LocalDate inicio, int cantMin, int cantMax, URL accesoURL,
             Set<Registro> set, DescActividad actividad2, Set<DescProfesor> set2) {
         this.nombre = nombre;
         this.inicio = inicio;
