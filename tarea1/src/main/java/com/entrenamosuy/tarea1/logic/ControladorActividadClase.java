@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
@@ -15,12 +17,12 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
-            LocalDateTime fecha) throws UsuarioRepetidoException {
+            LocalDateTime fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades(); // Tengo que especificar los tipos del map? Tengo
                                                                       // que importar el paquete map?
         if (actividades.containsKey(nombre)) {
-            throw new UsuarioRepetidoException("La actividad llamada " + nombre + " ya existe.");
+            throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
         } else {
             Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
             actividades.put(nombre, nuevaActividad);

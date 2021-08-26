@@ -3,6 +3,8 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
@@ -13,7 +15,21 @@ import java.time.LocalDateTime;
 
 public interface IControladorActividadClase {
 
-    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDateTime fecha) throws UsuarioRepetidoException;
+    /**
+     * Crea una nueva actividad con los datos ingresados perteneciente a institucion, si ya existe
+     * una actividad con el mismo nombre tira {@link ActividadRepetidaException} y si no se encuentra
+     * institutcion se tira {@link InstitucionNoEncontradaException}.
+     * 
+     * @param institucion Institucion al que pertenecera la actividad.
+     * @param nombre Nombre unico de la actividad.
+     * @param descripcion Descripcion de la actividad.
+     * @param duracion Duracion de la actividad.
+     * @param costo Costo de la actividad.
+     * @param registro Fecha de registro de la actividad
+     * @throws ActividadRepetidaException
+     * @throws InstitucionNoEncontradaException
+     */
+    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDateTime registro) throws ActividadRepetidaException, InstitucionNoEncontradaException;
 
     void crearInstitucion(String nombre, String descripcion, URL url);
 
