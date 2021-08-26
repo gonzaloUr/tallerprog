@@ -11,7 +11,7 @@ import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public interface IControladorActividadClase {
 
@@ -29,15 +29,15 @@ public interface IControladorActividadClase {
      * @throws ActividadRepetidaException
      * @throws InstitucionNoEncontradaException
      */
-    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDateTime registro) throws ActividadRepetidaException, InstitucionNoEncontradaException;
+    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDate registro) throws ActividadRepetidaException, InstitucionNoEncontradaException;
 
     void crearInstitucion(String nombre, String descripcion, URL url);
 
-    void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores, int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws UsuarioRepetidoException;
+    void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nombreProfesores, int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws UsuarioRepetidoException;
 
-    void registarseSinCuponera(String socio, String clase, LocalDateTime fechaRegistro);
+    void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro);
 
-    void registraseConCuponera(String socio, String clase, String cuponera, LocalDateTime fechaRegistro);
+    void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro);
 
     /**
      * Retorna el nombre, descripcion y URL de todos los institucion en el sistema.

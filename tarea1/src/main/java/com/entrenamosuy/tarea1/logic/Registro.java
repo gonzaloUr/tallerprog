@@ -1,24 +1,35 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Registro {
 
-    private LocalDateTime fecha;
+    private LocalDate fecha;
 
     private float costo;
 
-    public Registro(LocalDateTime fecha, int costo) {
+    private Clase claseAsociada;
+
+    public Registro(LocalDate fecha, int costo, Clase claseAsociada) {
         this.fecha = fecha;
         this.costo = costo;
+        this.claseAsociada = claseAsociada;
     }
 
-    public LocalDateTime getFecha() {
+    public Clase getClaseAsociada() {
+        return claseAsociada;
+    }
+ 
+    public void setClaseAsociada(Clase claseAsociada) {
+        this.claseAsociada = claseAsociada;
+    }
+
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
@@ -43,6 +54,7 @@ public class Registro {
 
     @Override
     public int hashCode() {
-        return Objects.hash(fecha, costo);
+        return Objects.hash(fecha, costo, claseAsociada);
     }
 }
+

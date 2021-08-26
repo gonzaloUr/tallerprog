@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +11,7 @@ public class Cuponera {
 
     private String descripcion;
     
-    private LocalDateTime inicio, fin;
+    private LocalDate inicio, fin;
 
     private int descuento;
 
@@ -21,7 +21,7 @@ public class Cuponera {
 
     private Set<Registro> registros;
 
-    public Cuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin, int descuento,
+    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
             float precio, Set<Integra> integras, Set<Registro> registros) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -33,7 +33,7 @@ public class Cuponera {
         this.registros = registros;
     }
 
-    public Cuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin, int descuento,
+    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
             float precio) {
         this(nombre, descripcion, inicio, fin, descuento, precio, Collections.emptySet(), Collections.emptySet());
     }
@@ -54,19 +54,19 @@ public class Cuponera {
         this.descripcion = descripcion;
     }
 
-    public LocalDateTime getInicio() {
+    public LocalDate getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDateTime inicio) {
+    public void setInicio(LocalDate inicio) {
         this.inicio = inicio;
     }
 
-    public LocalDateTime getFin() {
+    public LocalDate getFin() {
         return fin;
     }
 
-    public void setFin(LocalDateTime fin) {
+    public void setFin(LocalDate fin) {
         this.fin = fin;
     }
 

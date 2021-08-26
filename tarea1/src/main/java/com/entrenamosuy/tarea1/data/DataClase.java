@@ -1,36 +1,40 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
+
+//import com.entrenamosuy.tarea1.logic.Actividad;
+//import com.entrenamosuy.tarea1.logic.Profesor;
+import com.entrenamosuy.tarea1.logic.Registro;
 
 public class DataClase {
     
     private final String nombre;
 
-    private final LocalDateTime inicio;
+    private final LocalDate inicio;
 
     private final int cantMin, cantMax;
 
     private final URL accesoURL;
 
-    private final LocalDateTime registro;
+    private final Set<Registro> registro;
 
     private final DescActividad actividad;
 
     private final Set<DescProfesor> profesores;
 
-    public DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
-            LocalDateTime registro, DescActividad actividad, Set<DescProfesor> profesores) {
+    public DataClase(String nombre, LocalDate inicio, int cantMin, int cantMax, URL accesoURL,
+            Set<Registro> set, DescActividad actividad2, Set<DescProfesor> set2) {
         this.nombre = nombre;
         this.inicio = inicio;
         this.cantMin = cantMin;
         this.cantMax = cantMax;
         this.accesoURL = accesoURL;
-        this.registro = registro;
-        this.actividad = actividad;
-        this.profesores = profesores;
+        this.registro = set;
+        this.actividad = actividad2;
+        this.profesores = set2;
     }
 
     @Override

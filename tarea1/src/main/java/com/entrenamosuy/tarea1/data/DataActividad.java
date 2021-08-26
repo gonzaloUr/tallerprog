@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,7 +13,7 @@ public class DataActividad {
 
     private final Duration duracion;
 
-    private final LocalDateTime registro;
+    private final LocalDate registro;
 
     private final float costo;
 
@@ -21,7 +21,7 @@ public class DataActividad {
 
     private final Set<DataCuponera> cuponeras;
 
-    public DataActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, float costo,
+    public DataActividad(String nombre, String descripcion, Duration duracion, LocalDate registro, float costo,
             Set<DataClase> clases, Set<DataCuponera> cuponeras) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -44,7 +44,7 @@ public class DataActividad {
         return duracion;
     }
 
-    public LocalDateTime getRegistro() {
+    public LocalDate getRegistro() {
         return registro;
     }
 

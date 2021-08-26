@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.entrenamosuy.tarea1.data.Email;
@@ -15,9 +15,9 @@ public abstract class Usuario {
 
     private Email correo;
 
-    private LocalDateTime nacimiento;
+    private LocalDate nacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) {
+    public Usuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) {
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -57,11 +57,11 @@ public abstract class Usuario {
         this.correo = correo;
     }
 
-    public LocalDateTime getNacimiento() {
+    public LocalDate getNacimiento() {
         return nacimiento;
     }
 
-    public void setNacimiento(LocalDateTime nacimiento) {
+    public void setNacimiento(LocalDate nacimiento) {
         this.nacimiento = nacimiento;
     }
 

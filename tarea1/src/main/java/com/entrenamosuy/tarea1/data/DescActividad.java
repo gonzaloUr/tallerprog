@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.data;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class DescActividad {
@@ -12,11 +12,11 @@ public class DescActividad {
 
     private final Duration duracion;
 
-    private final LocalDateTime registro;
+    private final LocalDate registro;
 
-    private final int costo;
+    private final float costo;
 
-    public DescActividad(String nombre, String descripcion, Duration duracion, LocalDateTime registro, int costo) {
+    public DescActividad(String nombre, String descripcion, Duration duracion, LocalDate registro, float costo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;
@@ -36,11 +36,11 @@ public class DescActividad {
         return duracion;
     }
 
-    public LocalDateTime getRegistro() {
+    public LocalDate getRegistro() {
         return registro;
     }
 
-    public int getCosto() {
+    public float getCosto() {
         return costo;
     }
 

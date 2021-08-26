@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataCuponera;
@@ -13,7 +13,7 @@ import com.entrenamosuy.tarea1.util.Pair;
 public class ControladorCuponera implements IControladorCuponera {
 
     @Override
-    public void crearCuponera(String nombre, String descripcion, LocalDateTime inicio, LocalDateTime fin,
+    public void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin,
             int descuento) {
         // TODO Auto-generated method stub
 

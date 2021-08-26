@@ -1,5 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
+import java.util.HashMap;
 import java.util.Map;
 import com.entrenamosuy.tarea1.data.Email;
 
@@ -14,21 +15,21 @@ public final class Manejador {
         return instance;
     }
 
-    private Map<String, Actividad> actividades;
+    private Map<String, Actividad> actividades = new HashMap<>();
 
-    private Map<String, Clase> clases;
+    private Map<String, Clase> clases = new HashMap<>();
 
-    private Map<String, Cuponera> cuponeras;
+    private Map<String, Cuponera> cuponeras = new HashMap<>();
 
-    private Map<String, Institucion> instituciones;
+    private Map<String, Institucion> instituciones = new HashMap<>();
 
-    private Map<String, Profesor> profesores;
+    private Map<String, Profesor> profesores = new HashMap<>();
+    
+    private Map<Email, Profesor> profesoresMail = new HashMap<>();
 
-    private Map<Email, Profesor> profesoresMail;
-
-    private Map<String, Socio> socios;
-
-    private Map<Email, Socio> sociosMail;
+    private Map<String, Socio> socios = new HashMap<>();
+    
+    private Map<Email, Socio> sociosMail = new HashMap<>();
 
     private Manejador() {}
 

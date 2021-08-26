@@ -1,11 +1,14 @@
 package com.entrenamosuy.tarea1.logic;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
+import java.time.LocalDate;
+//import java.util.Collections;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.HashSet;
 
 import com.entrenamosuy.tarea1.data.DataSocio;
+import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Pair;
 
@@ -15,15 +18,11 @@ public class Socio extends Usuario {
 
     private Set<Compra> compras;
 
-    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento,
+    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
             Set<Registro> registros, Set<Compra> compras) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.registros = registros;
         this.compras = compras;
-    }
-
-    public Socio(String nickname, String nombre, String apellido, Email correo, LocalDateTime nacimiento) {
-        this(nickname, nombre, apellido, correo, nacimiento, Collections.emptySet(), Collections.emptySet());
     }
 
     public Set<Registro> getRegistros() {
@@ -67,6 +66,16 @@ public class Socio extends Usuario {
     }
 
     public DataSocio getDataSocio() {
-        return null;
+        Set<Registro> reg = this.getRegistros();
+        Iterator<Registro> it = reg.iterator();
+            Set<DataClase> claseReg = new HashSet<>();
+            while(it.hasNext()) {
+                Registro r = it.next();
+                Clase c = r.getClaseAsociada();
+                DataClase dataClase = c.getDataClase(); // IMPLEMENTAR en Clase
+                claseReg.add(dataClase);  
+            }
+        DataSocio res = new DataSocio(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), claseReg);
+        return res;
     }
 }

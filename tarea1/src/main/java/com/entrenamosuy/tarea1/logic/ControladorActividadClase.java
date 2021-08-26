@@ -3,8 +3,10 @@ package com.entrenamosuy.tarea1.logic;
 import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Iterator;
 
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
@@ -17,14 +19,15 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
-            LocalDateTime fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
+            LocalDate fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades(); // Tengo que especificar los tipos del map? Tengo
                                                                       // que importar el paquete map?
         if (actividades.containsKey(nombre)) {
             throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
         } else {
-            Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
+            Set<Clase> clases =  new HashSet<>();// SET DE CLASES VACIO. Las actividades ahora ven sus clases.
+            Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo, clases);
             actividades.put(nombre, nuevaActividad);
             // me falta linkear la institucion a la actividad o al reves
         }
@@ -37,8 +40,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDateTime fechaRegistro) throws UsuarioRepetidoException {
+    public void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nicknameProfesores,
+            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws UsuarioRepetidoException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
         Actividad actividad = actividades.get(nombreActividad);
@@ -47,20 +50,29 @@ public class ControladorActividadClase implements IControladorActividadClase {
             throw new UsuarioRepetidoException("La clase llamada " + nombre + " ya existe.");
         }
         else {
-            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro);
+            Set<Profesor> profes = new HashSet<>();   // ACA CREAMOS LA CLASE CON LOS PROFESORES
+            Map<String, Profesor> profesores = maneja.getProfesores();
+            Iterator<String> it = nicknameProfesores.iterator();
+            while(it.hasNext()) {
+                String nomP = it.next();
+                Profesor p = profesores.get(nomP);
+                profes.add(p);              
+            }                                         // ACA CREAMOS LA CLASE CON LOS PROFESORES
+            Set<Registro> registros = new HashSet<>();
+            Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // TAMBIEN SE HACE EL LINK DE CLASE A ACTIVIDAD
             clases.put(nombre, nuevaClase);
-            //falta linkear la clase a actividad o viceversa
+            actividad.agregarClase(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
         }
     }
 
     @Override
-    public void registarseSinCuponera(String socio, String clase, LocalDateTime fechaRegistro) {
+    public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) {
         // TODO Auto-generated method stub
         
     }
 
     @Override
-    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDateTime fechaRegistro) {
+    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro) {
         // TODO Auto-generated method stub
         
     }
@@ -88,5 +100,4 @@ public class ControladorActividadClase implements IControladorActividadClase {
         // TODO Auto-generated method stub
         return null;
     }
-
 }
