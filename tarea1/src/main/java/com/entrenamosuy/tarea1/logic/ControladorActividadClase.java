@@ -8,9 +8,11 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -40,13 +42,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nicknameProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws UsuarioRepetidoException {
+            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
         Actividad actividad = actividades.get(nombreActividad);
         Map<String, Clase> clases = maneja.getClases();
         if (clases.containsKey(nombre)){
-            throw new UsuarioRepetidoException("La clase llamada " + nombre + " ya existe.");
+            throw new ClaseRepetidaException("La clase llamada " + nombre + " ya existe.");
         }
         else {
             Set<Profesor> profes = new HashSet<>();   // ACA CREAMOS LA CLASE CON LOS PROFESORES
@@ -60,7 +62,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             Set<Registro> registros = new HashSet<>();
             Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // TAMBIEN SE HACE EL LINK DE CLASE A ACTIVIDAD
             clases.put(nombre, nuevaClase);
-            actividad.agregarClase(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
+            actividad.getClases().add(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
         }
     }
 
@@ -77,27 +79,40 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public Set<Triple<String, String, URL>> obtenerDescInstituciones() {
+    public Set<Triple<String, String, URL>> obtenerDescInstituciones() { //TODO El throw es que no hay instituciones en el sistema
         Manejador maneja = Manejador.getInstance();
-        Institucion ins = maneja.getInstituciones(); 
-        Set<Triple<String, String, URL>> res = new HashSet<>(); //no se si se crea asi
-        for (Institucion institucion : ins){
-            res.add(new Triple(institucion.getNombre(),institucion.getDescripcion(), institucion.getUrl()));
+        Set<Triple<String, String, URL>> res = new HashSet<>();
+        Map<String,Institucion> inst = maneja.getInstituciones();
+        for(Institucion i : inst.values()) {
+            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl()); 
+            res.add(trip);
+        }    
+        return res;
+    }
+
+    @Override
+    public Set<Pair<String, String>> obtenerDescActividades(String institucion) { //TODO No hay actividades en el sistema, no existe institucion con ese nombre
+        Manejador maneja = Manejador.getInstance();
+        Set<Pair<String, String>> res = new HashSet<>();
+        Map<String,Institucion> inst = maneja.getInstituciones();
+        Institucion i = inst.get(institucion);
+        Set<Actividad> acts = i.getActividadesOfrecidas();
+        for(Actividad a : acts) {
+            Pair<String, String> par = new Pair<String, String>(a.getNombre(), a.getDescripcion());
+            res.add(par);
         }
         return res;
     }
 
     @Override
-    public Set<Pair<String, String>> obtenerDescActividades(String institucion) {
+    public DataActividad consultarActividad(String actividad) { // TODO El throw es que no existe la actividad
         Manejador maneja = Manejador.getInstance();
-        Institucion ins = maneja.getInstituciones().get(institucion); 
-        Set<Actividad> actividades = ins.getActividades();
-        Set<Pair<String, String>> res = new HashSet<>(); //no se si se crea asi
-        for (Actividad actividad : actividades){
-            res.add(new Pair(actividad.getNombre(),actividad.getDescripcion()));
-        }
+        Map<String,Actividad> acts = maneja.getActividades();
+        Actividad a = acts.get(actividad);
+        DataActividad res = a.getDataActividad();
         return res;
-    }
+    }    
+
 
     @Override
     public Set<String> obtenerDescClases(String actividad) {

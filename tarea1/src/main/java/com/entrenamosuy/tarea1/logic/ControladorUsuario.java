@@ -16,6 +16,7 @@ import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
@@ -91,9 +92,32 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) {
-        // TODO Auto-generated method stub
-        
+    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) throws UsuarioNoEncontradoException {
+        Manejador manejador = Manejador.getInstance();
+        Usuario usuario;
+
+        Profesor profesor = manejador.getProfesores().get(nickname);
+
+        if (profesor == null) {
+            Socio socio = manejador.getSocios().get(nickname);
+
+            if (socio == null) {
+                throw new UsuarioNoEncontradoException(nickname);
+            } else {
+                usuario = socio;
+            }
+        } else {
+            usuario = profesor;
+        }
+
+        if (nombre != null)
+            usuario.setNombre(nombre);
+
+        if (apellido != null)
+            usuario.setApellido(apellido);
+
+        if (nacimiento != null)
+            usuario.setNacimiento(nacimiento);
     }
 
     @Override

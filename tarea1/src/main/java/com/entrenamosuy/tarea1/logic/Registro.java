@@ -11,10 +11,25 @@ public class Registro {
 
     private Clase claseAsociada;
 
-    public Registro(LocalDate fecha, int costo, Clase claseAsociada) {
+    private Cuponera cuponera;
+
+    public Registro(LocalDate fecha, int costo, Clase claseAsociada, Cuponera cuponera) {
         this.fecha = fecha;
         this.costo = costo;
         this.claseAsociada = claseAsociada;
+        this.setCuponera(cuponera);
+    }
+
+    public Registro(LocalDate fecha, int costo, Clase claseAsociada) {
+        this(fecha, costo, claseAsociada, null);
+    }
+
+    public Cuponera getCuponera() {
+        return cuponera;
+    }
+
+    public void setCuponera(Cuponera cup) {
+        this.cuponera = cup;
     }
 
     public Clase getClaseAsociada() {
@@ -42,19 +57,22 @@ public class Registro {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == this)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-        Registro other = (Registro) obj;
-        return fecha.equals(other.fecha) && costo == other.costo;
+    public int hashCode() {
+        return Objects.hash(claseAsociada, costo, cuponera, fecha);
     }
 
-
     @Override
-    public int hashCode() {
-        return Objects.hash(fecha, costo, claseAsociada);
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Registro other = (Registro) obj;
+        return Objects.equals(claseAsociada, other.claseAsociada)
+                && Float.floatToIntBits(costo) == Float.floatToIntBits(other.costo)
+                && Objects.equals(cuponera, other.cuponera) && Objects.equals(fecha, other.fecha);
     }
 }
 

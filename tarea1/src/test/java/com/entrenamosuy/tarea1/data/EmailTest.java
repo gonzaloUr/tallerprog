@@ -1,6 +1,5 @@
-package com.entrenamosuy.tarea1;
+package com.entrenamosuy.tarea1.data;
 
-import com.entrenamosuy.tarea1.data.Email;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

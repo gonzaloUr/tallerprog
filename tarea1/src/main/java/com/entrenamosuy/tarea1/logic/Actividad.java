@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.Map;
 
 import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -83,32 +84,6 @@ public class Actividad {
         this.clases = clases;
     }
 
-    public DataActividad getDataActividad() { 
-        Set<DataCuponera> cuponeras = new HashSet<>();//TODO Hacer
-
-
-
-        Set<DataClase> clases = new HashSet<>();
-        Set<Clase> cs = this.clases;
-        Iterator<Clase> it = cs.iterator();
-        while(it.hasNext()) {
-            Clase c = it.next();
-            DataClase dc = c.getDataClase();
-            clases.add(dc);              
-        }
-        DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion,this.fechaRegistro, this.costo, clases, cuponeras);
-        return res;
-    }
-
-    public DescActividad getDescActividad() {
-        DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
-        return res;
-    }
-
-    public void agregarClase(Clase cl) {
-        this.clases.add(cl);
-    }
-    
     @Override
     public int hashCode() {
         return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre, clases);
@@ -126,5 +101,36 @@ public class Actividad {
         return costo == other.costo && Objects.equals(descripcion, other.descripcion)
                 && Objects.equals(duracion, other.duracion) && Objects.equals(fechaRegistro, other.fechaRegistro)
                 && Objects.equals(nombre, other.nombre);
+    }
+
+    public DataActividad getDataActividad() { 
+        Set<DataCuponera> cuponeras = new HashSet<>();
+        Manejador man = Manejador.getInstance();
+        Map<String,Cuponera> cupos = man.getCuponeras();
+        for(Cuponera cupo : cupos.values()) {
+            Set<Integra> integs = cupo.getIntegras();
+            for(Integra integ : integs) {
+                Actividad act = integ.getActividad();
+                if (act.getNombre() == this.nombre) {
+                    DataCuponera cupoAagregar = cupo.getDataCuponera();
+                    cuponeras.add(cupoAagregar);
+                }
+            }    
+        }   
+        Set<DataClase> clases = new HashSet<>();
+        Set<Clase> cs = this.clases;
+        Iterator<Clase> it = cs.iterator();
+        while(it.hasNext()) {
+            Clase c = it.next();
+            DataClase dc = c.getDataClase();
+            clases.add(dc);              
+        }
+        DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion,this.fechaRegistro, this.costo, clases, cuponeras);
+        return res;
+    }
+
+    public DescActividad getDescActividad() {
+        DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
+        return res;
     }
 }
