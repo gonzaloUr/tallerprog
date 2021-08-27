@@ -21,8 +21,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
             LocalDate fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
-        Map<String, Actividad> actividades = maneja.getActividades(); // Tengo que especificar los tipos del map? Tengo
-                                                                      // que importar el paquete map?
+        Map<String, Actividad> actividades = maneja.getActividades(); 
         if (actividades.containsKey(nombre)) {
             throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
         } else {
@@ -79,19 +78,37 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public Set<Triple<String, String, URL>> obtenerDescInstituciones() {
-        // TODO Auto-generated method stub
-        return null;
+        Manejador maneja = Manejador.getInstance();
+        Institucion ins = maneja.getInstituciones(); 
+        Set<Triple<String, String, URL>> res = new HashSet<>(); //no se si se crea asi
+        for (Institucion institucion : ins){
+            res.add(new Triple(institucion.getNombre(),institucion.getDescripcion(), institucion.getUrl()));
+        }
+        return res;
     }
 
     @Override
     public Set<Pair<String, String>> obtenerDescActividades(String institucion) {
-        // TODO Auto-generated method stub
-        return null;
+        Manejador maneja = Manejador.getInstance();
+        Institucion ins = maneja.getInstituciones().get(institucion); 
+        Set<Actividad> actividades = ins.getActividades();
+        Set<Pair<String, String>> res = new HashSet<>(); //no se si se crea asi
+        for (Actividad actividad : actividades){
+            res.add(new Pair(actividad.getNombre(),actividad.getDescripcion()));
+        }
+        return res;
     }
 
     @Override
     public Set<String> obtenerDescClases(String actividad) {
-        // TODO Auto-generated method stub
+        Manejador maneja = Manejador.getInstance();
+        Actividad act = maneja.getActividades().get(actividad); 
+        Set<Clase> clases = ins.getClases();
+        Set<String> res = new HashSet<>(); //no se si se crea asi
+        for (Actividad actividad : actividades){
+            res.add(actividad.getDescripcion());
+        }
+        return res;
         return null;
     }
 
