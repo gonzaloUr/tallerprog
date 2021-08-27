@@ -32,22 +32,22 @@ public interface IControladorUsuario {
      * @param descripcion Descripcion del profesor.
      * @param bio Biografia del profesor.
      * @param link Link a pagina web del profesor.
-     * @throws NombreYaExisteException
-     * @throws InstitucionNoEncontradaException
+     * @throws UsuarioRepetidoException Cuando el nombre pasado no es unico.
+     * @throws InstitucionNoEncontradaException Cuando la institucion no existe.
      */
     void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Institucion institucion, 
         String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException;
 
     /**
      * Crea un nuevo socio en el sistema, si nickname o el correo ya estan usados se tira la excepcion
-     * NombreYaExisteException.
+     * UsuarioRepetidoException.
      * 
      * @param nickname Nickname unico del socio.
      * @param nombre Nombre del socio.
      * @param apellido Apellido del socio.
      * @param correo Correo unico del socio.
      * @param nacimiento Fecha de nacimiento del socio.
-     * @throws NombreYaExisteException
+     * @throws UsuarioRepetidoException Cuando el nickname o el correo no son unicos
      */
     void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) throws UsuarioRepetidoException;
 
@@ -59,7 +59,7 @@ public interface IControladorUsuario {
      * @param nombre Nuevo nombre para el usuario, si es null no se actualiza.
      * @param apellido Nuevo apellido para el usuario, si es null no se actualiza.
      * @param nacimiento Nueva fecha de nacimiento para el usuario, si es null no se actualiza.
-     * @throws UsuarioNoEncontradoException
+     * @throws UsuarioNoEncontradoException Cuando no existe un usuario con el nickname pasado.
      */
     void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) throws UsuarioNoEncontradoException;
         
@@ -68,7 +68,7 @@ public interface IControladorUsuario {
      * el sistema, si no hay socios tira SociosVacioException.
      * 
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
-     * @throws SocioVacioException
+     * @throws SociosVacioException Cuando no hay socios en el sistema
      */
     Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException;
 
@@ -77,7 +77,7 @@ public interface IControladorUsuario {
      * el sistema, si no hay profesores tira ProfesoresVacioException.
      * 
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
-     * @throwss ProfesoresVacioException
+     * @throws ProfesoresVacioException Cuando no hay profesores en el sistema.
      */
     Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException;
 
@@ -87,6 +87,7 @@ public interface IControladorUsuario {
      * 
      * @param nombre Nombre del socio.
      * @return El DataUsuario correspondiente a nombre.
+     * @throws SocioNoEncontradoException Cuando no exist un socio con el nombre pasado.
      */
     DataUsuario consultarSocio(String nombre) throws SocioNoEncontradoException;
 
@@ -96,6 +97,7 @@ public interface IControladorUsuario {
      * 
      * @param nombre Nombre del profesor.
      * @return El DataProfesor correspondiente a nombre.
+     * @throws ProfesorNoEncontradoException Cuando no existe un profesor con el nombre pasado.
      */
     DataProfesor consultarProfesor(String nombre) throws ProfesorNoEncontradoException;
 }

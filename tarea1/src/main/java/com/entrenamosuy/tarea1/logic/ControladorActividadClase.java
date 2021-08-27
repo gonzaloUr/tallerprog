@@ -8,7 +8,9 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -41,13 +43,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nicknameProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws UsuarioRepetidoException {
+            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Actividad> actividades = maneja.getActividades();   
         Actividad actividad = actividades.get(nombreActividad);
         Map<String, Clase> clases = maneja.getClases();
         if (clases.containsKey(nombre)){
-            throw new UsuarioRepetidoException("La clase llamada " + nombre + " ya existe.");
+            throw new ClaseRepetidaException("La clase llamada " + nombre + " ya existe.");
         }
         else {
             Set<Profesor> profes = new HashSet<>();   // ACA CREAMOS LA CLASE CON LOS PROFESORES

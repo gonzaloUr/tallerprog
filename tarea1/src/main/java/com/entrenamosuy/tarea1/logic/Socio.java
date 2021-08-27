@@ -61,7 +61,7 @@ public class Socio extends Usuario {
         return Objects.equals(compras, other.compras) && Objects.equals(registros, other.registros);
     }
 
-    public Set<Pair<String, String>> cuponerasValidas(Clase c, Actividad a) {
+    public Set<Pair<String, String>> cuponerasValidas(Actividad a) {
         return null;
     }
 
