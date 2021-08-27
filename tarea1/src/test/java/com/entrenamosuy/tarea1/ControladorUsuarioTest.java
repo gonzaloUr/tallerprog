@@ -19,7 +19,8 @@ public class ControladorUsuarioTest {
     @Test
     void testCrearSocioOK() {
         try {
-            IControladorUsuario ctrlU = Fabrica.creaControladorUsuario();
+            Fabrica F = new Fabrica();//Implementa la fabrica
+            IControladorUsuario ctrlU = F.creaControladorUsuario(); //Implementa la fabrica
             Email e = new Email("lucho", "@mail.com");
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", e, LocalDate.of(2007, 03, 28));
             DataSocio ds = (DataSocio) ctrlU.consultarSocio("Lucho");
