@@ -15,11 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.BoxLayout;
 import java.awt.Component;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.Sizes;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -62,7 +57,7 @@ public class AltaSocio extends JInternalFrame {
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
-		
+
 		JLabel lblNewLabel = new JLabel("Ingresar Nickname");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
@@ -70,7 +65,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 1;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-		
+
 		textField_4 = new JTextField();
 		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
 		gbc_textField_4.insets = new Insets(0, 0, 5, 5);
@@ -79,7 +74,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_textField_4.gridy = 1;
 		getContentPane().add(textField_4, gbc_textField_4);
 		textField_4.setColumns(10);
-		
+
 		JLabel lblIngresarNombre = new JLabel("Ingresar Nombre");
 		GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
 		gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
@@ -87,7 +82,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_lblIngresarNombre.gridx = 1;
 		gbc_lblIngresarNombre.gridy = 3;
 		getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-		
+
 		textField_5 = new JTextField();
 		GridBagConstraints gbc_textField_5 = new GridBagConstraints();
 		gbc_textField_5.insets = new Insets(0, 0, 5, 5);
@@ -96,7 +91,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_textField_5.gridy = 3;
 		getContentPane().add(textField_5, gbc_textField_5);
 		textField_5.setColumns(10);
-		
+
 		JLabel lblIngresarApellido = new JLabel("Ingresar Apellido");
 		GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
 		gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
@@ -104,7 +99,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_lblIngresarApellido.gridx = 1;
 		gbc_lblIngresarApellido.gridy = 5;
 		getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
-		
+
 		textField_6 = new JTextField();
 		GridBagConstraints gbc_textField_6 = new GridBagConstraints();
 		gbc_textField_6.insets = new Insets(0, 0, 5, 5);
@@ -113,7 +108,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_textField_6.gridy = 5;
 		getContentPane().add(textField_6, gbc_textField_6);
 		textField_6.setColumns(10);
-		
+
 		JLabel lblIngresarEmail = new JLabel("Ingresar Email");
 		GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
 		gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
@@ -121,7 +116,7 @@ public class AltaSocio extends JInternalFrame {
 		gbc_lblIngresarEmail.gridx = 1;
 		gbc_lblIngresarEmail.gridy = 7;
 		getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
-		
+
 		textField_7 = new JTextField();
 		GridBagConstraints gbc_textField_7 = new GridBagConstraints();
 		gbc_textField_7.insets = new Insets(0, 0, 0, 5);
