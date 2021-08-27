@@ -5,10 +5,7 @@ import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.NoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Pair;
 
 public class ControladorCuponera implements IControladorCuponera {
@@ -37,7 +34,7 @@ public class ControladorCuponera implements IControladorCuponera {
             throw new ActividadNoEncontradaException(actividad);
 
         // Buscar cuponeras validas de socio s para clase c de actividad a.
-        return s.cuponerasValidas(a);
+        return s.cuponerasUsables(a);
     }
 
     @Override

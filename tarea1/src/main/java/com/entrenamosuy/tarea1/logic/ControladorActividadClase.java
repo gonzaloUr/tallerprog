@@ -12,7 +12,6 @@ import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
@@ -64,7 +63,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             Set<Registro> registros = new HashSet<>();
             Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad); // TAMBIEN SE HACE EL LINK DE CLASE A ACTIVIDAD
             clases.put(nombre, nuevaClase);
-            actividad.agregarClase(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
+            actividad.getClases().add(nuevaClase); // LINK DE ACTIVIDAD A CLASE 
         }
     }
 

@@ -137,4 +137,13 @@ public class Cuponera {
                 && Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio)
                 && Objects.equals(registros, other.registros);
     }
+
+
+    public Integra getIntegra(Actividad a) {
+        for (Integra integra : integras)
+            if (integra.getActividad().equals(a))
+                return integra;
+
+        return null;
+    }
 }

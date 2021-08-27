@@ -23,10 +23,7 @@ public class DataUsuario {
         this.correo = correo;
         this.nacimiento = nacimiento2;
     }
-
-   // public DataUsuario(String nickname2, String nombre2, String apellido2, Email correo2, LocalDate LocalDate) {
-   // }
-
+    
     public String getNickname() {
         return nickname;
     }

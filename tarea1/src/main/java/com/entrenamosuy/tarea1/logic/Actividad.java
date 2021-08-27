@@ -84,6 +84,25 @@ public class Actividad {
         this.clases = clases;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre, clases);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Actividad other = (Actividad) obj;
+        return costo == other.costo && Objects.equals(descripcion, other.descripcion)
+                && Objects.equals(duracion, other.duracion) && Objects.equals(fechaRegistro, other.fechaRegistro)
+                && Objects.equals(nombre, other.nombre);
+    }
+
     public DataActividad getDataActividad() { 
         Set<DataCuponera> cuponeras = new HashSet<>();
         Manejador man = Manejador.getInstance();
@@ -113,28 +132,5 @@ public class Actividad {
     public DescActividad getDescActividad() {
         DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
         return res;
-    }
-
-    public void agregarClase(Clase cl) {
-        this.clases.add(cl);
-    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre, clases);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Actividad other = (Actividad) obj;
-        return costo == other.costo && Objects.equals(descripcion, other.descripcion)
-                && Objects.equals(duracion, other.duracion) && Objects.equals(fechaRegistro, other.fechaRegistro)
-                && Objects.equals(nombre, other.nombre);
     }
 }
