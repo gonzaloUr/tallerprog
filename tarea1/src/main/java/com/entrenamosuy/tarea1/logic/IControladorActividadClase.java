@@ -9,6 +9,7 @@ import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.tarea1.data.DataActividad;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -55,6 +56,8 @@ public interface IControladorActividadClase {
      */
     Set<Pair<String, String>> obtenerDescActividades(String institucion);
 
+    DataActividad consultarActividad(String actividad);
+    
     /**
      * Retorna el nombre de todas las clases en el sistema provistas por la actividad con el
      * nombre pasado.

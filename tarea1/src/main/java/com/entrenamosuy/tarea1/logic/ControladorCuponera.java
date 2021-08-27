@@ -27,7 +27,7 @@ public class ControladorCuponera implements IControladorCuponera {
         // Intentar obtener socio, clase y actividad del manejador.
         Socio s = manejador.getSocios().get(socio);
         Clase c = manejador.getClases().get(clase);
-        Actividad a = manejador.getActividades().get(actividad);
+        Actividad a = manejador.getActividades().get(actividad); 
 
         // Si alguno no se encontro tirar excepcion.
         if (c == null)
