@@ -1,17 +1,16 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.util.Objects;
-import java.util.Set;
 
 public class Integra {
 
     private int cantClases;
 
-    private Set<Actividad> actividades;
+    private Actividad actividad;
 
-    public Integra(int cantClases, Set<Actividad> actividades) {
+    public Integra(int cantClases, Actividad actividad) {
         this.cantClases = cantClases;
-        this.actividades = actividades;
+        this.actividad = actividad;
     }
 
     public int getCantClases() {
@@ -22,17 +21,17 @@ public class Integra {
         this.cantClases = cantClases;
     }
 
-    public Set<Actividad> getActividades() {
-        return actividades;
+    public Actividad getActividad() {
+        return actividad;
     }
 
-    public void setActividades(Set<Actividad> actividades) {
-        this.actividades = actividades;
+    public void setActividad (Actividad actividad) {
+        this.actividad = actividad;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cantClases, actividades);
+        return Objects.hash(cantClases, actividad);
     }
 
     @Override
@@ -42,6 +41,6 @@ public class Integra {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Integra other = (Integra) obj;
-        return cantClases == other.cantClases && actividades.equals(other.actividades);
+        return cantClases == other.cantClases && actividad.equals(other.actividad);
     }
 }

@@ -2,8 +2,11 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import com.entrenamosuy.tarea1.data.DataCuponera;
+import com.entrenamosuy.tarea1.data.DescActividad;
 
 public class Cuponera {
     
@@ -100,6 +103,18 @@ public class Cuponera {
 
     public void setRegistros(Set<Registro> registros) {
         this.registros = registros;
+    }
+
+    public DataCuponera getDataCuponera() {
+        Set<Integra> intes = this.integras; 
+        Set<DescActividad> acts = new HashSet<>();
+        for(Integra inte : intes) {
+            Actividad act = inte.getActividad();
+            DescActividad DA = act.getDescActividad();
+            acts.add(DA);
+        }
+        DataCuponera res = new DataCuponera(this.nombre, this.descripcion, acts);
+        return res;
     }
 
     @Override

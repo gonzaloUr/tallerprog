@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
+import java.util.Map;
 
 import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -84,10 +85,19 @@ public class Actividad {
     }
 
     public DataActividad getDataActividad() { 
-        Set<DataCuponera> cuponeras = new HashSet<>();//TODO Hacer
-
-
-
+        Set<DataCuponera> cuponeras = new HashSet<>();
+        Manejador man = Manejador.getInstance();
+        Map<String,Cuponera> cupos = man.getCuponeras();
+        for(Cuponera cupo : cupos.values()) {
+            Set<Integra> integs = cupo.getIntegras();
+            for(Integra integ : integs) {
+                Actividad act = integ.getActividad();
+                if (act.getNombre() == this.nombre) {
+                    DataCuponera cupoAagregar = cupo.getDataCuponera();
+                    cuponeras.add(cupoAagregar);
+                }
+            }    
+        }   
         Set<DataClase> clases = new HashSet<>();
         Set<Clase> cs = this.clases;
         Iterator<Clase> it = cs.iterator();
