@@ -5,4 +5,6 @@ public class ClaseVaciaException extends Exception {
     public ClaseVaciaException(String msg) {
         super(msg);
     }
+
+    public ClaseVaciaException() {}
 }

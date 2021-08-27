@@ -11,17 +11,20 @@ public class Registro {
 
     private Clase claseAsociada;
 
+    private Socio socio;
+
     private Cuponera cuponera;
 
-    public Registro(LocalDate fecha, int costo, Clase claseAsociada, Cuponera cuponera) {
+    public Registro(LocalDate fecha, float costo, Clase claseAsociada, Socio socio, Cuponera cuponera) {
         this.fecha = fecha;
         this.costo = costo;
         this.claseAsociada = claseAsociada;
-        this.setCuponera(cuponera);
+        this.socio = socio;
+        this.cuponera = cuponera;
     }
 
-    public Registro(LocalDate fecha, int costo, Clase claseAsociada) {
-        this(fecha, costo, claseAsociada, null);
+    public Registro(LocalDate fecha, float costo, Clase claseAsociada, Socio socio) {
+        this(fecha, costo, claseAsociada, socio, null);
     }
 
     public Cuponera getCuponera() {
@@ -38,6 +41,14 @@ public class Registro {
  
     public void setClaseAsociada(Clase claseAsociada) {
         this.claseAsociada = claseAsociada;
+    }
+
+    public Socio getSocio() {
+        return socio;
+    }
+
+    public void setSocio(Socio socio) {
+        this.socio = socio;
     }
 
     public LocalDate getFecha() {

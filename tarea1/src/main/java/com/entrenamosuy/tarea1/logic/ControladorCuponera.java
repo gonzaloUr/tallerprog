@@ -1,11 +1,16 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraVaciaException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException; 
+
 import com.entrenamosuy.tarea1.util.Pair;
 
 public class ControladorCuponera implements IControladorCuponera {
@@ -50,14 +55,29 @@ public class ControladorCuponera implements IControladorCuponera {
     }
 
     @Override
-    public Set<Pair<String, String>> obtenerDescCuponeras() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Pair<String, String>> obtenerDescCuponeras() throws CuponeraVaciaException {
+        Manejador manejador = Manejador.getInstance();
+        Map<String, Cuponera> cuponeras = manejador.getCuponeras();
+
+        if (cuponeras.isEmpty())
+            throw new CuponeraVaciaException("No hay cuponeras en el sistema");
+
+        Set<Pair<String, String>> ret = new HashSet<>();
+
+        for (Cuponera cup : cuponeras.values())
+            ret.add(new Pair<>(cup.getNombre(), cup.getDescripcion()));
+
+        return ret;
     }
 
     @Override
-    public DataCuponera consultarCuponera(String nombre) {
-        // TODO Auto-generated method stub
-        return null;
+    public DataCuponera consultarCuponera(String nombre) throws CuponeraNoEncontradaException{
+        Manejador manejador = Manejador.getInstance();
+        Cuponera c = manejador.getCuponeras().get(nombre);
+
+        if (c == null)
+            throw new CuponeraNoEncontradaException(nombre);
+
+        return c.getDataCuponera();
     }
 }

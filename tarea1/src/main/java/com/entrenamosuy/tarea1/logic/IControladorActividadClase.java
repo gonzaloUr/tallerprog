@@ -16,6 +16,7 @@ import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionVaciaException;
+import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
@@ -68,10 +69,12 @@ public interface IControladorActividadClase {
      * @param acceso Link de acceso.
      * @param fechaRegistro Fecha de registro en el sistema.
      * @throws ClaseRepetidaException Cuando el nombre no es unico en el sistema.
-     * @throws ActividadNoEncontradaException Cuando existe una actividad con el nombre pasado.s
+     * @throws ActividadNoEncontradaException Cuando existe una actividad con el nombre pasado.
+     * @throws ProfesorNoEncontradoException Cuando uno de los profesores pasados no es valido.
      */
     void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nombreProfesores, 
-        int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException;
+        int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) 
+        throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException;
 
     
     /**
@@ -127,7 +130,14 @@ public interface IControladorActividadClase {
      */
     Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException, ActividadVaciaException;
 
-    DataActividad consultarActividad(String actividad);
+    /**
+     * Retorna el DataActividad de la actividad pasada.
+     * 
+     * @param actividad Nombre de la actividad.
+     * @return El DataActividad correspondiente a actividad.
+     * @throws ActividadNoEncontradaException Cuando no existe actividad con ese nombre.
+     */
+    DataActividad consultarActividad(String actividad) throws ActividadNoEncontradaException;
     
     /**
      * Retorna el nombre de todas las clases en el sistema provistas por la actividad con el

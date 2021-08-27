@@ -36,6 +36,10 @@ public class Actividad {
         this.clases = clases;
     }
 
+    public Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro, float costo) {
+        this(nombre, descripcion, duracion, fechaRegistro, costo, new HashSet<>());
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -131,6 +135,12 @@ public class Actividad {
 
     public DescActividad getDescActividad() {
         DescActividad res = new DescActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo);
+        return res;
+    }
+
+    public float calcularPrecioConDescuento(Cuponera cup){
+        int desc = cup.getDescuento();
+        float res = costo - (costo*desc);
         return res;
     }
 }

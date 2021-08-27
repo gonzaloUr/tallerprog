@@ -115,4 +115,8 @@ public class Socio extends Usuario {
         DataSocio res = new DataSocio(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), claseReg);
         return res;
     }
+
+    public void asociarSocioRegistro(Registro reg){
+        registros.add(reg);
+    }
 }

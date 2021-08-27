@@ -155,4 +155,20 @@ public class Clase {
             this.getRegistros(), act, descProfes);
         return res;
     }
+
+    public void registrarseSinCuponera(Socio socio, LocalDate fecha){
+        float costo = actividad.getCosto();
+        Registro reg = new Registro(fecha, costo, this, socio, null);
+        registros.add(reg);
+        socio.asociarSocioRegistro(reg);
+    }
+
+    public void registrarseConCuponera(Socio socio, LocalDate fecha, Cuponera cup){
+        float costo = actividad.calcularPrecioConDescuento(cup);
+        Registro nuevoReg = new Registro(fecha, costo, this, socio, cup);
+        registros.add(nuevoReg);
+        socio.asociarSocioRegistro(nuevoReg);
+    }
+
+
 }

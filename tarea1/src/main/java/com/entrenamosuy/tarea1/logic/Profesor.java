@@ -117,7 +117,7 @@ public class Profesor extends Usuario {
         Iterator<Actividad> it = acti.iterator();
         while(it.hasNext()) {
             Actividad a = it.next();
-            DataActividad dataA = a.getDataActividad(); // TODO DataActividad en actividad
+            DataActividad dataA = a.getDataActividad();
             actividades.add(dataA);
         }     
         DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);

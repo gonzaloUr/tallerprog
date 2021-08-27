@@ -36,11 +36,11 @@ public class ControladorUsuarioTest {
         IControladorUsuario ctrlU = F.creaControladorUsuario();
 
         assertDoesNotThrow(() -> {
-            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "@mail.com"), LocalDate.of(2007, 03, 28));
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
         });
 
         assertThrows(UsuarioRepetidoException.class, () -> {
-            ctrlU.crearSocio("Lucho", "luciano", "Almenares", Email.of("luciano", "@mail.com"), LocalDate.of(1000, 03, 28));
+            ctrlU.crearSocio("Lucho", "luciano", "Almenares", Email.of("luciano", "mail.com"), LocalDate.of(1000, 03, 28));
         });
     }
 
@@ -48,7 +48,7 @@ public class ControladorUsuarioTest {
     void consultarSocio() {
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
-        Email e = Email.of("lucho", "@mail.com");
+        Email e = Email.of("lucho", "mail.com");
 
         assertDoesNotThrow(() -> {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", e, LocalDate.of(2007, 03, 28));
