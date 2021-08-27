@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Email {
 
+    public static Email of(String prefix, String domain) {
+        return new Email(prefix, domain);
+    }
+
     private final String prefix;
 
     private final String domain;

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
-import com.entrenamosuy.tarea1.data.DataUsuario;
+import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
@@ -82,14 +82,14 @@ public interface IControladorUsuario {
     Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException;
 
     /**
-     * Retorna el DataUsuario asociado al nombre pasado o tira una excepcion si no
+     * Retorna el DataSocio asociado al nombre pasado o tira una excepcion si no
      * se encuentra en el sistema.
      * 
      * @param nombre Nombre del socio.
      * @return El DataUsuario correspondiente a nombre.
      * @throws SocioNoEncontradoException Cuando no exist un socio con el nombre pasado.
      */
-    DataUsuario consultarSocio(String nombre) throws SocioNoEncontradoException;
+    DataSocio consultarSocio(String nombre) throws SocioNoEncontradoException;
 
     /**
      * Retorna el DataProfesor asociado al nombre pasado o tira una excepcion si no
