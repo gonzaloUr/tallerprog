@@ -13,6 +13,7 @@ import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -80,16 +81,40 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public Set<Triple<String, String, URL>> obtenerDescInstituciones() {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Triple<String, String, URL>> obtenerDescInstituciones() { //TODO El throw es que no hay instituciones en el sistema
+        Manejador maneja = Manejador.getInstance();
+        Set<Triple<String, String, URL>> res = new HashSet<>();
+        Map<String,Institucion> inst = maneja.getInstituciones();
+        for(Institucion i : inst.values()) {
+            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl()); 
+            res.add(trip);
+        }    
+        return res;
     }
 
     @Override
-    public Set<Pair<String, String>> obtenerDescActividades(String institucion) {
-        // TODO Auto-generated method stub
-        return null;
+    public Set<Pair<String, String>> obtenerDescActividades(String institucion) { //TODO No hay actividades en el sistema, no existe institucion con ese nombre
+        Manejador maneja = Manejador.getInstance();
+        Set<Pair<String, String>> res = new HashSet<>();
+        Map<String,Institucion> inst = maneja.getInstituciones();
+        Institucion i = inst.get(institucion);
+        Set<Actividad> acts = i.getActividadesOfrecidas();
+        for(Actividad a : acts) {
+            Pair<String, String> par = new Pair<String, String>(a.getNombre(), a.getDescripcion());
+            res.add(par);
+        }
+        return res;
     }
+
+    @Override
+    public DataActividad consultarActividad(String actividad) { // TODO El throw es que no existe la actividad
+        Manejador maneja = Manejador.getInstance();
+        Map<String,Actividad> acts = maneja.getActividades();
+        Actividad a = acts.get(actividad);
+        DataActividad res = a.getDataActividad();
+        return res;
+    }    
+
 
     @Override
     public Set<String> obtenerDescClases(String actividad) {

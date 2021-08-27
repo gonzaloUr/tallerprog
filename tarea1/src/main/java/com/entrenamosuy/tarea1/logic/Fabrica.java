@@ -2,15 +2,15 @@ package com.entrenamosuy.tarea1.logic;
 
 public class Fabrica {
     
-    public static IControladorActividadClase crearControladorActividadClase() { //TODO Revisar si va el static Luciano
+    public IControladorActividadClase crearControladorActividadClase() {
         return new ControladorActividadClase();
     }
 
-    public static IControladorCuponera crearControladorCuponera() {//TODO Revisar si va el static Luciano
+    public IControladorCuponera crearControladorCuponera() {
         return new ControladorCuponera();
     }
 
-    public static IControladorUsuario creaControladorUsuario() {//TODO Revisar si va el static Luciano
+    public IControladorUsuario creaControladorUsuario() {
         return new ControladorUsuario();
     }
 }
