@@ -59,10 +59,19 @@ public class ControladorCuponera implements IControladorCuponera {
         return res;
     }
 
-    @Override
-    public void agregarACuponera(String cuponera, String actividad) {
-        // TODO Auto-generated method stub
-
+    public void agregarACuponera(String cuponera, String actividad) throws ActividadNoEncontradaException, CuponeraNoEncontradaException {
+        Manejador m = Manejador.getInstance();
+        Cuponera c = m.getCuponeras().get(cuponera);
+        Actividad a = m.getActividades().get(actividad);
+        if (a == null)
+            throw new ActividadNoEncontradaException("No existe actividad con ese nombre");
+        if (c == null)
+            throw new CuponeraNoEncontradaException("No existe cuponera con ese nombre");
+        int cantC = a.getClases().size();
+        Integra integra = new Integra(cantC, a);
+        Set<Integra> ins = c.getIntegras();
+        ins.add(integra);
+        c.setIntegras(ins);                  
     }
 
     @Override
