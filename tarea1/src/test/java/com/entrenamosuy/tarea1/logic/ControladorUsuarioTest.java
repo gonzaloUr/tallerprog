@@ -18,6 +18,7 @@ import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -99,8 +100,8 @@ public class ControladorUsuarioTest {
             ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), "test", "descripcion", "ola", u);
         });
 
-        assertThrows(UsuarioRepetidoException.class, () -> { //2 profs con mismo mail y distinto nick
-            ctrlU.crearProfesor("Hola", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), "test", "descripcion", "ola", u);
+        assertThrows(InstitucionNoEncontradaException.class, () -> {
+            ctrlU.crearProfesor("Hola", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), null, "descripcion", "ola", u);
         });
     }
 
