@@ -4,6 +4,7 @@ import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -32,7 +33,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Manejador manejador = Manejador.getInstance();
         Map<String, Actividad> actividades = manejador.getActividades();
         Map<String, Institucion> instituciones = manejador.getInstituciones();
-        
+
         if (actividades.containsKey(nombre))
             throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
         if (!instituciones.containsKey(institucion))
@@ -52,14 +53,14 @@ public class ControladorActividadClase implements IControladorActividadClase {
         }
         Institucion res = new Institucion(nombre, descripcion, url);
         instituciones.put(nombre,res);
-        
+
     }
 
     @Override
-    public void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nicknameProfesores,
+    public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nicknameProfesores,
             int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException {
         Manejador maneja = Manejador.getInstance();
-        
+
         Map<String, Actividad> actividades = maneja.getActividades();
         Map<String, Clase> clases = maneja.getClases();
         Map<String, Profesor> profesores = maneja.getProfesores();
@@ -127,9 +128,9 @@ public class ControladorActividadClase implements IControladorActividadClase {
             throw new InstitucionVaciaException("No hay instituciones en el sistema");
         }
         for(Institucion i : inst.values()) {
-            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl()); 
+            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl());
             res.add(trip);
-        }    
+        }
         return res;
     }
 
@@ -149,7 +150,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         }
         if (res.isEmpty())
             throw new ActividadVaciaException("No hay actividades en el sistema");
-        
+
         return res;
     }
 
@@ -162,7 +163,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Actividad a = acts.get(actividad);
         DataActividad res = a.getDataActividad();
         return res;
-    }    
+    }
 
 
     @Override
@@ -174,7 +175,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Set<Clase> clases = act.getClases();
         Set<String> res = new HashSet<>();
         for (Clase clase : clases)
-            res.add(clase.getNombre()); 
+            res.add(clase.getNombre());
         if (res.isEmpty())
             throw new ClaseVaciaException();
         return res;
@@ -195,7 +196,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Clase clase = maneja.getClases().get(nombre);
         if (clase == null)
             throw new ClaseNoEncontradaException(nombre);
-        
+
         DataClase res = clase.getDataClase();
         return res;
     }

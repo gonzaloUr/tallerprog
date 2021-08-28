@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.net.URL;
 import java.util.Set;
 import java.util.HashSet;
@@ -14,10 +15,10 @@ public class Clase {
 
     private String nombre;
 
-    private LocalDate inicio;
+    private LocalDateTime inicio;
 
     private int cantMin, cantMax;
-    
+
     private URL acceso;
 
     private LocalDate fechaRegistro;
@@ -28,8 +29,8 @@ public class Clase {
 
     private Actividad actividad;
 
-    public Clase(String nombre, LocalDate inicio, int cantMin, int cantMax,
-                 URL acceso, LocalDate fechaRegistro, Set<Registro> registros, 
+    public Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
+                 URL acceso, LocalDate fechaRegistro, Set<Registro> registros,
                  Set<Profesor> profesores, Actividad actividad) {
         this.nombre = nombre;
         this.inicio = inicio;
@@ -50,11 +51,11 @@ public class Clase {
         this.nombre = nombre;
     }
 
-    public LocalDate getInicio() {
+    public LocalDateTime getInicio() {
         return inicio;
     }
 
-    public void setInicio(LocalDate inicio) {
+    public void setInicio(LocalDateTime inicio) {
         this.inicio = inicio;
     }
 
@@ -101,7 +102,7 @@ public class Clase {
     public Set<Profesor> getProfesores() {
         return profesores;
     }
-    
+
 
     public void setProfesores(Set<Profesor> profesores) {
         this.profesores = profesores;
@@ -136,12 +137,12 @@ public class Clase {
 
     public DataClase getDataClase() {
         Set<DescProfesor> descProfes = new HashSet<>();
-        Set<Profesor> profes = this.getProfesores(); 
+        Set<Profesor> profes = this.getProfesores();
         Iterator<Profesor> it = profes.iterator();
             while(it.hasNext()) {
                 Profesor p = it.next();
                 DescProfesor dp = p.getDescProfesor();
-                descProfes.add(dp);              
+                descProfes.add(dp);
             }
         Actividad acti = this.getActividad();
         DescActividad act = acti.getDescActividad();
@@ -163,6 +164,4 @@ public class Clase {
         registros.add(nuevoReg);
         socio.asociarSocioRegistro(nuevoReg);
     }
-
-
 }
