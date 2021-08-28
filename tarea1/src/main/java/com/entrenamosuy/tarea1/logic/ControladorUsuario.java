@@ -3,9 +3,8 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 import java.util.Set;
 
