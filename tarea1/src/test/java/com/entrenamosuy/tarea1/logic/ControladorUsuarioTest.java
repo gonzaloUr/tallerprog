@@ -13,9 +13,7 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
@@ -180,13 +178,9 @@ public class ControladorUsuarioTest {
     }
 
     @Test
-    void obtenerDescSocios() throws SociosVacioException {
+    void obtenerDescSocios() {
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
-
-        assertThrows(SociosVacioException.class, () -> {
-            ctrlU.obtenerDescSocios();
-        });
 
         assertDoesNotThrow(() -> {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
@@ -198,7 +192,7 @@ public class ControladorUsuarioTest {
     }
 
     @Test
-    void obtenerDescProfesores() throws ProfesoresVacioException, MalformedURLException{
+    void obtenerDescProfesores() throws MalformedURLException{
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         IControladorActividadClase ctrlA = F.crearControladorActividadClase();
@@ -207,10 +201,6 @@ public class ControladorUsuarioTest {
         assertDoesNotThrow(() -> {
             ctrlA.crearInstitucion("test", "test", new URL("https://test"));
             ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
-        });
-
-        assertThrows(ProfesoresVacioException.class, () -> {
-            ctrlU.obtenerDescProfesores();
         });
 
         assertDoesNotThrow(() -> {

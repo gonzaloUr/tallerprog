@@ -5,17 +5,14 @@ import java.util.Set;
 
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.ActividadVaciaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.ClaseVaciaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraInvalidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraLlenaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionVaciaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.data.DataClase;
@@ -117,7 +114,7 @@ public interface IControladorActividadClase {
      * @return Conjunto de tuplas de la forma (nombre, descripcion, url).
      * @throws InstitucionVaciaException Cuando no existen instituciones en el sistema.
      */
-    Set<Triple<String, String, URL>> obtenerDescInstituciones() throws InstitucionVaciaException;
+    Set<Triple<String, String, URL>> obtenerDescInstituciones();
 
     /**
      * Retorna el nombre y la descripcion de todas las actividades en el sistema provistas
@@ -128,7 +125,7 @@ public interface IControladorActividadClase {
      * @throws InstitucionNoEncontradaException Cuando la institucion pasada no existe en el sistema.
      * @throws ActividadVaciaException Cuando no hay ninguna actividad asociada a la institucion pasada.
      */
-    Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException, ActividadVaciaException;
+    Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException;
 
     /**
      * Retorna el DataActividad de la actividad pasada.
@@ -148,11 +145,8 @@ public interface IControladorActividadClase {
      * @throws ActividadNoEncontradaException Cuando la actividad pasada no existe en el sistema.
      * @throws ClaseVaciaException Cuando no hay ninguna clase asociada a la actividad pasada.
      */
-    Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException, ClaseVaciaException;
-
-
-    DataClase obtenerDataClase(String nombre) throws ClaseNoEncontradaException;
-
+    Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException;
+    
     /**
      * Retorna el DataClase asociado al nombre pasado o tira una excepcion si no se
      * encuentra en el sistema.

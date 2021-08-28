@@ -10,9 +10,7 @@ import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.util.Triple;
 
@@ -70,7 +68,7 @@ public interface IControladorUsuario {
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
      * @throws SociosVacioException Cuando no hay socios en el sistema
      */
-    Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException;
+    Set<Triple<String, String, String>> obtenerDescSocios();
 
     /**
      * Retorna el nickname, nombre y apellido de todos los profesores en
@@ -79,7 +77,7 @@ public interface IControladorUsuario {
      * @return Conjunto de tuplas de la forma (nombre, nickname, apellido).
      * @throws ProfesoresVacioException Cuando no hay profesores en el sistema.
      */
-    Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException;
+    Set<Triple<String, String, String>> obtenerDescProfesores();
 
     /**
      * Retorna el DataSocio asociado al nombre pasado o tira una excepcion si no

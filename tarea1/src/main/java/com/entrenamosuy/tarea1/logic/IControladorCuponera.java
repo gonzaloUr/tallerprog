@@ -6,11 +6,8 @@ import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.ActividadesAgregablesVaciasException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.CuponeraVaciaException;
-import com.entrenamosuy.tarea1.exceptions.CuponerasUsablesVaciasException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 
 public interface IControladorCuponera {
@@ -39,7 +36,7 @@ public interface IControladorCuponera {
      * @throws CuponerasUsablesVaciasException Cuando no hay cuponeras usables para el socio y activdad pasadas.
      */
     Set<Pair<String, String>> cuponerasUsables(String actividad, String socio) 
-        throws ActividadNoEncontradaException, SocioNoEncontradoException, CuponerasUsablesVaciasException;
+        throws ActividadNoEncontradaException, SocioNoEncontradoException;
 
     /**
      * Retorna el nombre y la descripcion de todas las actividades pertenecientes a institucion las cuales se pueden agregar a esta,
@@ -53,7 +50,7 @@ public interface IControladorCuponera {
      * @throws ActividadesAgregablesVaciasException Cuando no hay actividades a agregar.
      */
     Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion) 
-        throws CuponeraNoEncontradaException, InstitucionNoEncontradaException, ActividadesAgregablesVaciasException;
+        throws CuponeraNoEncontradaException, InstitucionNoEncontradaException;
 
     /**
      * Agrega actividad a cuponera.
@@ -71,7 +68,7 @@ public interface IControladorCuponera {
      * @return Conjunto de tuplas de la forma (nombre, desc).
      * @throws CuponeraVaciaException Cuando no hay cuponeras en el sistema.
      */
-    Set<Pair<String, String>> obtenerDescCuponeras() throws CuponeraVaciaException;
+    Set<Pair<String, String>> obtenerDescCuponeras();
 
     /**
      * Retorna el DataCuponera asociado al nombre pasado o tira una excepcion si no se

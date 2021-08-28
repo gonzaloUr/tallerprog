@@ -13,9 +13,7 @@ import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -105,36 +103,35 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException {
+    public Set<Triple<String, String, String>> obtenerDescSocios() {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
+        Set<Triple<String, String, String>> res = new HashSet<>();
+
         if (!mapa.isEmpty()) {
-            Set<Triple<String, String, String>> res = new HashSet<>();
             for(Socio s : mapa.values()) {
                 Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido()); 
                 res.add(trip);
-            }  
-            return res;
+            }
         }
-        else
-            throw new SociosVacioException("No hay socios en el sistema");
+
+        return res;
     }
 
     @Override
-    public Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException {
+    public Set<Triple<String, String, String>> obtenerDescProfesores() {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
-        if (!mapa.isEmpty()) {
-            Set<Triple<String, String, String>> res = new HashSet<>();
+        Set<Triple<String, String, String>> res = new HashSet<>();
 
+        if (!mapa.isEmpty()) {
             for(Profesor p : mapa.values()) {
                 Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido()); 
                 res.add(trip);
             } 
-            return res;
         }
-        else  
-            throw new ProfesoresVacioException("No hay profesores en el sistema");
+        
+        return res;
     }
 
     @Override

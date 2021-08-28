@@ -8,7 +8,6 @@ import java.util.Set;
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.CuponeraVaciaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException; 
 
@@ -67,12 +66,9 @@ public class ControladorCuponera implements IControladorCuponera {
     }
 
     @Override
-    public Set<Pair<String, String>> obtenerDescCuponeras() throws CuponeraVaciaException {
+    public Set<Pair<String, String>> obtenerDescCuponeras() {
         Manejador manejador = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = manejador.getCuponeras();
-
-        if (cuponeras.isEmpty())
-            throw new CuponeraVaciaException("No hay cuponeras en el sistema");
 
         Set<Pair<String, String>> ret = new HashSet<>();
 

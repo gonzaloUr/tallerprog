@@ -10,13 +10,10 @@ import java.util.HashSet;
 
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.ActividadVaciaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.ClaseVaciaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionVaciaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
@@ -120,13 +117,11 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public Set<Triple<String, String, URL>> obtenerDescInstituciones() throws InstitucionVaciaException {
+    public Set<Triple<String, String, URL>> obtenerDescInstituciones() {
         Manejador maneja = Manejador.getInstance();
         Set<Triple<String, String, URL>> res = new HashSet<>();
         Map<String,Institucion> inst = maneja.getInstituciones();
-        if (inst.isEmpty()) {
-            throw new InstitucionVaciaException("No hay instituciones en el sistema");
-        }
+
         for(Institucion i : inst.values()) {
             Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl());
             res.add(trip);
@@ -135,7 +130,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException, ActividadVaciaException {
+    public Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Set<Pair<String, String>> res = new HashSet<>();
         Map<String,Institucion> inst = maneja.getInstituciones();
@@ -148,8 +143,6 @@ public class ControladorActividadClase implements IControladorActividadClase {
             Pair<String, String> par = new Pair<String, String>(a.getNombre(), a.getDescripcion());
             res.add(par);
         }
-        if (res.isEmpty())
-            throw new ActividadVaciaException("No hay actividades en el sistema");
 
         return res;
     }
@@ -167,7 +160,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
 
     @Override
-    public Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException, ClaseVaciaException {
+    public Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Actividad act = maneja.getActividades().get(actividad);
         if (act == null)
@@ -176,18 +169,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Set<String> res = new HashSet<>();
         for (Clase clase : clases)
             res.add(clase.getNombre());
-        if (res.isEmpty())
-            throw new ClaseVaciaException();
-        return res;
-    }
 
-    @Override
-    public DataClase obtenerDataClase(String nombre) throws ClaseNoEncontradaException {
-        Manejador maneja = Manejador.getInstance();
-        Clase c = maneja.getClases().get(nombre);
-        if (c == null)
-            throw new ClaseNoEncontradaException("No existe clase con nombre:" + nombre);
-        return c.getDataClase();
+        return res;
     }
 
     @Override
