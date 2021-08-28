@@ -38,7 +38,7 @@ public class Clase {
         this.cantMax = cantMax;
         this.acceso = acceso;
         this.fechaRegistro = fechaRegistro;
-        this.registros = registros;
+        this.registros = registros = new HashSet<>();
         this.profesores = profesores;
         this.actividad = actividad;
     }

@@ -151,9 +151,12 @@ public class ControladorActividadClase implements IControladorActividadClase {
     public DataActividad consultarActividad(String actividad) throws ActividadNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String,Actividad> acts = maneja.getActividades();
-        if (acts == null)
+        if (acts.isEmpty())
             throw new ActividadNoEncontradaException(actividad);
         Actividad a = acts.get(actividad);
+        if (a == null) {
+            throw new ActividadNoEncontradaException(actividad);
+        }
         DataActividad res = a.getDataActividad();
         return res;
     }

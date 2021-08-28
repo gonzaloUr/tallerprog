@@ -79,7 +79,7 @@ public class ControladorUsuarioTest {
     }
 
     @Test
-    void crearProfesorBien() throws MalformedURLException {  
+    void crearProfesor() throws MalformedURLException {  
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         IControladorActividadClase ctrlA = F.crearControladorActividadClase();
@@ -100,6 +100,17 @@ public class ControladorUsuarioTest {
 
         assertThrows(InstitucionNoEncontradaException.class, () -> {
             ctrlU.crearProfesor("Hola", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), null, "descripcion", "ola", u);
+        });
+        assertDoesNotThrow(() -> {
+            DataProfesor dp = ctrlU.consultarProfesor("Facu");
+            assertEquals(dp.getApellido(), "Techera");
+            assertEquals(dp.getNombre(), "Facundo");
+            assertEquals(dp.getCorreo(), Email.of("facu", "mail.com"));
+            assertEquals(dp.getNacimiento(), LocalDate.of(2007, 03, 28));
+            assertEquals(dp.getDescripcion(), "descripcion");
+            assertEquals(dp.getBiografia(), "ola");
+            assertEquals(dp.getSitioWeb(), u);
+            assertEquals(dp.getInstitucionNombre(), "test");
         });
     }
 

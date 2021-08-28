@@ -13,10 +13,13 @@ import java.util.Set;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -104,5 +107,149 @@ public class ControladorActividadClaseTest {
 
             ctrlActividadClase.crearClase("test", "mi clase", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
         });
+    }
+
+    @Test
+    void obtenerDescInstituciones() {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlA.obtenerDescInstituciones();
+        });
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test1", "test1", new URL("https://test1"));
+            ctrlA.crearInstitucion("test2", "test2", new URL("https://test2"));
+            ctrlA.obtenerDescInstituciones();
+        });
+    }
+
+    @Test
+    void obtenerDescActividades() throws InstitucionNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        assertThrows(InstitucionNoEncontradaException.class, () -> { //Instituto no encontrado
+            ctrlA.obtenerDescActividades("");    
+        });
+        assertDoesNotThrow(() -> { 
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+        });
+        assertDoesNotThrow(() -> { //Todo bien
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlA.obtenerDescActividades("test");
+        });
+    }
+
+
+    @Test
+    void consultarActividad() throws ActividadNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        assertThrows(ActividadNoEncontradaException.class, () -> {
+            ctrlA.consultarActividad("t");
+        });
+
+        assertDoesNotThrow(() -> { //Todo bien
+            ctrlA.crearInstitucion("testI", "testIn", new URL("https://test"));
+            ctrlA.crearActividad("testI", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlA.consultarActividad("test");
+        });
+        assertThrows(ActividadNoEncontradaException.class, () -> {
+            ctrlA.consultarActividad("t");
+        });
+    }
+
+    @Test
+    void obtenerDescClases() throws ActividadNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        ControladorUsuario ctrlU = new ControladorUsuario();
+
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            ctrlU.crearProfesor("profe2", "Profe 2", "apellido", Email.of("profe2", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+        });
+
+        assertDoesNotThrow(() -> { // OK
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            profesores.add("profe2");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.obtenerDescClases("test");
+        });
+
+        assertThrows(ActividadNoEncontradaException.class, () -> {
+            ctrlA.obtenerDescClases("t");
+        });
+    }
+
+    @Test
+    void obtenerDataClase() throws ClaseNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        ControladorUsuario ctrlU = new ControladorUsuario();
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            ctrlU.crearProfesor("profe2", "Profe 2", "apellido", Email.of("profe2", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            profesores.add("profe2");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.consultarClase("test");
+        });
+        assertThrows(ClaseNoEncontradaException.class, () -> {
+            ctrlA.consultarClase("t");
+        });
+    };
+
+    @Test
+    void consultarClase() throws ClaseNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        ControladorUsuario ctrlU = new ControladorUsuario();
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            ctrlU.crearProfesor("profe2", "Profe 2", "apellido", Email.of("profe2", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            profesores.add("profe2");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.consultarClase("test");
+        });
+        assertThrows(ClaseNoEncontradaException.class, () -> {
+            ctrlA.consultarClase("t");
+        });
+    };
+
+    @Test
+    void registraseConCuponera() throws CuponeraNoEncontradaException, SocioNoEncontradoException, ClaseNoEncontradaException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        //ctrlA.registraseConCuponera(socio, clase, cuponera, fechaRegistro);
+    }
+
+    @Test
+    void registarseSinCuponera() throws ClaseNoEncontradaException, SocioNoEncontradoException {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        ControladorUsuario ctrlU = new ControladorUsuario();
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
+        });
+        assertThrows(SocioNoEncontradoException.class, () -> {
+            ctrlA.registarseSinCuponera("L", "test", LocalDate.of(2021, 03, 2));
+        });
+        assertThrows(ClaseNoEncontradaException.class, () -> {
+            ctrlA.registarseSinCuponera("Lucho", "t", LocalDate.of(2021, 03, 2));
+        });
+        /*assertDoesNotThrow(() -> {
+            ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(2021, 03, 2));  
+        });*/
     }
 }
