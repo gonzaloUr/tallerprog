@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
-//import java.util.Collections;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.data.DescActividad;
@@ -42,11 +41,6 @@ public class Clase {
         this.profesores = profesores;
         this.actividad = actividad;
     }
-
-/*    public Clase(String nombre, LocalDate inicio, int cantMin, int cantMax,
-                 URL acceso, LocalDate fechaRegistro) {
-        this(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, Collections.emptySet());
-    }*/
 
     public String getNombre() {
         return nombre;

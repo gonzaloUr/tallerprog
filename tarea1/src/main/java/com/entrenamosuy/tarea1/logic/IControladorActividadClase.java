@@ -75,7 +75,6 @@ public interface IControladorActividadClase {
     void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nombreProfesores, 
         int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) 
         throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException;
-
     
     /**
      * Registra a socio en la clase pasado sin el uso de una cuponera, si no existen socio o clase en el sistema

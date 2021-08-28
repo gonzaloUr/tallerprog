@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public class Institucion {
     }
 
     public Institucion(String nombre, String descripcion, URL url) {
-        this(nombre, descripcion, url, Collections.emptySet());
+        this(nombre, descripcion, url, new HashSet<>());
     }
 
     public String getNombre() {

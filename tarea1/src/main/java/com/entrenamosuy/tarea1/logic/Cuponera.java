@@ -1,7 +1,6 @@
 package com.entrenamosuy.tarea1.logic;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -38,7 +37,7 @@ public class Cuponera {
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
             float precio) {
-        this(nombre, descripcion, inicio, fin, descuento, precio, Collections.emptySet(), Collections.emptySet());
+        this(nombre, descripcion, inicio, fin, descuento, precio, new HashSet<>(), new HashSet<>());
     }
 
     public String getNombre() {

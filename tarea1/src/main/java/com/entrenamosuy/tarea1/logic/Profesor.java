@@ -2,7 +2,6 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
@@ -35,10 +34,14 @@ public class Profesor extends Usuario {
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.institucion = institucion;
-        this.clasesDictadas = Collections.emptySet();
+        this.clasesDictadas = new HashSet<>();
         this.actividades = actividades;
     }
 
+    public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
+            String descripcion, String biografia, URL sitioWeb, Institucion institucion) {
+        this(nickname, nombre, apellido, correo, nacimiento, descripcion, biografia, sitioWeb, institucion, new HashSet<>());
+    }
 
     public String getDescripcion() {
         return descripcion;

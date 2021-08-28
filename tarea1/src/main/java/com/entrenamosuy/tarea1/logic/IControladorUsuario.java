@@ -35,7 +35,7 @@ public interface IControladorUsuario {
      * @throws UsuarioRepetidoException Cuando el nombre pasado no es unico.
      * @throws InstitucionNoEncontradaException Cuando la institucion no existe.
      */
-    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Institucion institucion, 
+    void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, String institucion, 
         String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException;
 
     /**
