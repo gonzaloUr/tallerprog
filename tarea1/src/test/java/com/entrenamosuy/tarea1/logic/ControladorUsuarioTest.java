@@ -14,6 +14,7 @@ import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -120,6 +121,31 @@ public class ControladorUsuarioTest {
 
         assertThrows(ProfesorNoEncontradoException.class, () -> {
             ctrlU.consultarProfesor("facu");
+        });
+    }
+
+    @Test
+    void modificarDatosUsuario() throws MalformedURLException {
+        Fabrica F = new Fabrica();
+        IControladorUsuario ctrlU = F.creaControladorUsuario();
+        Institucion inst = null;//Explota por esto.. Hay que implementar
+        URL u = new URL("http", "www.google", 5, "file");
+        assertDoesNotThrow(() -> {
+            ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), inst, "descripcion", "ola", u);
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.modificarDatosUsuario("Facu", "Facundito", "Techera", LocalDate.of(2007, 03, 28));
+        });
+
+        assertDoesNotThrow(() -> {
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.modificarDatosUsuario("Lucho", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
+        });
+
+        assertThrows(UsuarioNoEncontradoException.class, () -> {
+            ctrlU.modificarDatosUsuario("Luchito", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
         });
     }
 
