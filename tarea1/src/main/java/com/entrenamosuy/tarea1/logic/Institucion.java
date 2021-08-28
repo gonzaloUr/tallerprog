@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.util.Pair;
+
+
 public class Institucion {
     
     private String nombre;
@@ -76,4 +79,15 @@ public class Institucion {
                 && Objects.equals(descripcion, other.descripcion) && Objects.equals(nombre, other.nombre)
                 && Objects.equals(url, other.url);
     }
+
+    public Set<Pair<String, String>> actividadesAgregables(Cuponera cup){
+        Set<Pair<String, String>> ret = new HashSet<>();
+        for (Actividad act : actividadesOfrecidas){
+            if (!cup.tieneActividad(act)){
+                ret.add(new Pair<>(act.getNombre(), act.getDescripcion()));
+            }
+        }
+        return ret;
+    }
+
 }

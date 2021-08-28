@@ -17,27 +17,27 @@ public class Cuponera {
 
     private int descuento;
 
-    private float precio;
+    //private float precio;
 
     private Set<Integra> integras;
 
     private Set<Registro> registros;
 
-    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-            float precio, Set<Integra> integras, Set<Registro> registros) {
+    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, 
+        Set<Integra> integras, Set<Registro> registros) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.inicio = inicio;
         this.fin = fin;
         this.descuento = descuento;
-        this.precio = precio;
+        //this.precio = precio;
         this.integras = integras;
         this.registros = registros;
     }
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-            float precio) {
-        this(nombre, descripcion, inicio, fin, descuento, precio, new HashSet<>(), new HashSet<>());
+            LocalDate fechaCreacion) {
+        this(nombre, descripcion, inicio, fin, descuento, new HashSet<>(), new HashSet<>());
     }
 
     public String getNombre() {
@@ -80,13 +80,13 @@ public class Cuponera {
         this.descuento = descuento;
     }
 
-    public float getPrecio() {
-        return precio;
-    }
+    //public float getPrecio() {
+    //    return precio;
+    //}
 
-    public void setPrecio(float precio) {
-        this.precio = precio;
-    }
+    //public void setPrecio(float precio) {
+    //    this.precio = precio;
+    //}
 
     public Set<Integra> getIntegras() {
         return integras;
@@ -118,7 +118,7 @@ public class Cuponera {
 
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion, descuento, fin, inicio, integras, nombre, precio, registros);
+        return Objects.hash(descripcion, descuento, fin, inicio, integras, nombre, registros);
     }
 
     @Override
@@ -133,10 +133,9 @@ public class Cuponera {
         return Objects.equals(descripcion, other.descripcion) && descuento == other.descuento
                 && Objects.equals(fin, other.fin) && Objects.equals(inicio, other.inicio)
                 && Objects.equals(integras, other.integras) && Objects.equals(nombre, other.nombre)
-                && Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio)
+                //&& Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio)
                 && Objects.equals(registros, other.registros);
     }
-
 
     public Integra getIntegra(Actividad a) {
         for (Integra integra : integras)
@@ -144,5 +143,16 @@ public class Cuponera {
                 return integra;
 
         return null;
+    }
+
+    public boolean tieneActividad(Actividad act){
+        boolean ret = false;
+        for (Integra integ : integras) {
+            if (act.equals(integ.getActividad())){
+                ret = true;
+                break;
+            }
+        }
+        return ret;
     }
 }

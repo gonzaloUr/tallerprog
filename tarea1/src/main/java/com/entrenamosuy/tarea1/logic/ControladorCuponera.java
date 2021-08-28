@@ -9,6 +9,7 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraVaciaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException; 
 
 import com.entrenamosuy.tarea1.util.Pair;
@@ -17,9 +18,15 @@ public class ControladorCuponera implements IControladorCuponera {
 
     @Override
     public void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin,
-            int descuento) {
-        // TODO Auto-generated method stub
+            int descuento) throws CuponeraRepetidaException {
+        Manejador manejador = Manejador.getInstance();
+        Map<String, Cuponera> cuponeras = manejador.getCuponeras();
 
+        if (cuponeras.containsKey(nombre))
+            throw new CuponeraRepetidaException("La cuponera llamada " + nombre + " ya existe.");
+        LocalDate ahora = LocalDate.now();
+        Cuponera nuevaCup = new Cuponera(nombre, descripcion,inicio, fin, descuento, ahora);
+        cuponeras.put(nombre,nuevaCup);
     }
 
     @Override
@@ -44,8 +51,13 @@ public class ControladorCuponera implements IControladorCuponera {
 
     @Override
     public Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion) {
-        // TODO Auto-generated method stub
-        return null;
+        Manejador maneja = Manejador.getInstance();
+        Map<String, Cuponera> cuponeras = maneja.getCuponeras();
+        Map<String, Institucion> instituciones = maneja.getInstituciones();
+        Cuponera cup = cuponeras.get(cuponera);
+        Institucion ins = instituciones.get(institucion);
+        Set<Pair<String, String>> res = ins.actividadesAgregables(cup);
+        return res;
     }
 
     @Override
