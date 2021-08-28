@@ -25,6 +25,7 @@ import com.entrenamosuy.tarea1.data.DataActividad;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public interface IControladorActividadClase {
 
@@ -32,7 +33,7 @@ public interface IControladorActividadClase {
      * Crea una nueva actividad con los datos ingresados perteneciente a institucion, si ya existe
      * una actividad con el mismo nombre tira {@link ActividadRepetidaException} y si no se encuentra
      * institutcion se tira {@link InstitucionNoEncontradaException}.
-     * 
+     *
      * @param institucion Institucion al que pertenecera la actividad.
      * @param nombre Nombre unico de la actividad.
      * @param descripcion Descripcion de la actividad.
@@ -47,7 +48,7 @@ public interface IControladorActividadClase {
     /**
      * Crea una nueva institucion con los datos ingresados, si ya existe una con el mismo nombre se tira
      * {@link InstitucionRepetidaException}.
-     * 
+     *
      * @param nombre El nombre unico de la institucion.
      * @param descripcion La descripcion de la institucion.
      * @param url El url de la institucion.
@@ -56,10 +57,10 @@ public interface IControladorActividadClase {
     void crearInstitucion(String nombre, String descripcion, URL url) throws InstitucionRepetidaException;
 
     /**
-     * Crea una nueva clase con los datos pasados perteneciente a la actividad pasada, si ya existe una con 
+     * Crea una nueva clase con los datos pasados perteneciente a la actividad pasada, si ya existe una con
      * el mismo nombre se tira {@link ClaseRepetidaException} y si no se encuentra la actividad se tira
      * {@link ActividadNoEncontradaException}
-     * 
+     *
      * @param nombreActividad Nombre de la actividad a la que pertenecera la clase.
      * @param nombre Nombre unico de la clase.
      * @param inicio Fecha de inicio de la clase.
@@ -72,14 +73,14 @@ public interface IControladorActividadClase {
      * @throws ActividadNoEncontradaException Cuando existe una actividad con el nombre pasado.
      * @throws ProfesorNoEncontradoException Cuando uno de los profesores pasados no es valido.
      */
-    void crearClase(String nombreActividad, String nombre, LocalDate inicio, Set<String> nombreProfesores, 
-        int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) 
+    void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
+        int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro)
         throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException;
-    
+
     /**
      * Registra a socio en la clase pasado sin el uso de una cuponera, si no existen socio o clase en el sistema
      * se tiran {@link SocioNoEncontradoException} y {@link ClaseNoEncontradaException}.
-     * 
+     *
      * @param socio Nombre del socio que se registrara en una clase.
      * @param clase Nombre de la clase a registrarse.
      * @param fechaRegistro Fecha del registro
@@ -91,10 +92,10 @@ public interface IControladorActividadClase {
     /**
      * Registar a socio en la clase pasada con la cuponera dada, si no existe un socio, clase o cuponera se tiran
      * {@link SocioNoEncontradoException}, {@link ClaseNoEncontradaException} y {@link CuponeraNoEncontradaException}.
-     * 
+     *
      * Ademas si la cuponera pasada no tiene alguna actividad que integre a clase o que la capacidad de esta
      * este llena se tiran {@link CuponeraInvalidaException} y {@link CuponeraInvalidaException} respectivamente.
-     * 
+     *
      * @param socio Nombre del socio que se registrara a clase.
      * @param clase Clase a registrarse.
      * @param cuponera Cuponera con la cual registrarse.
@@ -106,13 +107,13 @@ public interface IControladorActividadClase {
      * @throws CuponeraInvalidaException Cuando cuponera no tiene alguna actividad con clase.
      * @throws CuponeraLlenaException Cuando el limite de la cuponera se alcanzo.
      */
-    void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro) 
-        throws SocioNoEncontradoException, ClaseNoEncontradaException, CuponeraNoEncontradaException, 
+    void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
+        throws SocioNoEncontradoException, ClaseNoEncontradaException, CuponeraNoEncontradaException,
         CuponeraNoCompradaException, CuponeraInvalidaException, CuponeraLlenaException;
 
     /**
      * Retorna el nombre, descripcion y URL de todos los institucion en el sistema.
-     * 
+     *
      * @return Conjunto de tuplas de la forma (nombre, descripcion, url).
      * @throws InstitucionVaciaException Cuando no existen instituciones en el sistema.
      */
@@ -121,7 +122,7 @@ public interface IControladorActividadClase {
     /**
      * Retorna el nombre y la descripcion de todas las actividades en el sistema provistas
      * por el institucion con el nombre pasado.
-     * 
+     *
      * @param institucion Nombre de un institucion.
      * @return Conjunto de tuplas de la forma (nombre, descripcion).
      * @throws InstitucionNoEncontradaException Cuando la institucion pasada no existe en el sistema.
@@ -131,17 +132,17 @@ public interface IControladorActividadClase {
 
     /**
      * Retorna el DataActividad de la actividad pasada.
-     * 
+     *
      * @param actividad Nombre de la actividad.
      * @return El DataActividad correspondiente a actividad.
      * @throws ActividadNoEncontradaException Cuando no existe actividad con ese nombre.
      */
     DataActividad consultarActividad(String actividad) throws ActividadNoEncontradaException;
-    
+
     /**
      * Retorna el nombre de todas las clases en el sistema provistas por la actividad con el
      * nombre pasado.
-     * 
+     *
      * @param actividad Nombre de una actividad.
      * @return Conjunto de nombres de clases.
      * @throws ActividadNoEncontradaException Cuando la actividad pasada no existe en el sistema.
@@ -155,7 +156,7 @@ public interface IControladorActividadClase {
     /**
      * Retorna el DataClase asociado al nombre pasado o tira una excepcion si no se
      * encuentra en el sistema.
-     * 
+     *
      * @param nombre Nombre de la clase.
      * @return El DataClase correspondiente a nombre.
      * @throws ClaseNoEncontradaException Cuando la clase pasada no existe en el sistema.

@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -86,22 +87,22 @@ public class ControladorActividadClaseTest {
             profesores.add("profe1");
             profesores.add("profe2");
 
-            ctrlActividadClase.crearClase("test", "test", LocalDate.of(2000, 10, 10), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.crearClase("test", "test", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
         });
 
         assertThrows(ClaseRepetidaException.class, () -> {
-            ctrlActividadClase.crearClase("test", "test", LocalDate.of(2000, 10, 10), new HashSet<>(), 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.crearClase("test", "test", LocalDateTime.of(2000, 10, 10, 0, 0), new HashSet<>(), 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
         });
 
         assertThrows(ActividadNoEncontradaException.class, () -> {
-            ctrlActividadClase.crearClase("actividad", "mi clase", LocalDate.of(2000, 10, 10), new HashSet<>(), 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.crearClase("actividad", "mi clase", LocalDateTime.of(2000, 10, 10, 0, 0), new HashSet<>(), 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
         });
 
         assertThrows(ProfesorNoEncontradoException.class, () -> {
             Set<String> profesores = new HashSet<>();
             profesores.add("profe3");
 
-            ctrlActividadClase.crearClase("test", "mi clase", LocalDate.of(2000, 10, 10), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.crearClase("test", "mi clase", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
         });
     }
 }
