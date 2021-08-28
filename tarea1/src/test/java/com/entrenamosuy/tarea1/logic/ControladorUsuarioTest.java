@@ -12,7 +12,9 @@ import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ProfesoresVacioException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.SociosVacioException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 
@@ -141,11 +143,56 @@ public class ControladorUsuarioTest {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Lucho", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
+            ctrlU.modificarDatosUsuario("Lucho", "lucianito", "almenares", LocalDate.of(2007, 03, 29));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.modificarDatosUsuario("Lucho", null, "almenares", LocalDate.of(2007, 03, 29));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.modificarDatosUsuario("Lucho", "lucianito", null, LocalDate.of(2007, 03, 29));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.modificarDatosUsuario("Lucho", "lucianito", "almenares", null);
         });
 
         assertThrows(UsuarioNoEncontradoException.class, () -> {
             ctrlU.modificarDatosUsuario("Luchito", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
+        });
+    }
+
+    @Test
+    void obtenerDescSocios() throws SociosVacioException {
+        Fabrica F = new Fabrica();
+        IControladorUsuario ctrlU = F.creaControladorUsuario();
+
+        assertThrows(SociosVacioException.class, () -> {
+            ctrlU.obtenerDescSocios();
+        });
+
+        assertDoesNotThrow(() -> {
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.obtenerDescSocios();
+        });
+
+    }
+
+    @Test
+    void obtenerDescProfesores() throws ProfesoresVacioException, MalformedURLException{
+        Fabrica F = new Fabrica();
+        IControladorUsuario ctrlU = F.creaControladorUsuario();
+        Institucion inst = null;//Explota por esto.. Hay que implementar
+        URL u = new URL("http", "www.google", 5, "file");
+        assertThrows(ProfesoresVacioException.class, () -> {
+            ctrlU.obtenerDescProfesores();
+        });
+
+        assertDoesNotThrow(() -> {
+            ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), inst, "descripcion", "ola", u);
+        });
+        assertDoesNotThrow(() -> {
+            ctrlU.obtenerDescProfesores();
         });
     }
 

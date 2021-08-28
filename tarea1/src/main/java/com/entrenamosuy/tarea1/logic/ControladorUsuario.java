@@ -105,14 +105,12 @@ public class ControladorUsuario implements IControladorUsuario {
     public Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
-        if (mapa != null) {
+        if (!mapa.isEmpty()) {
             Set<Triple<String, String, String>> res = new HashSet<>();
-            Iterator<Entry<String, Socio>> it = mapa.entrySet().iterator();
-            while(it.hasNext()) {
-                Socio s = (Socio) it.next();
-                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido());
+            for(Socio s : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido()); 
                 res.add(trip);
-            }
+            }  
             return res;
         }
         else
@@ -123,14 +121,13 @@ public class ControladorUsuario implements IControladorUsuario {
     public Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
-        if (mapa != null) {
+        if (!mapa.isEmpty()) {
             Set<Triple<String, String, String>> res = new HashSet<>();
-            Iterator<Entry<String, Profesor>> it = mapa.entrySet().iterator();
-            while(it.hasNext()) {
-                Profesor p = (Profesor) it.next();
-                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido());
+
+            for(Profesor p : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido()); 
                 res.add(trip);
-            }
+            } 
             return res;
         }
         else  
