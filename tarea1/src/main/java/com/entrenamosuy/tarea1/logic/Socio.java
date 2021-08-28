@@ -108,7 +108,7 @@ public class Socio extends Usuario {
             while(it.hasNext()) {
                 Registro r = it.next();
                 Clase c = r.getClaseAsociada();
-                DataClase dataClase = c.getDataClase(); // IMPLEMENTAR en Clase
+                DataClase dataClase = c.getDataClase(); 
                 claseReg.add(dataClase);  
             }
         DataSocio res = new DataSocio(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), claseReg);

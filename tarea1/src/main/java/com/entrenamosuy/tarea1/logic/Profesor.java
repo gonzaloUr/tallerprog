@@ -114,7 +114,10 @@ public class Profesor extends Usuario {
     }
 
     public DataProfesor getDataProfesor() {
-        String institucionNombre = this.getInstitucion().getNombre();
+        String institucionNombre = "";
+        if (this.getInstitucion() != null) {
+            institucionNombre = this.getInstitucion().getNombre();
+        }    
         Set<DataActividad> actividades = new HashSet<>();
         Set<Actividad> acti = this.getActividad();
         Iterator<Actividad> it = acti.iterator();

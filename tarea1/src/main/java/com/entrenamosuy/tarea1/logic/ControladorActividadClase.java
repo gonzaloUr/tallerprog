@@ -35,10 +35,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
         
         if (actividades.containsKey(nombre))
             throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
-
         if (!instituciones.containsKey(institucion))
             throw new InstitucionNoEncontradaException(institucion);
-            
         Institucion inst = instituciones.get(institucion);
         Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
         inst.getActividadesOfrecidas().add(nuevaActividad);
@@ -65,17 +63,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Map<String, Actividad> actividades = maneja.getActividades();
         Map<String, Clase> clases = maneja.getClases();
         Map<String, Profesor> profesores = maneja.getProfesores();
-
         Actividad actividad = actividades.get(nombreActividad);
-        
         if (actividad == null)
             throw new ActividadNoEncontradaException(nombreActividad);
-
         if (clases.containsKey(nombre))
             throw new ClaseRepetidaException("La clase llamada " + nombre + " ya existe.");
 
         Set<Profesor> profes = new HashSet<>();
-
         for (String nickname : nicknameProfesores) {
             Profesor p = profesores.get(nickname);
 
@@ -84,10 +78,8 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
             profes.add(p);
         }
-        
         Set<Registro> registros = new HashSet<>();
         Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad);
-
         clases.put(nombre, nuevaClase);
         actividad.getClases().add(nuevaClase);
     }
@@ -177,20 +169,24 @@ public class ControladorActividadClase implements IControladorActividadClase {
     public Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException, ClaseVaciaException {
         Manejador maneja = Manejador.getInstance();
         Actividad act = maneja.getActividades().get(actividad);
-
         if (act == null)
             throw new ActividadNoEncontradaException(actividad);
-
         Set<Clase> clases = act.getClases();
         Set<String> res = new HashSet<>();
-
         for (Clase clase : clases)
-            res.add(clase.getNombre());
-            
+            res.add(clase.getNombre()); 
         if (res.isEmpty())
             throw new ClaseVaciaException();
-
         return res;
+    }
+
+    @Override
+    public DataClase obtenerDataClase(String nombre) throws ClaseNoEncontradaException {
+        Manejador maneja = Manejador.getInstance();
+        Clase c = maneja.getClases().get(nombre);
+        if (c == null)
+            throw new ClaseNoEncontradaException("No existe clase con nombre:" + nombre);
+        return c.getDataClase();
     }
 
     @Override

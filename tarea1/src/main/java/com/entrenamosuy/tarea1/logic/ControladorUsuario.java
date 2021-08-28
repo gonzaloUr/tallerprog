@@ -3,9 +3,8 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Map.Entry;
+
 
 import java.util.Set;
 
@@ -59,26 +58,8 @@ public class ControladorUsuario implements IControladorUsuario {
         Map<Email, Profesor> profesE = man.getProfesoresMail();
         Map<String, Socio> socios = man.getSocios();
         Map<Email, Socio> sociosE = man.getSociosMail();
-        boolean noExisteE;
-        boolean noExisteN;
-        if (!profes.isEmpty() || !socios.isEmpty()) {
-            noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
-        } else if (!profes.isEmpty() && socios.isEmpty()) {
-            noExisteN = (profes.get(nickname) == null);
-        } else if (profes.isEmpty() && !socios.isEmpty()) {
-            noExisteN = (socios.get(nickname) == null);
-        } else {
-            noExisteN = true;
-        }
-        if (!profes.isEmpty() || !socios.isEmpty()) {
-            noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
-        } else if (!profesE.isEmpty() && sociosE.isEmpty()) {
-            noExisteE = (profesE.get(correo) == null);
-        } else if (profesE.isEmpty() && !sociosE.isEmpty()) {
-            noExisteE = (sociosE.get(correo) == null);
-        } else {
-            noExisteE = true;
-        }
+        boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
+        boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
         if(noExisteN && noExisteE) {
         	Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento, new HashSet<>(), new HashSet<>());//modificado para que tenga sentido con la clase Socio
         	socios.put(nickname, nuevo);
@@ -92,7 +73,6 @@ public class ControladorUsuario implements IControladorUsuario {
         else {
         	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
         }
-        
     }
 
     @Override
@@ -128,14 +108,12 @@ public class ControladorUsuario implements IControladorUsuario {
     public Set<Triple<String, String, String>> obtenerDescSocios() throws SociosVacioException {
         Manejador man = Manejador.getInstance();
         Map<String, Socio> mapa = man.getSocios();
-        if (mapa != null) {
+        if (!mapa.isEmpty()) {
             Set<Triple<String, String, String>> res = new HashSet<>();
-            Iterator<Entry<String, Socio>> it = mapa.entrySet().iterator();
-            while(it.hasNext()) {
-                Socio s = (Socio) it.next();
-                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido());
+            for(Socio s : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido()); 
                 res.add(trip);
-            }
+            }  
             return res;
         }
         else
@@ -146,14 +124,13 @@ public class ControladorUsuario implements IControladorUsuario {
     public Set<Triple<String, String, String>> obtenerDescProfesores() throws ProfesoresVacioException {
         Manejador man = Manejador.getInstance();
         Map<String, Profesor> mapa = man.getProfesores();
-        if (mapa != null) {
+        if (!mapa.isEmpty()) {
             Set<Triple<String, String, String>> res = new HashSet<>();
-            Iterator<Entry<String, Profesor>> it = mapa.entrySet().iterator();
-            while(it.hasNext()) {
-                Profesor p = (Profesor) it.next();
-                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido());
+
+            for(Profesor p : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido()); 
                 res.add(trip);
-            }
+            } 
             return res;
         }
         else  
