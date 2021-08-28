@@ -55,26 +55,8 @@ public class ControladorUsuario implements IControladorUsuario {
         Map<Email, Profesor> profesE = man.getProfesoresMail();
         Map<String, Socio> socios = man.getSocios();
         Map<Email, Socio> sociosE = man.getSociosMail();
-        boolean noExisteE;
-        boolean noExisteN;
-        if (!profes.isEmpty() || !socios.isEmpty()) {
-            noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
-        } else if (!profes.isEmpty() && socios.isEmpty()) {
-            noExisteN = (profes.get(nickname) == null);
-        } else if (profes.isEmpty() && !socios.isEmpty()) {
-            noExisteN = (socios.get(nickname) == null);
-        } else {
-            noExisteN = true;
-        }
-        if (!profes.isEmpty() || !socios.isEmpty()) {
-            noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
-        } else if (!profesE.isEmpty() && sociosE.isEmpty()) {
-            noExisteE = (profesE.get(correo) == null);
-        } else if (profesE.isEmpty() && !sociosE.isEmpty()) {
-            noExisteE = (sociosE.get(correo) == null);
-        } else {
-            noExisteE = true;
-        }
+        boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
+        boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
         if(noExisteN && noExisteE) {
         	Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento, new HashSet<>(), new HashSet<>());//modificado para que tenga sentido con la clase Socio
         	socios.put(nickname, nuevo);
@@ -88,7 +70,6 @@ public class ControladorUsuario implements IControladorUsuario {
         else {
         	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
         }
-        
     }
 
     @Override
