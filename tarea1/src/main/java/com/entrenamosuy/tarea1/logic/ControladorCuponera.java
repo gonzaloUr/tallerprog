@@ -71,13 +71,11 @@ public class ControladorCuponera implements IControladorCuponera {
     }
 
     @Override
-    public DataCuponera consultarCuponera(String nombre) throws CuponeraNoEncontradaException{
+    public DataCuponera consultarCuponera(String nombre) throws CuponeraNoEncontradaException {
         Manejador manejador = Manejador.getInstance();
         Cuponera c = manejador.getCuponeras().get(nombre);
-
         if (c == null)
             throw new CuponeraNoEncontradaException(nombre);
-
         return c.getDataCuponera();
     }
 }

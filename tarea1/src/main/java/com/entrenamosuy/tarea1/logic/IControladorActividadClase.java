@@ -150,6 +150,9 @@ public interface IControladorActividadClase {
      */
     Set<String> obtenerDescClases(String actividad) throws ActividadNoEncontradaException, ClaseVaciaException;
 
+
+    DataClase obtenerDataClase(String nombre) throws ClaseNoEncontradaException;
+
     /**
      * Retorna el DataClase asociado al nombre pasado o tira una excepcion si no se
      * encuentra en el sistema.
