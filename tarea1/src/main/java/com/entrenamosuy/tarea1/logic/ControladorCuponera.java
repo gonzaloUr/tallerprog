@@ -9,6 +9,7 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException; 
 
 import com.entrenamosuy.tarea1.util.Pair;
@@ -38,22 +39,26 @@ public class ControladorCuponera implements IControladorCuponera {
 
         // Si alguno no se encontro tirar excepcion.
         if (s == null)
-            throw new SocioNoEncontradoException(socio);
+            throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         if (a == null)
-            throw new ActividadNoEncontradaException(actividad);
+            throw new ActividadNoEncontradaException("No existe una actividad con nombre: " + actividad);
 
         // Buscar cuponeras validas de socio s para clase c de actividad a.
         return s.cuponerasUsables(a);
     }
 
     @Override
-    public Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion) {
+    public Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion) throws CuponeraNoEncontradaException, InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = maneja.getCuponeras();
         Map<String, Institucion> instituciones = maneja.getInstituciones();
         Cuponera cup = cuponeras.get(cuponera);
         Institucion ins = instituciones.get(institucion);
+        if (cup == null)
+            throw new CuponeraNoEncontradaException("No existe una cuponera con nombre: " + cuponera);
+        if (ins == null)
+            throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         Set<Pair<String, String>> res = ins.actividadesAgregables(cup);
         return res;
     }
@@ -63,9 +68,9 @@ public class ControladorCuponera implements IControladorCuponera {
         Cuponera c = m.getCuponeras().get(cuponera);
         Actividad a = m.getActividades().get(actividad);
         if (a == null)
-            throw new ActividadNoEncontradaException("No existe actividad con ese nombre");
+            throw new ActividadNoEncontradaException("No existe una actividad con nombre: " + actividad);
         if (c == null)
-            throw new CuponeraNoEncontradaException("No existe cuponera con ese nombre");
+            throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + cuponera);
         Integra integra = new Integra(cant, a);
         Set<Integra> ins = c.getIntegras();
         ins.add(integra);
@@ -90,7 +95,7 @@ public class ControladorCuponera implements IControladorCuponera {
         Manejador manejador = Manejador.getInstance();
         Cuponera c = manejador.getCuponeras().get(nombre);
         if (c == null)
-            throw new CuponeraNoEncontradaException(nombre);
+            throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + nombre);
         return c.getDataCuponera();
     }
 }

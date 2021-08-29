@@ -34,7 +34,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (actividades.containsKey(nombre))
             throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
         if (!instituciones.containsKey(institucion))
-            throw new InstitucionNoEncontradaException(institucion);
+            throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         Institucion inst = instituciones.get(institucion);
         Actividad nuevaActividad = new Actividad(nombre, descripcion, duracion, fecha, costo);
         inst.getActividadesOfrecidas().add(nuevaActividad);
@@ -63,7 +63,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Map<String, Profesor> profesores = maneja.getProfesores();
         Actividad actividad = actividades.get(nombreActividad);
         if (actividad == null)
-            throw new ActividadNoEncontradaException(nombreActividad);
+            throw new ActividadNoEncontradaException("No existe actividad con nombre: " + nombreActividad);
         if (clases.containsKey(nombre))
             throw new ClaseRepetidaException("La clase llamada " + nombre + " ya existe.");
 
@@ -72,7 +72,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             Profesor p = profesores.get(nickname);
 
             if (p == null)
-                throw new ProfesorNoEncontradoException(nickname);
+                throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
 
             profes.add(p);
         }
@@ -89,10 +89,10 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Socio s = man.getSocios().get(socio);
 
         if (c == null)
-            throw new ClaseNoEncontradaException(clase);
+            throw new ClaseNoEncontradaException("No existe una clase con nombre: " + clase);
 
         if (s == null)
-            throw new SocioNoEncontradoException(socio);
+            throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         c.registrarseSinCuponera(s,fechaRegistro);
     }
@@ -105,13 +105,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Cuponera cup = maneja.getCuponeras().get(cuponera);
 
         if (c == null)
-            throw new ClaseNoEncontradaException(clase);
+            throw new ClaseNoEncontradaException("No existe una clase con nombre: " + clase);
 
         if (s == null)
-            throw new SocioNoEncontradoException(socio);
+            throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         if (cup == null)
-            throw new CuponeraNoEncontradaException(cuponera);
+            throw new CuponeraNoEncontradaException("No existe una cuponera con nombre: " + cuponera);
 
         c.registrarseConCuponera(s,fechaRegistro,cup);
     }
@@ -136,7 +136,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Map<String,Institucion> inst = maneja.getInstituciones();
         Institucion i = inst.get(institucion);
         if (i == null) {
-            throw new InstitucionNoEncontradaException(institucion);
+            throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         }
         Set<Actividad> acts = i.getActividadesOfrecidas();
         for(Actividad a : acts) {
@@ -152,10 +152,10 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Manejador maneja = Manejador.getInstance();
         Map<String,Actividad> acts = maneja.getActividades();
         if (acts.isEmpty())
-            throw new ActividadNoEncontradaException(actividad);
+            throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
         Actividad a = acts.get(actividad);
         if (a == null) {
-            throw new ActividadNoEncontradaException(actividad);
+            throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
         }
         DataActividad res = a.getDataActividad();
         return res;
@@ -167,7 +167,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Manejador maneja = Manejador.getInstance();
         Actividad act = maneja.getActividades().get(actividad);
         if (act == null)
-            throw new ActividadNoEncontradaException(actividad);
+            throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
         Set<Clase> clases = act.getClases();
         Set<String> res = new HashSet<>();
         for (Clase clase : clases)
@@ -181,7 +181,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Manejador maneja = Manejador.getInstance();
         Clase clase = maneja.getClases().get(nombre);
         if (clase == null)
-            throw new ClaseNoEncontradaException(nombre);
+            throw new ClaseNoEncontradaException("No existe clase con nombre:" + nombre);
 
         DataClase res = clase.getDataClase();
         return res;

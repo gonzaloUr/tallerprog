@@ -80,8 +80,10 @@ public class ControladorActividadClaseTest {
         ControladorUsuario ctrlUsuario = new ControladorUsuario();
 
         assertDoesNotThrow(() -> {
+            ctrlUsuario.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
             ctrlActividadClase.crearInstitucion("test", "test", new URL("https://test"));
             ctrlActividadClase.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlActividadClase.crearActividad("test", "test2", "test2", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
 
             ctrlUsuario.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
             ctrlUsuario.crearProfesor("profe2", "Profe 2", "apellido", Email.of("profe2", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
@@ -91,6 +93,8 @@ public class ControladorActividadClaseTest {
             profesores.add("profe2");
 
             ctrlActividadClase.crearClase("test", "test", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.crearClase("test2", "test2", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlActividadClase.registarseSinCuponera("Lucho", "test", LocalDate.of(1995, 10, 10));
         });
 
         assertThrows(ClaseRepetidaException.class, () -> {

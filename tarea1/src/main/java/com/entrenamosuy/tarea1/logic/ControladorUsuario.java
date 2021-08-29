@@ -29,7 +29,7 @@ public class ControladorUsuario implements IControladorUsuario {
         Institucion inst = manejador.getInstituciones().get(institucion);
 
         if (inst == null)
-            throw new InstitucionNoEncontradaException(institucion);
+            throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
 
         // Chequear que no existe usuario con nickname o correo pasado.
         Map<String, Profesor> profs = manejador.getProfesores();
@@ -41,7 +41,7 @@ public class ControladorUsuario implements IControladorUsuario {
         boolean b2 = profsEmail.get(correo) != null || sociosEmail.get(correo) != null;
 
         if (b1 || b2)
-            throw new UsuarioRepetidoException(nickname);
+            throw new UsuarioRepetidoException("No existe un usuario con nickname: " + nickname);
             
         // Crear un nuevo profesor con los datos pasados.
         Profesor nuevo = new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion, bio, link, inst);
@@ -84,7 +84,7 @@ public class ControladorUsuario implements IControladorUsuario {
             Socio socio = manejador.getSocios().get(nickname);
 
             if (socio == null) {
-                throw new UsuarioNoEncontradoException(nickname);
+                throw new UsuarioNoEncontradoException("No existe un usuario con nickname: " + nickname);
             } else {
                 usuario = socio;
             }
@@ -144,7 +144,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return r;
         }
         else
-            throw new SocioNoEncontradoException("No existe un socio con ese nickname en el sistema");
+            throw new SocioNoEncontradoException("No existe un socio con nickname: " + nickname);
     }
 
     @Override
@@ -157,7 +157,7 @@ public class ControladorUsuario implements IControladorUsuario {
             return r;
         }
         else
-            throw new ProfesorNoEncontradoException("No existe un profesor con ese nickname en el sistema");
+            throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
 
     }
 }

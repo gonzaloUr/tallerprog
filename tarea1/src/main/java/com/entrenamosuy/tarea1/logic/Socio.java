@@ -67,27 +67,20 @@ public class Socio extends Usuario {
 
         for (Compra compra : compras) {
             Cuponera cup = compra.getCuponera();
-
             // Obtener el tipo asociativo integra entre cup y a.
             Integra integra = cup.getIntegra(a);
-
             // Si la cuponera actual no tiene la actividad deseada no continuar.
             if (integra == null)
                 continue;
-
             // Obtener la cantidad de registros que utilizan cup y compararlo con la cantidad de integra.
             int cantRegistros = cantRegistrosConCuponeraA(a, cup);
             int cantClases = integra.getCantClases();
-
             if (cantRegistros < cantClases)
                 cuponerasADescribir.add(cup);
         }
-
         Set<Pair<String, String>> ret = new HashSet<>(cuponerasADescribir.size());
-
         for (Cuponera cup : cuponerasADescribir)
             ret.add(new Pair<>(cup.getNombre(), cup.getDescripcion()));
-
         return ret;
     }
 

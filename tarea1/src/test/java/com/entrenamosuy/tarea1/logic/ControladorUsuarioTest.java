@@ -8,6 +8,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.data.DataSocio;
@@ -59,10 +62,21 @@ public class ControladorUsuarioTest {
     void consultarSocio() {
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
         Email e = Email.of("lucho", "mail.com");
-
+        Email e2 = Email.of("lucho2", "mail.com");
         assertDoesNotThrow(() -> {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", e, LocalDate.of(2007, 03, 28));
+            ctrlU.crearSocio("Lucho2", "Luciano", "Almenares", e2, LocalDate.of(2007, 03, 28));
+
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(1995, 10, 10));
+
         });
 
         assertDoesNotThrow(() -> {
@@ -219,6 +233,21 @@ public class ControladorUsuarioTest {
         });
         assertDoesNotThrow(() -> {
             ctrlU.obtenerDescProfesores();
+        });
+    }
+
+    @Test
+    void otros() {
+        Fabrica F = new Fabrica();
+        IControladorUsuario ctrlU = F.creaControladorUsuario();
+        assertDoesNotThrow(() -> {
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
+            ctrlU.crearSocio("Lucho2", "Luciano2", "Almenares2", Email.of("lucho2", "mail.com"), LocalDate.of(2001, 13, 28));
+            Manejador m = Manejador.getInstance();
+            Socio u1 = m.getSocios().get("Lucho");
+            Socio u2 = m.getSocios().get("Lucho2");
+            u1.equals(u2);
+            u1.equals(u1);
         });
     }
 }
