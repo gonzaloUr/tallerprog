@@ -58,7 +58,7 @@ public class ControladorCuponera implements IControladorCuponera {
         return res;
     }
 
-    public void agregarACuponera(String cuponera, String actividad) throws ActividadNoEncontradaException, CuponeraNoEncontradaException {
+    public void agregarACuponera(String cuponera, String actividad, int cant) throws ActividadNoEncontradaException, CuponeraNoEncontradaException {
         Manejador m = Manejador.getInstance();
         Cuponera c = m.getCuponeras().get(cuponera);
         Actividad a = m.getActividades().get(actividad);
