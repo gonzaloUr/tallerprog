@@ -64,7 +64,7 @@ public class Institucion {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((actividadesOfrecidas == null) ? 0 : actividadesOfrecidas.hashCode());
+        //result = prime * result + ((actividadesOfrecidas == null) ? 0 : actividadesOfrecidas.hashCode());
         result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
         result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
         result = prime * result + ((url == null) ? 0 : url.hashCode());

@@ -22,7 +22,7 @@ public interface IControladorCuponera {
      * @param descuento Porcentaje de descuento.
      * @throws CuponeraRepetidaException Cuando el nombre no es unico.
      */
-    void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento) throws CuponeraRepetidaException;
+    void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, LocalDate fRegistro) throws CuponeraRepetidaException;
 
     /**
      * Retorna el nombre y la descripcion de todas las cuponeras en el sistema las cuales se pueden usar por socio

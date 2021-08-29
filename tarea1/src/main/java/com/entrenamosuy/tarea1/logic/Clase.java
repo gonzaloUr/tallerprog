@@ -153,7 +153,7 @@ public class Clase {
 
     public void registrarseSinCuponera(Socio socio, LocalDate fecha){
         float costo = actividad.getCosto();
-        Registro reg = new Registro(fecha, costo, this, socio, null);
+        Registro reg = new Registro(fecha, costo, this, socio);
         registros.add(reg);
         socio.asociarSocioRegistro(reg);
     }

@@ -13,7 +13,7 @@ public class Cuponera {
 
     private String descripcion;
     
-    private LocalDate inicio, fin;
+    private LocalDate inicio, fin, fRegistro;
 
     private int descuento;
 
@@ -24,7 +24,7 @@ public class Cuponera {
     private Set<Registro> registros;
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, 
-        Set<Integra> integras, Set<Registro> registros) {
+        LocalDate fRegistro, Set<Integra> integras, Set<Registro> registros) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.inicio = inicio;
@@ -33,11 +33,12 @@ public class Cuponera {
         //this.precio = precio;
         this.integras = integras;
         this.registros = registros;
+        this.fRegistro = fRegistro;
     }
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-            LocalDate fechaCreacion) {
-        this(nombre, descripcion, inicio, fin, descuento, new HashSet<>(), new HashSet<>());
+            LocalDate fRegistro) {
+        this(nombre, descripcion, inicio, fin, descuento, fRegistro, new HashSet<>(), new HashSet<>());
     }
 
     public String getNombre() {

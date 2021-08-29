@@ -17,14 +17,13 @@ public class ControladorCuponera implements IControladorCuponera {
 
     @Override
     public void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin,
-            int descuento) throws CuponeraRepetidaException {
+            int descuento, LocalDate fRegistro) throws CuponeraRepetidaException {
         Manejador manejador = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = manejador.getCuponeras();
 
         if (cuponeras.containsKey(nombre))
             throw new CuponeraRepetidaException("La cuponera llamada " + nombre + " ya existe.");
-        LocalDate ahora = LocalDate.now();
-        Cuponera nuevaCup = new Cuponera(nombre, descripcion,inicio, fin, descuento, ahora);
+        Cuponera nuevaCup = new Cuponera(nombre, descripcion, inicio, fin, descuento, fRegistro);
         cuponeras.put(nombre,nuevaCup);
     }
 

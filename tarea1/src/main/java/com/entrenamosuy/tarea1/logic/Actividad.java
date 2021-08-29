@@ -90,7 +90,7 @@ public class Actividad {
 
     @Override
     public int hashCode() {
-        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre, clases);
+        return Objects.hash(costo, descripcion, duracion, fechaRegistro, nombre);
     }
 
     @Override

@@ -69,7 +69,7 @@ public class Registro {
 
     @Override
     public int hashCode() {
-        return Objects.hash(claseAsociada, costo, cuponera, fecha);
+        return Objects.hash(costo, cuponera, fecha);
     }
 
     @Override
