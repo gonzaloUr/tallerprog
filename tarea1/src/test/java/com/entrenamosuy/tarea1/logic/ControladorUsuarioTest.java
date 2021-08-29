@@ -242,7 +242,7 @@ public class ControladorUsuarioTest {
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         assertDoesNotThrow(() -> {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
-            ctrlU.crearSocio("Lucho2", "Luciano2", "Almenares2", Email.of("lucho2", "mail.com"), LocalDate.of(2001, 13, 28));
+            ctrlU.crearSocio("Lucho2", "Luciano2", "Almenares2", Email.of("lucho2", "mail.com"), LocalDate.of(2001, 11, 28));
             Manejador m = Manejador.getInstance();
             Socio u1 = m.getSocios().get("Lucho");
             Socio u2 = m.getSocios().get("Lucho2");

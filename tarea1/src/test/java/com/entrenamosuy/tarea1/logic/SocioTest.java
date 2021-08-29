@@ -11,9 +11,26 @@ import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.util.Pair;
 import java.net.URL;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class SocioTest {
+
+    @BeforeEach
+    void resetarManejador() {
+        Manejador manejador = Manejador.getInstance();
+
+        manejador.getActividades().clear();
+        manejador.getClases().clear();
+        manejador.getCuponeras().clear();
+        manejador.getInstituciones().clear();
+        manejador.getProfesores().clear();
+        manejador.getProfesoresMail().clear();
+        manejador.getSocios().clear();
+        manejador.getSociosMail().clear();
+    }
+
+
     @Test
     void socioTest() {
         
