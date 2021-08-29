@@ -1,6 +1,8 @@
 package com.entrenamosuy.tarea1.logic;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.URL;
@@ -10,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
@@ -42,11 +45,40 @@ public class ControladorActividadClaseTest {
 
     @Test
     void crearActividad() {
+        Manejador m = Manejador.getInstance();
         ControladorActividadClase ctrl = new ControladorActividadClase();
 
         assertDoesNotThrow(() -> {
             ctrl.crearInstitucion("test", "test", new URL("https://test"));
             ctrl.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrl.crearActividad("test", "test2", "test2", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+        });
+        assertDoesNotThrow(() -> {
+            DataActividad da = ctrl.consultarActividad("test");
+            assertEquals(da.getClases().isEmpty(), da.getClases().isEmpty());
+            assertEquals(da.getCosto(), 10.0f);
+            assertEquals(da.getCuponeras().isEmpty(), da.getCuponeras().isEmpty());
+            assertEquals(da.getDescripcion(), "test");
+            assertEquals(da.getDuracion(), Duration.ofHours(1));
+            assertEquals(da.getNombre(), "test");
+            assertEquals(da.getRegistro(), LocalDate.of(2021, 9, 10));
+        });
+
+        assertDoesNotThrow(() -> {
+            Actividad a1 = m.getActividades().get("test");
+            Actividad a2 = m.getActividades().get("test1");
+            Integra i1 = new Integra(2, a1);
+            Integra i2 = new Integra(2, a2);
+            assertEquals(i1, i1);
+            assertNotEquals(i1, i2);
+
+            assertNotEquals(i1.getCantClases(), 5);
+            i1.setCantClases(5);
+            assertEquals(i1.getCantClases(), 5);
+
+            assertNotEquals(i1.getActividad(), a2);
+            i1.setActividad(a2);
+            assertEquals(i1.getActividad(), a2);
         });
 
         // No se puede crear actividades con nombres repetidos.
@@ -72,6 +104,8 @@ public class ControladorActividadClaseTest {
         assertThrows(InstitucionRepetidaException.class, () -> {
             ctrl.crearInstitucion("test", "desc", new URL("https://mypage"));
         });
+
+
     }
 
     @Test
@@ -280,4 +314,8 @@ public class ControladorActividadClaseTest {
             ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(2021, 03, 2));  
         });
     }
+
+
+
+
 }

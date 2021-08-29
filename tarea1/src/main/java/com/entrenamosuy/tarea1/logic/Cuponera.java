@@ -146,7 +146,7 @@ public class Cuponera {
         return null;
     }
 
-    public boolean tieneActividad(Actividad act){
+    public boolean tieneActividad(Actividad act){ //Null pointer si le pasa una actividad que no tiene
         boolean ret = false;
         for (Integra integ : integras) {
             if (act.equals(integ.getActividad())){

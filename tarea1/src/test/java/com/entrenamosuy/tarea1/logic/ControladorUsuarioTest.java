@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.logic;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.net.MalformedURLException;
@@ -61,6 +62,7 @@ public class ControladorUsuarioTest {
     @Test
     void consultarSocio() {
         Fabrica F = new Fabrica();
+        Manejador m = Manejador.getInstance();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         ControladorActividadClase ctrlA = new ControladorActividadClase();
         Email e = Email.of("lucho", "mail.com");
@@ -89,6 +91,19 @@ public class ControladorUsuarioTest {
 
         assertThrows(SocioNoEncontradoException.class, () -> {
             ctrlU.consultarSocio("lucho");
+        });
+
+        assertDoesNotThrow(() -> {
+            Socio s = m.getSocios().get("Lucho2");
+            assertNotEquals(s.getNickname(), "UWU");
+            s.setNickname("UWU");
+            assertEquals(s.getNickname(), "UWU");
+
+            assertEquals(s.getCompras().isEmpty(), true);
+
+            assertNotEquals(s.getCorreo(), Email.of("lililili", "mail.com"));
+            s.setCorreo(Email.of("lililili", "mail.com"));
+            assertEquals(s.getCorreo(), Email.of("lililili", "mail.com"));
         });
     }
 
