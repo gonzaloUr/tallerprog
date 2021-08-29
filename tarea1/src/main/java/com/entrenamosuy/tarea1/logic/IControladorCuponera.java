@@ -60,7 +60,7 @@ public interface IControladorCuponera {
      * @throws CuponeraNoEncontradaException Cuando cuponera no existe en el sistema.
      * @throws ActividadNoEncontradaException Cuando actividad no existe en el sistema.
      */
-    void agregarACuponera(String cuponera, String actividad) throws CuponeraNoEncontradaException, ActividadNoEncontradaException;
+    void agregarACuponera(String cuponera, String actividad, int cant) throws CuponeraNoEncontradaException, ActividadNoEncontradaException;
 
     /**
      * Retorna el nombre y la descripcion de todas las cuponeras en el sistema.

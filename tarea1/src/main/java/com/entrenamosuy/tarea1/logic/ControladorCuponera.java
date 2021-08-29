@@ -66,8 +66,7 @@ public class ControladorCuponera implements IControladorCuponera {
             throw new ActividadNoEncontradaException("No existe actividad con ese nombre");
         if (c == null)
             throw new CuponeraNoEncontradaException("No existe cuponera con ese nombre");
-        int cantC = a.getClases().size();
-        Integra integra = new Integra(cantC, a);
+        Integra integra = new Integra(cant, a);
         Set<Integra> ins = c.getIntegras();
         ins.add(integra);
         c.setIntegras(ins);                  
