@@ -191,7 +191,7 @@ public class App extends JFrame {
                    }
     
                    SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorActividadClase);
+                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorActividadClase, controladorCuponera);
                        consulta.setVisible(true);
                        getContentPane().add(consulta);
                    });
@@ -461,7 +461,7 @@ public class App extends JFrame {
         });
         
         crearCuponera.addActionListener((ActionEvent a) -> {
-            CrearCuponera c = new CrearCuponera(controladorCuponera);
+            CrearCuponera c = new CrearCuponera(controladorCuponera, that);
             c.setVisible(true);
             getContentPane().add(c);
         });

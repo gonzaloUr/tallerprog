@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -48,7 +50,7 @@ public class CrearCuponera extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public CrearCuponera(IControladorCuponera controladorCuponera) {
+    public CrearCuponera(IControladorCuponera controladorCuponera, App app) {
     	setMaximizable(true);
     	setResizable(true);
     	setClosable(true);
@@ -169,6 +171,7 @@ public class CrearCuponera extends JInternalFrame {
 		e.printStackTrace();
 		return;
 	    }
+            JOptionPane.showMessageDialog(app, "Cuponera creada exitosamente.");
             dispose();
         });
     }
