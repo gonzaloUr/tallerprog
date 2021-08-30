@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.*;
@@ -523,6 +524,54 @@ public class App extends JFrame {
 
             JOptionPane.showMessageDialog(that,"Datos cargados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }));
+        
+        agregarActividadCuponera.addActionListener((ActionEvent a) -> {
+            Set<Pair<String, String>> cuponeras = controladorCuponera.obtenerDescCuponeras();
+            
+            if (cuponeras.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No hay cuponeras en el sistema.",
+                        "error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+            
+            SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
+    	    	Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+
+                if (instituciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(this,
+                            "No hay instituciones en el sistema.",
+                            "error",
+                            JOptionPane.ERROR_MESSAGE);
+
+                    return;
+                }
+                
+                SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
+                    Set<Pair<String, String>> actividades = null;
+
+                    try {
+                	actividades = controladorCuponera.actividadesAgregables(cuponera, inst);
+                    } catch (InstitucionNoEncontradaException | CuponeraNoEncontradaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+                    }
+                    
+                   
+                    AgregarActividadACuponera agregarACuponera = new AgregarActividadACuponera();
+                    agregarACuponera.setVisible(true);
+                    getContentPane().add(agregarACuponera);
+                });
+                
+                selecionarInstitucion.setVisible(true);
+                getContentPane().add(selecionarInstitucion);
+            });            
+            
+            selecionarCuponera.setVisible(true);
+            getContentPane().add(selecionarCuponera);
+        });
     }
 
     public static void main(String[] args) {
