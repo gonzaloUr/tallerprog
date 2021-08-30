@@ -1,6 +1,10 @@
 package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
+
+import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JInternalFrame;
@@ -8,6 +12,8 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -21,6 +27,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -45,7 +52,7 @@ public class AltaSocio extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaSocio frame = new AltaSocio();
+					AltaSocio frame = new AltaSocio(null, null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -57,7 +64,7 @@ public class AltaSocio extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaSocio() {
+	public AltaSocio(App app, IControladorUsuario CU) {
 		setTitle("Alta Socio");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -163,7 +170,22 @@ public class AltaSocio extends JInternalFrame {
 						String nombre = textField_5.getText();
 						String apellido = textField_6.getText();
 						String mail = textField_7.getText();
-						LocalDate fecha = chooser.getDate();
+						Date fechaf = (Date) chooser.getDate();
+						FuncionFecha f = new FuncionFecha();
+						LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
+						setVisible(false);
+						try {
+						CU.crearSocio(nick, nombre, apellido, mail, fecha);
+						} catch(UsuarioRepetidoException rep) {
+							textField_4.setText("");
+							textField_5.setText("");
+							textField_6.setText("");
+							textField_7.setText("");
+							chooser.setDate(null);
+							setVisible(true);
+							JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
+						}
+						JOptionPane.showMessageDialog(app,"Socio creado exitosamente.");
 					}
 				});
 				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
@@ -176,6 +198,12 @@ public class AltaSocio extends JInternalFrame {
 				btnNewButton_1 = new JButton("Cancelar");
 				btnNewButton_1.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						setVisible(false);
+						textField_4.setText("");
+						textField_5.setText("");
+						textField_6.setText("");
+						textField_7.setText("");
+						chooser.setDate(null);
 					}
 				});
 				GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
