@@ -285,17 +285,14 @@ public class App extends JFrame {
         JMenuItem modificarUsuario = new JMenuItem("Modificar datos de usuario");
         modificar.add(modificarUsuario);
 
-        modificarUsuario.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();
-            Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
-            
-            List<Triple<String, String, String>> usuarios = new ArrayList<>(profesores.size() + socios.size());
-            usuarios.addAll(profesores);
-            usuarios.addAll(socios);
+        modificarUsuario.addActionListener((ActionEvent a) -> {          
+            Set<Triple<String, String, String>> usuarios = new HashSet<>();
+            usuarios.addAll(controladorUsuario.obtenerDescProfesores());
+            usuarios.addAll(controladorUsuario.obtenerDescSocios());
 
             if (usuarios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "No hay usuarios en el sistema!.",
+                        "No hay usuarios en el sistema.",
                         "error",
                         JOptionPane.ERROR_MESSAGE);
 
@@ -303,11 +300,32 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(usuarios, (String nombre) -> {
+        	// TODO: crear ModificarDatosUsuario y cerrar ventana actual.
                 System.out.println(nombre);
             });
             
             getContentPane().add(selecionarUsuario);
             selecionarUsuario.setVisible(true);
+        });
+        
+        consultaActividad.addActionListener((ActionEvent a) -> {
+           Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+           
+           if (instituciones.isEmpty()) {
+               JOptionPane.showMessageDialog(this,
+                       "No hay instituciones en el sistema.",
+                       "error",
+                       JOptionPane.ERROR_MESSAGE);
+
+               return;
+           }
+           
+           SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String institucion) -> {
+               	System.out.println(institucion);
+           });
+           
+           getContentPane().add(selecionarInstitucion);
+           selecionarInstitucion.setVisible(true);
         });
     }
 
