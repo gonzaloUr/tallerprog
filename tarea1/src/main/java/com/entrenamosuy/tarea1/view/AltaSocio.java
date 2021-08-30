@@ -160,11 +160,7 @@ public class AltaSocio extends JInternalFrame {
                 mail = Email.parse(textField_7.getText());
                 } catch(Exception ep) {
                 	JOptionPane.showMessageDialog(app, "Email invalido", "error", JOptionPane.ERROR_MESSAGE);
-                	textField_4.setText("");
-                    textField_5.setText("");
-                    textField_6.setText("");
                     textField_7.setText("");
-                    chooser.setDate(null);
                 	return;
                 }
                 Date fechaf = (Date) chooser.getDate();

@@ -190,10 +190,10 @@ public class AltaActividad extends JInternalFrame {
                     JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");
                     clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
                 } catch (ActividadRepetidaException are) {
-                    JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
                     clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
                 } catch (InstitucionNoEncontradaException inee) {
-                    JOptionPane.showMessageDialog(apli, "No existe una institucion con ese nombre.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(apli, "No existe una institucion con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
                     clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
                 }
             }

@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JComboBox;
 import javax.swing.Box;
@@ -46,7 +47,7 @@ public class AltaClase extends JInternalFrame {
 	private JTextField cantMax;
 	private JTextField url;
 
-    public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, String institucion) {
+    public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, String institucion, App app) {
         
         final List<String> profesores = new ArrayList<>();
         Manejador maneja = Manejador.getInstance();
@@ -191,9 +192,10 @@ public class AltaClase extends JInternalFrame {
         });
         
         btnAceptar.addActionListener((ActionEvent a) -> {
+            System.out.println(nombreField.getText());
             try {
 		controladorActividadClase.crearClase(actividad, 
-		    nombreField.getName(), 
+		    nombreField.getText(), 
 		    LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
 		    selectedNicknames,
 		    Integer.parseInt(cantMin.getText()),
@@ -201,9 +203,16 @@ public class AltaClase extends JInternalFrame {
 		    new URL(url.getText()),
 		    LocalDate.now());
 	    } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
-		  | MalformedURLException | ClaseRepetidaException e1) {
+		  | ClaseRepetidaException e1) {
 		e1.printStackTrace();
 	    }
+        catch(MalformedURLException e5){
+            JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
+            url.setText("");
+            return;
+        }
+            for (String s : maneja.getClases().keySet())
+            System.out.println(s);
             dispose();
         });
     }

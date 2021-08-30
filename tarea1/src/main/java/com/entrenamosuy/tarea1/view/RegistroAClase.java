@@ -33,11 +33,15 @@ import com.entrenamosuy.tarea1.exceptions.CuponeraLlenaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.logic.ControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class RegistroAClase extends JInternalFrame {
     private JTextField textField;
@@ -46,7 +50,16 @@ public class RegistroAClase extends JInternalFrame {
     private JTextField textField_3;
 
     public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase, App app) {
+	
+	final List<String> cuponerasLista = new ArrayList<>();
+	for (Pair<String, String> cuponera : cuponeras) {
+		String nombre = cuponera.getFirst();
+		cuponerasLista.add(nombre);
+	}
+	
 	setTitle("Registro a dictado de clase.");
+	setClosable(true);
+	setResizable(true);
 	getContentPane().setForeground(Color.RED);
 	GridBagLayout gridBagLayout = new GridBagLayout();
 	gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
@@ -62,7 +75,7 @@ public class RegistroAClase extends JInternalFrame {
 	gbc_lblSeleccionarCuponera.gridy = 1;
 	getContentPane().add(lblSeleccionarCuponera, gbc_lblSeleccionarCuponera);
 
-	JComboBox<String> cuponerasComboBox = new JComboBox<>();
+	JComboBox<String> cuponerasComboBox = new JComboBox<>(cuponerasLista.toArray(new String[0]));
 	GridBagConstraints gbc_cuponerasComboBox = new GridBagConstraints();
 	gbc_cuponerasComboBox.insets = new Insets(0, 0, 5, 5);
 	gbc_cuponerasComboBox.fill = GridBagConstraints.HORIZONTAL;
