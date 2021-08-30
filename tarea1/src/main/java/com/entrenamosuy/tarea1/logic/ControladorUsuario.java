@@ -22,7 +22,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
     @Override
     public void crearProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            String institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException {
+                              String institucion, String descripcion, String bio, URL link) throws UsuarioRepetidoException, InstitucionNoEncontradaException {
         Manejador manejador = Manejador.getInstance();
 
         // Obtener institucion pasada o tirar exception.
@@ -42,7 +42,7 @@ public class ControladorUsuario implements IControladorUsuario {
 
         if (b1 || b2)
             throw new UsuarioRepetidoException("No existe un usuario con nickname: " + nickname);
-            
+
         // Crear un nuevo profesor con los datos pasados.
         Profesor nuevo = new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion, bio, link, inst);
         manejador.getProfesores().put(nickname, nuevo);
@@ -58,18 +58,16 @@ public class ControladorUsuario implements IControladorUsuario {
         Map<Email, Socio> sociosE = man.getSociosMail();
         boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
         boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
-        if(noExisteN && noExisteE) {
-        	Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento, new HashSet<>(), new HashSet<>());//modificado para que tenga sentido con la clase Socio
-        	socios.put(nickname, nuevo);
-        	man.setSocios(socios);
-        	sociosE.put(correo, nuevo);
-        	man.setSociosMail(sociosE);
-        }
-        else if(!noExisteN){
-        	throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
-        }
-        else {
-        	throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
+        if (noExisteN && noExisteE) {
+            Socio nuevo = new Socio(nickname, nombre, apellido, correo, nacimiento, new HashSet<>(), new HashSet<>());//modificado para que tenga sentido con la clase Socio
+            socios.put(nickname, nuevo);
+            man.setSocios(socios);
+            sociosE.put(correo, nuevo);
+            man.setSociosMail(sociosE);
+        } else if (!noExisteN) {
+            throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
+        } else {
+            throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
         }
     }
 
@@ -109,8 +107,8 @@ public class ControladorUsuario implements IControladorUsuario {
         Set<Triple<String, String, String>> res = new HashSet<>();
 
         if (!mapa.isEmpty()) {
-            for(Socio s : mapa.values()) {
-                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido()); 
+            for (Socio s : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(s.getNombre(), s.getNickname(), s.getApellido());
                 res.add(trip);
             }
         }
@@ -125,12 +123,12 @@ public class ControladorUsuario implements IControladorUsuario {
         Set<Triple<String, String, String>> res = new HashSet<>();
 
         if (!mapa.isEmpty()) {
-            for(Profesor p : mapa.values()) {
-                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido()); 
+            for (Profesor p : mapa.values()) {
+                Triple<String, String, String> trip = new Triple<String, String, String>(p.getNombre(), p.getNickname(), p.getApellido());
                 res.add(trip);
-            } 
+            }
         }
-        
+
         return res;
     }
 
@@ -142,8 +140,7 @@ public class ControladorUsuario implements IControladorUsuario {
         if (p != null) {
             DataSocio r = p.getDataSocio();
             return r;
-        }
-        else
+        } else
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + nickname);
     }
 
@@ -155,8 +152,7 @@ public class ControladorUsuario implements IControladorUsuario {
         if (p != null) {
             DataProfesor r = p.getDataProfesor(); //Implementarlo en la clase Profesor
             return r;
-        }
-        else
+        } else
             throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
 
     }

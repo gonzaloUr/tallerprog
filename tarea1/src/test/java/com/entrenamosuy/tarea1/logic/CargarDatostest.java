@@ -50,7 +50,7 @@ public class CargarDatostest {
         CAC.crearInstitucion("Telon", "Actividades deportivas para todas la edades.", new URL("https://telon.com.uy"));
         CAC.crearInstitucion("Olympic", "Gimnasia y aparatos.", new URL("https://www.olympic21.com/"));
 
-        CU.crearProfesor("viktor", "Victor", "Perez", Email.of("vperez", "fuerza.com"), LocalDate.of(1977, 1, 1),"Fuerza Bruta", "Victor es un apasionado de los musculos. Sus clases son organizadas en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.", "Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego de quedar encantado con el pais en un viaje turistico.", new URL("https://www.vikgym.com"));
+        CU.crearProfesor("viktor", "Victor", "Perez", Email.of("vperez", "fuerza.com"), LocalDate.of(1977, 1, 1), "Fuerza Bruta", "Victor es un apasionado de los musculos. Sus clases son organizadas en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.", "Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego de quedar encantado con el pais en un viaje turistico.", new URL("https://www.vikgym.com"));
         CU.crearProfesor("denis", "Denis", "Miguel", Email.of("den80", "fuerza.com"), LocalDate.of(1980, 6, 14), "Telon", "A Denis le interesan los deportes con pelota, principalmente el voleibol y el hanball.", "Denis fue un jugador de voleibol profesional.", new URL("https://www.depecho.com"));
         CU.crearProfesor("clazar", "Carlos", "Lazaro", Email.of("claz4r0", "hotmail.com"), LocalDate.of(1953, 6, 22), "Instituto Natural", "Carlos es un profesor muy divertido, cuyas clases de aerobica estan cargadas de energia.", "El interes por la actividad fisica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.", new URL("https://www.enforma.com"));
         CU.crearProfesor("TheBoss", "Bruno", "Sosa", Email.of("bruceTheBoss", "gmail.com"), LocalDate.of(1949, 9, 23), "Fuerza Bruta", "Bruno es un ex-boxeador que busca entrenar futuros campeones.", "Bruno, mejor conocido como Bruce en el ring, compitio como boxeador entre los años 60s y 70s.", new URL("https://www.bruce.net"));
@@ -66,7 +66,7 @@ public class CargarDatostest {
         CAC.crearActividad("Fuerza Bruta", "Kickboxing", "En busca del nuevo campeon de boxeo.", Duration.ofMinutes(100), 980, LocalDate.of(2021, 6, 7));
         CAC.crearActividad("Telon", "Atletismo", "100m, 200m, postas y carreras con obstaculos.", Duration.ofMinutes(150), 500, LocalDate.of(2021, 7, 8));
         CAC.crearActividad("Telon", "Basquetbol", "Espectaculo conmemorando los 30 años de Violeta", Duration.ofMinutes(80), 450, LocalDate.of(2021, 7, 31));
-        
+
         Set<String> p1 = new HashSet<>();
         p1.add("viktor");
         CAC.crearClase("Aparatos y pesas", "Calistenia", LocalDateTime.of(2021, 3, 15, 15, 30), p1, 1, 5, new URL("https://www.musculos.com/Calistenia"), LocalDate.of(2021, 3, 31)); //Fallan por la fecha
@@ -75,7 +75,7 @@ public class CargarDatostest {
 
         Set<String> p2 = new HashSet<>();
         p2.add("denis");
-        CAC.crearClase("Voleibol", "Voleibol", LocalDateTime.of(2021, 6, 10, 19, 00), p2, 10 , 21, new URL("https://telon.com.uy/voley"), LocalDate.of(2021, 4, 20));
+        CAC.crearClase("Voleibol", "Voleibol", LocalDateTime.of(2021, 6, 10, 19, 00), p2, 10, 21, new URL("https://telon.com.uy/voley"), LocalDate.of(2021, 4, 20));
 
         Set<String> p3 = new HashSet<>();
         p3.add("Nelson");
@@ -107,7 +107,7 @@ public class CargarDatostest {
         CAC.crearClase("Basquetbol", "Basquet I", LocalDateTime.of(2021, 9, 1, 21, 00), p7, 10, 15, new URL("https://telon.com.uy/bball1"), LocalDate.of(2021, 7, 31));
         CAC.crearClase("Basquetbol", "Basquet II", LocalDateTime.of(2021, 9, 10, 21, 00), p7, 10, 15, new URL("https://telon.com.uy/bball2"), LocalDate.of(2021, 7, 31));
 
-/* IMPORTANTE Quedó sin la r el nombre... mejor cambiarlo aca que en todo el codigo*/
+        /* IMPORTANTE Quedó sin la r el nombre... mejor cambiarlo aca que en todo el codigo*/
         CAC.registarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
         CAC.registarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
         CAC.registarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
@@ -155,9 +155,9 @@ public class CargarDatostest {
         CAC.registarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
         CAC.registarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
 
-        CC.crearCuponera("Pelota","Deportes con pelota.", LocalDate.of(2021, 5, 1), LocalDate.of(2021, 7, 31), 20, LocalDate.of(2021, 4, 30)); 
-        CC.crearCuponera("Gimnasia","Aerobica y aparatos.", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 9, 30), 30, LocalDate.of(2021, 7, 15));
-        CC.crearCuponera("Musculos","Pesas.", LocalDate.of(2021, 8, 15), LocalDate.of(2021, 11, 15), 10, LocalDate.of(2021, 8, 1));
+        CC.crearCuponera("Pelota", "Deportes con pelota.", LocalDate.of(2021, 5, 1), LocalDate.of(2021, 7, 31), 20, LocalDate.of(2021, 4, 30));
+        CC.crearCuponera("Gimnasia", "Aerobica y aparatos.", LocalDate.of(2021, 8, 1), LocalDate.of(2021, 9, 30), 30, LocalDate.of(2021, 7, 15));
+        CC.crearCuponera("Musculos", "Pesas.", LocalDate.of(2021, 8, 15), LocalDate.of(2021, 11, 15), 10, LocalDate.of(2021, 8, 1));
 
         CC.agregarACuponera("Pelota", "Voleibol", 7);
         CC.agregarACuponera("Pelota", "Basquetbol", 18);

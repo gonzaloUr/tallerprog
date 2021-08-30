@@ -25,7 +25,7 @@ public class Integra {
         return actividad;
     }
 
-    public void setActividad (Actividad actividad) {
+    public void setActividad(Actividad actividad) {
         this.actividad = actividad;
     }
 

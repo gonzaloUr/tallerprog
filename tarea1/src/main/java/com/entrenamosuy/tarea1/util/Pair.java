@@ -3,7 +3,7 @@ package com.entrenamosuy.tarea1.util;
 import java.util.Objects;
 
 public class Pair<T, U> {
-    
+
     private final T first;
 
     private final U second;

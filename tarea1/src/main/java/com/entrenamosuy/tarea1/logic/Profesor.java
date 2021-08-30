@@ -27,8 +27,8 @@ public class Profesor extends Usuario {
     private Set<Actividad> actividades;
 
     public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            String descripcion, String biografia, URL sitioWeb, Institucion institucion, 
-            Set<Actividad> actividades) {
+                    String descripcion, String biografia, URL sitioWeb, Institucion institucion,
+                    Set<Actividad> actividades) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
@@ -39,7 +39,7 @@ public class Profesor extends Usuario {
     }
 
     public Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            String descripcion, String biografia, URL sitioWeb, Institucion institucion) {
+                    String descripcion, String biografia, URL sitioWeb, Institucion institucion) {
         this(nickname, nombre, apellido, correo, nacimiento, descripcion, biografia, sitioWeb, institucion, new HashSet<>());
     }
 
@@ -117,21 +117,21 @@ public class Profesor extends Usuario {
         String institucionNombre = "";
         if (this.getInstitucion() != null) {
             institucionNombre = this.getInstitucion().getNombre();
-        }    
+        }
         Set<DataActividad> actividades = new HashSet<>();
         Set<Actividad> acti = this.getActividad();
         Iterator<Actividad> it = acti.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Actividad a = it.next();
             DataActividad dataA = a.getDataActividad();
             actividades.add(dataA);
-        }     
+        }
         DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
         return res;
     }
 
     public DescProfesor getDescProfesor() {
         DescProfesor res = new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
-        return res; 
+        return res;
     }
 }

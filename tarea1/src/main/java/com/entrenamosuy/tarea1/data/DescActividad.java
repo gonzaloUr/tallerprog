@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class DescActividad {
-    
+
     private final String nombre;
 
     private final String descripcion;

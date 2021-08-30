@@ -1,33 +1,37 @@
 package com.entrenamosuy.tarea1.view;
 
+import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.tarea1.view.SelecionarActividad.Callback;
 
 import javax.swing.*;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
 
-public class SelecionarUsuario extends JInternalFrame {
+public class SelecionarClase extends JInternalFrame {
+
 
     public interface Callback {
 
-        void run(String nombre);
+        void run(String institucion);
     }
 
-    public SelecionarUsuario(Set<Triple<String, String, String>> usuarios, Callback callback) {
+    public SelecionarClase(Set<String> clases, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
-        setTitle("Selecionar usuario");
+        setTitle("Selecionar clase");
         setSize(398, 273);
 
-        List<Triple<String, String, String>> usuariosLista = new ArrayList<>(usuarios.size());
-        usuariosLista.addAll(usuarios);
+        List<String> clasesLista = new ArrayList<>(clases.size());
+        clasesLista.addAll(clases);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 350, 0, 0};
@@ -36,10 +40,10 @@ public class SelecionarUsuario extends JInternalFrame {
         gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
 
-        String[] datos = new String[usuariosLista.size()];
+        String[] datos = new String[clasesLista.size()];
 
-        for (int i = 0; i < usuariosLista.size(); i++)
-            datos[i] = usuariosLista.get(i).getSecond();
+        for (int i = 0; i < clasesLista.size(); i++)
+            datos[i] = clasesLista.get(i);
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();

@@ -8,13 +8,13 @@ import com.entrenamosuy.tarea1.util.Pair;
 
 
 public class Institucion {
-    
+
     private String nombre;
 
     private String descripcion;
 
     private URL url;
-    
+
     private Set<Actividad> actividadesOfrecidas;
 
     public Institucion(String nombre, String descripcion, URL url, Set<Actividad> actividadesOfrecidas) {
@@ -101,10 +101,10 @@ public class Institucion {
         return true;
     }
 
-    public Set<Pair<String, String>> actividadesAgregables(Cuponera cup){
+    public Set<Pair<String, String>> actividadesAgregables(Cuponera cup) {
         Set<Pair<String, String>> ret = new HashSet<>();
-        for (Actividad act : actividadesOfrecidas){
-            if (!cup.tieneActividad(act)){
+        for (Actividad act : actividadesOfrecidas) {
+            if (!cup.tieneActividad(act)) {
                 ret.add(new Pair<>(act.getNombre(), act.getDescripcion()));
             }
         }

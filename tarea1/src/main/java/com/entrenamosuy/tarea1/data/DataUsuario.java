@@ -1,11 +1,12 @@
 package com.entrenamosuy.tarea1.data;
 
 //import java.time.LocalDate;
+
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class DataUsuario {
-    
+
     private final String nickname;
 
     private final String nombre;
@@ -23,7 +24,7 @@ public class DataUsuario {
         this.correo = correo;
         this.nacimiento = nacimiento2;
     }
-    
+
     public String getNickname() {
         return nickname;
     }
@@ -56,8 +57,8 @@ public class DataUsuario {
         if (obj == null || getClass() != obj.getClass())
             return false;
         DataUsuario other = (DataUsuario) obj;
-        return apellido.equals(other.apellido) && correo.equals(other.correo) 
-                && nacimiento.equals(other.nacimiento) && nickname.equals(other.nickname) 
+        return apellido.equals(other.apellido) && correo.equals(other.correo)
+                && nacimiento.equals(other.nacimiento) && nickname.equals(other.nickname)
                 && nombre.equals(other.nombre);
     }
 }

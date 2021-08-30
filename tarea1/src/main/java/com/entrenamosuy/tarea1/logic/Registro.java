@@ -38,7 +38,7 @@ public class Registro {
     public Clase getClaseAsociada() {
         return claseAsociada;
     }
- 
+
     public void setClaseAsociada(Clase claseAsociada) {
         this.claseAsociada = claseAsociada;
     }

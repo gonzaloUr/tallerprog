@@ -18,7 +18,7 @@ public class DataProfesor extends DataUsuario {
     private final String institucionNombre;
 
     public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb, String institucionNombre) {
+                        Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb, String institucionNombre) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
@@ -34,7 +34,7 @@ public class DataProfesor extends DataUsuario {
     public String getInstitucionNombre() {
         return institucionNombre;
     }
-    
+
     public String getBiografia() {
         return biografia;
     }

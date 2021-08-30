@@ -1,6 +1,10 @@
 package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
+
+import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JInternalFrame;
@@ -25,158 +29,147 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
+import java.time.LocalDate;
 
 public class CrearCuponera extends JInternalFrame {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_7;
-	private JLabel lblIngresarFecha;
-	private JLabel lblNewLabel_1;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
-	private JSpinner spinner;
+    private JTextField textField;
+    private JTextField textField_1;
+    private JTextField textField_2;
+    private JTextField textField_3;
+    private JTextField nombreField;
+    private JTextField descField;
+    private JLabel lblIngresarFecha;
+    private JLabel lblNewLabel_1;
+    private JButton aceptar;
+    private JSpinner descuento;
+    private JLabel lblIngresarFin;
+    private JDateChooser calendarioFin;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearCuponera frame = new CrearCuponera();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+    /**
+     * Create the frame.
+     */
+    public CrearCuponera(IControladorCuponera controladorCuponera) {
+    	setMaximizable(true);
+    	setResizable(true);
+    	setClosable(true);
+        setTitle("Crear Cuponera");
+        getContentPane().setForeground(Color.RED);
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        gridBagLayout.columnWidths = new int[]{34, 0, 0, 49, 0, 9, 0};
+        gridBagLayout.rowHeights = new int[]{38, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        getContentPane().setLayout(gridBagLayout);
 
-	/**
-	 * Create the frame.
-	 */
-	public CrearCuponera() {
-		setTitle("Crear Cuponera");
-		getContentPane().setForeground(Color.RED);
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{76, 0, 0, 0, 0, 49, 0, 9, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		getContentPane().setLayout(gridBagLayout);
-						
-								JLabel lblNewLabel = new JLabel("Ingresar Nombre");
-								GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-								gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-								gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-								gbc_lblNewLabel.gridx = 1;
-								gbc_lblNewLabel.gridy = 1;
-								getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-				
-						textField_4 = new JTextField();
-						GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-						gbc_textField_4.gridwidth = 2;
-						gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-						gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-						gbc_textField_4.gridx = 5;
-						gbc_textField_4.gridy = 1;
-						getContentPane().add(textField_4, gbc_textField_4);
-						textField_4.setColumns(10);
-						
-								JLabel lblIngresarNombre = new JLabel("Ingresar Descripcion");
-								GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
-								gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
-								gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
-								gbc_lblIngresarNombre.gridx = 1;
-								gbc_lblIngresarNombre.gridy = 3;
-								getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-				
-						textField_5 = new JTextField();
-						GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-						gbc_textField_5.gridwidth = 2;
-						gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-						gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-						gbc_textField_5.gridx = 5;
-						gbc_textField_5.gridy = 3;
-						getContentPane().add(textField_5, gbc_textField_5);
-						textField_5.setColumns(10);
-				
-						JLabel lblIngresarApellido = new JLabel("Ingresar Descuento");
-						GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
-						gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
-						gbc_lblIngresarApellido.insets = new Insets(0, 0, 5, 5);
-						gbc_lblIngresarApellido.gridx = 1;
-						gbc_lblIngresarApellido.gridy = 5;
-						getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
-						
-						SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 100, 1);
-						spinner = new JSpinner(model);
-						spinner.setToolTipText("");
-						GridBagConstraints gbc_spinner = new GridBagConstraints();
-						gbc_spinner.gridwidth = 2;
-						gbc_spinner.fill = GridBagConstraints.HORIZONTAL;
-						gbc_spinner.insets = new Insets(0, 0, 5, 5);
-						gbc_spinner.gridx = 5;
-						gbc_spinner.gridy = 5;
-						getContentPane().add(spinner, gbc_spinner);
-				
-						JLabel lblIngresarEmail = new JLabel("Ingresar Email");
-						GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
-						gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
-						gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
-						gbc_lblIngresarEmail.gridx = 1;
-						gbc_lblIngresarEmail.gridy = 7;
-						getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
-		
-				textField_7 = new JTextField();
-				GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-				gbc_textField_7.gridwidth = 2;
-				gbc_textField_7.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_7.gridx = 5;
-				gbc_textField_7.gridy = 7;
-				getContentPane().add(textField_7, gbc_textField_7);
-				textField_7.setColumns(10);
-				
-				lblIngresarFecha = new JLabel("Ingresar fecha");
-				GridBagConstraints gbc_lblIngresarFecha = new GridBagConstraints();
-				gbc_lblIngresarFecha.anchor = GridBagConstraints.WEST;
-				gbc_lblIngresarFecha.insets = new Insets(0, 0, 5, 5);
-				gbc_lblIngresarFecha.gridx = 1;
-				gbc_lblIngresarFecha.gridy = 9;
-				getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
-				
-				JDateChooser lblNewLabel_1 = new JDateChooser();
-				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-				gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
-				gbc_lblNewLabel_1.gridwidth = 2;
-				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_1.gridx = 5;
-				gbc_lblNewLabel_1.gridy = 9;
-				getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
-				
-				btnNewButton = new JButton("Aceptar");
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton.gridx = 1;
-				gbc_btnNewButton.gridy = 11;
-				getContentPane().add(btnNewButton, gbc_btnNewButton);
-				
-				btnNewButton_1 = new JButton("Cancelar");
-				btnNewButton_1.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-					}
-				});
-				GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-				gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton_1.gridx = 5;
-				gbc_btnNewButton_1.gridy = 11;
-				getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
-		setBounds(100, 100, 555, 360);
-	}
+        JLabel lblNewLabel = new JLabel("Ingresar Nombre");
+        GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+        gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
+        gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNewLabel.gridx = 1;
+        gbc_lblNewLabel.gridy = 1;
+        getContentPane().add(lblNewLabel, gbc_lblNewLabel);
+
+        nombreField = new JTextField();
+        GridBagConstraints gbc_nombreField = new GridBagConstraints();
+        gbc_nombreField.gridwidth = 2;
+        gbc_nombreField.insets = new Insets(0, 0, 5, 5);
+        gbc_nombreField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_nombreField.gridx = 3;
+        gbc_nombreField.gridy = 1;
+        getContentPane().add(nombreField, gbc_nombreField);
+        nombreField.setColumns(10);
+
+        JLabel lblIngresarNombre = new JLabel("Ingresar Descripcion");
+        GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
+        gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarNombre.gridx = 1;
+        gbc_lblIngresarNombre.gridy = 3;
+        getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
+
+        descField = new JTextField();
+        GridBagConstraints gbc_descField = new GridBagConstraints();
+        gbc_descField.gridwidth = 2;
+        gbc_descField.insets = new Insets(0, 0, 5, 5);
+        gbc_descField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_descField.gridx = 3;
+        gbc_descField.gridy = 3;
+        getContentPane().add(descField, gbc_descField);
+        descField.setColumns(10);
+
+        JLabel lblIngresarApellido = new JLabel("Ingresar Descuento");
+        GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
+        gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarApellido.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarApellido.gridx = 1;
+        gbc_lblIngresarApellido.gridy = 5;
+        getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
+
+        SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 100, 1);
+        descuento = new JSpinner(model);
+        descuento.setToolTipText("");
+        GridBagConstraints gbc_descuento = new GridBagConstraints();
+        gbc_descuento.gridwidth = 2;
+        gbc_descuento.fill = GridBagConstraints.HORIZONTAL;
+        gbc_descuento.insets = new Insets(0, 0, 5, 5);
+        gbc_descuento.gridx = 3;
+        gbc_descuento.gridy = 5;
+        getContentPane().add(descuento, gbc_descuento);
+
+        lblIngresarFecha = new JLabel("Ingresar inicio");
+        GridBagConstraints gbc_lblIngresarFecha = new GridBagConstraints();
+        gbc_lblIngresarFecha.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarFecha.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarFecha.gridx = 1;
+        gbc_lblIngresarFecha.gridy = 7;
+        getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
+
+        JDateChooser calendario = new JDateChooser();
+        GridBagConstraints gbc_calendario = new GridBagConstraints();
+        gbc_calendario.fill = GridBagConstraints.HORIZONTAL;
+        gbc_calendario.gridwidth = 2;
+        gbc_calendario.insets = new Insets(0, 0, 5, 5);
+        gbc_calendario.gridx = 3;
+        gbc_calendario.gridy = 7;
+        getContentPane().add(calendario, gbc_calendario);
+                
+                lblIngresarFin = new JLabel("Ingresar fin");
+                GridBagConstraints gbc_lblIngresarFin = new GridBagConstraints();
+                gbc_lblIngresarFin.anchor = GridBagConstraints.WEST;
+                gbc_lblIngresarFin.insets = new Insets(0, 0, 5, 5);
+                gbc_lblIngresarFin.gridx = 1;
+                gbc_lblIngresarFin.gridy = 9;
+                getContentPane().add(lblIngresarFin, gbc_lblIngresarFin);
+                
+                calendarioFin = new JDateChooser();
+                GridBagConstraints gbc_calendarioFin = new GridBagConstraints();
+                gbc_calendarioFin.gridwidth = 2;
+                gbc_calendarioFin.insets = new Insets(0, 0, 5, 5);
+                gbc_calendarioFin.fill = GridBagConstraints.BOTH;
+                gbc_calendarioFin.gridx = 3;
+                gbc_calendarioFin.gridy = 9;
+                getContentPane().add(calendarioFin, gbc_calendarioFin);
+        
+                aceptar = new JButton("Aceptar");
+                GridBagConstraints gbc_aceptar = new GridBagConstraints();
+                gbc_aceptar.insets = new Insets(0, 0, 5, 5);
+                gbc_aceptar.gridx = 3;
+                gbc_aceptar.gridy = 11;
+                getContentPane().add(aceptar, gbc_aceptar);
+        setBounds(100, 100, 660, 525);
+        
+        aceptar.addActionListener((ActionEvent a) -> {
+            try {
+		controladorCuponera.crearCuponera(nombreField.getText(), descField.getText(), 
+		    FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), 
+		    FuncionFecha.convertToLocalDateViaInstant(calendarioFin.getDate()), 
+		    (Integer) descuento.getValue(), LocalDate.now());
+	    } catch (CuponeraRepetidaException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		return;
+	    }
+            dispose();
+        });
+    }
 }

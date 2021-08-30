@@ -10,7 +10,7 @@ import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException; 
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 
 import com.entrenamosuy.tarea1.util.Pair;
 
@@ -18,14 +18,14 @@ public class ControladorCuponera implements IControladorCuponera {
 
     @Override
     public void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin,
-            int descuento, LocalDate fRegistro) throws CuponeraRepetidaException {
+                              int descuento, LocalDate fRegistro) throws CuponeraRepetidaException {
         Manejador manejador = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = manejador.getCuponeras();
 
         if (cuponeras.containsKey(nombre))
             throw new CuponeraRepetidaException("La cuponera llamada " + nombre + " ya existe.");
         Cuponera nuevaCup = new Cuponera(nombre, descripcion, inicio, fin, descuento, fRegistro);
-        cuponeras.put(nombre,nuevaCup);
+        cuponeras.put(nombre, nuevaCup);
     }
 
     @Override
@@ -74,7 +74,7 @@ public class ControladorCuponera implements IControladorCuponera {
         Integra integra = new Integra(cant, a);
         Set<Integra> ins = c.getIntegras();
         ins.add(integra);
-        c.setIntegras(ins);                  
+        c.setIntegras(ins);
     }
 
     @Override
