@@ -190,14 +190,14 @@ public class ConsultaActividad extends JInternalFrame {
             if (mouseEvent.getClickCount() == 2) {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0) {
-                String cuponera = theList.getModel().getElementAt(index).toString();
-                ConsultaCuponera consultaCuponera = new ConsultaCuponera(cuponera, controladorCuponera, controladorActividadClase);
-                consultaCuponera.setVisible(true);
-                app.getContentPane().add(consultaCuponera);
+                    String cuponera = theList.getModel().getElementAt(index).toString();
+                    ConsultarCuponera consultaCuponera = new ConsultarCuponera(app, cuponera, controladorCuponera, controladorActividadClase);
+                    consultaCuponera.setVisible(true);
+                    app.getContentPane().add(consultaCuponera);
                 }
-            }
-        }
-    };
+            }	
+          }
+	};
 	cuponerasLista.addMouseListener(mouseListener);
 
 	JList<String> clasesLista = new JList<>(clases.toArray(new String[] {}));
@@ -207,5 +207,24 @@ public class ConsultaActividad extends JInternalFrame {
 	gbc_clasesLista.gridx = 3;
 	gbc_clasesLista.gridy = 11;
 	getContentPane().add(clasesLista, gbc_clasesLista);
+
+
+        MouseListener mouseListenerClases = new MouseAdapter() {
+            
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                  int index = theList.locationToIndex(mouseEvent.getPoint());
+                  if (index >= 0) {
+                    String clase = theList.getModel().getElementAt(index).toString();
+                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(clase, controladorActividadClase);
+                    dictadoClase.setVisible(true);
+                    app.getContentPane().add(dictadoClase);
+                  }
+                }
+              }
+        };
+        
+        clasesLista.addMouseListener(mouseListenerClases);
     }
 }

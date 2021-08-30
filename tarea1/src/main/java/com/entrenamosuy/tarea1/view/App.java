@@ -239,7 +239,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
-                ConsultaProfesor consulta = new ConsultaProfesor(nickname, controladorUsuario);
+                ConsultaProfesor consulta = new ConsultaProfesor(this, nickname, controladorUsuario, controladorCuponera, controladorActividadClase);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });

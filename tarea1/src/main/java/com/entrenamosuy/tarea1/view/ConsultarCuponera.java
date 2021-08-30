@@ -115,7 +115,7 @@ public class ConsultarCuponera extends JInternalFrame {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0) {
                 String actividad = theList.getModel().getElementAt(index).toString();
-                ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorActividadClase, controladorCuponera);
                 consultaActividad.setVisible(true);
                 app.getContentPane().add(consultaActividad);
                 }

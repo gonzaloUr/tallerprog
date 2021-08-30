@@ -7,6 +7,8 @@ import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -34,7 +36,7 @@ public class ConsultaProfesor extends JInternalFrame {
     private JTextField biografiaField;
     private JTextField sitioWebField;
 
-    public ConsultaProfesor(String nickname, IControladorUsuario controladorUsuario) {
+    public ConsultaProfesor(App app, String nickname, IControladorUsuario controladorUsuario, IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
         setResizable(true);
         setClosable(true);
         setTitle("Consulta profesor");
@@ -261,7 +263,7 @@ public class ConsultaProfesor extends JInternalFrame {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                     String actividad = theList.getModel().getElementAt(index).toString();
-                    ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorActividadClase, controladorCuponera);
                     consultaActividad.setVisible(true);
                     app.getContentPane().add(consultaActividad);
                     }
@@ -269,7 +271,7 @@ public class ConsultaProfesor extends JInternalFrame {
             }
         };
 
-        actividadesLista.addMouseListener(mouseListener);
+        actividadesLista.addMouseListener(mouseListenerActividades);
 
         MouseListener mouseListenerClases = new MouseAdapter() {
                 
@@ -279,7 +281,7 @@ public class ConsultaProfesor extends JInternalFrame {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                     String actividad = theList.getModel().getElementAt(index).toString();
-                    ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorActividadClase, controladorCuponera);
                     consultaActividad.setVisible(true);
                     app.getContentPane().add(consultaActividad);
                     }
@@ -287,6 +289,6 @@ public class ConsultaProfesor extends JInternalFrame {
             }
         };
 
-        clasesLista.addMouseListener(mouseListener);
+        clasesLista.addMouseListener(mouseListenerClases);
     }
 }
