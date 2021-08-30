@@ -278,8 +278,11 @@ public class App extends JFrame {
         JMenu consultas = new JMenu("Consultas");
         menuBar.add(consultas);
 
-        JMenuItem consultaUsuario = new JMenuItem("Consulta de usuario");
-        consultas.add(consultaUsuario);
+        JMenuItem consultaSocio = new JMenuItem("Consulta de socio");
+        consultas.add(consultaSocio);
+        
+        JMenuItem consultaProfesor = new JMenuItem("Consulta de profesor");
+        consultas.add(consultaProfesor);
 
         JMenuItem consultaActividad = new JMenuItem("Consulta de actividad deportiva");
         consultas.add(consultaActividad);
@@ -311,9 +314,10 @@ public class App extends JFrame {
                 return;
             }
 
-            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(usuarios, (String nombre) -> {
-        	// TODO: crear ModificarDatosUsuario y cerrar ventana actual.
-                System.out.println(nombre);
+            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(usuarios, (String nickname) -> {
+        	    ModificarDatosUsuario modificarDatosUsuario = new ModificarDatosUsuario(nickname, controladorUsuario);
+        	    getContentPane().add(modificarDatosUsuario);
+        	    modificarDatosUsuario.setVisible(true);
             });
             
             getContentPane().add(selecionarUsuario);
@@ -338,6 +342,28 @@ public class App extends JFrame {
            
            getContentPane().add(selecionarInstitucion);
            selecionarInstitucion.setVisible(true);
+        });
+        
+        consultaSocio.addActionListener((ActionEvent a) -> {
+            Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
+
+            if (socios.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No hay socios en el sistema.",
+                        "error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
+        	ConsultaSocio consulta = new ConsultaSocio();
+        	getContentPane().add(consulta);
+        	consultaSocio.setVisible(true);
+            });
+            
+            getContentPane().add(selecionarUsuario);
+            selecionarUsuario.setVisible(true);
         });
     }
 

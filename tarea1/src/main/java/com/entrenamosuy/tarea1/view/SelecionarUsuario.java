@@ -39,7 +39,7 @@ public class SelecionarUsuario extends JInternalFrame {
     	String[] datos = new String[usuariosLista.size()];
     	
     	for (int i = 0; i < usuariosLista.size(); i++)
-    	    datos[i] = usuariosLista.get(i).getFirst();
+    	    datos[i] = usuariosLista.get(i).getSecond();
     	
     	JComboBox<String> comboBox = new JComboBox<String>(datos);
     	GridBagConstraints gbc_comboBox = new GridBagConstraints();

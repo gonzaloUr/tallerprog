@@ -47,24 +47,6 @@ public class AltaActividad extends JInternalFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					App aper;
-					IControladorActividadClase cont;
-					AltaActividad frame = new AltaActividad(cont,aper);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public static void clearAltaAct(JComboBox a, JTextField b, JTextField c, JTextField d, JTextField e){
 		
 		b.setText("");
