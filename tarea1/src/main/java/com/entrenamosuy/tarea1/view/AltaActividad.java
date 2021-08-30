@@ -3,6 +3,8 @@ package com.entrenamosuy.tarea1.view;
 import java.awt.EventQueue;
 
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.Institucion;
+import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
@@ -30,8 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import java.time.Duration;
 import java.time.LocalDate;
-
-
+import java.util.Map;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
@@ -77,6 +78,10 @@ public class AltaActividad extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaActividad(IControladorActividadClase controladorActividadClase, App apli) {
+		Manejador man = Manejador.getInstance();
+		String [] in = man.getInstituciones().keySet().toArray(new String [0]);
+		
+		
 		setTitle("Alta de actividad deportiva");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -94,7 +99,7 @@ public class AltaActividad extends JInternalFrame {
 		gbc_lblNewLabel.gridy = 1;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(in);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;

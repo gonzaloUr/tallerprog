@@ -34,7 +34,7 @@ import javax.swing.JFrame;
 import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -179,7 +179,7 @@ public class AltaProfesor extends JInternalFrame {
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 5;
 		gbc_lblNewLabel_1.gridy = 9;
-		getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
+		getContentPane().add(chooser, gbc_lblNewLabel_1);
 		
 		lblIngresarInstitucion = new JLabel("Ingresar Institucion");
 		GridBagConstraints gbc_lblIngresarInstitucion = new GridBagConstraints();
@@ -315,6 +315,7 @@ public class AltaProfesor extends JInternalFrame {
 						textField_11.setText("");
 						setVisible(true);
 						JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
+						return;
 					} catch (InstitucionNoEncontradaException e1) {
 						textField_4.setText("");
 						textField_5.setText(""); 
@@ -327,6 +328,7 @@ public class AltaProfesor extends JInternalFrame {
 						textField_11.setText("");
 						setVisible(true);
 						JOptionPane.showMessageDialog(app, "Institucion no encontrada", "error", JOptionPane.ERROR_MESSAGE);
+						return;
 					}
 				textField_4.setText("");
 				textField_5.setText(""); 

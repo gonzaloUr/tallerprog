@@ -207,6 +207,7 @@ public class CrearClase extends JInternalFrame {
 		
 		JDateChooser lblNewLabel_2 = new JDateChooser();
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 0);
 		gbc_lblNewLabel_2.gridx = 5;
 		gbc_lblNewLabel_2.gridy = 10;

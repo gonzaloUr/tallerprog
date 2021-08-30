@@ -185,6 +185,7 @@ public class AltaSocio extends JInternalFrame {
 							chooser.setDate(null);
 							setVisible(true);
 							JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
+							return;
 						}
 						textField_4.setText("");
 						textField_5.setText("");
