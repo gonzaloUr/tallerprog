@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
 
+import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
@@ -169,7 +170,7 @@ public class AltaSocio extends JInternalFrame {
 						String nick = textField_4.getText();
 						String nombre = textField_5.getText();
 						String apellido = textField_6.getText();
-						String mail = textField_7.getText();
+						Email mail = Email.parse(textField_7.getText());
 						Date fechaf = (Date) chooser.getDate();
 						FuncionFecha f = new FuncionFecha();
 						LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
@@ -185,6 +186,11 @@ public class AltaSocio extends JInternalFrame {
 							setVisible(true);
 							JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
 						}
+						textField_4.setText("");
+						textField_5.setText("");
+						textField_6.setText("");
+						textField_7.setText("");
+						chooser.setDate(null);
 						JOptionPane.showMessageDialog(app,"Socio creado exitosamente.");
 					}
 				});

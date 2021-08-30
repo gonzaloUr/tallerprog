@@ -41,6 +41,8 @@ public class App extends JFrame {
         controladorActividadClase = fabrica.crearControladorActividadClase();
         controladorCuponera = fabrica.crearControladorCuponera();
         controladorUsuario = fabrica.creaControladorUsuario();
+        
+        App that = this;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Estación de trabajo");
@@ -237,8 +239,17 @@ public class App extends JFrame {
         JMenu registros = new JMenu("Registros");
         menuBar.add(registros);
 
-        JMenuItem altaDeUsuario = new JMenuItem("Alta de usuario");
-        registros.add(altaDeUsuario);
+        JMenuItem altaDeSocio = new JMenuItem("Alta de socio");
+        altaDeSocio.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AltaSocio altasocio = new AltaSocio(that, controladorUsuario);
+        		altasocio.setVisible(true);
+        	}
+        });
+        registros.add(altaDeSocio);
+        
+        JMenuItem altaDeProfesor = new JMenuItem("Alta de profesor");
+        registros.add(altaDeProfesor);
 
         JMenuItem altaActividadDeportiva = new JMenuItem("Alta de actividad deportiva");
         registros.add(altaActividadDeportiva);
