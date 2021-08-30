@@ -21,16 +21,17 @@ import com.entrenamosuy.tarea1.data.DataUsuario;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 
 public class ConsultaSocio extends JInternalFrame {
 
 
-    public ConsultaSocio(App app, IControladorActividadClase controladorActividadClase, IControladorUsuario CU, String nickname) {
+    public ConsultaSocio(App app, IControladorActividadClase controladorActividadClase, IControladorUsuario controladorUsuario, IControladorCuponera controladorCuponera, String nickname) {
 
         DataSocio data = null;
         try {
-            data = CU.consultarSocio(nickname);
+            data = controladorUsuario.consultarSocio(nickname);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,7 +175,7 @@ public class ConsultaSocio extends JInternalFrame {
                   int index = theList.locationToIndex(mouseEvent.getPoint());
                   if (index >= 0) {
                     String clase = theList.getModel().getElementAt(index).toString();
-                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(clase, controladorActividadClase);
+                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(app, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
                     dictadoClase.setVisible(true);
                     app.getContentPane().add(dictadoClase);
                   }

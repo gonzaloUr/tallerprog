@@ -8,6 +8,8 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -28,7 +30,7 @@ public class ConsultaActividad extends JInternalFrame {
 	private JTextField registroField;
 	private JTextField costoField;
 
-    public ConsultaActividad(App app, String actividad, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
+    public ConsultaActividad(App app, String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
     	setTitle("Consulta actividad");
     	setClosable(true);
     	setResizable(true);
@@ -190,14 +192,14 @@ public class ConsultaActividad extends JInternalFrame {
             if (mouseEvent.getClickCount() == 2) {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0) {
-                String cuponera = theList.getModel().getElementAt(index).toString();
-                ConsultaCuponera consultaCuponera = new ConsultaCuponera(cuponera, controladorCuponera, controladorActividadClase);
-                consultaCuponera.setVisible(true);
-                app.getContentPane().add(consultaCuponera);
+                    String cuponera = theList.getModel().getElementAt(index).toString();
+                    ConsultarCuponera consultaCuponera = new ConsultarCuponera(app, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
+                    consultaCuponera.setVisible(true);
+                    app.getContentPane().add(consultaCuponera);
                 }
-            }
-        }
-    };
+            }	
+          }
+	};
 	cuponerasLista.addMouseListener(mouseListener);
 
 	JList<String> clasesLista = new JList<>(clases.toArray(new String[] {}));
@@ -207,5 +209,24 @@ public class ConsultaActividad extends JInternalFrame {
 	gbc_clasesLista.gridx = 3;
 	gbc_clasesLista.gridy = 11;
 	getContentPane().add(clasesLista, gbc_clasesLista);
+
+
+        MouseListener mouseListenerClases = new MouseAdapter() {
+            
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                  int index = theList.locationToIndex(mouseEvent.getPoint());
+                  if (index >= 0) {
+                    String clase = theList.getModel().getElementAt(index).toString();
+                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(app, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
+                    dictadoClase.setVisible(true);
+                    app.getContentPane().add(dictadoClase);
+                  }
+                }
+              }
+        };
+        
+        clasesLista.addMouseListener(mouseListenerClases);
     }
 }

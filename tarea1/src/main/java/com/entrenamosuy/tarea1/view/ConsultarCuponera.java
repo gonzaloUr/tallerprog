@@ -6,6 +6,7 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.data.DescActividad;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ public class ConsultarCuponera extends JInternalFrame {
 	private JTextField nombreField;
 	private JTextField descripcionField;
 
-    public ConsultarCuponera(App app, String cuponera, IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
+    public ConsultarCuponera(App app, String cuponera, IControladorUsuario controladorUsuario, IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
     	setTitle("Consulta cuponera");
     	setResizable(true);
     	setClosable(true);
@@ -115,7 +116,7 @@ public class ConsultarCuponera extends JInternalFrame {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0) {
                 String actividad = theList.getModel().getElementAt(index).toString();
-                ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
                 consultaActividad.setVisible(true);
                 app.getContentPane().add(consultaActividad);
                 }

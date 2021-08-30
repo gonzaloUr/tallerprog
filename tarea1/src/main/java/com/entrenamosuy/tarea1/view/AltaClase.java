@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
@@ -45,13 +46,15 @@ public class AltaClase extends JInternalFrame {
 	private JTextField cantMax;
 	private JTextField url;
 
-    public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase) {
+    public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, String institucion) {
         
         final List<String> profesores = new ArrayList<>();
-        
+        Manejador maneja = Manejador.getInstance();
         for (Triple<String, String, String> profesor : controladorUsuario.obtenerDescProfesores()) {
             String nickname = profesor.getSecond();
-            profesores.add(nickname);
+            String nom = maneja.getProfesores().get(nickname).getInstitucion().getNombre();
+            if (nom.equals(institucion))
+                profesores.add(nickname);
         }
 	
     	setClosable(true);

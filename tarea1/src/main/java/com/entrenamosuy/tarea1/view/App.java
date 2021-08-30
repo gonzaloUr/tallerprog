@@ -193,7 +193,7 @@ public class App extends JFrame {
                    }
     
                    SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorActividadClase, controladorCuponera);
+                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
                        consulta.setVisible(true);
                        getContentPane().add(consulta);
                    });
@@ -219,7 +219,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-                ConsultaSocio consulta = new ConsultaSocio(this, controladorActividadClase, controladorUsuario, nickname);
+                ConsultaSocio consulta = new ConsultaSocio(this, controladorActividadClase, controladorUsuario, controladorCuponera, nickname);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -241,7 +241,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
-                ConsultaProfesor consulta = new ConsultaProfesor(nickname, controladorUsuario);
+                ConsultaProfesor consulta = new ConsultaProfesor(this, nickname, controladorUsuario, controladorCuponera, controladorActividadClase);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -282,7 +282,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    AltaClase altaClase = new AltaClase(actividad, controladorUsuario, controladorActividadClase);
+                    AltaClase altaClase = new AltaClase(actividad, controladorUsuario, controladorActividadClase, inst);
                     altaClase.setVisible(true);
                     getContentPane().add(altaClase);
                 });
@@ -346,7 +346,7 @@ public class App extends JFrame {
 	            }
 		    
 		    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
-			ConsultaDictadoClase consulta = new ConsultaDictadoClase(clase, controladorActividadClase);
+			ConsultaDictadoClase consulta = new ConsultaDictadoClase(this, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
 			consulta.setVisible(true);
 			getContentPane().add(consulta);
 		    });
@@ -499,7 +499,7 @@ public class App extends JFrame {
             
             
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-        	ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorCuponera, controladorActividadClase);
+        	ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
         	consulta.setVisible(true);
         	getContentPane().add(consulta);
             });
