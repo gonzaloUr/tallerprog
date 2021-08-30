@@ -383,7 +383,7 @@ public class App extends JFrame {
                     return;
                 }
 
-                if (instituciones.isEmpty()) {
+                if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
                             "No hay actividades en el sistema para " + inst + ".",
                             "error",
@@ -402,7 +402,7 @@ public class App extends JFrame {
 			return;
 		    }
 		    
-		    if (instituciones.isEmpty()) {
+		    if (clases.isEmpty()) {
 	                    JOptionPane.showMessageDialog(this,
 	                            "No hay clases en el sistema para " + actividad + ".",
 	                            "error",
@@ -411,39 +411,45 @@ public class App extends JFrame {
 	                    return;
 	            }
 		    
-                    Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
-                    
-                    if (socios.isEmpty()) {
-	                JOptionPane.showMessageDialog(this,
-	                        "No hay socios en el sistema.",
-	                        "error",
-	                        JOptionPane.ERROR_MESSAGE);
-
-	                return;
-	            }
-                    
-                    SelecionarUsuario selecionarSocio = new SelecionarUsuario(socios, (String socio) -> {
-        		    Set<Pair<String, String>> cuponeras = null;
-        			    
-        		    try {
-        			cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
-        		    } catch (SocioNoEncontradoException e1) {
-        			// TODO Auto-generated catch block
-        			e1.printStackTrace();
-        			return;
-        		    } catch (ActividadNoEncontradaException e1) {
-        			// TODO Auto-generated catch block
-        			e1.printStackTrace();
-        			return;
-        		    }
-        		    
-        		    RegistroAClase registroAClase = new RegistroAClase(actividad, socio, cuponeras);
-        		    registroAClase.setVisible(true);
-        		    getContentPane().add(registroAClase);
+		    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
+		    
+                        Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
+                        
+                        if (socios.isEmpty()) {
+    	                	JOptionPane.showMessageDialog(this,
+    	                		"No hay socios en el sistema.",
+    	                		"error",
+    	                		JOptionPane.ERROR_MESSAGE);
+    
+    	                	return;
+    	            	}
+                        
+                        SelecionarUsuario selecionarSocio = new SelecionarUsuario(socios, (String socio) -> {
+            		    Set<Pair<String, String>> cuponeras = null;
+            			    
+            		    try {
+            			cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
+            		    } catch (SocioNoEncontradoException e1) {
+            			// TODO Auto-generated catch block
+            			e1.printStackTrace();
+            			return;
+            		    } catch (ActividadNoEncontradaException e1) {
+            			// TODO Auto-generated catch block
+            			e1.printStackTrace();
+            			return;
+            		    }
+            		    
+            		    RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase);
+            		    registroAClase.setVisible(true);
+            		    getContentPane().add(registroAClase);
+                        });
+                        
+                        selecionarSocio.setVisible(true);
+                        getContentPane().add(selecionarSocio);
                     });
-                    
-                    selecionarSocio.setVisible(true);
-                    getContentPane().add(selecionarSocio);
+		    
+		    selecionarClase.setVisible(true);
+                    getContentPane().add(selecionarClase);
                 });
 
                 selecionarActividad.setVisible(true);

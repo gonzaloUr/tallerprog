@@ -23,7 +23,15 @@ import java.awt.event.ActionListener;
 import java.util.Set;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import java.time.LocalDate;
 
+import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInvalidaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraLlenaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
@@ -34,7 +42,7 @@ public class RegistroAClase extends JInternalFrame {
     private JTextField textField_2;
     private JTextField textField_3;
 
-    public RegistroAClase(String actividad, String socio, Set<Pair<String, String>> cuponeras) {
+    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase) {
 	setTitle("Registro a dictado de clase.");
 	getContentPane().setForeground(Color.RED);
 	GridBagLayout gridBagLayout = new GridBagLayout();
@@ -51,7 +59,7 @@ public class RegistroAClase extends JInternalFrame {
 	gbc_lblSeleccionarCuponera.gridy = 1;
 	getContentPane().add(lblSeleccionarCuponera, gbc_lblSeleccionarCuponera);
 
-	JComboBox cuponerasComboBox = new JComboBox();
+	JComboBox<String> cuponerasComboBox = new JComboBox<>();
 	GridBagConstraints gbc_cuponerasComboBox = new GridBagConstraints();
 	gbc_cuponerasComboBox.insets = new Insets(0, 0, 5, 5);
 	gbc_cuponerasComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -91,7 +99,38 @@ public class RegistroAClase extends JInternalFrame {
 	setBounds(100, 100, 555, 360);
 	
 	aceptar.addActionListener((ActionEvent a) -> {
-
+	    String cuponeraSelecionada = (String) cuponerasComboBox.getSelectedItem();
+	    
+	    if (utilizarCheckBox.isSelected() && cuponeraSelecionada != "") {
+		try {
+		    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, LocalDate.now());
+		} catch (SocioNoEncontradoException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (ClaseNoEncontradaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (CuponeraNoEncontradaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (CuponeraNoCompradaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (CuponeraInvalidaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		} catch (CuponeraLlenaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    } else {
+		try {
+		    controladorActividadClase.registarseSinCuponera(socio, clase, LocalDate.now());
+		} catch (SocioNoEncontradoException | ClaseNoEncontradaException e) {
+		    // TODO Auto-generated catch block
+		    e.printStackTrace();
+		}
+	    }
 	});
     }
 }
