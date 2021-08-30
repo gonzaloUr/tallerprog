@@ -7,12 +7,18 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.DropMode;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.GridBagLayout;
@@ -20,6 +26,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 
 public class AltaInstitucion extends JInternalFrame {
@@ -34,7 +42,10 @@ public class AltaInstitucion extends JInternalFrame {
     /**
      * Create the frame.
      */
-    public AltaInstitucion() {
+    public AltaInstitucion(IControladorActividadClase CAC, App app) {
+    	setMaximizable(true);
+    	setResizable(true);
+    	setClosable(true);
         setTitle("Alta de institucion deportiva");
         getContentPane().setForeground(Color.RED);
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -95,24 +106,44 @@ public class AltaInstitucion extends JInternalFrame {
         gbc_textField_6.gridy = 7;
         getContentPane().add(textField_6, gbc_textField_6);
         textField_6.setColumns(10);
-
-        JButton btnNewButton = new JButton("Aceptar");
-        GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-        gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton.gridx = 1;
-        gbc_btnNewButton.gridy = 10;
-        getContentPane().add(btnNewButton, gbc_btnNewButton);
-
-        JButton btnNewButton_1 = new JButton("Cancelar");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton_1.gridx = 5;
-        gbc_btnNewButton_1.gridy = 10;
-        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
+                                
+                                        JButton btnNewButton = new JButton("Aceptar");
+                                        btnNewButton.addActionListener(new ActionListener() {
+                                        	public void actionPerformed(ActionEvent e) {
+                                        		setVisible(false);
+                                        		String nombre = textField_4.getText();
+                                        		String desc = textField_5.getText();
+                                        		URL link = null;
+                                                try {
+                                                    link = new URL(textField_6.getText());
+                                                } catch (MalformedURLException e1) {
+                                                    textField_4.setText("");
+                                                    textField_5.setText("");
+                                                    textField_6.setText("");
+                                                    setVisible(true);
+                                                    JOptionPane.showMessageDialog(app, "URL no valida ingrese: https://ejemplo.xxx", "error", JOptionPane.ERROR_MESSAGE);
+                                                    return;
+                                                }
+                                                try {
+                                                	CAC.crearInstitucion(nombre, desc, link);
+                                                }
+                                                catch(InstitucionRepetidaException rep) {
+                                                    textField_4.setText("");
+                                                    textField_5.setText("");
+                                                    textField_6.setText("");
+                                                    setVisible(true);
+                                                    JOptionPane.showMessageDialog(app, "Institucion ya existente", "error", JOptionPane.ERROR_MESSAGE);
+                                                    return;
+                                                }
+                                                JOptionPane.showMessageDialog(app,"Institucion creada exitosamente,", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                                        	}
+                                        });
+                                        GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+                                        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
+                                        gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+                                        gbc_btnNewButton.gridx = 1;
+                                        gbc_btnNewButton.gridy = 10;
+                                        getContentPane().add(btnNewButton, gbc_btnNewButton);
         setBounds(100, 100, 555, 360);
     }
 }

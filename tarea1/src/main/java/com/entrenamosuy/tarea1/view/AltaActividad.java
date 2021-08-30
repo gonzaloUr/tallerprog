@@ -60,6 +60,9 @@ public class AltaActividad extends JInternalFrame {
      * Create the frame.
      */
     public AltaActividad(IControladorActividadClase controladorActividadClase, App apli) {
+    	setClosable(true);
+    	setResizable(true);
+    	setMaximizable(true);
         Manejador man = Manejador.getInstance();
         String[] in = man.getInstituciones().keySet().toArray(new String[0]);
 
@@ -196,23 +199,11 @@ public class AltaActividad extends JInternalFrame {
             }
         });
         GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
         gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
         gbc_btnNewButton.gridx = 1;
         gbc_btnNewButton.gridy = 10;
         getContentPane().add(btnNewButton, gbc_btnNewButton);
-
-        JButton btnNewButton_1 = new JButton("Cancelar");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
-            }
-        });
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton_1.gridx = 5;
-        gbc_btnNewButton_1.gridy = 10;
-        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
         setBounds(100, 100, 555, 360);
     }
 }

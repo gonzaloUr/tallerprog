@@ -44,7 +44,6 @@ public class AltaSocio extends JInternalFrame {
     private JLabel lblIngresarFecha;
     private JLabel lblNewLabel_1;
     private JButton btnNewButton;
-    private JButton btnNewButton_1;
 
     /**
      * Launch the application.
@@ -66,6 +65,9 @@ public class AltaSocio extends JInternalFrame {
      * Create the frame.
      */
     public AltaSocio(App app, IControladorUsuario CU) {
+    	setResizable(true);
+    	setMaximizable(true);
+    	setClosable(true);
         setTitle("Alta Socio");
         getContentPane().setForeground(Color.RED);
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -201,23 +203,6 @@ public class AltaSocio extends JInternalFrame {
         gbc_btnNewButton.gridx = 1;
         gbc_btnNewButton.gridy = 11;
         getContentPane().add(btnNewButton, gbc_btnNewButton);
-
-        btnNewButton_1 = new JButton("Cancelar");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                textField_4.setText("");
-                textField_5.setText("");
-                textField_6.setText("");
-                textField_7.setText("");
-                chooser.setDate(null);
-            }
-        });
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-        gbc_btnNewButton_1.gridx = 5;
-        gbc_btnNewButton_1.gridy = 11;
-        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
         setBounds(100, 100, 555, 360);
     }
 }

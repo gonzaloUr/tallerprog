@@ -496,7 +496,7 @@ public class App extends JFrame {
         });
         
         altaInstitucionDeportiva.addActionListener((ActionEvent a) -> {
-            AltaInstitucion alta = new AltaInstitucion();
+            AltaInstitucion alta = new AltaInstitucion(controladorActividadClase, that);
             alta.setVisible(true);
             getContentPane().add(alta);
         });
