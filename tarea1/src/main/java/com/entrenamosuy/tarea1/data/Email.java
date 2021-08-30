@@ -54,4 +54,10 @@ public class Email {
     public int hashCode() {
         return Objects.hash(prefix, domain);
     }
+
+    @Override
+    public String toString(){
+        return prefix + "@" + domain;
+    }
+
 }
