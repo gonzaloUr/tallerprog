@@ -217,7 +217,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-                ConsultaSocio consulta = new ConsultaSocio(controladorUsuario, nickname);
+                ConsultaSocio consulta = new ConsultaSocio(controladorActividadClase, controladorUsuario, nickname);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -225,7 +225,6 @@ public class App extends JFrame {
             getContentPane().add(selecionarUsuario);
             selecionarUsuario.setVisible(true);
         });
-
 
         consultaProfesor.addActionListener((ActionEvent a) -> {
             Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();

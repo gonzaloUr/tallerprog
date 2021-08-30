@@ -72,7 +72,7 @@ public class AltaProfesor extends JInternalFrame {
                     h.setVisible(true);
                     AltaProfesor frame = new AltaProfesor(null, null);
                     frame.setVisible(true);
-                    h.add(frame);
+                    h.getContentPane().add(frame);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
