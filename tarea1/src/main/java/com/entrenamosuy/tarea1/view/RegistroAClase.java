@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
@@ -22,6 +23,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+
+import com.toedter.calendar.JDateChooser;
 
 public class RegistroAClase extends JInternalFrame {
 	private JTextField textField;
@@ -112,6 +115,14 @@ public class RegistroAClase extends JInternalFrame {
 								gbc_lblIngresarApellido.gridx = 1;
 								gbc_lblIngresarApellido.gridy = 7;
 								getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
+						
+						JDateChooser lblNewLabel_1 = new JDateChooser();
+						GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+						gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
+						gbc_lblNewLabel_1.insets = new Insets(0, 0, 0, 9);
+						gbc_lblNewLabel_1.gridx = 5;
+						gbc_lblNewLabel_1.gridy = 7;
+						getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 						
 						JButton btnNewButton = new JButton("Aceptar");
 						GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
