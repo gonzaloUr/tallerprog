@@ -263,7 +263,7 @@ public class ConsultaProfesor extends JInternalFrame {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                     String actividad = theList.getModel().getElementAt(index).toString();
-                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorActividadClase, controladorCuponera);
+                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
                     consultaActividad.setVisible(true);
                     app.getContentPane().add(consultaActividad);
                     }
@@ -281,7 +281,7 @@ public class ConsultaProfesor extends JInternalFrame {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
                     String actividad = theList.getModel().getElementAt(index).toString();
-                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorActividadClase, controladorCuponera);
+                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
                     consultaActividad.setVisible(true);
                     app.getContentPane().add(consultaActividad);
                     }

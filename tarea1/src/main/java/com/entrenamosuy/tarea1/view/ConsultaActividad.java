@@ -8,6 +8,8 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -28,7 +30,7 @@ public class ConsultaActividad extends JInternalFrame {
 	private JTextField registroField;
 	private JTextField costoField;
 
-    public ConsultaActividad(App app, String actividad, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
+    public ConsultaActividad(App app, String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
     	setTitle("Consulta actividad");
     	setClosable(true);
     	setResizable(true);
@@ -191,7 +193,7 @@ public class ConsultaActividad extends JInternalFrame {
                 int index = theList.locationToIndex(mouseEvent.getPoint());
                 if (index >= 0) {
                     String cuponera = theList.getModel().getElementAt(index).toString();
-                    ConsultarCuponera consultaCuponera = new ConsultarCuponera(app, cuponera, controladorCuponera, controladorActividadClase);
+                    ConsultarCuponera consultaCuponera = new ConsultarCuponera(app, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
                     consultaCuponera.setVisible(true);
                     app.getContentPane().add(consultaCuponera);
                 }
@@ -217,7 +219,7 @@ public class ConsultaActividad extends JInternalFrame {
                   int index = theList.locationToIndex(mouseEvent.getPoint());
                   if (index >= 0) {
                     String clase = theList.getModel().getElementAt(index).toString();
-                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(clase, controladorActividadClase);
+                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(app, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
                     dictadoClase.setVisible(true);
                     app.getContentPane().add(dictadoClase);
                   }

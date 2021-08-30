@@ -6,10 +6,16 @@ import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +30,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 	private JTextField urlField;
 	private JTextField actividadField;
 
-    public ConsultaDictadoClase(String clase, IControladorActividadClase controladorActividadClase) {
+    public ConsultaDictadoClase(App app, String clase, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
     	setMaximizable(true);
     	setResizable(true);
     	setClosable(true);
@@ -182,5 +188,23 @@ public class ConsultaDictadoClase extends JInternalFrame {
 	gbc_list.gridx = 3;
 	gbc_list.gridy = 13;
 	getContentPane().add(list, gbc_list);
+
+        MouseListener mouseListener = new MouseAdapter() {
+            
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                  int index = theList.locationToIndex(mouseEvent.getPoint());
+                  if (index >= 0) {
+                    String profesor = theList.getModel().getElementAt(index).toString();
+                    ConsultaProfesor dictadoClase = new ConsultaProfesor(app, profesor, controladorUsuario,  controladorCuponera,  controladorActividadClase );
+                    dictadoClase.setVisible(true);
+                    app.getContentPane().add(dictadoClase);
+                  }
+                }
+              }
+        };
+        
+        list.addMouseListener(mouseListener);
     }
 }
