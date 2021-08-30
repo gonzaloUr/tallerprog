@@ -405,7 +405,30 @@ public class App extends JFrame {
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
         	ConsultaSocio consulta = new ConsultaSocio(controladorUsuario, nickname);
         	getContentPane().add(consulta);
-        	consultaSocio.setVisible(true);
+        	consulta.setVisible(true);
+            });
+            
+            getContentPane().add(selecionarUsuario);
+            selecionarUsuario.setVisible(true);
+        });
+        
+        
+        consultaProfesor.addActionListener((ActionEvent a) -> {
+            Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();
+
+            if (profesores.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No hay profesores en el sistema.",
+                        "error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
+        	ConsultaProfesor consulta = new ConsultaProfesor(nickname, controladorUsuario);
+        	getContentPane().add(consulta);
+        	consulta.setVisible(true);
             });
             
             getContentPane().add(selecionarUsuario);
