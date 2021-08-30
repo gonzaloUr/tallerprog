@@ -5,21 +5,28 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 
 import com.entrenamosuy.tarea1.data.DataUsuario;
+import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataSocio;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 
 public class ConsultaSocio extends JInternalFrame {
 
 
-    public ConsultaSocio(IControladorUsuario CU, String nickname) {
+    public ConsultaSocio(IControladorActividadClase controladorActividadClase, IControladorUsuario CU, String nickname) {
 
         DataSocio data = null;
         try {
@@ -31,7 +38,11 @@ public class ConsultaSocio extends JInternalFrame {
         String apellido = data.getApellido();
         String correo = data.getCorreo().toString();
         String nacimiento = data.getNacimiento().toString();
-
+        
+        List<String> clasesLista = new ArrayList<String>();
+        
+        for (DataClase c : data.getClases())
+            clasesLista.add(c.getNombre());
 
         setResizable(true);
         setClosable(true);
@@ -39,9 +50,9 @@ public class ConsultaSocio extends JInternalFrame {
         setSize(460, 412);
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
 
         JLabel lblNickname = new JLabel("Nickname");
@@ -138,11 +149,37 @@ public class ConsultaSocio extends JInternalFrame {
         gbc_textField_4.gridx = 3;
         gbc_textField_4.gridy = 9;
         getContentPane().add(textField_4, gbc_textField_4);
+        
+        JLabel lblClases = new JLabel("Clases");
+        GridBagConstraints gbc_lblClases = new GridBagConstraints();
+        gbc_lblClases.anchor = GridBagConstraints.WEST;
+        gbc_lblClases.insets = new Insets(0, 0, 5, 5);
+        gbc_lblClases.gridx = 1;
+        gbc_lblClases.gridy = 11;
+        getContentPane().add(lblClases, gbc_lblClases);
+        
+        JList<String> clases = new JList<>(clasesLista.toArray(new String[] {}));
+        GridBagConstraints gbc_clases = new GridBagConstraints();
+        gbc_clases.insets = new Insets(0, 0, 5, 5);
+        gbc_clases.fill = GridBagConstraints.BOTH;
+        gbc_clases.gridx = 3;
+        gbc_clases.gridy = 11;
+        getContentPane().add(clases, gbc_clases);
 
-        try {
-            CU.consultarSocio(nickname);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        MouseListener mouseListener = new MouseAdapter() {
+            
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                  int index = theList.locationToIndex(mouseEvent.getPoint());
+                  if (index >= 0) {
+                    String clase = theList.getModel().getElementAt(index).toString();
+                    ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(clase, controladorActividadClase);
+                  }
+                }
+              }
+        };
+        
+        clases.addMouseListener(mouseListener);
     }
 }
