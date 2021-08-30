@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
 
+import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
@@ -27,7 +28,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -128,13 +129,13 @@ public class AltaSocio extends JInternalFrame {
 				getContentPane().add(textField_6, gbc_textField_6);
 				textField_6.setColumns(10);
 				
-						JLabel lblIngresarEmail = new JLabel("Ingresar Email");
-						GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
-						gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
-						gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
-						gbc_lblIngresarEmail.gridx = 1;
-						gbc_lblIngresarEmail.gridy = 7;
-						getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
+				JLabel lblIngresarEmail = new JLabel("Ingresar Email");
+				GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
+				gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
+				gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
+				gbc_lblIngresarEmail.gridx = 1;
+				gbc_lblIngresarEmail.gridy = 7;
+				getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
 		
 				textField_7 = new JTextField();
 				GridBagConstraints gbc_textField_7 = new GridBagConstraints();
@@ -161,7 +162,7 @@ public class AltaSocio extends JInternalFrame {
 				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_1.gridx = 5;
 				gbc_lblNewLabel_1.gridy = 9;
-				getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
+				getContentPane().add(chooser, gbc_lblNewLabel_1);
 				
 				btnNewButton = new JButton("Aceptar");
 				btnNewButton.addActionListener(new ActionListener() {
@@ -169,7 +170,7 @@ public class AltaSocio extends JInternalFrame {
 						String nick = textField_4.getText();
 						String nombre = textField_5.getText();
 						String apellido = textField_6.getText();
-						String mail = textField_7.getText();
+						Email mail = Email.parse(textField_7.getText());
 						Date fechaf = (Date) chooser.getDate();
 						FuncionFecha f = new FuncionFecha();
 						LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
@@ -185,6 +186,11 @@ public class AltaSocio extends JInternalFrame {
 							setVisible(true);
 							JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
 						}
+						textField_4.setText("");
+						textField_5.setText("");
+						textField_6.setText("");
+						textField_7.setText("");
+						chooser.setDate(null);
 						JOptionPane.showMessageDialog(app,"Socio creado exitosamente.");
 					}
 				});

@@ -23,7 +23,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class AgregarActividadACuponera extends JInternalFrame {
+public class SeleccionarActHs extends JInternalFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -36,7 +36,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AgregarActividadACuponera frame = new AgregarActividadACuponera();
+					SeleccionarActHs frame = new SeleccionarActHs();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AgregarActividadACuponera() {
+	public SeleccionarActHs() {
 		setTitle("Agregar actividad a cuponera.");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -58,7 +58,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 				
-						JLabel lblNewLabel = new JLabel("Seleccionar Cuponera");
+						JLabel lblNewLabel = new JLabel("Seleccionar Actividad");
 						GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 						gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 						gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
@@ -74,7 +74,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
 								gbc_comboBox.gridy = 2;
 								getContentPane().add(comboBox, gbc_comboBox);
 						
-								JLabel lblIngresarNombre = new JLabel("Seleccionar Institucion");
+								JLabel lblIngresarNombre = new JLabel("Seleccionar Horas");
 								GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
 								gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
 								gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
