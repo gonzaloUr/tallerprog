@@ -2,6 +2,8 @@ package com.entrenamosuy.tarea1.view;
 
 import javax.swing.JInternalFrame;
 
+import com.entrenamosuy.tarea1.data.DataActividad;
+import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
@@ -10,9 +12,14 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 public class ConsultaProfesor extends JInternalFrame {
     private JTextField nicknameField;
@@ -188,14 +195,6 @@ public class ConsultaProfesor extends JInternalFrame {
         gbc_lblClases.gridy = 17;
         getContentPane().add(lblClases, gbc_lblClases);
 
-        JScrollPane scrollPane = new JScrollPane();
-        GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-        gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-        gbc_scrollPane.fill = GridBagConstraints.BOTH;
-        gbc_scrollPane.gridx = 3;
-        gbc_scrollPane.gridy = 17;
-        getContentPane().add(scrollPane, gbc_scrollPane);
-
         JLabel lblActividades = new JLabel("Actividades");
         GridBagConstraints gbc_lblActividades = new GridBagConstraints();
         gbc_lblActividades.anchor = GridBagConstraints.WEST;
@@ -204,14 +203,6 @@ public class ConsultaProfesor extends JInternalFrame {
         gbc_lblActividades.gridx = 1;
         gbc_lblActividades.gridy = 19;
         getContentPane().add(lblActividades, gbc_lblActividades);
-
-        JScrollPane scrollPane_1 = new JScrollPane();
-        GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-        gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
-        gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-        gbc_scrollPane_1.gridx = 3;
-        gbc_scrollPane_1.gridy = 19;
-        getContentPane().add(scrollPane_1, gbc_scrollPane_1);
 
         DataProfesor profesor = null;
         try {
@@ -227,6 +218,36 @@ public class ConsultaProfesor extends JInternalFrame {
         nacimientoField.setText(profesor.getNacimiento().toString());
         descripcionField.setText(profesor.getDescripcion());
         biografiaField.setText(profesor.getBiografia());
-        // sitioWebField.setText(profesor.getSitioWeb().toString());
+        
+        URL profesorURL = profesor.getSitioWeb();
+        
+        if (profesorURL != null)
+            sitioWebField.setText(profesorURL.toString());
+   
+        List<String> clases = new ArrayList<>();
+        List<String> actividades = new ArrayList<>();
+        
+        for (DataActividad a : profesor.getActividades()) {
+            actividades.add(a.getNombre());
+            
+            for (DataClase c : a.getClases())
+        	clases.add(c.getNombre());
+        }
+        
+        JList<String> actividadesLista = new JList<>(actividades.toArray(new String[] {}));
+        GridBagConstraints gbc_actividadesLista = new GridBagConstraints();
+        gbc_actividadesLista.insets = new Insets(0, 0, 5, 5);
+        gbc_actividadesLista.fill = GridBagConstraints.BOTH;
+        gbc_actividadesLista.gridx = 3;
+        gbc_actividadesLista.gridy = 19;
+        getContentPane().add(actividadesLista, gbc_actividadesLista);
+        
+        JList<String> clasesLista = new JList<>(clases.toArray(new String[] {}));
+        GridBagConstraints gbc_clasesLista = new GridBagConstraints();
+        gbc_clasesLista.insets = new Insets(0, 0, 5, 5);
+        gbc_clasesLista.fill = GridBagConstraints.BOTH;
+        gbc_clasesLista.gridx = 3;
+        gbc_clasesLista.gridy = 17;
+        getContentPane().add(clasesLista, gbc_clasesLista);
     }
 }
