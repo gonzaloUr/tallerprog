@@ -129,13 +129,13 @@ public class AltaSocio extends JInternalFrame {
 				getContentPane().add(textField_6, gbc_textField_6);
 				textField_6.setColumns(10);
 				
-						JLabel lblIngresarEmail = new JLabel("Ingresar Email");
-						GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
-						gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
-						gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
-						gbc_lblIngresarEmail.gridx = 1;
-						gbc_lblIngresarEmail.gridy = 7;
-						getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
+				JLabel lblIngresarEmail = new JLabel("Ingresar Email");
+				GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
+				gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
+				gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
+				gbc_lblIngresarEmail.gridx = 1;
+				gbc_lblIngresarEmail.gridy = 7;
+				getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
 		
 				textField_7 = new JTextField();
 				GridBagConstraints gbc_textField_7 = new GridBagConstraints();
