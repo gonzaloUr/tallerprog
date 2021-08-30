@@ -21,15 +21,13 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
-public class AltaInstitucion extends JInternalFrame {
+public class RegistroAClase extends JInternalFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
 
 	/**
 	 * Launch the application.
@@ -38,7 +36,7 @@ public class AltaInstitucion extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaInstitucion frame = new AltaInstitucion();
+					RegistroAClase frame = new RegistroAClase();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,73 +48,76 @@ public class AltaInstitucion extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AltaInstitucion() {
-		setTitle("Alta de institucion deportiva");
+	public RegistroAClase() {
+		setTitle("Registro a dictado de clase.");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{76, 0, 0, 0, 49, 0, 9, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		getContentPane().setLayout(gridBagLayout);
 
-		JLabel lblNewLabel = new JLabel("Ingresar Nombre");
+		JLabel lblNewLabel = new JLabel("Seleccionar Socio");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel.gridx = 1;
 		gbc_lblNewLabel.gridy = 1;
 		getContentPane().add(lblNewLabel, gbc_lblNewLabel);
-
-		textField_4 = new JTextField();
-		GridBagConstraints gbc_textField_4 = new GridBagConstraints();
-		gbc_textField_4.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_4.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_4.gridx = 5;
-		gbc_textField_4.gridy = 1;
-		getContentPane().add(textField_4, gbc_textField_4);
-		textField_4.setColumns(10);
-		
-				textField_5 = new JTextField();
-				GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-				gbc_textField_5.gridheight = 3;
-				gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-				gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-				gbc_textField_5.gridx = 5;
-				gbc_textField_5.gridy = 3;
-				getContentPane().add(textField_5, gbc_textField_5);
-				textField_5.setColumns(10);
+						
+						JComboBox comboBox = new JComboBox();
+						GridBagConstraints gbc_comboBox = new GridBagConstraints();
+						gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+						gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+						gbc_comboBox.gridx = 5;
+						gbc_comboBox.gridy = 1;
+						getContentPane().add(comboBox, gbc_comboBox);
 				
-						JLabel lblIngresarNombre = new JLabel("Ingresar Descripcion");
+						JLabel lblIngresarNombre = new JLabel("Seleccionar Clase");
 						GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
 						gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
 						gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
 						gbc_lblIngresarNombre.gridx = 1;
-						gbc_lblIngresarNombre.gridy = 4;
+						gbc_lblIngresarNombre.gridy = 3;
 						getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-		
-				JLabel lblIngresarApellido = new JLabel("Ingresar URL");
-				GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
-				gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
-				gbc_lblIngresarApellido.insets = new Insets(0, 0, 5, 5);
-				gbc_lblIngresarApellido.gridx = 1;
-				gbc_lblIngresarApellido.gridy = 7;
-				getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
-				
-						textField_6 = new JTextField();
-						GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-						gbc_textField_6.insets = new Insets(0, 0, 5, 5);
-						gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-						gbc_textField_6.gridx = 5;
-						gbc_textField_6.gridy = 7;
-						getContentPane().add(textField_6, gbc_textField_6);
-						textField_6.setColumns(10);
+								
+								JComboBox comboBox_1 = new JComboBox();
+								GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
+								gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
+								gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
+								gbc_comboBox_1.gridx = 5;
+								gbc_comboBox_1.gridy = 3;
+								getContentPane().add(comboBox_1, gbc_comboBox_1);
+								
+								JLabel lblSeleccionarCuponera = new JLabel("Seleccionar Cuponera");
+								GridBagConstraints gbc_lblSeleccionarCuponera = new GridBagConstraints();
+								gbc_lblSeleccionarCuponera.insets = new Insets(0, 0, 5, 5);
+								gbc_lblSeleccionarCuponera.gridx = 1;
+								gbc_lblSeleccionarCuponera.gridy = 5;
+								getContentPane().add(lblSeleccionarCuponera, gbc_lblSeleccionarCuponera);
+								
+								JComboBox comboBox_2 = new JComboBox();
+								GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+								gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+								gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+								gbc_comboBox_2.gridx = 5;
+								gbc_comboBox_2.gridy = 5;
+								getContentPane().add(comboBox_2, gbc_comboBox_2);
+						
+								JLabel lblIngresarApellido = new JLabel("Ingresar fecha");
+								GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
+								gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
+								gbc_lblIngresarApellido.insets = new Insets(0, 0, 5, 5);
+								gbc_lblIngresarApellido.gridx = 1;
+								gbc_lblIngresarApellido.gridy = 7;
+								getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
 						
 						JButton btnNewButton = new JButton("Aceptar");
 						GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-						gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
+						gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 						gbc_btnNewButton.gridx = 1;
-						gbc_btnNewButton.gridy = 10;
+						gbc_btnNewButton.gridy = 9;
 						getContentPane().add(btnNewButton, gbc_btnNewButton);
 						
 						JButton btnNewButton_1 = new JButton("Cancelar");
@@ -125,9 +126,9 @@ public class AltaInstitucion extends JInternalFrame {
 							}
 						});
 						GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-						gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
+						gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
 						gbc_btnNewButton_1.gridx = 5;
-						gbc_btnNewButton_1.gridy = 10;
+						gbc_btnNewButton_1.gridy = 9;
 						getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
 		setBounds(100, 100, 555, 360);
 	}

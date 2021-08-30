@@ -19,8 +19,11 @@ import javax.swing.SwingConstants;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.logic.ControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.Manejador;
+import com.entrenamosuy.tarea1.logic.Institucion;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -33,6 +36,7 @@ import java.util.Map;
 import java.util.Set;
 import java.awt.event.ActionEvent;
 import javax.swing.ListSelectionModel;
+import javax.swing.JComboBox;
 
 
 public class crearClase extends JInternalFrame {
@@ -105,7 +109,14 @@ public class crearClase extends JInternalFrame {
 			e1.printStackTrace();
 		}
 
-		String[] insts = man.getInstituciones().keySet().toArray(new String[0]);
+        Map<String, Institucion> in = man.getInstituciones();
+		String[] insts = new String[in.size()];
+		int i = 0;
+		for (Map.Entry<String, Institucion> entry : in.entrySet()) {
+		    insts [i] = entry.getValue().getNombre().toString();
+		    i++;
+		}
+		System.out.println(insts.length);
 		setTitle("Alta de dictado de clase");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -123,15 +134,13 @@ public class crearClase extends JInternalFrame {
 				gbc_lblNewLabel.gridy = 1;
 				getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 				
-				JList list = new JList(insts);
-				list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				JScrollPane listScroller = new JScrollPane(list);
-				GridBagConstraints gbc_list = new GridBagConstraints();
-				gbc_list.insets = new Insets(0, 0, 5, 5);
-				gbc_list.fill = GridBagConstraints.BOTH;
-				gbc_list.gridx = 5;
-				gbc_list.gridy = 1;
-				getContentPane().add(listScroller, gbc_list);
+				JComboBox comboBox = new JComboBox(insts);
+				GridBagConstraints gbc_comboBox = new GridBagConstraints();
+				gbc_comboBox.insets = new Insets(0, 0, 5, 5);
+				gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
+				gbc_comboBox.gridx = 5;
+				gbc_comboBox.gridy = 1;
+				getContentPane().add(comboBox, gbc_comboBox);
 		
 				JLabel lblIngresarNombre = new JLabel("Ingresar Nombre");
 				GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();

@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 public class CargarDatostest {
 
     @Test
-    void CargarDatos() throws UsuarioRepetidoException, MalformedURLException, InstitucionRepetidaException, InstitucionNoEncontradaException, ActividadRepetidaException, ProfesorNoEncontradoException, ActividadNoEncontradaException, ClaseRepetidaException, SocioNoEncontradoException, ClaseNoEncontradaException, CuponeraRepetidaException, CuponeraNoEncontradaException {
+    public static void CargarDatos() throws UsuarioRepetidoException, MalformedURLException, InstitucionRepetidaException, InstitucionNoEncontradaException, ActividadRepetidaException, ProfesorNoEncontradoException, ActividadNoEncontradaException, ClaseRepetidaException, SocioNoEncontradoException, ClaseNoEncontradaException, CuponeraRepetidaException, CuponeraNoEncontradaException {
         //Manejador man = Manejador.getInstance();
         ControladorActividadClase CAC = new ControladorActividadClase();
         ControladorUsuario CU = new ControladorUsuario();
