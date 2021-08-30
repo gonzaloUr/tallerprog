@@ -101,11 +101,11 @@ public class Institucion {
         return true;
     }
 
-    public Set<Pair<String, String>> actividadesAgregables(Cuponera cup) {
-        Set<Pair<String, String>> ret = new HashSet<>();
+    public Set<String> actividadesAgregables(Cuponera cup) {
+        Set<String> ret = new HashSet<>();
         for (Actividad act : actividadesOfrecidas) {
             if (!cup.tieneActividad(act)) {
-                ret.add(new Pair<>(act.getNombre(), act.getDescripcion()));
+                ret.add(act.getNombre());
             }
         }
         return ret;

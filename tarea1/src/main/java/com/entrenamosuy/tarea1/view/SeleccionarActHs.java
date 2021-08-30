@@ -7,12 +7,18 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.DropMode;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+
 import javax.swing.BoxLayout;
 import java.awt.Component;
 import java.awt.GridBagLayout;
@@ -20,8 +26,10 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Set;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 
 public class SeleccionarActHs extends JInternalFrame {
     private JTextField textField;
@@ -29,26 +37,12 @@ public class SeleccionarActHs extends JInternalFrame {
     private JTextField textField_2;
     private JTextField textField_3;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    SeleccionarActHs frame = new SeleccionarActHs();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    /**
-     * Create the frame.
-     */
-    public SeleccionarActHs() {
+
+    public SeleccionarActHs(Set<String> acts, IControladorCuponera CC, App app, String cuponera) {
+    	setResizable(true);
+    	setMaximizable(true);
+    	setClosable(true);
         setTitle("Agregar actividad a cuponera.");
         getContentPane().setForeground(Color.RED);
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -66,47 +60,50 @@ public class SeleccionarActHs extends JInternalFrame {
         gbc_lblNewLabel.gridy = 2;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
-        JComboBox comboBox = new JComboBox();
+        JComboBox comboBox = new JComboBox(acts.toArray(new String[0]));
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
+        gbc_comboBox.gridwidth = 2;
         gbc_comboBox.insets = new Insets(0, 0, 5, 5);
         gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 5;
+        gbc_comboBox.gridx = 4;
         gbc_comboBox.gridy = 2;
         getContentPane().add(comboBox, gbc_comboBox);
 
-        JLabel lblIngresarNombre = new JLabel("Seleccionar Horas");
+        JLabel lblIngresarNombre = new JLabel("Seleccionar Cantidad Clases");
         GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
         gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
         gbc_lblIngresarNombre.gridx = 1;
         gbc_lblIngresarNombre.gridy = 5;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-
-        JComboBox comboBox_1 = new JComboBox();
-        GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
-        gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
-        gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox_1.gridx = 5;
-        gbc_comboBox_1.gridy = 5;
-        getContentPane().add(comboBox_1, gbc_comboBox_1);
+        
+        SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 100, 1);
+        JSpinner spinner = new JSpinner(model);
+        GridBagConstraints gbc_spinner = new GridBagConstraints();
+        gbc_spinner.insets = new Insets(0, 0, 5, 5);
+        gbc_spinner.gridx = 5;
+        gbc_spinner.gridy = 5;
+        getContentPane().add(spinner, gbc_spinner);
 
         JButton btnNewButton = new JButton("Aceptar");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		String act = (String) comboBox.getSelectedItem();
+        		int clas = (int) spinner.getValue();
+        		try {
+        		CC.agregarACuponera(cuponera, act, clas);
+        		}catch(Exception ep) {};
+        		JOptionPane.showMessageDialog(app,"Actividad agregada.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+        		spinner.setValue(1);
+        		setVisible(false);
+        	}
+        });
         GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
         gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
         gbc_btnNewButton.gridx = 1;
         gbc_btnNewButton.gridy = 9;
         getContentPane().add(btnNewButton, gbc_btnNewButton);
-
-        JButton btnNewButton_1 = new JButton("Cancelar");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-        gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
-        gbc_btnNewButton_1.gridx = 5;
-        gbc_btnNewButton_1.gridy = 9;
-        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
         setBounds(100, 100, 555, 360);
     }
 }

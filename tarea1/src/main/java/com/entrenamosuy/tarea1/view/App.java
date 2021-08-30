@@ -549,7 +549,7 @@ public class App extends JFrame {
                 }
                 
                 SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                    Set<Pair<String, String>> actividades = null;
+                    Set<String> actividades = null;
 
                     try {
                 	actividades = controladorCuponera.actividadesAgregables(cuponera, inst);
@@ -557,11 +557,14 @@ public class App extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
                     }
+                    if(actividades.size()==0) {
+                    	JOptionPane.showMessageDialog(that,"No hay actividades agregables.","error", JOptionPane.ERROR_MESSAGE);
+                    	return;
+                    }
+                    SeleccionarActHs selecActH = new SeleccionarActHs(actividades, controladorCuponera, that, cuponera);
+                    selecActH.setVisible(true);
+                    getContentPane().add(selecActH);
                     
-                   
-                    AgregarActividadACuponera agregarACuponera = new AgregarActividadACuponera();
-                    agregarACuponera.setVisible(true);
-                    getContentPane().add(agregarACuponera);
                 });
                 
                 selecionarInstitucion.setVisible(true);
@@ -570,6 +573,7 @@ public class App extends JFrame {
             
             selecionarCuponera.setVisible(true);
             getContentPane().add(selecionarCuponera);
+
         });
     }
 

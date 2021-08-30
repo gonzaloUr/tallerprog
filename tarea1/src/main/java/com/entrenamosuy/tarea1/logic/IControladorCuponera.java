@@ -50,7 +50,7 @@ public interface IControladorCuponera {
      * @throws InstitucionNoEncontradaException     Cuando institucion no existe en el sistema.
      * @throws ActividadesAgregablesVaciasException Cuando no hay actividades a agregar.
      */
-    Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion)
+    Set<String> actividadesAgregables(String cuponera, String institucion)
             throws CuponeraNoEncontradaException, InstitucionNoEncontradaException;
 
     /**

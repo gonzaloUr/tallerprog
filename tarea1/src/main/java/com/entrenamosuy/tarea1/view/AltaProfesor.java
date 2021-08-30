@@ -261,7 +261,7 @@ public class AltaProfesor extends JInternalFrame {
                 Date fechaf = (Date) chooser.getDate();
                 FuncionFecha f = new FuncionFecha();
                 LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
-                String institucion = textField_8.getText();
+                String institucion = (String) comboBox.getSelectedItem();
                 String descripcion = textField_9.getText();
                 String biografia = textField_10.getText();
                 URL link = null;
@@ -273,7 +273,6 @@ public class AltaProfesor extends JInternalFrame {
                     textField_6.setText("");
                     textField_7.setText("");
                     chooser.setDate(null);
-                    textField_8.setText("");
                     textField_9.setText("");
                     textField_10.setText("");
                     textField_11.setText("");
@@ -289,7 +288,6 @@ public class AltaProfesor extends JInternalFrame {
                     textField_6.setText("");
                     textField_7.setText("");
                     chooser.setDate(null);
-                    textField_8.setText("");
                     textField_9.setText("");
                     textField_10.setText("");
                     textField_11.setText("");
@@ -302,7 +300,6 @@ public class AltaProfesor extends JInternalFrame {
                     textField_6.setText("");
                     textField_7.setText("");
                     chooser.setDate(null);
-                    textField_8.setText("");
                     textField_9.setText("");
                     textField_10.setText("");
                     textField_11.setText("");
@@ -315,7 +312,6 @@ public class AltaProfesor extends JInternalFrame {
                 textField_6.setText("");
                 textField_7.setText("");
                 chooser.setDate(null);
-                textField_8.setText("");
                 textField_9.setText("");
                 textField_10.setText("");
                 textField_11.setText("");

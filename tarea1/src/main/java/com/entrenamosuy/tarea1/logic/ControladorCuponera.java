@@ -49,7 +49,7 @@ public class ControladorCuponera implements IControladorCuponera {
     }
 
     @Override
-    public Set<Pair<String, String>> actividadesAgregables(String cuponera, String institucion) throws CuponeraNoEncontradaException, InstitucionNoEncontradaException {
+    public Set<String> actividadesAgregables(String cuponera, String institucion) throws CuponeraNoEncontradaException, InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = maneja.getCuponeras();
         Map<String, Institucion> instituciones = maneja.getInstituciones();
@@ -59,7 +59,7 @@ public class ControladorCuponera implements IControladorCuponera {
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre: " + cuponera);
         if (ins == null)
             throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
-        Set<Pair<String, String>> res = ins.actividadesAgregables(cup);
+        Set<String> res = ins.actividadesAgregables(cup);
         return res;
     }
 
