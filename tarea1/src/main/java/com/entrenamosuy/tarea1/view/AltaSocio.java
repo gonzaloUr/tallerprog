@@ -28,7 +28,7 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -162,7 +162,7 @@ public class AltaSocio extends JInternalFrame {
 				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 				gbc_lblNewLabel_1.gridx = 5;
 				gbc_lblNewLabel_1.gridy = 9;
-				getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
+				getContentPane().add(chooser, gbc_lblNewLabel_1);
 				
 				btnNewButton = new JButton("Aceptar");
 				btnNewButton.addActionListener(new ActionListener() {

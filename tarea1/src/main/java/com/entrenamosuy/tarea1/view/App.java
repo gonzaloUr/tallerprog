@@ -243,6 +243,7 @@ public class App extends JFrame {
         altaDeSocio.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		AltaSocio altasocio = new AltaSocio(that, controladorUsuario);
+        		that.getContentPane().add(altasocio);
         		altasocio.setVisible(true);
         	}
         });
