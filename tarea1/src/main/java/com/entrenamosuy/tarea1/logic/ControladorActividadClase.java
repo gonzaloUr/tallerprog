@@ -123,7 +123,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         Map<String,Institucion> inst = maneja.getInstituciones();
 
         for(Institucion i : inst.values()) {
-            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getDescripcion(), i.getDescripcion(), i.getUrl());
+            Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getNombre(), i.getDescripcion(), i.getUrl());
             res.add(trip);
         }
         return res;

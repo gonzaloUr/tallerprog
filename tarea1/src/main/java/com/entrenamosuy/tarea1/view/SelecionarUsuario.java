@@ -4,11 +4,13 @@ import com.entrenamosuy.tarea1.util.Triple;
 
 import javax.swing.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 public class SelecionarUsuario extends JInternalFrame {
 
@@ -17,12 +19,15 @@ public class SelecionarUsuario extends JInternalFrame {
         void run(String nombre);
     }
 
-    public SelecionarUsuario(List<Triple<String, String, String>> usuarios, Callback callback) {
+    public SelecionarUsuario(Set<Triple<String, String, String>> usuarios, Callback callback) {
     	setMaximizable(true);
     	setResizable(true);
     	setClosable(true);
     	setTitle("Selecionar usuario");
     	setSize(398, 273);
+    	
+    	List<Triple<String, String, String>> usuariosLista = new ArrayList<>(usuarios.size());
+    	usuariosLista.addAll(usuarios);
     	
     	GridBagLayout gridBagLayout = new GridBagLayout();
     	gridBagLayout.columnWidths = new int[]{0, 350, 0, 0};
@@ -31,10 +36,10 @@ public class SelecionarUsuario extends JInternalFrame {
     	gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
     	getContentPane().setLayout(gridBagLayout);
     	
-    	String[] datos = new String[usuarios.size()];
+    	String[] datos = new String[usuariosLista.size()];
     	
-    	for (int i = 0; i < usuarios.size(); i++)
-    	    datos[i] = usuarios.get(i).getFirst();
+    	for (int i = 0; i < usuariosLista.size(); i++)
+    	    datos[i] = usuariosLista.get(i).getFirst();
     	
     	JComboBox<String> comboBox = new JComboBox<String>(datos);
     	GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -50,5 +55,9 @@ public class SelecionarUsuario extends JInternalFrame {
     	gbc_btnNewButton.gridx = 1;
     	gbc_btnNewButton.gridy = 1;
     	getContentPane().add(btnNewButton, gbc_btnNewButton);
+    	
+    	btnNewButton.addActionListener((ActionEvent a) -> {
+    	    callback.run((String) comboBox.getSelectedItem());
+    	});
     }
 }
