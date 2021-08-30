@@ -403,7 +403,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-        	ConsultaSocio consulta = new ConsultaSocio();
+        	ConsultaSocio consulta = new ConsultaSocio(controladorUsuario, nickname);
         	getContentPane().add(consulta);
         	consultaSocio.setVisible(true);
             });
