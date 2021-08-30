@@ -2,6 +2,11 @@ package com.entrenamosuy.tarea1.view;
 
 import java.awt.EventQueue;
 
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
+
 
 import com.toedter.calendar.JDateChooser;
 
@@ -23,6 +28,9 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import java.time.Duration;
+import java.time.LocalDate;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -46,7 +54,9 @@ public class AltaActividad extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AltaActividad frame = new AltaActividad();
+					App aper;
+					IControladorActividadClase cont;
+					AltaActividad frame = new AltaActividad(cont,aper);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,8 +65,8 @@ public class AltaActividad extends JInternalFrame {
 		});
 	}
 
-	public static void clearAltaAct(JTextField a, JTextField b, JTextField c, JTextField d, JTextField e){
-		a.setText("");
+	public static void clearAltaAct(JComboBox a, JTextField b, JTextField c, JTextField d, JTextField e){
+		
 		b.setText("");
 		c.setText("");
 		d.setText("");
@@ -180,16 +190,20 @@ public class AltaActividad extends JInternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					controladorActividadClase.crearActividad(textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(),textField_8.getText());
+					int duration = Integer.parseInt(textField_7.getText());
+					Duration dura = Duration.ofMinutes(duration);
+					float precio = Float.parseFloat(textField_8.getText());
+					LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(lblNewLabel_2.getDate());
+					controladorActividadClase.crearActividad((String)comboBox.getSelectedItem(), textField_5.getText(), textField_6.getText(), dura ,precio, fecha);
 					setVisible(false);
 					JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");
-					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+					clearAltaAct(comboBox,textField_5,textField_6,textField_7,textField_8);					
 				} catch (ActividadRepetidaException are) {
 					JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.","Error", JOptionPane.ERROR_MESSAGE);
-					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+					clearAltaAct(comboBox,textField_5,textField_6,textField_7,textField_8);					
 				} catch (InstitucionNoEncontradaException inee){
 					JOptionPane.showMessageDialog(apli, "No existe una institucion con ese nombre.","Error", JOptionPane.ERROR_MESSAGE);
-					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+					clearAltaAct(comboBox,textField_5,textField_6,textField_7,textField_8);					
 				}
 			}
 		});
@@ -203,7 +217,7 @@ public class AltaActividad extends JInternalFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
-				clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+				clearAltaAct(comboBox, textField_5,textField_6,textField_7,textField_8);					
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
