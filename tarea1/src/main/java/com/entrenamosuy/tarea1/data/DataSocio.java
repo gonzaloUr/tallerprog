@@ -6,11 +6,11 @@ import java.util.Set;
 //import com.entrenamosuy.tarea1.logic.Clase;
 
 public class DataSocio extends DataUsuario {
- 
+
     private final Set<DataClase> clases;
 
     public DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate LocalDate,
-            Set<DataClase> claseReg) {
+                     Set<DataClase> claseReg) {
         super(nickname, nombre, apellido, correo, LocalDate);
         this.clases = claseReg;
     }
@@ -19,7 +19,7 @@ public class DataSocio extends DataUsuario {
 			Set<Clase> claseReg) {
 	}*/
 
-	public Set<DataClase> getClases() {
+    public Set<DataClase> getClases() {
         return clases;
     }
 

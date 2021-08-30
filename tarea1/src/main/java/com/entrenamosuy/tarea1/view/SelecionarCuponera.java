@@ -1,33 +1,38 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.util.Triple;
-
-import javax.swing.*;
-
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
 
-public class SelecionarUsuario extends JInternalFrame {
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+
+import com.entrenamosuy.tarea1.util.Pair;
+import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.tarea1.view.SelecionarInstitucion.Callback;
+
+public class SelecionarCuponera extends JInternalFrame {
 
     public interface Callback {
 
-        void run(String nombre);
+        void run(String institucion);
     }
 
-    public SelecionarUsuario(Set<Triple<String, String, String>> usuarios, Callback callback) {
+    public SelecionarCuponera(Set<Pair<String, String>> cuponeras, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
-        setTitle("Selecionar usuario");
+        setTitle("Selecionar cuponera");
         setSize(398, 273);
 
-        List<Triple<String, String, String>> usuariosLista = new ArrayList<>(usuarios.size());
-        usuariosLista.addAll(usuarios);
+        List<Pair<String, String>> cuponerasLista = new ArrayList<>(cuponeras.size());
+        cuponerasLista.addAll(cuponeras);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 350, 0, 0};
@@ -36,10 +41,10 @@ public class SelecionarUsuario extends JInternalFrame {
         gridBagLayout.rowWeights = new double[]{1.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
 
-        String[] datos = new String[usuariosLista.size()];
+        String[] datos = new String[cuponerasLista.size()];
 
-        for (int i = 0; i < usuariosLista.size(); i++)
-            datos[i] = usuariosLista.get(i).getSecond();
+        for (int i = 0; i < cuponerasLista.size(); i++)
+            datos[i] = cuponerasLista.get(i).getFirst();
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();

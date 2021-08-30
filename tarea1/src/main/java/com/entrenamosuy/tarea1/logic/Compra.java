@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Compra {
-    
+
     private LocalDate fecha;
 
     private Socio socio;

@@ -40,7 +40,7 @@ public class ControladorUsuarioTest {
         manejador.getSocios().clear();
         manejador.getSociosMail().clear();
     }
-    
+
     @Test
     void crearSocioBien() {
         Fabrica F = new Fabrica();
@@ -76,7 +76,7 @@ public class ControladorUsuarioTest {
             ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
             Set<String> profesores = new HashSet<>();
             profesores.add("profe1");
-            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12,12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12, 12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
             ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(1995, 10, 10));
 
         });
@@ -108,7 +108,7 @@ public class ControladorUsuarioTest {
     }
 
     @Test
-    void crearProfesor() throws MalformedURLException {  
+    void crearProfesor() throws MalformedURLException {
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         IControladorActividadClase ctrlA = F.crearControladorActividadClase();
@@ -119,7 +119,7 @@ public class ControladorUsuarioTest {
             ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
         });
 
-        assertDoesNotThrow(() -> {  
+        assertDoesNotThrow(() -> {
             ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), "test", "descripcion", "ola", u);
         });
 
@@ -232,7 +232,7 @@ public class ControladorUsuarioTest {
     }
 
     @Test
-    void obtenerDescProfesores() throws MalformedURLException{
+    void obtenerDescProfesores() throws MalformedURLException {
         Fabrica F = new Fabrica();
         IControladorUsuario ctrlU = F.creaControladorUsuario();
         IControladorActividadClase ctrlA = F.crearControladorActividadClase();

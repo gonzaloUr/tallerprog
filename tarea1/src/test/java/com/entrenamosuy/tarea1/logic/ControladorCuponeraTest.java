@@ -39,7 +39,7 @@ public class ControladorCuponeraTest {
         manejador.getSocios().clear();
         manejador.getSociosMail().clear();
     }
-    
+
     @Test
     void crearCuponera() throws CuponeraRepetidaException {
         Fabrica F = new Fabrica();
@@ -53,7 +53,7 @@ public class ControladorCuponeraTest {
     }
 
     @Test
-    void cuponerasUsables() throws ActividadNoEncontradaException, SocioNoEncontradoException { 
+    void cuponerasUsables() throws ActividadNoEncontradaException, SocioNoEncontradoException {
         ControladorCuponera ctrlC = new ControladorCuponera();
         ControladorActividadClase ctrlA = new ControladorActividadClase();
         ControladorUsuario ctrlU = new ControladorUsuario();
@@ -138,12 +138,12 @@ public class ControladorCuponeraTest {
             c2.equals(null);
 
             assertEquals(reg1.equals(reg1), true);
-            assertEquals(reg1.equals(null),false);
+            assertEquals(reg1.equals(null), false);
 
             assertNotEquals(reg1.getCuponera(), cup2);
             reg1.setCuponera(cup2);
             assertEquals(reg1.getCuponera(), cup2);
-            
+
             assertNotEquals(reg1.getSocio(), s2);
             reg1.setSocio(s2);
             assertEquals(reg1.getSocio(), s2);
@@ -151,14 +151,14 @@ public class ControladorCuponeraTest {
             assertNotEquals(reg1.getFecha(), LocalDate.of(2005, 03, 28));
             reg1.setFecha(LocalDate.of(2007, 03, 28));
             assertEquals(reg1.getFecha(), LocalDate.of(2007, 03, 28));
-            
+
             assertNotEquals(reg1.getCosto(), 234);
             reg1.setCosto(234);
             assertEquals(reg1.getCosto(), 234);
-            
-            
+
+
         });
-        
+
         assertThrows(CuponeraNoEncontradaException.class, () -> {
             ctrlC.agregarACuponera("cupo", "test", 5);
         });
@@ -167,7 +167,7 @@ public class ControladorCuponeraTest {
         });
     }
 
-    @Test 
+    @Test
     void varios() {
         Manejador m = Manejador.getInstance();
         ControladorCuponera ctrlC = new ControladorCuponera();
@@ -196,7 +196,7 @@ public class ControladorCuponeraTest {
             assertNotEquals(cup.getDescripcion(), "i");
             cup.setDescripcion("i");
             assertEquals(cup.getDescripcion(), "i");
-            
+
             assertNotEquals(cup.getInicio(), LocalDate.of(2007, 03, 28));
             cup.setInicio(LocalDate.of(2007, 03, 28));
             assertEquals(cup.getInicio(), LocalDate.of(2007, 03, 28));
@@ -204,11 +204,11 @@ public class ControladorCuponeraTest {
             assertNotEquals(cup.getFin(), LocalDate.of(2007, 03, 28));
             cup.setFin(LocalDate.of(2007, 03, 28));
             assertEquals(cup.getFin(), LocalDate.of(2007, 03, 28));
-            
+
             assertNotEquals(cup.getDescuento(), 23);
             cup.setDescuento(23);
             assertEquals(cup.getDescuento(), 23);
-            
+
             Set<Registro> a7 = null;
             assertEquals(cup.getRegistros().isEmpty(), true);
             cup.setRegistros(a7);
@@ -221,11 +221,10 @@ public class ControladorCuponeraTest {
             cup.equals(null);
 
 
-
             assertNotEquals(a.getNombre(), "nombre");
             a.setNombre("nombre");
             assertEquals(a.getNombre(), "nombre");
-            
+
             assertNotEquals(a.getDuracion(), Duration.ofHours(54));
             a.setDuracion(Duration.ofHours(1));
             assertEquals(a.getDuracion(), Duration.ofHours(1));
@@ -242,7 +241,7 @@ public class ControladorCuponeraTest {
         });
 
 
-    } 
+    }
 
     @Test
     void obtenerDescCuponeras() {

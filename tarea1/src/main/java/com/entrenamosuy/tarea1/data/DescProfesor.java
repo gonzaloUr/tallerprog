@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.Objects;
 
 public class DescProfesor {
-    
+
     private final String nickname;
 
     private final String nombre;

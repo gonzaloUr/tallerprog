@@ -22,7 +22,7 @@ public class DataActividad {
     private final Set<DataCuponera> cuponeras;
 
     public DataActividad(String nombre, String descripcion, Duration duracion, LocalDate registro, float costo,
-            Set<DataClase> clases, Set<DataCuponera> cuponeras) {
+                         Set<DataClase> clases, Set<DataCuponera> cuponeras) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.duracion = duracion;

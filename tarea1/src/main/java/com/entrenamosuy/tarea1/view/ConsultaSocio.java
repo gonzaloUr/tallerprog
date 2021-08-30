@@ -21,9 +21,10 @@ public class ConsultaSocio extends JInternalFrame {
 
     public ConsultaSocio(IControladorUsuario CU, String nickname) {
 
-        DataSocio data = null; 
-        try { data = CU.consultarSocio(nickname);}
-        catch(Exception e){
+        DataSocio data = null;
+        try {
+            data = CU.consultarSocio(nickname);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         String nome = data.getNombre();
@@ -32,7 +33,7 @@ public class ConsultaSocio extends JInternalFrame {
         String nacimiento = data.getNacimiento().toString();
 
 
-		setResizable(true);
+        setResizable(true);
         setClosable(true);
         setTitle("Consulta socio");
         setSize(460, 412);
@@ -143,5 +144,5 @@ public class ConsultaSocio extends JInternalFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-}
+    }
 }

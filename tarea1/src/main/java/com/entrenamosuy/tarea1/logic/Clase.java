@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
+
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.data.DescActividad;
@@ -139,26 +140,25 @@ public class Clase {
         Set<DescProfesor> descProfes = new HashSet<>();
         Set<Profesor> profes = this.getProfesores();
         Iterator<Profesor> it = profes.iterator();
-            while(it.hasNext()) {
-                Profesor p = it.next();
-                DescProfesor dp = p.getDescProfesor();
-                descProfes.add(dp);
-            }
+        while (it.hasNext()) {
+            Profesor p = it.next();
+            DescProfesor dp = p.getDescProfesor();
+            descProfes.add(dp);
+        }
         Actividad acti = this.getActividad();
         DescActividad act = acti.getDescActividad();
-        DataClase res = new DataClase(this.getNombre(), this.getInicio(), this.getCantMin(), this.getCantMax(), this.getAcceso(),
-            this.getRegistros(), act, descProfes);
+        DataClase res = new DataClase(this.getNombre(), this.getInicio(), this.getCantMin(), this.getCantMax(), this.getAcceso(), act, descProfes);
         return res;
     }
 
-    public void registrarseSinCuponera(Socio socio, LocalDate fecha){
+    public void registrarseSinCuponera(Socio socio, LocalDate fecha) {
         float costo = actividad.getCosto();
         Registro reg = new Registro(fecha, costo, this, socio);
         registros.add(reg);
         socio.asociarSocioRegistro(reg);
     }
 
-    public void registrarseConCuponera(Socio socio, LocalDate fecha, Cuponera cup){
+    public void registrarseConCuponera(Socio socio, LocalDate fecha, Cuponera cup) {
         float costo = actividad.calcularPrecioConDescuento(cup);
         Registro nuevoReg = new Registro(fecha, costo, this, socio, cup);
         registros.add(nuevoReg);

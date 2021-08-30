@@ -20,7 +20,7 @@ public class Socio extends Usuario {
     private Set<Compra> compras;
 
     public Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            Set<Registro> registros, Set<Compra> compras) {
+                 Set<Registro> registros, Set<Compra> compras) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.registros = registros;
         this.compras = compras;
@@ -97,18 +97,18 @@ public class Socio extends Usuario {
     public DataSocio getDataSocio() {
         Set<Registro> reg = this.getRegistros();
         Iterator<Registro> it = reg.iterator();
-            Set<DataClase> claseReg = new HashSet<>();
-            while(it.hasNext()) {
-                Registro r = it.next();
-                Clase c = r.getClaseAsociada();
-                DataClase dataClase = c.getDataClase(); 
-                claseReg.add(dataClase);  
-            }
+        Set<DataClase> claseReg = new HashSet<>();
+        while (it.hasNext()) {
+            Registro r = it.next();
+            Clase c = r.getClaseAsociada();
+            DataClase dataClase = c.getDataClase();
+            claseReg.add(dataClase);
+        }
         DataSocio res = new DataSocio(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), claseReg);
         return res;
     }
 
-    public void asociarSocioRegistro(Registro reg){
+    public void asociarSocioRegistro(Registro reg) {
         registros.add(reg);
     }
 }

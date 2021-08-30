@@ -3,7 +3,7 @@ package com.entrenamosuy.tarea1.util;
 import java.util.Objects;
 
 public class Triple<T, U, S> {
-    
+
     private final T first;
 
     private final U second;
@@ -40,7 +40,7 @@ public class Triple<T, U, S> {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Triple<?, ?, ?> other = (Triple<?, ?, ?>) obj;
-        return first.equals(other.first) && second.equals(other.second) 
+        return first.equals(other.first) && second.equals(other.second)
                 && third.equals(other.third);
     }
 }

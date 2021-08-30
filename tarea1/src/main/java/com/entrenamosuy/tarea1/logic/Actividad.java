@@ -107,29 +107,29 @@ public class Actividad {
                 && Objects.equals(nombre, other.nombre);
     }
 
-    public DataActividad getDataActividad() { 
+    public DataActividad getDataActividad() {
         Set<DataCuponera> cuponeras = new HashSet<>();
         Manejador man = Manejador.getInstance();
-        Map<String,Cuponera> cupos = man.getCuponeras();
-        for(Cuponera cupo : cupos.values()) {
+        Map<String, Cuponera> cupos = man.getCuponeras();
+        for (Cuponera cupo : cupos.values()) {
             Set<Integra> integs = cupo.getIntegras();
-            for(Integra integ : integs) {
+            for (Integra integ : integs) {
                 Actividad act = integ.getActividad();
                 if (act.getNombre() == this.nombre) {
                     DataCuponera cupoAagregar = cupo.getDataCuponera();
                     cuponeras.add(cupoAagregar);
                 }
-            }    
-        }   
+            }
+        }
         Set<DataClase> clases = new HashSet<>();
         Set<Clase> cs = this.clases;
         Iterator<Clase> it = cs.iterator();
-        while(it.hasNext()) {
+        while (it.hasNext()) {
             Clase c = it.next();
             DataClase dc = c.getDataClase();
-            clases.add(dc);              
+            clases.add(dc);
         }
-        DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion,this.fechaRegistro, this.costo, clases, cuponeras);
+        DataActividad res = new DataActividad(this.nombre, this.descripcion, this.duracion, this.fechaRegistro, this.costo, clases, cuponeras);
         return res;
     }
 
@@ -138,9 +138,9 @@ public class Actividad {
         return res;
     }
 
-    public float calcularPrecioConDescuento(Cuponera cup){
+    public float calcularPrecioConDescuento(Cuponera cup) {
         int desc = cup.getDescuento();
-        float res = costo - (costo*desc);
+        float res = costo - (costo * desc);
         return res;
     }
 }

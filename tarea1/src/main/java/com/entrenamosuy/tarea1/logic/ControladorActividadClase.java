@@ -26,7 +26,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo,
-            LocalDate fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
+                               LocalDate fecha) throws ActividadRepetidaException, InstitucionNoEncontradaException {
         Manejador manejador = Manejador.getInstance();
         Map<String, Actividad> actividades = manejador.getActividades();
         Map<String, Institucion> instituciones = manejador.getInstituciones();
@@ -44,18 +44,18 @@ public class ControladorActividadClase implements IControladorActividadClase {
     @Override
     public void crearInstitucion(String nombre, String descripcion, URL url) throws InstitucionRepetidaException {
         Manejador maneja = Manejador.getInstance();
-        Map<String,Institucion> instituciones = maneja.getInstituciones();
-        if (instituciones.containsKey(nombre)){
+        Map<String, Institucion> instituciones = maneja.getInstituciones();
+        if (instituciones.containsKey(nombre)) {
             throw new InstitucionRepetidaException("La institución llamada " + nombre + " ya existe.");
         }
         Institucion res = new Institucion(nombre, descripcion, url);
-        instituciones.put(nombre,res);
+        instituciones.put(nombre, res);
 
     }
 
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nicknameProfesores,
-            int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException {
+                           int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException {
         Manejador maneja = Manejador.getInstance();
 
         Map<String, Actividad> actividades = maneja.getActividades();
@@ -94,7 +94,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (s == null)
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
-        c.registrarseSinCuponera(s,fechaRegistro);
+        c.registrarseSinCuponera(s, fechaRegistro);
     }
 
     @Override
@@ -113,16 +113,16 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (cup == null)
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre: " + cuponera);
 
-        c.registrarseConCuponera(s,fechaRegistro,cup);
+        c.registrarseConCuponera(s, fechaRegistro, cup);
     }
 
     @Override
     public Set<Triple<String, String, URL>> obtenerDescInstituciones() {
         Manejador maneja = Manejador.getInstance();
         Set<Triple<String, String, URL>> res = new HashSet<>();
-        Map<String,Institucion> inst = maneja.getInstituciones();
+        Map<String, Institucion> inst = maneja.getInstituciones();
 
-        for(Institucion i : inst.values()) {
+        for (Institucion i : inst.values()) {
             Triple<String, String, URL> trip = new Triple<String, String, URL>(i.getNombre(), i.getDescripcion(), i.getUrl());
             res.add(trip);
         }
@@ -133,13 +133,13 @@ public class ControladorActividadClase implements IControladorActividadClase {
     public Set<Pair<String, String>> obtenerDescActividades(String institucion) throws InstitucionNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
         Set<Pair<String, String>> res = new HashSet<>();
-        Map<String,Institucion> inst = maneja.getInstituciones();
+        Map<String, Institucion> inst = maneja.getInstituciones();
         Institucion i = inst.get(institucion);
         if (i == null) {
             throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         }
         Set<Actividad> acts = i.getActividadesOfrecidas();
-        for(Actividad a : acts) {
+        for (Actividad a : acts) {
             Pair<String, String> par = new Pair<String, String>(a.getNombre(), a.getDescripcion());
             res.add(par);
         }
@@ -150,7 +150,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
     @Override
     public DataActividad consultarActividad(String actividad) throws ActividadNoEncontradaException {
         Manejador maneja = Manejador.getInstance();
-        Map<String,Actividad> acts = maneja.getActividades();
+        Map<String, Actividad> acts = maneja.getActividades();
         if (acts.isEmpty())
             throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
         Actividad a = acts.get(actividad);

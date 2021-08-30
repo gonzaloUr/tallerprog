@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import com.entrenamosuy.tarea1.data.Email;
 
 public final class Manejador {
@@ -24,14 +25,15 @@ public final class Manejador {
     private Map<String, Institucion> instituciones = new HashMap<>();
 
     private Map<String, Profesor> profesores = new HashMap<>();
-    
+
     private Map<Email, Profesor> profesoresMail = new HashMap<>();
 
     private Map<String, Socio> socios = new HashMap<>();
-    
+
     private Map<Email, Socio> sociosMail = new HashMap<>();
 
-    private Manejador() {}
+    private Manejador() {
+    }
 
     public static void setInstance(Manejador instance) {
         Manejador.instance = instance;

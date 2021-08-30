@@ -4,15 +4,16 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.data.DescActividad;
 
 public class Cuponera {
-    
+
     private String nombre;
 
     private String descripcion;
-    
+
     private LocalDate inicio, fin, fRegistro;
 
     private int descuento;
@@ -23,8 +24,8 @@ public class Cuponera {
 
     private Set<Registro> registros;
 
-    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, 
-        LocalDate fRegistro, Set<Integra> integras, Set<Registro> registros) {
+    public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
+                    LocalDate fRegistro, Set<Integra> integras, Set<Registro> registros) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.inicio = inicio;
@@ -37,7 +38,7 @@ public class Cuponera {
     }
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-            LocalDate fRegistro) {
+                    LocalDate fRegistro) {
         this(nombre, descripcion, inicio, fin, descuento, fRegistro, new HashSet<>(), new HashSet<>());
     }
 
@@ -106,9 +107,9 @@ public class Cuponera {
     }
 
     public DataCuponera getDataCuponera() {
-        Set<Integra> intes = this.integras; 
+        Set<Integra> intes = this.integras;
         Set<DescActividad> acts = new HashSet<>();
-        for(Integra inte : intes) {
+        for (Integra inte : intes) {
             Actividad act = inte.getActividad();
             DescActividad DA = act.getDescActividad();
             acts.add(DA);
@@ -146,10 +147,10 @@ public class Cuponera {
         return null;
     }
 
-    public boolean tieneActividad(Actividad act){ //Null pointer si le pasa una actividad que no tiene
+    public boolean tieneActividad(Actividad act) { //Null pointer si le pasa una actividad que no tiene
         boolean ret = false;
         for (Integra integ : integras) {
-            if (act.equals(integ.getActividad())){
+            if (act.equals(integ.getActividad())) {
                 ret = true;
                 break;
             }
