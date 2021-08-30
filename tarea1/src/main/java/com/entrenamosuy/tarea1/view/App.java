@@ -191,7 +191,7 @@ public class App extends JFrame {
                    }
     
                    SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                       ConsultaActividad consulta = new ConsultaActividad(actividad, controladorActividadClase);
+                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorActividadClase);
                        consulta.setVisible(true);
                        getContentPane().add(consulta);
                    });
@@ -217,7 +217,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-                ConsultaSocio consulta = new ConsultaSocio(controladorActividadClase, controladorUsuario, nickname);
+                ConsultaSocio consulta = new ConsultaSocio(this, controladorActividadClase, controladorUsuario, nickname);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -480,7 +480,7 @@ public class App extends JFrame {
             
             
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-        	ConsultarCuponera consulta = new ConsultarCuponera(cuponera, controladorCuponera);
+        	ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorCuponera, controladorActividadClase);
         	consulta.setVisible(true);
         	getContentPane().add(consulta);
             });

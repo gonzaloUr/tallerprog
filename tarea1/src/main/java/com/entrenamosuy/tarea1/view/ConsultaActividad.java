@@ -7,12 +7,16 @@ import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JTextField;
 import javax.swing.JList;
@@ -24,7 +28,7 @@ public class ConsultaActividad extends JInternalFrame {
 	private JTextField registroField;
 	private JTextField costoField;
 
-    public ConsultaActividad(String actividad, IControladorActividadClase controladorActividadClase) {
+    public ConsultaActividad(App app, String actividad, IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
     	setTitle("Consulta actividad");
     	setClosable(true);
     	setResizable(true);
@@ -178,6 +182,24 @@ public class ConsultaActividad extends JInternalFrame {
 	gbc_cuponerasLista.gridy = 13;
 	getContentPane().add(cuponerasLista, gbc_cuponerasLista);	
 	
+
+	MouseListener mouseListener = new MouseAdapter() {
+            
+        public void mouseClicked(MouseEvent mouseEvent) {
+            JList theList = (JList) mouseEvent.getSource();
+            if (mouseEvent.getClickCount() == 2) {
+                int index = theList.locationToIndex(mouseEvent.getPoint());
+                if (index >= 0) {
+                String cuponera = theList.getModel().getElementAt(index).toString();
+                ConsultaCuponera consultaCuponera = new ConsultaCuponera(cuponera, controladorCuponera, controladorActividadClase);
+                consultaCuponera.setVisible(true);
+                app.getContentPane().add(consultaCuponera);
+                }
+            }
+        }
+    };
+	cuponerasLista.addMouseListener(mouseListener);
+
 	JList<String> clasesLista = new JList<>(clases.toArray(new String[] {}));
 	GridBagConstraints gbc_clasesLista = new GridBagConstraints();
 	gbc_clasesLista.insets = new Insets(0, 0, 5, 5);
