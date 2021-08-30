@@ -15,6 +15,9 @@ import java.awt.Insets;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -249,5 +252,41 @@ public class ConsultaProfesor extends JInternalFrame {
         gbc_clasesLista.gridx = 3;
         gbc_clasesLista.gridy = 17;
         getContentPane().add(clasesLista, gbc_clasesLista);
+
+        MouseListener mouseListenerActividades = new MouseAdapter() {
+                
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                    String actividad = theList.getModel().getElementAt(index).toString();
+                    ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                    consultaActividad.setVisible(true);
+                    app.getContentPane().add(consultaActividad);
+                    }
+                }
+            }
+        };
+
+        actividadesLista.addMouseListener(mouseListener);
+
+        MouseListener mouseListenerClases = new MouseAdapter() {
+                
+            public void mouseClicked(MouseEvent mouseEvent) {
+                JList theList = (JList) mouseEvent.getSource();
+                if (mouseEvent.getClickCount() == 2) {
+                    int index = theList.locationToIndex(mouseEvent.getPoint());
+                    if (index >= 0) {
+                    String actividad = theList.getModel().getElementAt(index).toString();
+                    ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                    consultaActividad.setVisible(true);
+                    app.getContentPane().add(consultaActividad);
+                    }
+                }
+            }
+        };
+
+        clasesLista.addMouseListener(mouseListener);
     }
 }

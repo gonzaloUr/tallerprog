@@ -26,7 +26,7 @@ import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 public class ConsultaSocio extends JInternalFrame {
 
 
-    public ConsultaSocio(IControladorActividadClase controladorActividadClase, IControladorUsuario CU, String nickname) {
+    public ConsultaSocio(App app, IControladorActividadClase controladorActividadClase, IControladorUsuario CU, String nickname) {
 
         DataSocio data = null;
         try {
@@ -175,6 +175,8 @@ public class ConsultaSocio extends JInternalFrame {
                   if (index >= 0) {
                     String clase = theList.getModel().getElementAt(index).toString();
                     ConsultaDictadoClase dictadoClase = new ConsultaDictadoClase(clase, controladorActividadClase);
+                    dictadoClase.setVisible(true);
+                    app.getContentPane().add(dictadoClase);
                   }
                 }
               }

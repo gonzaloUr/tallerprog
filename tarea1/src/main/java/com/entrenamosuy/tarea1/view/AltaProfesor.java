@@ -38,7 +38,6 @@ import java.net.URL;
 import java.util.Date;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
 public class AltaProfesor extends JInternalFrame {
     private JTextField textField;
@@ -52,14 +51,15 @@ public class AltaProfesor extends JInternalFrame {
     private JLabel lblIngresarFecha;
     private JLabel lblNewLabel_1;
     private JButton btnNewButton;
+    private JButton btnNewButton_1;
     private JLabel lblIngresarInstitucion;
+    private JTextField textField_8;
     private JLabel lblIngresarDescripcion;
     private JTextField textField_9;
     private JLabel lblIngresarBiografia;
     private JTextField textField_10;
     private JLabel lblIngresarUrlhttpsejej;
     private JTextField textField_11;
-    private JComboBox comboBox;
 
     /**
      * Launch the application.
@@ -84,13 +84,6 @@ public class AltaProfesor extends JInternalFrame {
      * Create the frame.
      */
     public AltaProfesor(App app, IControladorUsuario CU) {
-    	Manejador man = Manejador.getInstance();
-    	String[] insts = man.getInstituciones().keySet().toArray(new String[0]);
-    	
-    	
-    	setClosable(true);
-    	setResizable(true);
-    	setMaximizable(true);
         setTitle("Alta Profesor");
         getContentPane().setForeground(Color.RED);
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -179,76 +172,103 @@ public class AltaProfesor extends JInternalFrame {
         gbc_lblIngresarFecha.gridx = 1;
         gbc_lblIngresarFecha.gridy = 6;
         getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
-        
-                JDateChooser chooser = new JDateChooser();
-                GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-                gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
-                gbc_lblNewLabel_1.gridwidth = 2;
-                gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-                gbc_lblNewLabel_1.gridx = 3;
-                gbc_lblNewLabel_1.gridy = 6;
-                getContentPane().add(chooser, gbc_lblNewLabel_1);
-        
-                lblIngresarInstitucion = new JLabel("Seleccionar Institucion");
-                GridBagConstraints gbc_lblIngresarInstitucion = new GridBagConstraints();
-                gbc_lblIngresarInstitucion.anchor = GridBagConstraints.WEST;
-                gbc_lblIngresarInstitucion.insets = new Insets(0, 0, 5, 5);
-                gbc_lblIngresarInstitucion.gridx = 1;
-                gbc_lblIngresarInstitucion.gridy = 7;
-                getContentPane().add(lblIngresarInstitucion, gbc_lblIngresarInstitucion);
-                
-                comboBox = new JComboBox(insts);
-                GridBagConstraints gbc_comboBox = new GridBagConstraints();
-                gbc_comboBox.gridwidth = 2;
-                gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-                gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-                gbc_comboBox.gridx = 3;
-                gbc_comboBox.gridy = 7;
-                getContentPane().add(comboBox, gbc_comboBox);
-        
-                lblIngresarDescripcion = new JLabel("Ingresar Descripcion");
-                GridBagConstraints gbc_lblIngresarDescripcion = new GridBagConstraints();
-                gbc_lblIngresarDescripcion.anchor = GridBagConstraints.WEST;
-                gbc_lblIngresarDescripcion.insets = new Insets(0, 0, 5, 5);
-                gbc_lblIngresarDescripcion.gridx = 1;
-                gbc_lblIngresarDescripcion.gridy = 8;
-                getContentPane().add(lblIngresarDescripcion, gbc_lblIngresarDescripcion);
-        
-                textField_9 = new JTextField();
-                GridBagConstraints gbc_textField_9 = new GridBagConstraints();
-                gbc_textField_9.gridwidth = 2;
-                gbc_textField_9.insets = new Insets(0, 0, 5, 5);
-                gbc_textField_9.fill = GridBagConstraints.HORIZONTAL;
-                gbc_textField_9.gridx = 3;
-                gbc_textField_9.gridy = 8;
-                getContentPane().add(textField_9, gbc_textField_9);
-                textField_9.setColumns(10);
-        
-                lblIngresarBiografia = new JLabel("Ingresar Biografia");
-                GridBagConstraints gbc_lblIngresarBiografia = new GridBagConstraints();
-                gbc_lblIngresarBiografia.anchor = GridBagConstraints.WEST;
-                gbc_lblIngresarBiografia.insets = new Insets(0, 0, 5, 5);
-                gbc_lblIngresarBiografia.gridx = 1;
-                gbc_lblIngresarBiografia.gridy = 9;
-                getContentPane().add(lblIngresarBiografia, gbc_lblIngresarBiografia);
-        
-                textField_10 = new JTextField();
-                GridBagConstraints gbc_textField_10 = new GridBagConstraints();
-                gbc_textField_10.gridwidth = 2;
-                gbc_textField_10.insets = new Insets(0, 0, 5, 5);
-                gbc_textField_10.fill = GridBagConstraints.HORIZONTAL;
-                gbc_textField_10.gridx = 3;
-                gbc_textField_10.gridy = 9;
-                getContentPane().add(textField_10, gbc_textField_10);
-                textField_10.setColumns(10);
-        
-                lblIngresarUrlhttpsejej = new JLabel("Ingresar URL (https://ej.ej)");
-                GridBagConstraints gbc_lblIngresarUrlhttpsejej = new GridBagConstraints();
-                gbc_lblIngresarUrlhttpsejej.anchor = GridBagConstraints.WEST;
-                gbc_lblIngresarUrlhttpsejej.insets = new Insets(0, 0, 5, 5);
-                gbc_lblIngresarUrlhttpsejej.gridx = 1;
-                gbc_lblIngresarUrlhttpsejej.gridy = 10;
-                getContentPane().add(lblIngresarUrlhttpsejej, gbc_lblIngresarUrlhttpsejej);
+
+        JDateChooser chooser = new JDateChooser();
+        GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+        gbc_lblNewLabel_1.fill = GridBagConstraints.HORIZONTAL;
+        gbc_lblNewLabel_1.gridwidth = 2;
+        gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+        gbc_lblNewLabel_1.gridx = 5;
+        gbc_lblNewLabel_1.gridy = 9;
+        getContentPane().add(chooser, gbc_lblNewLabel_1);
+
+        lblIngresarInstitucion = new JLabel("Ingresar Institucion");
+        GridBagConstraints gbc_lblIngresarInstitucion = new GridBagConstraints();
+        gbc_lblIngresarInstitucion.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarInstitucion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarInstitucion.gridx = 1;
+        gbc_lblIngresarInstitucion.gridy = 8;
+        getContentPane().add(lblIngresarInstitucion, gbc_lblIngresarInstitucion);
+
+        textField_8 = new JTextField();
+        GridBagConstraints gbc_textField_8 = new GridBagConstraints();
+        gbc_textField_8.gridwidth = 2;
+        gbc_textField_8.insets = new Insets(0, 0, 5, 5);
+        gbc_textField_8.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textField_8.gridx = 3;
+        gbc_textField_8.gridy = 8;
+        getContentPane().add(textField_8, gbc_textField_8);
+        textField_8.setColumns(10);
+
+        lblIngresarDescripcion = new JLabel("Ingresar Descripcion");
+        GridBagConstraints gbc_lblIngresarDescripcion = new GridBagConstraints();
+        gbc_lblIngresarDescripcion.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarDescripcion.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarDescripcion.gridx = 1;
+        gbc_lblIngresarDescripcion.gridy = 9;
+        getContentPane().add(lblIngresarDescripcion, gbc_lblIngresarDescripcion);
+
+        textField_9 = new JTextField();
+        GridBagConstraints gbc_textField_9 = new GridBagConstraints();
+        gbc_textField_9.gridwidth = 2;
+        gbc_textField_9.insets = new Insets(0, 0, 5, 5);
+        gbc_textField_9.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textField_9.gridx = 3;
+        gbc_textField_9.gridy = 9;
+        getContentPane().add(textField_9, gbc_textField_9);
+        textField_9.setColumns(10);
+
+        lblIngresarBiografia = new JLabel("Ingresar Biografia");
+        GridBagConstraints gbc_lblIngresarBiografia = new GridBagConstraints();
+        gbc_lblIngresarBiografia.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarBiografia.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarBiografia.gridx = 1;
+        gbc_lblIngresarBiografia.gridy = 10;
+        getContentPane().add(lblIngresarBiografia, gbc_lblIngresarBiografia);
+
+        textField_10 = new JTextField();
+        GridBagConstraints gbc_textField_10 = new GridBagConstraints();
+        gbc_textField_10.gridwidth = 2;
+        gbc_textField_10.insets = new Insets(0, 0, 5, 5);
+        gbc_textField_10.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textField_10.gridx = 3;
+        gbc_textField_10.gridy = 10;
+        getContentPane().add(textField_10, gbc_textField_10);
+        textField_10.setColumns(10);
+
+        lblIngresarUrlhttpsejej = new JLabel("Ingresar URL (https://ej.ej)");
+        GridBagConstraints gbc_lblIngresarUrlhttpsejej = new GridBagConstraints();
+        gbc_lblIngresarUrlhttpsejej.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarUrlhttpsejej.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarUrlhttpsejej.gridx = 1;
+        gbc_lblIngresarUrlhttpsejej.gridy = 11;
+        getContentPane().add(lblIngresarUrlhttpsejej, gbc_lblIngresarUrlhttpsejej);
+
+        textField_11 = new JTextField();
+        GridBagConstraints gbc_textField_11 = new GridBagConstraints();
+        gbc_textField_11.gridwidth = 2;
+        gbc_textField_11.insets = new Insets(0, 0, 5, 5);
+        gbc_textField_11.fill = GridBagConstraints.HORIZONTAL;
+        gbc_textField_11.gridx = 3;
+        gbc_textField_11.gridy = 11;
+        getContentPane().add(textField_11, gbc_textField_11);
+        textField_11.setColumns(10);
+
+        btnNewButton_1 = new JButton("Cancelar");
+        btnNewButton_1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                textField_4.setText("");
+                textField_5.setText("");
+                textField_6.setText("");
+                textField_7.setText("");
+                chooser.setDate(null);
+                textField_8.setText("");
+                textField_9.setText("");
+                textField_10.setText("");
+                textField_11.setText("");
+            }
+        });
 
 
         btnNewButton = new JButton("Aceptar");
@@ -322,22 +342,16 @@ public class AltaProfesor extends JInternalFrame {
                 JOptionPane.showMessageDialog(app, "Profesor creado exitosamente.");
             }
         });
-        
-                textField_11 = new JTextField();
-                GridBagConstraints gbc_textField_11 = new GridBagConstraints();
-                gbc_textField_11.gridwidth = 2;
-                gbc_textField_11.insets = new Insets(0, 0, 5, 5);
-                gbc_textField_11.fill = GridBagConstraints.HORIZONTAL;
-                gbc_textField_11.gridx = 3;
-                gbc_textField_11.gridy = 10;
-                getContentPane().add(textField_11, gbc_textField_11);
-                textField_11.setColumns(10);
         GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
         gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
         gbc_btnNewButton.gridx = 1;
         gbc_btnNewButton.gridy = 13;
         getContentPane().add(btnNewButton, gbc_btnNewButton);
+        GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
+        gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 5);
+        gbc_btnNewButton_1.gridx = 3;
+        gbc_btnNewButton_1.gridy = 13;
+        getContentPane().add(btnNewButton_1, gbc_btnNewButton_1);
         setBounds(100, 100, 555, 360);
     }
 }

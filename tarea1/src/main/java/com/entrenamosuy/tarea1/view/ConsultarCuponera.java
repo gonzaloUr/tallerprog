@@ -6,12 +6,16 @@ import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.data.DescActividad;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 
 import javax.swing.JTextField;
 import javax.swing.JList;
@@ -20,7 +24,7 @@ public class ConsultarCuponera extends JInternalFrame {
 	private JTextField nombreField;
 	private JTextField descripcionField;
 
-    public ConsultarCuponera(String cuponera, IControladorCuponera controladorCuponera) {
+    public ConsultarCuponera(App app, String cuponera, IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
     	setTitle("Consulta cuponera");
     	setResizable(true);
     	setClosable(true);
@@ -102,5 +106,22 @@ public class ConsultarCuponera extends JInternalFrame {
 	gbc_list.gridx = 3;
 	gbc_list.gridy = 5;
 	getContentPane().add(list, gbc_list);
+
+	MouseListener mouseListener = new MouseAdapter() {
+            
+        public void mouseClicked(MouseEvent mouseEvent) {
+            JList theList = (JList) mouseEvent.getSource();
+            if (mouseEvent.getClickCount() == 2) {
+                int index = theList.locationToIndex(mouseEvent.getPoint());
+                if (index >= 0) {
+                String actividad = theList.getModel().getElementAt(index).toString();
+                ConsultaActividad consultaActividad = new ConsultaActividad(actividad, controladorActividadClase);
+                consultaActividad.setVisible(true);
+                app.getContentPane().add(consultaActividad);
+                }
+            }
+        }
+    };
+	list.addMouseListener(mouseListener);
     }
 }
