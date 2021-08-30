@@ -29,25 +29,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
     private JTextField textField_2;
     private JTextField textField_3;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AgregarActividadACuponera frame = new AgregarActividadACuponera();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    /**
-     * Create the frame.
-     */
     public AgregarActividadACuponera() {
         setTitle("Agregar actividad a cuponera.");
         getContentPane().setForeground(Color.RED);
