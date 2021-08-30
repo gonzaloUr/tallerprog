@@ -21,6 +21,7 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JOptionPane;
 
 public class AltaActividad extends JInternalFrame {
 	private JTextField textField;
@@ -49,10 +50,18 @@ public class AltaActividad extends JInternalFrame {
 		});
 	}
 
+	public static void clearAltaAct(JTextField a, JTextField b, JTextField c, JTextField d, JTextField e){
+		a.setText("");
+		b.setText("");
+		c.setText("");
+		d.setText("");
+		e.setText("");
+	}
+
 	/**
 	 * Create the frame.
 	 */
-	public AltaActividad() {
+	public AltaActividad(IControladorActividadClase controladorActividadClase, App apli) {
 		setTitle("Alta de actividad deportiva");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -156,6 +165,22 @@ public class AltaActividad extends JInternalFrame {
 		getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
 		
 		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					controladorActividadClase.crearActividad(textField_4.getText(), textField_5.getText(), textField_6.getText(), textField_7.getText(),textField_8.getText());
+					setVisible(false);
+					JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");
+					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+				} catch (ActividadRepetidaException are) {
+					JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.","Error", JOptionPane.ERROR_MESSAGE);
+					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+				} catch (InstitucionNoEncontradaException inee){
+					JOptionPane.showMessageDialog(apli, "No existe una institucion con ese nombre.","Error", JOptionPane.ERROR_MESSAGE);
+					clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
+				}
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
 		gbc_btnNewButton.gridx = 1;
@@ -165,6 +190,8 @@ public class AltaActividad extends JInternalFrame {
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setVisible(false);
+				clearAltaAct(textField_4,textField_5,textField_6,textField_7,textField_8);					
 			}
 		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
