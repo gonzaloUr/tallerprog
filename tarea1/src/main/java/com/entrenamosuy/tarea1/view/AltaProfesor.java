@@ -249,16 +249,9 @@ public class AltaProfesor extends JInternalFrame {
                 Email mail; 
                 try {
                 mail = Email.parse(textField_7.getText());
-                } catch(Exception ep) {
+                } catch(IllegalArgumentException ep) {
                 	JOptionPane.showMessageDialog(app, "Email invalido", "error", JOptionPane.ERROR_MESSAGE);
-                	textField_4.setText("");
-                    textField_5.setText("");
-                    textField_6.setText("");
                     textField_7.setText("");
-                    chooser.setDate(null);
-                    textField_9.setText("");
-                    textField_10.setText("");
-                    textField_11.setText("");
                 	return;
                 }
                 Date fechaf = (Date) chooser.getDate();
@@ -271,16 +264,10 @@ public class AltaProfesor extends JInternalFrame {
                 try {
                     link = new URL(textField_11.getText());
                 } catch (MalformedURLException e1) {
-                    textField_4.setText("");
-                    textField_5.setText("");
-                    textField_6.setText("");
-                    textField_7.setText("");
-                    chooser.setDate(null);
-                    textField_9.setText("");
-                    textField_10.setText("");
                     textField_11.setText("");
                     setVisible(true);
                     JOptionPane.showMessageDialog(app, "URL no valida ingrese: https://ejemplo.xxx", "error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
                 setVisible(false);
                 try {
