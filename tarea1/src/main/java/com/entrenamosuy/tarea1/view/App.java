@@ -48,6 +48,8 @@ public class App extends JFrame {
         controladorUsuario = fabrica.creaControladorUsuario();
 
         App that = this;
+        
+        Manejador man = Manejador.getInstance();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Estación de trabajo");
@@ -427,6 +429,23 @@ public class App extends JFrame {
                         SelecionarUsuario selecionarSocio = new SelecionarUsuario(socios, (String socio) -> {
             		    Set<Pair<String, String>> cuponeras = null;
             			    
+            		    Set<Registro> regs = man.getSocios().get(socio).getRegistros();
+            		    boolean si = false;
+            		    for(Registro r : regs) {
+            		    	if(r.getClaseAsociada().getNombre().equals(clase)) {
+            		    		si = true;
+            		    		break;
+            		    	}
+            		    }
+            		    
+            		    if(si) {
+    	                	JOptionPane.showMessageDialog(this,
+        	                		"El socio ya esta registrado a la clase seleccionada.",
+        	                		"error",
+        	                		JOptionPane.ERROR_MESSAGE);
+    	                	return;
+            		    }
+            		    
             		    try {
             			cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
             		    } catch (SocioNoEncontradoException e1) {
@@ -439,7 +458,7 @@ public class App extends JFrame {
             			return;
             		    }
             		    
-            		    RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase);
+            		    RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase, that);
             		    registroAClase.setVisible(true);
             		    getContentPane().add(registroAClase);
                         });

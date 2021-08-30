@@ -7,6 +7,8 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -32,6 +34,7 @@ import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JCheckBox;
@@ -42,7 +45,7 @@ public class RegistroAClase extends JInternalFrame {
     private JTextField textField_2;
     private JTextField textField_3;
 
-    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase) {
+    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase, App app) {
 	setTitle("Registro a dictado de clase.");
 	getContentPane().setForeground(Color.RED);
 	GridBagLayout gridBagLayout = new GridBagLayout();
@@ -100,10 +103,11 @@ public class RegistroAClase extends JInternalFrame {
 	
 	aceptar.addActionListener((ActionEvent a) -> {
 	    String cuponeraSelecionada = (String) cuponerasComboBox.getSelectedItem();
+	    LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(calendario.getDate());
 	    
 	    if (utilizarCheckBox.isSelected() && cuponeraSelecionada != "") {
 		try {
-		    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, LocalDate.now());
+		    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
 		} catch (SocioNoEncontradoException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
@@ -125,12 +129,14 @@ public class RegistroAClase extends JInternalFrame {
 		}
 	    } else {
 		try {
-		    controladorActividadClase.registarseSinCuponera(socio, clase, LocalDate.now());
+		    controladorActividadClase.registarseSinCuponera(socio, clase, fecha);
 		} catch (SocioNoEncontradoException | ClaseNoEncontradaException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
 		}
 	    }
+	    setVisible(false);
+	    JOptionPane.showMessageDialog(app, "Registro creado exitosamente.");
 	});
     }
 }

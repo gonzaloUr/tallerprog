@@ -172,7 +172,18 @@ public class AltaSocio extends JInternalFrame {
                 String nick = textField_4.getText();
                 String nombre = textField_5.getText();
                 String apellido = textField_6.getText();
-                Email mail = Email.parse(textField_7.getText());
+                Email mail; 
+                try {
+                mail = Email.parse(textField_7.getText());
+                } catch(Exception ep) {
+                	JOptionPane.showMessageDialog(app, "Email invalido", "error", JOptionPane.ERROR_MESSAGE);
+                	textField_4.setText("");
+                    textField_5.setText("");
+                    textField_6.setText("");
+                    textField_7.setText("");
+                    chooser.setDate(null);
+                	return;
+                }
                 Date fechaf = (Date) chooser.getDate();
                 FuncionFecha f = new FuncionFecha();
                 LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
