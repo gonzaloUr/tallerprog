@@ -5,26 +5,14 @@ import java.awt.EventQueue;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.logic.ControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.logic.Institucion;
 
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-
-import java.awt.Component;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -33,13 +21,11 @@ import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
-import java.util.Set;
 import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 import javax.swing.JComboBox;
 
 
-public class crearClase extends JInternalFrame {
+public class CrearClase extends JInternalFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -56,7 +42,7 @@ public class crearClase extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					crearClase frame = new crearClase();
+					CrearClase frame = new CrearClase();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +54,7 @@ public class crearClase extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public crearClase() {
+	public CrearClase() {
 		Manejador man = Manejador.getInstance();
 		
 		ControladorActividadClase CAC = new ControladorActividadClase();
