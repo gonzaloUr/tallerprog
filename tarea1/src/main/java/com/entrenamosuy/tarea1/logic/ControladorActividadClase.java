@@ -77,6 +77,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             profes.add(p);
         }
         Set<Registro> registros = new HashSet<>();
+        System.out.println("antes---- " + nombre);
         Clase nuevaClase = new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro, registros, profes, actividad);
         clases.put(nombre, nuevaClase);
         actividad.getClases().add(nuevaClase);

@@ -191,9 +191,10 @@ public class AltaClase extends JInternalFrame {
         });
         
         btnAceptar.addActionListener((ActionEvent a) -> {
+            System.out.println(nombreField.getText());
             try {
 		controladorActividadClase.crearClase(actividad, 
-		    nombreField.getName(), 
+		    nombreField.getText(), 
 		    LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
 		    selectedNicknames,
 		    Integer.parseInt(cantMin.getText()),
@@ -204,6 +205,8 @@ public class AltaClase extends JInternalFrame {
 		  | MalformedURLException | ClaseRepetidaException e1) {
 		e1.printStackTrace();
 	    }
+            for (String s : maneja.getClases().keySet())
+            System.out.println(s);
             dispose();
         });
     }
