@@ -250,24 +250,58 @@ public class App extends JFrame {
         registros.add(altaDeSocio);
         
         JMenuItem altaDeProfesor = new JMenuItem("Alta de profesor");
+        altaDeProfesor.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario);
+        		that.getContentPane().add(altaprofesor);
+        		altaprofesor.setVisible(true);
+        	}
+        });
         registros.add(altaDeProfesor);
 
         JMenuItem altaActividadDeportiva = new JMenuItem("Alta de actividad deportiva");
+        altaActividadDeportiva.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		AltaActividad altaactividad = new AltaActividad(controladorActividadClase, that);
+        		that.getContentPane().add(altaactividad);
+        		altaactividad.setVisible(true);
+        	}
+        });
         registros.add(altaActividadDeportiva);
 
         JMenuItem altaDictadoClase = new JMenuItem("Alta de dictado de clase");
+        altaDictadoClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         registros.add(altaDictadoClase);
 
         JMenuItem registroDictadoClase = new JMenuItem("Registro a dictado clase");
+        registroDictadoClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         registros.add(registroDictadoClase);
 
         JMenuItem altaInstitucionDeportiva = new JMenuItem("Alta de institucion deportiva");
+        altaInstitucionDeportiva.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         registros.add(altaInstitucionDeportiva);
 
         JMenuItem crearCuponera = new JMenuItem("Crear cuponera de actividad deportivas");
+        crearCuponera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         registros.add(crearCuponera);
 
         JMenuItem agregarActividadCuponera = new JMenuItem("Agregar actividad deportiva a cuponera");
+        agregarActividadCuponera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         registros.add(agregarActividadCuponera);
 
         // Consulta de usuario
@@ -285,12 +319,24 @@ public class App extends JFrame {
         consultas.add(consultaProfesor);
 
         JMenuItem consultaActividad = new JMenuItem("Consulta de actividad deportiva");
+        consultaActividad.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         consultas.add(consultaActividad);
 
         JMenuItem consultaDictadoClase = new JMenuItem("Consulta de dictado de clase");
+        consultaDictadoClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         consultas.add(consultaDictadoClase);
 
         JMenuItem consultaCuponera = new JMenuItem("Consulta de cuponeras de actividades deportivas");
+        consultaCuponera.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         consultas.add(consultaCuponera);
 
         // Modificar datos de usuario
