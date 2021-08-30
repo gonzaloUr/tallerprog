@@ -280,7 +280,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    AltaClase altaClase = new AltaClase(actividad, controladorUsuario, controladorActividadClase);
+                    AltaClase altaClase = new AltaClase(actividad, controladorUsuario, controladorActividadClase, inst);
                     altaClase.setVisible(true);
                     getContentPane().add(altaClase);
                 });

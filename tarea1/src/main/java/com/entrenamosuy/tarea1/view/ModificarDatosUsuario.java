@@ -17,6 +17,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
     private JDateChooser nacimiento;
 
     public ModificarDatosUsuario(String nickname, IControladorUsuario controladorUsuario) {
+        ModificarDatosUsuario that = this;
         setTitle("Modificar datos usuario");
         setResizable(true);
         setClosable(true);
@@ -83,11 +84,15 @@ public class ModificarDatosUsuario extends JInternalFrame {
         gbc_btnAceptar.gridx = 3;
         gbc_btnAceptar.gridy = 9;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
+        //that.setVisible(false);
+
 
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
                 controladorUsuario.modificarDatosUsuario(nickname, nombre.getText(), apellido.getText(),
                         FuncionFecha.convertToLocalDateViaInstant(nacimiento.getDate()));
+                that.setVisible(false);
+                
             } catch (UsuarioNoEncontradoException e) {
                 JOptionPane.showMessageDialog(this, "Nickname no encontrado", "error", JOptionPane.ERROR_MESSAGE);
             }
