@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.logic.ControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.logic.Institucion;
 import com.toedter.calendar.JDateChooser;
@@ -36,74 +37,12 @@ public class CrearClase extends JInternalFrame {
 	private JTextField textField_7;
 	private JTextField textField_8;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CrearClase frame = new CrearClase();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
-	/**
-	 * Create the frame.
-	 */
-	public CrearClase() {
+	public CrearClase(IControladorActividadClase CAC, App app) {
 		Manejador man = Manejador.getInstance();
-		
-		ControladorActividadClase CAC = new ControladorActividadClase();
-		try {
-			CAC.crearInstitucion("Instituto Natural", "Clases de gimnasia aerobica, spinning y yoga.", new URL("https://www.inatural.com"));
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InstitucionRepetidaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
-			CAC.crearInstitucion("Fuerza Bruta", "Gimnasio especializado en el desarrollo de la musculatura.", new URL("https://www.musculos.com/"));
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InstitucionRepetidaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
-			CAC.crearInstitucion("Telon", "Actividades deportivas para todas la edades.", new URL("https://telon.com.uy"));
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InstitucionRepetidaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
-			CAC.crearInstitucion("Olympic", "Gimnasia y aparatos.", new URL("https://www.olympic21.com/"));
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (InstitucionRepetidaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 
-        Map<String, Institucion> in = man.getInstituciones();
-		String[] insts = new String[in.size()];
-		int i = 0;
-		for (Map.Entry<String, Institucion> entry : in.entrySet()) {
-		    insts [i] = entry.getValue().getNombre().toString();
-		    i++;
-		}
-		System.out.println(insts.length);
+		String[] insts = man.getInstituciones().keySet().toArray(new String[0]);
+
 		setTitle("Alta de dictado de clase");
 		getContentPane().setForeground(Color.RED);
 		GridBagLayout gridBagLayout = new GridBagLayout();

@@ -50,27 +50,21 @@ public class App extends JFrame {
 
         getContentPane().setLayout(null);
 
-        JInternalFrame cargados = new JInternalFrame("");
-        cargados.setBounds(143, 30, 375, 232);
-        getContentPane().add(cargados);
-
-        JPanel panel = new JPanel();
-        cargados.getContentPane().add(panel, BorderLayout.CENTER);
-        panel.setLayout(null);
-
-        JLabel lblCargadosConExito = new JLabel("Cargados con exito");
-        lblCargadosConExito.setBounds(117, 63, 136, 15);
-        panel.add(lblCargadosConExito);
-
-        JButton btnNewButton = new JButton("Aceptar");
-        btnNewButton.setBounds(137, 132, 89, 25);
-        btnNewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                cargados.setVisible(false);
-            }
-        });
-        panel.add(btnNewButton);
-        cargados.setVisible(false);
+		AltaSocio altasocio = new AltaSocio(that, controladorUsuario);
+		that.getContentPane().add(altasocio);
+		altasocio.setVisible(false);
+		
+		AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario);
+		that.getContentPane().add(altaprofesor);
+		altaprofesor.setVisible(false);
+		
+		AltaActividad altaactividad = new AltaActividad(controladorActividadClase, that);
+		that.getContentPane().add(altaactividad);
+		altaactividad.setVisible(false);
+		
+		CrearClase altaclase = new CrearClase(controladorActividadClase, that);
+		that.getContentPane().add(altaclase);
+		altaclase.setVisible(false);
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -220,7 +214,7 @@ public class App extends JFrame {
                 } catch (Exception ex) {
                 }
                 ;
-                cargados.setVisible(true);
+                JOptionPane.showMessageDialog(that,"Datos cargados exitosamente");
             }
         });
         inicio.add(cargarDatos);
@@ -242,8 +236,6 @@ public class App extends JFrame {
         JMenuItem altaDeSocio = new JMenuItem("Alta de socio");
         altaDeSocio.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		AltaSocio altasocio = new AltaSocio(that, controladorUsuario);
-        		that.getContentPane().add(altasocio);
         		altasocio.setVisible(true);
         	}
         });
@@ -252,8 +244,6 @@ public class App extends JFrame {
         JMenuItem altaDeProfesor = new JMenuItem("Alta de profesor");
         altaDeProfesor.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario);
-        		that.getContentPane().add(altaprofesor);
         		altaprofesor.setVisible(true);
         	}
         });
@@ -262,8 +252,6 @@ public class App extends JFrame {
         JMenuItem altaActividadDeportiva = new JMenuItem("Alta de actividad deportiva");
         altaActividadDeportiva.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		AltaActividad altaactividad = new AltaActividad(controladorActividadClase, that);
-        		that.getContentPane().add(altaactividad);
         		altaactividad.setVisible(true);
         	}
         });
@@ -272,6 +260,7 @@ public class App extends JFrame {
         JMenuItem altaDictadoClase = new JMenuItem("Alta de dictado de clase");
         altaDictadoClase.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		altaclase.setVisible(true);
         	}
         });
         registros.add(altaDictadoClase);
@@ -286,6 +275,7 @@ public class App extends JFrame {
         JMenuItem altaInstitucionDeportiva = new JMenuItem("Alta de institucion deportiva");
         altaInstitucionDeportiva.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		registroclase.setVisible
         	}
         });
         registros.add(altaInstitucionDeportiva);
