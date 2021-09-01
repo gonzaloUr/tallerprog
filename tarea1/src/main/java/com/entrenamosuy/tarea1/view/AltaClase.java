@@ -139,28 +139,7 @@ public class AltaClase extends JInternalFrame {
         gbc_lblProfesores.gridx = 1;
         gbc_lblProfesores.gridy = 4;
         getContentPane().add(lblProfesores, gbc_lblProfesores);
-        
-                JList list = new JList(profesores.toArray(new String[] {}));
-                GridBagConstraints gbc_list = new GridBagConstraints();
-                gbc_list.insets = new Insets(0, 0, 5, 5);
-                gbc_list.fill = GridBagConstraints.BOTH;
-                gbc_list.gridx = 3;
-                gbc_list.gridy = 4;
-                getContentPane().add(list, gbc_list);
-                
-                Set<String> selectedNicknames = new HashSet<>();
-                list.addListSelectionListener((ListSelectionEvent e) -> {
-                    if (e.getValueIsAdjusting() == false) {
-                	
-                	int[] selected = list.getSelectedIndices();
-                	selectedNicknames.clear();
-                	
-                	for (int i = 0; i < selected.length; i++)
-                	    selectedNicknames.add(profesores.get(selected[i]));
-                	
-                	System.out.println(selectedNicknames);
-                    }
-                });
+
         
         JLabel lblRegistro = new JLabel("Registro");
         GridBagConstraints gbc_lblRegistro = new GridBagConstraints();
@@ -235,7 +214,6 @@ public class AltaClase extends JInternalFrame {
         gbc_btnAceptar.gridx = 3;
         gbc_btnAceptar.gridy = 14;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
-<<<<<<< HEAD
 
         JList list = new JList(profesores.toArray(new String[] {}));
         GridBagConstraints gbc_list = new GridBagConstraints();
@@ -254,14 +232,8 @@ public class AltaClase extends JInternalFrame {
             }
         });
 
-=======
-        
-        
-        
->>>>>>> 05e9f935ce03e37e431fa56da0d449a92086f1fb
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
-<<<<<<< HEAD
                 controladorActividadClase.crearClase(actividad, 
                 nombreField.getText(), 
                 LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
@@ -295,41 +267,6 @@ public class AltaClase extends JInternalFrame {
                 JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-=======
-		controladorActividadClase.crearClase(actividad, 
-		    nombreField.getText(), 
-		    LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
-		    selectedNicknames,
-		    Integer.parseInt(cantMin.getText()),
-		    Integer.parseInt(cantMax.getText()),
-		    new URL(url.getText()),
-		    FuncionFecha.convertToLocalDateViaInstant(calendario2.getDate()));
-            JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
-	    } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
-		  | ClaseRepetidaException e1) {
-              JOptionPane.showMessageDialog(app,"Error al crear la clase.","error", JOptionPane.ERROR_MESSAGE);
-		e1.printStackTrace();
-	    }
-        catch(MalformedURLException e5){
-            JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
-            url.setText("");
-            return;
-        }
-        catch(ClaseInicioRegistroInvalidoException e6){
-            JOptionPane.showMessageDialog(app,"La fecha de inicio debe ser posterior a la de registro.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        catch(ClaseCantInvalidoException e7){
-            JOptionPane.showMessageDialog(app,"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", JOptionPane.ERROR_MESSAGE);
-            cantMin.setText("");
-            cantMax.setText("");
-            return;
-        }
-        catch (ClaseRegistroActividadInvalidaException e8){
-            JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
->>>>>>> 05e9f935ce03e37e431fa56da0d449a92086f1fb
             dispose();
         });
     }
