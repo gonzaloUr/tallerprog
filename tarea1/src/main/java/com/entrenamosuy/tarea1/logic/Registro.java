@@ -69,7 +69,7 @@ public class Registro {
 
     @Override
     public int hashCode() {
-        return Objects.hash(costo, cuponera, fecha);
+        return Objects.hash(claseAsociada, costo, cuponera, fecha, socio);
     }
 
     @Override
@@ -83,7 +83,8 @@ public class Registro {
         Registro other = (Registro) obj;
         return Objects.equals(claseAsociada, other.claseAsociada)
                 && Float.floatToIntBits(costo) == Float.floatToIntBits(other.costo)
-                && Objects.equals(cuponera, other.cuponera) && Objects.equals(fecha, other.fecha);
+                && Objects.equals(cuponera, other.cuponera) && Objects.equals(fecha, other.fecha)
+                && Objects.equals(socio, other.socio);
     }
 }
 

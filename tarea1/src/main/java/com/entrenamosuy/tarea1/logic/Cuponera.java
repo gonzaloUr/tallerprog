@@ -117,7 +117,7 @@ public class Cuponera {
 
     @Override
     public int hashCode() {
-        return Objects.hash(descripcion, descuento, fin, inicio, integras, nombre, registros);
+        return nombre.hashCode();
     }
 
     @Override
@@ -129,11 +129,7 @@ public class Cuponera {
         if (getClass() != obj.getClass())
             return false;
         Cuponera other = (Cuponera) obj;
-        return Objects.equals(descripcion, other.descripcion) && descuento == other.descuento
-                && Objects.equals(fin, other.fin) && Objects.equals(inicio, other.inicio)
-                && Objects.equals(integras, other.integras) && Objects.equals(nombre, other.nombre)
-                //&& Float.floatToIntBits(precio) == Float.floatToIntBits(other.precio)
-                && Objects.equals(registros, other.registros);
+        return Objects.equals(nombre, other.nombre);
     }
 
     public Integra getIntegra(Actividad a) {

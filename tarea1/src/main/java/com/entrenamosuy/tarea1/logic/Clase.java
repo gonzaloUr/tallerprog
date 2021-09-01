@@ -117,25 +117,6 @@ public class Clase {
         this.actividad = actividad;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(acceso, cantMax, cantMin, fechaRegistro, inicio, nombre, registros, profesores, actividad);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Clase other = (Clase) obj;
-        return Objects.equals(acceso, other.acceso) && cantMax == other.cantMax && cantMin == other.cantMin
-                && Objects.equals(fechaRegistro, other.fechaRegistro) && Objects.equals(inicio, other.inicio)
-                && Objects.equals(nombre, other.nombre) && Objects.equals(registros, other.registros);
-    }
-
     public DataClase getDataClase() {
         Set<DescProfesor> descProfes = new HashSet<>();
         Set<Profesor> profes = this.getProfesores();
@@ -163,5 +144,22 @@ public class Clase {
         Registro nuevoReg = new Registro(fecha, costo, this, socio, cup);
         registros.add(nuevoReg);
         socio.asociarSocioRegistro(nuevoReg);
+    }
+
+    @Override
+    public int hashCode() {
+        return nombre.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Clase other = (Clase) obj;
+            return Objects.equals(nombre, other.nombre);
     }
 }

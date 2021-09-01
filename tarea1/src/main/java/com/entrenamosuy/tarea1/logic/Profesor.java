@@ -3,11 +3,11 @@ package com.entrenamosuy.tarea1.logic;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataProfesor;
+import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DescProfesor;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.data.DataActividad;
@@ -91,47 +91,27 @@ public class Profesor extends Usuario {
         return actividades;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Objects.hash(biografia, clasesDictadas, descripcion, institucion, sitioWeb, actividades);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Profesor other = (Profesor) obj;
-        return Objects.equals(biografia, other.biografia) && Objects.equals(clasesDictadas, other.clasesDictadas)
-                && Objects.equals(descripcion, other.descripcion) && Objects.equals(institucion, other.institucion)
-                && Objects.equals(sitioWeb, other.sitioWeb);
-    }
-
     public DataProfesor getDataProfesor() {
         String institucionNombre = "";
         if (this.getInstitucion() != null) {
             institucionNombre = this.getInstitucion().getNombre();
         }
-        Set<DataActividad> actividades = new HashSet<>();
-        Set<Actividad> acti = this.getActividad();
-        Iterator<Actividad> it = acti.iterator();
-        while (it.hasNext()) {
-            Actividad a = it.next();
-            DataActividad dataA = a.getDataActividad();
-            actividades.add(dataA);
+        Set<DataActividad> actividadesData = new HashSet<>();
+        System.out.println("Size actividades en profesor " + getNombre() + ": " + actividades.size());
+        for (Actividad a : actividades) {
+            actividadesData.add(a.getDataActividad());
         }
-        DataProfesor res = new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividades, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
-        return res;
+        
+        System.out.println("Size clases en profesor " + getNombre() + ": " + clasesDictadas.size());
+        Set<DataClase> clasesData = new HashSet<>();
+        for (Clase c : clasesDictadas) {
+            clasesData.add(c.getDataClase());
+        }
+
+        return new DataProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.getCorreo(), this.getNacimiento(), actividadesData, clasesData, this.descripcion, this.biografia, this.sitioWeb, institucionNombre);
     }
 
     public DescProfesor getDescProfesor() {
-        DescProfesor res = new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
-        return res;
+        return new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
     }
 }

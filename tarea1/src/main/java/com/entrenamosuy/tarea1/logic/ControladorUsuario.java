@@ -152,8 +152,9 @@ public class ControladorUsuario implements IControladorUsuario {
         if (p != null) {
             DataProfesor r = p.getDataProfesor(); //Implementarlo en la clase Profesor
             return r;
-        } else
+        } else {
             throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
+        }
 
     }
 }

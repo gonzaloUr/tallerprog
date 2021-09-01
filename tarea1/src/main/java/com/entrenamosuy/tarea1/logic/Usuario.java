@@ -67,7 +67,7 @@ public abstract class Usuario {
 
     @Override
     public int hashCode() {
-        return Objects.hash(apellido, correo, nacimiento, nickname, nombre);
+        return Objects.hash(correo, nickname);
     }
 
     @Override
@@ -77,8 +77,6 @@ public abstract class Usuario {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Usuario other = (Usuario) obj;
-        return Objects.equals(apellido, other.apellido) && Objects.equals(correo, other.correo)
-                && Objects.equals(nacimiento, other.nacimiento) && Objects.equals(nickname, other.nickname)
-                && Objects.equals(nombre, other.nombre);
+        return Objects.equals(nickname, other.nickname) && Objects.equals(nombre, other.nombre);
     }
 }

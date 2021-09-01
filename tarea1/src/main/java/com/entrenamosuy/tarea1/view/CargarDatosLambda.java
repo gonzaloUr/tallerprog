@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.Email;
-import com.entrenamosuy.tarea1.logic.ControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.ControladorUsuario;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;

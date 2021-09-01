@@ -43,11 +43,19 @@ public class ConsultaProfesor extends JInternalFrame {
         } catch (ProfesorNoEncontradoException e) {
             e.printStackTrace();
         }
+        
+        System.out.println("largo actividades: " + profesor.getActividades().size());
         for (DataActividad a : profesor.getActividades()) {
+            System.out.println("Entre for1");
             actividades.add(a.getNombre());
-            for (DataClase c : a.getClases())
-        	    clases.add(c.getNombre());
         }
+          
+        System.out.println("largo clases: " +  profesor.getClases().size());
+        for (DataClase c : profesor.getClases()) {
+        	System.out.println("Entre for2");
+            clases.add(c.getNombre());
+        }
+        System.out.println("Sigo de largo");
         
         setResizable(true);
         setClosable(true);
@@ -234,7 +242,6 @@ public class ConsultaProfesor extends JInternalFrame {
         if (profesorURL != null)
             sitioWebField.setText(profesorURL.toString());
    
-
         JList<String> actividadesLista = new JList<>(actividades.toArray(new String[] {}));
         GridBagConstraints gbc_actividadesLista = new GridBagConstraints();
         gbc_actividadesLista.insets = new Insets(0, 0, 5, 5);
@@ -276,10 +283,10 @@ public class ConsultaProfesor extends JInternalFrame {
                 if (mouseEvent.getClickCount() == 2) {
                     int index = theList.locationToIndex(mouseEvent.getPoint());
                     if (index >= 0) {
-                    String actividad = theList.getModel().getElementAt(index).toString();
-                    ConsultaActividad consultaActividad = new ConsultaActividad(app, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
-                    consultaActividad.setVisible(true);
-                    app.getContentPane().add(consultaActividad);
+                    String clase = theList.getModel().getElementAt(index).toString();
+                    ConsultaDictadoClase consultaClase = new ConsultaDictadoClase(app, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
+                    consultaClase.setVisible(true);
+                    app.getContentPane().add(consultaClase);
                     }
                 }
             }

@@ -15,19 +15,22 @@ public class DataProfesor extends DataUsuario {
 
     private final Set<DataActividad> actividades;
 
+    private final Set<DataClase> clases;
+
     private final String institucionNombre;
 
     public DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-                        Set<DataActividad> actividades, String descripcion, String biografia, URL sitioWeb, String institucionNombre) {
+                        Set<DataActividad> actividades, Set<DataClase> clases, String descripcion, String biografia, URL sitioWeb, String institucionNombre) {
         super(nickname, nombre, apellido, correo, nacimiento);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.actividades = actividades;
+        this.clases = clases;
         this.institucionNombre = institucionNombre;
     }
 
-    public String getDescripcion() {
+	public String getDescripcion() {
         return descripcion;
     }
 
@@ -42,6 +45,10 @@ public class DataProfesor extends DataUsuario {
     public URL getSitioWeb() {
         return sitioWeb;
     }
+
+    public Set<DataClase> getClases() {
+		return clases;
+	}
 
     public Set<DataActividad> getActividades() {
         return actividades;

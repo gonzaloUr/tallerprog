@@ -329,9 +329,6 @@ public class App extends JFrame {
 			e1.printStackTrace();
 			return;
 		    }
-            for (String s : clases){
-                System.out.println(s);
-            }
 		    
 		    if (instituciones.isEmpty()) {
 	                    JOptionPane.showMessageDialog(this,

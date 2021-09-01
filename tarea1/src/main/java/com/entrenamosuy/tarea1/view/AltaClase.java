@@ -174,53 +174,46 @@ public class AltaClase extends JInternalFrame {
         
         list.addListSelectionListener((ListSelectionEvent e) -> {
             if (e.getValueIsAdjusting() == false) {
-        	
-        	int[] selected = list.getSelectedIndices();
-        	selectedNicknames.clear();
-        	
-        	for (int i = 0; i < selected.length; i++)
-        	    selectedNicknames.add(profesores.get(selected[i]));
-        	
-        	System.out.println(selectedNicknames);
+        	    int[] selected = list.getSelectedIndices();
+        	    selectedNicknames.clear();
             }
         });
-        
+
         btnAceptar.addActionListener((ActionEvent a) -> {
-            System.out.println(nombreField.getText());
             try {
-		controladorActividadClase.crearClase(actividad, 
-		    nombreField.getText(), 
-		    LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
-		    selectedNicknames,
-		    Integer.parseInt(cantMin.getText()),
-		    Integer.parseInt(cantMax.getText()),
-		    new URL(url.getText()),
-		    LocalDate.now());
-            JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
-	    } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
-		  | ClaseRepetidaException e1) {
-              JOptionPane.showMessageDialog(app,"Error al crear la clase.","error", JOptionPane.ERROR_MESSAGE);
-		e1.printStackTrace();
-	    }
-        catch(MalformedURLException e5){
-            JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
-            url.setText("");
-            return;
-        }
-        catch(ClaseInicioRegistroInvalidoException e6){
-            JOptionPane.showMessageDialog(app,"La fecha de inicio debe ser posterior a la de registro.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        catch(ClaseCantInvalidoException e7){
-            JOptionPane.showMessageDialog(app,"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", JOptionPane.ERROR_MESSAGE);
-            cantMin.setText("");
-            cantMax.setText("");
-            return;
-        }
-        catch (ClaseRegistroActividadInvalidaException e8){
-            JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+                controladorActividadClase.crearClase(actividad, 
+                nombreField.getText(), 
+                LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
+                selectedNicknames,
+                Integer.parseInt(cantMin.getText()),
+                Integer.parseInt(cantMax.getText()),
+                new URL(url.getText()),
+                LocalDate.now());
+                JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
+            } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
+            | ClaseRepetidaException e1) {
+                JOptionPane.showMessageDialog(app,"Error al crear la clase.","error", JOptionPane.ERROR_MESSAGE);
+            e1.printStackTrace();
+            }
+            catch(MalformedURLException e5){
+                JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
+                url.setText("");
+                return;
+            }
+            catch(ClaseInicioRegistroInvalidoException e6){
+                JOptionPane.showMessageDialog(app,"La fecha de inicio debe ser posterior a la de registro.","error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            catch(ClaseCantInvalidoException e7){
+                JOptionPane.showMessageDialog(app,"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", JOptionPane.ERROR_MESSAGE);
+                cantMin.setText("");
+                cantMax.setText("");
+                return;
+            }
+            catch (ClaseRegistroActividadInvalidaException e8){
+                JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             dispose();
         });
     }

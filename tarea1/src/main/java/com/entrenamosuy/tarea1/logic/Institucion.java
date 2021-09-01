@@ -2,6 +2,7 @@ package com.entrenamosuy.tarea1.logic;
 
 import java.net.URL;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Institucion {
@@ -59,43 +60,19 @@ public class Institucion {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        //result = prime * result + ((actividadesOfrecidas == null) ? 0 : actividadesOfrecidas.hashCode());
-        result = prime * result + ((descripcion == null) ? 0 : descripcion.hashCode());
-        result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-        result = prime * result + ((url == null) ? 0 : url.hashCode());
-        return result;
+        return Objects.hash(nombre);
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof Institucion))
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
             return false;
         Institucion other = (Institucion) obj;
-        if (actividadesOfrecidas == null) {
-            if (other.actividadesOfrecidas != null)
-                return false;
-        } else if (!actividadesOfrecidas.equals(other.actividadesOfrecidas))
-            return false;
-        if (descripcion == null) {
-            if (other.descripcion != null)
-                return false;
-        } else if (!descripcion.equals(other.descripcion))
-            return false;
-        if (nombre == null) {
-            if (other.nombre != null)
-                return false;
-        } else if (!nombre.equals(other.nombre))
-            return false;
-        if (url == null) {
-            if (other.url != null)
-                return false;
-        } else if (!url.equals(other.url))
-            return false;
-        return true;
+        return Objects.equals(nombre, other.nombre);
     }
 
     public Set<String> actividadesAgregables(Cuponera cup) {

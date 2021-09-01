@@ -42,26 +42,6 @@ public class Socio extends Usuario {
         this.compras = compras;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = super.hashCode();
-        result = prime * result + Objects.hash(compras, registros);
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (!super.equals(obj))
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Socio other = (Socio) obj;
-        return Objects.equals(compras, other.compras) && Objects.equals(registros, other.registros);
-    }
-
     public Set<Pair<String, String>> cuponerasUsables(Actividad a) {
         List<Cuponera> cuponerasADescribir = new ArrayList<>();
 
