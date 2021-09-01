@@ -35,25 +35,8 @@ public class AltaSocio extends JInternalFrame {
     private JLabel lblNewLabel_1;
     private JButton btnNewButton;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AltaSocio frame = new AltaSocio(null, null);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
-    /**
-     * Create the frame.
-     */
+    
     public AltaSocio(App app, IControladorUsuario CU) {
     	setResizable(true);
     	setMaximizable(true);

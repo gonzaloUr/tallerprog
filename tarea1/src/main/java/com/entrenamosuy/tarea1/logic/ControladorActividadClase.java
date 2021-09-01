@@ -85,7 +85,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
             throw new ClaseCantInvalidoException("El minimo deber ser menor al maximo.");
         if (x.isAfter(inicio))
             throw new ClaseInicioRegistroInvalidoException("La fecha de inicio debe ser porsterior a la de registro.");
-        if (y.isBefore(x))
+        if (y.isAfter(x))
             throw new ClaseRegistroActividadInvalidaException("");
 
         Set<Profesor> profes = new HashSet<>();
