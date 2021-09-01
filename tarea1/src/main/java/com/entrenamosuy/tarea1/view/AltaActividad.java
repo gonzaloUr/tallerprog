@@ -1,60 +1,33 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.EventQueue;
-
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.Institucion;
-import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
-
-
-import com.toedter.calendar.JDateChooser;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Map;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JOptionPane;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.Manejador;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.toedter.calendar.JDateChooser;
 
 public class AltaActividad extends JInternalFrame {
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
     private JTextField textField_8;
-
-    public static void clearAltaAct(JComboBox a, JTextField b, JTextField c, JTextField d, JTextField e) {
-
-        b.setText("");
-        c.setText("");
-        d.setText("");
-        e.setText("");
-    }
 
     /**
      * Create the frame.
@@ -85,7 +58,7 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
-        JComboBox comboBox = new JComboBox(in);
+        JComboBox<String> comboBox = new JComboBox<>(in);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.insets = new Insets(0, 0, 5, 5);
         gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -188,14 +161,16 @@ public class AltaActividad extends JInternalFrame {
                     controladorActividadClase.crearActividad((String) comboBox.getSelectedItem(), textField_5.getText(), textField_6.getText(), dura, precio, fecha);
                     setVisible(false);
                     JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");
-                    clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
                 } catch (ActividadRepetidaException are) {
                     JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
-                    clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
+                    textField_5.setText("");
+                    return;
                 } catch (InstitucionNoEncontradaException inee) {
-                    JOptionPane.showMessageDialog(apli, "No existe una institucion con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
-                    clearAltaAct(comboBox, textField_5, textField_6, textField_7, textField_8);
+                    inee.printStackTrace();
+                    return;
                 }
+
+                setVisible(false);
             }
         });
         GridBagConstraints gbc_btnNewButton = new GridBagConstraints();

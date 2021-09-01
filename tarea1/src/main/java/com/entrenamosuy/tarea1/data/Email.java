@@ -4,6 +4,8 @@ import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.entrenamosuy.tarea1.exceptions.EmailParseException;
+
 public class Email {
 
     private static final Pattern pattern = Pattern.compile("(.+)@(.+)");
@@ -12,7 +14,7 @@ public class Email {
         return new Email(prefix, domain);
     }
 
-    public static Email parse(String email) {
+    public static Email parse(String email) throws EmailParseException {
         Matcher matcher = pattern.matcher(email);
 
         if (matcher.find()) {
@@ -22,7 +24,7 @@ public class Email {
             return Email.of(prefix, domain);
         }
 
-        throw new IllegalArgumentException("email invalido");
+        throw new EmailParseException("email invalido");
     }
 
     private final String prefix;

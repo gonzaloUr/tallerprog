@@ -18,8 +18,6 @@ public class Cuponera {
 
     private int descuento;
 
-    //private float precio;
-
     private Set<Integra> integras;
 
     private Set<Registro> registros;
@@ -31,7 +29,6 @@ public class Cuponera {
         this.inicio = inicio;
         this.fin = fin;
         this.descuento = descuento;
-        //this.precio = precio;
         this.integras = integras;
         this.registros = registros;
         this.fRegistro = fRegistro;

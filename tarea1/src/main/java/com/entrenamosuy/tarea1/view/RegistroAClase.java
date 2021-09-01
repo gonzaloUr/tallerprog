@@ -1,46 +1,35 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.Set;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
+import com.entrenamosuy.tarea1.exceptions.ClaseLlenaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraInvalidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraLlenaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.ControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
-import javax.swing.JCheckBox;
-import java.util.List;
-import java.util.ArrayList;
 
 
 public class RegistroAClase extends JInternalFrame {
@@ -50,13 +39,13 @@ public class RegistroAClase extends JInternalFrame {
     private JTextField textField_3;
 
     public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase, App app) {
-	
+
 	final List<String> cuponerasLista = new ArrayList<>();
 	for (Pair<String, String> cuponera : cuponeras) {
 		String nombre = cuponera.getFirst();
 		cuponerasLista.add(nombre);
 	}
-	
+
 	setTitle("Registro a dictado de clase.");
 	setClosable(true);
 	setResizable(true);
@@ -113,11 +102,11 @@ public class RegistroAClase extends JInternalFrame {
 	gbc_aceptar.gridy = 7;
 	getContentPane().add(aceptar, gbc_aceptar);
 	setBounds(100, 100, 555, 360);
-	
+
 	aceptar.addActionListener((ActionEvent a) -> {
 	    String cuponeraSelecionada = (String) cuponerasComboBox.getSelectedItem();
 	    LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(calendario.getDate());
-	    
+
 	    if (utilizarCheckBox.isSelected() && cuponeraSelecionada != "") {
 		try {
 		    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
@@ -139,6 +128,12 @@ public class RegistroAClase extends JInternalFrame {
 		} catch (CuponeraLlenaException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		} catch (ClaseLlenaException e){
+			JOptionPane.showMessageDialog(app,"No hay lugares disponibles en esa clase.","error", JOptionPane.ERROR_MESSAGE);
+            return;
+		} catch (ClaseRegistroInvalidoException e){
+			JOptionPane.showMessageDialog(app,"Fecha de registro inválida.","error", JOptionPane.ERROR_MESSAGE);
+            return;
 		}
 	    } else {
 		try {
@@ -146,6 +141,12 @@ public class RegistroAClase extends JInternalFrame {
 		} catch (SocioNoEncontradoException | ClaseNoEncontradaException e) {
 		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		} catch(ClaseLlenaException e){
+			JOptionPane.showMessageDialog(app,"No hay lugares disponibles en esa clase.","error", JOptionPane.ERROR_MESSAGE);
+            return;
+		} catch(ClaseRegistroInvalidoException e){
+			JOptionPane.showMessageDialog(app,"Fecha de registro inválida.","error", JOptionPane.ERROR_MESSAGE);
+            return;
 		}
 	    }
 	    setVisible(false);

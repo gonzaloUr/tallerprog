@@ -3,20 +3,26 @@ package com.entrenamosuy.tarea1.logic;
 import java.util.Map;
 import java.net.URL;
 import java.time.Duration;
+import java.time.LocalTime;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
 
+import com.entrenamosuy.tarea1.exceptions.ClaseInicioRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseCantInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroActividadInvalidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseLlenaException;
 import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
@@ -55,17 +61,32 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
     @Override
     public void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nicknameProfesores,
-                           int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException {
+                           int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro) 
+                           throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException, 
+                                  ClaseInicioRegistroInvalidoException, ClaseCantInvalidoException, ClaseCantInvalidoException,
+                                  ClaseRegistroActividadInvalidaException {
+
         Manejador maneja = Manejador.getInstance();
 
         Map<String, Actividad> actividades = maneja.getActividades();
         Map<String, Clase> clases = maneja.getClases();
         Map<String, Profesor> profesores = maneja.getProfesores();
         Actividad actividad = actividades.get(nombreActividad);
+
         if (actividad == null)
             throw new ActividadNoEncontradaException("No existe actividad con nombre: " + nombreActividad);
+            
+        LocalDateTime x = LocalDateTime.of(fechaRegistro, LocalTime.of(0, 0));
+        LocalDateTime y = LocalDateTime.of(actividad.getFechaRegistro(), LocalTime.of(0, 0));
+
         if (clases.containsKey(nombre))
             throw new ClaseRepetidaException("La clase llamada " + nombre + " ya existe.");
+        if (cantMin > cantMax)
+            throw new ClaseCantInvalidoException("El minimo deber ser menor al maximo.");
+        if (x.isAfter(inicio))
+            throw new ClaseInicioRegistroInvalidoException("La fecha de inicio debe ser porsterior a la de registro.");
+        if (y.isBefore(x))
+            throw new ClaseRegistroActividadInvalidaException("");
 
         Set<Profesor> profes = new HashSet<>();
         for (String nickname : nicknameProfesores) {
@@ -84,7 +105,9 @@ public class ControladorActividadClase implements IControladorActividadClase {
     }
 
     @Override
-    public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) throws ClaseNoEncontradaException, SocioNoEncontradoException {
+    public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro)
+        throws ClaseNoEncontradaException, SocioNoEncontradoException, ClaseLlenaException, ClaseRegistroInvalidoException  {
+
         Manejador man = Manejador.getInstance();
         Clase c = man.getClases().get(clase);
         Socio s = man.getSocios().get(socio);
@@ -95,11 +118,20 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (s == null)
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
+         if ((c.getCantMax() - c.getRegistros().size()) <= 0) 
+            throw new ClaseLlenaException("La clase esta ya esta llena");
+            
+        if (fechaRegistro.isBefore(c.getFechaRegistro()))   
+            throw new ClaseRegistroInvalidoException("La fecha de registro no puede ser anterior que la fecha de registro de la clase");     
+
         c.registrarseSinCuponera(s, fechaRegistro);
     }
 
     @Override
-    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro) throws CuponeraNoEncontradaException, SocioNoEncontradoException, ClaseNoEncontradaException {
+    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro) 
+        throws CuponeraNoEncontradaException, SocioNoEncontradoException, ClaseLlenaException, 
+               ClaseNoEncontradaException, ClaseRegistroInvalidoException {
+
         Manejador maneja = Manejador.getInstance();
         Clase c = maneja.getClases().get(clase);
         Socio s = maneja.getSocios().get(socio);
@@ -113,6 +145,12 @@ public class ControladorActividadClase implements IControladorActividadClase {
 
         if (cup == null)
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre: " + cuponera);
+
+        if ((c.getCantMax() - c.getRegistros().size()) <= 0) 
+            throw new ClaseLlenaException("La clase esta ya esta llena");
+            
+        if (fechaRegistro.isBefore(c.getFechaRegistro())) 
+            throw new ClaseRegistroInvalidoException("La fecha de registro no puede ser anterior que la fecha de registro de la clase");     
 
         c.registrarseConCuponera(s, fechaRegistro, cup);
     }

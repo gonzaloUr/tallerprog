@@ -1,30 +1,27 @@
 package com.entrenamosuy.tarea1.view;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
 
 import com.entrenamosuy.tarea1.data.DataActividad;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataProfesor;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JList;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 
 public class ConsultaProfesor extends JInternalFrame {
     private JTextField nicknameField;
@@ -37,6 +34,21 @@ public class ConsultaProfesor extends JInternalFrame {
     private JTextField sitioWebField;
 
     public ConsultaProfesor(App app, String nickname, IControladorUsuario controladorUsuario, IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
+        List<String> clases = new ArrayList<String>();
+        List<String> actividades = new ArrayList<String>();
+        DataProfesor profesor = null;
+
+        try {
+            profesor = controladorUsuario.consultarProfesor(nickname);
+        } catch (ProfesorNoEncontradoException e) {
+            e.printStackTrace();
+        }
+        for (DataActividad a : profesor.getActividades()) {
+            actividades.add(a.getNombre());
+            for (DataClase c : a.getClases())
+        	    clases.add(c.getNombre());
+        }
+        
         setResizable(true);
         setClosable(true);
         setTitle("Consulta profesor");
@@ -209,13 +221,6 @@ public class ConsultaProfesor extends JInternalFrame {
         gbc_lblActividades.gridy = 19;
         getContentPane().add(lblActividades, gbc_lblActividades);
 
-        DataProfesor profesor = null;
-        try {
-            profesor = controladorUsuario.consultarProfesor(nickname);
-        } catch (ProfesorNoEncontradoException e) {
-            e.printStackTrace();
-        }
-
         nicknameField.setText(profesor.getNickname());
         nombreField.setText(profesor.getNombre());
         apellidoField.setText(profesor.getApellido());
@@ -229,16 +234,7 @@ public class ConsultaProfesor extends JInternalFrame {
         if (profesorURL != null)
             sitioWebField.setText(profesorURL.toString());
    
-        List<String> clases = new ArrayList<>();
-        List<String> actividades = new ArrayList<>();
-        
-        for (DataActividad a : profesor.getActividades()) {
-            actividades.add(a.getNombre());
-            
-            for (DataClase c : a.getClases())
-        	clases.add(c.getNombre());
-        }
-        
+
         JList<String> actividadesLista = new JList<>(actividades.toArray(new String[] {}));
         GridBagConstraints gbc_actividadesLista = new GridBagConstraints();
         gbc_actividadesLista.insets = new Insets(0, 0, 5, 5);

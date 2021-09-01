@@ -4,7 +4,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,8 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 
 import com.entrenamosuy.tarea1.util.Pair;
-import com.entrenamosuy.tarea1.util.Triple;
-import com.entrenamosuy.tarea1.view.SelecionarInstitucion.Callback;
 
 public class SelecionarCuponera extends JInternalFrame {
 

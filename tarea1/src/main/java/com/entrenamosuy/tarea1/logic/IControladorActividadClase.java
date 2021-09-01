@@ -5,7 +5,11 @@ import java.util.Set;
 
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseCantInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseInicioRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroActividadInvalidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraInvalidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraLlenaException;
@@ -15,6 +19,7 @@ import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseLlenaException;
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
@@ -40,7 +45,8 @@ public interface IControladorActividadClase {
      * @throws ActividadRepetidaException       Cuando el nombre no es unico.
      * @throws InstitucionNoEncontradaException Cuando la institucion no existe.
      */
-    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDate registro) throws ActividadRepetidaException, InstitucionNoEncontradaException;
+    void crearActividad(String institucion, String nombre, String descripcion, Duration duracion, float costo, LocalDate registro)
+            throws ActividadRepetidaException, InstitucionNoEncontradaException;
 
     /**
      * Crea una nueva institucion con los datos ingresados, si ya existe una con el mismo nombre se tira
@@ -55,8 +61,8 @@ public interface IControladorActividadClase {
 
     /**
      * Crea una nueva clase con los datos pasados perteneciente a la actividad pasada, si ya existe una con
-     * el mismo nombre se tira {@link ClaseRepetidaException} y si no se encuentra la actividad se tira
-     * {@link ActividadNoEncontradaException}
+     * el mismo nombre se tira {@link ClaseRepetidaException}, si no se encuentra la actividad se tira
+     * {@link ActividadNoEncontradaException} y si cantMin mayor a cantMax tira {@link ClaseCantInvalidException}
      *
      * @param nombreActividad  Nombre de la actividad a la que pertenecera la clase.
      * @param nombre           Nombre unico de la clase.
@@ -69,22 +75,29 @@ public interface IControladorActividadClase {
      * @throws ClaseRepetidaException         Cuando el nombre no es unico en el sistema.
      * @throws ActividadNoEncontradaException Cuando existe una actividad con el nombre pasado.
      * @throws ProfesorNoEncontradoException  Cuando uno de los profesores pasados no es valido.
+     * @throws ClaseCantInvalidoException  Cuando cantMin es mayor a cantMax
+     * @throws ClaseInicioRegistroInvalidoException Cuando inicio es menor a fechaRegistro.
+     * @throws ClaseRegistroActivdadInvalidaException Cuando fechaRegistro es menor que la fecha de registro de la actividad.
      */
     void crearClase(String nombreActividad, String nombre, LocalDateTime inicio, Set<String> nombreProfesores,
                     int cantMin, int cantMax, URL acceso, LocalDate fechaRegistro)
-            throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException;
+            throws ClaseRepetidaException, ActividadNoEncontradaException, ProfesorNoEncontradoException,
+                   ClaseCantInvalidoException, ClaseInicioRegistroInvalidoException, ClaseRegistroActividadInvalidaException;
 
     /**
      * Registra a socio en la clase pasado sin el uso de una cuponera, si no existen socio o clase en el sistema
-     * se tiran {@link SocioNoEncontradoException} y {@link ClaseNoEncontradaException}.
+     * se tiran {@link SocioNoEncontradoException}, {@link ClaseNoEncontradaException} y {@link ClaseLlenaException}.
      *
      * @param socio         Nombre del socio que se registrara en una clase.
      * @param clase         Nombre de la clase a registrarse.
      * @param fechaRegistro Fecha del registro
      * @throws SocioNoEncontradoException Cuando no existe un socio con el nombre pasado en el sistema.
      * @throws ClaseNoEncontradaException Cuando no existe una clase con el nombre pasado en el sistema.
+     * @throws ClaseLlenaException Cuando la cantidad de registros de clase es igual a su cantMax.
+     * @throws ClaseRegistroInvalidoException Cuando fechaRegistro es menor que la fecha de registro de la clase.
      */
-    void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) throws SocioNoEncontradoException, ClaseNoEncontradaException;
+    void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro)
+            throws SocioNoEncontradoException, ClaseNoEncontradaException, ClaseLlenaException, ClaseRegistroInvalidoException;
 
     /**
      * Registar a socio en la clase pasada con la cuponera dada, si no existe un socio, clase o cuponera se tiran
@@ -103,10 +116,13 @@ public interface IControladorActividadClase {
      * @throws CuponeraNoCompradaException   Cuando el socio pasado no es dueño de la cuponera pasada.
      * @throws CuponeraInvalidaException     Cuando cuponera no tiene alguna actividad con clase.
      * @throws CuponeraLlenaException        Cuando el limite de la cuponera se alcanzo.
+     * @throws ClaseLlenaException           Cuando la cantidad de registros de clase es igual a su cantMax.
+     * @throws ClaseRegistroInvalidoException      Cuando fechaRegistro es menor que la fecha de registro de la clase.
      */
     void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
             throws SocioNoEncontradoException, ClaseNoEncontradaException, CuponeraNoEncontradaException,
-            CuponeraNoCompradaException, CuponeraInvalidaException, CuponeraLlenaException;
+            CuponeraNoCompradaException, CuponeraInvalidaException, CuponeraLlenaException, ClaseLlenaException,
+            ClaseRegistroInvalidoException;
 
     /**
      * Retorna el nombre, descripcion y URL de todos los institucion en el sistema.
