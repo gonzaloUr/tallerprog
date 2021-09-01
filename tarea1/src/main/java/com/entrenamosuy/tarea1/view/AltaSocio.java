@@ -1,36 +1,26 @@
 package com.entrenamosuy.tarea1.view;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Date;
+
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
 import com.toedter.calendar.JDateChooser;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
-import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.Date;
-import java.time.LocalDate;
-import java.awt.event.ActionEvent;
 
 public class AltaSocio extends JInternalFrame {
     private JTextField textField;

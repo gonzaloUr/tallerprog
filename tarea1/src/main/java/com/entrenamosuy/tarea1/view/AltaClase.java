@@ -1,45 +1,39 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.ControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
-import com.entrenamosuy.tarea1.util.Triple;
-import com.toedter.calendar.JDateChooser;
-
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import javax.swing.JCheckBox;
+import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.JComboBox;
-import javax.swing.Box;
-import javax.swing.ListSelectionModel;
+import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.JButton;
+
+import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseCantInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseInicioRegistroInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroActividadInvalidaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRepetidaException;
+import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.logic.Manejador;
+import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.Triple;
+import com.toedter.calendar.JDateChooser;
 
 public class AltaClase extends JInternalFrame {
 	private JTextField nombreField;
@@ -168,7 +162,7 @@ public class AltaClase extends JInternalFrame {
         gbc_btnAceptar.gridy = 13;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
 
-        JList<String> list = new JList<>(profesores.toArray(new String[] {}));
+        JList list = new JList(profesores.toArray(new String[] {}));
         GridBagConstraints gbc_list = new GridBagConstraints();
         gbc_list.insets = new Insets(0, 0, 5, 5);
         gbc_list.fill = GridBagConstraints.BOTH;
@@ -202,8 +196,10 @@ public class AltaClase extends JInternalFrame {
 		    Integer.parseInt(cantMax.getText()),
 		    new URL(url.getText()),
 		    LocalDate.now());
+            JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
 	    } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
 		  | ClaseRepetidaException e1) {
+              JOptionPane.showMessageDialog(app,"Error al crear la clase.","error", JOptionPane.ERROR_MESSAGE);
 		e1.printStackTrace();
 	    }
         catch(MalformedURLException e5){
@@ -211,8 +207,20 @@ public class AltaClase extends JInternalFrame {
             url.setText("");
             return;
         }
-            for (String s : maneja.getClases().keySet())
-            System.out.println(s);
+        catch(ClaseInicioRegistroInvalidoException e6){
+            JOptionPane.showMessageDialog(app,"La fecha de inicio debe ser posterior a la de registro.","error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        catch(ClaseCantInvalidoException e7){
+            JOptionPane.showMessageDialog(app,"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", JOptionPane.ERROR_MESSAGE);
+            cantMin.setText("");
+            cantMax.setText("");
+            return;
+        }
+        catch (ClaseRegistroActividadInvalidaException e8){
+            JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
             dispose();
         });
     }

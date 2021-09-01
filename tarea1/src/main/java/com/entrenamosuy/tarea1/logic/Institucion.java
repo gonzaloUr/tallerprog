@@ -4,9 +4,6 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.entrenamosuy.tarea1.util.Pair;
-
-
 public class Institucion {
 
     private String nombre;

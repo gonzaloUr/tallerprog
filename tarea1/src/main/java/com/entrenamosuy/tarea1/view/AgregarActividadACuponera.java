@@ -1,33 +1,19 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
 import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
+import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
 
 public class AgregarActividadACuponera extends JInternalFrame {
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
 
     /**
      * Launch the application.
@@ -66,7 +52,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
         gbc_lblNewLabel.gridy = 2;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
-        JComboBox comboBox = new JComboBox();
+        JComboBox<String> comboBox = new JComboBox<>();
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
         gbc_comboBox.insets = new Insets(0, 0, 5, 5);
         gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -82,7 +68,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
         gbc_lblIngresarNombre.gridy = 5;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
 
-        JComboBox comboBox_1 = new JComboBox();
+        JComboBox<String> comboBox_1 = new JComboBox<>();
         GridBagConstraints gbc_comboBox_1 = new GridBagConstraints();
         gbc_comboBox_1.insets = new Insets(0, 0, 5, 5);
         gbc_comboBox_1.fill = GridBagConstraints.HORIZONTAL;

@@ -1,23 +1,19 @@
 package com.entrenamosuy.tarea1.view;
 
-import javax.swing.*;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JFrame;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.entrenamosuy.tarea1.data.DataUsuario;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JTextField;
+
 import com.entrenamosuy.tarea1.data.DataClase;
 import com.entrenamosuy.tarea1.data.DataSocio;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
@@ -41,7 +37,6 @@ public class ConsultaSocio extends JInternalFrame {
         String nacimiento = data.getNacimiento().toString();
         
         List<String> clasesLista = new ArrayList<String>();
-        
         for (DataClase c : data.getClases())
             clasesLista.add(c.getNombre());
 

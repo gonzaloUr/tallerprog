@@ -1,56 +1,38 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.EventQueue;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.Date;
 
-import com.toedter.calendar.JDateChooser;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 import com.entrenamosuy.tarea1.data.Email;
+import com.entrenamosuy.tarea1.exceptions.EmailParseException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.util.FuncionFecha;
-import com.entrenamosuy.tarea1.logic.Institucion;
-
-import javax.swing.JInternalFrame;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-
-import java.awt.Color;
-import javax.swing.JRadioButton;
-import javax.swing.JTextPane;
-import javax.swing.DropMode;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.BoxLayout;
-import java.awt.Component;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-
-import java.awt.event.ActionListener;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Date;
-import java.time.LocalDate;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 public class AltaProfesor extends JInternalFrame {
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
     private JTextField textField_4;
     private JTextField textField_5;
     private JTextField textField_6;
     private JTextField textField_7;
     private JLabel lblIngresarFecha;
-    private JLabel lblNewLabel_1;
     private JButton btnNewButton;
     private JLabel lblIngresarInstitucion;
     private JLabel lblIngresarDescripcion;
@@ -59,10 +41,8 @@ public class AltaProfesor extends JInternalFrame {
     private JTextField textField_10;
     private JLabel lblIngresarUrlhttpsejej;
     private JTextField textField_11;
-    private JComboBox comboBox;
+    private JComboBox<String> comboBox;
 
-    
-    
     public AltaProfesor(App app, IControladorUsuario CU) {
     	setResizable(true);
     	setMaximizable(true);
@@ -176,7 +156,7 @@ public class AltaProfesor extends JInternalFrame {
                         gbc_lblIngresarInstitucion.gridy = 7;
                         getContentPane().add(lblIngresarInstitucion, gbc_lblIngresarInstitucion);
                         
-                        comboBox = new JComboBox(insts);
+                        comboBox = new JComboBox<>(insts);
                         GridBagConstraints gbc_comboBox = new GridBagConstraints();
                         gbc_comboBox.gridwidth = 2;
                         gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -249,14 +229,13 @@ public class AltaProfesor extends JInternalFrame {
                 Email mail; 
                 try {
                 mail = Email.parse(textField_7.getText());
-                } catch(IllegalArgumentException ep) {
+                } catch(EmailParseException ep) {
                 	JOptionPane.showMessageDialog(app, "Email invalido", "error", JOptionPane.ERROR_MESSAGE);
                     textField_7.setText("");
                 	return;
                 }
                 Date fechaf = (Date) chooser.getDate();
-                FuncionFecha f = new FuncionFecha();
-                LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
+                LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(fechaf);
                 String institucion = (String) comboBox.getSelectedItem();
                 String descripcion = textField_9.getText();
                 String biografia = textField_10.getText();

@@ -11,8 +11,6 @@ import java.util.Set;
 import javax.swing.*;
 
 import com.entrenamosuy.tarea1.util.Pair;
-import com.entrenamosuy.tarea1.util.Triple;
-import com.entrenamosuy.tarea1.view.SelecionarUsuario.Callback;
 
 public class SelecionarActividad extends JInternalFrame {
 

@@ -77,8 +77,8 @@ public class CargarDatosLambda implements ActionListener {
 
             Set<String> p1 = new HashSet<>();
             p1.add("viktor");
-            CAC.crearClase("Aparatos y pesas", "Calistenia", LocalDateTime.of(2021, 3, 15, 15, 30), p1, 1, 5, new URL("https://www.musculos.com/Calistenia"), LocalDate.of(2021, 3, 31)); //Fallan por la fecha
-            CAC.crearClase("Aparatos y pesas", "Peso libre", LocalDateTime.of(2021, 5, 1, 17, 00), p1, 1, 5, new URL("https://www.musculos.com/pesolibre"), LocalDate.of(2021, 3, 31));  //Fallan por la fecha
+            CAC.crearClase("Aparatos y pesas", "Calistenia", LocalDateTime.of(2021, 4, 15, 15, 30), p1, 1, 5, new URL("https://www.musculos.com/Calistenia"), LocalDate.of(2021, 3, 31));
+            CAC.crearClase("Aparatos y pesas", "Peso libre", LocalDateTime.of(2021, 5, 1, 17, 00), p1, 1, 5, new URL("https://www.musculos.com/pesolibre"), LocalDate.of(2021, 3, 31));
             CAC.crearClase("Aparatos y pesas", "Aparatos", LocalDateTime.of(2021, 6, 1, 18, 00), p1, 1, 7, new URL("https://www.musculos.com/aparatos"), LocalDate.of(2021, 3, 31));  //Fallan por la fecha
 
             Set<String> p2 = new HashSet<>();

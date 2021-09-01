@@ -1,35 +1,29 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.data.Email;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.*;
+import com.entrenamosuy.tarea1.logic.Fabrica;
+import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.logic.Manejador;
+import com.entrenamosuy.tarea1.logic.Registro;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
-import java.time.Duration;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JOptionPane;
 
 public class App extends JFrame {
 

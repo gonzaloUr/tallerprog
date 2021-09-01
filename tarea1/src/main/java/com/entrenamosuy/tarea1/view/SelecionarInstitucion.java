@@ -1,10 +1,10 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.util.Triple;
-import com.entrenamosuy.tarea1.view.SelecionarActividad.Callback;
 
-import javax.swing.*;
+import javax.swing.JInternalFrame;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -17,9 +17,7 @@ import java.util.Set;
 
 public class SelecionarInstitucion extends JInternalFrame {
 
-
     public interface Callback {
-
         void run(String institucion);
     }
 
