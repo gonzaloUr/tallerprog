@@ -475,7 +475,7 @@ public class App extends JFrame {
             			return;
             		    }
 
-                        System.out.println("Cuponeras usables length: " + cuponeras.size());
+                        //System.out.println("Cuponeras usables length: " + cuponeras.size());
 
             		    RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase, that);
             		    registroAClase.setVisible(true);
