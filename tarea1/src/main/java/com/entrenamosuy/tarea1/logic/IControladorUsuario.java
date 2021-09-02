@@ -60,7 +60,7 @@ public interface IControladorUsuario {
      * @throws UsuarioNoEncontradoException Cuando no existe un usuario con el nickname pasado.
      */
     void modificarDatosSocio(String nickname, String nombre, String apellido, LocalDate nacimiento) throws SocioNoEncontradoException;
-    
+
     void modificarDatosProfesor(String nickname, String nombre, String apellido, LocalDate nacimiento,
 	    String descripcion, String biografia, URL sitioWeb) throws ProfesorNoEncontradoException;
 
@@ -81,6 +81,8 @@ public interface IControladorUsuario {
      * @throws ProfesoresVacioException Cuando no hay profesores en el sistema.
      */
     Set<Triple<String, String, String>> obtenerDescProfesores();
+
+    Set<Triple<String, String, String>> obtenerDescProfesoresDe(String institucion) throws InstitucionNoEncontradaException;
 
     /**
      * Retorna el DataSocio asociado al nombre pasado o tira una excepcion si no

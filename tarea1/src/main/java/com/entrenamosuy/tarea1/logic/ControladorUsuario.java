@@ -89,12 +89,12 @@ public class ControladorUsuario implements IControladorUsuario {
         if (nacimiento != null)
             socio.setNacimiento(nacimiento);
     }
-    
+
 
     @Override
     public void modificarDatosProfesor(String nickname, String nombre, String apellido, LocalDate nacimiento,
 	    String descripcion, String biografia, URL sitioWeb) throws ProfesorNoEncontradoException {
-	
+
         Manejador manejador = Manejador.getInstance();
         Profesor profesor = manejador.getProfesores().get(nickname);;
 
@@ -110,13 +110,13 @@ public class ControladorUsuario implements IControladorUsuario {
 
         if (nacimiento != null)
             profesor.setNacimiento(nacimiento);
-        
+
         if (descripcion != null)
             profesor.setDescripcion(descripcion);
-        
+
         if (biografia != null)
             profesor.setBiografia(biografia);
-        
+
         if (sitioWeb != null)
             profesor.setSitioWeb(sitioWeb);
     }
@@ -151,6 +151,28 @@ public class ControladorUsuario implements IControladorUsuario {
         }
 
         return res;
+    }
+
+    @Override
+    public Set<Triple<String, String, String>> obtenerDescProfesoresDe(String institucion)
+            throws InstitucionNoEncontradaException {
+
+        Manejador manejador = Manejador.getInstance();
+
+        if (!manejador.getInstituciones().containsKey(institucion))
+            throw new InstitucionNoEncontradaException("institucion no encontrada");
+
+        Set<Triple<String, String, String>> profesores = obtenerDescProfesores();
+        Set<Triple<String, String, String>> ret = new HashSet<>();
+
+        for (Triple<String, String, String> profesor : profesores) {
+            String nickname = profesor.getSecond();
+            String nom = manejador.getProfesores().get(nickname).getInstitucion().getNombre();
+            if (nom.equals(institucion))
+                ret.add(profesor);
+        }
+
+        return ret;
     }
 
     @Override
