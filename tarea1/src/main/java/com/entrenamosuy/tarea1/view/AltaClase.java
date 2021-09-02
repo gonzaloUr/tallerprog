@@ -40,26 +40,23 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JSpinner;
 
 public class AltaClase extends JInternalFrame {
-	private JTextField nombreField;
-	private JTextField cantMin;
-	private JTextField cantMax;
-	private JTextField url;
+    private JTextField nombreField;
+    private JTextField cantMin;
+    private JTextField cantMax;
+    private JTextField url;
 
     public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, String institucion, App app) {
         
-        final List<String> profesores = new ArrayList<>();
-        Manejador maneja = Manejador.getInstance();
-        for (Triple<String, String, String> profesor : controladorUsuario.obtenerDescProfesores()) {
-            String nickname = profesor.getSecond();
-            String nom = maneja.getProfesores().get(nickname).getInstitucion().getNombre();
-            if (nom.equals(institucion))
-                profesores.add(nickname);
-        }
+        final String[] profesores = controladorUsuario.obtenerDescProfesores()
+        	.stream()
+        	.map(Triple::getSecond)
+        	.toArray(String[]::new);
 	
     	setClosable(true);
     	setResizable(true);
         setSize(573, 455);
         setTitle("Alta clase");
+        
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -215,7 +212,7 @@ public class AltaClase extends JInternalFrame {
         gbc_btnAceptar.gridy = 14;
         getContentPane().add(btnAceptar, gbc_btnAceptar);
 
-        JList list = new JList(profesores.toArray(new String[] {}));
+        JList list = new JList(profesores);
         GridBagConstraints gbc_list = new GridBagConstraints();
         gbc_list.insets = new Insets(0, 0, 5, 5);
         gbc_list.fill = GridBagConstraints.BOTH;
@@ -227,25 +224,37 @@ public class AltaClase extends JInternalFrame {
         
         list.addListSelectionListener((ListSelectionEvent e) -> {
             if (e.getValueIsAdjusting() == false) {
-        	    int[] selected = list.getSelectedIndices();
-        	    selectedNicknames.clear();
+        	int[] selected = list.getSelectedIndices();
+        	selectedNicknames.clear();
+        	
+        	for (int i = 0; i < selected.length; i++)
+        	    selectedNicknames.add(profesores[selected[i]]);
             }
         });
 
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
                 controladorActividadClase.crearClase(actividad, 
-                nombreField.getText(),
-                LocalDateTime.of(FechaUtil.toLocalDateTime(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
-                selectedNicknames,
-                Integer.parseInt(cantMin.getText()),
-                Integer.parseInt(cantMax.getText()),
-                new URL(url.getText()),
-                FechaUtil.toLocalDateTime(calendario2.getDate()));
+                	nombreField.getText(),
+                	LocalDateTime.of(FechaUtil.toLocalDateTime(
+                		calendario.getDate()), 
+                		LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
+                	selectedNicknames,
+                	Integer.parseInt(cantMin.getText()),
+                	Integer.parseInt(cantMax.getText()),
+                	new URL(url.getText()),
+                	FechaUtil.toLocalDateTime(calendario2.getDate()));
+                
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
-            } 
-            catch(ActividadNoEncontradaException ex) {}
-            catch(ProfesorNoEncontradoException ec) {}
+            }
+            catch(ActividadNoEncontradaException ex) {
+        	ex.printStackTrace();
+        	return;
+            }
+            catch(ProfesorNoEncontradoException ec) {
+        	ec.printStackTrace();
+        	return;
+            }
             catch (NumberFormatException e1) {
                 JOptionPane.showMessageDialog(app,"Por favor ingrese un numero.","error", JOptionPane.ERROR_MESSAGE);
                 e1.printStackTrace();
@@ -257,22 +266,31 @@ public class AltaClase extends JInternalFrame {
                 return;
             }
             catch(MalformedURLException e5){
-                JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(app,
+                	"El link ingresado no es correcto.",
+                	"error", JOptionPane.ERROR_MESSAGE);
                 url.setText("");
                 return;
             }
             catch(ClaseInicioRegistroInvalidoException e6){
-                JOptionPane.showMessageDialog(app,"La fecha de inicio debe ser posterior a la de registro.","error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(app,
+                	"La fecha de inicio debe ser posterior a la de registro.","error", 
+                	JOptionPane.ERROR_MESSAGE);
                 return;
             }
             catch(ClaseCantInvalidoException e7){
-                JOptionPane.showMessageDialog(app,"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(app,
+                	"La cantidad minima de socios debe ser menor a la cantidad maxima.","error", 
+                	JOptionPane.ERROR_MESSAGE);
+                
                 cantMin.setText("");
                 cantMax.setText("");
                 return;
             }
             catch (ClaseRegistroActividadInvalidaException e8){
-                JOptionPane.showMessageDialog(app,"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.","error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(app, 
+                	"La fecha de registro de la clase debe ser posterior a la de registro de la actividad.",
+                	"error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             dispose();

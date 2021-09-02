@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -21,33 +22,33 @@ import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.Manejador;
 import com.entrenamosuy.tarea1.util.FechaUtil;
+import com.entrenamosuy.tarea1.util.Triple;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaActividad extends JInternalFrame {
-    private JTextField textField_5;
-    private JTextField textField_6;
-    private JTextField textField_7;
-    private JTextField textField_8;
+    private JTextField nombre;
+    private JTextField descripcion;
+    private JTextField duracion;
+    private JTextField costo;
 
-    /**
-     * Create the frame.
-     */
-    public AltaActividad(IControladorActividadClase controladorActividadClase, App apli) {
+    public AltaActividad(App app, IControladorActividadClase controladorActividadClase) {
+	String[] instituciones = controladorActividadClase.obtenerDescInstituciones()
+		.stream()
+		.map(Triple::getFirst)
+		.toArray(String[]::new);
+	
     	setClosable(true);
     	setResizable(true);
     	setMaximizable(true);
-        Manejador man = Manejador.getInstance();
-        String[] in = man.getInstituciones().keySet().toArray(new String[0]);
-
-
+        setBounds(100, 100, 554, 308);
         setTitle("Alta de actividad deportiva");
         getContentPane().setForeground(Color.RED);
         
         GridBagLayout gridBagLayout = new GridBagLayout();
-        gridBagLayout.columnWidths = new int[]{76, 0, 0, 0, 49, 0, 9, 0};
-        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        gridBagLayout.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
+        gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         getContentPane().setLayout(gridBagLayout);
 
         JLabel lblNewLabel = new JLabel("Seleccionar Institucion");
@@ -58,13 +59,13 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblNewLabel.gridy = 1;
         getContentPane().add(lblNewLabel, gbc_lblNewLabel);
 
-        JComboBox<String> comboBox = new JComboBox<>(in);
-        GridBagConstraints gbc_comboBox = new GridBagConstraints();
-        gbc_comboBox.insets = new Insets(0, 0, 5, 5);
-        gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
-        gbc_comboBox.gridx = 5;
-        gbc_comboBox.gridy = 1;
-        getContentPane().add(comboBox, gbc_comboBox);
+        JComboBox institucionComboBox = new JComboBox(instituciones);
+        GridBagConstraints gbc_institucionComboBox = new GridBagConstraints();
+        gbc_institucionComboBox.insets = new Insets(0, 0, 5, 5);
+        gbc_institucionComboBox.fill = GridBagConstraints.HORIZONTAL;
+        gbc_institucionComboBox.gridx = 3;
+        gbc_institucionComboBox.gridy = 1;
+        getContentPane().add(institucionComboBox, gbc_institucionComboBox);
 
         JLabel lblIngresarNombre = new JLabel("Ingresar Nombre");
         GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
@@ -74,14 +75,14 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblIngresarNombre.gridy = 2;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
 
-        textField_5 = new JTextField();
-        GridBagConstraints gbc_textField_5 = new GridBagConstraints();
-        gbc_textField_5.insets = new Insets(0, 0, 5, 5);
-        gbc_textField_5.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_5.gridx = 5;
-        gbc_textField_5.gridy = 2;
-        getContentPane().add(textField_5, gbc_textField_5);
-        textField_5.setColumns(10);
+        nombre = new JTextField();
+        GridBagConstraints gbc_nombre = new GridBagConstraints();
+        gbc_nombre.insets = new Insets(0, 0, 5, 5);
+        gbc_nombre.fill = GridBagConstraints.HORIZONTAL;
+        gbc_nombre.gridx = 3;
+        gbc_nombre.gridy = 2;
+        getContentPane().add(nombre, gbc_nombre);
+        nombre.setColumns(10);
 
         JLabel lblIngresarApellido = new JLabel("Ingresar descripcion");
         GridBagConstraints gbc_lblIngresarApellido = new GridBagConstraints();
@@ -91,14 +92,14 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblIngresarApellido.gridy = 3;
         getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
 
-        textField_6 = new JTextField();
-        GridBagConstraints gbc_textField_6 = new GridBagConstraints();
-        gbc_textField_6.insets = new Insets(0, 0, 5, 5);
-        gbc_textField_6.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_6.gridx = 5;
-        gbc_textField_6.gridy = 3;
-        getContentPane().add(textField_6, gbc_textField_6);
-        textField_6.setColumns(10);
+        descripcion = new JTextField();
+        GridBagConstraints gbc_descripcion = new GridBagConstraints();
+        gbc_descripcion.insets = new Insets(0, 0, 5, 5);
+        gbc_descripcion.fill = GridBagConstraints.HORIZONTAL;
+        gbc_descripcion.gridx = 3;
+        gbc_descripcion.gridy = 3;
+        getContentPane().add(descripcion, gbc_descripcion);
+        descripcion.setColumns(10);
 
         JLabel lblIngresarEmail = new JLabel("Ingresar duracion (min)");
         GridBagConstraints gbc_lblIngresarEmail = new GridBagConstraints();
@@ -108,14 +109,14 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblIngresarEmail.gridy = 4;
         getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
 
-        textField_7 = new JTextField();
-        GridBagConstraints gbc_textField_7 = new GridBagConstraints();
-        gbc_textField_7.insets = new Insets(0, 0, 5, 5);
-        gbc_textField_7.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_7.gridx = 5;
-        gbc_textField_7.gridy = 4;
-        getContentPane().add(textField_7, gbc_textField_7);
-        textField_7.setColumns(10);
+        duracion = new JTextField();
+        GridBagConstraints gbc_duracion = new GridBagConstraints();
+        gbc_duracion.insets = new Insets(0, 0, 5, 5);
+        gbc_duracion.fill = GridBagConstraints.HORIZONTAL;
+        gbc_duracion.gridx = 3;
+        gbc_duracion.gridy = 4;
+        getContentPane().add(duracion, gbc_duracion);
+        duracion.setColumns(10);
 
         JLabel lblNewLabel_1 = new JLabel("Ingresar costo");
         GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -125,14 +126,14 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblNewLabel_1.gridy = 5;
         getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-        textField_8 = new JTextField();
-        GridBagConstraints gbc_textField_8 = new GridBagConstraints();
-        gbc_textField_8.insets = new Insets(0, 0, 5, 5);
-        gbc_textField_8.fill = GridBagConstraints.HORIZONTAL;
-        gbc_textField_8.gridx = 5;
-        gbc_textField_8.gridy = 5;
-        getContentPane().add(textField_8, gbc_textField_8);
-        textField_8.setColumns(10);
+        costo = new JTextField();
+        GridBagConstraints gbc_costo = new GridBagConstraints();
+        gbc_costo.insets = new Insets(0, 0, 5, 5);
+        gbc_costo.fill = GridBagConstraints.HORIZONTAL;
+        gbc_costo.gridx = 3;
+        gbc_costo.gridy = 5;
+        getContentPane().add(costo, gbc_costo);
+        costo.setColumns(10);
 
         JLabel lblIngresarFecha = new JLabel("Ingresar fecha");
         GridBagConstraints gbc_lblIngresarFecha = new GridBagConstraints();
@@ -142,28 +143,38 @@ public class AltaActividad extends JInternalFrame {
         gbc_lblIngresarFecha.gridy = 7;
         getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
 
-        JDateChooser lblNewLabel_2 = new JDateChooser();
-        GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-        gbc_lblNewLabel_2.fill = GridBagConstraints.HORIZONTAL;
-        gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-        gbc_lblNewLabel_2.gridx = 5;
-        gbc_lblNewLabel_2.gridy = 7;
-        getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
-
-        JButton btnNewButton = new JButton("Aceptar");
-        btnNewButton.addActionListener(new ActionListener() {
+        JDateChooser calendario = new JDateChooser();
+        GridBagConstraints gbc_calendario = new GridBagConstraints();
+        gbc_calendario.fill = GridBagConstraints.HORIZONTAL;
+        gbc_calendario.insets = new Insets(0, 0, 5, 5);
+        gbc_calendario.gridx = 3;
+        gbc_calendario.gridy = 7;
+        getContentPane().add(calendario, gbc_calendario);
+        
+        JButton aceptar = new JButton("Aceptar");
+        GridBagConstraints gbc_aceptar = new GridBagConstraints();
+        gbc_aceptar.insets = new Insets(0, 0, 0, 5);
+        gbc_aceptar.gridx = 3;
+        gbc_aceptar.gridy = 9;
+        getContentPane().add(aceptar, gbc_aceptar);
+        
+        aceptar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int duration = Integer.parseInt(textField_7.getText());
-                    Duration dura = Duration.ofMinutes(duration);
-                    float precio = Float.parseFloat(textField_8.getText());
-                    LocalDate fecha = FechaUtil.toLocalDateTime(lblNewLabel_2.getDate());
-                    controladorActividadClase.crearActividad((String) comboBox.getSelectedItem(), textField_5.getText(), textField_6.getText(), dura, precio, fecha);
+                    Duration duration = Duration.ofMinutes(Integer.parseInt(duracion.getText()));
+                    float precio = Float.parseFloat(costo.getText());
+                    LocalDate fecha = FechaUtil.toLocalDateTime(calendario.getDate());
+                    
+                    controladorActividadClase.crearActividad((String) institucionComboBox.getSelectedItem(), 
+                	    nombre.getText(), 
+                	    descripcion.getText(), 
+                	    duration, precio, fecha);
+                    
+                    JOptionPane.showMessageDialog(app, "Actividad registrada exitosamente.");
                     setVisible(false);
-                    JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");
                 } catch (ActividadRepetidaException are) {
-                    JOptionPane.showMessageDialog(apli, "Ya existe una actividad con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
-                    textField_5.setText("");
+                    JOptionPane.showMessageDialog(app, "Ya existe una actividad con ese nombre.", "error", JOptionPane.ERROR_MESSAGE);
+                    nombre.setText("");
                     return;
                 } catch (InstitucionNoEncontradaException inee) {
                     inee.printStackTrace();
@@ -173,12 +184,5 @@ public class AltaActividad extends JInternalFrame {
                 setVisible(false);
             }
         });
-        GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-        gbc_btnNewButton.anchor = GridBagConstraints.WEST;
-        gbc_btnNewButton.insets = new Insets(0, 0, 0, 5);
-        gbc_btnNewButton.gridx = 1;
-        gbc_btnNewButton.gridy = 10;
-        getContentPane().add(btnNewButton, gbc_btnNewButton);
-        setBounds(100, 100, 555, 360);
     }
 }

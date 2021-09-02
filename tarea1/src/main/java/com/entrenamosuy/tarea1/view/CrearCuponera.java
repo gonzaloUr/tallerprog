@@ -34,15 +34,14 @@ public class CrearCuponera extends JInternalFrame {
     private JLabel lblIngresarFin;
     private JDateChooser calendarioFin;
 
-    /**
-     * Create the frame.
-     */
     public CrearCuponera(IControladorCuponera controladorCuponera, App app) {
     	setMaximizable(true);
     	setResizable(true);
     	setClosable(true);
         setTitle("Crear Cuponera");
         getContentPane().setForeground(Color.RED);
+        setBounds(100, 100, 660, 525);
+        
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{34, 0, 0, 49, 0, 9, 0};
         gridBagLayout.rowHeights = new int[]{38, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0};
@@ -121,32 +120,31 @@ public class CrearCuponera extends JInternalFrame {
         gbc_calendario.gridx = 3;
         gbc_calendario.gridy = 7;
         getContentPane().add(calendario, gbc_calendario);
-                
-                lblIngresarFin = new JLabel("Ingresar fin");
-                GridBagConstraints gbc_lblIngresarFin = new GridBagConstraints();
-                gbc_lblIngresarFin.anchor = GridBagConstraints.WEST;
-                gbc_lblIngresarFin.insets = new Insets(0, 0, 5, 5);
-                gbc_lblIngresarFin.gridx = 1;
-                gbc_lblIngresarFin.gridy = 9;
-                getContentPane().add(lblIngresarFin, gbc_lblIngresarFin);
-                
-                calendarioFin = new JDateChooser();
-                GridBagConstraints gbc_calendarioFin = new GridBagConstraints();
-                gbc_calendarioFin.gridwidth = 2;
-                gbc_calendarioFin.insets = new Insets(0, 0, 5, 5);
-                gbc_calendarioFin.fill = GridBagConstraints.BOTH;
-                gbc_calendarioFin.gridx = 3;
-                gbc_calendarioFin.gridy = 9;
-                getContentPane().add(calendarioFin, gbc_calendarioFin);
-        
-                aceptar = new JButton("Aceptar");
-                GridBagConstraints gbc_aceptar = new GridBagConstraints();
-                gbc_aceptar.insets = new Insets(0, 0, 5, 5);
-                gbc_aceptar.gridx = 3;
-                gbc_aceptar.gridy = 11;
-                getContentPane().add(aceptar, gbc_aceptar);
-        setBounds(100, 100, 660, 525);
-        
+
+	lblIngresarFin = new JLabel("Ingresar fin");
+	GridBagConstraints gbc_lblIngresarFin = new GridBagConstraints();
+	gbc_lblIngresarFin.anchor = GridBagConstraints.WEST;
+	gbc_lblIngresarFin.insets = new Insets(0, 0, 5, 5);
+	gbc_lblIngresarFin.gridx = 1;
+	gbc_lblIngresarFin.gridy = 9;
+	getContentPane().add(lblIngresarFin, gbc_lblIngresarFin);
+
+	calendarioFin = new JDateChooser();
+	GridBagConstraints gbc_calendarioFin = new GridBagConstraints();
+	gbc_calendarioFin.gridwidth = 2;
+	gbc_calendarioFin.insets = new Insets(0, 0, 5, 5);
+	gbc_calendarioFin.fill = GridBagConstraints.BOTH;
+	gbc_calendarioFin.gridx = 3;
+	gbc_calendarioFin.gridy = 9;
+	getContentPane().add(calendarioFin, gbc_calendarioFin);
+
+	aceptar = new JButton("Aceptar");
+	GridBagConstraints gbc_aceptar = new GridBagConstraints();
+	gbc_aceptar.insets = new Insets(0, 0, 5, 5);
+	gbc_aceptar.gridx = 3;
+	gbc_aceptar.gridy = 11;
+	getContentPane().add(aceptar, gbc_aceptar);
+
         aceptar.addActionListener((ActionEvent a) -> {
             try {
 		controladorCuponera.crearCuponera(nombreField.getText(), descField.getText(), 
@@ -154,12 +152,12 @@ public class CrearCuponera extends JInternalFrame {
 		    FechaUtil.toLocalDateTime(calendarioFin.getDate()),
 		    (Integer) descuento.getValue(), LocalDate.now());
 	    } catch (CuponeraRepetidaException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
 		return;
 	    }
+            
             JOptionPane.showMessageDialog(app, "Cuponera creada exitosamente.");
-            dispose();
+            setVisible(false);
         });
     }
 }

@@ -502,8 +502,8 @@ public class App extends JFrame {
             getContentPane().add(selecionarCuponera);
         });
         
-        altaActividadDeportiva.addActionListener((ActionEvent a) -> {
-            AltaActividad alta = new AltaActividad(controladorActividadClase, this);
+        altaActividadDeportiva.addActionListener((ActionEvent a) -> {          
+            AltaActividad alta = new AltaActividad(this, controladorActividadClase);
             alta.setVisible(true);
             getContentPane().add(alta);
         });
@@ -514,12 +514,10 @@ public class App extends JFrame {
             getContentPane().add(alta);
         });
         
-        altaDeProfesor.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario);
-                that.getContentPane().add(altaprofesor);
-                altaprofesor.setVisible(true);
-            }
+        altaDeProfesor.addActionListener((ActionEvent e) -> {
+            AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario, controladorActividadClase);
+            that.getContentPane().add(altaprofesor);
+            altaprofesor.setVisible(true);
         });
         
         altaDeSocio.addActionListener(new ActionListener() {
@@ -570,13 +568,15 @@ public class App extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
                     }
-                    if(actividades.size()==0) {
+                    
+                    if(actividades.size() == 0) {
                     	JOptionPane.showMessageDialog(that,"No hay actividades agregables.","error", JOptionPane.ERROR_MESSAGE);
                     	return;
                     }
-                    SeleccionarActHs selecActH = new SeleccionarActHs(actividades, controladorCuponera, that, cuponera);
-                    selecActH.setVisible(true);
-                    getContentPane().add(selecActH);
+                    
+                    AgregarActividadACuponera agregarCuponera = new AgregarActividadACuponera(actividades, cuponera, this, controladorCuponera);
+                    agregarCuponera.setVisible(true);
+                    getContentPane().add(agregarCuponera);
                     
                 });
                 

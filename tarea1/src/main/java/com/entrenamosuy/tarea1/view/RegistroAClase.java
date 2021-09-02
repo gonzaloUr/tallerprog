@@ -16,7 +16,6 @@ import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import com.entrenamosuy.tarea1.exceptions.ClaseLlenaException;
 import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
@@ -31,19 +30,15 @@ import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
 
-
 public class RegistroAClase extends JInternalFrame {
-    private JTextField textField;
-    private JTextField textField_1;
-    private JTextField textField_2;
-    private JTextField textField_3;
 
-    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras, IControladorActividadClase controladorActividadClase, App app) {
+    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras,
+	    IControladorActividadClase controladorActividadClase, App app) {
 
 	final List<String> cuponerasLista = new ArrayList<>();
 	for (Pair<String, String> cuponera : cuponeras) {
-		String nombre = cuponera.getFirst();
-		cuponerasLista.add(nombre);
+	    String nombre = cuponera.getFirst();
+	    cuponerasLista.add(nombre);
 	}
 
 	setTitle("Registro a dictado de clase.");
@@ -111,44 +106,50 @@ public class RegistroAClase extends JInternalFrame {
 		try {
 		    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
 		} catch (SocioNoEncontradoException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		    return;
 		} catch (ClaseNoEncontradaException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		    return;
 		} catch (CuponeraNoEncontradaException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		    return;
 		} catch (CuponeraNoCompradaException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		    return;
 		} catch (CuponeraInvalidaException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
+		    return;
 		} catch (CuponeraLlenaException e) {
-		    // TODO Auto-generated catch block
-		    e.printStackTrace();
-		} catch (ClaseLlenaException e){
-			JOptionPane.showMessageDialog(app,"No hay lugares disponibles en esa clase.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-		} catch (ClaseRegistroInvalidoException e){
-			JOptionPane.showMessageDialog(app,"Fecha de registro inválida.","error", JOptionPane.ERROR_MESSAGE);
-            return;
+		    JOptionPane.showMessageDialog(app, "No hay lugares disponibles en la cuponera.", "error",
+			    JOptionPane.ERROR_MESSAGE);
+		    return;
+		} catch (ClaseLlenaException e) {
+		    JOptionPane.showMessageDialog(app, "No hay lugares disponibles en esa clase.", "error",
+			    JOptionPane.ERROR_MESSAGE);
+		    return;
+		} catch (ClaseRegistroInvalidoException e) {
+		    JOptionPane.showMessageDialog(app, "Fecha de registro inválida.", "error",
+			    JOptionPane.ERROR_MESSAGE);
+		    return;
 		}
 	    } else {
 		try {
 		    controladorActividadClase.registarseSinCuponera(socio, clase, fecha);
 		} catch (SocioNoEncontradoException | ClaseNoEncontradaException e) {
-		    // TODO Auto-generated catch block
 		    e.printStackTrace();
-		} catch(ClaseLlenaException e){
-			JOptionPane.showMessageDialog(app,"No hay lugares disponibles en esa clase.","error", JOptionPane.ERROR_MESSAGE);
-            return;
-		} catch(ClaseRegistroInvalidoException e){
-			JOptionPane.showMessageDialog(app,"Fecha de registro inválida.","error", JOptionPane.ERROR_MESSAGE);
-            return;
+		    return;
+		} catch (ClaseLlenaException e) {
+		    JOptionPane.showMessageDialog(app, "No hay lugares disponibles en esa clase.", "error",
+			    JOptionPane.ERROR_MESSAGE);
+		    return;
+		} catch (ClaseRegistroInvalidoException e) {
+		    JOptionPane.showMessageDialog(app, "Fecha de registro inválida.", "error",
+			    JOptionPane.ERROR_MESSAGE);
+		    return;
 		}
 	    }
+	    
 	    setVisible(false);
 	    JOptionPane.showMessageDialog(app, "Registro creado exitosamente.");
 	});
