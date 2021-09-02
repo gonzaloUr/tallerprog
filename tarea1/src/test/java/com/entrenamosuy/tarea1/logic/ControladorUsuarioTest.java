@@ -204,7 +204,7 @@ public class ControladorUsuarioTest {
             ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), "test", "descripcion", "ola", u);
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosSocio("Facu", "Facundito", "Techera", LocalDate.of(2007, 03, 28));
+            ctrlU.modificarDatosProfesor("Facu", "Facundito", "Techera", LocalDate.of(2007, 03, 28), null, null, null);
         });
 
         assertDoesNotThrow(() -> {
