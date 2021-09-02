@@ -34,7 +34,7 @@ import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.entrenamosuy.tarea1.util.Triple;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JSpinner;
@@ -235,13 +235,13 @@ public class AltaClase extends JInternalFrame {
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
                 controladorActividadClase.crearClase(actividad, 
-                nombreField.getText(), 
-                LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
+                nombreField.getText(),
+                LocalDateTime.of(FechaUtil.toLocalDateTime(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
                 selectedNicknames,
                 Integer.parseInt(cantMin.getText()),
                 Integer.parseInt(cantMax.getText()),
                 new URL(url.getText()),
-                FuncionFecha.convertToLocalDateViaInstant(calendario2.getDate()));
+                FechaUtil.toLocalDateTime(calendario2.getDate()));
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
             } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
             | ClaseRepetidaException e1) {

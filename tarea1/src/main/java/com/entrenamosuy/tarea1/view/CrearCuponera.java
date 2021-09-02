@@ -17,7 +17,7 @@ import javax.swing.SpinnerNumberModel;
 
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 public class CrearCuponera extends JInternalFrame {
@@ -150,8 +150,8 @@ public class CrearCuponera extends JInternalFrame {
         aceptar.addActionListener((ActionEvent a) -> {
             try {
 		controladorCuponera.crearCuponera(nombreField.getText(), descField.getText(), 
-		    FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), 
-		    FuncionFecha.convertToLocalDateViaInstant(calendarioFin.getDate()), 
+		    FechaUtil.toLocalDateTime(calendario.getDate()),
+		    FechaUtil.toLocalDateTime(calendarioFin.getDate()),
 		    (Integer) descuento.getValue(), LocalDate.now());
 	    } catch (CuponeraRepetidaException e) {
 		// TODO Auto-generated catch block

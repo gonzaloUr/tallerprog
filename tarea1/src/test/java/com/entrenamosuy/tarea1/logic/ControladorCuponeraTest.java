@@ -13,8 +13,14 @@ import java.util.Map;
 import java.util.Set;
 import java.net.URL;
 
+
+
+
+
+
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroActividadInvalidaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
@@ -276,6 +282,7 @@ public class ControladorCuponeraTest {
         ControladorActividadClase ctrlA = new ControladorActividadClase();
         ControladorUsuario ctrlU = new ControladorUsuario();
         ControladorCuponera ctrlC = new ControladorCuponera();
+
         assertDoesNotThrow(() -> {
             ctrlA.crearInstitucion("test", "test", new URL("https://test"));
             ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
@@ -284,10 +291,25 @@ public class ControladorCuponeraTest {
             ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
             Set<String> profesores = new HashSet<>();
             profesores.add("profe1");
-            ctrlA.crearClase("test", "test", LocalDateTime.of(2000, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2021, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(2021, 10, 10));
             man.setClases(cla);
 
-            ctrlC.crearCuponera("cuponera1", "Todo lindo", LocalDate.of(2021, 02, 10), LocalDate.of(2021, 10, 10), 15, LocalDate.of(2021, 01, 10));
+            ctrlC.crearCuponera("cuponera1", "Todo lindo", LocalDate.of(2021, 9, 10), LocalDate.of(2021, 9, 10), 15, LocalDate.of(2021, 9, 10));
+            man.setCuponeras(cupo);
+
+            man.setInstituciones(ins);
+
+            man.setProfesores(proE);
+            man.setProfesoresMail(proM);
+
+        });
+
+        assertThrows(ClaseRegistroActividadInvalidaException.class, () -> {
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            ctrlA.crearClase("test", "test2", LocalDateTime.of(2012, 10, 10, 0, 0), profesores, 2, 10, new URL("https://test"), LocalDate.of(2011, 10, 10));
+            man.setClases(cla);
+            ctrlC.crearCuponera("cuponera12", "Todo lindo", LocalDate.of(2012, 10, 10), LocalDate.of(2012, 10, 10), 15, LocalDate.of(2012, 10, 10));
             man.setCuponeras(cupo);
 
             man.setInstituciones(ins);

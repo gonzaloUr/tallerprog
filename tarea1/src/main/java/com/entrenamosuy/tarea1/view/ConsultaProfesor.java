@@ -228,7 +228,11 @@ public class ConsultaProfesor extends JInternalFrame {
         gbc_lblActividades.gridx = 1;
         gbc_lblActividades.gridy = 19;
         getContentPane().add(lblActividades, gbc_lblActividades);
+<<<<<<< Updated upstream
 
+=======
+        
+>>>>>>> Stashed changes
         nicknameField.setText(profesor.getNickname());
         nombreField.setText(profesor.getNombre());
         apellidoField.setText(profesor.getApellido());
@@ -239,9 +243,14 @@ public class ConsultaProfesor extends JInternalFrame {
         
         URL profesorURL = profesor.getSitioWeb();
         
+<<<<<<< Updated upstream
         if (profesorURL != null)
             sitioWebField.setText(profesorURL.toString());
    
+=======
+        
+        
+>>>>>>> Stashed changes
         JList<String> actividadesLista = new JList<>(actividades.toArray(new String[] {}));
         GridBagConstraints gbc_actividadesLista = new GridBagConstraints();
         gbc_actividadesLista.insets = new Insets(0, 0, 5, 5);

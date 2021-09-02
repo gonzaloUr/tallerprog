@@ -9,6 +9,7 @@ import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -163,7 +164,7 @@ public class ConsultaActividad extends JInternalFrame {
 	
 	nombreField.setText(dataActividad.getNombre());
 	descripcionField.setText(dataActividad.getDescripcion());
-	duracionField.setText(dataActividad.getDuracion().toString());
+	duracionField.setText(FechaUtil.formatDuration(dataActividad.getDuracion()));
 	registroField.setText(dataActividad.getRegistro().toString());
 	costoField.setText(((Float) dataActividad.getCosto()).toString());
 	

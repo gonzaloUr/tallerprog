@@ -24,7 +24,7 @@ import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaProfesor extends JInternalFrame {
@@ -235,7 +235,7 @@ public class AltaProfesor extends JInternalFrame {
                 	return;
                 }
                 Date fechaf = (Date) chooser.getDate();
-                LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(fechaf);
+                LocalDate fecha = FechaUtil.toLocalDateTime(fechaf);
                 String institucion = (String) comboBox.getSelectedItem();
                 String descripcion = textField_9.getText();
                 String biografia = textField_10.getText();
