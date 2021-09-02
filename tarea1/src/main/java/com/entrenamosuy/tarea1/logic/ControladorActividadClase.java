@@ -84,7 +84,7 @@ public class ControladorActividadClase implements IControladorActividadClase {
         if (cantMin > cantMax)
             throw new ClaseCantInvalidoException("El minimo deber ser menor al maximo.");
         if (x.isAfter(inicio))
-            throw new ClaseInicioRegistroInvalidoException("La fecha de inicio debe ser porsterior a la de registro.");
+            throw new ClaseInicioRegistroInvalidoException("La fecha de inicio debe ser posterior a la de registro.");
         if (y.isAfter(x))
             throw new ClaseRegistroActividadInvalidaException("");
 

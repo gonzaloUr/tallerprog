@@ -2,7 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -90,7 +90,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
                 controladorUsuario.modificarDatosUsuario(nickname, nombre.getText(), apellido.getText(),
-                        FuncionFecha.convertToLocalDateViaInstant(nacimiento.getDate()));
+                        FechaUtil.toLocalDateTime(nacimiento.getDate()));
                 that.setVisible(false);
                 
             } catch (UsuarioNoEncontradoException e) {

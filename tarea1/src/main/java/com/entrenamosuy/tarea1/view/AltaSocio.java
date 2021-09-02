@@ -1,7 +1,6 @@
 package com.entrenamosuy.tarea1.view;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -19,7 +18,7 @@ import javax.swing.JTextField;
 import com.entrenamosuy.tarea1.data.Email;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaSocio extends JInternalFrame {
@@ -154,8 +153,8 @@ public class AltaSocio extends JInternalFrame {
                 	return;
                 }
                 Date fechaf = (Date) chooser.getDate();
-                FuncionFecha f = new FuncionFecha();
-                LocalDate fecha = f.convertToLocalDateViaInstant(fechaf);
+                FechaUtil f = new FechaUtil();
+                LocalDate fecha = f.toLocalDateTime(fechaf);
                 setVisible(false);
                 try {
                     CU.crearSocio(nick, nombre, apellido, mail, fecha);
