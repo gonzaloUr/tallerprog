@@ -97,12 +97,12 @@ public class Profesor extends Usuario {
             institucionNombre = this.getInstitucion().getNombre();
         }
         Set<DataActividad> actividadesData = new HashSet<>();
-        System.out.println("Size actividades en profesor " + getNombre() + ": " + actividades.size());
+        //System.out.println("Size actividades en profesor " + getNombre() + ": " + actividades.size());
         for (Actividad a : actividades) {
             actividadesData.add(a.getDataActividad());
         }
         
-        System.out.println("Size clases en profesor " + getNombre() + ": " + clasesDictadas.size());
+        //System.out.println("Size clases en profesor " + getNombre() + ": " + clasesDictadas.size());
         Set<DataClase> clasesData = new HashSet<>();
         for (Clase c : clasesDictadas) {
             clasesData.add(c.getDataClase());
