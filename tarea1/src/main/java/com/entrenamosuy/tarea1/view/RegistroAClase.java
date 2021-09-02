@@ -27,7 +27,7 @@ import com.entrenamosuy.tarea1.exceptions.CuponeraNoCompradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.entrenamosuy.tarea1.util.Pair;
 import com.toedter.calendar.JDateChooser;
 
@@ -105,7 +105,7 @@ public class RegistroAClase extends JInternalFrame {
 
 	aceptar.addActionListener((ActionEvent a) -> {
 	    String cuponeraSelecionada = (String) cuponerasComboBox.getSelectedItem();
-	    LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(calendario.getDate());
+	    LocalDate fecha = FechaUtil.toLocalDateTime(calendario.getDate());
 
 	    if (utilizarCheckBox.isSelected() && cuponeraSelecionada != "") {
 		try {
