@@ -47,12 +47,12 @@ public class AltaProfesor extends JInternalFrame {
     	setMaximizable(true);
     	setClosable(true);
         setBounds(100, 100, 586, 357);
-        
+
         String[] instituciones = controladorActividadClase.obtenerDescInstituciones()
         	.stream()
         	.map(Triple::getFirst)
         	.toArray(String[]::new);
-    	
+
     	setTitle("Alta Profesor");
         getContentPane().setForeground(Color.RED);
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -212,14 +212,14 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_urlField.gridy = 9;
 	getContentPane().add(urlField, gbc_urlField);
 	urlField.setColumns(10);
-        
+
         aceptar = new JButton("Aceptar");
         GridBagConstraints gbc_aceptar = new GridBagConstraints();
         gbc_aceptar.insets = new Insets(0, 0, 5, 5);
         gbc_aceptar.gridx = 3;
         gbc_aceptar.gridy = 11;
         getContentPane().add(aceptar, gbc_aceptar);
-        
+
         aceptar.addActionListener((ActionEvent a) -> {
            String nick = nicknameField.getText();
            String nombre = nombreField.getText();
@@ -230,7 +230,7 @@ public class AltaProfesor extends JInternalFrame {
            String descripcion = descripcionField.getText();
            String biografia = biografiaField.getText();
            String url = urlField.getText();
-           
+
 	    try {
 		controladorUsuario.crearProfesor(nick, nombre, apellido, Email.parse(email), fecha, institucion,
 			descripcion, biografia, new URL(url));
