@@ -22,6 +22,7 @@ import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
+import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -319,5 +320,37 @@ public class ControladorActividadClaseTest {
         });
     }
 
+    @Test
+    void cuponerasUsables() {
+        ControladorActividadClase ctrlA = new ControladorActividadClase();
+        ControladorUsuario ctrlU = new ControladorUsuario();
+        ControladorCuponera ctrlC = new ControladorCuponera();
 
+        Manejador manejador = Manejador.getInstance();
+
+        assertDoesNotThrow(() -> {
+            ctrlA.crearInstitucion("test", "test", new URL("https://test"));
+            ctrlA.crearActividad("test", "test", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2000, 10, 10));
+            ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2000, 10, 10), "test", "desc", null, null);
+            Set<String> profesores = new HashSet<>();
+            profesores.add("profe1");
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2000, 10, 10, 12, 12), profesores, 2, 10, new URL("https://test"), LocalDate.of(2000, 10, 10));
+            ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2000, 10, 10));
+
+            ctrlC.crearCuponera("test", "test", LocalDate.of(2000, 10, 10), LocalDate.of(2001, 10, 10), 20, LocalDate.of(1999, 10, 10));
+            ctrlC.agregarACuponera("test", "test", 2);
+
+            Socio socio = manejador.getSocios().get("Lucho");
+            Cuponera cup = manejador.getCuponeras().get("test");
+
+            Compra compra = new Compra(LocalDate.of(2000, 10, 10), socio, cup);
+            socio.getCompras().add(compra);
+        });
+
+        assertDoesNotThrow(() -> {
+            Set<Pair<String, String>> ret = ctrlC.cuponerasUsables("test", "Lucho");
+            assertEquals(1, ret.size());
+            assertEquals(true, ret.contains(new Pair<>("test", "test")));
+        });
+    }
 }

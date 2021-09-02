@@ -67,9 +67,12 @@ public class Socio extends Usuario {
     public int cantRegistrosConCuponeraA(Actividad a, Cuponera cup) {
         int ret = 0;
 
-        for (Registro reg : registros)
-            if (reg.getCuponera().equals(cup))
+        for (Registro reg : registros) {
+            Clase claseRegistro = reg.getClaseAsociada();
+
+            if (reg.getCuponera().equals(cup) && a.getClases().contains(claseRegistro))
                 ret++;
+        }
 
         return ret;
     }
