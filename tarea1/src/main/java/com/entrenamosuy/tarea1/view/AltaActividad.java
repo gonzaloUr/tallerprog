@@ -20,7 +20,7 @@ import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaActividad extends JInternalFrame {
@@ -157,7 +157,7 @@ public class AltaActividad extends JInternalFrame {
                     int duration = Integer.parseInt(textField_7.getText());
                     Duration dura = Duration.ofMinutes(duration);
                     float precio = Float.parseFloat(textField_8.getText());
-                    LocalDate fecha = FuncionFecha.convertToLocalDateViaInstant(lblNewLabel_2.getDate());
+                    LocalDate fecha = FechaUtil.toLocalDateTime(lblNewLabel_2.getDate());
                     controladorActividadClase.crearActividad((String) comboBox.getSelectedItem(), textField_5.getText(), textField_6.getText(), dura, precio, fecha);
                     setVisible(false);
                     JOptionPane.showMessageDialog(apli, "Actividad registrada exitosamente.");

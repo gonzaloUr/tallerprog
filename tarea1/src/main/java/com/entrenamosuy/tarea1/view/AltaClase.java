@@ -34,7 +34,7 @@ import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
 import com.entrenamosuy.tarea1.logic.IControladorUsuario;
 import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.util.FuncionFecha;
+import com.entrenamosuy.tarea1.util.FechaUtil;
 import com.entrenamosuy.tarea1.util.Triple;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JSpinner;
@@ -236,7 +236,7 @@ public class AltaClase extends JInternalFrame {
             try {
                 controladorActividadClase.crearClase(actividad, 
                 nombreField.getText(), 
-                LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
+                LocalDateTime.of(FechaUtil.toLocalDateTime(calendario.getDate()), LocalTime.of(0,  0)),
                 selectedNicknames,
                 Integer.parseInt(cantMin.getText()),
                 Integer.parseInt(cantMax.getText()),
