@@ -160,7 +160,7 @@ public class AltaSocio extends JInternalFrame {
 	    }
 
 	    JOptionPane.showMessageDialog(app, "Socio creado exitosamente.");
-	    setVisible(true);
+	    setVisible(false);
 	});
     }
 }

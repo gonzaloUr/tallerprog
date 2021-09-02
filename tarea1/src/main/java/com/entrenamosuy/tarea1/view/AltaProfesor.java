@@ -247,6 +247,8 @@ public class AltaProfesor extends JInternalFrame {
 		JOptionPane.showMessageDialog(app, "Email invalido", "error", JOptionPane.ERROR_MESSAGE);
             	return;
 	    }
+        JOptionPane.showMessageDialog(app, "Profesor creado exitosamente.");
+	    setVisible(false);
         });
     }
 }
