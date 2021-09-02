@@ -235,13 +235,13 @@ public class AltaClase extends JInternalFrame {
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
                 controladorActividadClase.crearClase(actividad, 
-                nombreField.getText(), 
-                LocalDateTime.of(FechaUtil.toLocalDateTime(calendario.getDate()), LocalTime.of(0,  0)),
+                nombreField.getText(),
+                LocalDateTime.of(FechaUtil.toLocalDateTime(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
                 selectedNicknames,
                 Integer.parseInt(cantMin.getText()),
                 Integer.parseInt(cantMax.getText()),
                 new URL(url.getText()),
-                LocalDate.now());
+                FechaUtil.toLocalDateTime(calendario2.getDate()));
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
             } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
             | ClaseRepetidaException e1) {
