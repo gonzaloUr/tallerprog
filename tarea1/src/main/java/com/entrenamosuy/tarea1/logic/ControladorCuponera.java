@@ -7,6 +7,8 @@ import java.util.Set;
 
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioFinInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
@@ -18,13 +20,19 @@ public class ControladorCuponera implements IControladorCuponera {
 
     @Override
     public void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin,
-                              int descuento, LocalDate fRegistro) throws CuponeraRepetidaException {
+                              int descuento, LocalDate fechaRegistro) 
+                        	      throws CuponeraRepetidaException, CuponeraInicioFinInvalidoException, CuponeraInicioRegistroInvalidoException {
         Manejador manejador = Manejador.getInstance();
         Map<String, Cuponera> cuponeras = manejador.getCuponeras();
 
         if (cuponeras.containsKey(nombre))
             throw new CuponeraRepetidaException("La cuponera llamada " + nombre + " ya existe.");
-        Cuponera nuevaCup = new Cuponera(nombre, descripcion, inicio, fin, descuento, fRegistro);
+        if (inicio.isAfter(fin))
+            throw new CuponeraInicioFinInvalidoException("Fecha de inicio/fin invalidas");
+        if (inicio.isBefore(fechaRegistro))
+            throw new CuponeraInicioRegistroInvalidoException("Fecha de inicio/registro invalidas");
+        
+        Cuponera nuevaCup = new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaRegistro);
         cuponeras.put(nombre, nuevaCup);
     }
 

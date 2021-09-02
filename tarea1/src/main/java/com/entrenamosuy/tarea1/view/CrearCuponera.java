@@ -15,6 +15,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioFinInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.logic.IControladorCuponera;
 import com.entrenamosuy.tarea1.util.FechaUtil;
@@ -151,8 +153,14 @@ public class CrearCuponera extends JInternalFrame {
 		    FechaUtil.toLocalDateTime(calendario.getDate()),
 		    FechaUtil.toLocalDateTime(calendarioFin.getDate()),
 		    (Integer) descuento.getValue(), LocalDate.now());
-	    } catch (CuponeraRepetidaException e) {
-		e.printStackTrace();
+	    } catch (CuponeraRepetidaException e1) {
+		e1.printStackTrace();
+		return;
+	    } catch (CuponeraInicioFinInvalidoException e2) {
+		JOptionPane.showMessageDialog(app, "Fecha de inicio/fin invalidas", "error", JOptionPane.ERROR_MESSAGE);
+		return;
+	    } catch (CuponeraInicioRegistroInvalidoException e3) {
+		JOptionPane.showMessageDialog(app, "Fecha de inicio/registro invalidas", "error", JOptionPane.ERROR_MESSAGE);
 		return;
 	    }
             

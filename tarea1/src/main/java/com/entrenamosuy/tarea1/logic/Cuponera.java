@@ -14,7 +14,7 @@ public class Cuponera {
 
     private String descripcion;
 
-    private LocalDate inicio, fin, fRegistro;
+    private LocalDate inicio, fin, fechaRegistro;
 
     private int descuento;
 
@@ -23,7 +23,7 @@ public class Cuponera {
     private Set<Registro> registros;
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-                    LocalDate fRegistro, Set<Integra> integras, Set<Registro> registros) {
+                    LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.inicio = inicio;
@@ -31,7 +31,7 @@ public class Cuponera {
         this.descuento = descuento;
         this.integras = integras;
         this.registros = registros;
-        this.fRegistro = fRegistro;
+        this.fechaRegistro = fechaRegistro;
     }
 
     public Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
@@ -79,14 +79,6 @@ public class Cuponera {
         this.descuento = descuento;
     }
 
-    //public float getPrecio() {
-    //    return precio;
-    //}
-
-    //public void setPrecio(float precio) {
-    //    this.precio = precio;
-    //}
-
     public Set<Integra> getIntegras() {
         return integras;
     }
@@ -103,6 +95,14 @@ public class Cuponera {
         this.registros = registros;
     }
 
+    public LocalDate getFechaRegistro() {
+	return fechaRegistro;
+    }
+
+    public void setFechaRegistro(LocalDate fechaRegistro) {
+	this.fechaRegistro = fechaRegistro;
+    }
+
     public DataCuponera getDataCuponera() {
         Set<Integra> intes = this.integras;
         Set<DescActividad> acts = new HashSet<>();
@@ -113,23 +113,6 @@ public class Cuponera {
         }
         DataCuponera res = new DataCuponera(this.nombre, this.descripcion, acts);
         return res;
-    }
-
-    @Override
-    public int hashCode() {
-        return nombre.hashCode();
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Cuponera other = (Cuponera) obj;
-        return Objects.equals(nombre, other.nombre);
     }
 
     public Integra getIntegra(Actividad a) {
@@ -149,5 +132,23 @@ public class Cuponera {
             }
         }
         return ret;
+    }
+    
+
+    @Override
+    public int hashCode() {
+        return nombre.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Cuponera other = (Cuponera) obj;
+        return Objects.equals(nombre, other.nombre);
     }
 }

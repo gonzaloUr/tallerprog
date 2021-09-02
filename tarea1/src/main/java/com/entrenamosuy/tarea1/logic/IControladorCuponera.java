@@ -7,6 +7,8 @@ import com.entrenamosuy.tarea1.util.Pair;
 import com.entrenamosuy.tarea1.data.DataCuponera;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioFinInvalidoException;
+import com.entrenamosuy.tarea1.exceptions.CuponeraInicioRegistroInvalidoException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
@@ -21,9 +23,11 @@ public interface IControladorCuponera {
      * @param inicio      Comienzo de validez.
      * @param fin         Fin de validez.
      * @param descuento   Porcentaje de descuento.
+     * @param fechaRegistro Fecha de registro de cuponera.
      * @throws CuponeraRepetidaException Cuando el nombre no es unico.
      */
-    void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, LocalDate fRegistro) throws CuponeraRepetidaException;
+    void crearCuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento, LocalDate fechaRegistro) 
+	    throws CuponeraRepetidaException, CuponeraInicioFinInvalidoException, CuponeraInicioRegistroInvalidoException;
 
     /**
      * Retorna el nombre y la descripcion de todas las cuponeras en el sistema las cuales se pueden usar por socio
@@ -61,7 +65,8 @@ public interface IControladorCuponera {
      * @throws CuponeraNoEncontradaException  Cuando cuponera no existe en el sistema.
      * @throws ActividadNoEncontradaException Cuando actividad no existe en el sistema.
      */
-    void agregarACuponera(String cuponera, String actividad, int cant) throws CuponeraNoEncontradaException, ActividadNoEncontradaException;
+    void agregarACuponera(String cuponera, String actividad, int cant) 
+	    throws CuponeraNoEncontradaException, ActividadNoEncontradaException;
 
     /**
      * Retorna el nombre y la descripcion de todas las cuponeras en el sistema.
