@@ -20,6 +20,7 @@ import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.tarea1.exceptions.ClaseRegistroActividadInvalidaException;
 import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -51,11 +52,11 @@ public class ControladorUsuarioTest {
         });
 
         assertThrows(UsuarioRepetidoException.class, () -> {
-            ctrlU.crearSocio("Lucho", "luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(1000, 03, 28));
+            ctrlU.crearSocio("Lucho", "luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
         });
 
         assertThrows(UsuarioRepetidoException.class, () -> {
-            ctrlU.crearSocio("Hola", "luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(1000, 03, 28));
+            ctrlU.crearSocio("Hola", "luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
         });
     }
 
@@ -76,8 +77,8 @@ public class ControladorUsuarioTest {
             ctrlU.crearProfesor("profe1", "Profe 1", "apellido", Email.of("profe1", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
             Set<String> profesores = new HashSet<>();
             profesores.add("profe1");
-            ctrlA.crearClase("test", "test", LocalDateTime.of(2005, 10, 10, 12, 12), profesores, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
-            ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(1995, 10, 10));
+            ctrlA.crearClase("test", "test", LocalDateTime.of(2021, 10, 10, 12, 12), profesores, 2, 10, new URL("https://test"), LocalDate.of(2021, 10, 10));
+            ctrlA.registarseSinCuponera("Lucho", "test", LocalDate.of(2021, 10, 10));
 
         });
 
@@ -87,6 +88,16 @@ public class ControladorUsuarioTest {
             assertEquals(ds.getNombre(), "Luciano");
             assertEquals(ds.getCorreo(), e);
             assertEquals(ds.getNacimiento(), LocalDate.of(2007, 03, 28));
+        });
+
+        assertThrows(ClaseRegistroActividadInvalidaException.class, () -> {
+            ctrlA.crearActividad("test", "test21", "test", Duration.ofHours(1), 10.0f, LocalDate.of(2021, 9, 10));
+            ctrlU.crearProfesor("profe21", "Profe 21", "apellido", Email.of("profe21", "mail.com"), LocalDate.of(2021, 9, 10), "test", "desc", null, null);
+            Set<String> profesores21 = new HashSet<>();
+            profesores21.add("profe21");
+            ctrlA.crearClase("test", "test21", LocalDateTime.of(2005, 10, 10, 12, 12), profesores21, 2, 10, new URL("https://test"), LocalDate.of(1995, 10, 10));
+            ctrlA.registarseSinCuponera("Lucho", "test21", LocalDate.of(1995, 10, 10));
+
         });
 
         assertThrows(SocioNoEncontradoException.class, () -> {

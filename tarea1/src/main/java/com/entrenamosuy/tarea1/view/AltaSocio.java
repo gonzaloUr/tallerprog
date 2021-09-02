@@ -160,10 +160,7 @@ public class AltaSocio extends JInternalFrame {
                     CU.crearSocio(nick, nombre, apellido, mail, fecha);
                 } catch (UsuarioRepetidoException rep) {
                     textField_4.setText("");
-                    textField_5.setText("");
-                    textField_6.setText("");
                     textField_7.setText("");
-                    chooser.setDate(null);
                     setVisible(true);
                     JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
                     return;
