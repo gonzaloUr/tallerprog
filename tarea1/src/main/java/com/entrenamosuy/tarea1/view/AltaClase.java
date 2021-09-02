@@ -236,12 +236,12 @@ public class AltaClase extends JInternalFrame {
             try {
                 controladorActividadClase.crearClase(actividad, 
                 nombreField.getText(), 
-                LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of(0,  0)),
+                LocalDateTime.of(FuncionFecha.convertToLocalDateViaInstant(calendario.getDate()), LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
                 selectedNicknames,
                 Integer.parseInt(cantMin.getText()),
                 Integer.parseInt(cantMax.getText()),
                 new URL(url.getText()),
-                LocalDate.now());
+                FuncionFecha.convertToLocalDateViaInstant(calendario2.getDate()));
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
             } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
             | ClaseRepetidaException e1) {
