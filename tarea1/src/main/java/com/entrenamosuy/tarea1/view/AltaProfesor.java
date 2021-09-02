@@ -253,12 +253,7 @@ public class AltaProfesor extends JInternalFrame {
                     CU.crearProfesor(nick, nombre, apellido, mail, fecha, institucion, descripcion, biografia, link);
                 } catch (UsuarioRepetidoException rep) {
                     textField_4.setText("");
-                    textField_5.setText("");
-                    textField_6.setText("");
                     textField_7.setText("");
-                    chooser.setDate(null);
-                    textField_9.setText("");
-                    textField_10.setText("");
                     textField_11.setText("");
                     setVisible(true);
                     JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
