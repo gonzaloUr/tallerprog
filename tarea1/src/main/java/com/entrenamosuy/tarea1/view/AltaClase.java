@@ -236,14 +236,14 @@ public class AltaClase extends JInternalFrame {
             try {
                 controladorActividadClase.crearClase(actividad, 
                 	nombreField.getText(),
-                	LocalDateTime.of(FechaUtil.toLocalDateTime(
+                	LocalDateTime.of(FechaUtil.toLocalDate(
                 		calendario.getDate()), 
                 		LocalTime.of((int) hora.getValue(), (int) minuto.getValue())),
                 	selectedNicknames,
                 	Integer.parseInt(cantMin.getText()),
                 	Integer.parseInt(cantMax.getText()),
                 	new URL(url.getText()),
-                	FechaUtil.toLocalDateTime(calendario2.getDate()));
+                	FechaUtil.toLocalDate(calendario2.getDate()));
                 
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
             }

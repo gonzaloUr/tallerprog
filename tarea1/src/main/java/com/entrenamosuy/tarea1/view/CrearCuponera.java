@@ -150,8 +150,8 @@ public class CrearCuponera extends JInternalFrame {
         aceptar.addActionListener((ActionEvent a) -> {
             try {
 		controladorCuponera.crearCuponera(nombreField.getText(), descField.getText(), 
-		    FechaUtil.toLocalDateTime(calendario.getDate()),
-		    FechaUtil.toLocalDateTime(calendarioFin.getDate()),
+		    FechaUtil.toLocalDate(calendario.getDate()),
+		    FechaUtil.toLocalDate(calendarioFin.getDate()),
 		    (Integer) descuento.getValue(), LocalDate.now());
 	    } catch (CuponeraRepetidaException e1) {
 		e1.printStackTrace();

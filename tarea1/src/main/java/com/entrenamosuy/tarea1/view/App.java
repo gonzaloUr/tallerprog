@@ -128,25 +128,48 @@ public class App extends JFrame {
         JMenu modificar = new JMenu("Modificar");
         menuBar.add(modificar);
 
-        JMenuItem modificarUsuario = new JMenuItem("Modificar datos de usuario");
-        modificar.add(modificarUsuario);
+        JMenuItem modificarSocio = new JMenuItem("Modificar datos de socio");
+        modificar.add(modificarSocio);
+        
+        JMenuItem modificarProfesor = new JMenuItem("Modificar datos de profesor");
+        modificar.add(modificarProfesor);
 
-        modificarUsuario.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> usuarios = new HashSet<>();
-            usuarios.addAll(controladorUsuario.obtenerDescProfesores());
-            usuarios.addAll(controladorUsuario.obtenerDescSocios());
+        modificarSocio.addActionListener((ActionEvent a) -> {
+            Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
 
-            if (usuarios.isEmpty()) {
+            if (socios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "No hay usuarios en el sistema.",
+                        "No hay socios en el sistema.",
                         "error",
                         JOptionPane.ERROR_MESSAGE);
 
                 return;
             }
 
-            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(usuarios, (String nickname) -> {
-                ModificarDatosUsuario modificarDatosUsuario = new ModificarDatosUsuario(nickname, controladorUsuario);
+            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
+                ModificarDatosSocio modificarDatosUsuario = new ModificarDatosSocio(nickname, controladorUsuario);
+                getContentPane().add(modificarDatosUsuario);
+                modificarDatosUsuario.setVisible(true);
+            });
+
+            getContentPane().add(selecionarUsuario);
+            selecionarUsuario.setVisible(true);
+        });
+        
+        modificarProfesor.addActionListener((ActionEvent a) -> {
+            Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();
+
+            if (profesores.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No hay profesores en el sistema.",
+                        "error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
+                ModificarDatosProfesor modificarDatosUsuario = new ModificarDatosProfesor(nickname, controladorUsuario);
                 getContentPane().add(modificarDatosUsuario);
                 modificarDatosUsuario.setVisible(true);
             });

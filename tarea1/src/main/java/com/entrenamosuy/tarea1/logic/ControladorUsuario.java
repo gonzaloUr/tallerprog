@@ -72,32 +72,53 @@ public class ControladorUsuario implements IControladorUsuario {
     }
 
     @Override
-    public void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) throws UsuarioNoEncontradoException {
+    public void modificarDatosSocio(String nickname, String nombre, String apellido, LocalDate nacimiento) throws SocioNoEncontradoException {
         Manejador manejador = Manejador.getInstance();
-        Usuario usuario;
+        Socio socio = manejador.getSocios().get(nickname);;
 
-        Profesor profesor = manejador.getProfesores().get(nickname);
-
-        if (profesor == null) {
-            Socio socio = manejador.getSocios().get(nickname);
-
-            if (socio == null) {
-                throw new UsuarioNoEncontradoException("No existe un usuario con nickname: " + nickname);
-            } else {
-                usuario = socio;
-            }
-        } else {
-            usuario = profesor;
+        if (socio == null) {
+            throw new SocioNoEncontradoException("No existe un socio con nickname: " + nickname);
         }
 
         if (nombre != null)
-            usuario.setNombre(nombre);
+            socio.setNombre(nombre);
 
         if (apellido != null)
-            usuario.setApellido(apellido);
+            socio.setApellido(apellido);
 
         if (nacimiento != null)
-            usuario.setNacimiento(nacimiento);
+            socio.setNacimiento(nacimiento);
+    }
+    
+
+    @Override
+    public void modificarDatosProfesor(String nickname, String nombre, String apellido, LocalDate nacimiento,
+	    String descripcion, String biografia, URL sitioWeb) throws ProfesorNoEncontradoException {
+	
+        Manejador manejador = Manejador.getInstance();
+        Profesor profesor = manejador.getProfesores().get(nickname);;
+
+        if (profesor == null) {
+            throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
+        }
+
+        if (nombre != null)
+            profesor.setNombre(nombre);
+
+        if (apellido != null)
+            profesor.setApellido(apellido);
+
+        if (nacimiento != null)
+            profesor.setNacimiento(nacimiento);
+        
+        if (descripcion != null)
+            profesor.setDescripcion(descripcion);
+        
+        if (biografia != null)
+            profesor.setBiografia(biografia);
+        
+        if (sitioWeb != null)
+            profesor.setSitioWeb(sitioWeb);
     }
 
     @Override

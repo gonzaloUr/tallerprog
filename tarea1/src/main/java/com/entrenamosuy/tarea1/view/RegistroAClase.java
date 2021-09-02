@@ -100,7 +100,7 @@ public class RegistroAClase extends JInternalFrame {
 
 	aceptar.addActionListener((ActionEvent a) -> {
 	    String cuponeraSelecionada = (String) cuponerasComboBox.getSelectedItem();
-	    LocalDate fecha = FechaUtil.toLocalDateTime(calendario.getDate());
+	    LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
 
 	    if (utilizarCheckBox.isSelected() && cuponeraSelecionada != "") {
 		try {

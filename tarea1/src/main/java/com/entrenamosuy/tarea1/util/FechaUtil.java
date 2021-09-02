@@ -11,7 +11,7 @@ public class FechaUtil {
 
     private final static long minute = Duration.ofMinutes(1).getSeconds();
 
-    public static LocalDate toLocalDateTime(Date dateToConvert) {
+    public static LocalDate toLocalDate(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();

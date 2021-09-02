@@ -204,27 +204,27 @@ public class ControladorUsuarioTest {
             ctrlU.crearProfesor("Facu", "Facundo", "Techera", Email.of("facu", "mail.com"), LocalDate.of(2007, 03, 28), "test", "descripcion", "ola", u);
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Facu", "Facundito", "Techera", LocalDate.of(2007, 03, 28));
+            ctrlU.modificarDatosSocio("Facu", "Facundito", "Techera", LocalDate.of(2007, 03, 28));
         });
 
         assertDoesNotThrow(() -> {
             ctrlU.crearSocio("Lucho", "Luciano", "Almenares", Email.of("lucho", "mail.com"), LocalDate.of(2007, 03, 28));
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Lucho", "lucianito", "almenares", LocalDate.of(2007, 03, 29));
+            ctrlU.modificarDatosSocio("Lucho", "lucianito", "almenares", LocalDate.of(2007, 03, 29));
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Lucho", null, "almenares", LocalDate.of(2007, 03, 29));
+            ctrlU.modificarDatosSocio("Lucho", null, "almenares", LocalDate.of(2007, 03, 29));
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Lucho", "lucianito", null, LocalDate.of(2007, 03, 29));
+            ctrlU.modificarDatosSocio("Lucho", "lucianito", null, LocalDate.of(2007, 03, 29));
         });
         assertDoesNotThrow(() -> {
-            ctrlU.modificarDatosUsuario("Lucho", "lucianito", "almenares", null);
+            ctrlU.modificarDatosSocio("Lucho", "lucianito", "almenares", null);
         });
 
         assertThrows(UsuarioNoEncontradoException.class, () -> {
-            ctrlU.modificarDatosUsuario("Luchito", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
+            ctrlU.modificarDatosSocio("Luchito", "Lucianito", "Almenares", LocalDate.of(2007, 03, 28));
         });
     }
 

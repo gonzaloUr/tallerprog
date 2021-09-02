@@ -147,7 +147,7 @@ public class AltaSocio extends JInternalFrame {
 	    String nombre = nombreField.getText();
 	    String apellido = apellidoField.getText();
 	    String mail = emailField.getText();
-	    LocalDate fecha = FechaUtil.toLocalDateTime(calendario.getDate());
+	    LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
 
 	    try {
 		controladorUsuario.crearSocio(nick, nombre, apellido, Email.parse(mail), fecha);

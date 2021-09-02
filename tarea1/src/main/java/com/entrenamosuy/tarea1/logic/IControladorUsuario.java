@@ -50,7 +50,7 @@ public interface IControladorUsuario {
     void crearSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) throws UsuarioRepetidoException;
 
     /**
-     * Se modifica el nombre, apellido y fecha de nacimiento del usuario identificado por el nickname pasado a
+     * Se modifica el nombre, apellido y fecha de nacimiento del socio identificado por el nickname pasado a
      * los valores pasados, si no existe tal usuario en el sistema se tira UsuarioNoEncontradoException.
      *
      * @param nickname   Nickname del usuario a modificar datos de.
@@ -59,7 +59,10 @@ public interface IControladorUsuario {
      * @param nacimiento Nueva fecha de nacimiento para el usuario, si es null no se actualiza.
      * @throws UsuarioNoEncontradoException Cuando no existe un usuario con el nickname pasado.
      */
-    void modificarDatosUsuario(String nickname, String nombre, String apellido, LocalDate nacimiento) throws UsuarioNoEncontradoException;
+    void modificarDatosSocio(String nickname, String nombre, String apellido, LocalDate nacimiento) throws SocioNoEncontradoException;
+    
+    void modificarDatosProfesor(String nickname, String nombre, String apellido, LocalDate nacimiento,
+	    String descripcion, String biografia, URL sitioWeb) throws ProfesorNoEncontradoException;
 
     /**
      * Retorna el nickname, nombre y apellido de todos los socios en

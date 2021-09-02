@@ -225,7 +225,7 @@ public class AltaProfesor extends JInternalFrame {
            String nombre = nombreField.getText();
            String apellido = apellidoField.getText();
            String email = emailField.getText();
-           LocalDate fecha = FechaUtil.toLocalDateTime(fechaField.getDate());
+           LocalDate fecha = FechaUtil.toLocalDate(fechaField.getDate());
            String institucion = (String) institucionComboBox.getSelectedItem();
            String descripcion = descripcionField.getText();
            String biografia = biografiaField.getText();

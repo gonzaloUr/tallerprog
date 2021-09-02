@@ -163,7 +163,7 @@ public class AltaActividad extends JInternalFrame {
                 try {
                     Duration duration = Duration.ofMinutes(Integer.parseInt(duracion.getText()));
                     float precio = Float.parseFloat(costo.getText());
-                    LocalDate fecha = FechaUtil.toLocalDateTime(calendario.getDate());
+                    LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
                     
                     controladorActividadClase.crearActividad((String) institucionComboBox.getSelectedItem(), 
                 	    nombre.getText(), 
