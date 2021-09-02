@@ -243,10 +243,18 @@ public class AltaClase extends JInternalFrame {
                 new URL(url.getText()),
                 FuncionFecha.convertToLocalDateViaInstant(calendario2.getDate()));
                 JOptionPane.showMessageDialog(app, "Clase creada exitosamente.");
-            } catch (ProfesorNoEncontradoException | NumberFormatException | ActividadNoEncontradaException
-            | ClaseRepetidaException e1) {
-                JOptionPane.showMessageDialog(app,"Error al crear la clase.","error", JOptionPane.ERROR_MESSAGE);
-            e1.printStackTrace();
+            } 
+            catch(ActividadNoEncontradaException ex) {}
+            catch(ProfesorNoEncontradoException ec) {}
+            catch (NumberFormatException e1) {
+                JOptionPane.showMessageDialog(app,"Por favor ingrese un numero.","error", JOptionPane.ERROR_MESSAGE);
+                e1.printStackTrace();
+                return;
+            }
+            catch(ClaseRepetidaException e2) {
+                JOptionPane.showMessageDialog(app,"Nombre no disponible","error", JOptionPane.ERROR_MESSAGE);
+                nombreField.setText("");
+                return;
             }
             catch(MalformedURLException e5){
                 JOptionPane.showMessageDialog(app,"El link ingresado no es correcto.","error", JOptionPane.ERROR_MESSAGE);
