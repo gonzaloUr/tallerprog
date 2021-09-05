@@ -16,14 +16,14 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.data.Email;
-import com.entrenamosuy.tarea1.exceptions.EmailParseException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FechaUtil;
-import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.exceptions.EmailParseException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.util.FechaUtil;
+import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaProfesor extends JInternalFrame {
@@ -232,8 +232,17 @@ public class AltaProfesor extends JInternalFrame {
            String url = urlField.getText();
 
 	    try {
-		controladorUsuario.crearProfesor(nick, nombre, apellido, Email.parse(email), fecha, institucion,
-			descripcion, biografia, new URL(url));
+	        controladorUsuario.crearProfesor()
+                    .setNickname(nick)
+                    .setNombre(nombre)
+                    .setApellido(apellido)
+                    .setCorreo(Email.parse(email))
+                    .setNacimiento(fecha)
+                    .setInstitucion(institucion)
+                    .setDescripcion(descripcion)
+                    .setBiografia(biografia)
+                    .setLink(new URL(url))
+                    .invoke();
 	    } catch (InstitucionNoEncontradaException e1) {
 		e1.printStackTrace();
 		return;

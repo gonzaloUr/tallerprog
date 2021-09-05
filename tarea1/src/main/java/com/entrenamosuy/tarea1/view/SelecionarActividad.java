@@ -10,7 +10,7 @@ import java.util.Set;
 
 import javax.swing.*;
 
-import com.entrenamosuy.tarea1.util.Pair;
+import com.entrenamosuy.core.util.Pair;
 
 public class SelecionarActividad extends JInternalFrame {
 

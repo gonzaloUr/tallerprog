@@ -15,13 +15,13 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.data.DataActividad;
-import com.entrenamosuy.tarea1.data.DataClase;
-import com.entrenamosuy.tarea1.data.DataProfesor;
-import com.entrenamosuy.tarea1.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.core.data.DataActividad;
+import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataProfesor;
+import com.entrenamosuy.core.exceptions.ProfesorNoEncontradoException;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.IControladorUsuario;
 
 public class ConsultaProfesor extends JInternalFrame {
     private JTextField nicknameField;

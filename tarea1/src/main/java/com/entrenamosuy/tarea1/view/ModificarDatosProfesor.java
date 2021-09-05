@@ -1,8 +1,8 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FechaUtil;
+import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -170,14 +170,15 @@ public class ModificarDatosProfesor extends JInternalFrame {
             }
             
             try {
-                controladorUsuario.modificarDatosProfesor(nickname, 
-                	nombre, 
-                	apellido,
-                        nacimiento,
-                        descripcion,
-                        biografia,
-                        sitioWeb);
-                
+                controladorUsuario.modificarDatosProfesor()
+                    .setNickname(nickname)
+                    .setNombre(nombre)
+                    .setApellido(apellido)
+                    .setNacimiento(nacimiento)
+                    .setDescripcion(descripcion)
+                    .setBiografia(biografia)
+                    .setSitioWeb(sitioWeb)
+                    .invoke();
             } catch (UsuarioNoEncontradoException e) {
                 JOptionPane.showMessageDialog(this, "Nickname no encontrado", "error", JOptionPane.ERROR_MESSAGE);
                 return;

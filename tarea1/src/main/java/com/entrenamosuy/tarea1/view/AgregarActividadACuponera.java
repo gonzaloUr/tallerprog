@@ -1,11 +1,9 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Set;
 
 import javax.swing.JButton;
@@ -16,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
+import com.entrenamosuy.core.IControladorCuponera;
 
 public class AgregarActividadACuponera extends JInternalFrame {
 
@@ -26,7 +24,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
     	setClosable(true);
         setTitle("Agregar actividad a cuponera.");
         setBounds(100, 100, 555, 360);
-        
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
@@ -57,7 +55,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
         gbc_lblIngresarNombre.gridx = 1;
         gbc_lblIngresarNombre.gridy = 3;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-        
+
         SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 100, 1);
         JSpinner cantSpinner = new JSpinner(model);
         GridBagConstraints gbc_cantSpinner = new GridBagConstraints();
@@ -65,25 +63,25 @@ public class AgregarActividadACuponera extends JInternalFrame {
         gbc_cantSpinner.gridx = 3;
         gbc_cantSpinner.gridy = 3;
         getContentPane().add(cantSpinner, gbc_cantSpinner);
-        
+
         JButton aceptar = new JButton("Aceptar");
         GridBagConstraints gbc_aceptar = new GridBagConstraints();
         gbc_aceptar.insets = new Insets(0, 0, 5, 5);
         gbc_aceptar.gridx = 3;
         gbc_aceptar.gridy = 5;
         getContentPane().add(aceptar, gbc_aceptar);
-        
+
         aceptar.addActionListener((ActionEvent a) -> {
             String actividad = (String) actividadComboBox.getSelectedItem();
             int cantidad = (int) cantSpinner.getValue();
-            
+
             try {
         	controladorCuponera.agregarACuponera(cuponera, actividad, cantidad);
             } catch (Exception e) {
         	e.printStackTrace();
         	return;
             }
-            
+
             JOptionPane.showMessageDialog(app,"Actividad agregada.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);
         });

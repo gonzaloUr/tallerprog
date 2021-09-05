@@ -5,9 +5,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -15,11 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.data.Email;
-import com.entrenamosuy.tarea1.exceptions.EmailParseException;
-import com.entrenamosuy.tarea1.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FechaUtil;
+import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.exceptions.EmailParseException;
+import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaSocio extends JInternalFrame {
@@ -150,7 +148,13 @@ public class AltaSocio extends JInternalFrame {
 	    LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
 
 	    try {
-		controladorUsuario.crearSocio(nick, nombre, apellido, Email.parse(mail), fecha);
+	    	controladorUsuario.crearSocio()
+				.setNickname(nick)
+				.setNombre(nombre)
+				.setApellido(apellido)
+				.setCorreo(Email.parse(mail))
+				.setNacimiento(fecha)
+				.invoke();
 	    } catch (UsuarioRepetidoException e1) {
 		JOptionPane.showMessageDialog(app, "Usuario ya existe", "error", JOptionPane.ERROR_MESSAGE);
 		return;

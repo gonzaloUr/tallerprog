@@ -2,12 +2,12 @@ package com.entrenamosuy.tarea1.view;
 
 import javax.swing.JInternalFrame;
 
-import com.entrenamosuy.tarea1.data.DataClase;
-import com.entrenamosuy.tarea1.data.DescProfesor;
-import com.entrenamosuy.tarea1.exceptions.ClaseNoEncontradaException;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DescProfesor;
+import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.IControladorUsuario;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;

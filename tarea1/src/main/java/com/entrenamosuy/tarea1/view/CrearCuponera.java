@@ -1,11 +1,9 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.time.LocalDate;
+import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.exceptions.CuponeraInconsistenteException;
+import com.entrenamosuy.core.util.FechaUtil;
+import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
@@ -14,13 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-
-import com.entrenamosuy.tarea1.exceptions.CuponeraInicioFinInvalidoException;
-import com.entrenamosuy.tarea1.exceptions.CuponeraInicioRegistroInvalidoException;
-import com.entrenamosuy.tarea1.exceptions.CuponeraRepetidaException;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.util.FechaUtil;
-import com.toedter.calendar.JDateChooser;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
 
 public class CrearCuponera extends JInternalFrame {
     private JTextField textField;
@@ -39,13 +35,13 @@ public class CrearCuponera extends JInternalFrame {
     private JDateChooser calendarioRegistro;
 
     public CrearCuponera(IControladorCuponera controladorCuponera, App app) {
-    	setMaximizable(true);
-    	setResizable(true);
-    	setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setClosable(true);
         setTitle("Crear Cuponera");
         getContentPane().setForeground(Color.RED);
         setBounds(100, 100, 660, 525);
-        
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{34, 0, 0, 49, 9, 0};
         gridBagLayout.rowHeights = new int[]{38, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 0};
@@ -121,63 +117,70 @@ public class CrearCuponera extends JInternalFrame {
         gbc_calendarioInicio.gridy = 7;
         getContentPane().add(calendarioInicio, gbc_calendarioInicio);
 
-	lblIngresarFin = new JLabel("Fin");
-	GridBagConstraints gbc_lblIngresarFin = new GridBagConstraints();
-	gbc_lblIngresarFin.anchor = GridBagConstraints.WEST;
-	gbc_lblIngresarFin.insets = new Insets(0, 0, 5, 5);
-	gbc_lblIngresarFin.gridx = 1;
-	gbc_lblIngresarFin.gridy = 9;
-	getContentPane().add(lblIngresarFin, gbc_lblIngresarFin);
+        lblIngresarFin = new JLabel("Fin");
+        GridBagConstraints gbc_lblIngresarFin = new GridBagConstraints();
+        gbc_lblIngresarFin.anchor = GridBagConstraints.WEST;
+        gbc_lblIngresarFin.insets = new Insets(0, 0, 5, 5);
+        gbc_lblIngresarFin.gridx = 1;
+        gbc_lblIngresarFin.gridy = 9;
+        getContentPane().add(lblIngresarFin, gbc_lblIngresarFin);
 
-	calendarioFin = new JDateChooser();
-	GridBagConstraints gbc_calendarioFin = new GridBagConstraints();
-	gbc_calendarioFin.insets = new Insets(0, 0, 5, 5);
-	gbc_calendarioFin.fill = GridBagConstraints.BOTH;
-	gbc_calendarioFin.gridx = 3;
-	gbc_calendarioFin.gridy = 9;
-	getContentPane().add(calendarioFin, gbc_calendarioFin);
-	
-	lblRegistro = new JLabel("Registro");
-	GridBagConstraints gbc_lblRegistro = new GridBagConstraints();
-	gbc_lblRegistro.anchor = GridBagConstraints.WEST;
-	gbc_lblRegistro.insets = new Insets(0, 0, 5, 5);
-	gbc_lblRegistro.gridx = 1;
-	gbc_lblRegistro.gridy = 11;
-	getContentPane().add(lblRegistro, gbc_lblRegistro);
-	
-	calendarioRegistro = new JDateChooser();
-	GridBagConstraints gbc_calendarioRegistro = new GridBagConstraints();
-	gbc_calendarioRegistro.insets = new Insets(0, 0, 5, 5);
-	gbc_calendarioRegistro.fill = GridBagConstraints.BOTH;
-	gbc_calendarioRegistro.gridx = 3;
-	gbc_calendarioRegistro.gridy = 11;
-	getContentPane().add(calendarioRegistro, gbc_calendarioRegistro);
+        calendarioFin = new JDateChooser();
+        GridBagConstraints gbc_calendarioFin = new GridBagConstraints();
+        gbc_calendarioFin.insets = new Insets(0, 0, 5, 5);
+        gbc_calendarioFin.fill = GridBagConstraints.BOTH;
+        gbc_calendarioFin.gridx = 3;
+        gbc_calendarioFin.gridy = 9;
+        getContentPane().add(calendarioFin, gbc_calendarioFin);
 
-	aceptar = new JButton("Aceptar");
-	GridBagConstraints gbc_aceptar = new GridBagConstraints();
-	gbc_aceptar.insets = new Insets(0, 0, 5, 5);
-	gbc_aceptar.gridx = 3;
-	gbc_aceptar.gridy = 13;
-	getContentPane().add(aceptar, gbc_aceptar);
+        lblRegistro = new JLabel("Registro");
+        GridBagConstraints gbc_lblRegistro = new GridBagConstraints();
+        gbc_lblRegistro.anchor = GridBagConstraints.WEST;
+        gbc_lblRegistro.insets = new Insets(0, 0, 5, 5);
+        gbc_lblRegistro.gridx = 1;
+        gbc_lblRegistro.gridy = 11;
+        getContentPane().add(lblRegistro, gbc_lblRegistro);
+
+        calendarioRegistro = new JDateChooser();
+        GridBagConstraints gbc_calendarioRegistro = new GridBagConstraints();
+        gbc_calendarioRegistro.insets = new Insets(0, 0, 5, 5);
+        gbc_calendarioRegistro.fill = GridBagConstraints.BOTH;
+        gbc_calendarioRegistro.gridx = 3;
+        gbc_calendarioRegistro.gridy = 11;
+        getContentPane().add(calendarioRegistro, gbc_calendarioRegistro);
+
+        aceptar = new JButton("Aceptar");
+        GridBagConstraints gbc_aceptar = new GridBagConstraints();
+        gbc_aceptar.insets = new Insets(0, 0, 5, 5);
+        gbc_aceptar.gridx = 3;
+        gbc_aceptar.gridy = 13;
+        getContentPane().add(aceptar, gbc_aceptar);
 
         aceptar.addActionListener((ActionEvent a) -> {
             try {
-		controladorCuponera.crearCuponera(nombreField.getText(), descField.getText(), 
-		    FechaUtil.toLocalDate(calendarioInicio.getDate()),
-		    FechaUtil.toLocalDate(calendarioFin.getDate()),
-		    (Integer) descuento.getValue(),
-		    FechaUtil.toLocalDate(calendarioRegistro.getDate()));
-	    } catch (CuponeraRepetidaException e1) {
-		e1.printStackTrace();
-		return;
-	    } catch (CuponeraInicioFinInvalidoException e2) {
-		JOptionPane.showMessageDialog(app, "Fecha de inicio/fin invalidas", "error", JOptionPane.ERROR_MESSAGE);
-		return;
-	    } catch (CuponeraInicioRegistroInvalidoException e3) {
-		JOptionPane.showMessageDialog(app, "Fecha de inicio/registro invalidas", "error", JOptionPane.ERROR_MESSAGE);
-		return;
-	    }
-            
+                controladorCuponera.crearCuponera()
+                        .setNombre(nombreField.getText())
+                        .setDescripcion(descField.getText())
+                        .setInicio(FechaUtil.toLocalDate(calendarioInicio.getDate()))
+                        .setFin(FechaUtil.toLocalDate(calendarioFin.getDate()))
+                        .setDescuento((Integer) descuento.getValue())
+                        .setFechaRegistro(FechaUtil.toLocalDate(calendarioRegistro.getDate()))
+                        .invoke();
+            } catch (CuponeraInconsistenteException e) {
+                for (CuponeraInconsistenteException.Restriccion r : e.getInconsistencias()) {
+                    switch (r) {
+                        case FIN_MENOR_INICIO:
+                            JOptionPane.showMessageDialog(app, "Fecha de inicio/fin invalidas", "error", JOptionPane.ERROR_MESSAGE);
+                            break;
+                        case INICIO_MENOR_REGISTRO:
+                            JOptionPane.showMessageDialog(app, "Fecha de inicio/registro invalidas", "error", JOptionPane.ERROR_MESSAGE);
+                            break;
+                    }
+                }
+
+                return;
+            }
+
             JOptionPane.showMessageDialog(app, "Cuponera creada exitosamente.");
             setVisible(false);
         });

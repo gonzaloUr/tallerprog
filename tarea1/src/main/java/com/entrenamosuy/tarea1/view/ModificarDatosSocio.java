@@ -1,8 +1,8 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.exceptions.UsuarioNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.util.FechaUtil;
+import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;

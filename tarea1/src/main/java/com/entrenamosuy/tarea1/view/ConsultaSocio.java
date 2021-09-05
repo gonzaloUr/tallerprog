@@ -14,11 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.data.DataClase;
-import com.entrenamosuy.tarea1.data.DataSocio;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
+import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataSocio;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.IControladorUsuario;
 
 public class ConsultaSocio extends JInternalFrame {
 

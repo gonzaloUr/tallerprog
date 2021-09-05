@@ -6,6 +6,26 @@ variables:
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
 
+build core:
+  stage: build
+  script: gradle --build-cache :core:assemble
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - core/build
+      - .gradle
+
+test core:
+  stage: test
+  script: gradle :core:check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - core/build
+      - .gradle
+
 build tarea1:
   stage: build
   script: gradle --build-cache :tarea1:assemble

@@ -1,29 +1,22 @@
 package com.entrenamosuy.tarea1.view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
+import com.entrenamosuy.core.Fabrica;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.Manejador;
+import com.entrenamosuy.core.model.Registro;
+import com.entrenamosuy.core.util.Pair;
+import com.entrenamosuy.core.util.Triple;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
-
-import com.entrenamosuy.tarea1.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.CuponeraNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.exceptions.SocioNoEncontradoException;
-import com.entrenamosuy.tarea1.logic.Fabrica;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.IControladorCuponera;
-import com.entrenamosuy.tarea1.logic.IControladorUsuario;
-import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.logic.Registro;
-import com.entrenamosuy.tarea1.util.Pair;
-import com.entrenamosuy.tarea1.util.Triple;
+import java.awt.event.ActionEvent;
+import java.net.URL;
+import java.util.Set;
 
 public class App extends JFrame {
 
@@ -40,8 +33,6 @@ public class App extends JFrame {
         controladorActividadClase = fabrica.crearControladorActividadClase();
         controladorCuponera = fabrica.crearControladorCuponera();
         controladorUsuario = fabrica.creaControladorUsuario();
-
-        App that = this;
 
         Manejador man = Manejador.getInstance();
 
@@ -118,10 +109,6 @@ public class App extends JFrame {
         consultas.add(consultaDictadoClase);
 
         JMenuItem consultaCuponera = new JMenuItem("Consulta de cuponeras de actividades deportivas");
-        consultaCuponera.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
         consultas.add(consultaCuponera);
 
         // Modificar datos de usuario
@@ -191,32 +178,25 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String institucion) -> {
-        	   Set<Pair<String, String>> actividades = null;
+                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(institucion);
 
-                   try {
-                       actividades = controladorActividadClase.obtenerDescActividades(institucion);
-                   } catch (InstitucionNoEncontradaException e) {
-                       e.printStackTrace();
-                       return;
-                   }
+                if (instituciones.isEmpty()) {
+                    JOptionPane.showMessageDialog(this,
+                            "No hay actividades en el sistema para " + institucion + ".",
+                            "error",
+                            JOptionPane.ERROR_MESSAGE);
 
-                   if (instituciones.isEmpty()) {
-                       JOptionPane.showMessageDialog(this,
-                               "No hay actividades en el sistema para " + institucion + ".",
-                               "error",
-                               JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
-                       return;
-                   }
+                SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
+                    ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
+                    consulta.setVisible(true);
+                    getContentPane().add(consulta);
+                });
 
-                   SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                       ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
-                       consulta.setVisible(true);
-                       getContentPane().add(consulta);
-                   });
-
-                   selecionarActividad.setVisible(true);
-                   getContentPane().add(selecionarActividad);
+                selecionarActividad.setVisible(true);
+                getContentPane().add(selecionarActividad);
             });
 
             getContentPane().add(selecionarInstitucion);
@@ -280,14 +260,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = null;
-
-                try {
-                    actividades = controladorActividadClase.obtenerDescActividades(inst);
-                } catch (InstitucionNoEncontradaException e) {
-                    e.printStackTrace();
-                    return;
-                }
+                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -325,14 +298,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = null;
-
-                try {
-                    actividades = controladorActividadClase.obtenerDescActividades(inst);
-                } catch (InstitucionNoEncontradaException e) {
-                    e.printStackTrace();
-                    return;
-                }
+                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -344,32 +310,25 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    Set<String> clases = null;
+                    Set<String> clases = controladorActividadClase.obtenerDescClases(actividad);
 
-		    try {
-			clases = controladorActividadClase.obtenerDescClases(actividad);
-		    } catch (ActividadNoEncontradaException e1) {
-			e1.printStackTrace();
-			return;
-		    }
+                    if (instituciones.isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "No hay clases en el sistema para " + actividad + ".",
+                                "error",
+                                JOptionPane.ERROR_MESSAGE);
 
-		    if (instituciones.isEmpty()) {
-	                    JOptionPane.showMessageDialog(this,
-	                            "No hay clases en el sistema para " + actividad + ".",
-	                            "error",
-	                            JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
 
-	                    return;
-	            }
+                    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
+                        ConsultaDictadoClase consulta = new ConsultaDictadoClase(this, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
+                        consulta.setVisible(true);
+                        getContentPane().add(consulta);
+                    });
 
-		    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
-			ConsultaDictadoClase consulta = new ConsultaDictadoClase(this, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
-			consulta.setVisible(true);
-			getContentPane().add(consulta);
-		    });
-
-		    selecionarClase.setVisible(true);
-		    getContentPane().add(selecionarClase);
+                    selecionarClase.setVisible(true);
+                    getContentPane().add(selecionarClase);
                 });
 
                 selecionarActividad.setVisible(true);
@@ -393,14 +352,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = null;
-
-                try {
-                    actividades = controladorActividadClase.obtenerDescActividades(inst);
-                } catch (InstitucionNoEncontradaException e) {
-                    e.printStackTrace();
-                    return;
-                }
+                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
 
                 if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -412,81 +364,61 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    Set<String> clases = null;
+                    Set<String> clases = controladorActividadClase.obtenerDescClases(actividad);
 
-		    try {
-			clases = controladorActividadClase.obtenerDescClases(actividad);
-		    } catch (ActividadNoEncontradaException e1) {
-			e1.printStackTrace();
-			return;
-		    }
+                    if (clases.isEmpty()) {
+                        JOptionPane.showMessageDialog(this,
+                                "No hay clases en el sistema para " + actividad + ".",
+                                "error",
+                                JOptionPane.ERROR_MESSAGE);
 
-		    if (clases.isEmpty()) {
-	                    JOptionPane.showMessageDialog(this,
-	                            "No hay clases en el sistema para " + actividad + ".",
-	                            "error",
-	                            JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
 
-	                    return;
-	            }
-
-		    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
+                    SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
 
                         Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
 
                         if (socios.isEmpty()) {
-    	                	JOptionPane.showMessageDialog(this,
-    	                		"No hay socios en el sistema.",
-    	                		"error",
-    	                		JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this,
+                                    "No hay socios en el sistema.",
+                                    "error",
+                                    JOptionPane.ERROR_MESSAGE);
 
-    	                	return;
-    	            	}
+                            return;
+                        }
 
                         SelecionarUsuario selecionarSocio = new SelecionarUsuario(socios, (String socio) -> {
-            		    Set<Pair<String, String>> cuponeras = null;
 
-            		    Set<Registro> regs = man.getSocios().get(socio).getRegistros();
-            		    boolean si = false;
-            		    for(Registro r : regs) {
-            		    	if(r.getClaseAsociada().getNombre().equals(clase)) {
-            		    		si = true;
-            		    		break;
-            		    	}
-            		    }
+                            Set<Registro> regs = man.getSocios().get(socio).getRegistros();
+                            boolean si = false;
+                            for (Registro r : regs) {
+                                if (r.getClaseAsociada().getNombre().equals(clase)) {
+                                    si = true;
+                                    break;
+                                }
+                            }
 
-            		    if(si) {
-    	                	JOptionPane.showMessageDialog(this,
-        	                		"El socio ya esta registrado a la clase seleccionada.",
-        	                		"error",
-        	                		JOptionPane.ERROR_MESSAGE);
-    	                	return;
-            		    }
+                            if (si) {
+                                JOptionPane.showMessageDialog(this,
+                                        "El socio ya esta registrado a la clase seleccionada.",
+                                        "error",
+                                        JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
 
-            		    try {
-            			cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
-            		    } catch (SocioNoEncontradoException e1) {
-            			// TODO Auto-generated catch block
-            			e1.printStackTrace();
-            			return;
-            		    } catch (ActividadNoEncontradaException e1) {
-            			// TODO Auto-generated catch block
-            			e1.printStackTrace();
-            			return;
-            		    }
+                            Set<Pair<String, String>> cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
 
-                        //System.out.println("Cuponeras usables length: " + cuponeras.size());
-
-            		    RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase, that);
-            		    registroAClase.setVisible(true);
-            		    getContentPane().add(registroAClase);
+                            RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase, this);
+                            registroAClase.setVisible(true);
+                            getContentPane().add(registroAClase);
                         });
 
                         selecionarSocio.setVisible(true);
                         getContentPane().add(selecionarSocio);
                     });
 
-		    selecionarClase.setVisible(true);
+                    selecionarClase.setVisible(true);
                     getContentPane().add(selecionarClase);
                 });
 
@@ -499,7 +431,7 @@ public class App extends JFrame {
         });
 
         crearCuponera.addActionListener((ActionEvent a) -> {
-            CrearCuponera c = new CrearCuponera(controladorCuponera, that);
+            CrearCuponera c = new CrearCuponera(controladorCuponera, this);
             c.setVisible(true);
             getContentPane().add(c);
         });
@@ -518,9 +450,9 @@ public class App extends JFrame {
 
 
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-        	ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
-        	consulta.setVisible(true);
-        	getContentPane().add(consulta);
+                ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
+                consulta.setVisible(true);
+                getContentPane().add(consulta);
             });
 
             selecionarCuponera.setVisible(true);
@@ -534,30 +466,28 @@ public class App extends JFrame {
         });
 
         altaInstitucionDeportiva.addActionListener((ActionEvent a) -> {
-            AltaInstitucion alta = new AltaInstitucion(controladorActividadClase, that);
+            AltaInstitucion alta = new AltaInstitucion(controladorActividadClase, this);
             alta.setVisible(true);
             getContentPane().add(alta);
         });
 
         altaDeProfesor.addActionListener((ActionEvent e) -> {
-            AltaProfesor altaprofesor = new AltaProfesor(that, controladorUsuario, controladorActividadClase);
-            that.getContentPane().add(altaprofesor);
+            AltaProfesor altaprofesor = new AltaProfesor(this, controladorUsuario, controladorActividadClase);
+            getContentPane().add(altaprofesor);
             altaprofesor.setVisible(true);
         });
 
-        altaDeSocio.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                AltaSocio altasocio = new AltaSocio(that, controladorUsuario);
-                that.getContentPane().add(altasocio);
-                altasocio.setVisible(true);
-            }
+        altaDeSocio.addActionListener((ActionEvent e) -> {
+            AltaSocio altasocio = new AltaSocio(this, controladorUsuario);
+            getContentPane().add(altasocio);
+            altasocio.setVisible(true);
         });
 
         cargarDatos.addActionListener(new CargarDatosLambda(controladorUsuario,
                 controladorActividadClase,
                 controladorCuponera, () -> {
 
-            JOptionPane.showMessageDialog(that,"Datos cargados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Datos cargados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }));
 
         agregarActividadCuponera.addActionListener((ActionEvent a) -> {
@@ -573,7 +503,7 @@ public class App extends JFrame {
             }
 
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-    	    	Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+                Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -585,18 +515,11 @@ public class App extends JFrame {
                 }
 
                 SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                    Set<String> actividades = null;
+                    Set<String> actividades = controladorCuponera.actividadesAgregables(cuponera, inst);
 
-                    try {
-                	actividades = controladorCuponera.actividadesAgregables(cuponera, inst);
-                    } catch (InstitucionNoEncontradaException | CuponeraNoEncontradaException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-                    }
-
-                    if(actividades.size() == 0) {
-                    	JOptionPane.showMessageDialog(that,"No hay actividades agregables.","error", JOptionPane.ERROR_MESSAGE);
-                    	return;
+                    if (actividades.size() == 0) {
+                        JOptionPane.showMessageDialog(this, "No hay actividades agregables.", "error", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
 
                     AgregarActividadACuponera agregarCuponera = new AgregarActividadACuponera(actividades, cuponera, this, controladorCuponera);

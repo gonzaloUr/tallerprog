@@ -1,0 +1,217 @@
+package com.entrenamosuy.core.model;
+
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataProfesor;
+import com.entrenamosuy.core.data.DescProfesor;
+import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.data.DataActividad;
+
+public class Profesor extends Usuario {
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private String nickname;
+
+        private String nombre;
+
+        private String apellido;
+
+        private Email correo;
+
+        private LocalDate nacimiento;
+
+        private String descripcion;
+
+        private String biografia;
+
+        private URL sitioWeb;
+
+        private Institucion institucion;
+
+        private Set<Clase> clasesDictadas = new HashSet<>();
+
+        private Set<Actividad> actividades = new HashSet<>();
+
+        public Builder setNickname(String nickname) {
+            this.nickname = nickname;
+            return this;
+        }
+
+        public Builder setNombre(String nombre) {
+            this.nombre = nombre;
+            return this;
+        }
+
+        public Builder setApellido(String apellido) {
+            this.apellido = apellido;
+            return this;
+        }
+
+        public Builder setCorreo(Email correo) {
+            this.correo = correo;
+            return this;
+        }
+
+        public Builder setNacimiento(LocalDate nacimiento) {
+            this.nacimiento = nacimiento;
+            return this;
+        }
+
+        public Builder setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+            return this;
+        }
+
+        public Builder setBiografia(String biografia) {
+            this.biografia = biografia;
+            return this;
+        }
+
+        public Builder setSitioWeb(URL sitioWeb) {
+            this.sitioWeb = sitioWeb;
+            return this;
+        }
+
+        public Builder setInstitucion(Institucion institucion) {
+            this.institucion = institucion;
+            return this;
+        }
+
+        public Builder setClasesDictadas(Set<Clase> clasesDictadas) {
+            this.clasesDictadas = clasesDictadas;
+            return this;
+        }
+
+        public Builder setActividades(Set<Actividad> actividades) {
+            this.actividades = actividades;
+            return this;
+        }
+
+        public Profesor build() {
+            return new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion, biografia,
+                    sitioWeb, institucion, clasesDictadas, actividades);
+        }
+    }
+
+    private String descripcion;
+
+    private String biografia;
+
+    private URL sitioWeb;
+
+    private Institucion institucion;
+
+    private Set<Clase> clasesDictadas;
+
+    private Set<Actividad> actividades;
+
+    protected Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
+                    String descripcion, String biografia, URL sitioWeb, Institucion institucion,
+                    Set<Clase> clasesDictadas, Set<Actividad> actividades) {
+        super(nickname, nombre, apellido, correo, nacimiento);
+
+        Objects.requireNonNull(descripcion, "descripcion es null en constructor Profesor");
+        Objects.requireNonNull(institucion, "institucion es null en constructor Profesor");
+        Objects.requireNonNull(clasesDictadas, "clasesDictadas es null en constructor Profesor");
+        Objects.requireNonNull(actividades, "actividades es null en constructor Profesor");
+
+        this.descripcion = descripcion;
+        this.biografia = biografia;
+        this.sitioWeb = sitioWeb;
+        this.institucion = institucion;
+        this.clasesDictadas = clasesDictadas;
+        this.actividades = actividades;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getBiografia() {
+        return biografia;
+    }
+
+    public void setBiografia(String biografia) {
+        this.biografia = biografia;
+    }
+
+    public URL getSitioWeb() {
+        return sitioWeb;
+    }
+
+    public void setSitioWeb(URL sitioWeb) {
+        this.sitioWeb = sitioWeb;
+    }
+
+    public Institucion getInstitucion() {
+        return institucion;
+    }
+
+    public void setInstitucion(Institucion institucion) {
+        this.institucion = institucion;
+    }
+
+    public Set<Clase> getClasesDictadas() {
+        return clasesDictadas;
+    }
+
+    public void setClasesDictadas(Set<Clase> clasesDictadas) {
+        this.clasesDictadas = clasesDictadas;
+    }
+
+    public void setActividad(Set<Actividad> actividades) {
+        this.actividades = actividades;
+    }
+
+    public Set<Actividad> getActividad() {
+        return actividades;
+    }
+
+    public DataProfesor getDataProfesor() {
+        String institucionNombre = this.getInstitucion().getNombre();
+        
+        Set<DataActividad> actividadesData = new HashSet<>();
+    
+        for (Actividad a : actividades) {
+            actividadesData.add(a.getDataActividad());
+        }
+        
+        Set<DataClase> clasesData = new HashSet<>();
+        
+        for (Clase c : clasesDictadas) {
+            clasesData.add(c.getDataClase());
+        }
+
+        return DataProfesor.builder()
+                .setNickname(getNickname())
+                .setNombre(getNombre())
+                .setApellido(getApellido())
+                .setCorreo(getCorreo())
+                .setNacimiento(getNacimiento())
+                .setActividades(actividadesData)
+                .setClases(clasesData)
+                .setInstitucion(institucionNombre)
+                .setDescripcion(descripcion)
+                .setBiografia(biografia)
+                .setSitioWeb(sitioWeb)
+                .build();
+    }
+
+    public DescProfesor getDescProfesor() {
+        return new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
+    }
+}

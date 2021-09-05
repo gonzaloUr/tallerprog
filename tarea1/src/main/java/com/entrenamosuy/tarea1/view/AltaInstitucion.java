@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.exceptions.InstitucionRepetidaException;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
+import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
+import com.entrenamosuy.core.IControladorActividadClase;
 
 public class AltaInstitucion extends JInternalFrame {
 

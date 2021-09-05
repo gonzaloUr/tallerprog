@@ -12,7 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 
-import com.entrenamosuy.tarea1.util.Pair;
+import com.entrenamosuy.core.util.Pair;
 
 public class SelecionarCuponera extends JInternalFrame {
 

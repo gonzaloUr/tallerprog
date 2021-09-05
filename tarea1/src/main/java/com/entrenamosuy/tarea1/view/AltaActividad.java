@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,12 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import com.entrenamosuy.tarea1.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.tarea1.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.tarea1.logic.IControladorActividadClase;
-import com.entrenamosuy.tarea1.logic.Manejador;
-import com.entrenamosuy.tarea1.util.FechaUtil;
-import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.util.FechaUtil;
+import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaActividad extends JInternalFrame {
@@ -164,12 +162,16 @@ public class AltaActividad extends JInternalFrame {
                     Duration duration = Duration.ofMinutes(Integer.parseInt(duracion.getText()));
                     float precio = Float.parseFloat(costo.getText());
                     LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
-                    
-                    controladorActividadClase.crearActividad((String) institucionComboBox.getSelectedItem(), 
-                	    nombre.getText(), 
-                	    descripcion.getText(), 
-                	    duration, precio, fecha);
-                    
+
+                    controladorActividadClase.crearActividad()
+                        .setInstitucion((String) institucionComboBox.getSelectedItem())
+                        .setNombre(nombre.getText())
+                        .setDescripcion(descripcion.getText())
+                        .setDuracion(duration)
+                        .setCosto(precio)
+                        .setRegistro(fecha)
+                        .invoke();
+
                     JOptionPane.showMessageDialog(app, "Actividad registrada exitosamente.");
                     setVisible(false);
                 } catch (ActividadRepetidaException are) {

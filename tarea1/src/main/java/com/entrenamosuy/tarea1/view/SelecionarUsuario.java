@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.tarea1.util.Triple;
+import com.entrenamosuy.core.util.Triple;
 
 import javax.swing.*;
 

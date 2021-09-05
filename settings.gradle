@@ -1,2 +1,3 @@
 rootProject.name = 'tprog'
 include 'tarea1'
+include 'core'
