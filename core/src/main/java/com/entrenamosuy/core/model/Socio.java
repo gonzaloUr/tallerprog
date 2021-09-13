@@ -1,15 +1,17 @@
 package com.entrenamosuy.core.model;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
 
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.Email;
-import com.entrenamosuy.core.util.Pair;
 
 public class Socio extends Usuario {
 
@@ -28,6 +30,14 @@ public class Socio extends Usuario {
         private Email correo;
 
         private LocalDate nacimiento;
+
+        private String password;
+
+        private Set<Usuario> usuariosSeguidos = new HashSet<>();
+
+        private Set<Usuario> seguidores = new HashSet<>();
+
+        private InputStream imagen;
 
         private Set<Registro> registros = new HashSet<>();
 
@@ -68,8 +78,29 @@ public class Socio extends Usuario {
             return this;
         }
 
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setUsuariosSeguidos(Set<Usuario> usariosSeguidos) {
+            this.usuariosSeguidos = usariosSeguidos;
+            return this;
+        }
+
+        public Builder setSeguidores(Set<Usuario> seguidores) {
+            this.seguidores = seguidores;
+            return this;
+        }
+
+        public Builder setImagen(InputStream imagen) {
+            this.imagen = imagen;
+            return this;
+        }
+
         public Socio build() {
-            return new Socio(nickname, nombre, apellido, correo, nacimiento, registros, compras);
+            return new Socio(nickname, nombre, apellido, correo, nacimiento, registros, compras,
+                    password, usuariosSeguidos, seguidores, imagen);
         }
     }
 
@@ -78,8 +109,14 @@ public class Socio extends Usuario {
     private Set<Compra> compras;
 
     protected Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-                 Set<Registro> registros, Set<Compra> compras) {
-        super(nickname, nombre, apellido, correo, nacimiento);
+                 Set<Registro> registros, Set<Compra> compras, String password, Set<Usuario> usuariosSeguidos,
+                 Set<Usuario> seguidores, InputStream imagen) {
+
+        super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
+
+        Objects.requireNonNull(registros, "registros es null en constructor Socio");
+        Objects.requireNonNull(compras, "compras es null en constructor Socio");
+
         this.registros = registros;
         this.compras = compras;
     }
@@ -100,7 +137,44 @@ public class Socio extends Usuario {
         this.compras = compras;
     }
 
-    public Set<Pair<String, String>> cuponerasUsables(Actividad a) {
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Profesor = [nickname=")
+            .append(getNickname())
+            .append(", nombre=")
+            .append(getNombre())
+            .append(", apellido=")
+            .append(getApellido())
+            .append(", registros=[");
+
+        if (!registros.isEmpty()) {
+            Iterator<Registro> it = registros.iterator();
+
+            builder.append(it.next().getClaseAsociada().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ")
+                    .append(it.next().getClaseAsociada().getNombre());
+        }
+
+        builder.append("], cuponeras=[");
+
+        if (!compras.isEmpty()) {
+            Iterator<Compra> it = compras.iterator();
+
+            builder.append(it.next().getCuponera().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ")
+                    .append(it.next().getCuponera().getNombre());
+        }
+
+        builder.append("]]");
+        return builder.toString();
+    }
+
+    public Set<String> cuponerasUsables(Actividad a) {
         List<Cuponera> cuponerasADescribir = new ArrayList<>();
 
         for (Compra compra : compras) {
@@ -116,9 +190,11 @@ public class Socio extends Usuario {
             if (cantRegistros < cantClases)
                 cuponerasADescribir.add(cup);
         }
-        Set<Pair<String, String>> ret = new HashSet<>(cuponerasADescribir.size());
+        Set<String> ret = new HashSet<>(cuponerasADescribir.size());
+
         for (Cuponera cup : cuponerasADescribir)
-            ret.add(new Pair<>(cup.getNombre(), cup.getDescripcion()));
+            ret.add(cup.getNombre());
+
         return ret;
     }
 

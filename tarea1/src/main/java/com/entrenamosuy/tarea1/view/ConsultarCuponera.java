@@ -5,9 +5,9 @@ import javax.swing.JInternalFrame;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DescActividad;
 import com.entrenamosuy.core.exceptions.CuponeraNoEncontradaException;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
-import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
@@ -25,8 +25,8 @@ public class ConsultarCuponera extends JInternalFrame {
     private JTextField nombreField;
     private JTextField descripcionField;
 
-    public ConsultarCuponera(App app, String cuponera, IControladorUsuario controladorUsuario,
-	    IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
+    public ConsultarCuponera(App app, String cuponera, AbstractFacadeUsuario controladorUsuario,
+							 AbstractFacadeCuponera controladorCuponera, AbstractFacadeActividad controladorActividadClase) {
 	setTitle("Consulta cuponera");
 	setResizable(true);
 	setClosable(true);
@@ -87,7 +87,7 @@ public class ConsultarCuponera extends JInternalFrame {
 	DataCuponera dataCuponera = null;
 
 	try {
-	    dataCuponera = controladorCuponera.consultarCuponera(cuponera);
+	    dataCuponera = controladorCuponera.getDataCuponera(cuponera);
 	} catch (CuponeraNoEncontradaException e) {
 	    e.printStackTrace();
 	    return;

@@ -1,7 +1,9 @@
 package com.entrenamosuy.core.model;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -27,6 +29,8 @@ public class Cuponera {
         private Set<Integra> integras = new HashSet<>();
 
         private Set<Registro> registros = new HashSet<>();
+
+        private InputStream imagen;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -68,8 +72,13 @@ public class Cuponera {
             return this;
         }
 
+        public Builder setImagen(InputStream imagen) {
+            this.imagen = imagen;
+            return this;
+        }
+
         public Cuponera build() {
-            return new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaRegistro, integras, registros);
+            return new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaRegistro, integras, registros, imagen);
         }
     }
 
@@ -85,8 +94,10 @@ public class Cuponera {
 
     private Set<Registro> registros;
 
+    private InputStream imagen;
+
     protected Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-                    LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros) {
+                    LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros, InputStream imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Cuponera");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Cuponera");
@@ -104,6 +115,7 @@ public class Cuponera {
         this.integras = integras;
         this.registros = registros;
         this.fechaRegistro = fechaRegistro;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -163,11 +175,19 @@ public class Cuponera {
     }
 
     public LocalDate getFechaRegistro() {
-	return fechaRegistro;
+        return fechaRegistro;
     }
 
     public void setFechaRegistro(LocalDate fechaRegistro) {
 	    this.fechaRegistro = fechaRegistro;
+    }
+
+    public InputStream getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(InputStream imagen) {
+        this.imagen = imagen;
     }
 
     @Override
@@ -183,6 +203,32 @@ public class Cuponera {
             return false;
         Cuponera other = (Cuponera) obj;
         return Objects.equals(nombre, other.nombre);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Cuponera = [nombre=")
+            .append(nombre)
+            .append(", registro=")
+            .append(fechaRegistro)
+            .append(", inicio=")
+            .append(inicio)
+            .append(", fin=")
+            .append(fin)
+            .append(", actividades=[");
+
+        if (!integras.isEmpty()) {
+            Iterator<Integra> it = integras.iterator();
+
+            builder.append(it.next().getActividad().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ").append(it.next().getActividad().getNombre());
+        }
+
+        builder.append("]]");
+        return builder.toString();
     }
 
     public DataCuponera getDataCuponera() {

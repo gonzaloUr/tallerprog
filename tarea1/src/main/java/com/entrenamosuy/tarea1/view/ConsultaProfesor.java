@@ -19,9 +19,9 @@ import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 
 public class ConsultaProfesor extends JInternalFrame {
     private JTextField nicknameField;
@@ -33,14 +33,14 @@ public class ConsultaProfesor extends JInternalFrame {
     private JTextField biografiaField;
     private JTextField sitioWebField;
 
-    public ConsultaProfesor(App app, String nickname, IControladorUsuario controladorUsuario,
-	    IControladorCuponera controladorCuponera, IControladorActividadClase controladorActividadClase) {
+    public ConsultaProfesor(App app, String nickname, AbstractFacadeUsuario controladorUsuario,
+							AbstractFacadeCuponera controladorCuponera, AbstractFacadeActividad controladorActividadClase) {
 	List<String> clases = new ArrayList<String>();
 	List<String> actividades = new ArrayList<String>();
 	DataProfesor profesor = null;
 
 	try {
-	    profesor = controladorUsuario.consultarProfesor(nickname);
+	    profesor = controladorUsuario.getDataProfesor(nickname);
 	} catch (ProfesorNoEncontradoException e) {
 	    e.printStackTrace();
 	}

@@ -15,11 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
-import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.AbstractFacadeActividad;
 
 public class AltaInstitucion extends JInternalFrame {
 
-    public AltaInstitucion(IControladorActividadClase controladorActividadClase, App app) {
+    public AltaInstitucion(AbstractFacadeActividad controladorActividadClase, App app) {
     	setMaximizable(true);
     	setResizable(true);
     	setClosable(true);

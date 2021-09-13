@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
 
 public class AgregarActividadACuponera extends JInternalFrame {
 
-    public AgregarActividadACuponera(Set<String> actividades, String cuponera, App app, IControladorCuponera controladorCuponera) {
+    public AgregarActividadACuponera(Set<String> actividades, String cuponera, App app, AbstractFacadeCuponera controladorCuponera) {
     	setResizable(true);
     	setMaximizable(true);
     	setClosable(true);

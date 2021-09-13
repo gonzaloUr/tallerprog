@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
@@ -18,7 +18,7 @@ public class ModificarDatosSocio extends JInternalFrame {
     private JTextField apellidoField;
     private JDateChooser nacimientoField;
 
-    public ModificarDatosSocio(String nickname, IControladorUsuario controladorUsuario) {
+    public ModificarDatosSocio(String nickname, AbstractFacadeUsuario controladorUsuario) {
         setTitle("Modificar datos socio");
         setResizable(true);
         setClosable(true);

@@ -1,8 +1,10 @@
 package com.entrenamosuy.core.model;
 
+import java.io.InputStream;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.Map;
@@ -11,7 +13,7 @@ import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DescActividad;
-import com.entrenamosuy.core.Manejador;
+import com.entrenamosuy.core.Registry;
 
 public class Actividad {
 
@@ -32,6 +34,14 @@ public class Actividad {
         private float costo;
 
         private Set<Clase> clases = new HashSet<>();
+
+        private Set<Categoria> categorias = new HashSet<>();
+
+        private InputStream imagen;
+
+        private ActividadEstado estado = ActividadEstado.INGRESADA;
+
+        private Set<Integra> integras = new HashSet<>();
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -63,8 +73,29 @@ public class Actividad {
             return this;
         }
 
+        public Builder setCategorias(Set<Categoria> categorias) {
+            this.categorias = categorias;
+            return this;
+        }
+
+        public Builder setImagen(InputStream imagen) {
+            this.imagen = imagen;
+            return this;
+        }
+
+        public Builder setEstado(ActividadEstado estado) {
+            this.estado = estado;
+            return this;
+        }
+
+        public Builder setIntegras(Set<Integra> integras) {
+            this.integras = integras;
+            return this;
+        }
+
         public Actividad build() {
-            return new Actividad(nombre, descripcion, duracion, fechaRegistro, costo, clases);
+            return new Actividad(nombre, descripcion, duracion, fechaRegistro, costo,
+                    clases, categorias, imagen, estado, integras);
         }
     }
 
@@ -80,14 +111,26 @@ public class Actividad {
 
     private Set<Clase> clases;
 
+    private Set<Categoria> categorias;
+
+    private Set<Integra> integras;
+
+    private InputStream imagen;
+
+    private ActividadEstado estado;
+
     protected Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro,
-                     float costo, Set<Clase> clases) {
+                     float costo, Set<Clase> clases, Set<Categoria> categorias, InputStream imagen,
+                     ActividadEstado estado, Set<Integra> integras) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Actividad");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Actividad");
         Objects.requireNonNull(duracion, "duracion es null en constructor Actividad");
         Objects.requireNonNull(fechaRegistro, "fechaRegistro es null en constructor Actividad");
         Objects.requireNonNull(clases, "clases es null en constructor Actividad");
+        Objects.requireNonNull(categorias, "categorias es null en constructor Actividad");
+        Objects.requireNonNull(estado, "estado es null en constructor Actividad");
+        Objects.requireNonNull(integras, "integras es null en constructor Actividad");
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -95,6 +138,10 @@ public class Actividad {
         this.fechaRegistro = fechaRegistro;
         this.costo = costo;
         this.clases = clases;
+        this.categorias = categorias;
+        this.imagen = imagen;
+        this.estado = estado;
+        this.integras = integras;
     }
 
     public String getNombre() {
@@ -145,6 +192,38 @@ public class Actividad {
         this.clases = clases;
     }
 
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
+    }
+
+    public InputStream getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(InputStream imagen) {
+        this.imagen = imagen;
+    }
+
+    public ActividadEstado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(ActividadEstado estado) {
+        this.estado = estado;
+    }
+
+    public Set<Integra> getIntegras() {
+        return integras;
+    }
+
+    public void setIntegras(Set<Integra> integras) {
+        this.integras = integras;
+    }
+
     @Override
     public int hashCode() {
         return nombre.hashCode();
@@ -160,13 +239,33 @@ public class Actividad {
         return Objects.equals(nombre, other.getNombre());
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Actividad = [nombre=")
+            .append(nombre)
+            .append(", clases=[");
+
+        if (!clases.isEmpty()) {
+            Iterator<Clase> it = clases.iterator();
+
+            builder.append(it.next().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ").append(it.next().getNombre());
+        }
+
+        builder.append("]]");
+        return builder.toString();
+    }
+
     public DataActividad getDataActividad() {
         Set<DataCuponera> cuponeras = new HashSet<>();
-        Manejador man = Manejador.getInstance();
-        Map<String, Cuponera> cupos = man.getCuponeras();
 
-        for (Cuponera cupo : cupos.values()) {
+        for (Integra i : integras) {
+            Cuponera cupo = i.getCuponera();
             Set<Integra> integs = cupo.getIntegras();
+
             for (Integra integ : integs) {
                 Actividad act = integ.getActividad();
                 if (act.getNombre().equals(this.nombre)) {

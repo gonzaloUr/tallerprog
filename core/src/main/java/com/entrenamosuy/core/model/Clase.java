@@ -3,8 +3,10 @@ package com.entrenamosuy.core.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.net.URL;
+import java.io.InputStream;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 
 import com.entrenamosuy.core.data.DataClase;
@@ -33,6 +35,8 @@ public class Clase {
         private Set<Profesor> profesores = new HashSet<>();
 
         private Actividad actividad;
+
+        private InputStream imagen;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -79,9 +83,14 @@ public class Clase {
             return this;
         }
 
+        public Builder setImagen(InputStream imagen) {
+            this.imagen = imagen;
+            return this;
+        }
+
         public Clase build() {
             return new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro,
-                    registros, profesores, actividad);
+                    registros, profesores, actividad, imagen);
         }
     }
 
@@ -101,9 +110,11 @@ public class Clase {
 
     private Actividad actividad;
 
+    private InputStream imagen;
+
     protected Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
                  URL acceso, LocalDate fechaRegistro, Set<Registro> registros,
-                 Set<Profesor> profesores, Actividad actividad) {
+                 Set<Profesor> profesores, Actividad actividad, InputStream imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Clase");
         Objects.requireNonNull(inicio, "inicio es null en constructor Clase");
@@ -122,6 +133,7 @@ public class Clase {
         this.registros = registros = new HashSet<>();
         this.profesores = profesores;
         this.actividad = actividad;
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -194,6 +206,36 @@ public class Clase {
 
     public void setActividad(Actividad actividad) {
         this.actividad = actividad;
+    }
+
+    public InputStream getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(InputStream imagen) {
+        this.imagen = imagen;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Clase = [nombre=")
+            .append(nombre)
+            .append(", actividad=")
+            .append(actividad.getNombre())
+            .append(", profesores=[");
+
+        if (!profesores.isEmpty()) {
+            Iterator<Profesor> it = profesores.iterator();
+
+            builder.append(it.next().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ").append(it.next().getNombre());
+        }
+
+        builder.append("]]");
+        return builder.toString();
     }
 
     public void registrarseSinCuponera(Socio socio, LocalDate fecha) {

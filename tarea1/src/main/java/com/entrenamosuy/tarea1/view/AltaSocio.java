@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.EmailParseException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
@@ -33,7 +33,7 @@ public class AltaSocio extends JInternalFrame {
     private JLabel lblNewLabel_1;
     private JButton aceptar;
 
-    public AltaSocio(App app, IControladorUsuario controladorUsuario) {
+    public AltaSocio(App app, AbstractFacadeUsuario controladorUsuario) {
 	setResizable(true);
 	setMaximizable(true);
 	setClosable(true);

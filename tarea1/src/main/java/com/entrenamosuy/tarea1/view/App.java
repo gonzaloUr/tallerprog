@@ -1,13 +1,11 @@
 package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.Fabrica;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
-import com.entrenamosuy.core.Manejador;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
+import com.entrenamosuy.core.Registry;
 import com.entrenamosuy.core.model.Registro;
-import com.entrenamosuy.core.util.Pair;
-import com.entrenamosuy.core.util.Triple;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -20,11 +18,11 @@ import java.util.Set;
 
 public class App extends JFrame {
 
-    private final IControladorActividadClase controladorActividadClase;
+    private final AbstractFacadeActividad controladorActividadClase;
 
-    private final IControladorCuponera controladorCuponera;
+    private final AbstractFacadeCuponera controladorCuponera;
 
-    private final IControladorUsuario controladorUsuario;
+    private final AbstractFacadeUsuario controladorUsuario;
 
     public App() {
         // Controladores y fabrica
@@ -34,7 +32,7 @@ public class App extends JFrame {
         controladorCuponera = fabrica.crearControladorCuponera();
         controladorUsuario = fabrica.creaControladorUsuario();
 
-        Manejador man = Manejador.getInstance();
+        Registry man = Registry.getInstance();
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Estación de trabajo");
@@ -122,7 +120,7 @@ public class App extends JFrame {
         modificar.add(modificarProfesor);
 
         modificarSocio.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
+            Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
 
             if (socios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -144,7 +142,7 @@ public class App extends JFrame {
         });
 
         modificarProfesor.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();
+            Set<Triple<String, String, String>> profesores = controladorUsuario.getProfesores();
 
             if (profesores.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -178,7 +176,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String institucion) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(institucion);
+                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(institucion);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -204,7 +202,7 @@ public class App extends JFrame {
         });
 
         consultaSocio.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
+            Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
 
             if (socios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -226,7 +224,7 @@ public class App extends JFrame {
         });
 
         consultaProfesor.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> profesores = controladorUsuario.obtenerDescProfesores();
+            Set<Triple<String, String, String>> profesores = controladorUsuario.getProfesores();
 
             if (profesores.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -260,7 +258,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
+                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -298,7 +296,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
+                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -352,7 +350,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.obtenerDescActividades(inst);
+                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
 
                 if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -377,7 +375,7 @@ public class App extends JFrame {
 
                     SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
 
-                        Set<Triple<String, String, String>> socios = controladorUsuario.obtenerDescSocios();
+                        Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
 
                         if (socios.isEmpty()) {
                             JOptionPane.showMessageDialog(this,
@@ -437,7 +435,7 @@ public class App extends JFrame {
         });
 
         consultaCuponera.addActionListener((ActionEvent a) -> {
-            Set<Pair<String, String>> cuponeras = controladorCuponera.obtenerDescCuponeras();
+            Set<Pair<String, String>> cuponeras = controladorCuponera.getCuponeras();
 
             if (cuponeras.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -491,7 +489,7 @@ public class App extends JFrame {
         }));
 
         agregarActividadCuponera.addActionListener((ActionEvent a) -> {
-            Set<Pair<String, String>> cuponeras = controladorCuponera.obtenerDescCuponeras();
+            Set<Pair<String, String>> cuponeras = controladorCuponera.getCuponeras();
 
             if (cuponeras.isEmpty()) {
                 JOptionPane.showMessageDialog(this,

@@ -5,9 +5,9 @@ import javax.swing.JInternalFrame;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
@@ -30,8 +30,8 @@ public class ConsultaDictadoClase extends JInternalFrame {
     private JTextField urlField;
     private JTextField actividadField;
 
-    public ConsultaDictadoClase(App app, String clase, IControladorUsuario controladorUsuario,
-	    IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
+    public ConsultaDictadoClase(App app, String clase, AbstractFacadeUsuario controladorUsuario,
+                                AbstractFacadeActividad controladorActividadClase, AbstractFacadeCuponera controladorCuponera) {
 	setMaximizable(true);
 	setResizable(true);
 	setClosable(true);

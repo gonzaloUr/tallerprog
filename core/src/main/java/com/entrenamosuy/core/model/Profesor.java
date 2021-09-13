@@ -1,8 +1,10 @@
 package com.entrenamosuy.core.model;
 
+import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -29,6 +31,14 @@ public class Profesor extends Usuario {
         private Email correo;
 
         private LocalDate nacimiento;
+
+        private String password;
+
+        private Set<Usuario> usuariosSeguidos = new HashSet<>();
+
+        private Set<Usuario> seguidores = new HashSet<>();
+
+        private InputStream imagen;
 
         private String descripcion;
 
@@ -72,6 +82,26 @@ public class Profesor extends Usuario {
             return this;
         }
 
+        public Builder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder setUsuariosSeguidos(Set<Usuario> usariosSeguidos) {
+            this.usuariosSeguidos = usariosSeguidos;
+            return this;
+        }
+
+        public Builder setSeguidores(Set<Usuario> seguidores) {
+            this.seguidores = seguidores;
+            return this;
+        }
+
+        public Builder setImagen(InputStream imagen) {
+            this.imagen = imagen;
+            return this;
+        }
+
         public Builder setBiografia(String biografia) {
             this.biografia = biografia;
             return this;
@@ -98,8 +128,9 @@ public class Profesor extends Usuario {
         }
 
         public Profesor build() {
-            return new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion, biografia,
-                    sitioWeb, institucion, clasesDictadas, actividades);
+            return new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion,
+                    password, usuariosSeguidos, seguidores, imagen, biografia, sitioWeb, institucion,
+                    clasesDictadas, actividades);
         }
     }
 
@@ -116,9 +147,11 @@ public class Profesor extends Usuario {
     private Set<Actividad> actividades;
 
     protected Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-                    String descripcion, String biografia, URL sitioWeb, Institucion institucion,
-                    Set<Clase> clasesDictadas, Set<Actividad> actividades) {
-        super(nickname, nombre, apellido, correo, nacimiento);
+                    String descripcion, String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores,
+                    InputStream imagen, String biografia, URL sitioWeb, Institucion institucion, Set<Clase> clasesDictadas,
+                    Set<Actividad> actividades) {
+
+        super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Profesor");
         Objects.requireNonNull(institucion, "institucion es null en constructor Profesor");
@@ -183,15 +216,15 @@ public class Profesor extends Usuario {
 
     public DataProfesor getDataProfesor() {
         String institucionNombre = this.getInstitucion().getNombre();
-        
+
         Set<DataActividad> actividadesData = new HashSet<>();
-    
+
         for (Actividad a : actividades) {
             actividadesData.add(a.getDataActividad());
         }
-        
+
         Set<DataClase> clasesData = new HashSet<>();
-        
+
         for (Clase c : clasesDictadas) {
             clasesData.add(c.getDataClase());
         }
@@ -213,5 +246,40 @@ public class Profesor extends Usuario {
 
     public DescProfesor getDescProfesor() {
         return new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Profesor = [nickname=")
+            .append(getNickname())
+            .append(", nombre=")
+            .append(getNombre())
+            .append(", apellido=")
+            .append(getApellido())
+            .append(", clasesDictadas=[");
+
+        if (!clasesDictadas.isEmpty()) {
+            Iterator<Clase> it = clasesDictadas.iterator();
+
+            builder.append(it.next().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ").append(it.next().getNombre());
+        }
+
+        builder.append("], actividades=[");
+
+        if (!actividades.isEmpty()) {
+            Iterator<Actividad> it = actividades.iterator();
+
+            builder.append(it.next().getNombre());
+
+            while (it.hasNext())
+                builder.append(", ").append(it.next().getNombre());
+        }
+
+        builder.append("]]");
+        return builder.toString();
     }
 }

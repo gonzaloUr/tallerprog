@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.AbstractFacadeActividad;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
@@ -29,7 +29,7 @@ public class AltaActividad extends JInternalFrame {
     private JTextField duracion;
     private JTextField costo;
 
-    public AltaActividad(App app, IControladorActividadClase controladorActividadClase) {
+    public AltaActividad(App app, AbstractFacadeActividad controladorActividadClase) {
 	String[] instituciones = controladorActividadClase.obtenerDescInstituciones()
 		.stream()
 		.map(Triple::getFirst)

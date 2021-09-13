@@ -1,16 +1,32 @@
 package com.entrenamosuy.core;
 
+import com.entrenamosuy.core.util.FacadeContainer;
+
 public class Fabrica {
 
-    public IControladorActividadClase crearControladorActividadClase() {
-        return new ControladorActividadClase();
-    }
+    public FacadeContainer createFacades() {
+        FacadeContainer ret = new FacadeContainer();
 
-    public IControladorCuponera crearControladorCuponera() {
-        return new ControladorCuponera();
-    }
+        AbstractRegistry registry = new Registry();
+        AbstractFacadeActividad facadeActividad = new FacadeActividad();
+        AbstractFacadeClase facadeClase = new FacadeClase();
+        AbstractFacadeCuponera facadeCuponera = new FacadeCuponera();
+        AbstractFacadeInstitucion facadeInstitucion = new FacadeInstitucion();
+        AbstractFacadeUsuario facadeUsuario = new FacadeUsuario();
 
-    public IControladorUsuario creaControladorUsuario() {
-        return new ControladorUsuario();
+        facadeActividad.setRegistry(registry);
+        facadeClase.setRegistry(registry);
+        facadeCuponera.setRegistry(registry);
+        facadeInstitucion.setRegistry(registry);
+        facadeUsuario.setRegistry(registry);
+
+        ret.setRegistry(registry);
+        ret.setFacadeActividad(facadeActividad);
+        ret.setFacadeClase(facadeClase);
+        ret.setFacadeCuponera(facadeCuponera);
+        ret.setFacadeInstitucion(facadeInstitucion);
+        ret.setFacadeUsuario(facadeUsuario);
+
+        return ret;
     }
 }

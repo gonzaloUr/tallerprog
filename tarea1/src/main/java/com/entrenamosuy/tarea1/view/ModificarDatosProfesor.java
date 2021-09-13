@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
 
@@ -23,7 +23,7 @@ public class ModificarDatosProfesor extends JInternalFrame {
     private JTextField biografiaField;
     private JTextField sitioWebField;
 
-    public ModificarDatosProfesor(String nickname, IControladorUsuario controladorUsuario) {
+    public ModificarDatosProfesor(String nickname, AbstractFacadeUsuario controladorUsuario) {
         setTitle("Modificar datos profesor");
         setResizable(true);
         setClosable(true);

@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.IControladorActividadClase;
+import com.entrenamosuy.core.AbstractFacadeActividad;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.entrenamosuy.core.util.Pair;
@@ -25,7 +25,7 @@ import java.util.Set;
 public class RegistroAClase extends JInternalFrame {
 
     public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras,
-                          IControladorActividadClase controladorActividadClase, App app) {
+                          AbstractFacadeActividad controladorActividadClase, App app) {
 
         final List<String> cuponerasLista = new ArrayList<>();
         for (Pair<String, String> cuponera : cuponeras) {

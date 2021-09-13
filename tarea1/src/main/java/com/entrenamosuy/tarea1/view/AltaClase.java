@@ -24,8 +24,8 @@ import javax.swing.event.ListSelectionEvent;
 
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
@@ -37,11 +37,11 @@ public class AltaClase extends JInternalFrame {
     private final JTextField cantMax;
     private final JTextField url;
 
-    public AltaClase(String actividad, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase, String institucion, App app) {
+    public AltaClase(String actividad, AbstractFacadeUsuario controladorUsuario, AbstractFacadeActividad controladorActividadClase, String institucion, App app) {
 
         String[] profesoresAux = null;
         try {
-            profesoresAux = controladorUsuario.obtenerDescProfesoresDe(institucion)
+            profesoresAux = controladorUsuario.getProfesoresDeInstitucion(institucion)
             	.stream()
             	.map(Triple::getSecond)
             	.toArray(String[]::new);

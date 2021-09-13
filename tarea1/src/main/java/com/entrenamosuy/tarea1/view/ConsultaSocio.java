@@ -16,14 +16,14 @@ import javax.swing.JTextField;
 
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataSocio;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 
 public class ConsultaSocio extends JInternalFrame {
 
-    public ConsultaSocio(App app, IControladorActividadClase controladorActividadClase,
-	    IControladorUsuario controladorUsuario, IControladorCuponera controladorCuponera, String nickname) {
+    public ConsultaSocio(App app, AbstractFacadeActividad controladorActividadClase,
+						 AbstractFacadeUsuario controladorUsuario, AbstractFacadeCuponera controladorCuponera, String nickname) {
 	DataSocio data = null;
 
 	try {

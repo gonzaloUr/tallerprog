@@ -1,6 +1,6 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.IControladorCuponera;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
 import com.entrenamosuy.core.exceptions.CuponeraInconsistenteException;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
@@ -34,7 +34,7 @@ public class CrearCuponera extends JInternalFrame {
     private JLabel lblRegistro;
     private JDateChooser calendarioRegistro;
 
-    public CrearCuponera(IControladorCuponera controladorCuponera, App app) {
+    public CrearCuponera(AbstractFacadeCuponera controladorCuponera, App app) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);

@@ -10,9 +10,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.entrenamosuy.core.data.Email;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 
 public class CargarDatosLambda implements ActionListener {
 
@@ -21,16 +21,16 @@ public class CargarDatosLambda implements ActionListener {
         void finished();
     }
 
-    private final IControladorUsuario CU;
+    private final AbstractFacadeUsuario CU;
 
-    private final IControladorActividadClase CAC;
+    private final AbstractFacadeActividad CAC;
 
-    private final IControladorCuponera CC;
+    private final AbstractFacadeCuponera CC;
 
     private final Callback callback;
 
-    public CargarDatosLambda(IControladorUsuario controladorUsuario,
-                             IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera,
+    public CargarDatosLambda(AbstractFacadeUsuario controladorUsuario,
+                             AbstractFacadeActividad controladorActividadClase, AbstractFacadeCuponera controladorCuponera,
                              Callback callback) {
         this.CU = controladorUsuario;
         this.CAC = controladorActividadClase;

@@ -1,7 +1,9 @@
 package com.entrenamosuy.core.model;
 
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 import com.entrenamosuy.core.data.Email;
 
@@ -17,12 +19,35 @@ public abstract class Usuario {
 
     private LocalDate nacimiento;
 
-    public Usuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) {
+    private String password;
+
+    private Set<Usuario> usuariosSeguidos;
+
+    private Set<Usuario> seguidores;
+
+    private InputStream imagen;
+
+    public Usuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
+            String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, InputStream imagen) {
+
+        Objects.requireNonNull(nickname, "nickname es null en constructor Usuario");
+        Objects.requireNonNull(nombre, "nombre es null en constructor Usuario");
+        Objects.requireNonNull(apellido, "apellido es null en constructor Usuario");
+        Objects.requireNonNull(correo, "correo es null en constructor Usuario");
+        Objects.requireNonNull(nacimiento, "nacimiento es null en constructor Usuario");
+        Objects.requireNonNull(password, "password es null en constructor Usuario");
+        Objects.requireNonNull(usuariosSeguidos, "usuariosSeguidos es null en constructor Usuario");
+        Objects.requireNonNull(seguidores, "seguidores es null en constructor Usuario");
+
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.nacimiento = nacimiento;
+        this.password = password;
+        this.usuariosSeguidos = usuariosSeguidos;
+        this.seguidores = seguidores;
+        this.imagen = imagen;
     }
 
     public String getNickname() {
@@ -65,6 +90,38 @@ public abstract class Usuario {
         this.nacimiento = nacimiento;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Usuario> getUsuariosSeguidos() {
+        return usuariosSeguidos;
+    }
+
+    public void setUsuariosSeguidos(Set<Usuario> usuariosSeguidos) {
+        this.usuariosSeguidos = usuariosSeguidos;
+    }
+
+    public Set<Usuario> getSeguidores() {
+        return seguidores;
+    }
+
+    public void setSeguidores(Set<Usuario> seguidores) {
+        this.seguidores = seguidores;
+    }
+
+    public InputStream getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(InputStream imagen) {
+        this.imagen = imagen;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(correo, nickname);
@@ -77,6 +134,6 @@ public abstract class Usuario {
         if (obj == null || getClass() != obj.getClass())
             return false;
         Usuario other = (Usuario) obj;
-        return Objects.equals(nickname, other.nickname) && Objects.equals(nombre, other.nombre);
+        return Objects.equals(nickname, other.nickname);
     }
 }

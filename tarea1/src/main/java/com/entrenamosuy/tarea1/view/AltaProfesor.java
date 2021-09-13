@@ -20,8 +20,8 @@ import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.EmailParseException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
@@ -42,7 +42,7 @@ public class AltaProfesor extends JInternalFrame {
     private JTextField urlField;
     private JComboBox institucionComboBox;
 
-    public AltaProfesor(App app, IControladorUsuario controladorUsuario, IControladorActividadClase controladorActividadClase) {
+    public AltaProfesor(App app, AbstractFacadeUsuario controladorUsuario, AbstractFacadeActividad controladorActividadClase) {
     	setResizable(true);
     	setMaximizable(true);
     	setClosable(true);

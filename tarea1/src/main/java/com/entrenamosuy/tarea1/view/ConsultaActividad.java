@@ -6,9 +6,9 @@ import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
-import com.entrenamosuy.core.IControladorActividadClase;
-import com.entrenamosuy.core.IControladorCuponera;
-import com.entrenamosuy.core.IControladorUsuario;
+import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.util.FechaUtil;
 
 import java.awt.GridBagLayout;
@@ -31,8 +31,8 @@ public class ConsultaActividad extends JInternalFrame {
     private JTextField registroField;
     private JTextField costoField;
 
-    public ConsultaActividad(App app, String actividad, IControladorUsuario controladorUsuario,
-	    IControladorActividadClase controladorActividadClase, IControladorCuponera controladorCuponera) {
+    public ConsultaActividad(App app, String actividad, AbstractFacadeUsuario controladorUsuario,
+							 AbstractFacadeActividad controladorActividadClase, AbstractFacadeCuponera controladorCuponera) {
 	setTitle("Consulta actividad");
 	setClosable(true);
 	setResizable(true);
@@ -156,7 +156,7 @@ public class ConsultaActividad extends JInternalFrame {
 	DataActividad dataActividad = null;
 
 	try {
-	    dataActividad = controladorActividadClase.consultarActividad(actividad);
+	    dataActividad = controladorActividadClase.getDataActividad(actividad);
 	} catch (ActividadNoEncontradaException e) {
 	    e.printStackTrace();
 	    return;
