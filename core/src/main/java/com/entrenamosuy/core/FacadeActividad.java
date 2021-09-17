@@ -1,7 +1,7 @@
 package com.entrenamosuy.core;
 
 import java.util.*;
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -27,7 +27,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             private LocalDate registro;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
@@ -66,7 +66,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
-            public CrearActividadChain setImagen(InputStream imagen) {
+            public CrearActividadChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return null;
             }

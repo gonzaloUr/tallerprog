@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -48,7 +48,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private String password;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public CrearProfesorChain setNickname(String nickname) {
@@ -111,7 +111,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public CrearProfesorChain setImagen(InputStream imagen) {
+            public CrearProfesorChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -173,7 +173,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private String password;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public CrearSocioChain setNickname(String nickname) {
@@ -212,7 +212,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public CrearSocioChain setImagen(InputStream imagen) {
+            public CrearSocioChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -259,7 +259,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public ModificarDatosSocioChain setNickname(String nickname) {
@@ -286,7 +286,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public ModificarDatosSocioChain setImagen(InputStream imagen) {
+            public ModificarDatosSocioChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -331,7 +331,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private URL sitioWeb;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public ModificarDatosProfesorChain setNickname(String nickname) {
@@ -376,7 +376,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public ModificarDatosProfesorChain setImagen(InputStream imagen) {
+            public ModificarDatosProfesorChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return this;
             }

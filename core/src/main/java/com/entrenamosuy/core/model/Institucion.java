@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -26,7 +26,7 @@ public class Institucion {
 
         private Set<Actividad> actividadesOfrecidas = new HashSet<>();
 
-        private InputStream imagen;
+        private ByteBuffer imagen;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -48,7 +48,7 @@ public class Institucion {
             return this;
         }
 
-        public Builder setImagen(InputStream imagen) {
+        public Builder setImagen(ByteBuffer imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -66,10 +66,10 @@ public class Institucion {
 
     private Set<Actividad> actividadesOfrecidas;
 
-    private InputStream imagen;
+    private ByteBuffer imagen;
 
     protected Institucion(String nombre, String descripcion, URL url,
-            Set<Actividad> actividadesOfrecidas, InputStream imagen) {
+            Set<Actividad> actividadesOfrecidas, ByteBuffer imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Institucion");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Institucion");
@@ -115,11 +115,11 @@ public class Institucion {
         this.actividadesOfrecidas = actividadesOfrecidas;
     }
 
-    public InputStream getImagen() {
+    public ByteBuffer getImagen() {
         return imagen;
     }
 
-    public void setImagen(InputStream imagen) {
+    public void setImagen(ByteBuffer imagen) {
         this.imagen = imagen;
     }
 

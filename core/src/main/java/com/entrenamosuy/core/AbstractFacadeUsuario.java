@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Set;
@@ -36,7 +36,7 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
         CrearProfesorChain setPassword(String password);
 
-        CrearProfesorChain setImagen(InputStream imagen);
+        CrearProfesorChain setImagen(ByteBuffer imagen);
 
         void invoke() throws UsuarioRepetidoException;
     }
@@ -57,7 +57,7 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
         CrearSocioChain setPassword(String password);
 
-        CrearSocioChain setImagen(InputStream imagen);
+        CrearSocioChain setImagen(ByteBuffer imagen);
 
         void invoke() throws UsuarioRepetidoException;
     }
@@ -74,7 +74,7 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
         ModificarDatosSocioChain setNacimiento(LocalDate nacimiento);
 
-        ModificarDatosSocioChain setImagen(InputStream imagen);
+        ModificarDatosSocioChain setImagen(ByteBuffer imagen);
 
         void invoke() throws ProfesorNoEncontradoException;
     }
@@ -97,7 +97,7 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
         ModificarDatosProfesorChain setSitioWeb(URL sitioWeb);
 
-        ModificarDatosProfesorChain setImagen(InputStream imagen);
+        ModificarDatosProfesorChain setImagen(ByteBuffer imagen);
 
         void invoke() throws ProfesorNoEncontradoException;
     }

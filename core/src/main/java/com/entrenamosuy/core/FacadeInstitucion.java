@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Map;
@@ -23,7 +23,7 @@ public class FacadeInstitucion extends AbstractFacadeInstitucion {
 
             private URL url;
 
-            private InputStream imagen;
+            private ByteBuffer imagen;
 
             @Override
             public CrearInstitucionChain setNombre(String nombre) {
@@ -44,7 +44,7 @@ public class FacadeInstitucion extends AbstractFacadeInstitucion {
             }
 
             @Override
-            public CrearInstitucionChain setImagen(InputStream imagen) {
+            public CrearInstitucionChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
                 return this;
             }

@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -23,7 +23,7 @@ public abstract class AbstractFacadeCuponera extends AbstractFacade {
 
         CrearCuponeraChain setFechaRegistro(LocalDate fechaRegistro);
 
-        CrearCuponeraChain setImagen(InputStream imagen);
+        CrearCuponeraChain setImagen(ByteBuffer imagen);
 
         void invoke() throws CuponeraInconsistenteException;
     }

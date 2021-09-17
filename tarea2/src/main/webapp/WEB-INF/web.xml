@@ -32,6 +32,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>AltaUsuario</servlet-name>
+        <servlet-class>com.entrenamosuy.web.AltaUsuarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AltaUsuario</servlet-name>
+        <url-pattern>/alta_usuario</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>IniciarSesion</servlet-name>
         <servlet-class>com.entrenamosuy.web.IniciarSesionServlet</servlet-class>
     </servlet>

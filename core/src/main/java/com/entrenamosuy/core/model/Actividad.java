@@ -1,19 +1,17 @@
 package com.entrenamosuy.core.model;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
-import java.util.Map;
 
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DescActividad;
-import com.entrenamosuy.core.Registry;
 
 public class Actividad {
 
@@ -37,7 +35,7 @@ public class Actividad {
 
         private Set<Categoria> categorias = new HashSet<>();
 
-        private InputStream imagen;
+        private ByteBuffer imagen;
 
         private ActividadEstado estado = ActividadEstado.INGRESADA;
 
@@ -78,7 +76,7 @@ public class Actividad {
             return this;
         }
 
-        public Builder setImagen(InputStream imagen) {
+        public Builder setImagen(ByteBuffer imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -115,12 +113,12 @@ public class Actividad {
 
     private Set<Integra> integras;
 
-    private InputStream imagen;
+    private ByteBuffer imagen;
 
     private ActividadEstado estado;
 
     protected Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro,
-                     float costo, Set<Clase> clases, Set<Categoria> categorias, InputStream imagen,
+                     float costo, Set<Clase> clases, Set<Categoria> categorias, ByteBuffer imagen,
                      ActividadEstado estado, Set<Integra> integras) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Actividad");
@@ -200,11 +198,11 @@ public class Actividad {
         this.categorias = categorias;
     }
 
-    public InputStream getImagen() {
+    public ByteBuffer getImagen() {
         return imagen;
     }
 
-    public void setImagen(InputStream imagen) {
+    public void setImagen(ByteBuffer imagen) {
         this.imagen = imagen;
     }
 

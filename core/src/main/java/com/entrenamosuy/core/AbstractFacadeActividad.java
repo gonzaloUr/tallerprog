@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
 import java.util.Set;
 
 import com.entrenamosuy.core.data.DataActividad;
@@ -26,7 +26,7 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
         CrearActividadChain setRegistro(LocalDate registro);
 
-        CrearActividadChain setImagen(InputStream imagen);
+        CrearActividadChain setImagen(ByteBuffer imagen);
 
         void invoke() throws ActividadRepetidaException;
     }

@@ -6,7 +6,8 @@
     </form>
     <c:choose>
         <c:when test="${usuario == null}">
-            <a class="btn btn-outline-light" href="iniciar_sesion">Iniciar sesión</a>
+            <a class="btn btn-outline-light mx-3" href="iniciar_sesion">Iniciar sesión</a>
+            <a class="btn btn-outline-light mx-3" href="alta_usuario">Registrarse</a>
         </c:when>
         <c:otherwise>
             <span>${usuario.nombre} ${usuario.apellido}</span>
