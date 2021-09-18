@@ -153,7 +153,7 @@ public class FacadeClase extends AbstractFacadeClase {
 
                 for (Profesor p : profes) {
                     p.getClasesDictadas().add(nuevaClase);
-                    p.getActividad().add(actividad);
+                    p.getActividadesRegistradas().add(actividad);
                 }
 
                 actividad.getClases().add(nuevaClase);

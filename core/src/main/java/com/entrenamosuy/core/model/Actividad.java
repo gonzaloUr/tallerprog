@@ -31,13 +31,13 @@ public class Actividad {
 
         private float costo;
 
-        private Set<Clase> clases = new HashSet<>();
-
-        private Set<Categoria> categorias = new HashSet<>();
+        private ActividadEstado estado = ActividadEstado.INGRESADA;
 
         private ByteBuffer imagen;
 
-        private ActividadEstado estado = ActividadEstado.INGRESADA;
+        private Set<Clase> clases = new HashSet<>();
+
+        private Set<Categoria> categorias = new HashSet<>();
 
         private Set<Integra> integras = new HashSet<>();
 
@@ -107,15 +107,15 @@ public class Actividad {
 
     private float costo;
 
+    private ActividadEstado estado;
+
+    private ByteBuffer imagen;
+
     private Set<Clase> clases;
 
     private Set<Categoria> categorias;
 
     private Set<Integra> integras;
-
-    private ByteBuffer imagen;
-
-    private ActividadEstado estado;
 
     protected Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro,
                      float costo, Set<Clase> clases, Set<Categoria> categorias, ByteBuffer imagen,

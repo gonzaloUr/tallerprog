@@ -50,7 +50,7 @@ public class Profesor extends Usuario {
 
         private Set<Clase> clasesDictadas = new HashSet<>();
 
-        private Set<Actividad> actividades = new HashSet<>();
+        private Set<Actividad> actividadesRegistradas = new HashSet<>();
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -122,15 +122,15 @@ public class Profesor extends Usuario {
             return this;
         }
 
-        public Builder setActividades(Set<Actividad> actividades) {
-            this.actividades = actividades;
+        public Builder setActividadesRegistradas(Set<Actividad> actividades) {
+            this.actividadesRegistradas = actividades;
             return this;
         }
 
         public Profesor build() {
             return new Profesor(nickname, nombre, apellido, correo, nacimiento, descripcion,
                     password, usuariosSeguidos, seguidores, imagen, biografia, sitioWeb, institucion,
-                    clasesDictadas, actividades);
+                    clasesDictadas, actividadesRegistradas);
         }
     }
 
@@ -144,26 +144,26 @@ public class Profesor extends Usuario {
 
     private Set<Clase> clasesDictadas;
 
-    private Set<Actividad> actividades;
+    private Set<Actividad> actividadesRegistradas;
 
     protected Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
                     String descripcion, String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores,
                     ByteBuffer imagen, String biografia, URL sitioWeb, Institucion institucion, Set<Clase> clasesDictadas,
-                    Set<Actividad> actividades) {
+                    Set<Actividad> actividadesRegistradas) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Profesor");
         Objects.requireNonNull(institucion, "institucion es null en constructor Profesor");
         Objects.requireNonNull(clasesDictadas, "clasesDictadas es null en constructor Profesor");
-        Objects.requireNonNull(actividades, "actividades es null en constructor Profesor");
+        Objects.requireNonNull(actividadesRegistradas, "actividadesRegistradas es null en constructor Profesor");
 
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
         this.institucion = institucion;
         this.clasesDictadas = clasesDictadas;
-        this.actividades = actividades;
+        this.actividadesRegistradas = actividadesRegistradas;
     }
 
     public String getDescripcion() {
@@ -206,12 +206,12 @@ public class Profesor extends Usuario {
         this.clasesDictadas = clasesDictadas;
     }
 
-    public void setActividad(Set<Actividad> actividades) {
-        this.actividades = actividades;
+    public void setActividadesRegistradas(Set<Actividad> actividades) {
+        this.actividadesRegistradas = actividades;
     }
 
-    public Set<Actividad> getActividad() {
-        return actividades;
+    public Set<Actividad> getActividadesRegistradas() {
+        return actividadesRegistradas;
     }
 
     public DataProfesor getDataProfesor() {
@@ -219,7 +219,7 @@ public class Profesor extends Usuario {
 
         Set<DataActividad> actividadesData = new HashSet<>();
 
-        for (Actividad a : actividades) {
+        for (Actividad a : actividadesRegistradas) {
             actividadesData.add(a.getDataActividad());
         }
 
@@ -270,8 +270,8 @@ public class Profesor extends Usuario {
 
         builder.append("], actividades=[");
 
-        if (!actividades.isEmpty()) {
-            Iterator<Actividad> it = actividades.iterator();
+        if (!actividadesRegistradas.isEmpty()) {
+            Iterator<Actividad> it = actividadesRegistradas.iterator();
 
             builder.append(it.next().getNombre());
 
