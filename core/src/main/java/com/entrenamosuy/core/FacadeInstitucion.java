@@ -10,6 +10,7 @@ import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
 import com.entrenamosuy.core.model.Institucion;
+import com.entrenamosuy.core.model.Actividad;
 
 public class FacadeInstitucion extends AbstractFacadeInstitucion {
 
@@ -88,5 +89,15 @@ public class FacadeInstitucion extends AbstractFacadeInstitucion {
             throw new InstitucionNoEncontradaException(institucion);
 
         return inst.getDataInstitucion();
+    }
+
+    @Override 
+    public Set<String> obtenerActividadesDeInstitucion(String institucion){
+        Map<String, Institucion> instituciones = getRegistry().getInstituciones();
+        Set<Actividad> actividades = instituciones.get(institucion).getActividadesOfrecidas();
+        Set<String> ret = new HashSet<>();
+        for (Actividad act : actividades)
+            ret.add(act.getNombre());
+        return ret;
     }
 }

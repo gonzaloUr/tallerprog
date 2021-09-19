@@ -23,7 +23,13 @@ public class DataSocio extends DataUsuario {
 
         private LocalDate nacimiento;
 
+        private Set<String> seguidores;
+        
+        private Set<String> seguidos;
+
         private Set<DataClase> clases = Collections.emptySet();
+
+        private Set<DataCuponera> cuponeras = Collections.emptySet();
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -50,27 +56,48 @@ public class DataSocio extends DataUsuario {
             return this;
         }
 
+        public Builder setSeguidores(Set<String> seguidores) {
+            this.seguidores = seguidores;
+            return this;
+        }
+
+        public Builder setSeguidos(Set<String> seguidos) {
+            this.seguidos = seguidos;
+            return this;
+        }
+
         public Builder setClases(Set<DataClase> clases) {
             this.clases = clases;
             return this;
         }
 
+        public Builder setCuponeras(Set<DataCuponera> cuponeras) {
+            this.cuponeras = cuponeras;
+            return this;
+        }
+
         public DataSocio build() {
-            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, clases);
+            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos, clases, cuponeras);
         }
     }
 
     private final Set<DataClase> clases;
+    private final Set<DataCuponera> cuponeras;
 
-    protected DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            Set<DataClase> clases) {
+    protected DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Set<String> seguidores, 
+        Set<String> seguidos, Set<DataClase> clases, Set<DataCuponera> cuponeras) {
 
-        super(nickname, nombre, apellido, correo, nacimiento);
+        super(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos);
         this.clases = clases;
+        this.cuponeras = cuponeras;
     }
 
     public Set<DataClase> getClases() {
         return clases;
+    }
+
+    public Set<DataCuponera> getCuponeras() {
+        return cuponeras;
     }
 
     @Override

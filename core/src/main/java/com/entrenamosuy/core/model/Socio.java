@@ -11,6 +11,7 @@ import java.util.Iterator;
 
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.Email;
 
 public class Socio extends Usuario {
@@ -214,10 +215,26 @@ public class Socio extends Usuario {
     public DataSocio getDataSocio() {
         Set<Registro> registros = getRegistros();
         Set<DataClase> dataClases = new HashSet<>(registros.size());
+        Set<Compra> compras = getCompras();
+        Set<DataCuponera> dataCuponeras = new HashSet<>(compras.size());
+        Set<String> seguidoresString = new HashSet<>();
+        Set<String> seguidosString = new HashSet<>();
+
+        for (Usuario u : getSeguidores()){
+            seguidoresString.add(u.getNickname());
+        }
+
+        for (Usuario u : getUsuariosSeguidos()){ //esta bien dejar el getter flotando?
+            seguidosString.add(u.getNickname());
+        }
 
         for (Registro r : registros) {
             Clase clase = r.getClaseAsociada();
             dataClases.add(clase.getDataClase());
+        }
+        for (Compra comp : compras){
+            Cuponera cup = comp.getCuponera();
+            dataCuponeras.add(cup.getDataCuponera());
         }
 
         return DataSocio.builder()
@@ -226,7 +243,10 @@ public class Socio extends Usuario {
             .setApellido(getApellido())
             .setCorreo(getCorreo())
             .setNacimiento(getNacimiento())
+            .setSeguidores(seguidoresString)
+            .setSeguidos(seguidosString)
             .setClases(dataClases)
+            .setCuponeras(dataCuponeras)
             .build();
     }
 

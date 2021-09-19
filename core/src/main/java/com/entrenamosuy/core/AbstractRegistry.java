@@ -2,6 +2,7 @@ package com.entrenamosuy.core;
 
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.Categoria;
 import com.entrenamosuy.core.model.Clase;
 import com.entrenamosuy.core.model.Cuponera;
 import com.entrenamosuy.core.model.Institucion;
@@ -27,4 +28,6 @@ public interface AbstractRegistry {
      Map<String, Socio> getSocios();
 
      Map<Email, Socio> getSociosMail();
+
+     Map<String, Categoria> getCategorias();
 }

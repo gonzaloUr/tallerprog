@@ -2,6 +2,7 @@ package com.entrenamosuy.core.data;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class DataUsuario {
 
@@ -15,7 +16,11 @@ public abstract class DataUsuario {
 
     private final LocalDate nacimiento;
 
-    public DataUsuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento) {
+    private final Set<String> seguidores;
+
+    private final Set<String> seguidos;
+
+    public DataUsuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Set<String> seguidores, Set<String> seguidos) {
         Objects.requireNonNull(nickname, "nickname es null en constructor DataUsuario");
         Objects.requireNonNull(nombre, "nombre es null en constructor DataUsuario");
         Objects.requireNonNull(apellido, "apellido es null en constructor DataUsuario");
@@ -27,6 +32,8 @@ public abstract class DataUsuario {
         this.apellido = apellido;
         this.correo = correo;
         this.nacimiento = nacimiento;
+        this.seguidores = seguidores;
+        this.seguidos = seguidos;
     }
 
     public String getNickname() {
@@ -47,6 +54,14 @@ public abstract class DataUsuario {
 
     public LocalDate getNacimiento() {
         return nacimiento;
+    }
+
+    public Set<String> getSeguidores() {
+        return seguidores;
+    }
+
+    public Set<String> getSeguidos() {
+        return seguidos;
     }
 
     @Override
