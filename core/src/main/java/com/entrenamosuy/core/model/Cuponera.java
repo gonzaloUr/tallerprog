@@ -30,7 +30,7 @@ public class Cuponera {
 
         private Set<Registro> registros = new HashSet<>();
 
-        private Set<Categoria> categorias;
+        private Set<Categoria> categorias = new HashSet<>();
 
         private ByteBuffer imagen;
 
