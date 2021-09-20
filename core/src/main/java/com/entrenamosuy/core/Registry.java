@@ -8,6 +8,7 @@ import com.entrenamosuy.core.model.Cuponera;
 import com.entrenamosuy.core.model.Institucion;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.model.Socio;
+import com.entrenamosuy.core.model.Categoria;
 
 import com.entrenamosuy.core.data.Email;
 
@@ -28,6 +29,8 @@ public class Registry implements AbstractRegistry {
     private Map<String, Socio> socios = new HashMap<>();
 
     private Map<Email, Socio> sociosMail = new HashMap<>();
+
+    private Map<String, Categoria> categorias = new HashMap<>();
 
     @Override
     public Map<String, Actividad> getActividades() {
@@ -67,5 +70,10 @@ public class Registry implements AbstractRegistry {
     @Override
     public Map<Email, Socio> getSociosMail() {
         return sociosMail;
+    }
+
+    @Override
+    public Map<String, Categoria> getCategorias() {
+        return categorias;
     }
 }

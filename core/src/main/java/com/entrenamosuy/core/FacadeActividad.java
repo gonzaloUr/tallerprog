@@ -181,4 +181,26 @@ public class FacadeActividad extends AbstractFacadeActividad {
         }
         return a.getDataActividad();
     }
+
+    @Override
+    public Set<String> obtenerCategorias() {
+        Map<String, Categoria> categorias = getRegistry().getCategorias();
+
+        Set<String> ret = new HashSet<>();
+
+        for (Categoria cat : categorias.values())
+            ret.add(cat.getNombre());
+
+        return ret;
+    }
+
+    @Override
+    public Set<String> obtenerActividadesDeCategoria(String categoria){
+        Map<String, Categoria> categorias = getRegistry().getCategorias();
+        Set<Actividad> actividades = categorias.get(categoria).getActividades();
+        Set<String> ret = new HashSet<>();
+        for (Actividad act : actividades)
+            ret.add(act.getNombre());
+        return ret;
+    }
 }

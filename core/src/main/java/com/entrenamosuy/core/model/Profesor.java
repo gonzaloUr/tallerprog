@@ -217,10 +217,23 @@ public class Profesor extends Usuario {
     public DataProfesor getDataProfesor() {
         String institucionNombre = this.getInstitucion().getNombre();
 
-        Set<DataActividad> actividadesData = new HashSet<>();
+        Set<DataActividad> actividadesAsociadas = new HashSet<>();
 
-        for (Actividad a : actividadesRegistradas) {
-            actividadesData.add(a.getDataActividad());
+        for (Clase c : clasesDictadas) {
+            DataActividad dataAct = c.getActividad().getDataActividad();
+            if (!actividadesAsociadas.contains(dataAct))
+                actividadesAsociadas.add(dataAct);
+        }
+
+        Set<String> seguidoresString = new HashSet<>();
+        Set<String> seguidosString = new HashSet<>();
+
+        for (Usuario u : getSeguidores()){
+            seguidoresString.add(u.getNickname());
+        }
+
+        for (Usuario u : getUsuariosSeguidos()){ //esta bien dejar el getter flotando?
+            seguidosString.add(u.getNickname());
         }
 
         Set<DataClase> clasesData = new HashSet<>();
@@ -229,18 +242,33 @@ public class Profesor extends Usuario {
             clasesData.add(c.getDataClase());
         }
 
+        Set<DataActividad> actAceptadas = new HashSet<>();
+        Set<DataActividad> actSinAceptar = new HashSet<>();
+
+        for (Actividad act : actividadesRegistradas){
+            if (act.getEstado()==ActividadEstado.ACEPTADA)
+                actAceptadas.add(act.getDataActividad());
+            else
+                actSinAceptar.add(act.getDataActividad());
+        }
+
+
         return DataProfesor.builder()
                 .setNickname(getNickname())
                 .setNombre(getNombre())
                 .setApellido(getApellido())
                 .setCorreo(getCorreo())
                 .setNacimiento(getNacimiento())
-                .setActividades(actividadesData)
+                .setSeguidores(seguidoresString)
+                .setSeguidos(seguidosString)
+                .setActividades(actividadesAsociadas)
                 .setClases(clasesData)
                 .setInstitucion(institucionNombre)
                 .setDescripcion(descripcion)
                 .setBiografia(biografia)
                 .setSitioWeb(sitioWeb)
+                .setAceptadas(actAceptadas) //falta crear el aceptar
+                .setSinAceptar(actSinAceptar) //falta crear el sinaceptar
                 .build();
     }
 

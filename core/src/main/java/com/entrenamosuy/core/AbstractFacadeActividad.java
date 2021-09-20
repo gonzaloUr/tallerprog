@@ -42,4 +42,8 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
     public abstract Set<String> getActividadesDeInstitucion(String institucion);
 
     public abstract DataActividad getDataActividad(String actividad);
+
+    public abstract Set<String> obtenerCategorias();
+
+    public abstract Set<String> obtenerActividadesDeCategoria(String categoria);
 }
