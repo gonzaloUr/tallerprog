@@ -20,10 +20,8 @@ import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.EmailParseException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.core.AbstractFacadeActividad;
-import com.entrenamosuy.core.AbstractFacadeUsuario;
+import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.util.FechaUtil;
-import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaProfesor extends JInternalFrame {
@@ -42,16 +40,13 @@ public class AltaProfesor extends JInternalFrame {
     private JTextField urlField;
     private JComboBox institucionComboBox;
 
-    public AltaProfesor(App app, AbstractFacadeUsuario controladorUsuario, AbstractFacadeActividad controladorActividadClase) {
+    public AltaProfesor(App app, FacadeContainer facades) {
     	setResizable(true);
     	setMaximizable(true);
     	setClosable(true);
         setBounds(100, 100, 586, 357);
 
-        String[] instituciones = controladorActividadClase.obtenerDescInstituciones()
-        	.stream()
-        	.map(Triple::getFirst)
-        	.toArray(String[]::new);
+        String[] instituciones = facades.getFacadeInstitucion().getInstituciones().toArray(new String[0]);
 
     	setTitle("Alta Profesor");
         getContentPane().setForeground(Color.RED);
@@ -232,7 +227,7 @@ public class AltaProfesor extends JInternalFrame {
            String url = urlField.getText();
 
 	    try {
-	        controladorUsuario.crearProfesor()
+	        facades.getFacadeUsuario().crearProfesor()
                     .setNickname(nick)
                     .setNombre(nombre)
                     .setApellido(apellido)
@@ -241,7 +236,7 @@ public class AltaProfesor extends JInternalFrame {
                     .setInstitucion(institucion)
                     .setDescripcion(descripcion)
                     .setBiografia(biografia)
-                    .setLink(new URL(url))
+                    .setSitioWeb(new URL(url))
                     .invoke();
 	    } catch (InstitucionNoEncontradaException e1) {
 		e1.printStackTrace();

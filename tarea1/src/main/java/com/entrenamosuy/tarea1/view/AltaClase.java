@@ -1,8 +1,6 @@
 package com.entrenamosuy.tarea1.view;
 
 import java.awt.GridBagConstraints;
-
-
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -23,11 +21,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
-import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.AbstractFacadeActividad;
-import com.entrenamosuy.core.AbstractFacadeUsuario;
+import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.util.FechaUtil;
-import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JSpinner;
 
@@ -37,19 +32,9 @@ public class AltaClase extends JInternalFrame {
     private final JTextField cantMax;
     private final JTextField url;
 
-    public AltaClase(String actividad, AbstractFacadeUsuario controladorUsuario, AbstractFacadeActividad controladorActividadClase, String institucion, App app) {
+    public AltaClase(String actividad, String institucion, App app, FacadeContainer facades) {
 
-        String[] profesoresAux = null;
-        try {
-            profesoresAux = controladorUsuario.getProfesoresDeInstitucion(institucion)
-            	.stream()
-            	.map(Triple::getSecond)
-            	.toArray(String[]::new);
-        } catch (InstitucionNoEncontradaException e3) {
-            e3.printStackTrace();
-        }
-
-        final String[] profesores = profesoresAux;
+        final String[] profesores = facades.getFacadeUsuario().getProfesoresDeInstitucion(institucion).toArray(new String[0]);
 
     	setClosable(true);
     	setResizable(true);
@@ -233,7 +218,7 @@ public class AltaClase extends JInternalFrame {
 
         btnAceptar.addActionListener((ActionEvent a) -> {
             try {
-                controladorActividadClase.crearClase()
+                facades.getFacadeClase().crearClase()
                     .setNombreActividad(actividad)
                     .setNombre(nombreField.getText())
                     .setInicio(LocalDateTime.of(FechaUtil.toLocalDate(

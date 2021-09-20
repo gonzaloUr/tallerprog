@@ -4,15 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
-
-import com.entrenamosuy.core.util.Pair;
 
 public class SelecionarCuponera extends JInternalFrame {
 
@@ -21,14 +17,14 @@ public class SelecionarCuponera extends JInternalFrame {
         void run(String institucion);
     }
 
-    public SelecionarCuponera(Set<Pair<String, String>> cuponeras, Callback callback) {
+    public SelecionarCuponera(Set<String> cuponeras, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
         setTitle("Selecionar cuponera");
         setSize(398, 273);
 
-        List<Pair<String, String>> cuponerasLista = new ArrayList<>(cuponeras.size());
+        List<String> cuponerasLista = new ArrayList<>(cuponeras.size());
         cuponerasLista.addAll(cuponeras);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -41,7 +37,7 @@ public class SelecionarCuponera extends JInternalFrame {
         String[] datos = new String[cuponerasLista.size()];
 
         for (int i = 0; i < cuponerasLista.size(); i++)
-            datos[i] = cuponerasLista.get(i).getFirst();
+            datos[i] = cuponerasLista.get(i);
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();

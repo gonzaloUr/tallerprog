@@ -1,9 +1,8 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.AbstractFacadeActividad;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
+import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.util.FechaUtil;
-import com.entrenamosuy.core.util.Pair;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JButton;
@@ -18,20 +17,12 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 
 public class RegistroAClase extends JInternalFrame {
 
-    public RegistroAClase(String actividad, String clase, String socio, Set<Pair<String, String>> cuponeras,
-                          AbstractFacadeActividad controladorActividadClase, App app) {
-
-        final List<String> cuponerasLista = new ArrayList<>();
-        for (Pair<String, String> cuponera : cuponeras) {
-            String nombre = cuponera.getFirst();
-            cuponerasLista.add(nombre);
-        }
+    public RegistroAClase(App app, String actividad, String clase, String socio, Set<String> cuponeras,
+                          FacadeContainer facades) {
 
         setTitle("Registro a dictado de clase.");
         setClosable(true);
@@ -51,7 +42,7 @@ public class RegistroAClase extends JInternalFrame {
         gbc_lblSeleccionarCuponera.gridy = 1;
         getContentPane().add(lblSeleccionarCuponera, gbc_lblSeleccionarCuponera);
 
-        JComboBox<String> cuponerasComboBox = new JComboBox<>(cuponerasLista.toArray(new String[0]));
+        JComboBox<String> cuponerasComboBox = new JComboBox<>(cuponeras.toArray(new String[0]));
         GridBagConstraints gbc_cuponerasComboBox = new GridBagConstraints();
         gbc_cuponerasComboBox.insets = new Insets(0, 0, 5, 5);
         gbc_cuponerasComboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -96,7 +87,7 @@ public class RegistroAClase extends JInternalFrame {
 
             if (utilizarCheckBox.isSelected() && !cuponeraSelecionada.equals("")) {
                 try {
-                    controladorActividadClase.registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
+                    facades.getFacadeActividad().registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
                 } catch (RegistroInconsistenteException e) {
 
                     for (RegistroInconsistenteException.Restriccion r : e.getInconsistencias()) {
@@ -122,7 +113,7 @@ public class RegistroAClase extends JInternalFrame {
                 }
             } else {
                 try {
-                    controladorActividadClase.registarseSinCuponera(socio, clase, fecha);
+                    facades.getFacadeActividad().registarseSinCuponera(socio, clase, fecha);
                 } catch (RegistroInconsistenteException e) {
 
                     for (RegistroInconsistenteException.Restriccion r : e.getInconsistencias()) {

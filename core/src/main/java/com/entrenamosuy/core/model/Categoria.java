@@ -9,12 +9,16 @@ public class Categoria {
 
     private Set<Actividad> actividades;
 
-    public Categoria(String nombre, Set<Actividad> actividades) {
+    private Set<Cuponera> cuponeras;
+
+    public Categoria(String nombre, Set<Actividad> actividades, Set<Cuponera> cuponeras) {
         Objects.requireNonNull(nombre, "nombre es null en constructor Categoria");
         Objects.requireNonNull(actividades, "actividades es null en constructor Categoria");
+        Objects.requireNonNull(cuponeras, "cuponeras es null en constructor Categoria");
 
         this.nombre = nombre;
         this.actividades = actividades;
+        this.cuponeras = cuponeras;
     }
 
     public String getNombre() {
@@ -31,6 +35,14 @@ public class Categoria {
 
     public void setActividades(Set<Actividad> actividades) {
         this.actividades = actividades;
+    }
+
+    public Set<Cuponera> getCuponeras() {
+        return cuponeras;
+    }
+
+    public void setCuponeras(Set<Cuponera> cuponeras) {
+        this.cuponeras = cuponeras;
     }
 
     @Override

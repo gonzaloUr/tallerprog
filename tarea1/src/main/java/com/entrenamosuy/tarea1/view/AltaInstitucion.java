@@ -15,18 +15,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
-import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.util.FacadeContainer;
 
 public class AltaInstitucion extends JInternalFrame {
 
-    public AltaInstitucion(AbstractFacadeActividad controladorActividadClase, App app) {
-    	setMaximizable(true);
-    	setResizable(true);
-    	setClosable(true);
+    public AltaInstitucion(App app, FacadeContainer facades) {
+        setMaximizable(true);
+        setResizable(true);
+        setClosable(true);
         setTitle("Alta de institucion deportiva");
         getContentPane().setForeground(Color.RED);
         setBounds(100, 100, 475, 249);
-        
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -58,7 +58,7 @@ public class AltaInstitucion extends JInternalFrame {
         gbc_lblIngresarNombre.gridx = 1;
         gbc_lblIngresarNombre.gridy = 3;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
-        
+
         JTextField descripcionField = new JTextField();
         GridBagConstraints gbc_descripcionField = new GridBagConstraints();
         gbc_descripcionField.insets = new Insets(0, 0, 5, 5);
@@ -90,25 +90,29 @@ public class AltaInstitucion extends JInternalFrame {
         gbc_aceptar.gridx = 3;
         gbc_aceptar.gridy = 7;
         getContentPane().add(aceptar, gbc_aceptar);
-        
+
         aceptar.addActionListener((ActionEvent e) -> {
             String nombre = nombreField.getText();
             String desc = descripcionField.getText();
             String link = urlField.getText();
-            
+
             try {
-		controladorActividadClase.crearInstitucion(nombre, desc, new URL(link));
-	    } catch (MalformedURLException e1) {
-		urlField.setText("");
-		JOptionPane.showMessageDialog(app, "URL no valida", "error", JOptionPane.ERROR_MESSAGE);
-		return;
-	    } catch (InstitucionRepetidaException e2) {
-		nombreField.setText("");
-		JOptionPane.showMessageDialog(app, "Institucion ya existente", "error", JOptionPane.ERROR_MESSAGE);
-		return;
-	    }
-            
-            JOptionPane.showMessageDialog(app,"Institucion creada exitosamente,", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
+                facades.getFacadeInstitucion().crearInstitucion()
+                        .setNombre(nombre)
+                        .setDescripcion(desc)
+                        .setUrl(new URL(link))
+                        .invoke();
+            } catch (MalformedURLException e1) {
+                urlField.setText("");
+                JOptionPane.showMessageDialog(app, "URL no valida", "error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } catch (InstitucionRepetidaException e2) {
+                nombreField.setText("");
+                JOptionPane.showMessageDialog(app, "Institucion ya existente", "error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            JOptionPane.showMessageDialog(app, "Institucion creada exitosamente,", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             setVisible(true);
         });
     }

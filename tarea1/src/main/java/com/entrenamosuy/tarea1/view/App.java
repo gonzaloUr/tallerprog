@@ -1,11 +1,9 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.Fabrica;
-import com.entrenamosuy.core.AbstractFacadeActividad;
-import com.entrenamosuy.core.AbstractFacadeCuponera;
-import com.entrenamosuy.core.AbstractFacadeUsuario;
-import com.entrenamosuy.core.Registry;
-import com.entrenamosuy.core.model.Registro;
+import com.entrenamosuy.core.*;
+import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataSocio;
+import com.entrenamosuy.core.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -13,26 +11,23 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
-import java.net.URL;
 import java.util.Set;
 
 public class App extends JFrame {
 
-    private final AbstractFacadeActividad controladorActividadClase;
-
-    private final AbstractFacadeCuponera controladorCuponera;
-
-    private final AbstractFacadeUsuario controladorUsuario;
+    private final FacadeContainer facades;
 
     public App() {
-        // Controladores y fabrica
         Fabrica fabrica = new Fabrica();
+        // TODO: hacer que fabrica cree el Registry.
+        AbstractRegistry registry = new Registry();
+        facades = fabrica.createFacades();
 
-        controladorActividadClase = fabrica.crearControladorActividadClase();
-        controladorCuponera = fabrica.crearControladorCuponera();
-        controladorUsuario = fabrica.creaControladorUsuario();
-
-        Registry man = Registry.getInstance();
+        facades.getFacadeActividad().setRegistry(registry);
+        facades.getFacadeClase().setRegistry(registry);
+        facades.getFacadeCuponera().setRegistry(registry);
+        facades.getFacadeInstitucion().setRegistry(registry);
+        facades.getFacadeUsuario().setRegistry(registry);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Estación de trabajo");
@@ -120,7 +115,7 @@ public class App extends JFrame {
         modificar.add(modificarProfesor);
 
         modificarSocio.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
+            Set<String> socios = facades.getFacadeUsuario().getSocios();
 
             if (socios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -132,7 +127,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-                ModificarDatosSocio modificarDatosUsuario = new ModificarDatosSocio(nickname, controladorUsuario);
+                ModificarDatosSocio modificarDatosUsuario = new ModificarDatosSocio(nickname, facades);
                 getContentPane().add(modificarDatosUsuario);
                 modificarDatosUsuario.setVisible(true);
             });
@@ -142,7 +137,7 @@ public class App extends JFrame {
         });
 
         modificarProfesor.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> profesores = controladorUsuario.getProfesores();
+            Set<String> profesores = facades.getFacadeUsuario().getProfesores();
 
             if (profesores.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -154,7 +149,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
-                ModificarDatosProfesor modificarDatosUsuario = new ModificarDatosProfesor(nickname, controladorUsuario);
+                ModificarDatosProfesor modificarDatosUsuario = new ModificarDatosProfesor(nickname, facades);
                 getContentPane().add(modificarDatosUsuario);
                 modificarDatosUsuario.setVisible(true);
             });
@@ -164,7 +159,7 @@ public class App extends JFrame {
         });
 
         consultaActividad.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+            Set<String> instituciones = facades.getFacadeInstitucion().getInstituciones();
 
             if (instituciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -176,7 +171,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String institucion) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(institucion);
+                Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(institucion);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -188,7 +183,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    ConsultaActividad consulta = new ConsultaActividad(this, actividad, controladorUsuario, controladorActividadClase, controladorCuponera);
+                    ConsultaActividad consulta = new ConsultaActividad(this, actividad, facades);
                     consulta.setVisible(true);
                     getContentPane().add(consulta);
                 });
@@ -202,7 +197,7 @@ public class App extends JFrame {
         });
 
         consultaSocio.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
+            Set<String> socios = facades.getFacadeUsuario().getSocios();
 
             if (socios.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -214,7 +209,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(socios, (String nickname) -> {
-                ConsultaSocio consulta = new ConsultaSocio(this, controladorActividadClase, controladorUsuario, controladorCuponera, nickname);
+                ConsultaSocio consulta = new ConsultaSocio(this, nickname, facades);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -224,7 +219,7 @@ public class App extends JFrame {
         });
 
         consultaProfesor.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, String>> profesores = controladorUsuario.getProfesores();
+            Set<String> profesores = facades.getFacadeUsuario().getProfesores();
 
             if (profesores.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -236,7 +231,7 @@ public class App extends JFrame {
             }
 
             SelecionarUsuario selecionarUsuario = new SelecionarUsuario(profesores, (String nickname) -> {
-                ConsultaProfesor consulta = new ConsultaProfesor(this, nickname, controladorUsuario, controladorCuponera, controladorActividadClase);
+                ConsultaProfesor consulta = new ConsultaProfesor(this, nickname, facades);
                 getContentPane().add(consulta);
                 consulta.setVisible(true);
             });
@@ -246,7 +241,7 @@ public class App extends JFrame {
         });
 
         altaDictadoClase.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+            Set<String> instituciones = facades.getFacadeInstitucion().getInstituciones();
 
             if (instituciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -258,7 +253,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
+                Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -270,7 +265,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    AltaClase altaClase = new AltaClase(actividad, controladorUsuario, controladorActividadClase, inst, this);
+                    AltaClase altaClase = new AltaClase(actividad, inst, this, facades);
                     altaClase.setVisible(true);
                     getContentPane().add(altaClase);
                 });
@@ -284,7 +279,7 @@ public class App extends JFrame {
         });
 
         consultaDictadoClase.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+            Set<String> instituciones = facades.getFacadeInstitucion().getInstituciones();
 
             if (instituciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -296,7 +291,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
+                Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(inst);
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -308,7 +303,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    Set<String> clases = controladorActividadClase.obtenerDescClases(actividad);
+                    Set<String> clases = facades.getFacadeClase().getClases(actividad);
 
                     if (instituciones.isEmpty()) {
                         JOptionPane.showMessageDialog(this,
@@ -320,7 +315,7 @@ public class App extends JFrame {
                     }
 
                     SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
-                        ConsultaDictadoClase consulta = new ConsultaDictadoClase(this, clase, controladorUsuario, controladorActividadClase, controladorCuponera);
+                        ConsultaDictadoClase consulta = new ConsultaDictadoClase(this, clase, facades);
                         consulta.setVisible(true);
                         getContentPane().add(consulta);
                     });
@@ -338,7 +333,7 @@ public class App extends JFrame {
         });
 
         registroDictadoClase.addActionListener((ActionEvent a) -> {
-            Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+            Set<String> instituciones = facades.getFacadeInstitucion().getInstituciones();
 
             if (instituciones.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -350,7 +345,7 @@ public class App extends JFrame {
             }
 
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                Set<Pair<String, String>> actividades = controladorActividadClase.getActividadesDeInstitucion(inst);
+                Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(inst);
 
                 if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -362,7 +357,7 @@ public class App extends JFrame {
                 }
 
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
-                    Set<String> clases = controladorActividadClase.obtenerDescClases(actividad);
+                    Set<String> clases = facades.getFacadeClase().getClases(actividad);
 
                     if (clases.isEmpty()) {
                         JOptionPane.showMessageDialog(this,
@@ -375,7 +370,7 @@ public class App extends JFrame {
 
                     SelecionarClase selecionarClase = new SelecionarClase(clases, (String clase) -> {
 
-                        Set<Triple<String, String, String>> socios = controladorUsuario.getSocios();
+                        Set<String> socios = facades.getFacadeUsuario().getSocios();
 
                         if (socios.isEmpty()) {
                             JOptionPane.showMessageDialog(this,
@@ -388,26 +383,21 @@ public class App extends JFrame {
 
                         SelecionarUsuario selecionarSocio = new SelecionarUsuario(socios, (String socio) -> {
 
-                            Set<Registro> regs = man.getSocios().get(socio).getRegistros();
-                            boolean si = false;
-                            for (Registro r : regs) {
-                                if (r.getClaseAsociada().getNombre().equals(clase)) {
-                                    si = true;
-                                    break;
+                            DataSocio dataSocio = facades.getFacadeUsuario().getDataSocio(socio);
+
+                            for (DataClase c : dataSocio.getClases()) {
+                                if (c.getNombre().equals(clase)) {
+                                    JOptionPane.showMessageDialog(this,
+                                            "El socio ya esta registrado a la clase seleccionada.",
+                                            "error",
+                                            JOptionPane.ERROR_MESSAGE);
+                                    return;
                                 }
                             }
 
-                            if (si) {
-                                JOptionPane.showMessageDialog(this,
-                                        "El socio ya esta registrado a la clase seleccionada.",
-                                        "error",
-                                        JOptionPane.ERROR_MESSAGE);
-                                return;
-                            }
+                            Set<String> cuponeras = facades.getFacadeCuponera().cuponerasUsables(actividad, socio);
 
-                            Set<Pair<String, String>> cuponeras = controladorCuponera.cuponerasUsables(actividad, socio);
-
-                            RegistroAClase registroAClase = new RegistroAClase(actividad, clase, socio, cuponeras, controladorActividadClase, this);
+                            RegistroAClase registroAClase = new RegistroAClase(this, actividad, clase, socio, cuponeras, facades);
                             registroAClase.setVisible(true);
                             getContentPane().add(registroAClase);
                         });
@@ -429,13 +419,13 @@ public class App extends JFrame {
         });
 
         crearCuponera.addActionListener((ActionEvent a) -> {
-            CrearCuponera c = new CrearCuponera(controladorCuponera, this);
+            CrearCuponera c = new CrearCuponera(this, facades);
             c.setVisible(true);
             getContentPane().add(c);
         });
 
         consultaCuponera.addActionListener((ActionEvent a) -> {
-            Set<Pair<String, String>> cuponeras = controladorCuponera.getCuponeras();
+            Set<String> cuponeras = facades.getFacadeCuponera().getCuponeras();
 
             if (cuponeras.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -448,7 +438,7 @@ public class App extends JFrame {
 
 
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-                ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, controladorUsuario, controladorCuponera, controladorActividadClase);
+                ConsultarCuponera consulta = new ConsultarCuponera(this, cuponera, facades);
                 consulta.setVisible(true);
                 getContentPane().add(consulta);
             });
@@ -458,38 +448,35 @@ public class App extends JFrame {
         });
 
         altaActividadDeportiva.addActionListener((ActionEvent a) -> {
-            AltaActividad alta = new AltaActividad(this, controladorActividadClase);
+            AltaActividad alta = new AltaActividad(this, facades);
             alta.setVisible(true);
             getContentPane().add(alta);
         });
 
         altaInstitucionDeportiva.addActionListener((ActionEvent a) -> {
-            AltaInstitucion alta = new AltaInstitucion(controladorActividadClase, this);
+            AltaInstitucion alta = new AltaInstitucion(this, facades);
             alta.setVisible(true);
             getContentPane().add(alta);
         });
 
         altaDeProfesor.addActionListener((ActionEvent e) -> {
-            AltaProfesor altaprofesor = new AltaProfesor(this, controladorUsuario, controladorActividadClase);
+            AltaProfesor altaprofesor = new AltaProfesor(this, facades);
             getContentPane().add(altaprofesor);
             altaprofesor.setVisible(true);
         });
 
         altaDeSocio.addActionListener((ActionEvent e) -> {
-            AltaSocio altasocio = new AltaSocio(this, controladorUsuario);
+            AltaSocio altasocio = new AltaSocio(this, facades);
             getContentPane().add(altasocio);
             altasocio.setVisible(true);
         });
 
-        cargarDatos.addActionListener(new CargarDatosLambda(controladorUsuario,
-                controladorActividadClase,
-                controladorCuponera, () -> {
-
+        cargarDatos.addActionListener(new CargarDatosLambda(facades, () -> {
             JOptionPane.showMessageDialog(this, "Datos cargados", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
         }));
 
         agregarActividadCuponera.addActionListener((ActionEvent a) -> {
-            Set<Pair<String, String>> cuponeras = controladorCuponera.getCuponeras();
+            Set<String> cuponeras = facades.getFacadeCuponera().getCuponeras();
 
             if (cuponeras.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -501,7 +488,7 @@ public class App extends JFrame {
             }
 
             SelecionarCuponera selecionarCuponera = new SelecionarCuponera(cuponeras, (String cuponera) -> {
-                Set<Triple<String, String, URL>> instituciones = controladorActividadClase.obtenerDescInstituciones();
+                Set<String> instituciones = facades.getFacadeInstitucion().getInstituciones();
 
                 if (instituciones.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
@@ -513,14 +500,14 @@ public class App extends JFrame {
                 }
 
                 SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
-                    Set<String> actividades = controladorCuponera.actividadesAgregables(cuponera, inst);
+                    Set<String> actividades = facades.getFacadeCuponera().actividadesAgregables(cuponera, inst);
 
                     if (actividades.size() == 0) {
                         JOptionPane.showMessageDialog(this, "No hay actividades agregables.", "error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
-                    AgregarActividadACuponera agregarCuponera = new AgregarActividadACuponera(actividades, cuponera, this, controladorCuponera);
+                    AgregarActividadACuponera agregarCuponera = new AgregarActividadACuponera(actividades, cuponera, this, facades);
                     agregarCuponera.setVisible(true);
                     getContentPane().add(agregarCuponera);
 

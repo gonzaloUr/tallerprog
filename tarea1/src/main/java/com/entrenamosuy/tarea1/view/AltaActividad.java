@@ -18,9 +18,8 @@ import javax.swing.JTextField;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.AbstractFacadeActividad;
+import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.util.FechaUtil;
-import com.entrenamosuy.core.util.Triple;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaActividad extends JInternalFrame {
@@ -29,12 +28,9 @@ public class AltaActividad extends JInternalFrame {
     private JTextField duracion;
     private JTextField costo;
 
-    public AltaActividad(App app, AbstractFacadeActividad controladorActividadClase) {
-	String[] instituciones = controladorActividadClase.obtenerDescInstituciones()
-		.stream()
-		.map(Triple::getFirst)
-		.toArray(String[]::new);
-	
+    public AltaActividad(App app, FacadeContainer facades) {
+	    String[] instituciones = facades.getFacadeInstitucion().getInstituciones().toArray(new String[0]);
+
     	setClosable(true);
     	setResizable(true);
     	setMaximizable(true);
@@ -163,7 +159,7 @@ public class AltaActividad extends JInternalFrame {
                     float precio = Float.parseFloat(costo.getText());
                     LocalDate fecha = FechaUtil.toLocalDate(calendario.getDate());
 
-                    controladorActividadClase.crearActividad()
+                    facades.getFacadeActividad().crearActividad()
                         .setInstitucion((String) institucionComboBox.getSelectedItem())
                         .setNombre(nombre.getText())
                         .setDescripcion(descripcion.getText())

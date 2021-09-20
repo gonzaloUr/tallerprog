@@ -30,6 +30,8 @@ public class Cuponera {
 
         private Set<Registro> registros = new HashSet<>();
 
+        private Set<Categoria> categorias;
+
         private ByteBuffer imagen;
 
         public Builder setNombre(String nombre) {
@@ -72,13 +74,19 @@ public class Cuponera {
             return this;
         }
 
+        public Builder setCategorias(Set<Categoria> categorias) {
+            this.categorias = categorias;
+            return this;
+        }
+
         public Builder setImagen(ByteBuffer imagen) {
             this.imagen = imagen;
             return this;
         }
 
         public Cuponera build() {
-            return new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaRegistro, integras, registros, imagen);
+            return new Cuponera(nombre, descripcion, inicio, fin, descuento, fechaRegistro, integras,
+                    registros, categorias, imagen);
         }
     }
 
@@ -94,10 +102,13 @@ public class Cuponera {
 
     private Set<Registro> registros;
 
+    private Set<Categoria> categorias;
+
     private ByteBuffer imagen;
 
     protected Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
-                    LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros, ByteBuffer imagen) {
+                    LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros, Set<Categoria> categorias,
+                    ByteBuffer imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Cuponera");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Cuponera");
@@ -106,6 +117,7 @@ public class Cuponera {
         Objects.requireNonNull(fechaRegistro, "fechaRegistro es null en constructor Cuponera");
         Objects.requireNonNull(integras, "integras es null en constructor Cuponera");
         Objects.requireNonNull(registros, "registros es null en constructor Cuponera");
+        Objects.requireNonNull(categorias, "categorias es null en constructor Cuponera");
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -115,6 +127,7 @@ public class Cuponera {
         this.integras = integras;
         this.registros = registros;
         this.fechaRegistro = fechaRegistro;
+        this.categorias = categorias;
         this.imagen = imagen;
     }
 
@@ -180,6 +193,14 @@ public class Cuponera {
 
     public void setFechaRegistro(LocalDate fechaRegistro) {
 	    this.fechaRegistro = fechaRegistro;
+    }
+
+    public Set<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(Set<Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     public ByteBuffer getImagen() {

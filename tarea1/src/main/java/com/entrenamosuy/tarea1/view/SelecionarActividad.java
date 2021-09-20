@@ -4,13 +4,11 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import javax.swing.*;
-
-import com.entrenamosuy.core.util.Pair;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JInternalFrame;
 
 public class SelecionarActividad extends JInternalFrame {
 
@@ -19,14 +17,14 @@ public class SelecionarActividad extends JInternalFrame {
         void run(String actividad);
     }
 
-    public SelecionarActividad(Set<Pair<String, String>> actividades, Callback callback) {
+    public SelecionarActividad(Set<String> actividades, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
         setTitle("Selecionar actividad");
         setSize(398, 273);
 
-        List<Pair<String, String>> actividadesLista = new ArrayList<>(actividades.size());
+        List<String> actividadesLista = new ArrayList<>(actividades.size());
         actividadesLista.addAll(actividades);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -39,7 +37,7 @@ public class SelecionarActividad extends JInternalFrame {
         String[] datos = new String[actividadesLista.size()];
 
         for (int i = 0; i < actividadesLista.size(); i++)
-            datos[i] = actividadesLista.get(i).getFirst();
+            datos[i] = actividadesLista.get(i);
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();

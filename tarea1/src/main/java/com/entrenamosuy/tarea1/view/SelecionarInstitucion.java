@@ -1,7 +1,5 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.util.Triple;
-
 import javax.swing.JInternalFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,9 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class SelecionarInstitucion extends JInternalFrame {
 
@@ -21,14 +17,14 @@ public class SelecionarInstitucion extends JInternalFrame {
         void run(String institucion);
     }
 
-    public SelecionarInstitucion(Set<Triple<String, String, URL>> instituciones, Callback callback) {
+    public SelecionarInstitucion(Set<String> instituciones, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
         setTitle("Selecionar institucion");
         setSize(398, 273);
 
-        List<Triple<String, String, URL>> institucionesLista = new ArrayList<>(instituciones.size());
+        List<String> institucionesLista = new ArrayList<>(instituciones.size());
         institucionesLista.addAll(instituciones);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -41,7 +37,7 @@ public class SelecionarInstitucion extends JInternalFrame {
         String[] datos = new String[institucionesLista.size()];
 
         for (int i = 0; i < institucionesLista.size(); i++)
-            datos[i] = institucionesLista.get(i).getFirst();
+            datos[i] = institucionesLista.get(i);
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();

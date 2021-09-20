@@ -2,7 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.core.AbstractFacadeUsuario;
-import com.entrenamosuy.core.util.FechaUtil;
+import com.entrenamosuy.core.util.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class ModificarDatosProfesor extends JInternalFrame {
     private JTextField biografiaField;
     private JTextField sitioWebField;
 
-    public ModificarDatosProfesor(String nickname, AbstractFacadeUsuario controladorUsuario) {
+    public ModificarDatosProfesor(String nickname, FacadeContainer facades) {
         setTitle("Modificar datos profesor");
         setResizable(true);
         setClosable(true);
@@ -170,7 +170,7 @@ public class ModificarDatosProfesor extends JInternalFrame {
             }
             
             try {
-                controladorUsuario.modificarDatosProfesor()
+                facades.getFacadeUsuario().modificarDatosProfesor()
                     .setNickname(nickname)
                     .setNombre(nombre)
                     .setApellido(apellido)

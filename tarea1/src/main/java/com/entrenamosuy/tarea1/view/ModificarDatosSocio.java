@@ -2,7 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.core.AbstractFacadeUsuario;
-import com.entrenamosuy.core.util.FechaUtil;
+import com.entrenamosuy.core.util.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.*;
@@ -18,12 +18,12 @@ public class ModificarDatosSocio extends JInternalFrame {
     private JTextField apellidoField;
     private JDateChooser nacimientoField;
 
-    public ModificarDatosSocio(String nickname, AbstractFacadeUsuario controladorUsuario) {
+    public ModificarDatosSocio(String nickname, FacadeContainer facades) {
         setTitle("Modificar datos socio");
         setResizable(true);
         setClosable(true);
         setSize(640, 415);
-        
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
         gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -91,17 +91,23 @@ public class ModificarDatosSocio extends JInternalFrame {
             String nombre = nombreField.getText();
             String apellido = apellidoField.getText();
             LocalDate nacimiento = null;
-            
+
             Date fecha = nacimientoField.getDate();
             if (fecha != null)
-        	nacimiento = FechaUtil.toLocalDate(fecha);
-            
+                nacimiento = FechaUtil.toLocalDate(fecha);
+
             nombre = nombre.length() == 0 ? null : nombre;
             apellido = apellido.length() == 0 ? null : apellido;
-            
+
             try {
-                controladorUsuario.modificarDatosSocio(nickname, nombre, apellido, nacimiento);
-                this.setVisible(false);    
+                facades.getFacadeUsuario().modificarDatosSocio()
+                        .setNickname(nickname)
+                        .setNombre(nombre)
+                        .setApellido(apellido)
+                        .setNacimiento(nacimiento)
+                        .invoke();
+
+                this.setVisible(false);
             } catch (UsuarioNoEncontradoException e) {
                 JOptionPane.showMessageDialog(this, "Nickname no encontrado", "error", JOptionPane.ERROR_MESSAGE);
             }

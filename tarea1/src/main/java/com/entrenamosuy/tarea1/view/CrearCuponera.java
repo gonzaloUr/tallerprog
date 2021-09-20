@@ -2,7 +2,7 @@ package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.AbstractFacadeCuponera;
 import com.entrenamosuy.core.exceptions.CuponeraInconsistenteException;
-import com.entrenamosuy.core.util.FechaUtil;
+import com.entrenamosuy.core.util.*;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JButton;
@@ -34,7 +34,7 @@ public class CrearCuponera extends JInternalFrame {
     private JLabel lblRegistro;
     private JDateChooser calendarioRegistro;
 
-    public CrearCuponera(AbstractFacadeCuponera controladorCuponera, App app) {
+    public CrearCuponera(App app, FacadeContainer facades) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
@@ -158,7 +158,7 @@ public class CrearCuponera extends JInternalFrame {
 
         aceptar.addActionListener((ActionEvent a) -> {
             try {
-                controladorCuponera.crearCuponera()
+                facades.getFacadeCuponera().crearCuponera()
                         .setNombre(nombreField.getText())
                         .setDescripcion(descField.getText())
                         .setInicio(FechaUtil.toLocalDate(calendarioInicio.getDate()))

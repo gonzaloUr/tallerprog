@@ -14,11 +14,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-import com.entrenamosuy.core.AbstractFacadeCuponera;
+import com.entrenamosuy.core.util.FacadeContainer;
 
 public class AgregarActividadACuponera extends JInternalFrame {
 
-    public AgregarActividadACuponera(Set<String> actividades, String cuponera, App app, AbstractFacadeCuponera controladorCuponera) {
+    public AgregarActividadACuponera(Set<String> actividades, String cuponera, App app, FacadeContainer facades) {
     	setResizable(true);
     	setMaximizable(true);
     	setClosable(true);
@@ -75,12 +75,7 @@ public class AgregarActividadACuponera extends JInternalFrame {
             String actividad = (String) actividadComboBox.getSelectedItem();
             int cantidad = (int) cantSpinner.getValue();
 
-            try {
-        	controladorCuponera.agregarACuponera(cuponera, actividad, cantidad);
-            } catch (Exception e) {
-        	e.printStackTrace();
-        	return;
-            }
+            facades.getFacadeCuponera().agregarACuponera(cuponera, actividad, cantidad);
 
             JOptionPane.showMessageDialog(app,"Actividad agregada.", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
             setVisible(false);

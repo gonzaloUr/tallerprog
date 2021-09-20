@@ -1,7 +1,5 @@
 package com.entrenamosuy.tarea1.view;
 
-import com.entrenamosuy.core.util.Triple;
-
 import javax.swing.*;
 
 import java.util.ArrayList;
@@ -19,14 +17,14 @@ public class SelecionarUsuario extends JInternalFrame {
         void run(String nombre);
     }
 
-    public SelecionarUsuario(Set<Triple<String, String, String>> usuarios, Callback callback) {
+    public SelecionarUsuario(Set<String> usuarios, Callback callback) {
         setMaximizable(true);
         setResizable(true);
         setClosable(true);
         setTitle("Selecionar usuario");
         setSize(398, 273);
 
-        List<Triple<String, String, String>> usuariosLista = new ArrayList<>(usuarios.size());
+        List<String> usuariosLista = new ArrayList<>(usuarios.size());
         usuariosLista.addAll(usuarios);
 
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -39,7 +37,7 @@ public class SelecionarUsuario extends JInternalFrame {
         String[] datos = new String[usuariosLista.size()];
 
         for (int i = 0; i < usuariosLista.size(); i++)
-            datos[i] = usuariosLista.get(i).getSecond();
+            datos[i] = usuariosLista.get(i);
 
         JComboBox<String> comboBox = new JComboBox<String>(datos);
         GridBagConstraints gbc_comboBox = new GridBagConstraints();
