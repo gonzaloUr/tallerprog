@@ -94,12 +94,14 @@ public class FacadeActividad extends AbstractFacadeActividad {
                 Institucion inst = instituciones.get(institucion);
 
                 Set<Categoria> categoriasActiv = new HashSet<>();
-                for (String nombre : categoriasString) {
-                    Categoria cat = categorias.get(nombre);
-                    if (cat == null)
-                        throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
-                    categoriasActiv.add(cat);
-                }
+                if (categoriasString != null) {
+                    for (String nombre : categoriasString) {
+                        Categoria cat = categorias.get(nombre);
+                        if (cat == null)
+                            throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
+                        categoriasActiv.add(cat);
+                    }
+                }    
                 Actividad nuevaActividad = Actividad.builder()
                         .setNombre(nombre)
                         .setDescripcion(descripcion)
