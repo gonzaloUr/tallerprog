@@ -28,6 +28,8 @@ public class DataActividad {
 
         private Set<DataCuponera> cuponeras = Collections.emptySet();
 
+        private Set<String> categorias = Collections.emptySet();
+
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
             return this;
@@ -63,9 +65,14 @@ public class DataActividad {
             return this;
         }
 
+        public Builder setCategorias(Set<String> categorias) {
+            this.categorias = categorias;
+            return this;
+        }
+
         public DataActividad build() {
             return new DataActividad(nombre, descripcion, duracion, registro, costo,
-                    clases, cuponeras);
+                    clases, cuponeras, categorias);
         }
     }
 
@@ -83,9 +90,11 @@ public class DataActividad {
 
     private final Set<DataCuponera> cuponeras;
 
+    private final Set<String> categorias;
+
     protected DataActividad(String nombre, String descripcion, Duration duracion,
             LocalDate registro, float costo, Set<DataClase> clases,
-            Set<DataCuponera> cuponeras) {
+            Set<DataCuponera> cuponeras, Set<String> categorias) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor DataActividad");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor DataActividad");
@@ -93,6 +102,7 @@ public class DataActividad {
         Objects.requireNonNull(registro, "registro es null en constructor DataActividad");
         Objects.requireNonNull(clases, "clases es null en constructor DataActividad");
         Objects.requireNonNull(cuponeras, "cuponeras es null en constructor DataActividad");
+        Objects.requireNonNull(categorias, "categorias es null en constructor DataActividad");
 
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -101,6 +111,7 @@ public class DataActividad {
         this.costo = costo;
         this.clases = clases;
         this.cuponeras = cuponeras;
+        this.categorias = categorias;
     }
 
     public String getNombre() {
@@ -129,6 +140,10 @@ public class DataActividad {
 
     public Set<DataCuponera> getCuponeras() {
         return cuponeras;
+    }
+
+    public Set<String> getCategorias(){
+        return categorias;
     }
 
     @Override
