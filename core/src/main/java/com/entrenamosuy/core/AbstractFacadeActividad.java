@@ -28,6 +28,8 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
         CrearActividadChain setImagen(ByteBuffer imagen);
 
+        CrearActividadChain setCategoriasString(Set<String> categorias);
+
         void invoke() throws ActividadRepetidaException;
     }
 

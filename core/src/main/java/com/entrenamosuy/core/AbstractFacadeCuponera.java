@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Set;
 
 import com.entrenamosuy.core.exceptions.CuponeraInconsistenteException;
+import com.entrenamosuy.core.exceptions.CuponeraYaPoseidaException;
 import com.entrenamosuy.core.data.DataCuponera;
 
 public abstract class AbstractFacadeCuponera extends AbstractFacade {
@@ -39,4 +40,9 @@ public abstract class AbstractFacadeCuponera extends AbstractFacade {
     public abstract Set<String> getCuponeras();
 
     public abstract DataCuponera getDataCuponera(String nombre);
+
+    public abstract Set<DataCuponera> cuponerasVigentes();
+
+    public abstract void comprarCuponera(String nickname, String nombreCuponera)
+            throws CuponeraYaPoseidaException;
 }

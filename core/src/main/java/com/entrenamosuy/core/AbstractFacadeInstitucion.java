@@ -27,6 +27,4 @@ public abstract class AbstractFacadeInstitucion extends AbstractFacade {
     public abstract Set<String> getInstituciones();
 
     public abstract DataInstitucion getDataInstitucion(String institucion);
-
-    public abstract Set<String> obtenerActividadesDeInstitucion(String institucion);
 }

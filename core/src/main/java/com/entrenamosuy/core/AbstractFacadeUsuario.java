@@ -115,4 +115,9 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
     public abstract DataProfesor getDataProfesor(String nickname);
 
     public abstract void validarCredenciales(String nickname, String password) throws PasswordInvalidaException;
+
+    public abstract void seguirUsuario(String nickname, String actual);
+
+    public abstract void dejarDeSeguirUsuario(String nickname, String actual);
+
 }

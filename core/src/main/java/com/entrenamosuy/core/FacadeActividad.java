@@ -29,6 +29,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             private ByteBuffer imagen;
 
+            private Set<String> categoriasString;
+
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
                 this.institucion = institucion;
@@ -72,9 +74,16 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
+            public CrearActividadChain setCategoriasString(Set<String> categorias) {
+                this.categoriasString = categorias;
+                return null;
+            }
+
+            @Override
             public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException {
                 Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Institucion> instituciones = getRegistry().getInstituciones();
+                Map<String, Categoria> categorias = getRegistry().getCategorias();
 
                 if (actividades.containsKey(nombre))
                     throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
@@ -83,6 +92,14 @@ public class FacadeActividad extends AbstractFacadeActividad {
                     throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
 
                 Institucion inst = instituciones.get(institucion);
+
+                Set<Categoria> categoriasActiv = new HashSet<>();
+                for (String nombre : categoriasString) {
+                    Categoria cat = categorias.get(nombre);
+                    if (cat == null)
+                        throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
+                    categoriasActiv.add(cat);
+                }
                 Actividad nuevaActividad = Actividad.builder()
                         .setNombre(nombre)
                         .setDescripcion(descripcion)
@@ -90,6 +107,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         .setFechaRegistro(registro)
                         .setCosto(costo)
                         .setImagen(imagen)
+                        .setCategorias(categoriasActiv)
                         .build();
                 inst.getActividadesOfrecidas().add(nuevaActividad);
                 actividades.put(nombre, nuevaActividad);
@@ -164,9 +182,10 @@ public class FacadeActividad extends AbstractFacadeActividad {
             throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         }
         Set<Actividad> acts = i.getActividadesOfrecidas();
-        for (Actividad a : acts)
-            res.add(a.getNombre());
-
+        for (Actividad a : acts){
+            if (a.getEstado()==ActividadEstado.ACEPTADA)
+                res.add(a.getNombre());
+        }
         return res;
     }
 

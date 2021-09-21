@@ -138,6 +138,10 @@ public class Socio extends Usuario {
         this.compras = compras;
     }
 
+    public void agregarCompra(Compra compra){
+        compras.add(compra);
+    }
+
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();

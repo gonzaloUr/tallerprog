@@ -136,4 +136,23 @@ public abstract class Usuario {
         Usuario other = (Usuario) obj;
         return Objects.equals(nickname, other.nickname);
     }
+
+
+    public void seguirUsuario(Usuario u){
+        usuariosSeguidos.add(u);
+        u.agregarSeguidor(this);
+    }
+
+    public void dejarDeSeguirUsuario(Usuario u) {
+        usuariosSeguidos.remove(u);
+        u.removerSeguidor(u);
+    }
+
+    public void removerSeguidor(Usuario u){
+        seguidores.remove(u);
+    }
+    
+    public void agregarSeguidor(Usuario u){
+        seguidores.add(u);
+    }
 }
