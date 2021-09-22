@@ -36,10 +36,14 @@
                 .stream()
                 .map(DataCuponera::getNombre)
                 .collect(Collectors.toSet());
+            Set<String> categoriasAsociadas = actividad.getCategorias()
+                .stream()
+                .collect(Collectors.toSet());
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("clasesOfrecidas", clasesOfrecidas);
             request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
+            request.setAttribute("categoriasAsociadas", categoriasAsociadas);
         %>
         <div class="d-flex flex-row">
             <jsp:include page="/WEB-INF/templates/aside.jsp"/>
@@ -47,6 +51,13 @@
                 <section class="d-flex flex-column">
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
                     <p class="fs-6">${descripcion}</p>
+
+                    <p class="fs-4 fw-bold p-3">Categorias: </p>
+                    <ul>
+                        <c:forEach items="${categoriasAsociadas}" var="cat" >
+                            <li>${cat}</li>
+                        </c:forEach>
+                    </ul>
                     <aside id="clase_cuponera">
                         <nav class="flex flex-column p-3 bg-light">
                             <div class="list-group pb-3">
@@ -69,6 +80,7 @@
                             </div>
                         </nav>
                     </aside>
+
 
                 </section>
             </main>
