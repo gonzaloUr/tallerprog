@@ -1,6 +1,9 @@
 package com.entrenamosuy.core;
 
 import java.util.*;
+
+import javax.xml.crypto.Data;
+
 import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -223,5 +226,39 @@ public class FacadeActividad extends AbstractFacadeActividad {
         for (Actividad act : actividades)
             ret.add(act.getNombre());
         return ret;
+    }
+
+    @Override
+    public void crearCategoria(String nombre) 
+        throws CategoriaRepetidaException{
+        Map<String, Categoria> categorias = getRegistry().getCategorias();
+        Set<Actividad> actividades = new HashSet<>();
+        Set<Cuponera> cuponeras = new HashSet<>();
+        if (categorias.containsKey(nombre))
+            throw new CategoriaRepetidaException("La categoria de nombre " + nombre + " ya existe.");
+        Categoria cat = new Categoria(nombre, actividades, cuponeras);
+        categorias.put(nombre,cat);
+    }
+    @Override
+    public Set<DataActividad> listarActividadesIngresadas(){
+        Map<String,Actividad> actividades = getRegistry().getActividades();
+        Set<DataActividad> ret = new HashSet<>();
+        for (Map.Entry<String,Actividad> a : actividades.entrySet()){
+            if (a.getValue().getEstado()==ActividadEstado.INGRESADA)
+                ret.add(a.getValue().getDataActividad());
+        }
+        return ret;
+    }
+
+    @Override
+    public void aceptarActividad(String actividad){
+        Actividad a = getRegistry().getActividades().get(actividad);
+        a.setEstado(ActividadEstado.ACEPTADA);
+    }
+
+    @Override
+    public void rechazarActividad(String actividad){
+        Actividad a = getRegistry().getActividades().get(actividad);
+        a.setEstado(ActividadEstado.RECHAZADA);
     }
 }
