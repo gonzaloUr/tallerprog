@@ -11,14 +11,18 @@ public class DataCuponera {
 
     private final Set<DescActividad> actividades;
 
-    public DataCuponera(String nombre, String descripcion, Set<DescActividad> actividades) {
+    private final Set<String> categorias;
+
+    public DataCuponera(String nombre, String descripcion, Set<DescActividad> actividades, Set<String> categorias) {
         Objects.requireNonNull(nombre, "nombre es null en constructor DataCuponera");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor DataCuponera");
         Objects.requireNonNull(actividades, "actividades es null en constructor DataCuponera");
+        Objects.requireNonNull(categorias, "categorias es null en constructor DataCuponera");
 
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.actividades = actividades;
+        this.categorias = categorias;
     }
 
     public String getNombre() {
@@ -31,6 +35,10 @@ public class DataCuponera {
 
     public Set<DescActividad> getActividades() {
         return actividades;
+    }
+
+    public Set<String> getCategorias(){
+        return categorias;
     }
 
     @Override

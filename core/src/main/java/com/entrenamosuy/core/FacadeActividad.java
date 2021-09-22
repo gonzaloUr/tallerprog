@@ -1,6 +1,9 @@
 package com.entrenamosuy.core;
 
 import java.util.*;
+
+import javax.xml.crypto.Data;
+
 import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -28,6 +31,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
             private LocalDate registro;
 
             private ByteBuffer imagen;
+
+            private Set<String> categoriasString = new HashSet<>();
 
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
@@ -68,13 +73,20 @@ public class FacadeActividad extends AbstractFacadeActividad {
             @Override
             public CrearActividadChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
-                return null;
+                return this;
+            }
+
+            @Override
+            public CrearActividadChain setCategoriasString(Set<String> categorias) {
+                this.categoriasString = categorias;
+                return this;
             }
 
             @Override
             public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException {
                 Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Institucion> instituciones = getRegistry().getInstituciones();
+                Map<String, Categoria> categorias = getRegistry().getCategorias();
 
                 if (actividades.containsKey(nombre))
                     throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
@@ -83,6 +95,16 @@ public class FacadeActividad extends AbstractFacadeActividad {
                     throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
 
                 Institucion inst = instituciones.get(institucion);
+
+                Set<Categoria> categoriasActiv = new HashSet<>();
+                if (categoriasString != null) {
+                    for (String nombre : categoriasString) {
+                        Categoria cat = categorias.get(nombre);
+                        if (cat == null)
+                            throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
+                        categoriasActiv.add(cat);
+                    }
+                }    
                 Actividad nuevaActividad = Actividad.builder()
                         .setNombre(nombre)
                         .setDescripcion(descripcion)
@@ -90,6 +112,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         .setFechaRegistro(registro)
                         .setCosto(costo)
                         .setImagen(imagen)
+                        .setCategorias(categoriasActiv)
                         .build();
                 inst.getActividadesOfrecidas().add(nuevaActividad);
                 actividades.put(nombre, nuevaActividad);
@@ -164,9 +187,10 @@ public class FacadeActividad extends AbstractFacadeActividad {
             throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         }
         Set<Actividad> acts = i.getActividadesOfrecidas();
-        for (Actividad a : acts)
-            res.add(a.getNombre());
-
+        for (Actividad a : acts){
+            if (a.getEstado()==ActividadEstado.ACEPTADA)
+                res.add(a.getNombre());
+        }
         return res;
     }
 
@@ -202,5 +226,39 @@ public class FacadeActividad extends AbstractFacadeActividad {
         for (Actividad act : actividades)
             ret.add(act.getNombre());
         return ret;
+    }
+
+    @Override
+    public void crearCategoria(String nombre) 
+        throws CategoriaRepetidaException{
+        Map<String, Categoria> categorias = getRegistry().getCategorias();
+        Set<Actividad> actividades = new HashSet<>();
+        Set<Cuponera> cuponeras = new HashSet<>();
+        if (categorias.containsKey(nombre))
+            throw new CategoriaRepetidaException("La categoria de nombre " + nombre + " ya existe.");
+        Categoria cat = new Categoria(nombre, actividades, cuponeras);
+        categorias.put(nombre,cat);
+    }
+    @Override
+    public Set<DataActividad> listarActividadesIngresadas(){
+        Map<String,Actividad> actividades = getRegistry().getActividades();
+        Set<DataActividad> ret = new HashSet<>();
+        for (Map.Entry<String,Actividad> a : actividades.entrySet()){
+            if (a.getValue().getEstado()==ActividadEstado.INGRESADA)
+                ret.add(a.getValue().getDataActividad());
+        }
+        return ret;
+    }
+
+    @Override
+    public void aceptarActividad(String actividad){
+        Actividad a = getRegistry().getActividades().get(actividad);
+        a.setEstado(ActividadEstado.ACEPTADA);
+    }
+
+    @Override
+    public void rechazarActividad(String actividad){
+        Actividad a = getRegistry().getActividades().get(actividad);
+        a.setEstado(ActividadEstado.RECHAZADA);
     }
 }

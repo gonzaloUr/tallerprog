@@ -492,4 +492,59 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
         if (!usuario.getPassword().equals(password))
             throw new PasswordInvalidaException();
     }
+
+    @Override
+    public void seguirUsuario(String nickname, String actual){ //en progreso
+        Map<String, Socio> socios = getRegistry().getSocios();
+        Map<String, Profesor> profes = getRegistry().getProfesores();
+        Usuario usuarioActual = null;
+        Usuario usuarioNickname = null;
+        if (socios.containsKey(actual)){    
+            usuarioActual = socios.get(actual);
+        }
+        else if (profes.containsKey(actual)){
+            usuarioActual = profes.get(actual);
+        }
+        else{
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
+        }
+        if (socios.containsKey(nickname)){    
+            usuarioNickname = socios.get(actual);
+        }
+        else if (profes.containsKey(nickname)){
+            usuarioNickname = profes.get(actual);
+        }
+        else{
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
+        }
+        usuarioActual.seguirUsuario(usuarioNickname);
+    }
+
+    @Override
+    public void dejarDeSeguirUsuario(String nickname, String actual){
+        Map<String, Socio> socios = getRegistry().getSocios();
+        Map<String, Profesor> profes = getRegistry().getProfesores();
+        Usuario usuarioActual = null;
+        Usuario usuarioNickname = null;
+        if (socios.containsKey(actual)){    
+            usuarioActual = socios.get(actual);
+        }
+        else if (profes.containsKey(actual)){
+            usuarioActual = profes.get(actual);
+        }
+        else{
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
+        }
+        if (socios.containsKey(nickname)){    
+            usuarioNickname = socios.get(actual);
+        }
+        else if (profes.containsKey(nickname)){
+            usuarioNickname = profes.get(actual);
+        }
+        else{
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
+        }
+        usuarioActual.dejarDeSeguirUsuario(usuarioNickname);
+
+    }
 }

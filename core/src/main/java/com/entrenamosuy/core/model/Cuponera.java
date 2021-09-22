@@ -254,13 +254,16 @@ public class Cuponera {
 
     public DataCuponera getDataCuponera() {
         Set<DescActividad> acts = new HashSet<>(integras.size());
-
+        Set<String> categoriasStrings = new HashSet<>();
+        for (Categoria cat : categorias){
+            categoriasStrings.add(cat.getNombre());
+        }
         for (Integra i : integras) {
             Actividad actividad = i.getActividad();
             acts.add(actividad.getDescActividad());
         }
 
-        return new DataCuponera(this.nombre, this.descripcion, acts);
+        return new DataCuponera(this.nombre, this.descripcion, acts, categoriasStrings);
     }
 
     public Integra getIntegra(Actividad a) {

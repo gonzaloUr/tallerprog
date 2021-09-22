@@ -267,8 +267,8 @@ public class Profesor extends Usuario {
                 .setDescripcion(descripcion)
                 .setBiografia(biografia)
                 .setSitioWeb(sitioWeb)
-                .setAceptadas(actAceptadas) //falta crear el aceptar
-                .setSinAceptar(actSinAceptar) //falta crear el sinaceptar
+                .setAceptadas(actAceptadas)
+                .setSinAceptar(actSinAceptar) 
                 .build();
     }
 

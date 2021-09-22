@@ -174,7 +174,7 @@ public class Institucion {
         Set<String> ret = new HashSet<>();
 
         for (Actividad act : actividadesOfrecidas) {
-            if (!cup.tieneActividad(act)) {
+            if ((!cup.tieneActividad(act))&&(act.getEstado()==ActividadEstado.ACEPTADA)) {
                 ret.add(act.getNombre());
             }
         }

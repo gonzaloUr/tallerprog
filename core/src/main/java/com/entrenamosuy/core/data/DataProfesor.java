@@ -152,6 +152,9 @@ public class DataProfesor extends DataUsuario {
         Objects.requireNonNull(actividades, "actividades es null en constructor DataProfesor");
         Objects.requireNonNull(clases, "clases es null en constructor DataProfesor");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor DataProfesor");
+        Objects.requireNonNull(aceptadas, "aceptadas es null en constructor DataProfesor");
+        Objects.requireNonNull(sinAceptar, "sinAceptar es null en constructor DataProfesor");
+
         
         this.descripcion = descripcion;
         this.biografia = biografia;

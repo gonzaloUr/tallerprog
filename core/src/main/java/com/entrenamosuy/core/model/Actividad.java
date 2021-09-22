@@ -260,7 +260,12 @@ public class Actividad {
     public DataActividad getDataActividad() {
         Set<DataCuponera> cuponeras = new HashSet<>();
 
-        for (Integra i : integras) {
+
+        for(Integra i : integras){
+            cuponeras.add(i.getCuponera().getDataCuponera());
+        }
+
+        /* for (Integra i : integras) {
             Cuponera cupo = i.getCuponera();
             Set<Integra> integs = cupo.getIntegras();
 
@@ -271,6 +276,11 @@ public class Actividad {
                     cuponeras.add(cupoAagregar);
                 }
             }
+        } */
+
+        Set<String> categoriasString = new HashSet<>();
+        for (Categoria c : categorias){
+            categoriasString.add(c.getNombre());
         }
 
         Set<DataClase> dataClases = new HashSet<>();
@@ -285,6 +295,7 @@ public class Actividad {
                 .setCosto(costo)
                 .setClases(dataClases)
                 .setCuponeras(cuponeras)
+                .setCategorias(categoriasString)
                 .build();
     }
 

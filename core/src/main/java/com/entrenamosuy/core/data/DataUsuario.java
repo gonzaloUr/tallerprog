@@ -26,7 +26,8 @@ public abstract class DataUsuario {
         Objects.requireNonNull(apellido, "apellido es null en constructor DataUsuario");
         Objects.requireNonNull(correo, "correo es null en constructor DataUsuario");
         Objects.requireNonNull(nacimiento, "nacimiento es null en constructor DataUsuario");
-
+        Objects.requireNonNull(seguidores, "seguidores es null en constructor DataProfesor");
+        Objects.requireNonNull(seguidos, "seguidos es null en constructor DataProfesor");
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;

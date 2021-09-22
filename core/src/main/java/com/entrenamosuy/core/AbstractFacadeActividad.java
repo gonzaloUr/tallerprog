@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.CategoriaRepetidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 
 import java.time.Duration;
@@ -28,6 +29,8 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
         CrearActividadChain setImagen(ByteBuffer imagen);
 
+        CrearActividadChain setCategoriasString(Set<String> categorias);
+
         void invoke() throws ActividadRepetidaException;
     }
 
@@ -46,4 +49,12 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
     public abstract Set<String> obtenerCategorias();
 
     public abstract Set<String> obtenerActividadesDeCategoria(String categoria);
+
+    public abstract void crearCategoria(String nombre) throws CategoriaRepetidaException;
+
+    public abstract Set<DataActividad> listarActividadesIngresadas();
+
+    public abstract void aceptarActividad(String actividad);
+
+    public abstract void rechazarActividad(String actividad);
 }

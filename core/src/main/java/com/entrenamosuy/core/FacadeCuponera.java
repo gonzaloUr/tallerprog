@@ -12,6 +12,7 @@ import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.CuponeraInconsistenteException;
 import com.entrenamosuy.core.exceptions.CuponeraNoEncontradaException;
+import com.entrenamosuy.core.exceptions.CuponeraYaPoseidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.core.model.Actividad;
@@ -19,6 +20,7 @@ import com.entrenamosuy.core.model.Cuponera;
 import com.entrenamosuy.core.model.Institucion;
 import com.entrenamosuy.core.model.Integra;
 import com.entrenamosuy.core.model.Socio;
+import com.entrenamosuy.core.model.Compra;
 
 public class FacadeCuponera extends AbstractFacadeCuponera {
 
@@ -161,9 +163,8 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + cuponera);
 
         Integra integra = new Integra(cant, a, c);
-        Set<Integra> ins = c.getIntegras();
-        ins.add(integra);
-        c.setIntegras(ins);
+        c.getIntegras().add(integra);
+        a.getIntegras().add(integra);
     }
 
     @Override
@@ -186,5 +187,33 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + nombre);
 
         return c.getDataCuponera();
+    }
+
+    @Override
+    public Set<DataCuponera> cuponerasVigentes(){
+        Set<DataCuponera> ret = new HashSet<>();
+        Map<String,Cuponera> cuponeras = getRegistry().getCuponeras();
+        for (Map.Entry<String, Cuponera> par : cuponeras.entrySet()){
+            if (par.getValue().getFin().isAfter(LocalDate.now())){
+                ret.add(par.getValue().getDataCuponera());
+            }
+        }
+        return ret;
+    }
+
+    @Override
+    public void comprarCuponera(String nickname, String nombreCuponera) //ojo, podrias copmrar una cuponera expirada, ese control se hace porque se muestra CuponerasVigentes()
+        throws CuponeraYaPoseidaException{
+
+        Socio socio = getRegistry().getSocios().get(nickname);
+        Cuponera cuponera = getRegistry().getCuponeras().get(nombreCuponera);
+        Set<Compra> comprasSocio = socio.getCompras();
+
+        for (Compra c : comprasSocio){
+            if (c.getCuponera().equals(cuponera))
+                throw new CuponeraYaPoseidaException("Ya posees la cuponera " + nombreCuponera);
+        }
+        Compra nuevaCompra = new Compra(LocalDate.now(), socio, cuponera);
+        socio.agregarCompra(nuevaCompra);
     }
 }
