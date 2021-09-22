@@ -44,15 +44,15 @@ public class CargarDatosLambda implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         try {
-            facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).invoke();
-            facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).invoke();
-            facadeUsuario.crearSocio().setNickname("euge").setNombre("Eugenia").setApellido("Williams").setCorreo(Email.of("e.will", "gmail.com")).setNacimiento(LocalDate.of(1990, 4, 15)).invoke();
-            facadeUsuario.crearSocio().setNickname("guille").setNombre("Guillermo").setApellido("Hector").setCorreo(Email.of("ghector", "gmail.com")).setNacimiento(LocalDate.of(1959, 5, 15)).invoke();
-            facadeUsuario.crearSocio().setNickname("sergiop").setNombre("Sergio").setApellido("Perez").setCorreo(Email.of("sergi", "gmail.uy")).setNacimiento(LocalDate.of(1950, 1, 28)).invoke();
-            facadeUsuario.crearSocio().setNickname("andy").setNombre("Andres").setApellido("Roman").setCorreo(Email.of("chino", "gmail.uy")).setNacimiento(LocalDate.of(1976, 3, 17)).invoke();
-            facadeUsuario.crearSocio().setNickname("tonyp").setNombre("Antonio").setApellido("Paz").setCorreo(Email.of("eltony", "gmail.uy")).setNacimiento(LocalDate.of(1955, 2, 14)).invoke();
-            facadeUsuario.crearSocio().setNickname("m1k4").setNombre("Micaela").setApellido("Lopez").setCorreo(Email.of("mika", "gmail.ar")).setNacimiento(LocalDate.of(1987, 2, 23)).invoke();
-            facadeUsuario.crearSocio().setNickname("charly").setNombre("Carlos").setApellido("Boston").setCorreo(Email.of("emi71", "gmail.uy")).setNacimiento(LocalDate.of(1937, 3, 8)).invoke();
+            facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).setPassword("asdfg456").invoke();
+            facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).setPassword("123rtgfdv").invoke();
+            facadeUsuario.crearSocio().setNickname("euge").setNombre("Eugenia").setApellido("Williams").setCorreo(Email.of("e.will", "gmail.com")).setNacimiento(LocalDate.of(1990, 4, 15)).setPassword("poiuy086").invoke();
+            facadeUsuario.crearSocio().setNickname("guille").setNombre("Guillermo").setApellido("Hector").setCorreo(Email.of("ghector", "gmail.com")).setNacimiento(LocalDate.of(1959, 5, 15)).setPassword("GTO468").invoke();
+            facadeUsuario.crearSocio().setNickname("sergiop").setNombre("Sergio").setApellido("Perez").setCorreo(Email.of("sergi", "gmail.uy")).setNacimiento(LocalDate.of(1950, 1, 28)).setPassword("HGF135").invoke();
+            facadeUsuario.crearSocio().setNickname("andy").setNombre("Andres").setApellido("Roman").setCorreo(Email.of("chino", "gmail.uy")).setNacimiento(LocalDate.of(1976, 3, 17)).setPassword("lkj65D").invoke();
+            facadeUsuario.crearSocio().setNickname("tonyp").setNombre("Antonio").setApellido("Paz").setCorreo(Email.of("eltony", "gmail.uy")).setNacimiento(LocalDate.of(1955, 2, 14)).setPassword("jhvf395").invoke();
+            facadeUsuario.crearSocio().setNickname("m1k4").setNombre("Micaela").setApellido("Lopez").setCorreo(Email.of("mika", "gmail.ar")).setNacimiento(LocalDate.of(1987, 2, 23)).setPassword("ijngr024").invoke();
+            facadeUsuario.crearSocio().setNickname("charly").setNombre("Carlos").setApellido("Boston").setCorreo(Email.of("emi71", "gmail.uy")).setNacimiento(LocalDate.of(1937, 3, 8)).setPassword("987mnbgh").invoke();
 
             facadeInstitucion.crearInstitucion()
                     .setNombre("Instituto Natural")
@@ -88,6 +88,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Victor es un apasionado de los musculos. Sus clases son organizadas en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.")
                     .setBiografia("Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego de quedar encantado con el pais en un viaje turistico.")
                     .setSitioWeb(new URL("https://www.vikgym.com"))
+                    .setPassword("lkj34df")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -100,6 +101,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("A Denis le interesan los deportes con pelota, principalmente el voleibol y el hanball.")
                     .setBiografia("Denis fue un jugador de voleibol profesional.")
                     .setSitioWeb(new URL("https://www.depecho.com"))
+                    .setPassword("poke579")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -112,6 +114,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Carlos es un profesor muy divertido, cuyas clases de aerobica estan cargadas de energia.")
                     .setBiografia("El interes por la actividad fisica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.")
                     .setSitioWeb(new URL("https://www.enforma.com"))
+                    .setPassword("mkji648")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -124,6 +127,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Bruno es un ex-boxeador que busca entrenar futuros campeones.")
                     .setBiografia("Bruno, mejor conocido como Bruce en el ring, compitio como boxeador entre los años 60s y 70s.")
                     .setSitioWeb(new URL("https://www.bruce.net"))
+                    .setPassword("fcku0123")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -136,6 +140,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Profesor de natacion, especializado en braza y mariposa.")
                     .setBiografia(null)
                     .setSitioWeb(null)
+                    .setPassword("vbmn4r")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -148,6 +153,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a enseñar tacticas dee futbol.")
                     .setBiografia("Jugadora profesional de futbol desde 2010 a 2020.")
                     .setSitioWeb(new URL("https://www.laley.com"))
+                    .setPassword("ncnl123")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -160,6 +166,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Priscila tiene un gran interespor los deportes olimpicos.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.pi314.net"))
+                    .setPassword("mny101")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -172,6 +179,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Profesora dedicada y exigente. No acepta un no puedo como respuesta.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.dygym.com"))
+                    .setPassword("1o1vbm")
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -184,6 +192,7 @@ public class CargarDatosLambda implements ActionListener {
                     .setDescripcion("Dada su gran estatura, aldo siempre jugo al basquetbol. Ahora se dedica a enseñarlo.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.sportsaldo.net"))
+                    .setPassword("ultraton01")
                     .invoke();
 
             facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos y pesas").setDescripcion("Clases de aparatos, pesas y calistenia.").setDuracion(Duration.ofMinutes(90)).setCosto(550).setRegistro(LocalDate.of(2021, 3, 31)).invoke();
