@@ -61,30 +61,26 @@
               <div class="space" style="height:100px"></div>
               <div class="row gutters-sm">
                <div class="col-md-4 mb-3 offset-md-1">
-              <h5><strong>Clases:</strong></h5>
-              <div class="space" style="height:20px"></div>
               <div class="card mb-3">
                 <div class="card-body">
               <div class="list-group" style="list-style-type:none">
-              	<a href="consulta_clase" class="list-gropu-item list-gropu-item-action">Voleibol</a>
+              	<a class="list-group-item active">Clases</a>
               	 <hr>
-              	<a href="consulta_clase" class="list-gropu-item list-gropu-item-action">Aerobico adulto mayor</a>
-              	 <hr>
-              	<a href="consulta_clase" class="list-gropu-item list-gropu-item-action">Musculos para boxeo</a>
-              	 <hr>
-              	<a href="consulta_clase" class="list-gropu-item list-gropu-item-action">200 M</a>
-              	 <hr>
-              	<a href="consulta_clase" class="list-gropu-item list-gropu-item-action">Basquet I</a>
+              	<a href="consulta_clase" class="list-group-item list-group-item-action">Voleibol</a>
+              	<a href="consulta_clase" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
+              	<a href="consulta_clase" class="list-group-item list-group-item-action">Musculos para boxeo</a>
+              	<a href="consulta_clase" class="list-group-item list-group-item-action">200 M</a>
+              	<a href="consulta_clase" class="list-group-item list-group-item-action">Basquet I</a>
               </div>
               </div>
               </div>
               </div>
               <div class="col-md-4 mb-3 offset-md-1">
-              <h5><strong>Cuponeras:</strong></h5>
-              <div class="space" style="height:20px"></div>
               <div class="card mb-3">
                 <div class="card-body">
               <div class="list-group" style="list-style-type:none">
+              <a class="list-group-item active">Cuponeras:</a>
+              	 <hr>
               	              </div>
               </div>
               </div>
