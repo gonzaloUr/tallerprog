@@ -11,5 +11,8 @@
 	<body class="d-flex flex-column">
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <jsp:include page="/WEB-INF/templates/aside.jsp"/>
+        <main class="d-flex flex.column">
+        <a href="consulta_socio">link</a>
+        </main>
 	</body>
 </html>
