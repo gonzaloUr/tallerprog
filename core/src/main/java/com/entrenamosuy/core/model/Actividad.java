@@ -125,7 +125,6 @@ public class Actividad {
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Actividad");
         Objects.requireNonNull(duracion, "duracion es null en constructor Actividad");
         Objects.requireNonNull(fechaRegistro, "fechaRegistro es null en constructor Actividad");
-        Objects.requireNonNull(costo, "costo es null en constructor Actividad");
         Objects.requireNonNull(clases, "clases es null en constructor Actividad");
         Objects.requireNonNull(categorias, "categorias es null en constructor Actividad");
         Objects.requireNonNull(estado, "estado es null en constructor Actividad");

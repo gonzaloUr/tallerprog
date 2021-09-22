@@ -29,7 +29,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             private ByteBuffer imagen;
 
-            private Set<String> categoriasString;
+            private Set<String> categoriasString = new HashSet<>();
 
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
@@ -70,13 +70,13 @@ public class FacadeActividad extends AbstractFacadeActividad {
             @Override
             public CrearActividadChain setImagen(ByteBuffer imagen) {
                 this.imagen = imagen;
-                return null;
+                return this;
             }
 
             @Override
             public CrearActividadChain setCategoriasString(Set<String> categorias) {
                 this.categoriasString = categorias;
-                return null;
+                return this;
             }
 
             @Override
