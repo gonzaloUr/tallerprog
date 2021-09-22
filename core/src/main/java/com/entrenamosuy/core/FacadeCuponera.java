@@ -163,9 +163,8 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + cuponera);
 
         Integra integra = new Integra(cant, a, c);
-        Set<Integra> ins = c.getIntegras();
-        ins.add(integra);
-        c.setIntegras(ins);
+        c.getIntegras().add(integra);
+        a.getIntegras().add(integra);
     }
 
     @Override
@@ -205,7 +204,7 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
     @Override
     public void comprarCuponera(String nickname, String nombreCuponera) //ojo, podrias copmrar una cuponera expirada, ese control se hace porque se muestra CuponerasVigentes()
         throws CuponeraYaPoseidaException{
-        
+
         Socio socio = getRegistry().getSocios().get(nickname);
         Cuponera cuponera = getRegistry().getCuponeras().get(nombreCuponera);
         Set<Compra> comprasSocio = socio.getCompras();
@@ -215,6 +214,6 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
                 throw new CuponeraYaPoseidaException("Ya posees la cuponera " + nombreCuponera);
         }
         Compra nuevaCompra = new Compra(LocalDate.now(), socio, cuponera);
-        socio.agregarCompra(nuevaCompra);   
+        socio.agregarCompra(nuevaCompra);
     }
 }

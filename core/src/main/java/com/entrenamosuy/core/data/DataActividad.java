@@ -2,7 +2,7 @@ package com.entrenamosuy.core.data;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,11 +24,11 @@ public class DataActividad {
 
         private float costo;
 
-        private Set<DataClase> clases = Collections.emptySet();
+        private Set<DataClase> clases = new HashSet<>();
 
-        private Set<DataCuponera> cuponeras = Collections.emptySet();
+        private Set<DataCuponera> cuponeras = new HashSet<>();
 
-        private Set<String> categorias = Collections.emptySet();
+        private Set<String> categorias = new HashSet<>();
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
