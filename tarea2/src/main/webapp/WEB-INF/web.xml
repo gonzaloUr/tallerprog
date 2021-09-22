@@ -75,4 +75,12 @@
         <servlet-name>consulta_actividad_deportiva</servlet-name>
         <url-pattern>/consulta_actividad_deportiva</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>consulta_dictado_clase</servlet-name>
+        <jsp-file>/WEB-INF/consulta_dictado_clase.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>consulta_dictado_clase</servlet-name>
+        <url-pattern>/consulta_dictado_clase</url-pattern>
+    </servlet-mapping>
 </web-app>
