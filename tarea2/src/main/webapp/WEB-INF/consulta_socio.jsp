@@ -68,7 +68,7 @@
                                         <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     </div>
-                                    <div class="space" style="height:60px"></div>
+                                    <div class="space" style="height:30px"></div>
                <div class="list-group">
                                     <div class="list-group-item d-flex align-items-center active">Seguidores
                                     </div>
@@ -77,58 +77,60 @@
                                             <div><strong>guille</strong></div>
                                             <div class="text-muted fs-13px">Socio</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>eugue</strong></div>
                                             <div class="text-muted fs-13px">Socio</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>denis</strong></div>
                                             <div class="text-muted fs-13px">Profesor</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>Nelson</strong></div>
                                             <div class="text-muted fs-13px">Profesor</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     </div>
               
               </div>
               <div class="col-md-1 mb-3">
 	              <aside id="clase_cuponera">
-	              <div class="card mb-3">
+	              <div class="space" style="height:60px"></div>
+	              <div class="card mb-3" style="width:300px">
 	                <div class="card-body">
 	              <div class="list-group" style="list-style-type:none">
 	              	<a class="list-group-item active">Clases</a>
 	              	 <hr>
-	              	<a href="consulta_clase" class="list-group-item list-group-item-action">Voleibol</a>
-	              	<a href="consulta_clase" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
-	              	<a href="consulta_clase" class="list-group-item list-group-item-action">Musculos para boxeo</a>
-	              	<a href="consulta_clase" class="list-group-item list-group-item-action">200 M</a>
-	              	<a href="consulta_clase" class="list-group-item list-group-item-action">Basquet I</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Voleibol</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Musculos para boxeo</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">200 M</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Basquet I</a>
 	              </div>
 	              </div>
 	              </div>
 	
-	              <div class="card mb-3">
+	              <div class="card mb-3" style="width:300px">
 	                <div class="card-body">
 	              <div class="list-group" style="list-style-type:none">
-	              <a class="list-group-item active">Cuponeras:</a>
+	              <a class="list-group-item active">Cuponeras</a>
 	              	 <hr>
 	              	 <a href="consulta_cuponera" class="list-group-item list-group-item-action">Pelota</a>
-	              	              </div>
+	              </div>
 	              </div>
 	              </div>
 	              </aside>
+              </div>
               </div>
 			
 	</body>
