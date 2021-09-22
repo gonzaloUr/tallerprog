@@ -39,6 +39,15 @@
         <servlet-name>consulta_socio</servlet-name>
         <url-pattern>/consulta_socio</url-pattern>
     </servlet-mapping>
+    
+     <servlet>
+        <servlet-name>consulta_profesor</servlet-name>
+        <jsp-file>/WEB-INF/consulta_profesor.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>consulta_profesor</servlet-name>
+        <url-pattern>/consulta_profesor</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>AltaUsuario</servlet-name>
