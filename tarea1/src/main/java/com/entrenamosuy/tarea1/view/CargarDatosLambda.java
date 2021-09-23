@@ -3,15 +3,18 @@ package com.entrenamosuy.tarea1.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
+import java.security.cert.PKIXCertPathValidatorResult;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayDeque;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.entrenamosuy.core.*;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.util.FacadeContainer;
+import com.entrenamosuy.core.model.Usuario; // es para hacer el set vacio de seguidores
 
 public class CargarDatosLambda implements ActionListener {
 
@@ -44,6 +47,7 @@ public class CargarDatosLambda implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         try {
+                Set<Usuario> seg = new HashSet<>(); // TENGO QUE SETERLE LOS SEGUIDORES O SEGUIDOS PORQUE DA NULL PTR AL HACER SEGUIDORES.ADD(SEGUIDOR) EN USUARIO
             facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).setPassword("asdfg456").invoke();
             facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).setPassword("123rtgfdv").invoke();
             facadeUsuario.crearSocio().setNickname("euge").setNombre("Eugenia").setApellido("Williams").setCorreo(Email.of("e.will", "gmail.com")).setNacimiento(LocalDate.of(1990, 4, 15)).setPassword("poiuy086").invoke();
@@ -195,12 +199,94 @@ public class CargarDatosLambda implements ActionListener {
                     .setPassword("ultraton01")
                     .invoke();
 
-            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos y pesas").setDescripcion("Clases de aparatos, pesas y calistenia.").setDuracion(Duration.ofMinutes(90)).setCosto(550).setRegistro(LocalDate.of(2021, 3, 31)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol").setDescripcion("Voleibol en todas sus formas.").setDuracion(Duration.ofMinutes(120)).setCosto(750).setRegistro(LocalDate.of(2021, 4, 20)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Aerobica").setDescripcion("Para cuidar el aparato cardiovascular.").setDuracion(Duration.ofMinutes(110)).setCosto(800).setRegistro(LocalDate.of(2021, 5, 30)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Kickboxing").setDescripcion("En busca del nuevo campeon de boxeo.").setDuracion(Duration.ofMinutes(100)).setCosto(980).setRegistro(LocalDate.of(2021, 6, 7)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Atletismo").setDescripcion("100m, 200m, postas y carreras con obstaculos.").setDuracion(Duration.ofMinutes(150)).setCosto(500).setRegistro(LocalDate.of(2021, 7, 8)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol").setDescripcion("Espectaculo conmemorando los 30 años de Violeta").setDuracion(Duration.ofMinutes(80)).setCosto(450).setRegistro(LocalDate.of(2021, 7, 31)).invoke();
+                facadeUsuario.seguirUsuario("guille", "Emi71");
+                facadeUsuario.seguirUsuario("euge", "caro");
+                facadeUsuario.seguirUsuario("guille", "caro");
+                facadeUsuario.seguirUsuario("Emi71", "euge");
+                facadeUsuario.seguirUsuario("caro", "euge");
+                facadeUsuario.seguirUsuario("m1k4", "euge");
+                facadeUsuario.seguirUsuario("Emi71", "guille");
+                facadeUsuario.seguirUsuario("caro", "guille");
+                facadeUsuario.seguirUsuario("euge", "guille");
+                facadeUsuario.seguirUsuario("TheBoss", "guille");
+                facadeUsuario.seguirUsuario("euge", "sergiop");
+                facadeUsuario.seguirUsuario("andy", "sergiop");
+                facadeUsuario.seguirUsuario("clazar", "sergiop");
+                facadeUsuario.seguirUsuario("caro", "andy");
+                facadeUsuario.seguirUsuario("tonyp", "andy");
+                facadeUsuario.seguirUsuario("clazar", "andy");
+                facadeUsuario.seguirUsuario("caro", "tonyp");
+                facadeUsuario.seguirUsuario("m1k4", "tonyp");
+                facadeUsuario.seguirUsuario("charly", "tonyp");
+                facadeUsuario.seguirUsuario("sergiop", "m1k4");
+                facadeUsuario.seguirUsuario("tonyp", "m1k4");
+                facadeUsuario.seguirUsuario("tonyp", "charly");
+                facadeUsuario.seguirUsuario("Nelson", "charly");
+                facadeUsuario.seguirUsuario("tonyp", "viktor");
+                facadeUsuario.seguirUsuario("m1k4", "viktor");
+                facadeUsuario.seguirUsuario("clazar", "viktor");
+                facadeUsuario.seguirUsuario("lale", "viktor");
+                facadeUsuario.seguirUsuario("prisc", "viktor");
+                facadeUsuario.seguirUsuario("Emi71", "denis");
+                facadeUsuario.seguirUsuario("caro", "denis");
+                facadeUsuario.seguirUsuario("euge", "denis");
+                facadeUsuario.seguirUsuario("guille", "denis");
+                facadeUsuario.seguirUsuario("sergiop", "denis");
+                facadeUsuario.seguirUsuario("andy", "denis");
+                facadeUsuario.seguirUsuario("tonyp", "denis");
+                facadeUsuario.seguirUsuario("m1k4", "denis");
+                facadeUsuario.seguirUsuario("charly", "denis");
+                facadeUsuario.seguirUsuario("caro", "clazar");
+                facadeUsuario.seguirUsuario("euge", "clazar");
+                facadeUsuario.seguirUsuario("guille", "clazar");
+                facadeUsuario.seguirUsuario("TheBoss", "clazar");
+                facadeUsuario.seguirUsuario("guille", "TheBoss");
+                facadeUsuario.seguirUsuario("andy", "TheBoss");
+                facadeUsuario.seguirUsuario("m1k4", "TheBoss");
+                facadeUsuario.seguirUsuario("Emi71", "Nelson");
+                facadeUsuario.seguirUsuario("andy", "Nelson");
+                facadeUsuario.seguirUsuario("tonyp", "Nelson");
+                facadeUsuario.seguirUsuario("lale", "Nelson");
+                facadeUsuario.seguirUsuario("prisc", "Nelson");
+                facadeUsuario.seguirUsuario("dagost", "Nelson");
+                facadeUsuario.seguirUsuario("charly", "lale");
+                facadeUsuario.seguirUsuario("Nelson", "lale");
+                facadeUsuario.seguirUsuario("charly", "prisc");
+                facadeUsuario.seguirUsuario("Nelson", "prisc");
+                facadeUsuario.seguirUsuario("tonyp", "dagost");
+                facadeUsuario.seguirUsuario("charly", "dagost");
+                facadeUsuario.seguirUsuario("andy", "aldo");
+                facadeUsuario.seguirUsuario("tonyp", "aldo");
+                facadeUsuario.seguirUsuario("charly", "aldo");
+                facadeUsuario.seguirUsuario("lale", "aldo");
+                facadeUsuario.seguirUsuario("prisc", "aldo");
+                facadeUsuario.seguirUsuario("dagost", "aldo");
+        
+                Set<String> k1 = new HashSet<>();
+                k1.add("Deportes");
+                Set<String> k2 = new HashSet<>();
+                k2.add("Fitness");
+                Set<String> k3 = new HashSet<>();
+                k3.add("Gimnasia");
+                Set<String> k4 = new HashSet<>();
+                k4.add("Gimnasia");
+                k4.add("Al aire libre");
+
+                facadeActividad.crearCategoria("Al aire libre");
+                facadeActividad.crearCategoria("Deportes");
+                facadeActividad.crearCategoria("Fitness");
+                facadeActividad.crearCategoria("Gimnasia");
+
+            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos y pesas").setDescripcion("Clases de aparatos, pesas y calistenia.").setDuracion(Duration.ofMinutes(90)).setCosto(550).setRegistro(LocalDate.of(2021, 3, 31)).setCategoriasString(k2).invoke();
+            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol").setDescripcion("Voleibol en todas sus formas.").setDuracion(Duration.ofMinutes(120)).setCosto(750).setRegistro(LocalDate.of(2021, 4, 20)).setCategoriasString(k1).invoke();
+            facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Aerobica").setDescripcion("Para cuidar el aparato cardiovascular.").setDuracion(Duration.ofMinutes(110)).setCosto(800).setRegistro(LocalDate.of(2021, 5, 30)).setCategoriasString(k4).invoke();
+            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Kickboxing").setDescripcion("En busca del nuevo campeón de boxeo.").setDuracion(Duration.ofMinutes(100)).setCosto(980).setRegistro(LocalDate.of(2021, 6, 7)).setCategoriasString(k1).invoke();
+            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Atletismo").setDescripcion("100m, 200m, postas y carreras con obstaculos.").setDuracion(Duration.ofMinutes(150)).setCosto(500).setRegistro(LocalDate.of(2021, 7, 8)).setCategoriasString(k1).invoke();
+            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol").setDescripcion("Basquetbol para todos.").setDuracion(Duration.ofMinutes(80)).setCosto(450).setRegistro(LocalDate.of(2021, 7, 31)).setCategoriasString(k1).invoke();
+            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos II").setDescripcion("Clases de aparatos avanzadas.").setDuracion(Duration.ofMinutes(60)).setCosto(1500).setRegistro(LocalDate.of(2021, 8, 15)).setCategoriasString(k2).invoke();
+            facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Pilates").setDescripcion("El Método Pilates combina diferentes capacidades físicas.").setDuracion(Duration.ofMinutes(45)).setCosto(600).setRegistro(LocalDate.of(2021, 8, 30)).setCategoriasString(k3).invoke();
+            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol II").setDescripcion("Voleibol avanzado.").setDuracion(Duration.ofMinutes(120)).setCosto(1000).setRegistro(LocalDate.of(2021, 9, 1)).invoke();
+            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol II").setDescripcion("Basquetbol avanzado.").setDuracion(Duration.ofMinutes(80)).setCosto(600).setRegistro(LocalDate.of(2021, 9, 7)).invoke();
 
             Set<String> p1 = new HashSet<>();
             p1.add("viktor");
@@ -449,6 +535,15 @@ public class CargarDatosLambda implements ActionListener {
             facadeCuponera.agregarACuponera("Gimnasia", "Aparatos y pesas", 8);
             facadeCuponera.agregarACuponera("Musculos", "Kickboxing", 11);
             facadeCuponera.agregarACuponera("Musculos", "Aparatos y pesas", 12);
+
+            facadeCuponera.comprarCuponera("guille", "Pelota");
+            facadeCuponera.comprarCuponera("m1k4", "Gimnasia");
+            facadeCuponera.comprarCuponera("caro", "Gimnasia");
+            facadeCuponera.comprarCuponera("sergiop", "Musculos");
+            facadeCuponera.comprarCuponera("andy", "Musculos");
+            facadeCuponera.comprarCuponera("Emi71", "Pelota");
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
