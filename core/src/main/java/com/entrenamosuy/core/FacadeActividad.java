@@ -83,7 +83,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
-            public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException {
+            public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException, SinCategoriaException {
                 Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Institucion> instituciones = getRegistry().getInstituciones();
                 Map<String, Categoria> categorias = getRegistry().getCategorias();
@@ -97,14 +97,16 @@ public class FacadeActividad extends AbstractFacadeActividad {
                 Institucion inst = instituciones.get(institucion);
 
                 Set<Categoria> categoriasActiv = new HashSet<>();
-                if (categoriasString != null) {
-                    for (String nombre : categoriasString) {
-                        Categoria cat = categorias.get(nombre);
-                        if (cat == null)
-                            throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
-                        categoriasActiv.add(cat);
-                    }
-                }    
+                if ((categoriasString==null)||(categoriasString.isEmpty())) {
+                    throw new SinCategoriaException("No fueron seleccionadas categorias a asociar.");
+                }
+                for (String nombre : categoriasString) {
+                    Categoria cat = categorias.get(nombre);
+                    if (cat == null)
+                        throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
+                    categoriasActiv.add(cat);
+                }
+                   
                 Actividad nuevaActividad = Actividad.builder()
                         .setNombre(nombre)
                         .setDescripcion(descripcion)
@@ -207,7 +209,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public Set<String> obtenerCategorias() {
+    public Set<String> getCategorias() {
         Map<String, Categoria> categorias = getRegistry().getCategorias();
 
         Set<String> ret = new HashSet<>();
@@ -219,7 +221,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public Set<String> obtenerActividadesDeCategoria(String categoria){
+    public Set<String> getActividadesDeCategoria(String categoria){
         Map<String, Categoria> categorias = getRegistry().getCategorias();
         Set<Actividad> actividades = categorias.get(categoria).getActividades();
         Set<String> ret = new HashSet<>();

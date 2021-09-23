@@ -113,7 +113,7 @@ public class AltaInstitucion extends JInternalFrame {
             }
 
             JOptionPane.showMessageDialog(app, "Institucion creada exitosamente,", "Mensaje", JOptionPane.INFORMATION_MESSAGE);
-            setVisible(true);
+            setVisible(false);
         });
     }
 }

@@ -29,6 +29,8 @@ public class AltaProfesor extends JInternalFrame {
     private JTextField nombreField;
     private JTextField apellidoField;
     private JTextField emailField;
+    private JTextField passwordField;
+    private JTextField confirmPasswordField;
     private JLabel lblIngresarFecha;
     private JButton aceptar;
     private JLabel lblIngresarInstitucion;
@@ -74,12 +76,46 @@ public class AltaProfesor extends JInternalFrame {
         getContentPane().add(nicknameField, gbc_nicknameField);
         nicknameField.setColumns(10);
 
+        JLabel lblPassword = new JLabel("Ingresar Contraseña");
+        GridBagConstraints gbc_lblPassword = new GridBagConstraints();
+        gbc_lblPassword.anchor = GridBagConstraints.WEST;
+        gbc_lblPassword.insets = new Insets(0, 0, 5, 5);
+        gbc_lblPassword.gridx = 1;
+        gbc_lblPassword.gridy = 2;
+        getContentPane().add(lblPassword, gbc_lblPassword);
+
+        passwordField = new JTextField();
+        GridBagConstraints gbc_passwordField = new GridBagConstraints();
+        gbc_passwordField.insets = new Insets(0, 0, 5, 5);
+        gbc_passwordField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_passwordField.gridx = 3;
+        gbc_passwordField.gridy = 2;
+        getContentPane().add(passwordField, gbc_passwordField);
+        passwordField.setColumns(10);
+
+        JLabel lblconfirmPassword = new JLabel("Confirmar Contraseña");
+        GridBagConstraints gbc_lblconfirmPassword = new GridBagConstraints();
+        gbc_lblconfirmPassword.anchor = GridBagConstraints.WEST;
+        gbc_lblconfirmPassword.insets = new Insets(0, 0, 5, 5);
+        gbc_lblconfirmPassword.gridx = 1;
+        gbc_lblconfirmPassword.gridy = 3;
+        getContentPane().add(lblconfirmPassword, gbc_lblconfirmPassword);
+
+        confirmPasswordField = new JTextField();
+        GridBagConstraints gbc_confirmPasswordField = new GridBagConstraints();
+        gbc_confirmPasswordField.insets = new Insets(0, 0, 5, 5);
+        gbc_confirmPasswordField.fill = GridBagConstraints.HORIZONTAL;
+        gbc_confirmPasswordField.gridx = 3;
+        gbc_confirmPasswordField.gridy = 3;
+        getContentPane().add(confirmPasswordField, gbc_confirmPasswordField);
+        confirmPasswordField.setColumns(10);
+
         JLabel lblIngresarNombre = new JLabel("Ingresar Nombre");
         GridBagConstraints gbc_lblIngresarNombre = new GridBagConstraints();
         gbc_lblIngresarNombre.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarNombre.insets = new Insets(0, 0, 5, 5);
         gbc_lblIngresarNombre.gridx = 1;
-        gbc_lblIngresarNombre.gridy = 2;
+        gbc_lblIngresarNombre.gridy = 4;
         getContentPane().add(lblIngresarNombre, gbc_lblIngresarNombre);
 
         nombreField = new JTextField();
@@ -87,7 +123,7 @@ public class AltaProfesor extends JInternalFrame {
         gbc_nombreField.insets = new Insets(0, 0, 5, 5);
         gbc_nombreField.fill = GridBagConstraints.HORIZONTAL;
         gbc_nombreField.gridx = 3;
-        gbc_nombreField.gridy = 2;
+        gbc_nombreField.gridy = 4;
         getContentPane().add(nombreField, gbc_nombreField);
         nombreField.setColumns(10);
 
@@ -96,7 +132,7 @@ public class AltaProfesor extends JInternalFrame {
         gbc_lblIngresarApellido.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarApellido.insets = new Insets(0, 0, 5, 5);
         gbc_lblIngresarApellido.gridx = 1;
-        gbc_lblIngresarApellido.gridy = 3;
+        gbc_lblIngresarApellido.gridy = 5;
         getContentPane().add(lblIngresarApellido, gbc_lblIngresarApellido);
 
         apellidoField = new JTextField();
@@ -104,7 +140,7 @@ public class AltaProfesor extends JInternalFrame {
         gbc_apellidoField.insets = new Insets(0, 0, 5, 5);
         gbc_apellidoField.fill = GridBagConstraints.HORIZONTAL;
         gbc_apellidoField.gridx = 3;
-        gbc_apellidoField.gridy = 3;
+        gbc_apellidoField.gridy = 5;
         getContentPane().add(apellidoField, gbc_apellidoField);
         apellidoField.setColumns(10);
 
@@ -113,7 +149,7 @@ public class AltaProfesor extends JInternalFrame {
         gbc_lblIngresarEmail.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarEmail.insets = new Insets(0, 0, 5, 5);
         gbc_lblIngresarEmail.gridx = 1;
-        gbc_lblIngresarEmail.gridy = 4;
+        gbc_lblIngresarEmail.gridy = 6;
         getContentPane().add(lblIngresarEmail, gbc_lblIngresarEmail);
 
         emailField = new JTextField();
@@ -121,16 +157,16 @@ public class AltaProfesor extends JInternalFrame {
         gbc_emailField.insets = new Insets(0, 0, 5, 5);
         gbc_emailField.fill = GridBagConstraints.HORIZONTAL;
         gbc_emailField.gridx = 3;
-        gbc_emailField.gridy = 4;
+        gbc_emailField.gridy = 6;
         getContentPane().add(emailField, gbc_emailField);
         emailField.setColumns(10);
 
-        lblIngresarFecha = new JLabel("Ingresar fecha");
+        lblIngresarFecha = new JLabel("Ingresar nacimiento");
         GridBagConstraints gbc_lblIngresarFecha = new GridBagConstraints();
         gbc_lblIngresarFecha.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarFecha.insets = new Insets(0, 0, 5, 5);
         gbc_lblIngresarFecha.gridx = 1;
-        gbc_lblIngresarFecha.gridy = 5;
+        gbc_lblIngresarFecha.gridy = 7;
         getContentPane().add(lblIngresarFecha, gbc_lblIngresarFecha);
 
 	JDateChooser fechaField = new JDateChooser();
@@ -138,7 +174,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_fechaField.fill = GridBagConstraints.HORIZONTAL;
 	gbc_fechaField.insets = new Insets(0, 0, 5, 5);
 	gbc_fechaField.gridx = 3;
-	gbc_fechaField.gridy = 5;
+	gbc_fechaField.gridy = 7;
 	getContentPane().add(fechaField, gbc_fechaField);
 
 	lblIngresarInstitucion = new JLabel("Ingresar Institucion");
@@ -146,7 +182,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_lblIngresarInstitucion.anchor = GridBagConstraints.WEST;
 	gbc_lblIngresarInstitucion.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIngresarInstitucion.gridx = 1;
-	gbc_lblIngresarInstitucion.gridy = 6;
+	gbc_lblIngresarInstitucion.gridy = 8;
 	getContentPane().add(lblIngresarInstitucion, gbc_lblIngresarInstitucion);
 
 	institucionComboBox = new JComboBox(instituciones);
@@ -154,7 +190,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_institucionComboBox.insets = new Insets(0, 0, 5, 5);
 	gbc_institucionComboBox.fill = GridBagConstraints.HORIZONTAL;
 	gbc_institucionComboBox.gridx = 3;
-	gbc_institucionComboBox.gridy = 6;
+	gbc_institucionComboBox.gridy = 8;
 	getContentPane().add(institucionComboBox, gbc_institucionComboBox);
 
 	lblIngresarDescripcion = new JLabel("Ingresar Descripcion");
@@ -162,7 +198,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_lblIngresarDescripcion.anchor = GridBagConstraints.WEST;
 	gbc_lblIngresarDescripcion.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIngresarDescripcion.gridx = 1;
-	gbc_lblIngresarDescripcion.gridy = 7;
+	gbc_lblIngresarDescripcion.gridy = 9;
 	getContentPane().add(lblIngresarDescripcion, gbc_lblIngresarDescripcion);
 
 	descripcionField = new JTextField();
@@ -170,7 +206,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_descripcionField.insets = new Insets(0, 0, 5, 5);
 	gbc_descripcionField.fill = GridBagConstraints.HORIZONTAL;
 	gbc_descripcionField.gridx = 3;
-	gbc_descripcionField.gridy = 7;
+	gbc_descripcionField.gridy = 9;
 	getContentPane().add(descripcionField, gbc_descripcionField);
 	descripcionField.setColumns(10);
 
@@ -179,7 +215,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_lblIngresarBiografia.anchor = GridBagConstraints.WEST;
 	gbc_lblIngresarBiografia.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIngresarBiografia.gridx = 1;
-	gbc_lblIngresarBiografia.gridy = 8;
+	gbc_lblIngresarBiografia.gridy = 10;
 	getContentPane().add(lblIngresarBiografia, gbc_lblIngresarBiografia);
 
 	biografiaField = new JTextField();
@@ -187,7 +223,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_biografiaField.insets = new Insets(0, 0, 5, 5);
 	gbc_biografiaField.fill = GridBagConstraints.HORIZONTAL;
 	gbc_biografiaField.gridx = 3;
-	gbc_biografiaField.gridy = 8;
+	gbc_biografiaField.gridy = 10;
 	getContentPane().add(biografiaField, gbc_biografiaField);
 	biografiaField.setColumns(10);
 
@@ -196,7 +232,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_lblIngresarUrlhttpsejej.anchor = GridBagConstraints.WEST;
 	gbc_lblIngresarUrlhttpsejej.insets = new Insets(0, 0, 5, 5);
 	gbc_lblIngresarUrlhttpsejej.gridx = 1;
-	gbc_lblIngresarUrlhttpsejej.gridy = 9;
+	gbc_lblIngresarUrlhttpsejej.gridy = 11;
 	getContentPane().add(lblIngresarUrlhttpsejej, gbc_lblIngresarUrlhttpsejej);
 
 	urlField = new JTextField();
@@ -204,7 +240,7 @@ public class AltaProfesor extends JInternalFrame {
 	gbc_urlField.insets = new Insets(0, 0, 5, 5);
 	gbc_urlField.fill = GridBagConstraints.HORIZONTAL;
 	gbc_urlField.gridx = 3;
-	gbc_urlField.gridy = 9;
+	gbc_urlField.gridy = 11;
 	getContentPane().add(urlField, gbc_urlField);
 	urlField.setColumns(10);
 
@@ -212,7 +248,7 @@ public class AltaProfesor extends JInternalFrame {
         GridBagConstraints gbc_aceptar = new GridBagConstraints();
         gbc_aceptar.insets = new Insets(0, 0, 5, 5);
         gbc_aceptar.gridx = 3;
-        gbc_aceptar.gridy = 11;
+        gbc_aceptar.gridy = 13;
         getContentPane().add(aceptar, gbc_aceptar);
 
         aceptar.addActionListener((ActionEvent a) -> {
@@ -220,15 +256,36 @@ public class AltaProfesor extends JInternalFrame {
            String nombre = nombreField.getText();
            String apellido = apellidoField.getText();
            String email = emailField.getText();
+           String password = passwordField.getText();
+           String confirmPassword = confirmPasswordField.getText();
            LocalDate fecha = FechaUtil.toLocalDate(fechaField.getDate());
            String institucion = (String) institucionComboBox.getSelectedItem();
            String descripcion = descripcionField.getText();
            String biografia = biografiaField.getText();
            String url = urlField.getText();
+        
+           if (!password.equals(confirmPassword)){ //hago el control aca para no obligar al constructor a hacer el checkeo
+            JOptionPane.showMessageDialog(this,
+                    "Las contraseñas ingresadas son distintas.",
+                    "error",
+                    JOptionPane.ERROR_MESSAGE);
+            confirmPasswordField.setText("");
+
+            return;
+            }
+            if (institucion==null){JOptionPane.showMessageDialog(this,
+                "Por favor seleccione una institucion.",
+                "error",
+                JOptionPane.ERROR_MESSAGE);
+                
+
+                return;
+        }
 
 	    try {
 	        facades.getFacadeUsuario().crearProfesor()
                     .setNickname(nick)
+                    .setPassword(password)
                     .setNombre(nombre)
                     .setApellido(apellido)
                     .setCorreo(Email.parse(email))

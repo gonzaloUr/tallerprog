@@ -46,9 +46,9 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract DataActividad getDataActividad(String actividad);
 
-    public abstract Set<String> obtenerCategorias();
+    public abstract Set<String> getCategorias();
 
-    public abstract Set<String> obtenerActividadesDeCategoria(String categoria);
+    public abstract Set<String> getActividadesDeCategoria(String categoria);
 
     public abstract void crearCategoria(String nombre) throws CategoriaRepetidaException;
 
