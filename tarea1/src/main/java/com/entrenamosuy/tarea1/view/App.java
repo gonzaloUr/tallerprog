@@ -1,6 +1,7 @@
 package com.entrenamosuy.tarea1.view;
 
 import com.entrenamosuy.core.*;
+import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.util.*;
@@ -11,6 +12,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionEvent;
+import java.util.HashSet;
 import java.util.Set;
 
 public class App extends JFrame {
@@ -45,6 +47,9 @@ public class App extends JFrame {
         JMenuItem cargarDatos = new JMenuItem("Cargar datos");
         inicio.add(cargarDatos);
 
+        JMenuItem aceptarRechazarAct = new JMenuItem("Aceptar/Rechazar Actividad Deportiva");
+        inicio.add(aceptarRechazarAct);
+
         // Alta de usuario
         // Alta de actividad deportiva
         // Alta de dictado de clase
@@ -69,11 +74,14 @@ public class App extends JFrame {
         JMenuItem altaDictadoClase = new JMenuItem("Alta de dictado de clase");
         registros.add(altaDictadoClase);
 
-        JMenuItem registroDictadoClase = new JMenuItem("Registro a dictado clase");
-        registros.add(registroDictadoClase);
+        JMenuItem altaCategoria = new JMenuItem("Alta de categoría");
+        registros.add(altaCategoria);
 
         JMenuItem altaInstitucionDeportiva = new JMenuItem("Alta de institucion deportiva");
         registros.add(altaInstitucionDeportiva);
+
+        JMenuItem registroDictadoClase = new JMenuItem("Registro a dictado clase");
+        registros.add(registroDictadoClase);
 
         JMenuItem crearCuponera = new JMenuItem("Crear cuponera de actividad deportivas");
         registros.add(crearCuponera);
@@ -113,6 +121,35 @@ public class App extends JFrame {
 
         JMenuItem modificarProfesor = new JMenuItem("Modificar datos de profesor");
         modificar.add(modificarProfesor);
+
+        //Aceptar o Rechazar Actividad Deportiva... en obras hasta que cargar datos esté completo.
+        aceptarRechazarAct.addActionListener((ActionEvent a) -> {
+            Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listarActividadesIngresadas();
+            
+            if (dataIngresadas.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        "No hay actividades por aceptar o rechazar.",
+                        "error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                return;
+            }
+
+            Set<String> ingresadas = new HashSet<>();
+            for (DataActividad ac : dataIngresadas){
+                ingresadas.add(ac.getNombre());
+            }
+
+            SelecionarActividad selecionarIngresada = new SelecionarActividad(ingresadas, (String ingresada) -> {
+                AceptarORechazar aR = new AceptarORechazar(ingresada,facades);
+                getContentPane().add(aR);
+                aR.setVisible(true);
+            });
+
+            getContentPane().add(selecionarIngresada);
+            selecionarIngresada.setVisible(true);
+        });
+
 
         modificarSocio.addActionListener((ActionEvent a) -> {
             Set<String> socios = facades.getFacadeUsuario().getSocios();
@@ -447,6 +484,12 @@ public class App extends JFrame {
             getContentPane().add(selecionarCuponera);
         });
 
+        altaCategoria.addActionListener((ActionEvent a) -> {
+            AltaCategoria alta = new AltaCategoria(this, facades);
+            alta.setVisible(true);
+            getContentPane().add(alta);
+        });
+
         altaActividadDeportiva.addActionListener((ActionEvent a) -> {
             AltaActividad alta = new AltaActividad(this, facades);
             alta.setVisible(true);
@@ -476,11 +519,11 @@ public class App extends JFrame {
         }));
 
         agregarActividadCuponera.addActionListener((ActionEvent a) -> {
-            Set<String> cuponeras = facades.getFacadeCuponera().getCuponeras();
+            Set<String> cuponeras = facades.getFacadeCuponera().getCuponerasSinCompras();
 
             if (cuponeras.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
-                        "No hay cuponeras en el sistema.",
+                        "No existen cuponeras disponibles para agregarles una actividad.",
                         "error",
                         JOptionPane.ERROR_MESSAGE);
 
