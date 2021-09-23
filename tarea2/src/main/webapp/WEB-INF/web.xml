@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>consulta_institucion</servlet-name>
-        <jsp-file>/WEB-INF/consulta_institucion.jsp</jsp-file>
+        <jsp-file>/WEB-INF/consulta_institucion.html</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>consulta_institucion</servlet-name>
@@ -57,6 +57,25 @@
         <servlet-name>lista_usuarios</servlet-name>
         <url-pattern>/lista_usuarios</url-pattern>
     </servlet-mapping>
+    
+         <servlet>
+        <servlet-name>lista_instituciones</servlet-name>
+        <jsp-file>/WEB-INF/lista_instituciones.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lista_instituciones</servlet-name>
+        <url-pattern>/lista_instituciones</url-pattern>
+    </servlet-mapping>
+    
+             <servlet>
+        <servlet-name>lista_actividades</servlet-name>
+        <jsp-file>/WEB-INF/lista_actividades.html</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>lista_actividades</servlet-name>
+        <url-pattern>/lista_actividades</url-pattern>
+    </servlet-mapping>
+    
 
     <servlet>
         <servlet-name>AltaUsuario</servlet-name>
@@ -87,7 +106,7 @@
 
     <servlet>
         <servlet-name>consulta_actividad_deportiva</servlet-name>
-        <jsp-file>/WEB-INF/consulta_actividad_deportiva.jsp</jsp-file>
+        <jsp-file>/WEB-INF/consulta_actividad_deportiva.html</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>consulta_actividad_deportiva</servlet-name>
@@ -95,7 +114,7 @@
     </servlet-mapping>
     <servlet>
         <servlet-name>consulta_dictado_clase</servlet-name>
-        <jsp-file>/WEB-INF/consulta_dictado_clase.jsp</jsp-file>
+        <jsp-file>/WEB-INF/consulta_dictado_clase.html</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>consulta_dictado_clase</servlet-name>
