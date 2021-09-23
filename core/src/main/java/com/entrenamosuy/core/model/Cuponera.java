@@ -106,6 +106,8 @@ public class Cuponera {
 
     private ByteBuffer imagen;
 
+    private boolean comprada; //atributo "secreto" para el CU agregar act a cuponera
+
     protected Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
                     LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros, Set<Categoria> categorias,
                     ByteBuffer imagen) {
@@ -129,6 +131,7 @@ public class Cuponera {
         this.fechaRegistro = fechaRegistro;
         this.categorias = categorias;
         this.imagen = imagen;
+        this.comprada = false;
     }
 
     public String getNombre() {
@@ -210,6 +213,16 @@ public class Cuponera {
     public void setImagen(ByteBuffer imagen) {
         this.imagen = imagen;
     }
+
+    public boolean getComprada(){
+        return comprada;
+    }
+
+    public void setComprada(boolean comprada){
+        this.comprada = comprada;
+    }
+
+
 
     @Override
     public int hashCode() {

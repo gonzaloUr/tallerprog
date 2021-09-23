@@ -215,5 +215,21 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
         }
         Compra nuevaCompra = new Compra(LocalDate.now(), socio, cuponera);
         socio.agregarCompra(nuevaCompra);
+        if (cuponera.getComprada()==false)
+            cuponera.setComprada(true);
+    }
+
+    @Override
+    public Set<String> getCuponerasSinCompras() {
+        Map<String, Cuponera> cuponeras = getRegistry().getCuponeras();
+
+        Set<String> ret = new HashSet<>();
+
+        for (Cuponera cup : cuponeras.values()){
+            if (cup.getComprada()==false)
+                ret.add(cup.getNombre());
+        }
+
+        return ret;
     }
 }
