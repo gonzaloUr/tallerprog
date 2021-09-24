@@ -35,7 +35,7 @@
 
     <servlet>
         <servlet-name>index</servlet-name>
-        <jsp-file>/index.jsp</jsp-file>
+        <jsp-file>/WEB-INF/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
