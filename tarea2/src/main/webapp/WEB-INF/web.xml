@@ -13,69 +13,34 @@
         <url-pattern>*.css</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpg</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.png</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.jpeg</url-pattern>
+    </servlet-mapping>
+
     <servlet>
         <servlet-name>index</servlet-name>
-        <jsp-file>/WEB-INF/index.jsp</jsp-file>
+        <jsp-file>/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern/>
     </servlet-mapping>
-
-    <servlet>
-        <servlet-name>consulta_institucion</servlet-name>
-        <jsp-file>/WEB-INF/consulta_institucion.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>consulta_institucion</servlet-name>
-        <url-pattern>/consulta_institucion</url-pattern>
-    </servlet-mapping>
-    
-     <servlet>
-        <servlet-name>consulta_socio</servlet-name>
-        <jsp-file>/WEB-INF/consulta_socio.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>consulta_socio</servlet-name>
-        <url-pattern>/consulta_socio</url-pattern>
-    </servlet-mapping>
-    
-     <servlet>
-        <servlet-name>consulta_profesor</servlet-name>
-        <jsp-file>/WEB-INF/consulta_profesor.jsp</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>consulta_profesor</servlet-name>
-        <url-pattern>/consulta_profesor</url-pattern>
-    </servlet-mapping>
-    
-         <servlet>
-        <servlet-name>lista_usuarios</servlet-name>
-        <jsp-file>/WEB-INF/lista_usurarios.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>lista_usuarios</servlet-name>
-        <url-pattern>/lista_usuarios</url-pattern>
-    </servlet-mapping>
-    
-         <servlet>
-        <servlet-name>lista_instituciones</servlet-name>
-        <jsp-file>/WEB-INF/lista_instituciones.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>lista_instituciones</servlet-name>
-        <url-pattern>/lista_instituciones</url-pattern>
-    </servlet-mapping>
-    
-             <servlet>
-        <servlet-name>lista_actividades</servlet-name>
-        <jsp-file>/WEB-INF/lista_actividades.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>lista_actividades</servlet-name>
-        <url-pattern>/lista_actividades</url-pattern>
-    </servlet-mapping>
-    
 
     <servlet>
         <servlet-name>AltaUsuario</servlet-name>
@@ -102,22 +67,5 @@
     <servlet-mapping>
         <servlet-name>DatosPrueba</servlet-name>
         <url-pattern>/datos_prueba</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>consulta_actividad_deportiva</servlet-name>
-        <jsp-file>/WEB-INF/consulta_actividad_deportiva.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>consulta_actividad_deportiva</servlet-name>
-        <url-pattern>/consulta_actividad_deportiva</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>consulta_dictado_clase</servlet-name>
-        <jsp-file>/WEB-INF/consulta_dictado_clase.html</jsp-file>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>consulta_dictado_clase</servlet-name>
-        <url-pattern>/consulta_dictado_clase</url-pattern>
     </servlet-mapping>
 </web-app>
