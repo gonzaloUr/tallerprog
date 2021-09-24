@@ -33,7 +33,7 @@ public class FacadeClase extends AbstractFacadeClase {
 
             private LocalDateTime inicio;
 
-            private Set<String> nicknameProfesores;
+            private Set<String> nicknameProfesores = new HashSet<>();
 
             private int cantMin, cantMax;
 
