@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="styles/sidebar.css">
-<header class="d-flex flex-row justify-content-between bg-dark text-white p-3">
-    
+<header class="d-flex flex-row justify-content-between bg-dark text-white p-3">  
+
     <h3>Entrenamos.uy</h3>
     <div class="d-flex flex-column">
     	<a class="btn btn-outline-light mx-3" href="lista_usuarios">Usuarios</a>
@@ -20,8 +20,5 @@
             <a class="btn btn-outline-light mx-3" href="iniciar_sesion">Iniciar sesión</a>
             <a class="btn btn-outline-light mx-3" href="alta_usuario">Registrarse</a>
         </c:when>
-        <c:otherwise>
-            <span>${usuario.nombre} ${usuario.apellido}</span>
-        </c:otherwise>
     </c:choose>
 </header>
