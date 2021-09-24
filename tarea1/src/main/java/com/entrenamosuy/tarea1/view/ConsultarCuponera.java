@@ -82,8 +82,16 @@ public class ConsultarCuponera extends JInternalFrame {
         gbc_lblActividades.insets = new Insets(0, 0, 5, 5);
         gbc_lblActividades.anchor = GridBagConstraints.WEST;
         gbc_lblActividades.gridx = 1;
-        gbc_lblActividades.gridy = 5;
+        gbc_lblActividades.gridy = 7;
         getContentPane().add(lblActividades, gbc_lblActividades);
+
+        JLabel lblCategorias = new JLabel("Categorias");
+        GridBagConstraints gbc_lblCategorias = new GridBagConstraints();
+        gbc_lblCategorias.insets = new Insets(0, 0, 5, 5);
+        gbc_lblCategorias.anchor = GridBagConstraints.WEST;
+        gbc_lblCategorias.gridx = 1;
+        gbc_lblCategorias.gridy = 5;
+        getContentPane().add(lblCategorias, gbc_lblCategorias);
 
         DataCuponera dataCuponera = facades.getFacadeCuponera().getDataCuponera(cuponera);
 
