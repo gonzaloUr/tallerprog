@@ -7,40 +7,87 @@
         <link rel="stylesheet" href="styles/sidebar.css">
     </head>
     <body class="d-flex flex-column">
-        <include src="templates/header.html"></include>
+		<header class="d-flex flex-row justify-content-between bg-dark text-white p-3">
+		    
+		    <h3>Entrenamos.uy</h3>
+		    <div class="d-flex flex-column">
+		    	<a class="btn btn-outline-light mx-3" href="lista_usuarios">Usuarios</a>
+		    </div>
+		    <div class="d-flex flex-column">
+		    	<a class="btn btn-outline-light mx-3" href="lista_instituciones">Instituciones</a>
+		    </div>
+		    <div class="d-flex flex-column">
+		    	<a class="btn btn-outline-light mx-3" href="lista_actividades">Actividades</a>
+		    </div>
+		    <form class="col-4 mx-3" action="search" method="post">
+		        <input class="form-control" type="search" placeholder="buscar" name="keyword">
+		    </form>
+		    <c:choose>
+		        <c:when test="${usuario == null}">
+		            <a class="btn btn-outline-light mx-3" href="iniciar_sesion">Iniciar sesión</a>
+		            <a class="btn btn-outline-light mx-3" href="alta_usuario">Registrarse</a>
+		        </c:when>
+		        <c:otherwise>
+		            <span>${usuario.nombre} ${usuario.apellido}</span>
+		        </c:otherwise>
+		    </c:choose>
+		</header>
         <div class="d-flex flex-row">
-            <include src="/templates/aside.html"></include>
-            <main class="d-flex flex-column p-3">
+            <aside id="aside">
+			    <nav class="flex flex-column p-3 bg-light">
+			        <div class="list-group pb-3">
+			            <label class="list-group-item active">Instituciones</label>
+			            <form action="consulta_institucion.html">
+			                <input class="list-group-item list-group-item-action" type="submit" value="Telon"> 
+			            </form>
+			        </div>
+			        <div class="list-group">
+			            <label class="list-group-item active">Categorías</label>
+			            <form action="consulta_institucion.html">
+			                <p class="list-group-item list-group-item-action"> Categoria </a></p> 
+			            </form>
+			        </div>
+			    </nav>
+			</aside>
+            <main class="d-flex flex-column p-5">
                 <section class="d-flex flex-column">
-                    <h1 class="fs-1 fw-bold p-3">Voleibol</h1>
+                    
+                    <div style='float:left; height:10px; width:40%; margin-left:250px'>
+					    <p> </p>
+					    <h1 class="fs-1 fw-bold p-4">Voleibol</h1>
+					</div>    
+                    <img src="Voley.jpg" alt="Admin" width="250">
+                    <p> </p>
                     <p class="fs-6">Voleibol en todas sus formas</p>
-
-                    <p class="fs-4 fw-bold p-3">Categorias: </p>
+                    <p class="fs-4 fw-bold p-0">Categorias: </p>
                     <ul>
-                        <li> <a href="URL"> Deportes </a></li>
+                        <li> Deportes </li>
                     </ul>
                     <aside id="clase_cuponera">
-                        <nav class="flex flex-column p-3 bg-light">
-                            <div class="list-group pb-3">
-                                <label class="list-group-item active">Clases Ofrecidas</label>
-                                <ul>
-                                    <li> <a href="URL"> Braza </a></li>
-                                    <li> <a href="URL"> Voleibol</a></li>
-                                    <li> <a href="URL"> Mariposa</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <nav class="flex flex-column p-3 bg-light">
-                            <div class="fs-4 fw-bold p-3">
-                                <p class="list-group-item active">Cuponeras Asociadas</p>
-                                <ul>
-                                    <li> <a href="URL"> Pelota </a></li>
-
-                                </ul>
-                            </div>
-                        </nav>
-                    </aside>
-
+		              <div class="space" style="height:50px"></div>
+		              <div class="card mb-3" style="width:300px">
+		                <div class="card-body">
+		              <div class="list-group" style="list-style-type:none">
+		              	<a class="list-group-item active">Clases ofrecidas</a>
+		              	 <hr>
+		              	<a href="consulta_dictado_clase.html" class="list-group-item list-group-item-action">Braza</a>
+		              	<a href="consulta_dictado_clase.html" class="list-group-item list-group-item-action">Voleibol</a>
+		              	<a href="consulta_dictado_clase.html" class="list-group-item list-group-item-action">Mariposa</a>           	
+                      </div>
+	              	  </div>
+	                  </div>
+                        
+                        
+                        <div class="card mb-3" style="width:300px">
+	                		<div class="card-body">
+	              		<div class="list-group" style="list-style-type:none">
+	              		<a class="list-group-item active">Cuponeras asociadas</a>
+	              	 		<hr>
+                                  <p class="list-group-item list-group-item-action"> Pelota </a></p>
+                        </div>
+	              	    </div>
+	                    </div>
+	                </aside>
 
                 </section>
             </main>
