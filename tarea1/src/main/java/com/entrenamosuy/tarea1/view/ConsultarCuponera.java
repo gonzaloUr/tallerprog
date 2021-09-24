@@ -91,16 +91,27 @@ public class ConsultarCuponera extends JInternalFrame {
         descripcionField.setText(dataCuponera.getDescripcion());
 
         List<String> actividades = new ArrayList<>();
+        List<String> categorias = new ArrayList<>();
 
         for (DescActividad a : dataCuponera.getActividades())
             actividades.add(a.getNombre());
+        for (String s : dataCuponera.getCategorias())
+            categorias.add(s);
+
+        JList<String> listCat = new JList<>(categorias.toArray(new String[]{}));
+        GridBagConstraints gbc_listCat = new GridBagConstraints();
+        gbc_listCat.insets = new Insets(0, 0, 5, 5);
+        gbc_listCat.fill = GridBagConstraints.BOTH;
+        gbc_listCat.gridx = 3;
+        gbc_listCat.gridy = 5;
+        getContentPane().add(listCat, gbc_listCat);
 
         JList<String> list = new JList<>(actividades.toArray(new String[]{}));
         GridBagConstraints gbc_list = new GridBagConstraints();
         gbc_list.insets = new Insets(0, 0, 5, 5);
         gbc_list.fill = GridBagConstraints.BOTH;
         gbc_list.gridx = 3;
-        gbc_list.gridy = 5;
+        gbc_list.gridy = 7;
         getContentPane().add(list, gbc_list);
 
         MouseListener mouseListener = new MouseAdapter() {

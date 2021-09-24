@@ -45,4 +45,6 @@ public abstract class AbstractFacadeCuponera extends AbstractFacade {
 
     public abstract void comprarCuponera(String nickname, String nombreCuponera)
             throws CuponeraYaPoseidaException;
+
+    public abstract Set<String> getCuponerasSinCompras();
 }

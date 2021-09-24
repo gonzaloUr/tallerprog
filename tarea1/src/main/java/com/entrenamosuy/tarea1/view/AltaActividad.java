@@ -8,16 +8,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.HashSet;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.util.FechaUtil;
 import com.toedter.calendar.JDateChooser;
@@ -37,6 +43,8 @@ public class AltaActividad extends JInternalFrame {
         setBounds(100, 100, 554, 308);
         setTitle("Alta de actividad deportiva");
         getContentPane().setForeground(Color.RED);
+
+        String [] arrayCategorias = facades.getFacadeActividad().getCategorias().toArray(new String[0]);
         
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
@@ -129,7 +137,7 @@ public class AltaActividad extends JInternalFrame {
         getContentPane().add(costo, gbc_costo);
         costo.setColumns(10);
 
-        JLabel lblIngresarFecha = new JLabel("Ingresar fecha");
+        JLabel lblIngresarFecha = new JLabel("Ingresar fecha de registro");
         GridBagConstraints gbc_lblIngresarFecha = new GridBagConstraints();
         gbc_lblIngresarFecha.anchor = GridBagConstraints.WEST;
         gbc_lblIngresarFecha.insets = new Insets(0, 0, 5, 5);
@@ -145,11 +153,41 @@ public class AltaActividad extends JInternalFrame {
         gbc_calendario.gridy = 7;
         getContentPane().add(calendario, gbc_calendario);
         
+        JLabel lblCat = new JLabel("<html>Ingresar categoria/s <br/> (manten Ctrl para seleccionar varias)</html>");
+        GridBagConstraints gbc_lblCat = new GridBagConstraints();
+        gbc_lblCat.anchor = GridBagConstraints.WEST;
+        gbc_lblCat.insets = new Insets(0, 0, 5, 5);
+        gbc_lblCat.gridx = 1;
+        gbc_lblCat.gridy = 9;
+        getContentPane().add(lblCat, gbc_lblCat);
+
+        JList listCat = new JList<>(arrayCategorias);
+        listCat.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        listCat.setVisible(true);
+        GridBagConstraints gbc_listCat = new GridBagConstraints();
+        gbc_listCat.insets = new Insets(0, 0, 0, 5);
+        gbc_listCat.fill = GridBagConstraints.BOTH;
+        gbc_listCat.gridx = 3;
+        gbc_listCat.gridy = 9;
+        getContentPane().add(listCat, gbc_listCat);
+
+        Set<String> categorias = new HashSet<>();
+
+        listCat.addListSelectionListener((ListSelectionEvent e) -> {
+            if (!e.getValueIsAdjusting()) {
+        	    int[] selected = listCat.getSelectedIndices();
+        	    categorias.clear();
+
+        	    for (int j : selected)
+        	        categorias.add(arrayCategorias[j]);
+            }
+        });
+        
         JButton aceptar = new JButton("Aceptar");
         GridBagConstraints gbc_aceptar = new GridBagConstraints();
         gbc_aceptar.insets = new Insets(0, 0, 0, 5);
         gbc_aceptar.gridx = 3;
-        gbc_aceptar.gridy = 9;
+        gbc_aceptar.gridy = 11;
         getContentPane().add(aceptar, gbc_aceptar);
         
         aceptar.addActionListener(new ActionListener() {
@@ -166,6 +204,7 @@ public class AltaActividad extends JInternalFrame {
                         .setDuracion(duration)
                         .setCosto(precio)
                         .setRegistro(fecha)
+                        .setCategoriasString(categorias)
                         .invoke();
 
                     JOptionPane.showMessageDialog(app, "Actividad registrada exitosamente.");
@@ -176,6 +215,9 @@ public class AltaActividad extends JInternalFrame {
                     return;
                 } catch (InstitucionNoEncontradaException inee) {
                     inee.printStackTrace();
+                    return;
+                } catch (SinCategoriaException sc){
+                    JOptionPane.showMessageDialog(app, "Debes seleccionar al menos una categoria.", "error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 

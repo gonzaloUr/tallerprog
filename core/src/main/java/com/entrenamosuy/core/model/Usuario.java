@@ -145,7 +145,7 @@ public abstract class Usuario {
 
     public void dejarDeSeguirUsuario(Usuario u) {
         usuariosSeguidos.remove(u);
-        u.removerSeguidor(u);
+        u.removerSeguidor(this);
     }
 
     public void removerSeguidor(Usuario u){

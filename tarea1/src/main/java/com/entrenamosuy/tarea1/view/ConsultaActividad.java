@@ -152,6 +152,14 @@ public class ConsultaActividad extends JInternalFrame {
         gbc_lblCuponeras.gridy = 13;
         getContentPane().add(lblCuponeras, gbc_lblCuponeras);
 
+        JLabel lblCat = new JLabel("Categorias");
+        GridBagConstraints gbc_lblCat = new GridBagConstraints();
+        gbc_lblCat.insets = new Insets(0, 0, 5, 5);
+        gbc_lblCat.anchor = GridBagConstraints.WEST;
+        gbc_lblCat.gridx = 1;
+        gbc_lblCat.gridy = 15;
+        getContentPane().add(lblCat, gbc_lblCat);
+
         DataActividad dataActividad = facades.getFacadeActividad().getDataActividad(actividad);
 
         nombreField.setText(dataActividad.getNombre());
@@ -162,19 +170,31 @@ public class ConsultaActividad extends JInternalFrame {
 
         List<String> clases = new ArrayList<>();
         List<String> cuponeras = new ArrayList<>();
+        List<String> categorias = new ArrayList<>();
 
         for (DataClase c : dataActividad.getClases())
             clases.add(c.getNombre());
 
         for (DataCuponera c : dataActividad.getCuponeras())
             cuponeras.add(c.getNombre());
-
+        
+        for (String cat: dataActividad.getCategorias())
+            categorias.add(cat);
+            
+        JList<String> categoriasLista = new JList<>(categorias.toArray(new String[]{}));
+        GridBagConstraints gbc_categoriasLista = new GridBagConstraints();
+        gbc_categoriasLista.insets = new Insets(0, 0, 5, 5);
+        gbc_categoriasLista.fill = GridBagConstraints.BOTH;
+        gbc_categoriasLista.gridx = 3;
+        gbc_categoriasLista.gridy = 11;
+        getContentPane().add(categoriasLista, gbc_categoriasLista);
+        
         JList<String> cuponerasLista = new JList<>(cuponeras.toArray(new String[]{}));
         GridBagConstraints gbc_cuponerasLista = new GridBagConstraints();
         gbc_cuponerasLista.insets = new Insets(0, 0, 5, 5);
         gbc_cuponerasLista.fill = GridBagConstraints.BOTH;
         gbc_cuponerasLista.gridx = 3;
-        gbc_cuponerasLista.gridy = 13;
+        gbc_cuponerasLista.gridy = 15;
         getContentPane().add(cuponerasLista, gbc_cuponerasLista);
 
         MouseListener mouseListener = new MouseAdapter() {
@@ -199,7 +219,7 @@ public class ConsultaActividad extends JInternalFrame {
         gbc_clasesLista.insets = new Insets(0, 0, 5, 5);
         gbc_clasesLista.fill = GridBagConstraints.BOTH;
         gbc_clasesLista.gridx = 3;
-        gbc_clasesLista.gridy = 11;
+        gbc_clasesLista.gridy = 13;
         getContentPane().add(clasesLista, gbc_clasesLista);
 
         MouseListener mouseListenerClases = new MouseAdapter() {
