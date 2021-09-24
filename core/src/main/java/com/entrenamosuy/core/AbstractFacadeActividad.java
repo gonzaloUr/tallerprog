@@ -54,7 +54,7 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract Set<DataActividad> listaractividadesRegistradas();
 
-    public abstract void aceptarActividad(String actividad); //hacer que tiren exception si reciben null?
+    public abstract void aceptarActividad(String actividad);
 
     public abstract void rechazarActividad(String actividad);
 }

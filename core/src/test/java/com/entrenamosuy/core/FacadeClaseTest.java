@@ -33,6 +33,10 @@ public class FacadeClaseTest {
                     .setUrl(new URL("https://test"))
                     .invoke();
 
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
             facades.getFacadeActividad().crearActividad()
                     .setNombre("a1")
                     .setInstitucion("i1")
@@ -40,6 +44,7 @@ public class FacadeClaseTest {
                     .setCosto(10f)
                     .setDuracion(Duration.ofHours(1))
                     .setRegistro(LocalDate.of(2000, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeUsuario().crearProfesor()

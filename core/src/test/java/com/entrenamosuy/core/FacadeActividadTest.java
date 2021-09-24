@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
@@ -19,6 +21,10 @@ public class FacadeActividadTest {
     public void crearActividad() {
         Fabrica fabrica = new Fabrica();
         FacadeContainer facades = fabrica.createFacades();
+
+        facades.getFacadeActividad().crearCategoria("cat1");
+        Set<String> categorias = new HashSet<>();
+        categorias.add("cat1");
 
         assertDoesNotThrow(() -> {
             facades.getFacadeInstitucion().crearInstitucion()
@@ -34,6 +40,7 @@ public class FacadeActividadTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(10f)
                     .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -43,6 +50,7 @@ public class FacadeActividadTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(10f)
                     .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
                     .invoke();
         });
 
@@ -55,6 +63,7 @@ public class FacadeActividadTest {
                     .setDuracion(Duration.ofHours(2))
                     .setCosto(15f)
                     .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
                     .invoke();
         });
 
@@ -67,6 +76,7 @@ public class FacadeActividadTest {
                     .setDuracion(Duration.ofMinutes(45))
                     .setCosto(200f)
                     .setRegistro(LocalDate.of(2000, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
         });
     }

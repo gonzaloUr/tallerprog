@@ -8,8 +8,12 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
+import com.entrenamosuy.core.data.DataCuponera;
+import com.entrenamosuy.core.data.DescActividad;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.util.FacadeContainer;
 
@@ -56,6 +60,10 @@ public class FacadeCuponeraTest {
                 .setUrl(new URL("https://test"))
                 .invoke();
 
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
             facades.getFacadeActividad().crearActividad()
                 .setNombre("a1")
                 .setDescripcion("test")
@@ -63,6 +71,7 @@ public class FacadeCuponeraTest {
                 .setDuracion(Duration.ofHours(1))
                 .setCosto(1f)
                 .setRegistro(LocalDate.of(1999, 1, 1))
+                .setCategoriasString(categorias)
                 .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -72,6 +81,7 @@ public class FacadeCuponeraTest {
                 .setDuracion(Duration.ofHours(1))
                 .setCosto(1f)
                 .setRegistro(LocalDate.of(1999, 1, 1))
+                .setCategoriasString(categorias)
                 .invoke();
 
             facades.getFacadeClase().crearClase()
@@ -129,6 +139,10 @@ public class FacadeCuponeraTest {
                     .setUrl(new URL("https://test"))
                     .invoke();
 
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
             facades.getFacadeActividad().crearActividad()
                     .setNombre("a1")
                     .setDescripcion("test")
@@ -136,6 +150,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -145,6 +160,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -154,6 +170,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -163,6 +180,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
             facades.getFacadeCuponera().crearCuponera()
@@ -241,6 +259,11 @@ public class FacadeCuponeraTest {
                     .setUrl(new URL("https://test"))
                     .invoke();
 
+            facades.getFacadeActividad().crearCategoria("c1");
+            facades.getFacadeActividad().crearCategoria("c2");
+            facades.getFacadeActividad().crearCategoria("c3");
+            facades.getFacadeActividad().crearCategoria("c4");
+
             facades.getFacadeActividad().crearActividad()
                     .setNombre("a1")
                     .setDescripcion("test")
@@ -248,6 +271,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(Collections.singleton("c1"))
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -257,6 +281,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(Collections.singleton("c2"))
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -266,6 +291,7 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(Collections.singleton("c3"))
                     .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -275,14 +301,44 @@ public class FacadeCuponeraTest {
                     .setDuracion(Duration.ofHours(1))
                     .setCosto(1f)
                     .setRegistro(LocalDate.of(1999, 1, 1))
+                    .setCategoriasString(Collections.singleton("c4"))
                     .invoke();
 
-            facades.getFacadeActividad().crearCategoria("c1");
-            facades.getFacadeActividad().crearCategoria("c2");
-            facades.getFacadeActividad().crearCategoria("c3");
-            facades.getFacadeActividad().crearCategoria("c4");
+            facades.getFacadeCuponera().crearCuponera()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setDescuento(50)
+                    .setFechaRegistro(LocalDate.of(1999, 1, 1))
+                    .setInicio(LocalDate.of(2000, 1, 1))
+                    .setFin(LocalDate.of(2001, 1, 1))
+                    .invoke();
 
-            // TODO: terminar
+            facades.getFacadeCuponera().agregarACuponera("test", "a1", 4);
+            facades.getFacadeCuponera().agregarACuponera("test", "a2", 1);
+            facades.getFacadeCuponera().agregarACuponera("test", "a3", 3);
+            facades.getFacadeCuponera().agregarACuponera("test", "a4", 2);
         });
+
+        DataCuponera ret = facades.getFacadeCuponera().getDataCuponera("test");
+
+        assertEquals("test", ret.getNombre());
+        assertEquals("test", ret.getDescripcion());
+
+        DescActividad a1 = new DescActividad("a1", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad a2 = new DescActividad("a2", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad a3 = new DescActividad("a3", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad a4 = new DescActividad("a4", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+
+        assertEquals(4, ret.getActividades().size());
+        assertTrue(ret.getActividades().contains(a1));
+        assertTrue(ret.getActividades().contains(a2));
+        assertTrue(ret.getActividades().contains(a3));
+        assertTrue(ret.getActividades().contains(a4));
+
+        assertEquals(4, ret.getCategorias().size());
+        assertTrue(ret.getCategorias().contains("c1"));
+        assertTrue(ret.getCategorias().contains("c2"));
+        assertTrue(ret.getCategorias().contains("c3"));
+        assertTrue(ret.getCategorias().contains("c4"));
     }
 }

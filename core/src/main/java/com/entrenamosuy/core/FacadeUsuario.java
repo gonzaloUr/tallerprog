@@ -39,9 +39,9 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private Set<Usuario> usuariosSeguidos;
+            private Set<Usuario> usuariosSeguidos = new HashSet<>();
 
-            private Set<Usuario> seguidores;
+            private Set<Usuario> seguidores = new HashSet<>();
 
             private String institucion;
 
@@ -55,7 +55,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private ByteBuffer imagen;
 
-            private Set<Actividad> actividadesRegistradas;
+            private Set<Actividad> actividadesRegistradas = new HashSet<>();
 
             @Override
             public CrearProfesorChain setNickname(String nickname) {
@@ -197,9 +197,9 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private Set<Usuario> usuariosSeguidos;
+            private Set<Usuario> usuariosSeguidos = new HashSet<>();
 
-            private Set<Usuario> seguidores;
+            private Set<Usuario> seguidores = new HashSet<>();
 
             private String password;
 
