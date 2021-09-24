@@ -34,6 +34,10 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             private Set<String> categoriasString = new HashSet<>();
 
+            private ActividadEstado estado = ActividadEstado.INGRESADA;
+
+            private String creador = null;
+
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
                 this.institucion = institucion;
@@ -83,10 +87,29 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
+            public CrearActividadChain setEstado(ActividadEstado estado) {
+                this.estado = estado;
+                return this;
+            }
+
+            @Override
+            public CrearActividadChain setCreador(String creador) {
+                this.creador = creador;
+                return this;
+            }
+
+
+            @Override
             public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException, SinCategoriaException {
                 Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Institucion> instituciones = getRegistry().getInstituciones();
                 Map<String, Categoria> categorias = getRegistry().getCategorias();
+                Map<String, Profesor> profes = getRegistry().getProfesores();
+                Profesor profe;
+
+                if ((creador!=null)&&(!profes.containsKey(creador))){
+                    throw new UsuarioNoEncontradoException("No existe un profesor de nombre " + creador);
+                }
 
                 if (actividades.containsKey(nombre))
                     throw new ActividadRepetidaException("La actividad llamada " + nombre + " ya existe.");
@@ -115,9 +138,17 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         .setCosto(costo)
                         .setImagen(imagen)
                         .setCategorias(categoriasActiv)
+                        .setEstado(estado)
                         .build();
                 inst.getActividadesOfrecidas().add(nuevaActividad);
                 actividades.put(nombre, nuevaActividad);
+                for(Categoria c : categoriasActiv){
+                    c.agregarActividad(nuevaActividad);
+                }
+                if (creador != null){
+                    profe = profes.get(creador);
+                    profe.agregarActividadRegistrada(nuevaActividad);
+                }
             }
         };
     }

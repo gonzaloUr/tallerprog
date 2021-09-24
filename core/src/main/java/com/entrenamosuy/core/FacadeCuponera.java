@@ -16,6 +16,7 @@ import com.entrenamosuy.core.exceptions.CuponeraYaPoseidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.Categoria;
 import com.entrenamosuy.core.model.Cuponera;
 import com.entrenamosuy.core.model.Institucion;
 import com.entrenamosuy.core.model.Integra;
@@ -165,6 +166,10 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
         Integra integra = new Integra(cant, a, c);
         c.getIntegras().add(integra);
         a.getIntegras().add(integra);
+        for ( Categoria cat : a.getCategorias()){ //la categoria sabe quienes la tienen
+            cat.agregarCuponera(c);
+            c.getCategorias().add(cat);
+        }
     }
 
     @Override

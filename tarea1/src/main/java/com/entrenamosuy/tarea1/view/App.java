@@ -122,7 +122,7 @@ public class App extends JFrame {
         JMenuItem modificarProfesor = new JMenuItem("Modificar datos de profesor");
         modificar.add(modificarProfesor);
 
-        //Aceptar o Rechazar Actividad Deportiva... en obras hasta que cargar datos esté completo.
+        //Aceptar o Rechazar Actividad Deportiva
         aceptarRechazarAct.addActionListener((ActionEvent a) -> {
             Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listaractividadesRegistradas();
             

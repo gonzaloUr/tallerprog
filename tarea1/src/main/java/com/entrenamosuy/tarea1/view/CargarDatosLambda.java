@@ -16,6 +16,9 @@ import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.model.Usuario; // es para hacer el set vacio de seguidores
 import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.ActividadEstado;
+
+
 
 public class CargarDatosLambda implements ActionListener {
 
@@ -49,45 +52,43 @@ public class CargarDatosLambda implements ActionListener {
     public void actionPerformed(ActionEvent arg0) {
         try {
 
-                Set<Usuario> seg1 = new HashSet<Usuario>();
-                Set<Usuario> seg2 = new HashSet<Usuario>();
-                Set<Usuario> seg3 = new HashSet<Usuario>();
-                Set<Usuario> seg4 = new HashSet<Usuario>();
-                Set<Usuario> seg5 = new HashSet<Usuario>();
-                Set<Usuario> seg6 = new HashSet<Usuario>();
-                Set<Usuario> seg7 = new HashSet<Usuario>();
-                Set<Usuario> seg8 = new HashSet<Usuario>();
-                Set<Usuario> seg9 = new HashSet<Usuario>();
-                Set<Usuario> seg10 = new HashSet<Usuario>();
-                Set<Usuario> seg11 = new HashSet<Usuario>();
-                Set<Usuario> seg12 = new HashSet<Usuario>();
-                Set<Usuario> seg13 = new HashSet<Usuario>();
-                Set<Usuario> seg14 = new HashSet<Usuario>();
-                Set<Usuario> seg15 = new HashSet<Usuario>();
-                Set<Usuario> seg16 = new HashSet<Usuario>();
-                Set<Usuario> seg17 = new HashSet<Usuario>();
-                Set<Usuario> seg18 = new HashSet<Usuario>();
-                Set<Usuario> seg19 = new HashSet<Usuario>();
-                Set<Usuario> seg20 = new HashSet<Usuario>();
-                Set<Usuario> seg21 = new HashSet<Usuario>();
-                Set<Usuario> seg22 = new HashSet<Usuario>();
-                Set<Usuario> seg23 = new HashSet<Usuario>();
-                Set<Usuario> seg24 = new HashSet<Usuario>();
-                Set<Usuario> seg25 = new HashSet<Usuario>();
-                Set<Usuario> seg26 = new HashSet<Usuario>();
-                Set<Usuario> seg27 = new HashSet<Usuario>();
-                Set<Usuario> seg28 = new HashSet<Usuario>();
-                Set<Usuario> seg29 = new HashSet<Usuario>();
-                Set<Usuario> seg30 = new HashSet<Usuario>();
-                Set<Usuario> seg31 = new HashSet<Usuario>();
-                Set<Usuario> seg32 = new HashSet<Usuario>();
-                Set<Usuario> seg33 = new HashSet<Usuario>();
-                Set<Usuario> seg34 = new HashSet<Usuario>();
-                Set<Usuario> seg35 = new HashSet<Usuario>();
-                Set<Usuario> seg36 = new HashSet<Usuario>();
+                Set<Usuario> seg1 = new HashSet<>();
+                Set<Usuario> seg2 = new HashSet<>();
+                Set<Usuario> seg3 = new HashSet<>();
+                Set<Usuario> seg4 = new HashSet<>();
+                Set<Usuario> seg5 = new HashSet<>();
+                Set<Usuario> seg6 = new HashSet<>();
+                Set<Usuario> seg7 = new HashSet<>();
+                Set<Usuario> seg8 = new HashSet<>();
+                Set<Usuario> seg9 = new HashSet<>();
+                Set<Usuario> seg10 = new HashSet<>();
+                Set<Usuario> seg11 = new HashSet<>();
+                Set<Usuario> seg12 = new HashSet<>();
+                Set<Usuario> seg13 = new HashSet<>();
+                Set<Usuario> seg14 = new HashSet<>();
+                Set<Usuario> seg15 = new HashSet<>();
+                Set<Usuario> seg16 = new HashSet<>();
+                Set<Usuario> seg17 = new HashSet<>();
+                Set<Usuario> seg18 = new HashSet<>();
+                Set<Usuario> seg19 = new HashSet<>();
+                Set<Usuario> seg20 = new HashSet<>();
+                Set<Usuario> seg21 = new HashSet<>();
+                Set<Usuario> seg22 = new HashSet<>();
+                Set<Usuario> seg23 = new HashSet<>();
+                Set<Usuario> seg24 = new HashSet<>();
+                Set<Usuario> seg25 = new HashSet<>();
+                Set<Usuario> seg26 = new HashSet<>();
+                Set<Usuario> seg27 = new HashSet<>();
+                Set<Usuario> seg28 = new HashSet<>();
+                Set<Usuario> seg29 = new HashSet<>();
+                Set<Usuario> seg30 = new HashSet<>();
+                Set<Usuario> seg31 = new HashSet<>();
+                Set<Usuario> seg32 = new HashSet<>();
+                Set<Usuario> seg33 = new HashSet<>();
+                Set<Usuario> seg34 = new HashSet<>();
+                Set<Usuario> seg35 = new HashSet<>();
+                Set<Usuario> seg36 = new HashSet<>();
 
-
-             
 
             facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).setPassword("asdfg456").setSeguidores(seg1).setUsuariosSeguidos(seg2).invoke();
             facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).setPassword("123rtgfdv").setSeguidores(seg3).setUsuariosSeguidos(seg4).invoke();
@@ -267,6 +268,35 @@ public class CargarDatosLambda implements ActionListener {
                     .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
                 
+                    Set<String> k1 = new HashSet<>();
+                    k1.add("Deportes");
+                    Set<String> k2 = new HashSet<>();
+                    k2.add("Fitness");
+                    Set<String> k3 = new HashSet<>();
+                    k3.add("Gimnasia");
+                    Set<String> k4 = new HashSet<>();
+                    k4.add("Gimnasia");
+                    k4.add("Al aire libre");
+    
+                    Set<String> k5 = new HashSet<>();
+                    k5.add("Deportes");
+                    k5.add("Al aire libre");
+    
+                    facadeActividad.crearCategoria("Al aire libre");
+                    facadeActividad.crearCategoria("Deportes");
+                    facadeActividad.crearCategoria("Fitness");
+                    facadeActividad.crearCategoria("Gimnasia");
+    
+                facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos y pesas").setDescripcion("Clases de aparatos, pesas y calistenia.").setDuracion(Duration.ofMinutes(90)).setCosto(550).setRegistro(LocalDate.of(2021, 3, 31)).setCategoriasString(k2).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol").setDescripcion("Voleibol en todas sus formas.").setDuracion(Duration.ofMinutes(120)).setCosto(750).setRegistro(LocalDate.of(2021, 4, 20)).setCategoriasString(k1).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Aerobica").setDescripcion("Para cuidar el aparato cardiovascular.").setDuracion(Duration.ofMinutes(110)).setCosto(800).setRegistro(LocalDate.of(2021, 5, 30)).setCategoriasString(k4).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Kickboxing").setDescripcion("En busca del nuevo campeón de boxeo.").setDuracion(Duration.ofMinutes(100)).setCosto(980).setRegistro(LocalDate.of(2021, 6, 7)).setCategoriasString(k1).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Atletismo").setDescripcion("100m, 200m, postas y carreras con obstaculos.").setDuracion(Duration.ofMinutes(150)).setCosto(500).setRegistro(LocalDate.of(2021, 7, 8)).setCategoriasString(k1).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol").setDescripcion("Basquetbol para todos.").setDuracion(Duration.ofMinutes(80)).setCosto(450).setRegistro(LocalDate.of(2021, 7, 31)).setCategoriasString(k1).setEstado(ActividadEstado.ACEPTADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos II").setDescripcion("Clases de aparatos avanzadas.").setDuracion(Duration.ofMinutes(60)).setCosto(1500).setRegistro(LocalDate.of(2021, 8, 15)).setCategoriasString(k2).setEstado(ActividadEstado.RECHAZADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Pilates").setDescripcion("El Método Pilates combina diferentes capacidades físicas.").setDuracion(Duration.ofMinutes(45)).setCosto(600).setRegistro(LocalDate.of(2021, 8, 30)).setCategoriasString(k3).setEstado(ActividadEstado.INGRESADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol II").setDescripcion("Voleibol avanzado.").setDuracion(Duration.ofMinutes(120)).setCosto(1000).setRegistro(LocalDate.of(2021, 9, 1)).setCategoriasString(k5).setEstado(ActividadEstado.RECHAZADA).invoke();
+                facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol II").setDescripcion("Basquetbol avanzado.").setDuracion(Duration.ofMinutes(80)).setCosto(600).setRegistro(LocalDate.of(2021, 9, 7)).setCategoriasString(k3).setEstado(ActividadEstado.INGRESADA).invoke();
 
                 facadeUsuario.seguirUsuario("guille", "Emi71");
                 facadeUsuario.seguirUsuario("euge", "caro");
@@ -331,31 +361,7 @@ public class CargarDatosLambda implements ActionListener {
                 facadeUsuario.seguirUsuario("prisc", "aldo");
                 facadeUsuario.seguirUsuario("dagost", "aldo");
         
-                Set<String> k1 = new HashSet<>();
-                k1.add("Deportes");
-                Set<String> k2 = new HashSet<>();
-                k2.add("Fitness");
-                Set<String> k3 = new HashSet<>();
-                k3.add("Gimnasia");
-                Set<String> k4 = new HashSet<>();
-                k4.add("Gimnasia");
-                k4.add("Al aire libre");
-
-                facadeActividad.crearCategoria("Al aire libre");
-                facadeActividad.crearCategoria("Deportes");
-                facadeActividad.crearCategoria("Fitness");
-                facadeActividad.crearCategoria("Gimnasia");
-
-            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos y pesas").setDescripcion("Clases de aparatos, pesas y calistenia.").setDuracion(Duration.ofMinutes(90)).setCosto(550).setRegistro(LocalDate.of(2021, 3, 31)).setCategoriasString(k2).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol").setDescripcion("Voleibol en todas sus formas.").setDuracion(Duration.ofMinutes(120)).setCosto(750).setRegistro(LocalDate.of(2021, 4, 20)).setCategoriasString(k1).invoke();
-            facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Aerobica").setDescripcion("Para cuidar el aparato cardiovascular.").setDuracion(Duration.ofMinutes(110)).setCosto(800).setRegistro(LocalDate.of(2021, 5, 30)).setCategoriasString(k4).invoke();
-            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Kickboxing").setDescripcion("En busca del nuevo campeón de boxeo.").setDuracion(Duration.ofMinutes(100)).setCosto(980).setRegistro(LocalDate.of(2021, 6, 7)).setCategoriasString(k1).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Atletismo").setDescripcion("100m, 200m, postas y carreras con obstaculos.").setDuracion(Duration.ofMinutes(150)).setCosto(500).setRegistro(LocalDate.of(2021, 7, 8)).setCategoriasString(k1).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol").setDescripcion("Basquetbol para todos.").setDuracion(Duration.ofMinutes(80)).setCosto(450).setRegistro(LocalDate.of(2021, 7, 31)).setCategoriasString(k1).invoke();
-            facadeActividad.crearActividad().setInstitucion("Fuerza Bruta").setNombre("Aparatos II").setDescripcion("Clases de aparatos avanzadas.").setDuracion(Duration.ofMinutes(60)).setCosto(1500).setRegistro(LocalDate.of(2021, 8, 15)).setCategoriasString(k2).invoke();
-            facadeActividad.crearActividad().setInstitucion("Instituto Natural").setNombre("Pilates").setDescripcion("El Método Pilates combina diferentes capacidades físicas.").setDuracion(Duration.ofMinutes(45)).setCosto(600).setRegistro(LocalDate.of(2021, 8, 30)).setCategoriasString(k3).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Voleibol II").setDescripcion("Voleibol avanzado.").setDuracion(Duration.ofMinutes(120)).setCosto(1000).setRegistro(LocalDate.of(2021, 9, 1)).invoke();
-            facadeActividad.crearActividad().setInstitucion("Telon").setNombre("Basquetbol II").setDescripcion("Basquetbol avanzado.").setDuracion(Duration.ofMinutes(80)).setCosto(600).setRegistro(LocalDate.of(2021, 9, 7)).invoke();
+                
 
             Set<String> p1 = new HashSet<>();
             p1.add("viktor");

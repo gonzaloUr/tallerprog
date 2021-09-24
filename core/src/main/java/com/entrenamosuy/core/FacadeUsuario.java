@@ -39,9 +39,9 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private Set<Usuario> usuariosSeguidos;
+            private Set<Usuario> usuariosSeguidos = new HashSet<>();
 
-            private Set<Usuario> seguidores;
+            private Set<Usuario> seguidores = new HashSet<>();
 
             private String institucion;
 
@@ -55,7 +55,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private ByteBuffer imagen;
 
-            private Set<Actividad> actividadesRegistradas;
+            private Set<Actividad> actividadesRegistradas = new HashSet<>();
 
             @Override
             public CrearProfesorChain setNickname(String nickname) {
@@ -197,9 +197,9 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private Set<Usuario> usuariosSeguidos;
+            private Set<Usuario> usuariosSeguidos = new HashSet<>();
 
-            private Set<Usuario> seguidores;
+            private Set<Usuario> seguidores = new HashSet<>();
 
             private String password;
 
@@ -539,8 +539,8 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     public void seguirUsuario(String nickname, String actual){ //en progreso
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();
-        Usuario usuarioActual = null;
-        Usuario usuarioNickname = null;
+        Usuario usuarioActual;
+        Usuario usuarioNickname;
         if (socios.containsKey(actual)){    
             usuarioActual = socios.get(actual);
         }
@@ -551,10 +551,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
         }
         if (socios.containsKey(nickname)){    
-            usuarioNickname = socios.get(actual);
+            usuarioNickname = socios.get(nickname);
         }
         else if (profes.containsKey(nickname)){
-            usuarioNickname = profes.get(actual);
+            usuarioNickname = profes.get(nickname);
         }
         else{
             throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);

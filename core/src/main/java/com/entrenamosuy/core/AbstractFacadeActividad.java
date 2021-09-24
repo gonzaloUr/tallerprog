@@ -7,6 +7,8 @@ import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.CategoriaRepetidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
+import com.entrenamosuy.core.model.ActividadEstado;
+import com.entrenamosuy.core.model.Profesor;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -30,6 +32,10 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
         CrearActividadChain setImagen(ByteBuffer imagen);
 
         CrearActividadChain setCategoriasString(Set<String> categorias);
+
+        CrearActividadChain setEstado(ActividadEstado estado);
+
+        CrearActividadChain setCreador(String creador);
 
         void invoke() throws ActividadRepetidaException;
     }

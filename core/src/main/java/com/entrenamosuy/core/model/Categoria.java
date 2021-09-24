@@ -45,6 +45,13 @@ public class Categoria {
         this.cuponeras = cuponeras;
     }
 
+    public void agregarActividad(Actividad a){
+        actividades.add(a);
+    }
+    public void agregarCuponera(Cuponera c){
+        cuponeras.add(c);
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(nombre);
