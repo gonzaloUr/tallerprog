@@ -4,10 +4,7 @@ import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.core.model.Actividad;
-import com.entrenamosuy.core.model.Clase;
-import com.entrenamosuy.core.model.Institucion;
-import com.entrenamosuy.core.model.Profesor;
+import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
@@ -15,62 +12,42 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FacadeClaseTest {
 
     @Test
     public void crearClase() {
-        AbstractRegistry registry = mock(AbstractRegistry.class);
-        Map<String, Institucion> instituciones = new HashMap<>();
-        Map<String, Actividad> actividades = new HashMap<>();
-        Map<String, Profesor> profesores = new HashMap<>();
-        Map<Email, Profesor> profesoresMail = new HashMap<>();
-        Map<String, Clase> clases = new HashMap<>();
-
-        when(registry.getInstituciones()).thenReturn(instituciones);
-        when(registry.getActividades()).thenReturn(actividades);
-        when(registry.getProfesores()).thenReturn(profesores);
-        when(registry.getProfesoresMail()).thenReturn(profesoresMail);
-        when(registry.getClases()).thenReturn(clases);
-
-        AbstractFacadeUsuario facadeUsuario = new FacadeUsuario();
-        AbstractFacadeInstitucion facadeInstitucion = new FacadeInstitucion();
-        AbstractFacadeActividad facadeActividad = new FacadeActividad();
-        AbstractFacadeClase facadeClase = new FacadeClase();
-
-        facadeUsuario.setRegistry(registry);
-        facadeInstitucion.setRegistry(registry);
-        facadeActividad.setRegistry(registry);
-        facadeClase.setRegistry(registry);
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
 
         assertDoesNotThrow(() -> {
-            facadeInstitucion.crearInstitucion()
+            facades.getFacadeInstitucion().crearInstitucion()
                     .setNombre("i1")
                     .setDescripcion("i1")
                     .setUrl(new URL("https://test"))
                     .invoke();
 
-            facadeActividad.crearActividad()
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
+            facades.getFacadeActividad().crearActividad()
                     .setNombre("a1")
                     .setInstitucion("i1")
                     .setDescripcion("a1")
                     .setCosto(10f)
                     .setDuracion(Duration.ofHours(1))
                     .setRegistro(LocalDate.of(2000, 1, 1))
+                    .setCategoriasString(categorias)
                     .invoke();
 
-            facadeUsuario.crearProfesor()
+            facades.getFacadeUsuario().crearProfesor()
                     .setNickname("p1")
                     .setNombre("p1")
                     .setApellido("p1")
@@ -84,7 +61,7 @@ public class FacadeClaseTest {
             Set<String> profesoresNickname = new HashSet<>();
             profesoresNickname.add("p1");
 
-            facadeClase.crearClase()
+            facades.getFacadeClase().crearClase()
                     .setNombre("c1")
                     .setNombreActividad("a1")
                     .setNicknameProfesores(profesoresNickname)
@@ -96,11 +73,10 @@ public class FacadeClaseTest {
                     .invoke();
         });
 
-        assertThat(clases, hasKey("c1"));
-
+        assertTrue(facades.getRegistry().getClases().containsKey("c1"));
 
         assertThrows(ClaseInconsistenteException.class, () -> {
-            facadeClase.crearClase()
+            facades.getFacadeClase().crearClase()
                     .setNombre("c1")
                     .setNombreActividad("a1")
                     .setNicknameProfesores(Collections.emptySet())
@@ -113,7 +89,7 @@ public class FacadeClaseTest {
         });
 
         assertThrows(ActividadNoEncontradaException.class, () -> {
-            facadeClase.crearClase()
+            facades.getFacadeClase().crearClase()
                     .setNombre("c2")
                     .setNombreActividad("a2")
                     .setNicknameProfesores(Collections.emptySet())
@@ -129,7 +105,7 @@ public class FacadeClaseTest {
             Set<String> profesoresNickname = new HashSet<>();
             profesoresNickname.add("p3");
 
-            facadeClase.crearClase()
+            facades.getFacadeClase().crearClase()
                     .setNombre("c2")
                     .setNombreActividad("a1")
                     .setNicknameProfesores(profesoresNickname)

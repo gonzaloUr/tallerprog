@@ -2,10 +2,8 @@ package com.entrenamosuy.core.model;
 
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -180,7 +178,7 @@ public class Socio extends Usuario {
     }
 
     public Set<String> cuponerasUsables(Actividad a) {
-        List<Cuponera> cuponerasADescribir = new ArrayList<>();
+        Set<String> ret = new HashSet<>();
 
         for (Compra compra : compras) {
             Cuponera cup = compra.getCuponera();
@@ -193,12 +191,8 @@ public class Socio extends Usuario {
             int cantRegistros = cantRegistrosConCuponeraA(a, cup);
             int cantClases = integra.getCantClases();
             if (cantRegistros < cantClases)
-                cuponerasADescribir.add(cup);
+                ret.add(cup.getNombre());
         }
-        Set<String> ret = new HashSet<>(cuponerasADescribir.size());
-
-        for (Cuponera cup : cuponerasADescribir)
-            ret.add(cup.getNombre());
 
         return ret;
     }

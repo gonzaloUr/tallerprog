@@ -2,80 +2,82 @@ package com.entrenamosuy.core;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
+import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.model.Actividad;
-import com.entrenamosuy.core.model.Institucion;
 
+import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
 public class FacadeActividadTest {
 
     @Test
     public void crearActividad() {
-        AbstractRegistry registry = mock(AbstractRegistry.class);
-        Map<String, Institucion> instituciones = new HashMap<>();
-        Map<String, Actividad> actividades = new HashMap<>();
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
 
-        when(registry.getInstituciones()).thenReturn(instituciones);
-        when(registry.getActividades()).thenReturn(actividades);
-
-        Institucion i1 = mock(Institucion.class);
-        instituciones.put("test", i1);
-
-        AbstractFacadeActividad facadeActividad = new FacadeActividad();
-        facadeActividad.setRegistry(registry);
+        facades.getFacadeActividad().crearCategoria("cat1");
+        Set<String> categorias = new HashSet<>();
+        categorias.add("cat1");
 
         assertDoesNotThrow(() -> {
-            facadeActividad.crearActividad()
-                .setNombre("test")
-                .setDescripcion("test")
-                .setInstitucion("test")
-                .setDuracion(Duration.ofHours(1))
-                .setCosto(10f)
-                .setRegistro(LocalDate.of(2021, 9, 10))
-                .invoke();
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setUrl(new URL("https://test"))
+                    .invoke();
 
-            facadeActividad.crearActividad()
-                .setNombre("test2")
-                .setDescripcion("test2")
-                .setInstitucion("test")
-                .setDuracion(Duration.ofHours(1))
-                .setCosto(10f)
-                .setRegistro(LocalDate.of(2021, 9, 10))
-                .invoke();
+            facades.getFacadeActividad().crearActividad()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setInstitucion("test")
+                    .setDuracion(Duration.ofHours(1))
+                    .setCosto(10f)
+                    .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
+                    .invoke();
+
+            facades.getFacadeActividad().crearActividad()
+                    .setNombre("test2")
+                    .setDescripcion("test2")
+                    .setInstitucion("test")
+                    .setDuracion(Duration.ofHours(1))
+                    .setCosto(10f)
+                    .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
+                    .invoke();
         });
 
         // No se puede crear actividades con nombres repetidos.
         assertThrows(ActividadRepetidaException.class, () -> {
-            facadeActividad.crearActividad()
-                .setNombre("test")
-                .setDescripcion("test")
-                .setInstitucion("test")
-                .setDuracion(Duration.ofHours(2))
-                .setCosto(15f)
-                .setRegistro(LocalDate.of(2021, 9, 10))
-                .invoke();
+            facades.getFacadeActividad().crearActividad()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setInstitucion("test")
+                    .setDuracion(Duration.ofHours(2))
+                    .setCosto(15f)
+                    .setRegistro(LocalDate.of(2021, 9, 10))
+                    .setCategoriasString(categorias)
+                    .invoke();
         });
 
         // La actividad esta asociada a una institucion valida.
         assertThrows(InstitucionNoEncontradaException.class, () -> {
-            facadeActividad.crearActividad()
-                .setNombre("test3")
-                .setDescripcion("test3")
-                .setInstitucion("institucion")
-                .setDuracion(Duration.ofMinutes(45))
-                .setCosto(200f)
-                .setRegistro(LocalDate.of(2000, 1, 1))
-                .invoke();
+            facades.getFacadeActividad().crearActividad()
+                    .setNombre("test3")
+                    .setDescripcion("test3")
+                    .setInstitucion("institucion")
+                    .setDuracion(Duration.ofMinutes(45))
+                    .setCosto(200f)
+                    .setRegistro(LocalDate.of(2000, 1, 1))
+                    .setCategoriasString(categorias)
+                    .invoke();
         });
     }
 }

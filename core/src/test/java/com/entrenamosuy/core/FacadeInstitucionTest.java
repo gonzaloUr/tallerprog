@@ -1,42 +1,33 @@
 package com.entrenamosuy.core;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasKey;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
-import java.util.*;
+import java.util.Set;
 
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
-import com.entrenamosuy.core.model.Institucion;
 
+import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
 public class FacadeInstitucionTest {
 
     @Test
     public void crearInstitucion() {
-        AbstractRegistry registry = mock(AbstractRegistry.class);
-        Map<String, Institucion> instituciones = new HashMap<>();
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
 
-        when(registry.getInstituciones()).thenReturn(instituciones);
-
-        AbstractFacadeInstitucion facadeInstitucion = new FacadeInstitucion();
-        facadeInstitucion.setRegistry(registry);
-
-        assertDoesNotThrow(() -> facadeInstitucion.crearInstitucion()
+        assertDoesNotThrow(() -> facades.getFacadeInstitucion().crearInstitucion()
                 .setNombre("test")
                 .setDescripcion("test")
                 .setUrl(new URL("https://test"))
                 .invoke());
 
-        assertThat(instituciones, hasKey("test"));
+        assertTrue(facades.getRegistry().getInstituciones().containsKey("test"));
 
-        assertThrows(InstitucionRepetidaException.class, () -> facadeInstitucion.crearInstitucion()
+        assertThrows(InstitucionRepetidaException.class, () -> facades.getFacadeInstitucion().crearInstitucion()
                 .setNombre("test")
                 .setDescripcion("test")
                 .setUrl(new URL("https://test"))
@@ -45,23 +36,18 @@ public class FacadeInstitucionTest {
 
     @Test
     public void getInstituciones() {
-        AbstractRegistry registry = mock(AbstractRegistry.class);
-        Map<String, Institucion> instituciones = new HashMap<>();
-
-        when(registry.getInstituciones()).thenReturn(instituciones);
-
-        AbstractFacadeInstitucion facadeInstitucion = new FacadeInstitucion();
-        facadeInstitucion.setRegistry(registry);
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
 
         assertDoesNotThrow(() -> {
-            facadeInstitucion.crearInstitucion()
+            facades.getFacadeInstitucion().crearInstitucion()
                 .setNombre("test")
                 .setDescripcion("test")
                 .setUrl(new URL("https://test"))
                 .invoke();
 
-            Set<String> ret = facadeInstitucion.getInstituciones();
-            assertThat(ret, hasItem("test"));
+            Set<String> ret = facades.getFacadeInstitucion().getInstituciones();
+            assertTrue(ret.contains("test"));
         });
     }
 }
