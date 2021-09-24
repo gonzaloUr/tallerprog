@@ -52,7 +52,7 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract void crearCategoria(String nombre) throws CategoriaRepetidaException;
 
-    public abstract Set<DataActividad> listarActividadesIngresadas();
+    public abstract Set<DataActividad> listaractividadesRegistradas();
 
     public abstract void aceptarActividad(String actividad); //hacer que tiren exception si reciben null?
 

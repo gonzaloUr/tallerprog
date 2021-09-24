@@ -84,8 +84,8 @@ public class Socio extends Usuario {
             return this;
         }
 
-        public Builder setUsuariosSeguidos(Set<Usuario> usariosSeguidos) {
-            this.usuariosSeguidos = usariosSeguidos;
+        public Builder setUsuariosSeguidos(Set<Usuario> usuariosSeguidos) {
+            this.usuariosSeguidos = usuariosSeguidos;
             return this;
         }
 

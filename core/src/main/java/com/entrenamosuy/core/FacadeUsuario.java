@@ -21,6 +21,7 @@ import com.entrenamosuy.core.model.Institucion;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.model.Socio;
 import com.entrenamosuy.core.model.Usuario;
+import com.entrenamosuy.core.model.Actividad;
 
 public class FacadeUsuario extends AbstractFacadeUsuario {
 
@@ -38,6 +39,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
+            private Set<Usuario> usuariosSeguidos;
+
+            private Set<Usuario> seguidores;
+
             private String institucion;
 
             private String descripcion;
@@ -49,6 +54,8 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             private String password;
 
             private ByteBuffer imagen;
+
+            private Set<Actividad> actividadesRegistradas;
 
             @Override
             public CrearProfesorChain setNickname(String nickname) {
@@ -116,6 +123,21 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                 return this;
             }
 
+            public CrearProfesorChain setUsuariosSeguidos(Set<Usuario> usuariosSeguidos) {
+                this.usuariosSeguidos = usuariosSeguidos;
+                return this;
+            }
+    
+            public CrearProfesorChain setSeguidores(Set<Usuario> seguidores) {
+                this.seguidores = seguidores;
+                return this;
+            }
+
+            public CrearProfesorChain setActividadesRegistradas(Set<Actividad> actividades) {
+                this.actividadesRegistradas = actividades;
+                return this;
+            }
+
             @Override
             public void invoke() throws UsuarioRepetidoException {
                 // Obtener institucion pasada o tirar exception.
@@ -143,11 +165,15 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                         .setApellido(apellido)
                         .setCorreo(correo)
                         .setNacimiento(nacimiento)
+                        .setUsuariosSeguidos(usuariosSeguidos)
+                        .setSeguidores(seguidores)
                         .setDescripcion(descripcion)
                         .setBiografia(bio)
                         .setSitioWeb(link)
                         .setInstitucion(inst)
                         .setPassword(password)
+                        .setClasesDictadas(new HashSet<>())
+                        .setActividadesRegistradas(actividadesRegistradas)
                         .setImagen(imagen)
                         .build();
 
@@ -170,6 +196,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             private Email correo;
 
             private LocalDate nacimiento;
+
+            private Set<Usuario> usuariosSeguidos;
+
+            private Set<Usuario> seguidores;
 
             private String password;
 
@@ -205,6 +235,16 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                 return this;
             }
 
+            public CrearSocioChain setUsuariosSeguidos(Set<Usuario> usuariosSeguidos) {
+                this.usuariosSeguidos = usuariosSeguidos;
+                return this;
+            }
+    
+            public CrearSocioChain setSeguidores(Set<Usuario> seguidores) {
+                this.seguidores = seguidores;
+                return this;
+            }
+
             @Override
             public CrearSocioChain setPassword(String password) {
                 this.password = password;
@@ -232,6 +272,8 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                             .setApellido(apellido)
                             .setCorreo(correo)
                             .setNacimiento(nacimiento)
+                            .setUsuariosSeguidos(usuariosSeguidos)
+                            .setSeguidores(seguidores)
                             .setPassword(password)
                             .setImagen(imagen)
                             .build();
@@ -239,7 +281,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                     socios.put(nickname, nuevo);
                     sociosE.put(correo, nuevo);
                 } else if (!noExisteN) {
-                    throw new UsuarioRepetidoException("Ya existe un ususario con ese nickname.");
+                    throw new UsuarioRepetidoException("Ya existe un ususuario con ese nickname.");
                 } else {
                     throw new UsuarioRepetidoException("Ya existe un usuario con ese correo electronico.");
                 }

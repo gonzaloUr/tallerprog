@@ -5,6 +5,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.Set;
 
+import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.Usuario;
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.Email;
@@ -26,6 +28,10 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
         CrearProfesorChain setNacimiento(LocalDate nacimiento);
 
+        CrearProfesorChain setUsuariosSeguidos(Set<Usuario> usuariosSeguidos);
+
+        CrearProfesorChain setSeguidores(Set<Usuario> seguidores);
+
         CrearProfesorChain setInstitucion(String institucion);
 
         CrearProfesorChain setDescripcion(String descripcion);
@@ -37,6 +43,8 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
         CrearProfesorChain setPassword(String password);
 
         CrearProfesorChain setImagen(ByteBuffer imagen);
+
+        CrearProfesorChain setActividadesRegistradas(Set<Actividad> actividadesRegistradas);
 
         void invoke() throws UsuarioRepetidoException;
     }
@@ -54,6 +62,10 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
         CrearSocioChain setCorreo(Email correo);
 
         CrearSocioChain setNacimiento(LocalDate nacimiento);
+
+        CrearSocioChain setUsuariosSeguidos(Set<Usuario> usuariosSeguidos);
+
+        CrearSocioChain setSeguidores(Set<Usuario> seguidores);
 
         CrearSocioChain setPassword(String password);
 

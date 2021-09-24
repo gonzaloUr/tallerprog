@@ -124,7 +124,7 @@ public class App extends JFrame {
 
         //Aceptar o Rechazar Actividad Deportiva... en obras hasta que cargar datos esté completo.
         aceptarRechazarAct.addActionListener((ActionEvent a) -> {
-            Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listarActividadesIngresadas();
+            Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listaractividadesRegistradas();
             
             if (dataIngresadas.isEmpty()) {
                 JOptionPane.showMessageDialog(this,
@@ -210,9 +210,9 @@ public class App extends JFrame {
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String institucion) -> {
                 Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(institucion);
 
-                if (instituciones.isEmpty()) {
+                if (actividades.isEmpty()){
                     JOptionPane.showMessageDialog(this,
-                            "No hay actividades en el sistema para " + institucion + ".",
+                            "No hay actividades aceptadas en el sistema para " + institucion + ".",
                             "error",
                             JOptionPane.ERROR_MESSAGE);
 
@@ -292,9 +292,9 @@ public class App extends JFrame {
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
                 Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(inst);
 
-                if (instituciones.isEmpty()) {
+                if (actividades.isEmpty()){
                     JOptionPane.showMessageDialog(this,
-                            "No hay actividades en el sistema para " + inst + ".",
+                            "No hay actividades aceptadas en el sistema para " + inst + ".",
                             "error",
                             JOptionPane.ERROR_MESSAGE);
 
@@ -330,9 +330,9 @@ public class App extends JFrame {
             SelecionarInstitucion selecionarInstitucion = new SelecionarInstitucion(instituciones, (String inst) -> {
                 Set<String> actividades = facades.getFacadeActividad().getActividadesDeInstitucion(inst);
 
-                if (instituciones.isEmpty()) {
+                if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
-                            "No hay actividades en el sistema para " + inst + ".",
+                            "No hay actividades aceptadas en el sistema para " + inst + ".",
                             "error",
                             JOptionPane.ERROR_MESSAGE);
 
@@ -342,7 +342,7 @@ public class App extends JFrame {
                 SelecionarActividad selecionarActividad = new SelecionarActividad(actividades, (String actividad) -> {
                     Set<String> clases = facades.getFacadeClase().getClases(actividad);
 
-                    if (instituciones.isEmpty()) {
+                    if (clases.isEmpty()) {
                         JOptionPane.showMessageDialog(this,
                                 "No hay clases en el sistema para " + actividad + ".",
                                 "error",
@@ -386,7 +386,7 @@ public class App extends JFrame {
 
                 if (actividades.isEmpty()) {
                     JOptionPane.showMessageDialog(this,
-                            "No hay actividades en el sistema para " + inst + ".",
+                            "No hay actividades aceptadas en el sistema para " + inst + ".",
                             "error",
                             JOptionPane.ERROR_MESSAGE);
 

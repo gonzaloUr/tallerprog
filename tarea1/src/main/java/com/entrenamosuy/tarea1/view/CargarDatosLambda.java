@@ -15,6 +15,7 @@ import com.entrenamosuy.core.*;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.util.FacadeContainer;
 import com.entrenamosuy.core.model.Usuario; // es para hacer el set vacio de seguidores
+import com.entrenamosuy.core.model.Actividad;
 
 public class CargarDatosLambda implements ActionListener {
 
@@ -47,16 +48,56 @@ public class CargarDatosLambda implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent arg0) {
         try {
-                Set<Usuario> seg = new HashSet<>(); // TENGO QUE SETERLE LOS SEGUIDORES O SEGUIDOS PORQUE DA NULL PTR AL HACER SEGUIDORES.ADD(SEGUIDOR) EN USUARIO
-            facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).setPassword("asdfg456").invoke();
-            facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).setPassword("123rtgfdv").invoke();
-            facadeUsuario.crearSocio().setNickname("euge").setNombre("Eugenia").setApellido("Williams").setCorreo(Email.of("e.will", "gmail.com")).setNacimiento(LocalDate.of(1990, 4, 15)).setPassword("poiuy086").invoke();
-            facadeUsuario.crearSocio().setNickname("guille").setNombre("Guillermo").setApellido("Hector").setCorreo(Email.of("ghector", "gmail.com")).setNacimiento(LocalDate.of(1959, 5, 15)).setPassword("GTO468").invoke();
-            facadeUsuario.crearSocio().setNickname("sergiop").setNombre("Sergio").setApellido("Perez").setCorreo(Email.of("sergi", "gmail.uy")).setNacimiento(LocalDate.of(1950, 1, 28)).setPassword("HGF135").invoke();
-            facadeUsuario.crearSocio().setNickname("andy").setNombre("Andres").setApellido("Roman").setCorreo(Email.of("chino", "gmail.uy")).setNacimiento(LocalDate.of(1976, 3, 17)).setPassword("lkj65D").invoke();
-            facadeUsuario.crearSocio().setNickname("tonyp").setNombre("Antonio").setApellido("Paz").setCorreo(Email.of("eltony", "gmail.uy")).setNacimiento(LocalDate.of(1955, 2, 14)).setPassword("jhvf395").invoke();
-            facadeUsuario.crearSocio().setNickname("m1k4").setNombre("Micaela").setApellido("Lopez").setCorreo(Email.of("mika", "gmail.ar")).setNacimiento(LocalDate.of(1987, 2, 23)).setPassword("ijngr024").invoke();
-            facadeUsuario.crearSocio().setNickname("charly").setNombre("Carlos").setApellido("Boston").setCorreo(Email.of("emi71", "gmail.uy")).setNacimiento(LocalDate.of(1937, 3, 8)).setPassword("987mnbgh").invoke();
+
+                Set<Usuario> seg1 = new HashSet<Usuario>();
+                Set<Usuario> seg2 = new HashSet<Usuario>();
+                Set<Usuario> seg3 = new HashSet<Usuario>();
+                Set<Usuario> seg4 = new HashSet<Usuario>();
+                Set<Usuario> seg5 = new HashSet<Usuario>();
+                Set<Usuario> seg6 = new HashSet<Usuario>();
+                Set<Usuario> seg7 = new HashSet<Usuario>();
+                Set<Usuario> seg8 = new HashSet<Usuario>();
+                Set<Usuario> seg9 = new HashSet<Usuario>();
+                Set<Usuario> seg10 = new HashSet<Usuario>();
+                Set<Usuario> seg11 = new HashSet<Usuario>();
+                Set<Usuario> seg12 = new HashSet<Usuario>();
+                Set<Usuario> seg13 = new HashSet<Usuario>();
+                Set<Usuario> seg14 = new HashSet<Usuario>();
+                Set<Usuario> seg15 = new HashSet<Usuario>();
+                Set<Usuario> seg16 = new HashSet<Usuario>();
+                Set<Usuario> seg17 = new HashSet<Usuario>();
+                Set<Usuario> seg18 = new HashSet<Usuario>();
+                Set<Usuario> seg19 = new HashSet<Usuario>();
+                Set<Usuario> seg20 = new HashSet<Usuario>();
+                Set<Usuario> seg21 = new HashSet<Usuario>();
+                Set<Usuario> seg22 = new HashSet<Usuario>();
+                Set<Usuario> seg23 = new HashSet<Usuario>();
+                Set<Usuario> seg24 = new HashSet<Usuario>();
+                Set<Usuario> seg25 = new HashSet<Usuario>();
+                Set<Usuario> seg26 = new HashSet<Usuario>();
+                Set<Usuario> seg27 = new HashSet<Usuario>();
+                Set<Usuario> seg28 = new HashSet<Usuario>();
+                Set<Usuario> seg29 = new HashSet<Usuario>();
+                Set<Usuario> seg30 = new HashSet<Usuario>();
+                Set<Usuario> seg31 = new HashSet<Usuario>();
+                Set<Usuario> seg32 = new HashSet<Usuario>();
+                Set<Usuario> seg33 = new HashSet<Usuario>();
+                Set<Usuario> seg34 = new HashSet<Usuario>();
+                Set<Usuario> seg35 = new HashSet<Usuario>();
+                Set<Usuario> seg36 = new HashSet<Usuario>();
+
+
+             
+
+            facadeUsuario.crearSocio().setNickname("Emi71").setNombre("Emiliano").setApellido("Lucas").setCorreo(Email.of("emi71", "gmail.com")).setNacimiento(LocalDate.of(1971, 12, 31)).setPassword("asdfg456").setSeguidores(seg1).setUsuariosSeguidos(seg2).invoke();
+            facadeUsuario.crearSocio().setNickname("caro").setNombre("Carolina").setApellido("Omega").setCorreo(Email.of("caro", "gmail.com")).setNacimiento(LocalDate.of(1983, 11, 15)).setPassword("123rtgfdv").setSeguidores(seg3).setUsuariosSeguidos(seg4).invoke();
+            facadeUsuario.crearSocio().setNickname("euge").setNombre("Eugenia").setApellido("Williams").setCorreo(Email.of("e.will", "gmail.com")).setNacimiento(LocalDate.of(1990, 4, 15)).setPassword("poiuy086").setSeguidores(seg5).setUsuariosSeguidos(seg6).invoke();
+            facadeUsuario.crearSocio().setNickname("guille").setNombre("Guillermo").setApellido("Hector").setCorreo(Email.of("ghector", "gmail.com")).setNacimiento(LocalDate.of(1959, 5, 15)).setPassword("GTO468").setSeguidores(seg7).setUsuariosSeguidos(seg8).invoke();
+            facadeUsuario.crearSocio().setNickname("sergiop").setNombre("Sergio").setApellido("Perez").setCorreo(Email.of("sergi", "gmail.uy")).setNacimiento(LocalDate.of(1950, 1, 28)).setPassword("HGF135").setSeguidores(seg9).setUsuariosSeguidos(seg10).invoke();
+            facadeUsuario.crearSocio().setNickname("andy").setNombre("Andres").setApellido("Roman").setCorreo(Email.of("chino", "gmail.uy")).setNacimiento(LocalDate.of(1976, 3, 17)).setPassword("lkj65D").setSeguidores(seg11).setUsuariosSeguidos(seg12).invoke();
+            facadeUsuario.crearSocio().setNickname("tonyp").setNombre("Antonio").setApellido("Paz").setCorreo(Email.of("eltony", "gmail.uy")).setNacimiento(LocalDate.of(1955, 2, 14)).setPassword("jhvf395").setSeguidores(seg13).setUsuariosSeguidos(seg14).invoke();
+            facadeUsuario.crearSocio().setNickname("m1k4").setNombre("Micaela").setApellido("Lopez").setCorreo(Email.of("mika", "gmail.ar")).setNacimiento(LocalDate.of(1987, 2, 23)).setPassword("ijngr024").setSeguidores(seg15).setUsuariosSeguidos(seg16).invoke();
+            facadeUsuario.crearSocio().setNickname("charly").setNombre("Carlos").setApellido("Boston").setCorreo(Email.of("emi71", "gmail.uy")).setNacimiento(LocalDate.of(1937, 3, 8)).setPassword("987mnbgh").setSeguidores(seg17).setUsuariosSeguidos(seg18).invoke();
 
             facadeInstitucion.crearInstitucion()
                     .setNombre("Instituto Natural")
@@ -88,11 +129,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Perez")
                     .setCorreo(Email.of("vperez", "fuerza.com"))
                     .setNacimiento(LocalDate.of(1977, 1, 1))
+                    .setUsuariosSeguidos(seg19)
+                    .setSeguidores(seg20)
                     .setInstitucion("Fuerza Bruta")
                     .setDescripcion("Victor es un apasionado de los musculos. Sus clases son organizadas en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.")
                     .setBiografia("Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego de quedar encantado con el pais en un viaje turistico.")
                     .setSitioWeb(new URL("https://www.vikgym.com"))
                     .setPassword("lkj34df")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -101,11 +145,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Miguel")
                     .setCorreo(Email.of("den80", "fuerza.com"))
                     .setNacimiento(LocalDate.of(1980, 6, 14))
+                    .setUsuariosSeguidos(seg21)
+                    .setSeguidores(seg22)
                     .setInstitucion("Telon")
                     .setDescripcion("A Denis le interesan los deportes con pelota, principalmente el voleibol y el hanball.")
                     .setBiografia("Denis fue un jugador de voleibol profesional.")
                     .setSitioWeb(new URL("https://www.depecho.com"))
                     .setPassword("poke579")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -114,11 +161,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Lazaro")
                     .setCorreo(Email.of("claz4r0", "hotmail.com"))
                     .setNacimiento(LocalDate.of(1953, 6, 22))
+                    .setUsuariosSeguidos(seg23)
+                    .setSeguidores(seg24)
                     .setInstitucion("Instituto Natural")
                     .setDescripcion("Carlos es un profesor muy divertido, cuyas clases de aerobica estan cargadas de energia.")
                     .setBiografia("El interes por la actividad fisica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.")
                     .setSitioWeb(new URL("https://www.enforma.com"))
                     .setPassword("mkji648")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -127,11 +177,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Sosa")
                     .setCorreo(Email.of("bruceTheBoss", "gmail.com"))
                     .setNacimiento(LocalDate.of(1949, 9, 23))
+                    .setUsuariosSeguidos(seg25)
+                    .setSeguidores(seg26)
                     .setInstitucion("Fuerza Bruta")
                     .setDescripcion("Bruno es un ex-boxeador que busca entrenar futuros campeones.")
                     .setBiografia("Bruno, mejor conocido como Bruce en el ring, compitio como boxeador entre los años 60s y 70s.")
                     .setSitioWeb(new URL("https://www.bruce.net"))
                     .setPassword("fcku0123")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -140,11 +193,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Nelson")
                     .setCorreo(Email.of("nelson", "hotmail.com"))
                     .setNacimiento(LocalDate.of(1998, 1, 1))
+                    .setUsuariosSeguidos(seg27)
+                    .setSeguidores(seg28)
                     .setInstitucion("Telon")
                     .setDescripcion("Profesor de natacion, especializado en braza y mariposa.")
                     .setBiografia(null)
                     .setSitioWeb(null)
                     .setPassword("vbmn4r")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -153,11 +209,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Leyes")
                     .setCorreo(Email.of("la_le", "outlook.com"))
                     .setNacimiento(LocalDate.of(1987, 2, 14))
+                    .setUsuariosSeguidos(seg29)
+                    .setSeguidores(seg30)
                     .setInstitucion("Telon")
                     .setDescripcion("Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a enseñar tacticas dee futbol.")
                     .setBiografia("Jugadora profesional de futbol desde 2010 a 2020.")
                     .setSitioWeb(new URL("https://www.laley.com"))
                     .setPassword("ncnl123")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -166,11 +225,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Pappo")
                     .setCorreo(Email.of("pripa", "gmail.com"))
                     .setNacimiento(LocalDate.of(1981, 8, 13))
+                    .setUsuariosSeguidos(seg31)
+                    .setSeguidores(seg32)
                     .setInstitucion("Olympic")
                     .setDescripcion("Priscila tiene un gran interespor los deportes olimpicos.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.pi314.net"))
                     .setPassword("mny101")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -179,11 +241,14 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Agostini")
                     .setCorreo(Email.of("d_1940_ago", "gmail.com"))
                     .setNacimiento(LocalDate.of(1940, 3, 5))
+                    .setUsuariosSeguidos(seg33)
+                    .setSeguidores(seg34)
                     .setInstitucion("Olympic")
                     .setDescripcion("Profesora dedicada y exigente. No acepta un no puedo como respuesta.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.dygym.com"))
                     .setPassword("1o1vbm")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
 
             facadeUsuario.crearProfesor()
@@ -192,12 +257,16 @@ public class CargarDatosLambda implements ActionListener {
                     .setApellido("Vivaldi")
                     .setCorreo(Email.of("aldo", "outlook.com"))
                     .setNacimiento(LocalDate.of(1952, 7, 17))
+                    .setUsuariosSeguidos(seg35)
+                    .setSeguidores(seg36)
                     .setInstitucion("Telon")
                     .setDescripcion("Dada su gran estatura, aldo siempre jugo al basquetbol. Ahora se dedica a enseñarlo.")
                     .setBiografia(null)
                     .setSitioWeb(new URL("https://www.sportsaldo.net"))
                     .setPassword("ultraton01")
+                    .setActividadesRegistradas(new HashSet<Actividad>())
                     .invoke();
+                
 
                 facadeUsuario.seguirUsuario("guille", "Emi71");
                 facadeUsuario.seguirUsuario("euge", "caro");
