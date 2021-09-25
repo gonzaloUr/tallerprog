@@ -4,13 +4,13 @@
     
     <h3>Entrenamos.uy</h3>
     <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_usuarios">Usuarios</a>
+    	<a class="btn btn-outline-light mx-3" href="lista_usuarios.html">Usuarios</a>
     </div>
     <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_instituciones">Instituciones</a>
+    	<a class="btn btn-outline-light mx-3" href="lista_instituciones.html">Instituciones</a>
     </div>
     <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_actividades">Actividades</a>
+    	<a class="btn btn-outline-light mx-3" href="lista_actividades.html">Actividades</a>
     </div>
     <form class="col-4 mx-3" action="search" method="post">
         <input class="form-control" type="search" placeholder="buscar" name="keyword">
