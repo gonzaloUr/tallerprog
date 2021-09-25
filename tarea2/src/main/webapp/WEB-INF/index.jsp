@@ -12,8 +12,6 @@
         <jsp:include page="/WEB-INF/templates/header.jsp"/>
         <jsp:include page="/WEB-INF/templates/aside.jsp"/>
         <main class="d-flex flex.column">
-        <a href="consulta_profesor">linkprofe</a>
-        <a href="consulta_socio">linksocio</a>
         </main>
 	</body>
 </html>

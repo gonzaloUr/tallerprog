@@ -141,7 +141,7 @@ public class ConsultaActividad extends JInternalFrame {
         gbc_lblClases.insets = new Insets(0, 0, 5, 5);
         gbc_lblClases.anchor = GridBagConstraints.WEST;
         gbc_lblClases.gridx = 1;
-        gbc_lblClases.gridy = 11;
+        gbc_lblClases.gridy = 13;
         getContentPane().add(lblClases, gbc_lblClases);
 
         JLabel lblCuponeras = new JLabel("Cuponeras");
@@ -149,7 +149,7 @@ public class ConsultaActividad extends JInternalFrame {
         gbc_lblCuponeras.insets = new Insets(0, 0, 5, 5);
         gbc_lblCuponeras.anchor = GridBagConstraints.WEST;
         gbc_lblCuponeras.gridx = 1;
-        gbc_lblCuponeras.gridy = 13;
+        gbc_lblCuponeras.gridy = 15;
         getContentPane().add(lblCuponeras, gbc_lblCuponeras);
 
         JLabel lblCat = new JLabel("Categorias");
@@ -157,7 +157,7 @@ public class ConsultaActividad extends JInternalFrame {
         gbc_lblCat.insets = new Insets(0, 0, 5, 5);
         gbc_lblCat.anchor = GridBagConstraints.WEST;
         gbc_lblCat.gridx = 1;
-        gbc_lblCat.gridy = 15;
+        gbc_lblCat.gridy = 11;
         getContentPane().add(lblCat, gbc_lblCat);
 
         DataActividad dataActividad = facades.getFacadeActividad().getDataActividad(actividad);

@@ -213,6 +213,10 @@ public class Profesor extends Usuario {
         return actividadesRegistradas;
     }
 
+    public void agregarActividadRegistrada(Actividad a){
+        actividadesRegistradas.add(a);
+    }
+
     public DataProfesor getDataProfesor() {
         String institucionNombre = this.getInstitucion().getNombre();
 

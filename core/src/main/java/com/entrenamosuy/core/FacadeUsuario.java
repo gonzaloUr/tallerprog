@@ -497,8 +497,8 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     public void seguirUsuario(String nickname, String actual){ //en progreso
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();
-        Usuario usuarioActual = null;
-        Usuario usuarioNickname = null;
+        Usuario usuarioActual;
+        Usuario usuarioNickname;
         if (socios.containsKey(actual)){    
             usuarioActual = socios.get(actual);
         }
@@ -509,10 +509,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
         }
         if (socios.containsKey(nickname)){    
-            usuarioNickname = socios.get(actual);
+            usuarioNickname = socios.get(nickname);
         }
         else if (profes.containsKey(nickname)){
-            usuarioNickname = profes.get(actual);
+            usuarioNickname = profes.get(nickname);
         }
         else{
             throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);

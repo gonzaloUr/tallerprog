@@ -30,7 +30,7 @@ public class Actividad {
 
         private float costo;
 
-        private ActividadEstado estado = ActividadEstado.INGRESADA;
+        private ActividadEstado estado;
 
         private ByteBuffer imagen;
 

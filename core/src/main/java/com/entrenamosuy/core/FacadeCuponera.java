@@ -166,8 +166,10 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
         Integra integra = new Integra(cant, a, c);
         c.getIntegras().add(integra);
         a.getIntegras().add(integra);
-
-        c.getCategorias().addAll(a.getCategorias());
+        for ( Categoria cat : a.getCategorias()){ //la categoria sabe quienes la tienen
+            cat.agregarCuponera(c);
+            c.getCategorias().add(cat);
+        }
     }
 
     @Override
