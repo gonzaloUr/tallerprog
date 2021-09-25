@@ -3,7 +3,6 @@ package com.entrenamosuy.core.model;
 import java.nio.ByteBuffer;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -237,32 +236,6 @@ public class Cuponera {
             return false;
         Cuponera other = (Cuponera) obj;
         return Objects.equals(nombre, other.nombre);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Cuponera = [nombre=")
-            .append(nombre)
-            .append(", registro=")
-            .append(fechaRegistro)
-            .append(", inicio=")
-            .append(inicio)
-            .append(", fin=")
-            .append(fin)
-            .append(", actividades=[");
-
-        if (!integras.isEmpty()) {
-            Iterator<Integra> it = integras.iterator();
-
-            builder.append(it.next().getActividad().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getActividad().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 
     public DataCuponera getDataCuponera() {

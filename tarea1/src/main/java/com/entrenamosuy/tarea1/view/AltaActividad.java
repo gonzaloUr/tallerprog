@@ -204,7 +204,7 @@ public class AltaActividad extends JInternalFrame {
                         .setDuracion(duration)
                         .setCosto(precio)
                         .setRegistro(fecha)
-                        .setCategoriasString(categorias)
+                        .setCategorias(categorias)
                         .invoke();
 
                     JOptionPane.showMessageDialog(app, "Actividad registrada exitosamente.");

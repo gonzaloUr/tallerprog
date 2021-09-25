@@ -59,11 +59,4 @@ public class Integra {
             Objects.equals(actividad, other.actividad) &&
             Objects.equals(cuponera, other.cuponera);
     }
-
-    @Override
-    public String toString() {
-        return "Integra [actividad=" + actividad.getNombre() +
-            ", cuponera=" + cuponera.getNombre() +
-            ", cantClases=" + cantClases + "]";
-    }
 }

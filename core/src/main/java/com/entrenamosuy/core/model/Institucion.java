@@ -3,7 +3,6 @@ package com.entrenamosuy.core.model;
 import java.nio.ByteBuffer;
 import java.net.URL;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -136,26 +135,6 @@ public class Institucion {
             return false;
         Institucion other = (Institucion) obj;
         return Objects.equals(nombre, other.nombre);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Institucion = [nombre=")
-            .append(nombre)
-            .append(", actividades=[");
-
-        if (!actividadesOfrecidas.isEmpty()) {
-            Iterator<Actividad> it = actividadesOfrecidas.iterator();
-
-            builder.append(it.next().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 
     public DataInstitucion getDataInstitucion() {

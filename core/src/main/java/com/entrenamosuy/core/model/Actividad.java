@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -235,26 +234,6 @@ public class Actividad {
             return false;
         Actividad other = (Actividad) obj;
         return Objects.equals(nombre, other.getNombre());
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Actividad = [nombre=")
-            .append(nombre)
-            .append(", clases=[");
-
-        if (!clases.isEmpty()) {
-            Iterator<Clase> it = clases.iterator();
-
-            builder.append(it.next().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 
     public DataActividad getDataActividad() {

@@ -6,7 +6,6 @@ import java.net.URL;
 import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 
 import com.entrenamosuy.core.data.DataClase;
@@ -229,28 +228,6 @@ public class Clase {
             return false;
         Clase other = (Clase) obj;
         return Objects.equals(nombre, other.nombre);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Clase = [nombre=")
-            .append(nombre)
-            .append(", actividad=")
-            .append(actividad.getNombre())
-            .append(", profesores=[");
-
-        if (!profesores.isEmpty()) {
-            Iterator<Profesor> it = profesores.iterator();
-
-            builder.append(it.next().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 
     public void registrarseSinCuponera(Socio socio, LocalDate fecha) {

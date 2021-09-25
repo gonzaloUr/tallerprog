@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.Iterator;
 
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataClase;
@@ -138,43 +137,6 @@ public class Socio extends Usuario {
 
     public void agregarCompra(Compra compra){
         compras.add(compra);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Profesor = [nickname=")
-            .append(getNickname())
-            .append(", nombre=")
-            .append(getNombre())
-            .append(", apellido=")
-            .append(getApellido())
-            .append(", registros=[");
-
-        if (!registros.isEmpty()) {
-            Iterator<Registro> it = registros.iterator();
-
-            builder.append(it.next().getClaseAsociada().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ")
-                    .append(it.next().getClaseAsociada().getNombre());
-        }
-
-        builder.append("], cuponeras=[");
-
-        if (!compras.isEmpty()) {
-            Iterator<Compra> it = compras.iterator();
-
-            builder.append(it.next().getCuponera().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ")
-                    .append(it.next().getCuponera().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 
     public Set<String> cuponerasUsables(Actividad a) {

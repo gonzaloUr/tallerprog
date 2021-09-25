@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 
@@ -268,46 +267,11 @@ public class Profesor extends Usuario {
                 .setBiografia(biografia)
                 .setSitioWeb(sitioWeb)
                 .setAceptadas(actAceptadas)
-                .setSinAceptar(actSinAceptar) 
+                .setSinAceptar(actSinAceptar)
                 .build();
     }
 
     public DescProfesor getDescProfesor() {
         return new DescProfesor(this.getNickname(), this.getNombre(), this.getApellido(), this.sitioWeb);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Profesor = [nickname=")
-            .append(getNickname())
-            .append(", nombre=")
-            .append(getNombre())
-            .append(", apellido=")
-            .append(getApellido())
-            .append(", clasesDictadas=[");
-
-        if (!clasesDictadas.isEmpty()) {
-            Iterator<Clase> it = clasesDictadas.iterator();
-
-            builder.append(it.next().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getNombre());
-        }
-
-        builder.append("], actividades=[");
-
-        if (!actividadesRegistradas.isEmpty()) {
-            Iterator<Actividad> it = actividadesRegistradas.iterator();
-
-            builder.append(it.next().getNombre());
-
-            while (it.hasNext())
-                builder.append(", ").append(it.next().getNombre());
-        }
-
-        builder.append("]]");
-        return builder.toString();
     }
 }

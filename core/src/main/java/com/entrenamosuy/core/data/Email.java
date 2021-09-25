@@ -34,7 +34,7 @@ public class Email {
     public Email(String prefix, String domain) {
         Objects.requireNonNull(prefix, "prefix es null en constructor Email");
         Objects.requireNonNull(domain, "domain es null en constructor Email");
-        
+
         this.prefix = prefix;
         this.domain = domain;
     }
@@ -54,9 +54,9 @@ public class Email {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) 
+        if (this == obj)
             return true;
-        if (obj == null || getClass() != obj.getClass()) 
+        if (obj == null || getClass() != obj.getClass())
             return false;
         Email other = (Email) obj;
         return Objects.equals(prefix, other.prefix)

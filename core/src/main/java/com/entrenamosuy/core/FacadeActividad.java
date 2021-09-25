@@ -77,7 +77,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
-            public CrearActividadChain setCategoriasString(Set<String> categorias) {
+            public CrearActividadChain setCategorias(Set<String> categorias) {
                 this.categoriasString = categorias;
                 return this;
             }
