@@ -665,9 +665,9 @@ public class CargarDatosLambda implements ActionListener {
             facadeActividad.registarseSinCuponera("sergiop", "Mariposa", LocalDate.of(2021, 7, 11));
             facadeActividad.registarseSinCuponera("andy", "Mariposa", LocalDate.of(2021, 7, 18));
             facadeActividad.registarseSinCuponera("m1k4", "Aerobica niños", LocalDate.of(2021, 7, 19));
-            facadeActividad.registarseSinCuponera("Emi71", "Aerobica adulto 5or", LocalDate.of(2021, 8, 17));
-            facadeActividad.registarseSinCuponera("guille", "Aerobica adulto 5or", LocalDate.of(2021, 8, 20));
-            facadeActividad.registarseSinCuponera("andy", "Aerobica adulto 5or", LocalDate.of(2021, 8, 23));
+            facadeActividad.registarseSinCuponera("Emi71", "Aerobica adulto mayor", LocalDate.of(2021, 8, 17));
+            facadeActividad.registarseSinCuponera("guille", "Aerobica adulto mayor", LocalDate.of(2021, 8, 20));
+            facadeActividad.registarseSinCuponera("andy", "Aerobica adulto mayor", LocalDate.of(2021, 8, 23));
             facadeActividad.registarseSinCuponera("caro", "Aerobica", LocalDate.of(2021, 8, 15));
             facadeActividad.registarseSinCuponera("euge", "Aerobica", LocalDate.of(2021, 8, 26));
             facadeActividad.registarseSinCuponera("andy", "Boxeo I", LocalDate.of(2021, 7, 19));

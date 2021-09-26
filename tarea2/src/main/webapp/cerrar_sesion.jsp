@@ -15,9 +15,9 @@
                 <span>usuario no logeado!</span>
             </c:when>
             <c:otherwise>
-                <c:set var="usuario" value="null" scope="session"/>
                 <span>Cerrando sesion para ${usuario.nombre} ${usuario.apellido}</span>
-                <a class="btn btn-primary" href="<c:url value="/index_profe.html"/index_visitante.html>">Pagina principal</a>
+                <a class="btn btn-primary" href="<c:url value="/index_visitante.html"/>">Pagina principal</a>
+                <c:set var="usuario" value="null" scope="session"/>
             </c:otherwise>
         </c:choose>
 	</body>
