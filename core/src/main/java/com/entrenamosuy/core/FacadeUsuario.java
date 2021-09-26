@@ -448,7 +448,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                 Profesor profesor = getRegistry().getProfesores().get(nickname);
                 String institucionNombreProfesor = profesor.getInstitucion().getNombre();
 
-                return !institucionNombreProfesor.equals(institucion);
+                return institucionNombreProfesor.equals(institucion);
             })
             .collect(Collectors.toSet());
     }

@@ -563,7 +563,7 @@ public class FacadeUsuarioTest {
 
         Set<String> ret = facades.getFacadeUsuario().getProfesoresDeInstitucion("test");
 
-        assertEquals(ret.size(), 2);
+        assertEquals(2, ret.size());
         assertTrue(ret.contains("p1"));
         assertTrue(ret.contains("p2"));
     }
