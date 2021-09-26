@@ -18,6 +18,7 @@ import com.entrenamosuy.core.AbstractFacadeCuponera;
 import com.entrenamosuy.core.AbstractFacadeInstitucion;
 import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.model.ActividadEstado;
 
 
 
@@ -25,84 +26,93 @@ public class DatosPruebaServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        AbstractFacadeUsuario ctrlUsuario = Facades.getFacades().getFacadeUsuario();
-        AbstractFacadeActividad ctrlActividadClase = Facades.getFacades().getFacadeActividad();
-        AbstractFacadeCuponera ctrlCuponera = Facades.getFacades().getFacadeCuponera();
+        AbstractFacadeUsuario facadeUsuario = Facades.getFacades().getFacadeUsuario();
+        AbstractFacadeActividad facadeActividad = Facades.getFacades().getFacadeActividad();
+        AbstractFacadeCuponera facadeCuponera = Facades.getFacades().getFacadeCuponera();
         AbstractFacadeClase facadeClase = Facades.getFacades().getFacadeClase();
         AbstractFacadeInstitucion facadeInstitucion = Facades.getFacades().getFacadeInstitucion();
 
         try {
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("Emi71")
                 .setNombre("Emiliano")
                 .setApellido("Lucas")
                 .setCorreo(Email.of("emi71", "gmail.com"))
                 .setNacimiento(LocalDate.of(1971, 12, 31))
-                .setPassword("").invoke();
+                .setPassword("asdfg456")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("caro")
                 .setNombre("Carolina")
                 .setApellido("Omega")
                 .setCorreo(Email.of("caro", "gmail.com"))
                 .setNacimiento(LocalDate.of(1983, 11, 15))
-                .setPassword("").invoke();
+                .setPassword("123rtgfdv")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("euge")
                 .setNombre("Eugenia")
                 .setApellido("Williams")
                 .setCorreo(Email.of("e.will", "gmail.com"))
                 .setNacimiento(LocalDate.of(1990, 4, 15))
-                .setPassword("").invoke();
+                .setPassword("poiuy086")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("guille")
                 .setNombre("Guillermo")
                 .setApellido("Hector")
                 .setCorreo(Email.of("ghector", "gmail.com"))
                 .setNacimiento(LocalDate.of(1959, 5, 15))
-                .setPassword("").invoke();
+                .setPassword("GTO468")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("sergiop")
                 .setNombre("Sergio")
                 .setApellido("Perez")
                 .setCorreo(Email.of("sergi", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1950, 1, 28))
-                .setPassword("").invoke();
+                .setPassword("HGF135")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("andy")
                 .setNombre("Andres")
                 .setApellido("Roman")
                 .setCorreo(Email.of("chino", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1976, 3, 17))
-                .setPassword("").invoke();
+                .setPassword("lkj65D")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("tonyp")
                 .setNombre("Antonio")
                 .setApellido("Paz")
                 .setCorreo(Email.of("eltony", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1955, 2, 14))
-                .setPassword("").invoke();
+                .setPassword("jhvf395")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("m1k4")
                 .setNombre("Micaela")
                 .setApellido("Lopez")
                 .setCorreo(Email.of("mika", "gmail.ar"))
                 .setNacimiento(LocalDate.of(1987, 2, 23))
-                .setPassword("").invoke();
+                .setPassword("ijngr024")
+                .invoke();
 
-            ctrlUsuario.crearSocio()
+            facadeUsuario.crearSocio()
                 .setNickname("charly")
                 .setNombre("Carlos")
                 .setApellido("Boston")
                 .setCorreo(Email.of("emi71", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1937, 3, 8))
-                .setPassword("").invoke();
+                .setPassword("987mnbgh")
+                .invoke();
 
             facadeInstitucion.crearInstitucion()
                 .setNombre("Instituto Natural")
@@ -128,22 +138,20 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setUrl(new URL("https://www.olympic21.com/"))
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("viktor")
                 .setNombre("Victor")
                 .setApellido("Perez")
                 .setCorreo(Email.of("vperez", "fuerza.com"))
                 .setNacimiento(LocalDate.of(1977, 1, 1))
                 .setInstitucion("Fuerza Bruta")
-                .setDescripcion("Victor es un apasionado de los musculos. Sus clases son organizadas " +
-                        "en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.")
-                .setBiografia("Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego " +
-                        "de quedar encantado con el pais en un viaje turistico.")
+                .setDescripcion("Victor es un apasionado de los musculos. Sus clases son organizadas en funcion de distintos aparatos y pesas con el objetivo de desarrollar los musculos.")
+                .setBiografia("Victor nacio en Moscow en 1977. En el año 2005 emigro a Uruguay luego de quedar encantado con el pais en un viaje turistico.")
                 .setSitioWeb(new URL("https://www.vikgym.com"))
-                .setPassword("")
+                .setPassword("lkj34df")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("denis")
                 .setNombre("Denis")
                 .setApellido("Miguel")
@@ -153,10 +161,10 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("A Denis le interesan los deportes con pelota, principalmente el voleibol y el hanball.")
                 .setBiografia("Denis fue un jugador de voleibol profesional.")
                 .setSitioWeb(new URL("https://www.depecho.com"))
-                .setPassword("")
+                .setPassword("poke579")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("clazar")
                 .setNombre("Carlos")
                 .setApellido("Lazaro")
@@ -164,13 +172,12 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setNacimiento(LocalDate.of(1953, 6, 22))
                 .setInstitucion("Instituto Natural")
                 .setDescripcion("Carlos es un profesor muy divertido, cuyas clases de aerobica estan cargadas de energia.")
-                .setBiografia("El interes por la actividad fisica llevo a Carlos a dejar su trabajo en un estudio " +
-                        "contable y abrir su propio gimnasio.")
+                .setBiografia("El interes por la actividad fisica llevo a Carlos a dejar su trabajo en un estudio contable y abrir su propio gimnasio.")
                 .setSitioWeb(new URL("https://www.enforma.com"))
-                .setPassword("")
+                .setPassword("mkji648")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("TheBoss")
                 .setNombre("Bruno")
                 .setApellido("Sosa")
@@ -180,10 +187,10 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("Bruno es un ex-boxeador que busca entrenar futuros campeones.")
                 .setBiografia("Bruno, mejor conocido como Bruce en el ring, compitio como boxeador entre los años 60s y 70s.")
                 .setSitioWeb(new URL("https://www.bruce.net"))
-                .setPassword("")
+                .setPassword("fcku0123")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("Nelson")
                 .setNombre("Luis")
                 .setApellido("Nelson")
@@ -193,24 +200,23 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("Profesor de natacion, especializado en braza y mariposa.")
                 .setBiografia(null)
                 .setSitioWeb(null)
-                .setPassword("")
+                .setPassword("vbmn4r")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("lale")
                 .setNombre("Laura")
                 .setApellido("Leyes")
                 .setCorreo(Email.of("la_le", "outlook.com"))
                 .setNacimiento(LocalDate.of(1987, 2, 14))
                 .setInstitucion("Telon")
-                .setDescripcion("Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases " +
-                        "a enseñar tacticas dee futbol.")
+                .setDescripcion("Luego de una exitosa carrera como jugadora de futbol profesional. Laura dedica sus clases a enseñar tacticas dee futbol.")
                 .setBiografia("Jugadora profesional de futbol desde 2010 a 2020.")
                 .setSitioWeb(new URL("https://www.laley.com"))
-                .setPassword("")
+                .setPassword("ncnl123")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("prisc")
                 .setNombre("Priscila")
                 .setApellido("Pappo")
@@ -220,10 +226,10 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("Priscila tiene un gran interespor los deportes olimpicos.")
                 .setBiografia(null)
                 .setSitioWeb(new URL("https://www.pi314.net"))
-                .setPassword("")
+                .setPassword("mny101")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("dagost")
                 .setNombre("Diana")
                 .setApellido("Agostini")
@@ -233,10 +239,10 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("Profesora dedicada y exigente. No acepta un no puedo como respuesta.")
                 .setBiografia(null)
                 .setSitioWeb(new URL("https://www.dygym.com"))
-                .setPassword("")
+                .setPassword("1o1vbm")
                 .invoke();
 
-            ctrlUsuario.crearProfesor()
+            facadeUsuario.crearProfesor()
                 .setNickname("aldo")
                 .setNombre("Aldo")
                 .setApellido("Vivaldi")
@@ -246,56 +252,200 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setDescripcion("Dada su gran estatura, aldo siempre jugo al basquetbol. Ahora se dedica a enseñarlo.")
                 .setBiografia(null)
                 .setSitioWeb(new URL("https://www.sportsaldo.net"))
-                .setPassword("")
+                .setPassword("ultraton01")
                 .invoke();
 
-            ctrlActividadClase.crearActividad()
+            Set<String> k1 = new HashSet<>();
+            k1.add("Deportes");
+            Set<String> k2 = new HashSet<>();
+            k2.add("Fitness");
+            Set<String> k3 = new HashSet<>();
+            k3.add("Gimnasia");
+            Set<String> k4 = new HashSet<>();
+            k4.add("Gimnasia");
+            k4.add("Al aire libre");
+
+            Set<String> k5 = new HashSet<>();
+            k5.add("Deportes");
+            k5.add("Al aire libre");
+
+            facadeActividad.crearCategoria("Al aire libre");
+            facadeActividad.crearCategoria("Deportes");
+            facadeActividad.crearCategoria("Fitness");
+            facadeActividad.crearCategoria("Gimnasia");
+
+            facadeActividad.crearActividad()
                 .setInstitucion("Fuerza Bruta")
                 .setNombre("Aparatos y pesas")
                 .setDescripcion("Clases de aparatos, pesas y calistenia.")
                 .setDuracion(Duration.ofMinutes(90))
                 .setCosto(550)
-                .setRegistro(LocalDate.of(2021, 3, 31)).invoke();
+                .setRegistro(LocalDate.of(2021, 3, 31))
+                .setCategorias(k2)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
 
-            ctrlActividadClase.crearActividad()
+            facadeActividad.crearActividad()
                 .setInstitucion("Telon")
                 .setNombre("Voleibol")
                 .setDescripcion("Voleibol en todas sus formas.")
                 .setDuracion(Duration.ofMinutes(120))
                 .setCosto(750)
-                .setRegistro(LocalDate.of(2021, 4, 20)).invoke();
+                .setRegistro(LocalDate.of(2021, 4, 20))
+                .setCategorias(k1)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
 
-            ctrlActividadClase.crearActividad()
+            facadeActividad.crearActividad()
                 .setInstitucion("Instituto Natural")
                 .setNombre("Aerobica")
                 .setDescripcion("Para cuidar el aparato cardiovascular.")
                 .setDuracion(Duration.ofMinutes(110))
                 .setCosto(800)
-                .setRegistro(LocalDate.of(2021, 5, 30)).invoke();
+                .setRegistro(LocalDate.of(2021, 5, 30))
+                .setCategorias(k4)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
 
-            ctrlActividadClase.crearActividad()
+            facadeActividad.crearActividad()
                 .setInstitucion("Fuerza Bruta")
                 .setNombre("Kickboxing")
-                .setDescripcion("En busca del nuevo campeon de boxeo.")
+                .setDescripcion("En busca del nuevo campeón de boxeo.")
                 .setDuracion(Duration.ofMinutes(100))
                 .setCosto(980)
-                .setRegistro(LocalDate.of(2021, 6, 7)).invoke();
+                .setRegistro(LocalDate.of(2021, 6, 7))
+                .setCategorias(k1)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
 
-            ctrlActividadClase.crearActividad()
+            facadeActividad.crearActividad()
                 .setInstitucion("Telon")
                 .setNombre("Atletismo")
                 .setDescripcion("100m, 200m, postas y carreras con obstaculos.")
                 .setDuracion(Duration.ofMinutes(150))
                 .setCosto(500)
-                .setRegistro(LocalDate.of(2021, 7, 8)).invoke();
+                .setRegistro(LocalDate.of(2021, 7, 8))
+                .setCategorias(k1)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
 
-            ctrlActividadClase.crearActividad()
+            facadeActividad.crearActividad()
                 .setInstitucion("Telon")
                 .setNombre("Basquetbol")
-                .setDescripcion("Espectaculo conmemorando los 30 años de Violeta")
+                .setDescripcion("Basquetbol para todos.")
                 .setDuracion(Duration.ofMinutes(80))
                 .setCosto(450)
-                .setRegistro(LocalDate.of(2021, 7, 31)).invoke();
+                .setRegistro(LocalDate.of(2021, 7, 31))
+                .setCategorias(k1)
+                .setEstado(ActividadEstado.ACEPTADA)
+                .invoke();
+
+            facadeActividad.crearActividad()
+                .setInstitucion("Fuerza Bruta")
+                .setNombre("Aparatos II")
+                .setDescripcion("Clases de aparatos avanzadas.")
+                .setDuracion(Duration.ofMinutes(60))
+                .setCosto(1500)
+                .setRegistro(LocalDate.of(2021, 8, 15))
+                .setCategorias(k2)
+                .setEstado(ActividadEstado.RECHAZADA)
+                .invoke();
+
+            facadeActividad.crearActividad()
+                .setInstitucion("Instituto Natural")
+                .setNombre("Pilates")
+                .setDescripcion("El Método Pilates combina diferentes capacidades físicas.")
+                .setDuracion(Duration.ofMinutes(45))
+                .setCosto(600)
+                .setRegistro(LocalDate.of(2021, 8, 30))
+                .setCategorias(k3)
+                .setEstado(ActividadEstado.INGRESADA)
+                .invoke();
+
+            facadeActividad.crearActividad()
+                .setInstitucion("Telon")
+                .setNombre("Voleibol II")
+                .setDescripcion("Voleibol avanzado.")
+                .setDuracion(Duration.ofMinutes(120))
+                .setCosto(1000)
+                .setRegistro(LocalDate.of(2021, 9, 1))
+                .setCategorias(k5)
+                .setEstado(ActividadEstado.RECHAZADA)
+                .invoke();
+
+            facadeActividad.crearActividad()
+                .setInstitucion("Telon")
+                .setNombre("Basquetbol II")
+                .setDescripcion("Basquetbol avanzado.")
+                .setDuracion(Duration.ofMinutes(80))
+                .setCosto(600)
+                .setRegistro(LocalDate.of(2021, 9, 7))
+                .setCategorias(k3)
+                .setEstado(ActividadEstado.INGRESADA)
+                .invoke();
+
+            facadeUsuario.seguirUsuario("guille", "Emi71");
+            facadeUsuario.seguirUsuario("euge", "caro");
+            facadeUsuario.seguirUsuario("guille", "caro");
+            facadeUsuario.seguirUsuario("Emi71", "euge");
+            facadeUsuario.seguirUsuario("caro", "euge");
+            facadeUsuario.seguirUsuario("m1k4", "euge");
+            facadeUsuario.seguirUsuario("Emi71", "guille");
+            facadeUsuario.seguirUsuario("caro", "guille");
+            facadeUsuario.seguirUsuario("euge", "guille");
+            facadeUsuario.seguirUsuario("TheBoss", "guille");
+            facadeUsuario.seguirUsuario("euge", "sergiop");
+            facadeUsuario.seguirUsuario("andy", "sergiop");
+            facadeUsuario.seguirUsuario("clazar", "sergiop");
+            facadeUsuario.seguirUsuario("caro", "andy");
+            facadeUsuario.seguirUsuario("tonyp", "andy");
+            facadeUsuario.seguirUsuario("clazar", "andy");
+            facadeUsuario.seguirUsuario("caro", "tonyp");
+            facadeUsuario.seguirUsuario("m1k4", "tonyp");
+            facadeUsuario.seguirUsuario("charly", "tonyp");
+            facadeUsuario.seguirUsuario("sergiop", "m1k4");
+            facadeUsuario.seguirUsuario("tonyp", "m1k4");
+            facadeUsuario.seguirUsuario("tonyp", "charly");
+            facadeUsuario.seguirUsuario("Nelson", "charly");
+            facadeUsuario.seguirUsuario("tonyp", "viktor");
+            facadeUsuario.seguirUsuario("m1k4", "viktor");
+            facadeUsuario.seguirUsuario("clazar", "viktor");
+            facadeUsuario.seguirUsuario("lale", "viktor");
+            facadeUsuario.seguirUsuario("prisc", "viktor");
+            facadeUsuario.seguirUsuario("Emi71", "denis");
+            facadeUsuario.seguirUsuario("caro", "denis");
+            facadeUsuario.seguirUsuario("euge", "denis");
+            facadeUsuario.seguirUsuario("guille", "denis");
+            facadeUsuario.seguirUsuario("sergiop", "denis");
+            facadeUsuario.seguirUsuario("andy", "denis");
+            facadeUsuario.seguirUsuario("tonyp", "denis");
+            facadeUsuario.seguirUsuario("m1k4", "denis");
+            facadeUsuario.seguirUsuario("charly", "denis");
+            facadeUsuario.seguirUsuario("caro", "clazar");
+            facadeUsuario.seguirUsuario("euge", "clazar");
+            facadeUsuario.seguirUsuario("guille", "clazar");
+            facadeUsuario.seguirUsuario("TheBoss", "clazar");
+            facadeUsuario.seguirUsuario("guille", "TheBoss");
+            facadeUsuario.seguirUsuario("andy", "TheBoss");
+            facadeUsuario.seguirUsuario("m1k4", "TheBoss");
+            facadeUsuario.seguirUsuario("Emi71", "Nelson");
+            facadeUsuario.seguirUsuario("andy", "Nelson");
+            facadeUsuario.seguirUsuario("tonyp", "Nelson");
+            facadeUsuario.seguirUsuario("lale", "Nelson");
+            facadeUsuario.seguirUsuario("prisc", "Nelson");
+            facadeUsuario.seguirUsuario("dagost", "Nelson");
+            facadeUsuario.seguirUsuario("charly", "lale");
+            facadeUsuario.seguirUsuario("Nelson", "lale");
+            facadeUsuario.seguirUsuario("charly", "prisc");
+            facadeUsuario.seguirUsuario("Nelson", "prisc");
+            facadeUsuario.seguirUsuario("tonyp", "dagost");
+            facadeUsuario.seguirUsuario("charly", "dagost");
+            facadeUsuario.seguirUsuario("andy", "aldo");
+            facadeUsuario.seguirUsuario("tonyp", "aldo");
+            facadeUsuario.seguirUsuario("charly", "aldo");
+            facadeUsuario.seguirUsuario("lale", "aldo");
+            facadeUsuario.seguirUsuario("prisc", "aldo");
+            facadeUsuario.seguirUsuario("dagost", "aldo");
 
             Set<String> p1 = new HashSet<>();
             p1.add("viktor");
@@ -379,7 +529,7 @@ public class DatosPruebaServlet extends HttpServlet {
 
             facadeClase.crearClase()
                 .setNombreActividad("Aerobica")
-                .setNombre("Aerobica adulto 5or")
+                .setNombre("Aerobica adulto mayor")
                 .setInicio(LocalDateTime.of(2021, 8, 31, 19, 30))
                 .setNicknameProfesores(p4)
                 .setCantMin(5)
@@ -487,83 +637,70 @@ public class DatosPruebaServlet extends HttpServlet {
                 .setFechaRegistro(LocalDate.of(2021, 7, 31)).invoke();
 
             /* IMPORTANTE Quedó sin la r el nombre... mejor cambiarlo aca que en todo el codigo*/
-            ctrlActividadClase.registarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
-            ctrlActividadClase.registarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
-            ctrlActividadClase.registarseSinCuponera("andy", "Peso libre", LocalDate.of(2021, 4, 15));
-            ctrlActividadClase.registarseSinCuponera("tonyp", "Peso libre", LocalDate.of(2021, 4, 20));
-            ctrlActividadClase.registarseSinCuponera("caro", "Peso libre", LocalDate.of(2021, 4, 25));
-            ctrlActividadClase.registarseSinCuponera("m1k4", "Peso libre", LocalDate.of(2021, 4, 28));
-            ctrlActividadClase.registarseSinCuponera("charly", "Aparatos", LocalDate.of(2021, 4, 16));
-            ctrlActividadClase.registarseSinCuponera("caro", "Aparatos", LocalDate.of(2021, 5, 15));
-            ctrlActividadClase.registarseSinCuponera("m1k4", "Aparatos", LocalDate.of(2021, 5, 20));
-            ctrlActividadClase.registarseSinCuponera("Emi71", "Voleibol", LocalDate.of(2021, 5, 5));
-            ctrlActividadClase.registarseSinCuponera("euge", "Voleibol", LocalDate.of(2021, 5, 10));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Voleibol", LocalDate.of(2021, 5, 15));
-            ctrlActividadClase.registarseSinCuponera("tonyp", "Voleibol", LocalDate.of(2021, 5, 20));
-            ctrlActividadClase.registarseSinCuponera("guille", "Braza", LocalDate.of(2021, 6, 8));
-            ctrlActividadClase.registarseSinCuponera("euge", "Braza", LocalDate.of(2021, 6, 13));
-            ctrlActividadClase.registarseSinCuponera("m1k4", "Braza", LocalDate.of(2021, 6, 25));
-            ctrlActividadClase.registarseSinCuponera("charly", "Mariposa", LocalDate.of(2021, 7, 5));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Mariposa", LocalDate.of(2021, 7, 11));
-            ctrlActividadClase.registarseSinCuponera("andy", "Mariposa", LocalDate.of(2021, 7, 18));
-            ctrlActividadClase.registarseSinCuponera("m1k4", "Aerobica niños", LocalDate.of(2021, 7, 19));
-            ctrlActividadClase.registarseSinCuponera("Emi71", "Aerobica adulto 5or", LocalDate.of(2021, 8, 17));
-            ctrlActividadClase.registarseSinCuponera("guille", "Aerobica adulto 5or", LocalDate.of(2021, 8, 20));
-            ctrlActividadClase.registarseSinCuponera("andy", "Aerobica adulto 5or", LocalDate.of(2021, 8, 23));
-            ctrlActividadClase.registarseSinCuponera("caro", "Aerobica", LocalDate.of(2021, 8, 15));
-            ctrlActividadClase.registarseSinCuponera("euge", "Aerobica", LocalDate.of(2021, 8, 26));
-            ctrlActividadClase.registarseSinCuponera("andy", "Boxeo I", LocalDate.of(2021, 7, 19));
-            ctrlActividadClase.registarseSinCuponera("tonyp", "Boxeo I", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("m1k4", "Boxeo I", LocalDate.of(2021, 8, 24));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Boxeo II", LocalDate.of(2021, 8, 1));
-            ctrlActividadClase.registarseSinCuponera("guille", "Boxeo II", LocalDate.of(2021, 8, 30));
-            ctrlActividadClase.registarseSinCuponera("Emi71", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("caro", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("euge", "Musculos para boxeo", LocalDate.of(2021, 9, 1));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Musculos para boxeo", LocalDate.of(2021, 9, 5));
-            ctrlActividadClase.registarseSinCuponera("guille", "100 M", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("charly", "100 M", LocalDate.of(2021, 9, 3));
-            ctrlActividadClase.registarseSinCuponera("Emi71", "200 M", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("charly", "200 M", LocalDate.of(2021, 9, 6));
-            ctrlActividadClase.registarseSinCuponera("caro", "Posta", LocalDate.of(2021, 9, 1));
-            ctrlActividadClase.registarseSinCuponera("sergiop", "Basquet I", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("Emi71", "Basquet I", LocalDate.of(2021, 8, 20));
-            ctrlActividadClase.registarseSinCuponera("tonyp", "Basquet I", LocalDate.of(2021, 8, 31));
-            ctrlActividadClase.registarseSinCuponera("andy", "Basquet II", LocalDate.of(2021, 8, 16));
-            ctrlActividadClase.registarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
-            ctrlActividadClase.registarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
+            facadeActividad.registarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
+            facadeActividad.registarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
+            facadeActividad.registarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
+            facadeActividad.registarseSinCuponera("andy", "Peso libre", LocalDate.of(2021, 4, 15));
+            facadeActividad.registarseSinCuponera("tonyp", "Peso libre", LocalDate.of(2021, 4, 20));
+            facadeActividad.registarseSinCuponera("caro", "Peso libre", LocalDate.of(2021, 4, 25));
+            facadeActividad.registarseSinCuponera("m1k4", "Peso libre", LocalDate.of(2021, 4, 28));
+            facadeActividad.registarseSinCuponera("charly", "Aparatos", LocalDate.of(2021, 4, 16));
+            facadeActividad.registarseSinCuponera("caro", "Aparatos", LocalDate.of(2021, 5, 15));
+            facadeActividad.registarseSinCuponera("m1k4", "Aparatos", LocalDate.of(2021, 5, 20));
+            facadeActividad.registarseSinCuponera("Emi71", "Voleibol", LocalDate.of(2021, 5, 5));
+            facadeActividad.registarseSinCuponera("euge", "Voleibol", LocalDate.of(2021, 5, 10));
+            facadeActividad.registarseSinCuponera("sergiop", "Voleibol", LocalDate.of(2021, 5, 15));
+            facadeActividad.registarseSinCuponera("tonyp", "Voleibol", LocalDate.of(2021, 5, 20));
+            facadeActividad.registarseSinCuponera("guille", "Braza", LocalDate.of(2021, 6, 8));
+            facadeActividad.registarseSinCuponera("euge", "Braza", LocalDate.of(2021, 6, 13));
+            facadeActividad.registarseSinCuponera("m1k4", "Braza", LocalDate.of(2021, 6, 25));
+            facadeActividad.registarseSinCuponera("charly", "Mariposa", LocalDate.of(2021, 7, 5));
+            facadeActividad.registarseSinCuponera("sergiop", "Mariposa", LocalDate.of(2021, 7, 11));
+            facadeActividad.registarseSinCuponera("andy", "Mariposa", LocalDate.of(2021, 7, 18));
+            facadeActividad.registarseSinCuponera("m1k4", "Aerobica niños", LocalDate.of(2021, 7, 19));
+            facadeActividad.registarseSinCuponera("Emi71", "Aerobica adulto 5or", LocalDate.of(2021, 8, 17));
+            facadeActividad.registarseSinCuponera("guille", "Aerobica adulto 5or", LocalDate.of(2021, 8, 20));
+            facadeActividad.registarseSinCuponera("andy", "Aerobica adulto 5or", LocalDate.of(2021, 8, 23));
+            facadeActividad.registarseSinCuponera("caro", "Aerobica", LocalDate.of(2021, 8, 15));
+            facadeActividad.registarseSinCuponera("euge", "Aerobica", LocalDate.of(2021, 8, 26));
+            facadeActividad.registarseSinCuponera("andy", "Boxeo I", LocalDate.of(2021, 7, 19));
+            facadeActividad.registarseSinCuponera("tonyp", "Boxeo I", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("m1k4", "Boxeo I", LocalDate.of(2021, 8, 24));
+            facadeActividad.registarseSinCuponera("sergiop", "Boxeo II", LocalDate.of(2021, 8, 1));
+            facadeActividad.registarseSinCuponera("guille", "Boxeo II", LocalDate.of(2021, 8, 30));
+            facadeActividad.registarseSinCuponera("Emi71", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("caro", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("euge", "Musculos para boxeo", LocalDate.of(2021, 9, 1));
+            facadeActividad.registarseSinCuponera("sergiop", "Musculos para boxeo", LocalDate.of(2021, 9, 5));
+            facadeActividad.registarseSinCuponera("guille", "100 M", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("charly", "100 M", LocalDate.of(2021, 9, 3));
+            facadeActividad.registarseSinCuponera("Emi71", "200 M", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("charly", "200 M", LocalDate.of(2021, 9, 6));
+            facadeActividad.registarseSinCuponera("caro", "Posta", LocalDate.of(2021, 9, 1));
+            facadeActividad.registarseSinCuponera("sergiop", "Basquet I", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("Emi71", "Basquet I", LocalDate.of(2021, 8, 20));
+            facadeActividad.registarseSinCuponera("tonyp", "Basquet I", LocalDate.of(2021, 8, 31));
+            facadeActividad.registarseSinCuponera("andy", "Basquet II", LocalDate.of(2021, 8, 16));
+            facadeActividad.registarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
+            facadeActividad.registarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
 
-            ctrlCuponera.crearCuponera()
-                .setNombre("Pelota")
-                .setDescripcion("Deportes con pelota.")
-                .setInicio(LocalDate.of(2021, 5, 1))
-                .setFin(LocalDate.of(2021, 7, 31))
-                .setDescuento(20)
-                .setFechaRegistro(LocalDate.of(2021, 4, 30)).invoke();
+            facadeCuponera.crearCuponera().setNombre("Pelota").setDescripcion("Deportes con pelota.").setInicio(LocalDate.of(2021, 5, 1)).setFin(LocalDate.of(2021, 7, 31)).setDescuento(20).setFechaRegistro(LocalDate.of(2021, 4, 30)).invoke();
+            facadeCuponera.crearCuponera().setNombre("Gimnasia").setDescripcion("Aerobica y aparatos.").setInicio(LocalDate.of(2021, 8, 1)).setFin(LocalDate.of(2021, 9, 30)).setDescuento(30).setFechaRegistro(LocalDate.of(2021, 7, 15)).invoke();
+            facadeCuponera.crearCuponera().setNombre("Musculos").setDescripcion("Pesas.").setInicio(LocalDate.of(2021, 8, 15)).setFin(LocalDate.of(2021, 11, 15)).setDescuento(10).setFechaRegistro(LocalDate.of(2021, 8, 1)).invoke();
 
-            ctrlCuponera.crearCuponera()
-                .setNombre("Gimnasia")
-                .setDescripcion("Aerobica y aparatos.")
-                .setInicio(LocalDate.of(2021, 8, 1))
-                .setFin(LocalDate.of(2021, 9, 30))
-                .setDescuento(30)
-                .setFechaRegistro(LocalDate.of(2021, 7, 15)).invoke();
+            facadeCuponera.agregarACuponera("Pelota", "Voleibol", 7);
+            facadeCuponera.agregarACuponera("Pelota", "Basquetbol", 18);
+            facadeCuponera.agregarACuponera("Gimnasia", "Aerobica", 2);
+            facadeCuponera.agregarACuponera("Gimnasia", "Aparatos y pesas", 8);
+            facadeCuponera.agregarACuponera("Musculos", "Kickboxing", 11);
+            facadeCuponera.agregarACuponera("Musculos", "Aparatos y pesas", 12);
 
-            ctrlCuponera.crearCuponera()
-                .setNombre("Musculos")
-                .setDescripcion("Pesas.")
-                .setInicio(LocalDate.of(2021, 8, 15))
-                .setFin(LocalDate.of(2021, 11, 15))
-                .setDescuento(10)
-                .setFechaRegistro(LocalDate.of(2021, 8, 1)).invoke();
-
-            ctrlCuponera.agregarACuponera("Pelota", "Voleibol", 7);
-            ctrlCuponera.agregarACuponera("Pelota", "Basquetbol", 18);
-            ctrlCuponera.agregarACuponera("Gimnasia", "Aerobica", 2);
-            ctrlCuponera.agregarACuponera("Gimnasia", "Aparatos y pesas", 8);
-            ctrlCuponera.agregarACuponera("Musculos", "Kickboxing", 11);
-            ctrlCuponera.agregarACuponera("Musculos", "Aparatos y pesas", 12);
+            facadeCuponera.comprarCuponera("guille", "Pelota");
+            facadeCuponera.comprarCuponera("m1k4", "Gimnasia");
+            facadeCuponera.comprarCuponera("caro", "Gimnasia");
+            facadeCuponera.comprarCuponera("sergiop", "Musculos");
+            facadeCuponera.comprarCuponera("andy", "Musculos");
+            facadeCuponera.comprarCuponera("Emi71", "Pelota");
         } catch (Exception e) {
             e.printStackTrace(response.getWriter());
         }

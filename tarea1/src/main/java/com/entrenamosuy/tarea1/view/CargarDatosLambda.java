@@ -536,7 +536,7 @@ public class CargarDatosLambda implements ActionListener {
 
             facadeClase.crearClase()
                 .setNombreActividad("Aerobica")
-                .setNombre("Aerobica adulto 5or")
+                .setNombre("Aerobica adulto mayor")
                 .setInicio(LocalDateTime.of(2021, 8, 31, 19, 30))
                 .setNicknameProfesores(p4)
                 .setCantMin(5)

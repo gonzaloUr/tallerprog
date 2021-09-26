@@ -15,6 +15,7 @@ import java.util.Set;
 
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataSocio;
+import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.core.util.FacadeContainer;
@@ -408,5 +409,116 @@ public class FacadeUsuarioTest {
         assertEquals("bio", ret.getBiografia());
         assertEquals(LocalDate.of(2000, 1, 1), ret.getNacimiento());
         assertEquals(new URL("https://url"), ret.getSitioWeb());
+    }
+
+    @Test
+    public void seguirUsuarios() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                    .setNickname("s1")
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setCorreo(Email.of("s1", "mail.com"))
+                    .setPassword("pass")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearSocio()
+                    .setNickname("s2")
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setCorreo(Email.of("s2", "mail.com"))
+                    .setPassword("pass")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearSocio()
+                    .setNickname("s3")
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setCorreo(Email.of("s3", "mail.com"))
+                    .setPassword("pass")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearSocio()
+                    .setNickname("s4")
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setCorreo(Email.of("s4", "mail.com"))
+                    .setPassword("pass")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .invoke();
+        });
+
+        facades.getFacadeUsuario().seguirUsuario("s2", "s1");
+        facades.getFacadeUsuario().seguirUsuario("s3", "s1");
+        facades.getFacadeUsuario().seguirUsuario("s3", "s2");
+        facades.getFacadeUsuario().seguirUsuario("s1", "s3");
+        facades.getFacadeUsuario().seguirUsuario("s1", "s4");
+        facades.getFacadeUsuario().seguirUsuario("s3", "s4");
+
+        DataUsuario r1 = facades.getFacadeUsuario().getDataSocio("s1");
+        DataUsuario r2 = facades.getFacadeUsuario().getDataSocio("s2");
+        DataUsuario r3 = facades.getFacadeUsuario().getDataSocio("s3");
+        DataUsuario r4 = facades.getFacadeUsuario().getDataSocio("s4");
+
+        assertTrue(r1.getSeguidores().contains("s3"));
+        assertTrue(r1.getSeguidores().contains("s4"));
+        assertEquals(2, r1.getSeguidores().size());
+        assertTrue(r2.getSeguidores().contains("s1"));
+        assertEquals(1, r2.getSeguidores().size());
+        assertTrue(r3.getSeguidores().contains("s1"));
+        assertTrue(r3.getSeguidores().contains("s2"));
+        assertTrue(r3.getSeguidores().contains("s4"));
+        assertEquals(3, r3.getSeguidores().size());
+        assertEquals(0, r4.getSeguidores().size());
+
+        assertTrue(r1.getSeguidos().contains("s2"));
+        assertTrue(r1.getSeguidos().contains("s3"));
+        assertEquals(2, r1.getSeguidos().size());
+        assertTrue(r2.getSeguidos().contains("s3"));
+        assertEquals(1, r2.getSeguidos().size());
+        assertTrue(r3.getSeguidos().contains("s1"));
+        assertEquals(1, r3.getSeguidos().size());
+        assertTrue(r4.getSeguidos().contains("s1"));
+        assertTrue(r4.getSeguidos().contains("s3"));
+        assertEquals(2, r4.getSeguidos().size());
+
+        facades.getFacadeUsuario().dejarDeSeguirUsuario("s3", "s4");
+        facades.getFacadeUsuario().dejarDeSeguirUsuario("s2", "s1");
+        facades.getFacadeUsuario().dejarDeSeguirUsuario("s1", "s3");
+        facades.getFacadeUsuario().dejarDeSeguirUsuario("s1", "s4");
+        facades.getFacadeUsuario().seguirUsuario("s2", "s4");
+        facades.getFacadeUsuario().seguirUsuario("s4", "s1");
+        facades.getFacadeUsuario().seguirUsuario("s1", "s2");
+
+        r1 = facades.getFacadeUsuario().getDataSocio("s1");
+        r2 = facades.getFacadeUsuario().getDataSocio("s2");
+        r3 = facades.getFacadeUsuario().getDataSocio("s3");
+        r4 = facades.getFacadeUsuario().getDataSocio("s4");
+
+        assertTrue(r1.getSeguidores().contains("s2"));
+        assertEquals(1, r1.getSeguidores().size());
+        assertTrue(r2.getSeguidores().contains("s4"));
+        assertEquals(1, r2.getSeguidores().size());
+        assertTrue(r3.getSeguidores().contains("s1"));
+        assertTrue(r3.getSeguidores().contains("s2"));
+        assertEquals(2, r3.getSeguidores().size());
+        assertTrue(r4.getSeguidores().contains("s1"));
+        assertEquals(1, r4.getSeguidores().size());
+
+        assertTrue(r1.getSeguidos().contains("s3"));
+        assertTrue(r1.getSeguidos().contains("s4"));
+        assertEquals(2, r1.getSeguidos().size());
+        assertTrue(r2.getSeguidos().contains("s1"));
+        assertTrue(r2.getSeguidos().contains("s3"));
+        assertEquals(2, r2.getSeguidos().size());
+        assertEquals(0, r3.getSeguidos().size());
+        assertTrue(r4.getSeguidos().contains("s2"));
+        assertEquals(1, r4.getSeguidos().size());
     }
 }

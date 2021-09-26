@@ -494,57 +494,52 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     }
 
     @Override
-    public void seguirUsuario(String nickname, String actual){ //en progreso
+    public void seguirUsuario(String seguido, String seguidor) {
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();
-        Usuario usuarioActual;
-        Usuario usuarioNickname;
-        if (socios.containsKey(actual)){    
-            usuarioActual = socios.get(actual);
-        }
-        else if (profes.containsKey(actual)){
-            usuarioActual = profes.get(actual);
-        }
-        else{
-            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
-        }
-        if (socios.containsKey(nickname)){    
-            usuarioNickname = socios.get(nickname);
-        }
-        else if (profes.containsKey(nickname)){
-            usuarioNickname = profes.get(nickname);
-        }
-        else{
-            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
-        }
-        usuarioActual.seguirUsuario(usuarioNickname);
+
+        Usuario usuarioSeguido;
+        Usuario usuarioSeguidor;
+
+        if (socios.containsKey(seguido))
+            usuarioSeguido = socios.get(seguido);
+        else if (profes.containsKey(seguido))
+            usuarioSeguido = profes.get(seguido);
+        else
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + seguido);
+
+        if (socios.containsKey(seguidor))
+            usuarioSeguidor = socios.get(seguidor);
+        else if (profes.containsKey(seguidor))
+            usuarioSeguidor = profes.get(seguidor);
+        else
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + seguidor);
+
+        usuarioSeguidor.seguirUsuario(usuarioSeguido);
     }
 
     @Override
-    public void dejarDeSeguirUsuario(String nickname, String actual){
+    public void dejarDeSeguirUsuario(String seguido, String seguidor) {
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();
-        Usuario usuarioActual = null;
-        Usuario usuarioNickname = null;
-        if (socios.containsKey(actual)){    
-            usuarioActual = socios.get(actual);
-        }
-        else if (profes.containsKey(actual)){
-            usuarioActual = profes.get(actual);
-        }
-        else{
-            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
-        }
-        if (socios.containsKey(nickname)){    
-            usuarioNickname = socios.get(actual);
-        }
-        else if (profes.containsKey(nickname)){
-            usuarioNickname = profes.get(actual);
-        }
-        else{
-            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + nickname);
-        }
-        usuarioActual.dejarDeSeguirUsuario(usuarioNickname);
 
+        Usuario usuarioSeguido;
+        Usuario usuarioSeguidor;
+
+        if (socios.containsKey(seguido))
+            usuarioSeguido = socios.get(seguido);
+        else if (profes.containsKey(seguido))
+            usuarioSeguido = profes.get(seguido);
+        else
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + seguido);
+
+        if (socios.containsKey(seguidor))
+            usuarioSeguidor = socios.get(seguidor);
+        else if (profes.containsKey(seguidor))
+            usuarioSeguidor = profes.get(seguidor);
+        else
+            throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + seguidor);
+
+        usuarioSeguidor.dejarDeSeguirUsuario(usuarioSeguido);
     }
 }

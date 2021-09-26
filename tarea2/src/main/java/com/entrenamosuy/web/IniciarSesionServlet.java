@@ -44,10 +44,10 @@ public class IniciarSesionServlet extends HttpServlet {
 
             if (socios.contains(nickname)) {
                 session.setAttribute("usuario", usuarioFacade.getDataSocio(nickname));
-                session.setAttribute("es_profesor", true);
+                session.setAttribute("es_profesor", false);
             } else {
                 session.setAttribute("usuario", usuarioFacade.getDataProfesor(nickname));
-                session.setAttribute("es_profesor", false);
+                session.setAttribute("es_profesor", true);
             }
 
             request.setAttribute("successful_login", true);
