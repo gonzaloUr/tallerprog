@@ -49,7 +49,7 @@ public class Profesor extends Usuario {
 
         private Set<Clase> clasesDictadas = new HashSet<>();
 
-        private Set<Actividad> actividadesRegistradas = new HashSet<>();
+        private Set<Actividad> actividadesRegistradas = new HashSet<>(); //todas las que ingresó
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;

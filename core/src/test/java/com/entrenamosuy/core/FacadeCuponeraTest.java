@@ -341,4 +341,105 @@ public class FacadeCuponeraTest {
         assertTrue(ret.getCategorias().contains("c3"));
         assertTrue(ret.getCategorias().contains("c4"));
     }
+
+    @Test
+    public void cuponerasVigentes() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                .setNickname("test")
+                .setNombre("test")
+                .setApellido("test")
+                .setPassword("pass")
+                .setCorreo(Email.of("test", "mail.com"))
+                .setNacimiento(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("test")
+                .setDescripcion("test")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a1")
+                .setDescripcion("test")
+                .setInstitucion("test")
+                .setDuracion(Duration.ofHours(1))
+                .setCosto(1f)
+                .setRegistro(LocalDate.of(1999, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeCuponera().crearCuponera()
+                .setNombre("c1")
+                .setDescripcion("test")
+                .setInicio(LocalDate.of(1999, 1, 1))
+                .setFin(LocalDate.of(2000, 1, 1))
+                .setDescuento(50)
+                .setFechaRegistro(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeCuponera().crearCuponera()
+                .setNombre("c2")
+                .setDescripcion("test")
+                .setInicio(LocalDate.of(1999, 1, 1))
+                .setFin(LocalDate.of(2030, 1, 1))
+                .setDescuento(50)
+                .setFechaRegistro(LocalDate.of(1999, 1, 1))
+                .invoke();
+            });
+
+            Set<DataCuponera> ret = facades.getFacadeCuponera().cuponerasVigentes();
+            assertEquals(1, ret.size());
+            assertEquals("c2", ((DataCuponera) ret.toArray()[0]).getNombre());
+    }
+
+    @Test 
+    public void getCuponerasSinCompras() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                .setNickname("test")
+                .setNombre("test")
+                .setApellido("test")
+                .setPassword("pass")
+                .setCorreo(Email.of("test", "mail.com"))
+                .setNacimiento(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeCuponera().crearCuponera()
+                .setNombre("c1")
+                .setDescripcion("test")
+                .setInicio(LocalDate.of(1999, 1, 1))
+                .setFin(LocalDate.of(2000, 1, 1))
+                .setDescuento(50)
+                .setFechaRegistro(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeCuponera().crearCuponera()
+                .setNombre("c2")
+                .setDescripcion("test")
+                .setInicio(LocalDate.of(1999, 1, 1))
+                .setFin(LocalDate.of(2000, 1, 1))
+                .setDescuento(50)
+                .setFechaRegistro(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeCuponera().comprarCuponera("test", "c1");
+        });
+
+        Set<String> ret = facades.getFacadeCuponera().getCuponerasSinCompras();
+        
+        assertEquals(1, ret.size());
+        assertTrue(ret.contains("c2"));
+    }
 }

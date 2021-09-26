@@ -124,7 +124,7 @@ public class App extends JFrame {
 
         //Aceptar o Rechazar Actividad Deportiva
         aceptarRechazarAct.addActionListener((ActionEvent a) -> {
-            Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listaractividadesRegistradas();
+            Set<DataActividad> dataIngresadas = facades.getFacadeActividad().listarActividadesRegistradas();
             
             if (dataIngresadas.isEmpty()) {
                 JOptionPane.showMessageDialog(this,

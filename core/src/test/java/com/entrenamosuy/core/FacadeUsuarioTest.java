@@ -18,6 +18,7 @@ import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
 import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
@@ -520,5 +521,103 @@ public class FacadeUsuarioTest {
         assertEquals(0, r3.getSeguidos().size());
         assertTrue(r4.getSeguidos().contains("s2"));
         assertEquals(1, r4.getSeguidos().size());
+    }
+
+    @Test
+    public void getProfesoresDeInstitucion() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setDescripcion("test")
+                    .setUrl(new URL("https://test"))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("p1")
+                    .setCorreo(Email.of("p1", "mail.com"))
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setDescripcion("test")
+                    .setPassword("pass")
+                    .setInstitucion("test")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .setSitioWeb(new URL("https://test"))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("p2")
+                    .setCorreo(Email.of("p2", "mail.com"))
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setDescripcion("test")
+                    .setPassword("pass")
+                    .setInstitucion("test")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .setSitioWeb(new URL("https://test"))
+                    .invoke();
+        });
+
+        Set<String> ret = facades.getFacadeUsuario().getProfesoresDeInstitucion("test");
+
+        assertEquals(ret.size(), 2);
+        assertTrue(ret.contains("p1"));
+        assertTrue(ret.contains("p2"));
+    }
+
+    @Test
+    public void validarCredenciales() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                .setNickname("s1")
+                .setNombre("test")
+                .setApellido("test")
+                .setCorreo(Email.of("s1", "mail.com"))
+                .setPassword("pass")
+                .setNacimiento(LocalDate.of(1999, 1, 1))
+                .invoke();
+
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setDescripcion("test")
+                    .setUrl(new URL("https://test"))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("p1")
+                    .setCorreo(Email.of("p1", "mail.com"))
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setDescripcion("test")
+                    .setPassword("pass")
+                    .setInstitucion("test")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .setSitioWeb(new URL("https://test"))
+                    .invoke();
+
+        });
+
+        assertThrows(PasswordInvalidaException.class, () -> {
+            facades.getFacadeUsuario().validarCredenciales("s1", "mal");
+        });
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().validarCredenciales("s1", "pass");
+        });
+
+        assertThrows(PasswordInvalidaException.class, () -> {
+            facades.getFacadeUsuario().validarCredenciales("p1", "mal");
+        });
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().validarCredenciales("p1", "pass");
+        });
     }
 }

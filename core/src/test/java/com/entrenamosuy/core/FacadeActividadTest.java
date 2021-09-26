@@ -3,6 +3,7 @@ package com.entrenamosuy.core;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.URL;
 import java.time.Duration;
@@ -122,5 +123,189 @@ public class FacadeActividadTest {
         categorias.add("cat1");
 
         assertEquals(categorias, ret.getCategorias());
+    }
+
+    @Test
+    public void getActividadesDeInstitucion() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a1")
+                .setInstitucion("i1")
+                .setDescripcion("a1")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a2")
+                .setInstitucion("i1")
+                .setDescripcion("a2")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeActividad().aceptarActividad("a1");
+            facades.getFacadeActividad().aceptarActividad("a2");
+        });
+
+        Set<String> ret = facades.getFacadeActividad().getActividadesDeInstitucion("i1");
+
+        assertEquals(2, ret.size());
+        assertTrue(ret.contains("a1"));
+        assertTrue(ret.contains("a2"));
+    }
+
+    @Test
+    public void getActividadesDeCategoria() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a1")
+                .setInstitucion("i1")
+                .setDescripcion("a1")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a2")
+                .setInstitucion("i1")
+                .setDescripcion("a2")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+        });
+
+        Set<String> ret = facades.getFacadeActividad().getActividadesDeCategoria("cat1");
+
+        assertEquals(ret.size(), 2);
+        assertTrue(ret.contains("a1"));
+        assertTrue(ret.contains("a2"));
+    }
+
+    @Test
+    public void getCategorias() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeActividad().crearCategoria("c1");
+            facades.getFacadeActividad().crearCategoria("c2");
+            facades.getFacadeActividad().crearCategoria("c3");
+            facades.getFacadeActividad().crearCategoria("c4");
+        }); 
+        
+        Set<String> ret = facades.getFacadeActividad().getCategorias();
+
+        assertEquals(4, ret.size());
+        assertTrue(ret.contains("c1"));
+    }
+    
+    @Test 
+    public void listarActividadesRegistradas() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+
+            facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+                
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a1")
+                .setInstitucion("i1")
+                .setDescripcion("a1")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+        });
+
+        Set<DataActividad> ret = facades.getFacadeActividad().listarActividadesRegistradas();
+            
+        assertEquals(1, ret.size());
+        assertEquals("a1", ((DataActividad) ret.toArray()[0]).getNombre());
+    }
+
+    @Test
+    public void rechazarActividad() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a1")
+                .setInstitucion("i1")
+                .setDescripcion("a1")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a2")
+                .setInstitucion("i1")
+                .setDescripcion("a2")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+
+            facades.getFacadeActividad().rechazarActividad("a1");
+            facades.getFacadeActividad().rechazarActividad("a2");
+        });
     }
 }
