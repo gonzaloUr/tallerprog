@@ -8,6 +8,10 @@ java {
     }
 }
 
+war {
+    exclude("**/WEB-INF/lib/*")
+}
+
 dependencies {
     compileOnly 'javax:javaee-api:8.0'
     implementation project(':core')

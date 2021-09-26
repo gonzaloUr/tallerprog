@@ -23,9 +23,9 @@ public class DataSocio extends DataUsuario {
 
         private LocalDate nacimiento;
 
-        private Set<String> seguidores;
+        private Set<String> seguidores = Collections.emptySet();
         
-        private Set<String> seguidos;
+        private Set<String> seguidos = Collections.emptySet();
 
         private Set<DataClase> clases = Collections.emptySet();
 

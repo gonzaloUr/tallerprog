@@ -3,7 +3,9 @@ package com.entrenamosuy.core;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -112,6 +114,57 @@ public class FacadeUsuarioTest {
                     .setSitioWeb(new URL("https://test"))
                     .invoke();
         });
+    }
+    
+
+    @Test
+    public void getSocios() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                .setNombre("test")
+                .setApellido("test")
+                .setNickname("test")
+                .setPassword("pass")
+                .setCorreo(Email.of("test", "mail.com"))
+                .setNacimiento(LocalDate.of(1999, 1, 1))
+                .invoke();
+        });
+        
+        Set<String> ret = facades.getFacadeUsuario().getSocios();
+        assertTrue(ret.contains("test"));
+    }
+
+    @Test
+    public void getProfesores() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setDescripcion("test")
+                    .setUrl(new URL("https://test"))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("test")
+                    .setCorreo(Email.of("test", "mail.com"))
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setDescripcion("test")
+                    .setPassword("pass")
+                    .setInstitucion("test")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .setSitioWeb(new URL("https://test"))
+                    .invoke();
+        });
+        
+        Set<String> ret = facades.getFacadeUsuario().getProfesores();
+        assertTrue(ret.contains("test"));
     }
 
     @Test
@@ -273,5 +326,87 @@ public class FacadeUsuarioTest {
         });
 
         DataSocio ret = facades.getFacadeUsuario().getDataSocio("s1");
+
+        assertEquals("test", ret.getApellido());
+        assertEquals("test", ret.getNombre());
+        assertEquals("s1", ret.getNickname());
+        assertEquals(Email.of("s1", "mail.com"), ret.getCorreo());
+        assertEquals(LocalDate.of(1999, 1, 1), ret.getNacimiento());
+    }
+    
+    @Test
+    public void modificarDatosSocio() {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeUsuario().crearSocio()
+                    .setNickname("s1")
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setCorreo(Email.of("s1", "mail.com"))
+                    .setPassword("pass")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .invoke();
+            
+            facades.getFacadeUsuario().modificarDatosSocio()
+                .setNickname("s1")
+                .setNombre("s1")
+                .setNacimiento(LocalDate.of(2000, 1, 1))
+                .setApellido("s1")
+                .invoke();
+        });
+
+        DataSocio ret = facades.getFacadeUsuario().getDataSocio("s1");
+        
+        assertEquals("s1", ret.getNombre());
+        assertEquals("s1", ret.getApellido());
+        assertEquals(LocalDate.of(2000, 1, 1), ret.getNacimiento());
+    }
+    
+    @Test
+    public void modificarDatosProfesor() throws MalformedURLException {
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("test")
+                    .setDescripcion("test")
+                    .setDescripcion("test")
+                    .setUrl(new URL("https://test"))
+                    .invoke();
+
+            facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("test")
+                    .setCorreo(Email.of("test", "mail.com"))
+                    .setNombre("test")
+                    .setApellido("test")
+                    .setDescripcion("test")
+                    .setPassword("pass")
+                    .setInstitucion("test")
+                    .setNacimiento(LocalDate.of(1999, 1, 1))
+                    .setSitioWeb(new URL("https://test"))
+                    .invoke();
+            
+            facades.getFacadeUsuario().modificarDatosProfesor()
+                    .setNickname("test")
+                    .setNombre("prof")
+                    .setApellido("prof")
+                    .setDescripcion("desc")
+                    .setBiografia("bio")
+                    .setNacimiento(LocalDate.of(2000, 1, 1))
+                    .setSitioWeb(new URL("https://url"))
+                    .invoke();
+        });
+
+        DataProfesor ret = facades.getFacadeUsuario().getDataProfesor("test");
+
+        assertEquals("prof", ret.getNombre());
+        assertEquals("prof", ret.getApellido());
+        assertEquals("desc", ret.getDescripcion());
+        assertEquals("bio", ret.getBiografia());
+        assertEquals(LocalDate.of(2000, 1, 1), ret.getNacimiento());
+        assertEquals(new URL("https://url"), ret.getSitioWeb());
     }
 }

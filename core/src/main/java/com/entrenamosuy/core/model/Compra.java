@@ -60,11 +60,4 @@ public class Compra {
         return Objects.equals(cuponera, other.cuponera) && Objects.equals(fecha, other.fecha)
                 && Objects.equals(socio, other.socio);
     }
-
-    @Override
-    public String toString() {
-        return "Compra [cuponera=" + cuponera.getNombre() +
-            ", fecha=" + fecha +
-            ", socio=" + socio.getNombre() + "]";
-    }
 }

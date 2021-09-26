@@ -35,20 +35,11 @@
 
     <servlet>
         <servlet-name>index</servlet-name>
-        <jsp-file>/WEB-INF/index.jsp</jsp-file>
+        <jsp-file>/index.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern/>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>AltaUsuario</servlet-name>
-        <servlet-class>com.entrenamosuy.web.AltaUsuarioServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AltaUsuario</servlet-name>
-        <url-pattern>/alta_usuario</url-pattern>
     </servlet-mapping>
 
     <servlet>

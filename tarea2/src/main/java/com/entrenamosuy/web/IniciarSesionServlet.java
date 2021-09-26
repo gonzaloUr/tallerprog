@@ -23,7 +23,7 @@ public class IniciarSesionServlet extends HttpServlet {
 
         if (nickname == null) {
             getServletContext()
-                .getRequestDispatcher("/WEB-INF/iniciar_sesion.jsp")
+                .getRequestDispatcher("/iniciar_sesion.jsp")
                 .forward(request, response);
         }
     }
@@ -61,7 +61,7 @@ public class IniciarSesionServlet extends HttpServlet {
         }
 
         getServletContext()
-            .getRequestDispatcher("/WEB-INF/iniciar_sesion.jsp")
+            .getRequestDispatcher("/iniciar_sesion.jsp")
             .forward(request, response);
     }
 }
