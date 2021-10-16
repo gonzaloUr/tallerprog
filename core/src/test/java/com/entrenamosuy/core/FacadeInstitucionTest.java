@@ -7,10 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashSet;
 import java.util.Set;
 
-import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
 

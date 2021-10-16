@@ -197,7 +197,7 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
     @Override
     public Set<DataCuponera> cuponerasVigentes(){
         Set<DataCuponera> ret = new HashSet<>();
-        Map<String,Cuponera> cuponeras = getRegistry().getCuponeras();
+        Map<String, Cuponera> cuponeras = getRegistry().getCuponeras();
         for (Map.Entry<String, Cuponera> par : cuponeras.entrySet()){
             if (par.getValue().getFin().isAfter(LocalDate.now())){
                 ret.add(par.getValue().getDataCuponera());

@@ -240,7 +240,7 @@ public class Actividad {
         Set<DataCuponera> cuponeras = new HashSet<>();
 
 
-        for(Integra i : integras){
+        for (Integra i : integras){
             cuponeras.add(i.getCuponera().getDataCuponera());
         }
 

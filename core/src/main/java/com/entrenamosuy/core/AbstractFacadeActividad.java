@@ -8,7 +8,6 @@ import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.CategoriaRepetidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.model.ActividadEstado;
-import com.entrenamosuy.core.model.Profesor;
 
 import java.time.Duration;
 import java.time.LocalDate;

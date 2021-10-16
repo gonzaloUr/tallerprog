@@ -1,16 +1,38 @@
 package com.entrenamosuy.core;
 
-import java.util.*;
-
-import javax.xml.crypto.Data;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 import java.nio.ByteBuffer;
 import java.time.Duration;
 import java.time.LocalDate;
 
-import com.entrenamosuy.core.exceptions.*;
+import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.SinCategoriaException;
+import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
+import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.exceptions.CategoriaNoEncontradaException;
+import com.entrenamosuy.core.exceptions.CuponeraNoEncontradaException;
+import com.entrenamosuy.core.exceptions.CategoriaRepetidaException;
+import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
+import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
+
+
 import com.entrenamosuy.core.data.DataActividad;
-import com.entrenamosuy.core.model.*;
+
+import com.entrenamosuy.core.model.ActividadEstado;
+import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.Institucion;
+import com.entrenamosuy.core.model.Categoria;
+import com.entrenamosuy.core.model.Profesor;
+import com.entrenamosuy.core.model.Clase;
+import com.entrenamosuy.core.model.Socio;
+import com.entrenamosuy.core.model.Cuponera;
 
 public class FacadeActividad extends AbstractFacadeActividad {
 
@@ -107,7 +129,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                 Map<String, Profesor> profes = getRegistry().getProfesores();
                 Profesor profe;
 
-                if ((creador!=null)&&(!profes.containsKey(creador))){
+                if (creador!=null&&!profes.containsKey(creador)){
                     throw new UsuarioNoEncontradoException("No existe un profesor de nombre " + creador);
                 }
 
@@ -120,7 +142,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                 Institucion inst = instituciones.get(institucion);
 
                 Set<Categoria> categoriasActiv = new HashSet<>();
-                if ((categoriasString==null)||(categoriasString.isEmpty())) {
+                if (categoriasString==null||categoriasString.isEmpty()) {
                     throw new SinCategoriaException("No fueron seleccionadas categorias a asociar.");
                 }
                 for (String nombre : categoriasString) {
@@ -142,7 +164,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         .build();
                 inst.getActividadesOfrecidas().add(nuevaActividad);
                 actividades.put(nombre, nuevaActividad);
-                for(Categoria cat : categoriasActiv){
+                for (Categoria cat : categoriasActiv){
                     cat.agregarActividad(nuevaActividad);
                 }
                 if (creador != null){
@@ -270,13 +292,13 @@ public class FacadeActividad extends AbstractFacadeActividad {
         if (categorias.containsKey(nombre))
             throw new CategoriaRepetidaException("La categoria de nombre " + nombre + " ya existe.");
         Categoria cat = new Categoria(nombre, actividades, cuponeras);
-        categorias.put(nombre,cat);
+        categorias.put(nombre, cat);
     }
     @Override
     public Set<DataActividad> listarActividadesRegistradas(){
-        Map<String,Actividad> actividades = getRegistry().getActividades();
+        Map<String, Actividad> actividades = getRegistry().getActividades();
         Set<DataActividad> ret = new HashSet<>();
-        for (Map.Entry<String,Actividad> activ : actividades.entrySet()){
+        for (Map.Entry<String, Actividad> activ : actividades.entrySet()){
             if (activ.getValue().getEstado()==ActividadEstado.INGRESADA)
                 ret.add(activ.getValue().getDataActividad());
         }

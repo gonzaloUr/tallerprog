@@ -223,8 +223,8 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                 Map<Email, Profesor> profesE = getRegistry().getProfesoresMail();
                 Map<String, Socio> socios = getRegistry().getSocios();
                 Map<Email, Socio> sociosE = getRegistry().getSociosMail();
-                boolean noExisteN = (profes.get(nickname) == null) && (socios.get(nickname) == null);
-                boolean noExisteE = (profesE.get(correo) == null) && (sociosE.get(correo) == null);
+                boolean noExisteN = profes.get(nickname) == null && socios.get(nickname) == null;
+                boolean noExisteE = profesE.get(correo) == null && sociosE.get(correo) == null;
                 if (noExisteN && noExisteE) {
                     Socio nuevo = Socio.builder()
                             .setNickname(nickname)
