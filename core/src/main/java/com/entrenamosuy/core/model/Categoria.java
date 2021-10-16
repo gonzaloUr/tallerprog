@@ -45,11 +45,11 @@ public class Categoria {
         this.cuponeras = cuponeras;
     }
 
-    public void agregarActividad(Actividad a){
-        actividades.add(a);
+    public void agregarActividad(Actividad activ){
+        actividades.add(activ);
     }
-    public void agregarCuponera(Cuponera c){
-        cuponeras.add(c);
+    public void agregarCuponera(Cuponera cupo){
+        cuponeras.add(cupo);
     }
 
     @Override

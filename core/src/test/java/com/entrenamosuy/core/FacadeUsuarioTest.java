@@ -462,32 +462,32 @@ public class FacadeUsuarioTest {
         facades.getFacadeUsuario().seguirUsuario("s1", "s4");
         facades.getFacadeUsuario().seguirUsuario("s3", "s4");
 
-        DataUsuario r1 = facades.getFacadeUsuario().getDataSocio("s1");
-        DataUsuario r2 = facades.getFacadeUsuario().getDataSocio("s2");
-        DataUsuario r3 = facades.getFacadeUsuario().getDataSocio("s3");
-        DataUsuario r4 = facades.getFacadeUsuario().getDataSocio("s4");
+        DataUsuario dataUsuario1 = facades.getFacadeUsuario().getDataSocio("s1");
+        DataUsuario dataUsuario2 = facades.getFacadeUsuario().getDataSocio("s2");
+        DataUsuario dataUsuario3 = facades.getFacadeUsuario().getDataSocio("s3");
+        DataUsuario dataUsuario4 = facades.getFacadeUsuario().getDataSocio("s4");
 
-        assertTrue(r1.getSeguidores().contains("s3"));
-        assertTrue(r1.getSeguidores().contains("s4"));
-        assertEquals(2, r1.getSeguidores().size());
-        assertTrue(r2.getSeguidores().contains("s1"));
-        assertEquals(1, r2.getSeguidores().size());
-        assertTrue(r3.getSeguidores().contains("s1"));
-        assertTrue(r3.getSeguidores().contains("s2"));
-        assertTrue(r3.getSeguidores().contains("s4"));
-        assertEquals(3, r3.getSeguidores().size());
-        assertEquals(0, r4.getSeguidores().size());
+        assertTrue(dataUsuario1.getSeguidores().contains("s3"));
+        assertTrue(dataUsuario1.getSeguidores().contains("s4"));
+        assertEquals(2, dataUsuario1.getSeguidores().size());
+        assertTrue(dataUsuario2.getSeguidores().contains("s1"));
+        assertEquals(1, dataUsuario2.getSeguidores().size());
+        assertTrue(dataUsuario3.getSeguidores().contains("s1"));
+        assertTrue(dataUsuario3.getSeguidores().contains("s2"));
+        assertTrue(dataUsuario3.getSeguidores().contains("s4"));
+        assertEquals(3, dataUsuario3.getSeguidores().size());
+        assertEquals(0, dataUsuario4.getSeguidores().size());
 
-        assertTrue(r1.getSeguidos().contains("s2"));
-        assertTrue(r1.getSeguidos().contains("s3"));
-        assertEquals(2, r1.getSeguidos().size());
-        assertTrue(r2.getSeguidos().contains("s3"));
-        assertEquals(1, r2.getSeguidos().size());
-        assertTrue(r3.getSeguidos().contains("s1"));
-        assertEquals(1, r3.getSeguidos().size());
-        assertTrue(r4.getSeguidos().contains("s1"));
-        assertTrue(r4.getSeguidos().contains("s3"));
-        assertEquals(2, r4.getSeguidos().size());
+        assertTrue(dataUsuario1.getSeguidos().contains("s2"));
+        assertTrue(dataUsuario1.getSeguidos().contains("s3"));
+        assertEquals(2, dataUsuario1.getSeguidos().size());
+        assertTrue(dataUsuario2.getSeguidos().contains("s3"));
+        assertEquals(1, dataUsuario2.getSeguidos().size());
+        assertTrue(dataUsuario3.getSeguidos().contains("s1"));
+        assertEquals(1, dataUsuario3.getSeguidos().size());
+        assertTrue(dataUsuario4.getSeguidos().contains("s1"));
+        assertTrue(dataUsuario4.getSeguidos().contains("s3"));
+        assertEquals(2, dataUsuario4.getSeguidos().size());
 
         facades.getFacadeUsuario().dejarDeSeguirUsuario("s3", "s4");
         facades.getFacadeUsuario().dejarDeSeguirUsuario("s2", "s1");
@@ -497,30 +497,30 @@ public class FacadeUsuarioTest {
         facades.getFacadeUsuario().seguirUsuario("s4", "s1");
         facades.getFacadeUsuario().seguirUsuario("s1", "s2");
 
-        r1 = facades.getFacadeUsuario().getDataSocio("s1");
-        r2 = facades.getFacadeUsuario().getDataSocio("s2");
-        r3 = facades.getFacadeUsuario().getDataSocio("s3");
-        r4 = facades.getFacadeUsuario().getDataSocio("s4");
+        dataUsuario1 = facades.getFacadeUsuario().getDataSocio("s1");
+        dataUsuario2 = facades.getFacadeUsuario().getDataSocio("s2");
+        dataUsuario3 = facades.getFacadeUsuario().getDataSocio("s3");
+        dataUsuario4 = facades.getFacadeUsuario().getDataSocio("s4");
 
-        assertTrue(r1.getSeguidores().contains("s2"));
-        assertEquals(1, r1.getSeguidores().size());
-        assertTrue(r2.getSeguidores().contains("s4"));
-        assertEquals(1, r2.getSeguidores().size());
-        assertTrue(r3.getSeguidores().contains("s1"));
-        assertTrue(r3.getSeguidores().contains("s2"));
-        assertEquals(2, r3.getSeguidores().size());
-        assertTrue(r4.getSeguidores().contains("s1"));
-        assertEquals(1, r4.getSeguidores().size());
+        assertTrue(dataUsuario1.getSeguidores().contains("s2"));
+        assertEquals(1, dataUsuario1.getSeguidores().size());
+        assertTrue(dataUsuario2.getSeguidores().contains("s4"));
+        assertEquals(1, dataUsuario2.getSeguidores().size());
+        assertTrue(dataUsuario3.getSeguidores().contains("s1"));
+        assertTrue(dataUsuario3.getSeguidores().contains("s2"));
+        assertEquals(2, dataUsuario3.getSeguidores().size());
+        assertTrue(dataUsuario4.getSeguidores().contains("s1"));
+        assertEquals(1, dataUsuario4.getSeguidores().size());
 
-        assertTrue(r1.getSeguidos().contains("s3"));
-        assertTrue(r1.getSeguidos().contains("s4"));
-        assertEquals(2, r1.getSeguidos().size());
-        assertTrue(r2.getSeguidos().contains("s1"));
-        assertTrue(r2.getSeguidos().contains("s3"));
-        assertEquals(2, r2.getSeguidos().size());
-        assertEquals(0, r3.getSeguidos().size());
-        assertTrue(r4.getSeguidos().contains("s2"));
-        assertEquals(1, r4.getSeguidos().size());
+        assertTrue(dataUsuario1.getSeguidos().contains("s3"));
+        assertTrue(dataUsuario1.getSeguidos().contains("s4"));
+        assertEquals(2, dataUsuario1.getSeguidos().size());
+        assertTrue(dataUsuario2.getSeguidos().contains("s1"));
+        assertTrue(dataUsuario2.getSeguidos().contains("s3"));
+        assertEquals(2, dataUsuario2.getSeguidos().size());
+        assertEquals(0, dataUsuario3.getSeguidos().size());
+        assertTrue(dataUsuario4.getSeguidos().contains("s2"));
+        assertEquals(1, dataUsuario4.getSeguidos().size());
     }
 
     @Test

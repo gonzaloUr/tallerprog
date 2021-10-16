@@ -324,16 +324,16 @@ public class FacadeCuponeraTest {
         assertEquals("test", ret.getNombre());
         assertEquals("test", ret.getDescripcion());
 
-        DescActividad a1 = new DescActividad("a1", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
-        DescActividad a2 = new DescActividad("a2", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
-        DescActividad a3 = new DescActividad("a3", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
-        DescActividad a4 = new DescActividad("a4", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad descActividad1 = new DescActividad("a1", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad descActividad2 = new DescActividad("a2", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad descActividad3 = new DescActividad("a3", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
+        DescActividad descActividad4 = new DescActividad("a4", "test", Duration.ofHours(1), LocalDate.of(1999, 1, 1), 1f);
 
         assertEquals(4, ret.getActividades().size());
-        assertTrue(ret.getActividades().contains(a1));
-        assertTrue(ret.getActividades().contains(a2));
-        assertTrue(ret.getActividades().contains(a3));
-        assertTrue(ret.getActividades().contains(a4));
+        assertTrue(ret.getActividades().contains(descActividad1));
+        assertTrue(ret.getActividades().contains(descActividad2));
+        assertTrue(ret.getActividades().contains(descActividad3));
+        assertTrue(ret.getActividades().contains(descActividad4));
 
         assertEquals(4, ret.getCategorias().size());
         assertTrue(ret.getCategorias().contains("c1"));

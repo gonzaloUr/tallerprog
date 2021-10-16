@@ -122,16 +122,16 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
     public Set<String> cuponerasUsables(String actividad, String socio)
         throws ActividadNoEncontradaException, SocioNoEncontradoException {
 
-        Socio s = getRegistry().getSocios().get(socio);
-        Actividad a = getRegistry().getActividades().get(actividad);
+        Socio soci = getRegistry().getSocios().get(socio);
+        Actividad activ = getRegistry().getActividades().get(actividad);
 
-        if (s == null)
+        if (soci == null)
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
-        if (a == null)
+        if (activ == null)
             throw new ActividadNoEncontradaException("No existe una actividad con nombre: " + actividad);
 
-        return s.cuponerasUsables(a);
+        return soci.cuponerasUsables(activ);
     }
 
     @Override
@@ -154,21 +154,21 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
     public void agregarACuponera(String cuponera, String actividad, int cant)
         throws ActividadNoEncontradaException, CuponeraNoEncontradaException {
 
-        Cuponera c = getRegistry().getCuponeras().get(cuponera);
-        Actividad a = getRegistry().getActividades().get(actividad);
+        Cuponera cup = getRegistry().getCuponeras().get(cuponera);
+        Actividad activ = getRegistry().getActividades().get(actividad);
 
-        if (a == null)
+        if (activ == null)
             throw new ActividadNoEncontradaException("No existe una actividad con nombre: " + actividad);
 
-        if (c == null)
+        if (cup == null)
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + cuponera);
 
-        Integra integra = new Integra(cant, a, c);
-        c.getIntegras().add(integra);
-        a.getIntegras().add(integra);
-        for ( Categoria cat : a.getCategorias()){ //la categoria sabe quienes la tienen
-            cat.agregarCuponera(c);
-            c.getCategorias().add(cat);
+        Integra integra = new Integra(cant, activ, cup);
+        cup.getIntegras().add(integra);
+        activ.getIntegras().add(integra);
+        for ( Categoria cat : activ.getCategorias()){ //la categoria sabe quienes la tienen
+            cat.agregarCuponera(cup);
+            cup.getCategorias().add(cat);
         }
     }
 
@@ -186,12 +186,12 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
 
     @Override
     public DataCuponera getDataCuponera(String nombre) throws CuponeraNoEncontradaException {
-        Cuponera c = getRegistry().getCuponeras().get(nombre);
+        Cuponera cup = getRegistry().getCuponeras().get(nombre);
 
-        if (c == null)
+        if (cup == null)
             throw new CuponeraNoEncontradaException("No existe una cuponera con nombre:" + nombre);
 
-        return c.getDataCuponera();
+        return cup.getDataCuponera();
     }
 
     @Override

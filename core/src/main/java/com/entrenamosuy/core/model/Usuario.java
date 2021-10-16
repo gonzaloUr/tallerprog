@@ -138,21 +138,21 @@ public abstract class Usuario {
     }
 
 
-    public void seguirUsuario(Usuario u){
-        usuariosSeguidos.add(u);
-        u.agregarSeguidor(this);
+    public void seguirUsuario(Usuario usuario){
+        usuariosSeguidos.add(usuario);
+        usuario.agregarSeguidor(this);
     }
 
-    public void dejarDeSeguirUsuario(Usuario u) {
-        usuariosSeguidos.remove(u);
-        u.removerSeguidor(this);
+    public void dejarDeSeguirUsuario(Usuario usuario) {
+        usuariosSeguidos.remove(usuario);
+        usuario.removerSeguidor(this);
     }
 
-    public void removerSeguidor(Usuario u){
-        seguidores.remove(u);
+    public void removerSeguidor(Usuario usuario){
+        seguidores.remove(usuario);
     }
     
-    public void agregarSeguidor(Usuario u){
-        seguidores.add(u);
+    public void agregarSeguidor(Usuario usuario){
+        seguidores.add(usuario);
     }
 }

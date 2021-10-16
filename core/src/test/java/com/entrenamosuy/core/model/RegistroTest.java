@@ -15,21 +15,21 @@ public class RegistroTest {
         Cuponera cuponera = mock(Cuponera.class);
         Clase clase = mock(Clase.class);
 
-        Registro r1 = Registro.builder()
+        Registro registro1 = Registro.builder()
             .setSocio(socio)
             .setCuponera(cuponera)
             .setClaseAsociada(clase)
             .setFecha(LocalDate.of(1999, 1, 1))
             .build();
 
-        Registro r2 = Registro.builder()
+        Registro registro2 = Registro.builder()
             .setSocio(socio)
             .setCuponera(cuponera)
             .setClaseAsociada(clase)
             .setFecha(LocalDate.of(1999, 1, 1))
             .build();
         
-        assertEquals(r1, r2);
-        assertEquals(r1.hashCode(), r2.hashCode());
+        assertEquals(registro1, registro2);
+        assertEquals(registro1.hashCode(), registro2.hashCode());
     }
 }

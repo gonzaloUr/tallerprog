@@ -11,21 +11,21 @@ public class DataActividadTest {
 
     @Test
     public void equalsTest() {
-        DataActividad d1 = DataActividad.builder()
+        DataActividad dataActividad1 = DataActividad.builder()
                 .setNombre("test")
                 .setDescripcion("test")
                 .setDuracion(Duration.ofHours(1))
                 .setRegistro(LocalDate.of(1999, 1, 1))
                 .build();
 
-        DataActividad d2 = DataActividad.builder()
+        DataActividad dataActividad2 = DataActividad.builder()
                 .setNombre("test")
                 .setDescripcion("test")
                 .setDuracion(Duration.ofHours(1))
                 .setRegistro(LocalDate.of(1999, 1, 1))
                 .build();
 
-        assertEquals(d1, d2);
-        assertEquals(d1.hashCode(), d2.hashCode());
+        assertEquals(dataActividad1, dataActividad2);
+        assertEquals(dataActividad1.hashCode(), dataActividad2.hashCode());
     }
 }

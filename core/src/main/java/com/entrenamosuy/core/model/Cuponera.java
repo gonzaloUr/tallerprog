@@ -252,9 +252,9 @@ public class Cuponera {
         return new DataCuponera(this.nombre, this.descripcion, acts, categoriasStrings);
     }
 
-    public Integra getIntegra(Actividad a) {
+    public Integra getIntegra(Actividad activ) {
         for (Integra integra : integras)
-            if (integra.getActividad().equals(a))
+            if (integra.getActividad().equals(activ))
                 return integra;
 
         return null;

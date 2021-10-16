@@ -142,8 +142,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         .build();
                 inst.getActividadesOfrecidas().add(nuevaActividad);
                 actividades.put(nombre, nuevaActividad);
-                for(Categoria c : categoriasActiv){
-                    c.agregarActividad(nuevaActividad);
+                for(Categoria cat : categoriasActiv){
+                    cat.agregarActividad(nuevaActividad);
                 }
                 if (creador != null){
                     profe = profes.get(creador);
@@ -156,41 +156,41 @@ public class FacadeActividad extends AbstractFacadeActividad {
     @Override
     public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) throws RegistroInconsistenteException {
 
-        Clase c = getRegistry().getClases().get(clase);
-        Socio s = getRegistry().getSocios().get(socio);
+        Clase clas = getRegistry().getClases().get(clase);
+        Socio soci = getRegistry().getSocios().get(socio);
 
-        if (c == null)
+        if (clas == null)
             throw new ClaseNoEncontradaException("No existe una clase con nombre: " + clase);
 
-        if (s == null)
+        if (soci == null)
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         List<RegistroInconsistenteException.Restriccion> inconsistencias = new ArrayList<>();
 
-        if ((c.getCantMax() - c.getRegistros().size()) <= 0)
+        if ((clas.getCantMax() - clas.getRegistros().size()) <= 0)
             inconsistencias.add(RegistroInconsistenteException.Restriccion.CLASE_LLENA);
 
-        if (fechaRegistro.isBefore(c.getFechaRegistro()))
+        if (fechaRegistro.isBefore(clas.getFechaRegistro()))
             inconsistencias.add(RegistroInconsistenteException.Restriccion.FECHA_REGISTRO_MENOR_REGISTRO_CLASE);
 
         if (!inconsistencias.isEmpty())
             throw new RegistroInconsistenteException(inconsistencias);
 
-        c.registrarseSinCuponera(s, fechaRegistro);
+        clas.registrarseSinCuponera(soci, fechaRegistro);
     }
 
     @Override
     public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
         throws RegistroInconsistenteException {
 
-        Clase c = getRegistry().getClases().get(clase);
-        Socio s = getRegistry().getSocios().get(socio);
+        Clase clas = getRegistry().getClases().get(clase);
+        Socio soci = getRegistry().getSocios().get(socio);
         Cuponera cup = getRegistry().getCuponeras().get(cuponera);
 
-        if (c == null)
+        if (clas == null)
             throw new ClaseNoEncontradaException("No existe una clase con nombre: " + clase);
 
-        if (s == null)
+        if (soci == null)
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         if (cup == null)
@@ -198,16 +198,16 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
         List<RegistroInconsistenteException.Restriccion> inconsistencias = new ArrayList<>();
 
-        if ((c.getCantMax() - c.getRegistros().size()) <= 0)
+        if ((clas.getCantMax() - clas.getRegistros().size()) <= 0)
             inconsistencias.add(RegistroInconsistenteException.Restriccion.CLASE_LLENA);
 
-        if (fechaRegistro.isBefore(c.getFechaRegistro()))
+        if (fechaRegistro.isBefore(clas.getFechaRegistro()))
             inconsistencias.add(RegistroInconsistenteException.Restriccion.FECHA_REGISTRO_MENOR_REGISTRO_CLASE);
 
         if (!inconsistencias.isEmpty())
             throw new RegistroInconsistenteException(inconsistencias);
 
-        c.registrarseConCuponera(s, fechaRegistro, cup);
+        clas.registrarseConCuponera(soci, fechaRegistro, cup);
     }
 
     @Override
@@ -215,14 +215,14 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Set<String> res = new HashSet<>();
         Map<String, Institucion> inst = getRegistry().getInstituciones();
 
-        Institucion i = inst.get(institucion);
-        if (i == null) {
+        Institucion ins = inst.get(institucion);
+        if (ins == null) {
             throw new InstitucionNoEncontradaException("No existe una institucion con nombre: " + institucion);
         }
-        Set<Actividad> acts = i.getActividadesOfrecidas();
-        for (Actividad a : acts){
-            if (a.getEstado()==ActividadEstado.ACEPTADA)
-                res.add(a.getNombre());
+        Set<Actividad> acts = ins.getActividadesOfrecidas();
+        for (Actividad activ : acts){
+            if (activ.getEstado()==ActividadEstado.ACEPTADA)
+                res.add(activ.getNombre());
         }
         return res;
     }
@@ -232,11 +232,11 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Map<String, Actividad> acts = getRegistry().getActividades();
         if (acts.isEmpty())
             throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
-        Actividad a = acts.get(actividad);
-        if (a == null) {
+        Actividad activ = acts.get(actividad);
+        if (activ == null) {
             throw new ActividadNoEncontradaException("No existe actividad con nombre:" + actividad);
         }
-        return a.getDataActividad();
+        return activ.getDataActividad();
     }
 
     @Override
@@ -276,22 +276,22 @@ public class FacadeActividad extends AbstractFacadeActividad {
     public Set<DataActividad> listarActividadesRegistradas(){
         Map<String,Actividad> actividades = getRegistry().getActividades();
         Set<DataActividad> ret = new HashSet<>();
-        for (Map.Entry<String,Actividad> a : actividades.entrySet()){
-            if (a.getValue().getEstado()==ActividadEstado.INGRESADA)
-                ret.add(a.getValue().getDataActividad());
+        for (Map.Entry<String,Actividad> activ : actividades.entrySet()){
+            if (activ.getValue().getEstado()==ActividadEstado.INGRESADA)
+                ret.add(activ.getValue().getDataActividad());
         }
         return ret;
     }
 
     @Override
     public void aceptarActividad(String actividad){
-        Actividad a = getRegistry().getActividades().get(actividad);
-        a.setEstado(ActividadEstado.ACEPTADA);
+        Actividad activ = getRegistry().getActividades().get(actividad);
+        activ.setEstado(ActividadEstado.ACEPTADA);
     }
 
     @Override
     public void rechazarActividad(String actividad){
-        Actividad a = getRegistry().getActividades().get(actividad);
-        a.setEstado(ActividadEstado.RECHAZADA);
+        Actividad activ = getRegistry().getActividades().get(actividad);
+        activ.setEstado(ActividadEstado.RECHAZADA);
     }
 }

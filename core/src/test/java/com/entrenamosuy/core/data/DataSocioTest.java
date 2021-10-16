@@ -10,7 +10,7 @@ public class DataSocioTest {
 
     @Test
     public void equalsTest() {
-        DataSocio d1 = DataSocio.builder()
+        DataSocio dataSocio1 = DataSocio.builder()
                 .setNickname("test")
                 .setNombre("test")
                 .setApellido("test")
@@ -18,7 +18,7 @@ public class DataSocioTest {
                 .setNacimiento(LocalDate.of(1999, 1, 1))
                 .build();
 
-        DataSocio d2 = DataSocio.builder()
+        DataSocio dataSocio2 = DataSocio.builder()
                 .setNickname("test")
                 .setNombre("test")
                 .setApellido("test")
@@ -26,7 +26,7 @@ public class DataSocioTest {
                 .setNacimiento(LocalDate.of(1999, 1, 1))
                 .build();
 
-        assertEquals(d1, d2);
-        assertEquals(d1.hashCode(), d2.hashCode());
+        assertEquals(dataSocio1, dataSocio2);
+        assertEquals(dataSocio1.hashCode(), dataSocio2.hashCode());
     }
 }

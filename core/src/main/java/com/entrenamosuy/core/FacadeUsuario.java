@@ -130,10 +130,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
                 Map<Email, Profesor> profsEmail = getRegistry().getProfesoresMail();
                 Map<Email, Socio> sociosEmail = getRegistry().getSociosMail();
 
-                boolean b1 = profs.get(nickname) != null || socios.get(nickname) != null;
-                boolean b2 = profsEmail.get(correo) != null || sociosEmail.get(correo) != null;
+                boolean boolean1 = profs.get(nickname) != null || socios.get(nickname) != null;
+                boolean boolean2 = profsEmail.get(correo) != null || sociosEmail.get(correo) != null;
 
-                if (b1 || b2)
+                if (boolean1 || boolean2)
                     throw new UsuarioRepetidoException("No existe un usuario con nickname: " + nickname);
 
                 // Crear un nuevo profesor con los datos pasados.
@@ -456,10 +456,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     @Override
     public DataSocio getDataSocio(String nickname) {
         Map<String, Socio> mapa = getRegistry().getSocios();
-        Socio p = mapa.get(nickname);
-        if (p != null) {
-            DataSocio r = p.getDataSocio();
-            return r;
+        Socio socio = mapa.get(nickname);
+        if (socio != null) {
+            DataSocio dataSocio = socio.getDataSocio();
+            return dataSocio;
         } else
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + nickname);
     }
@@ -467,10 +467,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     @Override
     public DataProfesor getDataProfesor(String nickname) {
         Map<String, Profesor> mapa = getRegistry().getProfesores();
-        Profesor p = mapa.get(nickname);
-        if (p != null) {
-            DataProfesor r = p.getDataProfesor(); // Implementarlo en la clase Profesor
-            return r;
+        Profesor profe = mapa.get(nickname);
+        if (profe != null) {
+            DataProfesor dataProfe = profe.getDataProfesor(); // Implementarlo en la clase Profesor
+            return dataProfe;
         } else {
             throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
         }

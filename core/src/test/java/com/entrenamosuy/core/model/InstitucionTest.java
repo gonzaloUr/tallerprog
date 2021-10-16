@@ -11,18 +11,18 @@ public class InstitucionTest {
     @Test
     public void equalsTest() throws MalformedURLException {
 
-        Institucion r1 = Institucion.builder()
+        Institucion institucion1 = Institucion.builder()
             .setNombre("i")
             .setDescripcion("")
             .setUrl(new URL("https://test"))
             .build();
-        Institucion r2 = Institucion.builder()
+        Institucion institucion2 = Institucion.builder()
             .setNombre("i")
             .setDescripcion("")
             .setUrl(new URL("https://test"))
             .build();
             
-        assertEquals(r1, r2);
-        assertEquals(r1.hashCode(), r2.hashCode());
+        assertEquals(institucion1, institucion2);
+        assertEquals(institucion1.hashCode(), institucion2.hashCode());
     }
 }

@@ -10,7 +10,7 @@ public class DataProfesorTest {
 
     @Test
     public void equalsTest() {
-        DataProfesor d1 = DataProfesor.builder()
+        DataProfesor dataProfesor1 = DataProfesor.builder()
                 .setNickname("test")
                 .setNombre("test")
                 .setApellido("test")
@@ -20,7 +20,7 @@ public class DataProfesorTest {
                 .setNacimiento(LocalDate.of(1999, 1, 1))
                 .build();
 
-        DataProfesor d2 = DataProfesor.builder()
+        DataProfesor dataProfesor2 = DataProfesor.builder()
                 .setNickname("test")
                 .setNombre("test")
                 .setApellido("test")
@@ -30,7 +30,7 @@ public class DataProfesorTest {
                 .setNacimiento(LocalDate.of(1999, 1, 1))
                 .build();
 
-        assertEquals(d1, d2);
-        assertEquals(d1.hashCode(), d2.hashCode());
+        assertEquals(dataProfesor1, dataProfesor2);
+        assertEquals(dataProfesor1.hashCode(), dataProfesor2.hashCode());
     }
 }

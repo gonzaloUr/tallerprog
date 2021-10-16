@@ -16,7 +16,7 @@ public class ClaseTest {
     public void equalsTest() throws MalformedURLException {
         Actividad actividad = mock(Actividad.class);
 
-        Clase c1 = Clase.builder()
+        Clase clase1 = Clase.builder()
             .setActividad(actividad)
             .setAcceso(new URL("https://test"))
             .setCantMin(1)
@@ -26,7 +26,7 @@ public class ClaseTest {
             .setNombre("c1")
             .build();
 
-        Clase c2 = Clase.builder()
+        Clase clase2 = Clase.builder()
             .setActividad(actividad)
             .setAcceso(new URL("https://test"))
             .setCantMin(1)
@@ -36,7 +36,7 @@ public class ClaseTest {
             .setNombre("c1")
             .build();
         
-        assertEquals(c1, c2);
-        assertEquals(c1.hashCode(), c2.hashCode());
+        assertEquals(clase1, clase2);
+        assertEquals(clase1.hashCode(), clase2.hashCode());
     }
 }

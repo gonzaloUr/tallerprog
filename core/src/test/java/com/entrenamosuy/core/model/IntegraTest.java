@@ -11,12 +11,12 @@ public class IntegraTest {
 
     @Test
     public void equalsTest() {
-        Actividad a1 = mock(Actividad.class);
-        Cuponera c1 = mock(Cuponera.class);
+        Actividad actividad1 = mock(Actividad.class);
+        Cuponera cuponera1 = mock(Cuponera.class);
         
-        Integra i1 = new Integra(1, a1, c1);
-        Integra i2 = new Integra(1, a1, c1);
+        Integra integra1 = new Integra(1, actividad1, cuponera1);
+        Integra integra2 = new Integra(1, actividad1, cuponera1);
         
-        assertEquals(i1, i2);
+        assertEquals(integra1, integra2);
     }
 }

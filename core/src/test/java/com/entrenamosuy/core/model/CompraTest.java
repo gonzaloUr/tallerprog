@@ -14,9 +14,9 @@ public class CompraTest {
         Socio socio = mock(Socio.class);
         Cuponera cuponera = mock(Cuponera.class);
         
-        Compra c1 = new Compra(LocalDate.of(1999, 1, 1), socio, cuponera);
-        Compra c2 = new Compra(LocalDate.of(1999, 1, 1), socio, cuponera);
+        Compra compra1 = new Compra(LocalDate.of(1999, 1, 1), socio, cuponera);
+        Compra compra2 = new Compra(LocalDate.of(1999, 1, 1), socio, cuponera);
         
-        assertEquals(c1, c2);
+        assertEquals(compra1, compra2);
     }
 }

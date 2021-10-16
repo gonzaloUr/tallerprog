@@ -14,7 +14,7 @@ public class DataClaseTest {
 
     @Test
     public void equalsTest() throws MalformedURLException {
-        DataClase d1 = DataClase.builder()
+        DataClase dataClase1 = DataClase.builder()
                 .setNombre("test")
                 .setInicio(LocalDateTime.of(1999, 1, 1, 1, 1))
                 .setAccesoURL(new URL("https://test"))
@@ -28,7 +28,7 @@ public class DataClaseTest {
                         10f))
                 .build();
 
-        DataClase d2 = DataClase.builder()
+        DataClase dataClase2 = DataClase.builder()
                 .setNombre("test")
                 .setInicio(LocalDateTime.of(1999, 1, 1, 1, 1))
                 .setAccesoURL(new URL("https://test"))
@@ -42,7 +42,7 @@ public class DataClaseTest {
                         10f))
                 .build();
 
-        assertEquals(d1, d2);
-        assertEquals(d1.hashCode(), d2.hashCode());
+        assertEquals(dataClase1, dataClase2);
+        assertEquals(dataClase1.hashCode(), dataClase2.hashCode());
     }
 }

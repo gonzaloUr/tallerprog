@@ -129,12 +129,12 @@ public class FacadeClase extends AbstractFacadeClase {
 
                 Set<Profesor> profes = new HashSet<>();
                 for (String nickname : nicknameProfesores) {
-                    Profesor p = profesores.get(nickname);
+                    Profesor profe = profesores.get(nickname);
 
-                    if (p == null)
+                    if (profe == null)
                         throw new ProfesorNoEncontradoException("No existe un profesor con nickname: " + nickname);
 
-                    profes.add(p);
+                    profes.add(profe);
                 }
 
                 Set<Registro> registros = new HashSet<>();
