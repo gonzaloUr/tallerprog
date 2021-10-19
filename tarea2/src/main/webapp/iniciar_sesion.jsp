@@ -5,7 +5,12 @@
 	<head>
         <meta charset="UTF-8">
         <c:if test="${successful_login eq true}">
-            <meta http-equiv="refresh" content="3; URL=<c:url value="/"/>">
+            <c:if test="${es_profesor eq true}">
+                <meta http-equiv="refresh" content="3; URL=<c:url value="/index_profe.html"/>">
+            </c:if>
+            <c:if test="${es_profesor eq false}">
+                <meta http-equiv="refresh" content="3; URL=<c:url value="/index_socio.html"/>">
+            </c:if>
         </c:if>
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -17,7 +22,12 @@
                 <div class="form-login">
                     <h1 class="h3 mb-3 fw-normal">Inicio exitoso</h1>
                     <span class="mb-3">Sera direccionado automáticamente a la pagina principal en un momento</span>
-                    <a class="btn btn-primary" href="<c:url value="/"/>">Pagina principal</a>
+                    <c:if test="${es_profesor eq false}">
+                        <a class="btn btn-primary" href="<c:url value="/index_socio.html"/>">Pagina principal</a>
+                    </c:if>
+                    <c:if test="${es_profesor eq true}">
+                        <a class="btn btn-primary" href="<c:url value="/index_profe.html"/>">Pagina principal</a>
+                    </c:if>
                 </div>
             </c:when>
             <c:otherwise>
