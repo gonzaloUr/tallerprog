@@ -1,4 +1,4 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,22 +9,7 @@
         <link rel="stylesheet" href="styles/sidebar.css">
 	</head>
 	<body>
-		        <header class="d-flex flex-row justify-content-between bg-dark text-white p-3">
-    
-    <a href="index_profe.html" class="text-decoration-none" style="color:white"><h3>Entrenamos.uy</h3></a>
-    <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_usuarios_profe.html">Usuarios</a>
-    </div>
-   
-    <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_actividades_profe.html">Actividades</a>
-    </div>
-    <form class="col-4 mx-3" action="search" method="post">
-        <input class="form-control" type="search" placeholder="buscar" name="keyword">
-    </form>
-            <a class="btn btn-outline-light mx-3" href="cerrar_sesion">Cerrar sesión</a>
-            <a class="btn btn-outline-light mx-3" href="alta_usuario.html" style="visibility: hidden">Registrarse</a>
-</header>
+	        <jsp:include page="/WEB-INF/templates/header.jsp"/>
 	        <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -92,28 +77,28 @@
                                             <div><strong>guille</strong></div>
                                             <div class="text-muted fs-13px">Socio</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>eugue</strong></div>
                                             <div class="text-muted fs-13px">Socio</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>denis</strong></div>
                                             <div class="text-muted fs-13px">Profesor</div>
                                         </div>
-                                        <a href="consulta_profesor_profe.html" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>Nelson</strong></div>
                                             <div class="text-muted fs-13px">Profesor</div>
                                         </div>
-                                        <a href="consulta_profesor_profe.html" class="btn btn-outline-primary">Ver Perfil</a>
+                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     </div>
               
@@ -126,11 +111,11 @@
 	              <div class="list-group" style="list-style-type:none">
 	              	<a class="list-group-item active">Clases</a>
 	              	 <hr>
-	              	<a href="consulta_dictado_clase_profe.html" class="list-group-item list-group-item-action">Voleibol</a>
-	              	<a href="consulta_dictado_clase_profe.html" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
-	              	<a href="consulta_dictado_clase_profe.html" class="list-group-item list-group-item-action">Musculos para boxeo</a>
-	              	<a href="consulta_dictado_clase_profe.html" class="list-group-item list-group-item-action">200 M</a>
-	              	<a href="consulta_dictado_clase_profe.html" class="list-group-item list-group-item-action">Basquet I</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Voleibol</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Musculos para boxeo</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">200 M</a>
+	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Basquet I</a>
 	              </div>
 	              </div>
 	              </div>
@@ -140,7 +125,7 @@
 	              <div class="list-group" style="list-style-type:none">
 	              <a class="list-group-item active">Cuponeras</a>
 	              	 <hr>
-	              	 <p class="list-group-item list-group-item-action">Pelota</p>
+	              	 <a href="consulta_cuponera" class="list-group-item list-group-item-action">Pelota</a>
 	              </div>
 	              </div>
 	              </div>

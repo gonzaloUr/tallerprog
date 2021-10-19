@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,7 +9,7 @@
         <link rel="stylesheet" href="styles/alta_usuario.css">
     </head>
 	<body class="d-flex flex-column text-center justify-content-center py-12">
-        <form class="d-flex flex-column form-signup" action="index_visitante.html">
+        <form class="d-flex flex-column form-signup" method="post">
             <h1 class="h3 mb-3 fw-normal">Alta de usuario</h1>
             <input class="form-control mb-3" placeholder="nickname" name="nick">
             <input class="form-control mb-3" placeholder="nombre" name="nick">
