@@ -20,9 +20,7 @@ import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.model.ActividadEstado;
 
-
-
-public class DatosPruebaServlet extends HttpServlet {
+public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -704,5 +702,7 @@ public class DatosPruebaServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace(response.getWriter());
         }
+
+        response.getWriter().println("Datos cargados!");
     }
 }

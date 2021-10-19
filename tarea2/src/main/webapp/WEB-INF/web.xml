@@ -8,6 +8,21 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
     http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     id="WebApp_ID" version="2.5">
+
+    <!-- Servlets -->
+
+    <servlet>
+        <servlet-name>ActividadServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.ActividadServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>IndexServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.IndexServlet</servlet-class>
+    </servlet>
+
+    <!-- Default servlet mappings -->
+
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.css</url-pattern>
@@ -33,34 +48,22 @@
         <url-pattern>*.jpeg</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>cerrar_sesion</servlet-name>
-        <jsp-file>/cerrar_sesion.jsp</jsp-file>
-    </servlet>
+    <!-- ActividadServlet mappings -->
+
     <servlet-mapping>
-        <servlet-name>cerrar_sesion</servlet-name>
-        <url-pattern>/cerrar_sesion</url-pattern>
+        <servlet-name>ActividadServlet</servlet-name>
+        <url-pattern>/consulta_actividad</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>IniciarSesion</servlet-name>
-        <servlet-class>com.entrenamosuy.web.IniciarSesionServlet</servlet-class>
-    </servlet>
     <servlet-mapping>
-        <servlet-name>IniciarSesion</servlet-name>
-        <url-pattern>/iniciar_sesion</url-pattern>
+        <servlet-name>ActividadServlet</servlet-name>
+        <url-pattern>/lista_actividades</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>DatosPrueba</servlet-name>
-        <servlet-class>com.entrenamosuy.web.DatosPruebaServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DatosPrueba</servlet-name>
-        <url-pattern>/datos_prueba</url-pattern>
-    </servlet-mapping>
+    <!-- IndexServlet mapping -->
 
-    <welcome-file-list>
-		<welcome-file>index_visitante.html</welcome-file>
-	</welcome-file-list>
+    <servlet-mapping>
+        <servlet-name>IndexServlet</servlet-name>
+        <url-pattern/>
+    </servlet-mapping>
 </web-app>
