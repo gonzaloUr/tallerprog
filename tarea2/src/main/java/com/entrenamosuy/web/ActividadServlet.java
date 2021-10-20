@@ -22,7 +22,7 @@ public class ActividadServlet extends HttpServlet {
             Set<DataActividad> acts = Facades
 				.getFacades()
 				.getFacadeActividad()
-				.listarActividadesRegistradas();
+				.listarActividadesAceptadas();
 
 			request.setAttribute("actividades", acts);
 			request.getRequestDispatcher("/lista_actividades.jsp")

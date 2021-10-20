@@ -235,7 +235,7 @@ public class FacadeActividadTest {
     }
     
     @Test 
-    public void listarActividadesRegistradas() {
+    public void listarActividadesIngresadas() {
         Fabrica fabrica = new Fabrica();
         FacadeContainer facades = fabrica.createFacades();
 
@@ -262,7 +262,7 @@ public class FacadeActividadTest {
                 .invoke();
         });
 
-        Set<DataActividad> ret = facades.getFacadeActividad().listarActividadesRegistradas();
+        Set<DataActividad> ret = facades.getFacadeActividad().listarActividadesIngresadas();
             
         assertEquals(1, ret.size());
         assertEquals("a1", ((DataActividad) ret.toArray()[0]).getNombre());

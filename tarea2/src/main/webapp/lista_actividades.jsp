@@ -1,6 +1,8 @@
 <%@page import="java.util.Set"%>
 <%@page import="com.entrenamosuy.core.data.DataActividad"%>
+**/ %>
 <!DOCTYPE html>
+<% List activ = (List)session.getAttribute("actividades");%>
 <html>
 	<head>
         <meta charset="UTF-8">
@@ -13,6 +15,7 @@
 		<div class="d-flex justify-content-center">
 			<div class=col-3></div>
 			<div class=col-6>
+                
 			      <div class="list-group">
                               <div class="list-group-item d-flex align-items-center active"><h4><strong>Actividades</strong></h4>
                               </div>

@@ -57,7 +57,9 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract void crearCategoria(String nombre) throws CategoriaRepetidaException;
 
-    public abstract Set<DataActividad> listarActividadesRegistradas();
+    public abstract Set<DataActividad> listarActividadesIngresadas(); //Devuelve las actividades de estado Ingresada
+
+    public abstract Set<DataActividad> listarActividadesAceptadas(); //Devuelve las actividades de estado Aceptada
 
     public abstract void aceptarActividad(String actividad);
 

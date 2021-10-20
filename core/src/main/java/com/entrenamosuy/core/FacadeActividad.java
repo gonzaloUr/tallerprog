@@ -295,11 +295,22 @@ public class FacadeActividad extends AbstractFacadeActividad {
         categorias.put(nombre, cat);
     }
     @Override
-    public Set<DataActividad> listarActividadesRegistradas(){
+    public Set<DataActividad> listarActividadesIngresadas(){
         Map<String, Actividad> actividades = getRegistry().getActividades();
         Set<DataActividad> ret = new HashSet<>();
         for (Map.Entry<String, Actividad> activ : actividades.entrySet()){
             if (activ.getValue().getEstado()==ActividadEstado.INGRESADA)
+                ret.add(activ.getValue().getDataActividad());
+        }
+        return ret;
+    }
+
+    @Override
+    public Set<DataActividad> listarActividadesAceptadas(){
+        Map<String, Actividad> actividades = getRegistry().getActividades();
+        Set<DataActividad> ret = new HashSet<>();
+        for (Map.Entry<String, Actividad> activ : actividades.entrySet()){
+            if (activ.getValue().getEstado()==ActividadEstado.ACEPTADA)
                 ret.add(activ.getValue().getDataActividad());
         }
         return ret;
