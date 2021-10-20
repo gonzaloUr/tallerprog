@@ -1,8 +1,6 @@
 <%@page import="java.util.Set"%>
 <%@page import="com.entrenamosuy.core.data.DataActividad"%>
-**/ %>
 <!DOCTYPE html>
-<% List activ = (List)session.getAttribute("actividades");%>
 <html>
 	<head>
         <meta charset="UTF-8">
