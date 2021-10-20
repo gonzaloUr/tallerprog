@@ -6,11 +6,9 @@
     <div class="d-flex flex-column">
     	<a class="btn btn-outline-light mx-3" href="lista_usuarios_visitante.html">Usuarios</a>
     </div>
+    
     <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_instituciones_visitante.html">Instituciones</a>
-    </div>
-    <div class="d-flex flex-column">
-    	<a class="btn btn-outline-light mx-3" href="lista_actividades_visitante.html">Actividades</a>
+    	<a class="btn btn-outline-light mx-3" href="lista_actividades">Actividades</a>
     </div>
     <form class="col-4 mx-3" action="search" method="post">
         <input class="form-control" type="search" placeholder="buscar" name="keyword">
