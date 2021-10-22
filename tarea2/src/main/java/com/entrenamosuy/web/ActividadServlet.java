@@ -15,8 +15,10 @@ import com.entrenamosuy.core.data.DataCuponera;
 
 public class ActividadServlet extends HttpServlet {
     
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getServletPath();
+    
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getServletPath();
         
 		if(path.equals("/lista_actividades")) {
             Set<DataActividad> acts = Facades
@@ -58,13 +60,6 @@ public class ActividadServlet extends HttpServlet {
 			request
 				.getRequestDispatcher("/consulta_actividad.jsp")
 				.forward(request, response);
-		} else {
-			// TODO: alta actividad			
-		}
-    }
-    
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
+		} 
 	}
 }

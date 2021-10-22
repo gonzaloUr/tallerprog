@@ -26,6 +26,23 @@ public class UsuarioServlet extends HttpServlet {
                 .getRequestDispatcher("/iniciar_sesion.jsp")
                 .forward(request, response);
         }
+
+        String path = request.getServletPath();
+
+        if(path.equals("/consulta_socio")) {
+            String nick = request.getAttribute("nickname");
+            DataSocio socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nick);
+            request.setAttribute("nombre", socio.getNombre() + "" + socio.getApellido());
+            request.setAttribute("mail", socio.getCorreo().toString());
+            request.setAttribute("nacimiento", socio.getNacimiento());
+            request.setAttribute("seguidos", socio.getSeguidos());
+            request.setAttribute("seguidores", socio.getSeguidores());
+            request.setAttribute("clases", socio.getClases());
+            request.setAttribute("cuponeras", socio.getCuponeras());
+            request.getRequestDispatcher("/consulta_socio
+            .jsp")
+				.forward(request, response);
+        }
     }
 
 

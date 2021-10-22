@@ -9,6 +9,17 @@
         <link rel="stylesheet" href="styles/sidebar.css">
 	</head>
 	<body>
+
+          <% 
+          String nick = request.getAttribute("nickname");
+          String nombre = request.getAttribute("nombre");
+          String mail = request.getAttribute("mail");
+          LocalDate nacimiento = request.getAttribute("nacimiento");
+          Set<String> seguidos = request.getAttribute("seguidos");
+          Set<String> seguidores = request.getAttribute("seguidores");
+          Set<DataClase> clases = request.getAttribute("clases");
+          Set<DataCuponera> cuponeras = request.getAttribute("cuponeras");
+          %>
 	        <jsp:include page="/WEB-INF/templates/header.jsp"/>
 	        <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
@@ -17,7 +28,7 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bit.ly/3lxoBvZ" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
-                      <h4>Emi71</h4>
+                      <h4><%= nick%></h4>
                       <p class="text-secondary mb-1">Socio</p>
                       <button class="btn btn-primary">Seguir</button>
                     </div>
@@ -31,7 +42,7 @@
                       <h6 class="mb-0">Nombre completo</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                      Emiliano Lucas
+                      <%= nombre%>
                     </div>
                   </div>
                   <hr>
@@ -40,7 +51,7 @@
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                      emi71@gmail.com
+                      <%= mail%>
                     </div>
                   </div>
                   <hr>
@@ -49,7 +60,7 @@
                       <h6 class="mb-0">Fecha de nacimiento</h6>
                     </div>
                     <div class="col-sm-7 text-secondary">
-                      31/12/1971
+                      <%= nacimiento.getDayOfMonth()%>/<%= nacimiento.getMonthValue()%>/<%= nacimiento.getYear()%>
                     </div>
                   </div>
                  </div>
@@ -60,6 +71,9 @@
                <div class="list-group">
                                     <div class="list-group-item d-flex align-items-center active">Siguiendo
                                     </div>
+                                    <% 
+                                    Set<String> sig = (Set<String>) request.getAttribute("seguidos");
+                                    for (String s: sig){
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong>guille</strong></div>
@@ -111,11 +125,12 @@
 	              <div class="list-group" style="list-style-type:none">
 	              	<a class="list-group-item active">Clases</a>
 	              	 <hr>
-	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Voleibol</a>
-	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Aerobico adulto mayor</a>
-	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Musculos para boxeo</a>
-	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">200 M</a>
-	              	<a href="consulta_dictado_clase" class="list-group-item list-group-item-action">Basquet I</a>
+                   <% 
+                      Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
+                      for (String c: cls){
+                    %>
+	              	<a href="consulta_dictado_clase?nombre=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.get.Nombre()%></a>
+                   <% } %>
 	              </div>
 	              </div>
 	              </div>
@@ -125,7 +140,12 @@
 	              <div class="list-group" style="list-style-type:none">
 	              <a class="list-group-item active">Cuponeras</a>
 	              	 <hr>
-	              	 <a href="consulta_cuponera" class="list-group-item list-group-item-action">Pelota</a>
+                   <% 
+                      Set<DataCuponera> cls = (Set<DataCuponera>) request.getAttribute("cuponeras");
+                      for (String cup: cups){
+                    %>
+	              	 <a href="consulta_cuponera?nombre=<%= cup.getNombre()%>" class="list-group-item list-group-item-action"><%= cup.getNombre()%></a>
+                   <% } %>
 	              </div>
 	              </div>
 	              </div>
