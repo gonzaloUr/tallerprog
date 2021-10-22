@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +24,8 @@ import com.entrenamosuy.core.model.ActividadEstado;
 public class IndexServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        /*
         AbstractFacadeUsuario facadeUsuario = Facades.getFacades().getFacadeUsuario();
         AbstractFacadeActividad facadeActividad = Facades.getFacades().getFacadeActividad();
         AbstractFacadeCuponera facadeCuponera = Facades.getFacades().getFacadeCuponera();
@@ -634,7 +636,6 @@ public class IndexServlet extends HttpServlet {
                 .setAcceso(new URL("https://telon.com.uy/bball2"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 31)).invoke();
 
-            /* IMPORTANTE Quedó sin la r el nombre... mejor cambiarlo aca que en todo el codigo*/
             facadeActividad.registarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
             facadeActividad.registarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
             facadeActividad.registarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
@@ -702,7 +703,8 @@ public class IndexServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace(response.getWriter());
         }
+        */
 
-        response.getWriter().println("Datos cargados!");
+        request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 }

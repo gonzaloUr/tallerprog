@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -25,10 +25,10 @@ public abstract class Usuario {
 
     private Set<Usuario> seguidores;
 
-    private ByteBuffer imagen;
+    private File imagen;
 
     public Usuario(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, ByteBuffer imagen) {
+            String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, File imagen) {
 
         Objects.requireNonNull(nickname, "nickname es null en constructor Usuario");
         Objects.requireNonNull(nombre, "nombre es null en constructor Usuario");
@@ -114,11 +114,11 @@ public abstract class Usuario {
         this.seguidores = seguidores;
     }
 
-    public ByteBuffer getImagen() {
+    public File getImagen() {
         return imagen;
     }
 
-    public void setImagen(ByteBuffer imagen) {
+    public void setImagen(File imagen) {
         this.imagen = imagen;
     }
 

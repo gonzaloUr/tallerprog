@@ -9,8 +9,8 @@
     </head>
 	</head>
 	<body class="d-flex flex-column">
-        <jsp:include page="/WEB-INF/templates/header.jsp"/>
-        <jsp:include page="/WEB-INF/templates/aside.jsp"/>
+        <jsp:include page="/templates/header.jsp"/>
+        <jsp:include page="/templates/aside.jsp"/>
         <main class="d-flex flex.column">
         <a href="consulta_profesor">linkprofe</a>
         <a href="consulta_socio">linksocio</a>

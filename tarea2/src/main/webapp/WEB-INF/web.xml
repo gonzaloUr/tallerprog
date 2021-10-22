@@ -31,6 +31,11 @@
         <servlet-class>com.entrenamosuy.web.UsuarioServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ImagenServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.ImagenServlet</servlet-class>
+    </servlet>
+
     <!-- Default servlet mappings -->
 
     <servlet-mapping>
@@ -41,21 +46,6 @@
     <servlet-mapping>
         <servlet-name>default</servlet-name>
         <url-pattern>*.html</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpg</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.png</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpeg</url-pattern>
     </servlet-mapping>
 
     <!-- ActividadServlet mappings -->
@@ -99,5 +89,12 @@
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
         <url-pattern/>
+    </servlet-mapping>
+
+    <!-- ImagenServlet mapping -->
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/usuario/*</url-pattern>
     </servlet-mapping>
 </web-app>

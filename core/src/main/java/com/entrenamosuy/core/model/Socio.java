@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
@@ -35,7 +35,7 @@ public class Socio extends Usuario {
 
         private Set<Usuario> seguidores = new HashSet<>();
 
-        private ByteBuffer imagen;
+        private File imagen;
 
         private Set<Registro> registros = new HashSet<>();
 
@@ -91,7 +91,7 @@ public class Socio extends Usuario {
             return this;
         }
 
-        public Builder setImagen(ByteBuffer imagen) {
+        public Builder setImagen(File imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -108,7 +108,7 @@ public class Socio extends Usuario {
 
     protected Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
                  Set<Registro> registros, Set<Compra> compras, String password, Set<Usuario> usuariosSeguidos,
-                 Set<Usuario> seguidores, ByteBuffer imagen) {
+                 Set<Usuario> seguidores, File imagen) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 

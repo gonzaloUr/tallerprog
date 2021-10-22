@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class Actividad {
 
         private ActividadEstado estado;
 
-        private ByteBuffer imagen;
+        private File imagen;
 
         private Set<Clase> clases = new HashSet<>();
 
@@ -75,7 +75,7 @@ public class Actividad {
             return this;
         }
 
-        public Builder setImagen(ByteBuffer imagen) {
+        public Builder setImagen(File imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -108,7 +108,7 @@ public class Actividad {
 
     private ActividadEstado estado;
 
-    private ByteBuffer imagen;
+    private File imagen;
 
     private Set<Clase> clases;
 
@@ -117,7 +117,7 @@ public class Actividad {
     private Set<Integra> integras;
 
     protected Actividad(String nombre, String descripcion, Duration duracion, LocalDate fechaRegistro,
-                     float costo, Set<Clase> clases, Set<Categoria> categorias, ByteBuffer imagen,
+                     float costo, Set<Clase> clases, Set<Categoria> categorias, File imagen,
                      ActividadEstado estado, Set<Integra> integras) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Actividad");
@@ -197,11 +197,11 @@ public class Actividad {
         this.categorias = categorias;
     }
 
-    public ByteBuffer getImagen() {
+    public File getImagen() {
         return imagen;
     }
 
-    public void setImagen(ByteBuffer imagen) {
+    public void setImagen(File imagen) {
         this.imagen = imagen;
     }
 

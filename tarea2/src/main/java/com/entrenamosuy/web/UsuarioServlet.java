@@ -1,18 +1,29 @@
 package com.entrenamosuy.web;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataSocio;
+import com.entrenamosuy.core.data.DataUsuario;
+import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 
+@MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class UsuarioServlet extends HttpServlet {
 
     @Override
@@ -57,5 +68,48 @@ public class UsuarioServlet extends HttpServlet {
 				.forward(request, response);
         }*/
     }
-}
 
+    private static void pipe(InputStream is, OutputStream os) throws IOException {
+        int n;
+        byte[] buff = new byte[1024];
+
+        while ((n = is.read(buff)) > -1)
+            os.write(buff, 0, n);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nickname = (String) request.getParameter("nick");
+        String nombre = (String) request.getParameter("nombre");
+        String pass = (String) request.getParameter("pass");
+
+        Part imgPart = request.getPart("img");
+        InputStream is = imgPart.getInputStream();
+
+        File tmp = File.createTempFile("img_", null);
+        OutputStream os = new FileOutputStream(tmp);
+
+        pipe(is, os);
+        os.close();
+
+        try {
+            Facades.getFacades().getFacadeUsuario().crearSocio()
+                .setNickname(nickname)
+                .setNombre(nombre)
+                .setApellido("test")
+                .setPassword(pass)
+                .setCorreo(Email.of("test", "mail.com"))
+                .setImagen(tmp)
+                .setNacimiento(LocalDate.now())
+                .invoke();
+        } catch (UsuarioRepetidoException e) {
+            e.printStackTrace(response.getWriter());
+        }
+
+        DataUsuario socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nickname);
+        request.getSession().setAttribute("usuario", socio);
+
+        // getServletContext().getRequestDispatcher("/").forward(request, response);
+        response.getWriter().println("hola");
+    }
+}

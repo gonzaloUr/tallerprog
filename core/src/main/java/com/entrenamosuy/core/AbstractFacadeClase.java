@@ -3,7 +3,7 @@ package com.entrenamosuy.core;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -29,7 +29,7 @@ public abstract class AbstractFacadeClase extends AbstractFacade {
 
         CrearClaseChain setFechaRegistro(LocalDate fechaRegistro);
 
-        CrearClaseChain setImagen(ByteBuffer imagen);
+        CrearClaseChain setImagen(File imagen);
 
         void invoke() throws ClaseInconsistenteException;
     }

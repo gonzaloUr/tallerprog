@@ -20,6 +20,7 @@
                         </c:when>
                         <c:otherwise>
                             <span class="ms-3">${usuario.nombre} ${usuario.apellido}</span>
+                            <img src="img/usuario/${usuario.nickname}"/>
                         </c:otherwise>
                     </c:choose>
                 </div>

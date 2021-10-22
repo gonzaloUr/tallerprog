@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +41,7 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
 
             private LocalDate fechaRegistro;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public CrearCuponeraChain setNombre(String nombre) {
@@ -80,7 +80,7 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
             }
 
             @Override
-            public CrearCuponeraChain setImagen(ByteBuffer imagen) {
+            public CrearCuponeraChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }

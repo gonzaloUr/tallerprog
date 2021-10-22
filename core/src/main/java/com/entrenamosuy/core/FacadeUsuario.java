@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -48,7 +48,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private String password;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public CrearProfesorChain setNickname(String nickname) {
@@ -111,7 +111,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public CrearProfesorChain setImagen(ByteBuffer imagen) {
+            public CrearProfesorChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -173,7 +173,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private String password;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public CrearSocioChain setNickname(String nickname) {
@@ -212,7 +212,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public CrearSocioChain setImagen(ByteBuffer imagen) {
+            public CrearSocioChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -259,7 +259,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private LocalDate nacimiento;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public ModificarDatosSocioChain setNickname(String nickname) {
@@ -286,7 +286,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public ModificarDatosSocioChain setImagen(ByteBuffer imagen) {
+            public ModificarDatosSocioChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -331,7 +331,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
             private URL sitioWeb;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public ModificarDatosProfesorChain setNickname(String nickname) {
@@ -376,7 +376,7 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             }
 
             @Override
-            public ModificarDatosProfesorChain setImagen(ByteBuffer imagen) {
+            public ModificarDatosProfesorChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -541,5 +541,22 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
             throw new UsuarioNoEncontradoException("No existe un usuario de nickname " + seguidor);
 
         usuarioSeguidor.dejarDeSeguirUsuario(usuarioSeguido);
+    }
+
+    @Override
+    public File getImagenUsuario(String nickname) {
+        Map<String, Socio> socios = getRegistry().getSocios();
+        Map<String, Profesor> profes = getRegistry().getProfesores();
+
+        Usuario usuario;
+
+        if (socios.containsKey(nickname))
+            usuario = socios.get(nickname);
+        else if (profes.containsKey(nickname))
+            usuario = profes.get(nickname);
+        else
+            throw new UsuarioNoEncontradoException(nickname);
+
+        return usuario.getImagen();
     }
 }

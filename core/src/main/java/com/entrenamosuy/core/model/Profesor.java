@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -37,7 +37,7 @@ public class Profesor extends Usuario {
 
         private Set<Usuario> seguidores = new HashSet<>();
 
-        private ByteBuffer imagen;
+        private File imagen;
 
         private String descripcion;
 
@@ -96,7 +96,7 @@ public class Profesor extends Usuario {
             return this;
         }
 
-        public Builder setImagen(ByteBuffer imagen) {
+        public Builder setImagen(File imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -147,7 +147,7 @@ public class Profesor extends Usuario {
 
     protected Profesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
                     String descripcion, String password, Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores,
-                    ByteBuffer imagen, String biografia, URL sitioWeb, Institucion institucion, Set<Clase> clasesDictadas,
+                    File imagen, String biografia, URL sitioWeb, Institucion institucion, Set<Clase> clasesDictadas,
                     Set<Actividad> actividadesRegistradas) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);

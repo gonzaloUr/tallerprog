@@ -3,7 +3,7 @@ package com.entrenamosuy.core.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.net.URL;
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Objects;
@@ -35,7 +35,7 @@ public class Clase {
 
         private Actividad actividad;
 
-        private ByteBuffer imagen;
+        private File imagen;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -82,7 +82,7 @@ public class Clase {
             return this;
         }
 
-        public Builder setImagen(ByteBuffer imagen) {
+        public Builder setImagen(File imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -109,11 +109,11 @@ public class Clase {
 
     private Actividad actividad;
 
-    private ByteBuffer imagen;
+    private File imagen;
 
     protected Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
                  URL acceso, LocalDate fechaRegistro, Set<Registro> registros,
-                 Set<Profesor> profesores, Actividad actividad, ByteBuffer imagen) {
+                 Set<Profesor> profesores, Actividad actividad, File imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Clase");
         Objects.requireNonNull(inicio, "inicio es null en constructor Clase");
@@ -207,11 +207,11 @@ public class Clase {
         this.actividad = actividad;
     }
 
-    public ByteBuffer getImagen() {
+    public File getImagen() {
         return imagen;
     }
 
-    public void setImagen(ByteBuffer imagen) {
+    public void setImagen(File imagen) {
         this.imagen = imagen;
     }
 

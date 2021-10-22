@@ -1,6 +1,6 @@
 package com.entrenamosuy.core.model;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
@@ -31,7 +31,7 @@ public class Cuponera {
 
         private Set<Categoria> categorias = new HashSet<>();
 
-        private ByteBuffer imagen;
+        private File imagen;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -78,7 +78,7 @@ public class Cuponera {
             return this;
         }
 
-        public Builder setImagen(ByteBuffer imagen) {
+        public Builder setImagen(File imagen) {
             this.imagen = imagen;
             return this;
         }
@@ -103,13 +103,13 @@ public class Cuponera {
 
     private Set<Categoria> categorias;
 
-    private ByteBuffer imagen;
+    private File imagen;
 
     private boolean comprada; //atributo "secreto" para el CU agregar act a cuponera
 
     protected Cuponera(String nombre, String descripcion, LocalDate inicio, LocalDate fin, int descuento,
                     LocalDate fechaRegistro, Set<Integra> integras, Set<Registro> registros, Set<Categoria> categorias,
-                    ByteBuffer imagen) {
+                    File imagen) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Cuponera");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor Cuponera");
@@ -205,11 +205,11 @@ public class Cuponera {
         this.categorias = categorias;
     }
 
-    public ByteBuffer getImagen() {
+    public File getImagen() {
         return imagen;
     }
 
-    public void setImagen(ByteBuffer imagen) {
+    public void setImagen(File imagen) {
         this.imagen = imagen;
     }
 

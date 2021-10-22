@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
 
@@ -52,7 +52,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             private LocalDate registro;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             private Set<String> categoriasString = new HashSet<>();
 
@@ -97,7 +97,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
             }
 
             @Override
-            public CrearActividadChain setImagen(ByteBuffer imagen) {
+            public CrearActividadChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
@@ -151,7 +151,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                         throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
                     categoriasActiv.add(cat);
                 }
-                   
+
                 Actividad nuevaActividad = Actividad.builder()
                         .setNombre(nombre)
                         .setDescripcion(descripcion)
@@ -284,7 +284,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public void crearCategoria(String nombre) 
+    public void crearCategoria(String nombre)
         throws CategoriaRepetidaException{
         Map<String, Categoria> categorias = getRegistry().getCategorias();
         Set<Actividad> actividades = new HashSet<>();

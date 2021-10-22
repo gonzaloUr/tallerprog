@@ -9,10 +9,10 @@
         <link rel="stylesheet" href="styles/alta_usuario.css">
     </head>
 	<body class="d-flex flex-column text-center justify-content-center py-12">
-        <form class="d-flex flex-column form-signup" method="post">
+        <form class="d-flex flex-column form-signup" method="post" enctype="multipart/form-data">
             <h1 class="h3 mb-3 fw-normal">Alta de usuario</h1>
             <input class="form-control mb-3" placeholder="nickname" name="nick">
-            <input class="form-control mb-3" placeholder="nombre" name="nick">
+            <input class="form-control mb-3" placeholder="nombre" name="nombre">
             <input class="form-control mb-3" placeholder="contraseña" name="pass" type="password">
             <input class="mb-3" accept="image/*" name="img" type="file">
             <input class="w-100 btn btn-primary" type="submit" value="Registrarse">

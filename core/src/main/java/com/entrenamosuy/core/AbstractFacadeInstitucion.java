@@ -3,7 +3,7 @@ package com.entrenamosuy.core;
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.exceptions.InstitucionRepetidaException;
 
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.net.URL;
 import java.util.Set;
 
@@ -17,7 +17,7 @@ public abstract class AbstractFacadeInstitucion extends AbstractFacade {
 
         CrearInstitucionChain setUrl(URL url);
 
-        CrearInstitucionChain setImagen(ByteBuffer imagen);
+        CrearInstitucionChain setImagen(File imagen);
 
         void invoke() throws InstitucionRepetidaException;
     }

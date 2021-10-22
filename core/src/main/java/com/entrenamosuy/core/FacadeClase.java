@@ -3,7 +3,7 @@ package com.entrenamosuy.core;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.nio.ByteBuffer;
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,7 +41,7 @@ public class FacadeClase extends AbstractFacadeClase {
 
             private LocalDate fechaRegistro;
 
-            private ByteBuffer imagen;
+            private File imagen;
 
             @Override
             public CrearClaseChain setNombreActividad(String nombreActividad) {
@@ -92,7 +92,7 @@ public class FacadeClase extends AbstractFacadeClase {
             }
 
             @Override
-            public CrearClaseChain setImagen(ByteBuffer imagen) {
+            public CrearClaseChain setImagen(File imagen) {
                 this.imagen = imagen;
                 return this;
             }
