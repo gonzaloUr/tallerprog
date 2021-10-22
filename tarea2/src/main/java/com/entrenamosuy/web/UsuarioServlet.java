@@ -2,29 +2,43 @@ package com.entrenamosuy.web;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.entrenamosuy.core.AbstractFacadeUsuario;
-import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
-import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.data.DataProfesor;
+import com.entrenamosuy.core.data.DataSocio;
 
 public class UsuarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        String path = request.getServletPath();
 
-        String nickname = (String) session.getAttribute("nickname");
+        if (path.equals("/lista_usuarios")) {
+            AbstractFacadeUsuario facade = Facades.getFacades().getFacadeUsuario();
 
-        if (nickname == null) {
-            getServletContext()
-                .getRequestDispatcher("/iniciar_sesion.jsp")
-                .forward(request, response);
+            Set<DataSocio> socios = facade
+                .getSocios()
+                .stream()
+                .map(facade::getDataSocio)
+                .collect(Collectors.toSet());
+
+            Set<DataProfesor> profes = facade
+                .getProfesores()
+                .stream()
+                .map(facade::getDataProfesor)
+                .collect(Collectors.toSet());
+
+            request.setAttribute("socios", socios);
+            request.setAttribute("profes", profes);
+			request.getRequestDispatcher("/lista_usuarios.jsp").forward(request, response);
+        } else if (path.equals("/alta_usuario")) {
+            request.getRequestDispatcher("/alta_usuario.jsp").forward(request, response);
         }
 
         String path = request.getServletPath();
@@ -43,8 +57,5 @@ public class UsuarioServlet extends HttpServlet {
 				.forward(request, response);
         }*/
     }
-
-
-
 }
 

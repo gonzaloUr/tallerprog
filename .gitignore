@@ -26,3 +26,7 @@ local.properties
 **/build/
 !gradle-wrapper.jar
 .gradletasknamecache
+
+### misc ###
+*.jar
+**/WEB-INF/lib/

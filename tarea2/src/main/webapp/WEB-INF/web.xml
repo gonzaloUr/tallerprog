@@ -26,6 +26,11 @@
         <servlet-class>com.entrenamosuy.web.ClaseServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.UsuarioServlet</servlet-class>
+    </servlet>
+
     <!-- Default servlet mappings -->
 
     <servlet-mapping>
@@ -77,7 +82,19 @@
         <url-pattern>/confirmar_registro_clase</url-pattern>
     </servlet-mapping>
 
-    <!-- IndexServlet mapping -->
+    <!-- UsuarioServlet mappings -->
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/lista_usuarios</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/alta_usuario</url-pattern>
+    </servlet-mapping>
+
+    <!-- IndexServlet mappings -->
 
     <servlet-mapping>
         <servlet-name>IndexServlet</servlet-name>
