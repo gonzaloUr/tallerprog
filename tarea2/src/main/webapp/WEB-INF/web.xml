@@ -71,7 +71,12 @@
         <servlet-name>ClaseServlet</servlet-name>
         <url-pattern>/registrarse_a_clase</url-pattern>
     </servlet-mapping>
-    
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/confirmar_registro_clase</url-pattern>
+    </servlet-mapping>
+
     <!-- IndexServlet mapping -->
 
     <servlet-mapping>

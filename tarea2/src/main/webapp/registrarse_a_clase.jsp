@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="styles/alta_usuario.css">
     </head>
 	<body class="d-flex flex-column text-center justify-content-center py-12">
-        <form class="d-flex flex-column form-signup" action="consulta_dictado_clase.html">
+        <form class="d-flex flex-column form-signup" action="consulta_dictado_clase">
             <h1 class="h3 mb-3 fw-normal">Registrarse a clase</h1>
             <label for="institucion">Elija institucion deportiva :</label>
 

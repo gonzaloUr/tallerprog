@@ -18,8 +18,7 @@ import com.entrenamosuy.core.data.DataClase;
 
 
 public class ClaseServlet extends HttpServlet {
-    
-    private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
         
 		if(path.equals("/registrarse_a_clase")) {
@@ -32,49 +31,43 @@ public class ClaseServlet extends HttpServlet {
 			request.getRequestDispatcher("/registrarse_a_clase.jsp")
 				.forward(request, response);
 
-		} /*else if(path.equals("/consulta_actividad")) {
-			String act = request.getParameter("nombre");
-			DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
+		} else if(path.equals("/confirmar_registro_clase")) {
+			
+            String act = request.getParameter("actividad");
+            String cla = request.getParameter("clase");
+			
+            //HttpSession session = request.getSession();
 
-            String nombre = actividad.getNombre();
-            String descripcion = actividad.getDescripcion();
+            //String nickname = (String) session.getAttribute("nickname");
 
-            Set<String> clasesOfrecidas = actividad.getClases()
-                .stream()
-                .map(DataClase::getNombre)
-                .collect(Collectors.toSet());
+            Set<String> cupos = Facades
+				.getFacades()
+				.getFacadeCuponera()
+				.cuponerasUsables(act, "Emi71");
 
-            Set<String> cuponerasAsociadas = actividad.getCuponeras()
-                .stream()
-                .map(DataCuponera::getNombre)
-                .collect(Collectors.toSet());
+			request.setAttribute("cuponeras", cupos);
+			request.getRequestDispatcher("/confirmar_registro_clase.jsp")
+			.forward(request, response);
 
-            Set<String> categoriasAsociadas = actividad.getCategorias()
-                .stream()
-                .collect(Collectors.toSet());
-
-            request.setAttribute("nombre", nombre);
-            request.setAttribute("descripcion", descripcion);
-            request.setAttribute("clasesOfrecidas", clasesOfrecidas);
-            request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
-            request.setAttribute("categoriasAsociadas", categoriasAsociadas);
-
-			request
-				.getRequestDispatcher("/consulta_actividad.jsp")
-				.forward(request, response);
 		} else {
 			// TODO: alta actividad			
-		}*/
+		}
     }
     
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processRequest(request, response);
-	}
 
-
-
+	/*
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getServletPath();
+        if(path.equals("/confirmar_registro_clase")) {
+            String cup = request.getParameter("cuponera");
+            
+        }    
+    }
+	*/
 }
+
+
 
 
 

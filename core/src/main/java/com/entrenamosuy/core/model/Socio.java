@@ -163,8 +163,11 @@ public class Socio extends Usuario {
         int ret = 0;
 
         for (Registro reg : registros) {
-            Clase claseRegistro = reg.getClaseAsociada();
+            if (reg.getCuponera() == null)
+                continue;
 
+            Clase claseRegistro = reg.getClaseAsociada();
+            
             if (reg.getCuponera().equals(cup) && activ.getClases().contains(claseRegistro))
                 ret++;
         }
