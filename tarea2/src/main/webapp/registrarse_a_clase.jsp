@@ -1,3 +1,9 @@
+<%@page import="java.util.Set"%>
+<%@page import="com.entrenamosuy.core.data.DataClase"%>
+
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -10,10 +16,19 @@
         <form class="d-flex flex-column form-signup" action="consulta_dictado_clase.html">
             <h1 class="h3 mb-3 fw-normal">Registrarse a clase</h1>
             <label for="institucion">Elija institucion deportiva :</label>
-            <select name="institucion" id="institucion" multiple>
-              <option value="Telon">Telón</option>
+
+            <select name="institucion" id="institucion">
+              <%
+              Set<String> insts = (Set<String>) request.getAttribute("instituciones");
+              for (String inst: insts){
+              %>
+            
+                <option value="<%= inst%>"><%= inst%></option>
+              
+              <% } %>
             </select> 
             <p></p>
+
             <label for="actividad_Depor">Elija la actividad deportiva :</label>
             <select name="actividad_Depor" id="actividad_Depor" multiple>
               <option value="Voleibol">Voleibol</option>

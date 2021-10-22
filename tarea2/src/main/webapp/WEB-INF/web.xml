@@ -21,6 +21,11 @@
         <servlet-class>com.entrenamosuy.web.IndexServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ClaseServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.ClaseServlet</servlet-class>
+    </servlet>
+
     <!-- Default servlet mappings -->
 
     <servlet-mapping>
@@ -60,6 +65,13 @@
         <url-pattern>/lista_actividades</url-pattern>
     </servlet-mapping>
 
+    <!-- ClaseServlet mappings -->
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/registrarse_a_clase</url-pattern>
+    </servlet-mapping>
+    
     <!-- IndexServlet mapping -->
 
     <servlet-mapping>
