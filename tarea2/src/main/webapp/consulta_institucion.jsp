@@ -19,7 +19,9 @@
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
                     <p class="fs-6">${descripcion}</p>
                     <a class="fs-6" href="${url}">url</a>
+                </section>
 
+                <aside id="clase_cuponera">
                     <nav class="flex flex-column p-3 bg-light">
                         <div class="list-group pb-3">
                             <label class="list-group-item active">Actividades Ofrecidas</label>
@@ -28,7 +30,9 @@
                                 <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad}">
                             </form>
                             </c:forEach>
-                </section>
+                        </div>
+                    </nav>        
+                </aside>
             </main>
         </div>
 	</body>
