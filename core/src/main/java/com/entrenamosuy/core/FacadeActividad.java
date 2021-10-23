@@ -25,7 +25,6 @@ import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
-import com.entrenamosuy.core.data.DataSocio;
 
 import com.entrenamosuy.core.model.ActividadEstado;
 import com.entrenamosuy.core.model.Actividad;
@@ -65,7 +64,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
             @Override
             public CrearActividadChain setInstitucion(String institucion) {
                 this.institucion = institucion;
-                return this;Clase 
+                return this;
             }
 
             @Override
@@ -88,7 +87,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             @Override
             public CrearActividadChain setCosto(float costo) {
-                this.costo = Clase costo;
+                this.costo = costo;
                 return this;
             }
 
@@ -112,7 +111,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             @Override
             public CrearActividadChain setEstado(ActividadEstado estado) {
-                this.estado =Clase  estado;
+                this.estado = estado;
                 return this;
             }
 
@@ -125,7 +124,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             @Override
             public void invoke() throws ActividadRepetidaException, InstitucionNoEncontradaException, SinCategoriaException {
-                Map<String, AClase ctividad> actividades = getRegistry().getActividades();
+                Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Institucion> instituciones = getRegistry().getInstituciones();
                 Map<String, Categoria> categorias = getRegistry().getCategorias();
                 Map<String, Profesor> profes = getRegistry().getProfesores();
@@ -148,7 +147,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                     throw new SinCategoriaException("No fueron seleccionadas categorias a asociar.");
                 }
                 for (String nombre : categoriasString) {
-                    Categoria caawd += categorias.get(nombre);
+                    Categoria cat = categorias.get(nombre);
                     if (cat == null)
                         throw new CategoriaNoEncontradaException("No existe una categoria con nombre: " + nombre);
                     categoriasActiv.add(cat);
@@ -170,7 +169,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
                     cat.agregarActividad(nuevaActividad);
                 }
                 if (creador != null){
-                    profe = pClase rofes.get(creador);
+                    profe = profes.get(creador);
                     profe.agregarActividadRegistrada(nuevaActividad);
                 }
             }
@@ -190,18 +189,14 @@ public class FacadeActividad extends AbstractFacadeActividad {
             throw new SocioNoEncontradoException("No existe un socio con nickname: " + socio);
 
         List<RegistroInconsistenteException.Restriccion> inconsistencias = new ArrayList<>();
-        
-        String awd = "";
 
         Set<DataClase> clasesDeSocio = soci.getDataSocio().getClases();
         for (DataClase c: clasesDeSocio){
-            awd += c.getNombre()+ " "; 
-            if (c.getNombre() == clase){
+            if (c.getNombre().equals(clase)){
                 inconsistencias.add(RegistroInconsistenteException.Restriccion.YA_REGISTRADO_A_CLASE);
-                break;        
+                break;
             }
         }
-        throw new IllegalArgumentException(awd);    
 
         if ((clas.getCantMax() - clas.getRegistros().size()) <= 0)
             inconsistencias.add(RegistroInconsistenteException.Restriccion.CLASE_LLENA);
@@ -245,7 +240,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
             clas.registrarseConCuponera(soci, fechaRegistro, cup);
         }
-    
+
     @Override
     public Set<String> getActividadesDeInstitucion(String institucion) throws InstitucionNoEncontradaException {
         Set<String> res = new HashSet<>();
