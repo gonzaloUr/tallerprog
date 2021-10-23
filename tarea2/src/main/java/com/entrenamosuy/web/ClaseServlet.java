@@ -85,16 +85,16 @@ public class ClaseServlet extends HttpServlet {
 		} else if(path.equals("/confirmar_registro_clase")) {
 			
             String act = request.getParameter("actividad");
-            String cla = request.getParameter("clase");
+            //String cla = request.getParameter("clase");
 			
-            //HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
 
-            //String nickname = (String) session.getAttribute("nickname");
+            String nickname = (String) session.getAttribute("nickname");
 
             Set<String> cupos = Facades
 				.getFacades()
 				.getFacadeCuponera()
-				.cuponerasUsables(act, "Emi71");
+				.cuponerasUsables(act, nickname);
 
 			request.setAttribute("cuponeras", cupos);
 			request.getRequestDispatcher("/confirmar_registro_clase.jsp")
@@ -149,10 +149,9 @@ public class ClaseServlet extends HttpServlet {
         String path = request.getServletPath();
         if(path.equals("/confirmar_registro_clase")) {
            
-			//HttpSession session = request.getSession();
-        	//String nickname = (String) session.getAttribute("nickname");
+			HttpSession session = request.getSession();
+        	String nickname = (String) session.getAttribute("nickname");
 
-			//TODO CHEQUEAR QUE YA ESTÁ REGISTRADO A LA CLASE!!!!!
 		    String cla = request.getParameter("clase");
 		    String cup = request.getParameter("cuponera");
 			LocalDate fecha = LocalDate.now();
@@ -163,10 +162,17 @@ public class ClaseServlet extends HttpServlet {
 					Facades
 					.getFacades()
 					.getFacadeActividad()
-					.registarseSinCuponera("Emi71", cla, fecha);
+					.registarseSinCuponera(nickname, cla, fecha);
+					
+
 				} catch (RegistroInconsistenteException e) { 
 					e.printStackTrace(response.getWriter());
+					request.setAttribute("reg_exito", false);
+					request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
+					return;
 				}
+				request.setAttribute("reg_exito", true);
+
 			}
 			else {
 				response.getWriter().println("cup != null");
@@ -174,14 +180,17 @@ public class ClaseServlet extends HttpServlet {
 					Facades
 					.getFacades()
 					.getFacadeActividad()
-					.registraseConCuponera("Emi71" , cla, cup, fecha);
+					.registraseConCuponera(nickname , cla, cup, fecha);
+
 				} catch (RegistroInconsistenteException e) {
 					e.printStackTrace(response.getWriter());
+					request.setAttribute("reg_exito", false);
+					request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
+					return;
 				}
+				request.setAttribute("reg_exito", true);
 			}
-			response.getWriter().println("hola");
-			response.getWriter().println("clase" + cla);
-			response.getWriter().println("cuponera" + cup);
+			request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
 
         } 
     }
