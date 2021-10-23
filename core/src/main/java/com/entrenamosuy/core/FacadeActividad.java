@@ -229,6 +229,14 @@ public class FacadeActividad extends AbstractFacadeActividad {
 
         List<RegistroInconsistenteException.Restriccion> inconsistencias = new ArrayList<>();
 
+        Set<DataClase> clasesDeSocio = soci.getDataSocio().getClases();
+        for (DataClase c: clasesDeSocio) {
+            if (c.getNombre().equals(clase)){
+                inconsistencias.add(RegistroInconsistenteException.Restriccion.YA_REGISTRADO_A_CLASE);
+                break;
+            }
+        }
+
         if ((clas.getCantMax() - clas.getRegistros().size()) <= 0)
             inconsistencias.add(RegistroInconsistenteException.Restriccion.CLASE_LLENA);
 
@@ -238,8 +246,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
         if (!inconsistencias.isEmpty())
             throw new RegistroInconsistenteException(inconsistencias);
 
-            clas.registrarseConCuponera(soci, fechaRegistro, cup);
-        }
+        clas.registrarseConCuponera(soci, fechaRegistro, cup);
+    }
 
     @Override
     public Set<String> getActividadesDeInstitucion(String institucion) throws InstitucionNoEncontradaException {
