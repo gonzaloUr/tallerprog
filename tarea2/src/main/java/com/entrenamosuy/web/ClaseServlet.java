@@ -19,6 +19,7 @@ import com.entrenamosuy.core.AbstractFacadeActividad;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.data.DataInstitucion;
+import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
@@ -89,7 +90,8 @@ public class ClaseServlet extends HttpServlet {
 			
             HttpSession session = request.getSession();
 
-            String nickname = (String) session.getAttribute("nickname");
+            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+			String nickname = usr.getNickname();
 
             Set<String> cupos = Facades
 				.getFacades()
@@ -150,7 +152,9 @@ public class ClaseServlet extends HttpServlet {
         if(path.equals("/confirmar_registro_clase")) {
            
 			HttpSession session = request.getSession();
-        	String nickname = (String) session.getAttribute("nickname");
+        	
+			DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+			String nickname = usr.getNickname();
 
 		    String cla = request.getParameter("clase");
 		    String cup = request.getParameter("cuponera");
