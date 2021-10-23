@@ -14,8 +14,8 @@
             <h1 class="h3 mb-3 fw-normal">Alta de actividad deportiva</h1>
             <input class="form-control mb-3" placeholder="Nombre" name="nombre_alta_act">
             <input class="form-control mb-3" placeholder="Descripcion" name="descripcion_alta_act">
-            <input class="form-control mb-3" placeholder="Duracion" name="duracion_alta_act" type="number" min="0">
-            <input class="form-control mb-3" placeholder="Costo" name="costo_alta_act" type="number" min="0">
+            <input class="form-control mb-3" placeholder="Duracion (en minutos)" name="duracion_alta_act" type="number" min="0">
+            <input class="form-control mb-3" placeholder="Costo (en $U)" name="costo_alta_act" type="number" min="0">
             <label for="categorias">Elija categorias (para multiples Ctrl+click) :</label>
             <select name="select_categorias" multiple>
                 <c:forEach items="${categorias}" var = "categoria">

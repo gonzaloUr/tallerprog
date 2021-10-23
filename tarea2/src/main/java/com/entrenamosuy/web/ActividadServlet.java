@@ -122,6 +122,8 @@ public class ActividadServlet extends HttpServlet {
                 .setCreador("Nelson")
                 .invoke();
             request.setAttribute("error", "Alta exitosa. ");
+            response.sendRedirect(response.encodeRedirectURL("/tarea2"));
+            return;
         }
         catch(ActividadRepetidaException are){
             request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
