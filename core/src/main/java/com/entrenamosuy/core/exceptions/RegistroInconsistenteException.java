@@ -12,6 +12,7 @@ public class RegistroInconsistenteException extends Exception {
         CUPONERA_NO_COMPRADA,
         CUPONERA_NO_TIENE_ACTIVIDAD_CON_CLASE,
         CUPONERA_LLENA
+        YA_REGISTRADO_A_CLASE
     }
 
     private final List<Restriccion> inconsistencias;

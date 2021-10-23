@@ -72,7 +72,9 @@ public class ClaseServlet extends HttpServlet {
 		    String cla = request.getParameter("clase");
 		    String cup = request.getParameter("cuponera");
 			LocalDate fecha = LocalDate.now();
+			response.getWriter().println("antes if");
 			if (cup == null) { 
+				response.getWriter().println("cup null");
 				try {
 					Facades
 					.getFacades()
@@ -83,6 +85,7 @@ public class ClaseServlet extends HttpServlet {
 				}
 			}
 			else {
+				response.getWriter().println("cup != null");
 				try {
 					Facades
 					.getFacades()
@@ -92,9 +95,9 @@ public class ClaseServlet extends HttpServlet {
 					e.printStackTrace(response.getWriter());
 				}
 			}
-response.getWriter().println("hola");
-response.getWriter().println("clase" + cla);
-response.getWriter().println("cuponera" + cup);
+			response.getWriter().println("hola");
+			response.getWriter().println("clase" + cla);
+			response.getWriter().println("cuponera" + cup);
 
         } 
     }
