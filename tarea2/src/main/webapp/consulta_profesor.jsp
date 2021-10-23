@@ -129,7 +129,8 @@
                                     </div>
                                     <div class="space" style="height:30px"></div>
                                 <div class="list-group">
-                                    <div class="list-group-item d-flex align-items-center active">Seguidores
+      
+                                  <div class="list-group-item d-flex align-items-center active">Seguidores
                                     </div>
                                     <% 
                                     List<MiniUsuario> seg = (List<MiniUsuario>) request.getAttribute("seguidores");
