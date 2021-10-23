@@ -3,13 +3,15 @@
 <header class="bg-dark text-white">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col-3">
                 <div class="d-flex p-2 align-items-center h-100">
                     <a href="/tarea2" class="text-decoration-none" style="color:white"><h3>Entrenamos.uy</h3></a>
                 </div>
             </div>
-            <div class="col-8">
-                <div class="d-flex p-2 justify-content-end align-items-center">
+            <div class="col-9">
+                <div class="d-flex p-2 justify-content-between align-items-center">
+                    <a class="btn btn-outline-light ms-3" href="lista_usuarios">Usuarios</a>
+                    <a class="btn btn-outline-light ms-3" href="lista_actividades">Actividades</a>
                     <form class="m-0" action="search" method="post">
                         <input class="form-control" type="search" placeholder="buscar" name="keyword">
                     </form>

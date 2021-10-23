@@ -20,7 +20,7 @@ import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DataInstitucion;
-import com.entrenamosuy.core.data.DataUsuario;
+import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
@@ -105,7 +105,7 @@ public class ActividadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+        DataProfesor usr = (DataProfesor) session.getAttribute("usuario");
         String nick = usr.getNickname();
         String inst = usr.getInstitucion();
         String nombre = (String)request.getParameter("nombre_alta_act");
