@@ -52,7 +52,7 @@ public class UsuarioServlet extends HttpServlet {
             request.getRequestDispatcher("/alta_usuario.jsp").forward(request, response);
         }
 
-        String path = request.getServletPath();
+        //String path = request.getServletPath();
 
         /*if(path.equals("/consulta_socio")) {
             String nick = request.getAttribute("nickname");

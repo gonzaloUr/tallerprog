@@ -15,7 +15,7 @@
       <h1 class="h3 mb-3 fw-normal">Confirmar registro a clase</h1>
       <label for="actividad_Depor">Si desea registrarse con una cuponera, seleccionela:</label>
       
-      <select name="cuponera" id="cuponera">
+      <select name="cuponera" id="cuponera" multiple>
       <%
       Set<String> cupos = (Set<String>) request.getAttribute("cuponeras");
       for (String cupo: cupos){

@@ -25,7 +25,7 @@ public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        /*
+        
         AbstractFacadeUsuario facadeUsuario = Facades.getFacades().getFacadeUsuario();
         AbstractFacadeActividad facadeActividad = Facades.getFacades().getFacadeActividad();
         AbstractFacadeCuponera facadeCuponera = Facades.getFacades().getFacadeCuponera();
@@ -703,7 +703,7 @@ public class IndexServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace(response.getWriter());
         }
-        */
+        
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
