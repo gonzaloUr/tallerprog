@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="d-flex p-2 align-items-center h-100">
-                    <h3>Entrenamos.uy</h3>
+                    <a href="/tarea2" class="text-decoration-none" style="color:white"><h3>Entrenamos.uy</h3></a>
                 </div>
             </div>
             <div class="col-8">
