@@ -13,18 +13,20 @@ import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 
-public class IniciarSesionServlet extends HttpServlet {
+public class SesionServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        String path = request.getServletPath();
 
-        String nickname = (String) session.getAttribute("nickname");
-
-        if (nickname == null) {
+        if (path.equals("/iniciar_sesion")) {
             getServletContext()
                 .getRequestDispatcher("/iniciar_sesion.jsp")
                 .forward(request, response);
+        } else if (path.equals("/cerrar_sesion")) {
+            request.getSession().removeAttribute("nickname");
+            request.getSession().removeAttribute("usuario");
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         }
     }
 

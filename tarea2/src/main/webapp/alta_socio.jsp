@@ -20,6 +20,9 @@
             <input class="form-control mb-3" placeholder="confirmar contraseña" name="pass_confirm" type="password">
             <input class="form-control mb-3" accept="image/*" name="img" type="file">
             <input class="btn btn-primary w-100" type="submit" value="Registrarse">
+            <c:if test="${failed eq true}">
+                <span class="text-danger mb-3">${reason}</span>
+            </c:if>
         </form>
 	</body>
 </html>
