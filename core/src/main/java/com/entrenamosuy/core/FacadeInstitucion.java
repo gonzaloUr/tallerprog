@@ -90,4 +90,13 @@ public class FacadeInstitucion extends AbstractFacadeInstitucion {
         return inst.getDataInstitucion();
     }
 
+    @Override
+    public File getImagenInstitucion(String id) {
+        Institucion inst = getRegistry().getInstituciones().get(id);
+
+        if (inst == null)
+            throw new InstitucionNoEncontradaException(id);
+
+        return inst.getImagen();
+    }
 }

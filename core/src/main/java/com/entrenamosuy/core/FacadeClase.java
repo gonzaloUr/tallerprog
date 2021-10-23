@@ -184,4 +184,14 @@ public class FacadeClase extends AbstractFacadeClase {
 
         return clase.getDataClase();
     }
+
+    @Override
+    public File getImagenClase(String id) {
+        Clase clase = getRegistry().getClases().get(id);
+
+        if (clase == null)
+            throw new ClaseNoEncontradaException("No existe clase con nombre:" + id);
+
+        return clase.getImagen();
+    }
 }

@@ -24,8 +24,18 @@ public class ImagenServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String nickname = uri.substring(uri.lastIndexOf("/") + 1);
-        File img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(nickname);
+        String id = uri.substring(uri.lastIndexOf("/") + 1);
+
+        File img = null;
+
+        if (uri.startsWith(request.getContextPath() + "/img/usuario"))
+            img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(id);
+        else if (uri.startsWith(request.getContextPath() + "/img/clase"))
+            img = Facades.getFacades().getFacadeClase().getImagenClase(id);
+        else if (uri.startsWith(request.getContextPath() + "/img/actividad"))
+            img = Facades.getFacades().getFacadeActividad().getImagenActividad(id);
+        else if (uri.startsWith(request.getContextPath() + "/img/institucion"))
+            img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(id);
 
         response.setContentLength((int) img.length());
 

@@ -64,4 +64,6 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
     public abstract void aceptarActividad(String actividad);
 
     public abstract void rechazarActividad(String actividad);
+
+    public abstract File getImagenActividad(String id);
 }
