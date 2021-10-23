@@ -13,12 +13,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.entrenamosuy.core.FacadeActividad;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DataInstitucion;
+import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
@@ -26,6 +28,8 @@ import com.entrenamosuy.core.exceptions.SinCategoriaException;
 
 public class ActividadServlet extends HttpServlet {
     
+
+
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String path = request.getServletPath();
@@ -100,6 +104,10 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+        String nick = usr.getNickname();
+        String inst = usr.getInstitucion();
         String nombre = (String)request.getParameter("nombre_alta_act");
         String descripcion = (String)request.getParameter("descripcion_alta_act");
         Duration duracion = (Duration.ofMinutes(Long.parseLong(request.getParameter("duracion_alta_act"))));
@@ -114,12 +122,12 @@ public class ActividadServlet extends HttpServlet {
             Facades.getFacades().getFacadeActividad().crearActividad()
                 .setNombre(nombre)
                 .setDescripcion(descripcion)
-                .setInstitucion("Telon")
+                .setInstitucion(inst)
                 .setDuracion(duracion)
                 .setCosto(costo)
                 .setRegistro(LocalDate.now())
                 .setCategorias(categorias)
-                .setCreador("Nelson")
+                .setCreador(nick)
                 .invoke();
             request.setAttribute("error", "Alta exitosa. ");
             response.sendRedirect(response.encodeRedirectURL("/tarea2"));
