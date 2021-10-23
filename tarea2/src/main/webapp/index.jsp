@@ -6,6 +6,7 @@
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
     </head>
 	</head>
 	<body class="d-flex flex-column">

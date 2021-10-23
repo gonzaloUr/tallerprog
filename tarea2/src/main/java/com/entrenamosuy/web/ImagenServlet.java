@@ -23,8 +23,8 @@ public class ImagenServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String path = request.getServletPath();
-        String nickname = path.substring("/img/usuario/".length());
+        String uri = request.getRequestURI();
+        String nickname = uri.substring(uri.lastIndexOf("/") + 1);
         File img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(nickname);
 
         response.setContentLength((int) img.length());
