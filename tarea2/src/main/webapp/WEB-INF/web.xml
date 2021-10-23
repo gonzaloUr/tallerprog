@@ -69,12 +69,27 @@
 
     <servlet-mapping>
         <servlet-name>ClaseServlet</servlet-name>
-        <url-pattern>/registrarse_a_clase</url-pattern>
+        <url-pattern>/registrarse_a_clase_1</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/registrarse_a_clase_2</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/registrarse_a_clase_3</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ClaseServlet</servlet-name>
         <url-pattern>/confirmar_registro_clase</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/consulta_dictado_clase</url-pattern>
     </servlet-mapping>
 
     <!-- UsuarioServlet mappings -->
