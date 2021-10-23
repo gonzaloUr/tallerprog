@@ -237,4 +237,10 @@ public class FacadeCuponera extends AbstractFacadeCuponera {
 
         return ret;
     }
+
+    @Override
+    public File getImagenCuponera(String nombre) {
+        Cuponera cuponera = getRegistry().getCuponeras().get(nombre);
+        return cuponera.getImagen();
+    }
 }

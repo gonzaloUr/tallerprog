@@ -47,4 +47,6 @@ public abstract class AbstractFacadeCuponera extends AbstractFacade {
             throws CuponeraYaPoseidaException;
 
     public abstract Set<String> getCuponerasSinCompras();
+
+    public abstract File getImagenCuponera(String nombre);
 }
