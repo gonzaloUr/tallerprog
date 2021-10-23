@@ -13,6 +13,7 @@
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
 	</head>
 	<body>
 
@@ -37,7 +38,7 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                    <img src="https://bit.ly/3lxoBvZ" alt="Admin" class="rounded-circle" width="150">
+                    <img src="img/usuario/<%=nick%>" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h4><%= nick%></h4>
                       <p class="text-secondary mb-1">Profesor</p>
@@ -110,20 +111,22 @@
                                     <div class="list-group-item d-flex align-items-center active">Siguiendo
                                     </div>
                                     <% 
+                                    String h;
                                     List<MiniUsuario> sig = (List<MiniUsuario>) request.getAttribute("seguidos");
                                     for (MiniUsuario s: sig){
                                     %>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong><%= s.getNombre()%></strong></div>
-                                    <% if (s.getEsSocio()){ %>
+                                    <% if (s.getEsSocio()){
+                                        h = "socio"; %>
                                         <div class="text-muted fs-13px">Socio</div>
-                                        <a href="consulta_socio?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
-                                    <%} else { %>
+                                    <%} else { 
+                                        h = "profesor";%>
                                         <div class="text-muted fs-13px">Profesor</div>
-                                        <a href="consulta_profesor?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
                                     <% } %>
                                         </div>
+                                        <a href="consulta_<%=h%>?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
                                         </div>
                                     <% } %>
                                     </div>
@@ -139,14 +142,15 @@
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><strong><%= a.getNombre()%></strong></div>
-                                    <% if (a.getEsSocio()){ %>
+                                    <% if (a.getEsSocio()){ 
+                                            h = "socio";%>
                                             <div class="text-muted fs-13px">Socio</div>
-                                            <a href="consulta_socio?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
-                                    <%} else { %>
+                                    <%} else { 
+                                            h = "profesor";%>
                                             <div class="text-muted fs-13px">Profesor</div>
-                                            <a href="consulta_profesor?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
                                     <% } %>
                                         </div>
+                                        <a href="consulta_<%=h%>?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
                                         </div>
                                     <% } %>
                                     </div>

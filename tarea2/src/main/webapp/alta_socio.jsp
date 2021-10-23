@@ -9,13 +9,17 @@
         <link rel="stylesheet" href="styles/alta_usuario.css">
     </head>
 	<body class="d-flex flex-column text-center justify-content-center py-12">
-        <form class="d-flex flex-column form-signup" method="post" enctype="multipart/form-data">
-            <h1 class="h3 mb-3 fw-normal">Alta de usuario</h1>
+        <form class="d-flex flex-column form-signup" method="post" action="alta_socio" enctype="multipart/form-data">
+            <h1 class="h3 mb-3 fw-normal">Alta de socio</h1>
             <input class="form-control mb-3" placeholder="nickname" name="nick">
             <input class="form-control mb-3" placeholder="nombre" name="nombre">
+            <input class="form-control mb-3" placeholder="apellido" name="apellido">
+            <input class="form-control mb-3" placeholder="email" name="email" type="email">
+            <input class="form-control mb-3" name="nacimiento" type="date">
             <input class="form-control mb-3" placeholder="contraseña" name="pass" type="password">
-            <input class="mb-3" accept="image/*" name="img" type="file">
-            <input class="w-100 btn btn-primary" type="submit" value="Registrarse">
+            <input class="form-control mb-3" placeholder="confirmar contraseña" name="pass_confirm" type="password">
+            <input class="form-control mb-3" accept="image/*" name="img" type="file">
+            <input class="btn btn-primary w-100" type="submit" value="Registrarse">
         </form>
 	</body>
 </html>

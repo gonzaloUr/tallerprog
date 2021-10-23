@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.data.MiniUsuario;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.exceptions.EmailParseException;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class UsuarioServlet extends HttpServlet {
@@ -52,7 +56,21 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("profes", profes);
 			request.getRequestDispatcher("/lista_usuarios.jsp").forward(request, response);
         } else if (path.equals("/alta_usuario")) {
-            request.getRequestDispatcher("/alta_usuario.jsp").forward(request, response);
+            if (request.getParameterMap().isEmpty())
+                request.getRequestDispatcher("/alta_usuario_selecion.jsp").forward(request, response);
+            else {
+                String tipo = request.getParameter("tipo");
+
+                if (tipo.equals("socio"))
+                    request.getRequestDispatcher("/alta_socio.jsp").forward(request, response);
+                else {
+                    Set<String> institucionesSet = Facades.getFacades().getFacadeInstitucion().getInstituciones();
+                    List<String> instituciones = new ArrayList<>(institucionesSet.size());
+                    instituciones.addAll(institucionesSet);
+                    request.setAttribute("instituciones", instituciones);
+                    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
+                }
+            }
         }
 
         if(path.equals("/consulta_socio")) {
@@ -91,7 +109,7 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("mail", profe.getCorreo().toString());
             request.setAttribute("nacimiento", profe.getNacimiento());
             request.setAttribute("clases", profe.getClases());
-            request.setAttribute("cuponeras", profe.getActividades());
+            request.setAttribute("actividades", profe.getActividades());
             request.setAttribute("nickname", nick);
             request.setAttribute("institucion", profe.getInstitucion());
             request.setAttribute("descripcion", profe.getDescripcion());
@@ -127,37 +145,135 @@ public class UsuarioServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String nickname = (String) request.getParameter("nick");
-        String nombre = (String) request.getParameter("nombre");
-        String pass = (String) request.getParameter("pass");
+        String path = request.getServletPath();
 
-        Part imgPart = request.getPart("img");
-        InputStream is = imgPart.getInputStream();
+        if (path.equals("/alta_socio")) {
+            String nickname = (String) request.getParameter("nick");
+            String nombre = (String) request.getParameter("nombre");
+            String apellido = (String) request.getParameter("apellido");
+            String emailStr = (String) request.getParameter("email");
+            String nacimientoStr = (String) request.getParameter("nacimiento");
+            LocalDate nacimiento = LocalDate.parse(nacimientoStr);
+            String pass = (String) request.getParameter("pass");
+            String passConfirm = (String) request.getParameter("pass_confirm");
 
-        File tmp = File.createTempFile("img_", null);
-        OutputStream os = new FileOutputStream(tmp);
+            Email email = null;
 
-        pipe(is, os);
-        os.close();
+            try {
+                email = Email.parse(emailStr);
+            } catch (EmailParseException e1) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "email_format");
+			    request.getRequestDispatcher("/alta_socio.jsp").forward(request, response);
+                return;
+            }
 
-        try {
-            Facades.getFacades().getFacadeUsuario().crearSocio()
-                .setNickname(nickname)
-                .setNombre(nombre)
-                .setApellido("test")
-                .setPassword(pass)
-                .setCorreo(Email.of("test", "mail.com"))
-                .setImagen(tmp)
-                .setNacimiento(LocalDate.now())
-                .invoke();
-        } catch (UsuarioRepetidoException e) {
-            e.printStackTrace(response.getWriter());
+            if (!pass.equals(passConfirm)) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "pass_does_not_match");
+			    request.getRequestDispatcher("/alta_socio.jsp").forward(request, response);
+                return;
+            }
+
+            Part imgPart = request.getPart("img");
+            InputStream is = imgPart.getInputStream();
+
+            File tmp = File.createTempFile("img_", null);
+            OutputStream os = new FileOutputStream(tmp);
+
+            pipe(is, os);
+            os.close();
+
+            try {
+                Facades.getFacades().getFacadeUsuario().crearSocio()
+                    .setNickname(nickname)
+                    .setNombre(nombre)
+                    .setApellido(apellido)
+                    .setCorreo(email)
+                    .setPassword(pass)
+                    .setImagen(tmp)
+                    .setNacimiento(nacimiento)
+                    .invoke();
+            } catch (UsuarioRepetidoException e) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "usuario_repetido");
+                tmp.delete();
+			    request.getRequestDispatcher("/alta_socio.jsp").forward(request, response);
+                return;
+            }
+
+            DataUsuario socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nickname);
+            request.getSession().setAttribute("usuario", socio);
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+        } else if (path.equals("/alta_profesor")) {
+            String nickname = (String) request.getParameter("nick");
+            String nombre = (String) request.getParameter("nombre");
+            String apellido = (String) request.getParameter("apellido");
+            String emailStr = (String) request.getParameter("email");
+            String nacimientoStr = (String) request.getParameter("nacimiento");
+            LocalDate nacimiento = LocalDate.parse(nacimientoStr);
+            String institucion = (String) request.getParameter("institucion");
+            String descripcion = (String) request.getParameter("desc");
+            String biografia = (String) request.getParameter("bio");
+            URL sitioWeb = new URL((String) request.getParameter("sitio_web"));
+            String pass = (String) request.getParameter("pass");
+            String passConfirm = (String) request.getParameter("pass_confirm");
+
+            Email email = null;
+
+            try {
+                email = Email.parse(emailStr);
+            } catch (EmailParseException e1) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "email_format");
+			    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
+                return;
+            }
+
+            if (!pass.equals(passConfirm)) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "pass_does_not_match");
+			    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
+                return;
+            }
+
+            if (biografia.equals(""))
+                biografia = null;
+
+            Part imgPart = request.getPart("img");
+            InputStream is = imgPart.getInputStream();
+
+            File tmp = File.createTempFile("img_", null);
+            OutputStream os = new FileOutputStream(tmp);
+
+            pipe(is, os);
+            os.close();
+
+            try {
+                Facades.getFacades().getFacadeUsuario().crearProfesor()
+                    .setNickname(nickname)
+                    .setNombre(nombre)
+                    .setApellido(apellido)
+                    .setCorreo(email)
+                    .setNacimiento(nacimiento)
+                    .setInstitucion(institucion)
+                    .setDescripcion(descripcion)
+                    .setBiografia(biografia)
+                    .setSitioWeb(sitioWeb)
+                    .setPassword(pass)
+                    .setImagen(tmp)
+                    .invoke();
+            } catch (UsuarioRepetidoException e) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "usuario_repetido");
+                tmp.delete();
+			    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
+                return;
+            }
+
+            DataUsuario profesor = Facades.getFacades().getFacadeUsuario().getDataProfesor(nickname);
+            request.getSession().setAttribute("usuario", profesor);
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         }
-
-        DataUsuario socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nickname);
-        request.getSession().setAttribute("usuario", socio);
-
-        // getServletContext().getRequestDispatcher("/").forward(request, response);
-        response.getWriter().println("hola");
     }
 }

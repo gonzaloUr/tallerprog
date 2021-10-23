@@ -344,4 +344,10 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Actividad activ = getRegistry().getActividades().get(actividad);
         activ.setEstado(ActividadEstado.RECHAZADA);
     }
+
+    @Override
+    public File getImagenActividad(String id) {
+        Actividad actividad = getRegistry().getActividades().get(id);
+        return actividad.getImagen();
+    }
 }

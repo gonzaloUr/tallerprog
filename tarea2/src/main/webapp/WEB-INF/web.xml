@@ -69,12 +69,27 @@
 
     <servlet-mapping>
         <servlet-name>ClaseServlet</servlet-name>
-        <url-pattern>/registrarse_a_clase</url-pattern>
+        <url-pattern>/registrarse_a_clase_1</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/registrarse_a_clase_2</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/registrarse_a_clase_3</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>ClaseServlet</servlet-name>
         <url-pattern>/confirmar_registro_clase</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/consulta_dictado_clase</url-pattern>
     </servlet-mapping>
 
     <!-- UsuarioServlet mappings -->
@@ -99,6 +114,16 @@
         <url-pattern>/alta_usuario</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/alta_socio</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/alta_profesor</url-pattern>
+    </servlet-mapping>
+
     <!-- IndexServlet mappings -->
 
     <servlet-mapping>
@@ -111,5 +136,20 @@
     <servlet-mapping>
         <servlet-name>ImagenServlet</servlet-name>
         <url-pattern>/img/usuario/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/clase/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/institucion/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/actividad/*</url-pattern>
     </servlet-mapping>
 </web-app>

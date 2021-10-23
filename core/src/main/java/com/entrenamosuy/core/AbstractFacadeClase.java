@@ -39,4 +39,6 @@ public abstract class AbstractFacadeClase extends AbstractFacade {
     public abstract Set<String> getClases(String actividad);
 
     public abstract DataClase getDataClase(String nombre);
+
+    public abstract File getImagenClase(String id);
 }
