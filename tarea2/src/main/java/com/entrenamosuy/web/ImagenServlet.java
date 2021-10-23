@@ -36,6 +36,8 @@ public class ImagenServlet extends HttpServlet {
             img = Facades.getFacades().getFacadeActividad().getImagenActividad(id);
         else if (uri.startsWith(request.getContextPath() + "/img/institucion"))
             img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(id);
+        else if (uri.startsWith(request.getContextPath() + "/img/cuponera"))
+            img = Facades.getFacades().getFacadeCuponera().getImagenCuponera(id);
 
         response.setContentLength((int) img.length());
 
