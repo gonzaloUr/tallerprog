@@ -89,6 +89,16 @@
         <url-pattern>/alta_usuario</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/alta_socio</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/alta_profesor</url-pattern>
+    </servlet-mapping>
+
     <!-- IndexServlet mappings -->
 
     <servlet-mapping>
