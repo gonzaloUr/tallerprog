@@ -25,7 +25,7 @@
                             <label class="list-group-item active">Actividades Ofrecidas</label>
                             <c:forEach items="${actividadesOfrecidas}" var="actividad" >
                             <form action="consulta_actividad">
-                                <input class="list-group-item list-group-item-action" type="submit" name="actividad" value="${actividad}">
+                                <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad}">
                             </form>
                             </c:forEach>
                 </section>
