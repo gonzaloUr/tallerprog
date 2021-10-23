@@ -9,8 +9,6 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 
@@ -217,6 +215,7 @@ public class UsuarioServlet extends HttpServlet {
 
             DataUsuario socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nickname);
             request.getSession().setAttribute("usuario", socio);
+            request.getSession().setAttribute("es_profesor", false);
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         } else if (path.equals("/alta_profesor")) {
             String nickname = (String) request.getParameter("nick");
@@ -286,6 +285,7 @@ public class UsuarioServlet extends HttpServlet {
 
             DataUsuario profesor = Facades.getFacades().getFacadeUsuario().getDataProfesor(nickname);
             request.getSession().setAttribute("usuario", profesor);
+            request.getSession().setAttribute("es_profesor", true);
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         }
     }

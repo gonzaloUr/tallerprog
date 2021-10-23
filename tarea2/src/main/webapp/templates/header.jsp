@@ -20,7 +20,19 @@
                         </c:when>
                         <c:otherwise>
                             <span class="ms-3">${usuario.nombre} ${usuario.apellido}</span>
-                            <img class="avatar-img ms-3" src="img/usuario/${usuario.nickname}"/>
+                            <c:choose>
+                                <c:when test="${es_profesor eq true}">
+                                    <a href="consulta_profesor?nickname=${usuario.nickname}">
+                                        <img class="avatar-img ms-3" src="img/usuario/${usuario.nickname}"/>
+                                    </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="consulta_socio?nickname=${usuario.nickname}">
+                                        <img class="avatar-img ms-3" src="img/usuario/${usuario.nickname}"/>
+                                    </a>
+                                </c:otherwise>
+                            </c:choose>
+                            <a class="btn btn-outline-light ms-3" href="cerrar_sesion">Cerrar sesion</a>
                         </c:otherwise>
                     </c:choose>
                 </div>

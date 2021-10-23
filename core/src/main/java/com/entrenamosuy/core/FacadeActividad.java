@@ -296,7 +296,9 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Set<Actividad> actividades = categorias.get(categoria).getActividades();
         Set<String> ret = new HashSet<>();
         for (Actividad act : actividades)
-            ret.add(act.getNombre());
+            if (act.getEstado()==ActividadEstado.ACEPTADA){
+                ret.add(act.getNombre());
+            }
         return ret;
     }
 

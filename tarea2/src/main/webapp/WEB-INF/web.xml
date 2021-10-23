@@ -37,8 +37,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>IniciarSesionServlet</servlet-name>
-        <servlet-class>com.entrenamosuy.web.IniciarSesionServlet</servlet-class>
+        <servlet-name>SesionServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.SesionServlet</servlet-class>
     </servlet>
 
     <!-- Default servlet mappings -->
@@ -53,11 +53,16 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
-    <!-- IniciarSesionServlet mappings -->
-    
+    <!-- SesionServlet mappings -->
+
     <servlet-mapping>
-        <servlet-name>IniciarSesionServlet</servlet-name>
+        <servlet-name>SesionServlet</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SesionServlet</servlet-name>
+        <url-pattern>/cerrar_sesion</url-pattern>
     </servlet-mapping>
 
     <!-- ActividadServlet mappings -->
