@@ -164,11 +164,22 @@
 	              	<a class="list-group-item active">Actividades</a>
 	              	 <hr>
                    <% 
-                      Set<DataActividad> acts = (Set<DataActividad>) request.getAttribute("actividades");
+                      Set<DataActividad> acts = (Set<DataActividad>) actividades;
                       for (DataActividad a: acts){
                     %>
 	              	<a href="consulta_actividad?nombre=<%= a.getNombre()%>" class="list-group-item list-group-item-action"><%= a.getNombre()%></a>
                    <% } %>
+                   <% 
+                   Set<DataActividad> actsNo = (Set<DataActividad>) actividadesN;
+                   for (DataActividad ac: actsNo){
+                 %>
+                 <div class="list-group-item d-flex align-items-center">
+                <div class="flex-fill pl-3 pr-3">
+                <div><%= ac.getNombre()%></div>
+                <div class="text-muted fs-13px">No aceptada</div>
+                </div>
+                 </div>
+                <% } %>
 	              </div>
 	              </div>
 	              </div>
@@ -182,7 +193,7 @@
                       Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
                       for (DataClase cl: cls){
                     %>
-	              	 <a href="consulta_dictado_clase?nombre=<%= cl.getNombre()%>" class="list-group-item list-group-item-action"><%= cl.getNombre()%></a>
+	              	 <a href="consulta_dictado_clase?clase=<%= cl.getNombre()%>" class="list-group-item list-group-item-action"><%= cl.getNombre()%></a>
                    <% } %>
 	              </div>
 	              </div>

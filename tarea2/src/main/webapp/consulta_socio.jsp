@@ -134,7 +134,7 @@
                       Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
                       for (DataClase c: cls){
                     %>
-	              	<a href="consulta_dictado_clase?nombre=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.getNombre()%></a>
+	              	<a href="consulta_dictado_clase?clase=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.getNombre()%></a>
                    <% } %>
 	              </div>
 	              </div>

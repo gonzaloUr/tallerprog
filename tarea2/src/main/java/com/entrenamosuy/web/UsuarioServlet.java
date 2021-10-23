@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import javax.servlet.http.HttpSession;
 
 import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.DataProfesor;
@@ -104,12 +105,24 @@ public class UsuarioServlet extends HttpServlet {
 
         if(path.equals("/consulta_profesor")) {
             String nick = request.getParameter("nickname");
+
+            HttpSession session = request.getSession();
+
             DataProfesor profe = Facades.getFacades().getFacadeUsuario().getDataProfesor(nick);
+
+            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+            if (usr != null){
+                String nickS = usr.getNickname(); 
+                if(nick.equals(nickS)){
+                    request.setAttribute("actividadesNoAceptadas", profe.getSinAceptar());
+                }   
+            }
+
             request.setAttribute("nombre", profe.getNombre() + "" + profe.getApellido());
             request.setAttribute("mail", profe.getCorreo().toString());
             request.setAttribute("nacimiento", profe.getNacimiento());
             request.setAttribute("clases", profe.getClases());
-            request.setAttribute("actividades", profe.getActividades());
+            request.setAttribute("actividades", profe.getAceptadas());
             request.setAttribute("nickname", nick);
             request.setAttribute("institucion", profe.getInstitucion());
             request.setAttribute("descripcion", profe.getDescripcion());
