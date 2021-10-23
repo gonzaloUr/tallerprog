@@ -1,5 +1,9 @@
 package com.entrenamosuy.web;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,12 +12,15 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collections;
 
+
 import javax.jms.Session;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 import com.entrenamosuy.core.FacadeActividad;
 import com.entrenamosuy.core.data.DataActividad;
@@ -21,11 +28,14 @@ import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.data.DataProfesor;
+import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
 
+
+@MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ActividadServlet extends HttpServlet {
     
 
@@ -102,6 +112,14 @@ public class ActividadServlet extends HttpServlet {
         }
 	}
 
+    private static void pipe(InputStream is, OutputStream os) throws IOException {
+        int n;
+        byte[] buff = new byte[1024];
+
+        while ((n = is.read(buff)) > -1)
+            os.write(buff, 0, n);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
@@ -112,13 +130,19 @@ public class ActividadServlet extends HttpServlet {
         String descripcion = (String)request.getParameter("descripcion_alta_act");
         Duration duracion = (Duration.ofMinutes(Long.parseLong(request.getParameter("duracion_alta_act"))));
         Float costo = Float.valueOf(request.getParameter("costo_alta_act"));
+        Part imgPart = request.getPart("img");
+        InputStream is = imgPart.getInputStream();
+
+        File tmp = File.createTempFile("img_", null);
+        OutputStream os = new FileOutputStream(tmp);
+
+        pipe(is, os);
+        os.close();
         Set<String> categorias = new HashSet<String>();
         String[] array = request.getParameterValues("select_categorias");
         if (array!=null && array.length!=0)
             Collections.addAll(categorias, array);
-        //response.getWriter().println(categorias.size());
         try {
-            //String ins = ((Profesor)request.getSession().getAttribute("usuario")).getInstitucion().getNombre(); Esto es lo que se deberia hacer una vez loggeado.
             Facades.getFacades().getFacadeActividad().crearActividad()
                 .setNombre(nombre)
                 .setDescripcion(descripcion)
@@ -128,6 +152,7 @@ public class ActividadServlet extends HttpServlet {
                 .setRegistro(LocalDate.now())
                 .setCategorias(categorias)
                 .setCreador(nick)
+                .setImagen(tmp)
                 .invoke();
             request.setAttribute("error", "Alta exitosa. ");
             response.sendRedirect(response.encodeRedirectURL("/tarea2"));
@@ -135,7 +160,6 @@ public class ActividadServlet extends HttpServlet {
         }
         catch(ActividadRepetidaException are){
             request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
-            //response.sendError(400, "Ya existe una actividad con ese nombre. ");
         }
         catch(InstitucionNoEncontradaException inee){
             request.setAttribute("error", "No existe una institucion con ese nombre. ");
@@ -143,7 +167,6 @@ public class ActividadServlet extends HttpServlet {
         catch(SinCategoriaException sce){
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
-        //response.sendRedirect("/alta_actividad.jsp");
         processRequest(request, response);
         request.getRequestDispatcher("/alta_actividad.jsp")
 			.forward(request, response);
