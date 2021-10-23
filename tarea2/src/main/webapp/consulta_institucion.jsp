@@ -7,9 +7,8 @@
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
     </head>
-
-
 	<body class="d-flex flex-column">
         <jsp:include page="/templates/header.jsp"/>
         <div class="d-flex flex-row">
@@ -31,7 +30,7 @@
                             </form>
                             </c:forEach>
                         </div>
-                    </nav>        
+                    </nav>
                 </aside>
             </main>
         </div>

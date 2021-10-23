@@ -127,4 +127,19 @@
         <servlet-name>ImagenServlet</servlet-name>
         <url-pattern>/img/usuario/*</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/clase/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/institucion/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ImagenServlet</servlet-name>
+        <url-pattern>/img/actividad/*</url-pattern>
+    </servlet-mapping>
 </web-app>

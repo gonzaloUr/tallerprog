@@ -7,10 +7,11 @@
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
 	</head>
 	<body>
 
-          <% 
+          <%
           String nick = request.getAttribute("nickname");
           String nombre = request.getAttribute("nombre");
           String mail = request.getAttribute("mail");
@@ -71,7 +72,7 @@
                <div class="list-group">
                                     <div class="list-group-item d-flex align-items-center active">Siguiendo
                                     </div>
-                                    <% 
+                                    <%
                                     Set<String> sig = (Set<String>) request.getAttribute("seguidos");
                                     for (String s: sig){
                                     <div class="list-group-item d-flex align-items-center">
@@ -115,7 +116,7 @@
                                         <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
                                     </div>
                                     </div>
-              
+
               </div>
               <div class="col-md-1 mb-3">
 	              <aside id="clase_cuponera">
@@ -125,7 +126,7 @@
 	              <div class="list-group" style="list-style-type:none">
 	              	<a class="list-group-item active">Clases</a>
 	              	 <hr>
-                   <% 
+                   <%
                       Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
                       for (String c: cls){
                     %>
@@ -134,13 +135,13 @@
 	              </div>
 	              </div>
 	              </div>
-	
+
 	              <div class="card mb-3" style="width:300px">
 	                <div class="card-body">
 	              <div class="list-group" style="list-style-type:none">
 	              <a class="list-group-item active">Cuponeras</a>
 	              	 <hr>
-                   <% 
+                   <%
                       Set<DataCuponera> cls = (Set<DataCuponera>) request.getAttribute("cuponeras");
                       for (String cup: cups){
                     %>
@@ -152,6 +153,6 @@
 	              </aside>
               </div>
               </div>
-			
+
 	</body>
 </html>

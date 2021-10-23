@@ -8,8 +8,8 @@
         <meta charset="UTF-8">
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
     </head>
 	<body class="d-flex flex-column">
         <jsp:include page="/templates/header.jsp"/>
@@ -21,9 +21,9 @@
                     <p class="fs-6"> <b>Fecha y hora de inicio:</b>  ${inicio}</p>
                     <p class="fs-6"><b>Cantidad minima de participantes:</b> ${cantMin}</p>
                     <p class="fs-6"><b>Cantidad maxima de participantes:</b> ${cantMax}</p>
-                    <p><a href=${url}>Pagina web de ${nombre}</a></p>                   
+                    <p><a href=${url}>Pagina web de ${nombre}</a></p>
                     <p><a href="consulta_actividad_deportiva?actividad=${acti}"> Ver Información Actividad Deportiva </a>  </p>
-                    <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${clase}"> Registrarme a la clase </a>  </p> 
+                    <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${clase}"> Registrarme a la clase </a>  </p>
                     <c:forEach items="${profesorNom}" var="profesorNom" >
                         <p><b>Profesor: </b>${profesorNom} ${apellido}</p>
                     </c:forEach>

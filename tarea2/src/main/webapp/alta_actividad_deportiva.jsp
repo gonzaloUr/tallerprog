@@ -19,7 +19,7 @@
               <option value="Deportes">Deportes</option>
               <option value="Fitness">Fitness</option>
               <option value="Gimnasia">Gimnasia</option>
-            </select> 
+            </select>
             <p> </p>
             <input class="w-100 btn btn-primary" type="submit" value="Dar de alta">
         </form>

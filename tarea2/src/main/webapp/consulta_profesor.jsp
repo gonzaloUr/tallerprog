@@ -7,6 +7,7 @@
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
 	</head>
 	<body>
 	        <jsp:include page="/WEB-INF/templates/header.jsp"/>
@@ -160,20 +161,20 @@ profesional.
                                             <div class="text-muted fs-13px">Socio</div>
                                         </div>
                                         <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
-                                    </div>                                                                                                                                                
+                                    </div>
                                     </div>
                                     <div class="space" style="height:30px"></div>
                <div class="list-group">
                                     <div class="list-group-item d-flex align-items-center active">Seguidores
                                     </div>
                                     <div class="list-group-item d-flex align-items-center"> No hay seguidores</div>
-                                    
+
                                     </div>
-              
+
               </div>
               <div class="col-md-1 mb-3">
 	              <aside id="clase_cuponera">
-              		  <div class="space" style="height:60px"></div>	              
+              		  <div class="space" style="height:60px"></div>
 		              <div class="card mb-3" style="width:300px">
 		                <div class="card-body">
 		              <div class="list-group" style="list-style-type:none">
@@ -183,7 +184,7 @@ profesional.
 		              </div>
 		              </div>
 		              </div>
-		
+
 		              <div class="card mb-3" style="width:300px">
 		                <div class="card-body">
 		              <div class="list-group" style="list-style-type:none">
@@ -197,8 +198,8 @@ profesional.
 	              </aside>
               </div>
               </div>
-			
-             
-			
+
+
+
 	</body>
 </html>
