@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 
@@ -21,6 +23,7 @@ import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.data.MiniUsuario;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
@@ -52,19 +55,66 @@ public class UsuarioServlet extends HttpServlet {
             request.getRequestDispatcher("/alta_usuario.jsp").forward(request, response);
         }
 
-        /*if(path.equals("/consulta_socio")) {
-            String nick = request.getAttribute("nickname");
+        if(path.equals("/consulta_socio")) {
+            String nick = request.getParameter("nickname");
             DataSocio socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nick);
             request.setAttribute("nombre", socio.getNombre() + "" + socio.getApellido());
             request.setAttribute("mail", socio.getCorreo().toString());
             request.setAttribute("nacimiento", socio.getNacimiento());
-            request.setAttribute("seguidos", socio.getSeguidos());
-            request.setAttribute("seguidores", socio.getSeguidores());
             request.setAttribute("clases", socio.getClases());
             request.setAttribute("cuponeras", socio.getCuponeras());
+            request.setAttribute("nickname", nick);
+
+            List<MiniUsuario> seguidos = new ArrayList<MiniUsuario>();
+            Set<String> seguidosSet = socio.getSeguidos();
+            for(String s: seguidosSet){
+                seguidos.add(new MiniUsuario(s, Facades.getFacades().getFacadeUsuario().getSocios().contains(s)));
+            }
+
+            List<MiniUsuario> seguidores = new ArrayList<MiniUsuario>();
+            Set<String> seguidoresSet = socio.getSeguidores();
+            for(String s: seguidoresSet){
+                seguidores.add(new MiniUsuario(s, Facades.getFacades().getFacadeUsuario().getSocios().contains(s)));
+            }
+
+            request.setAttribute("seguidos", seguidos);
+            request.setAttribute("seguidores", seguidores);
+
             request.getRequestDispatcher("/consulta_socio.jsp")
 				.forward(request, response);
-        }*/
+        }
+
+        if(path.equals("/consulta_profesor")) {
+            String nick = request.getParameter("nickname");
+            DataProfesor profe = Facades.getFacades().getFacadeUsuario().getDataProfesor(nick);
+            request.setAttribute("nombre", profe.getNombre() + "" + profe.getApellido());
+            request.setAttribute("mail", profe.getCorreo().toString());
+            request.setAttribute("nacimiento", profe.getNacimiento());
+            request.setAttribute("clases", profe.getClases());
+            request.setAttribute("cuponeras", profe.getActividades());
+            request.setAttribute("nickname", nick);
+            request.setAttribute("institucion", profe.getInstitucion());
+            request.setAttribute("descripcion", profe.getDescripcion());
+            request.setAttribute("biografia", profe.getBiografia());
+
+            List<MiniUsuario> seguidos = new ArrayList<MiniUsuario>();
+            Set<String> seguidosSet = profe.getSeguidos();
+            for(String s: seguidosSet){
+                seguidos.add(new MiniUsuario(s, Facades.getFacades().getFacadeUsuario().getSocios().contains(s)));
+            }
+
+            List<MiniUsuario> seguidores = new ArrayList<MiniUsuario>();
+            Set<String> seguidoresSet = profe.getSeguidores();
+            for(String s: seguidoresSet){
+                seguidores.add(new MiniUsuario(s, Facades.getFacades().getFacadeUsuario().getSocios().contains(s)));
+            }
+
+            request.setAttribute("seguidos", seguidos);
+            request.setAttribute("seguidores", seguidores);
+
+            request.getRequestDispatcher("/consulta_profesor.jsp")
+				.forward(request, response);
+        }
     }
 
     private static void pipe(InputStream is, OutputStream os) throws IOException {

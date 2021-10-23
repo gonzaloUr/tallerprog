@@ -191,11 +191,11 @@ public class Socio extends Usuario {
             seguidosString.add(u.getNickname());
         }
 
-        for (Registro r : registros) {
+        for (Registro r : getRegistros()) {
             Clase clase = r.getClaseAsociada();
             dataClases.add(clase.getDataClase());
         }
-        for (Compra comp : compras){
+        for (Compra comp : getCompras()){
             Cuponera cup = comp.getCuponera();
             dataCuponeras.add(cup.getDataCuponera());
         }

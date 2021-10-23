@@ -1,4 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.entrenamosuy.core.data.MiniUsuario"%>
+<%@page import="com.entrenamosuy.core.data.DataClase"%>
+<%@page import="com.entrenamosuy.core.data.DataCuponera"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Set"%>
 
 <!DOCTYPE html>
 <html>
@@ -11,16 +17,16 @@
 	<body>
 
           <% 
-          String nick = request.getAttribute("nickname");
-          String nombre = request.getAttribute("nombre");
-          String mail = request.getAttribute("mail");
-          LocalDate nacimiento = request.getAttribute("nacimiento");
-          Set<String> seguidos = request.getAttribute("seguidos");
-          Set<String> seguidores = request.getAttribute("seguidores");
-          Set<DataClase> clases = request.getAttribute("clases");
-          Set<DataCuponera> cuponeras = request.getAttribute("cuponeras");
+          String nick = (String) request.getAttribute("nickname");
+          String nombre = (String) request.getAttribute("nombre");
+          String mail = (String) request.getAttribute("mail");
+          LocalDate nacimiento = (LocalDate) request.getAttribute("nacimiento");
+          List<MiniUsuario> seguidos = (List<MiniUsuario>) request.getAttribute("seguidos");
+          List<MiniUsuario> seguidores = (List<MiniUsuario>) request.getAttribute("seguidores");
+          Set<DataClase> clases = (Set<DataClase>) request.getAttribute("clases");
+          Set<DataCuponera> cuponeras = (Set<DataCuponera>) request.getAttribute("cuponeras");
           %>
-	        <jsp:include page="/WEB-INF/templates/header.jsp"/>
+	        <jsp:include page="templates/header.jsp"/>
 	        <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -72,51 +78,46 @@
                                     <div class="list-group-item d-flex align-items-center active">Siguiendo
                                     </div>
                                     <% 
-                                    Set<String> sig = (Set<String>) request.getAttribute("seguidos");
-                                    for (String s: sig){
+                                    List<MiniUsuario> sig = (List<MiniUsuario>) request.getAttribute("seguidos");
+                                    for (MiniUsuario s: sig){
+                                    %>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
-                                            <div><strong>guille</strong></div>
-                                            <div class="text-muted fs-13px">Socio</div>
+                                            <div><strong><%= s.getNombre()%></strong></div>
+                                    <% if (s.getEsSocio()){ %>
+                                        <div class="text-muted fs-13px">Socio</div>
+                                        <a href="consulta_socio?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                                    <%} else { %>
+                                        <div class="text-muted fs-13px">Profesor</div>
+                                        <a href="consulta_profesor?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                                    <% } %>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">Ver Perfil</a>
-                                    </div>
+                                        </div>
+                                    <% } %>
                                     </div>
                                     <div class="space" style="height:30px"></div>
-               <div class="list-group">
+                                <div class="list-group">
                                     <div class="list-group-item d-flex align-items-center active">Seguidores
                                     </div>
+                                    <% 
+                                    List<MiniUsuario> seg = (List<MiniUsuario>) request.getAttribute("seguidores");
+                                    for (MiniUsuario a: seg){
+                                    %>
                                     <div class="list-group-item d-flex align-items-center">
                                         <div class="flex-fill pl-3 pr-3">
-                                            <div><strong>guille</strong></div>
+                                            <div><strong><%= a.getNombre()%></strong></div>
+                                    <% if (a.getEsSocio()){ %>
                                             <div class="text-muted fs-13px">Socio</div>
-                                        </div>
-                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><strong>eugue</strong></div>
-                                            <div class="text-muted fs-13px">Socio</div>
-                                        </div>
-                                        <a href="consulta_socio" class="btn btn-outline-primary">Ver Perfil</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><strong>denis</strong></div>
+                                            <a href="consulta_socio?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                                    <%} else { %>
                                             <div class="text-muted fs-13px">Profesor</div>
+                                            <a href="consulta_profesor?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                                    <% } %>
                                         </div>
-                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><strong>Nelson</strong></div>
-                                            <div class="text-muted fs-13px">Profesor</div>
                                         </div>
-                                        <a href="consulta_profesor" class="btn btn-outline-primary">Ver Perfil</a>
+                                    <% } %>
                                     </div>
-                                    </div>
-              
-              </div>
+                          </div>
               <div class="col-md-1 mb-3">
 	              <aside id="clase_cuponera">
 	              <div class="space" style="height:60px"></div>
@@ -127,9 +128,9 @@
 	              	 <hr>
                    <% 
                       Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
-                      for (String c: cls){
+                      for (DataClase c: cls){
                     %>
-	              	<a href="consulta_dictado_clase?nombre=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.get.Nombre()%></a>
+	              	<a href="consulta_dictado_clase?nombre=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.getNombre()%></a>
                    <% } %>
 	              </div>
 	              </div>
@@ -141,8 +142,8 @@
 	              <a class="list-group-item active">Cuponeras</a>
 	              	 <hr>
                    <% 
-                      Set<DataCuponera> cls = (Set<DataCuponera>) request.getAttribute("cuponeras");
-                      for (String cup: cups){
+                      Set<DataCuponera> cups = (Set<DataCuponera>) request.getAttribute("cuponeras");
+                      for (DataCuponera cup: cups){
                     %>
 	              	 <a href="consulta_cuponera?nombre=<%= cup.getNombre()%>" class="list-group-item list-group-item-action"><%= cup.getNombre()%></a>
                    <% } %>
