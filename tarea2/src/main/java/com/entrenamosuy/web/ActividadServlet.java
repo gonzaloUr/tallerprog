@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
+import com.entrenamosuy.core.data.DataInstitucion;
 
 public class ActividadServlet extends HttpServlet {
     
@@ -60,6 +61,31 @@ public class ActividadServlet extends HttpServlet {
 			request
 				.getRequestDispatcher("/consulta_actividad.jsp")
 				.forward(request, response);
-		} 
+		} else if(path.equals("/consulta_institucion")) {
+            //QUEDO ACA INSTITUCION POR FACILIDAD
+
+            String institucionNombre = request.getParameter("institucion");
+            DataInstitucion institucion = Facades
+                .getFacades()
+                .getFacadeInstitucion()
+                .getDataInstitucion(institucionNombre);
+
+            String nombre = institucion.getNombre();
+            String descripcion = institucion.getDescripcion();
+            String url = institucion.getUrl().toString();
+            Set<String> actividadesOfrecidas = institucion.getActividadesOfrecidas()
+                .stream()
+                .map(DataActividad::getNombre)
+                .collect(Collectors.toSet());
+
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("descripcion", descripcion);
+            request.setAttribute("url", url);
+            request.setAttribute("actividadesOfrecidas", actividadesOfrecidas);
+
+            request
+				.getRequestDispatcher("/consulta_institucion.jsp")
+				.forward(request, response);
+        }
 	}
 }
