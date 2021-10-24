@@ -46,9 +46,9 @@
                             <div class="list-group pb-3">
                                 <label class="list-group-item active">Cuponeras Asociadas</label>
                                 <c:forEach items="${cuponerasAsociadas}" var="cuponera" >
-                                <form action="consulta_dictado_clase">
-                                    <input class="list-group-item list-group-item-action" type="submit" name="cuponera" value="${cuponera}">
-                                </form>
+                                
+                                    <span class="list-group-item list-group-item-action">${cuponera}</span>
+                                
                                 </c:forEach>
                             </div>
                         </nav>
