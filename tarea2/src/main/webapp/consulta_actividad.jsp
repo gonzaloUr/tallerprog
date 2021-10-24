@@ -21,9 +21,15 @@
 
                     <p class="fs-4 fw-bold p-3">Categorias: </p>
                     <ul>
-                        <c:forEach items="${categoriasAsociadas}" var="cat" >
-                            <li>${cat}</li>
-                        </c:forEach>
+                            <nav class="flex flex-column p-3 bg-light">
+                                <div class="list-group pb-3">
+                                    <c:forEach items="${categoriasAsociadas}" var="cat" >
+                                    <form action="consulta_categoria">
+                                        <input class="list-group-item list-group-item-action" type="submit" name="categoria" value="${cat}">
+                                    </form>
+                                    </c:forEach>
+                                </div>
+                            </nav>
                     </ul>
                     <aside id="clase_cuponera">
                         <nav class="flex flex-column p-3 bg-light">

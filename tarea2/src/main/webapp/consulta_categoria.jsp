@@ -16,16 +16,14 @@
             <jsp:include page="/templates/aside.jsp"/>
             <main class="d-flex flex-column p-3">
                 <section class="d-flex flex-column">
-                    <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
-                    <p class="fs-6">${descripcion}</p>
-                    <a class="fs-6" href="${url}">url</a>
+                    <h1 class="fs-1 fw-bold p-3">${categorianombre}</h1>
                 </section>
 
                 <aside id="clase_cuponera">
                     <nav class="flex flex-column p-3 bg-light">
                         <div class="list-group pb-3">
                             <label class="list-group-item active">Actividades Ofrecidas</label>
-                            <c:forEach items="${actividadesOfrecidas}" var="actividad" >
+                            <c:forEach items="${catactividades}" var="actividad" >
                             <form action="consulta_actividad">
                                 <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad}">
                             </form>
