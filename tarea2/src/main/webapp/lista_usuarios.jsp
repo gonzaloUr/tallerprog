@@ -37,7 +37,7 @@
                     <img src="img/usuario/${profe.nickname}" alt="" height="50px" class="rounded-sm ml-n2" />
                     <h class="m-3"><strong>${profe.nombre}</strong></h>
                     <div class="flex-fill pl-5 pr-3">
-                        <a href="consulta_institucion" class="text-muted fs-13px">${profe.institucion}</a>
+                        <a href="consulta_institucion?institucion=${profe.institucion}" class="text-muted fs-13px">${profe.institucion}</a>
                     </div>
                     <a href="consulta_profesor?nickname=${profe.nickname}" class="btn btn-outline-primary">Ver Perfil</a>
                 </div>
