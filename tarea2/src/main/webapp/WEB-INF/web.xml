@@ -87,6 +87,11 @@
         <url-pattern>/alta_actividad</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>ActividadServlet</servlet-name>
+        <url-pattern>/consulta_categoria</url-pattern>
+    </servlet-mapping>
+
     <!-- ClaseServlet mappings -->
 
     <servlet-mapping>

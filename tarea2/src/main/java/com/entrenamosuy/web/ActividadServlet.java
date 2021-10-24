@@ -106,10 +106,23 @@ public class ActividadServlet extends HttpServlet {
             request.getRequestDispatcher("/consulta_institucion.jsp")
                 .forward(request, response);
                 
-		}
-        else if (path=="/alta_actividad") { //Cuando quieren llenar el formulario para dar de alta la actividad.
+		}   else if (path=="/alta_actividad") { //Cuando quieren llenar el formulario para dar de alta la actividad.
             processRequest(request, response);
+
+        } else if (path.equals("/consulta_categoria")) {
+            String cat = request.getParameter("categoria");
+            Set<String> catActividades = Facades
+                .getFacades()
+                .getFacadeActividad()
+                .getActividadesDeCategoria(cat);
+
+            
+            request.setAttribute("categorianombre", cat);
+            request.setAttribute("catactividades", catActividades);
+            request.getRequestDispatcher("/consulta_categoria.jsp")
+                .forward(request, response);
         }
+
 	}
 
     private static void pipe(InputStream is, OutputStream os) throws IOException {
