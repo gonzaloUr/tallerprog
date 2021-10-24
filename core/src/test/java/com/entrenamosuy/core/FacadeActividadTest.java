@@ -14,7 +14,7 @@ import java.util.Set;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-
+import com.entrenamosuy.core.model.ActividadEstado;
 import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
@@ -196,6 +196,7 @@ public class FacadeActividadTest {
                 .setDuracion(Duration.ofHours(1))
                 .setRegistro(LocalDate.of(2000, 1, 1))
                 .setCategorias(categorias)
+                .setEstado(ActividadEstado.ACEPTADA)
                 .invoke();
 
             facades.getFacadeActividad().crearActividad()
@@ -206,6 +207,7 @@ public class FacadeActividadTest {
                 .setDuracion(Duration.ofHours(1))
                 .setRegistro(LocalDate.of(2000, 1, 1))
                 .setCategorias(categorias)
+                .setEstado(ActividadEstado.ACEPTADA)
                 .invoke();
         });
 
