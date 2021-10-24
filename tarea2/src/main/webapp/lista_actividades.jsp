@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="styles/sidebar.css">
     </head>
 	<body class="d-flex flex-column">
+            <jsp:include page="/templates/header.jsp"/>
+            <div class="space" style="height:60px"></div>
 		<div class="d-flex justify-content-center">
 			<div class=col-3></div>
 			<div class=col-6>
