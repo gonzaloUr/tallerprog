@@ -5,6 +5,7 @@
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>

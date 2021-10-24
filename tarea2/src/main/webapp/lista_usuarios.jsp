@@ -5,7 +5,8 @@
         <meta charset="UTF-8">
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="common.css">
+        <link rel="stylesheet" href="styles/sidebar.css">
+        <link rel="stylesheet" href="styles/common.css">
     </head>
     <body>
         <jsp:include page="/templates/header.jsp"/>
