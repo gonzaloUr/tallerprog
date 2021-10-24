@@ -18,7 +18,7 @@
                 <section class="d-flex flex-column">
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
                     <p class="fs-6">${descripcion}</p>
-                    <a class="fs-6" href="${url}">url</a>
+                    <a class="fs-6" href="${url}">Sitio Web institucional</a>
                 </section>
 
                 <aside id="clase_cuponera">
