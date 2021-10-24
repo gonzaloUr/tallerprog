@@ -23,7 +23,11 @@
                     <p class="fs-6"><b>Cantidad maxima de participantes:</b> ${cantMax}</p>
                     <p><a href=${url}>Pagina web de ${nombre}</a></p>
                     <p><a href="consulta_actividad?nombre=${acti}"> Ver Información Actividad Deportiva </a>  </p>
-                    <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
+                    <c:choose>
+                        <c:when test="${es_socio eq true}">
+                            <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
+                        </c:when>
+                    </c:choose>
                     <c:forEach items="${profesorNom}" var="profesorNom" >
                         <p><b>Profesor: </b>${profesorNom} ${apellido}</p>
                     </c:forEach>

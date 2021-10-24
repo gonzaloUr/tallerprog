@@ -17,9 +17,11 @@ import com.entrenamosuy.core.AbstractFacadeClase;
 import com.entrenamosuy.core.AbstractFacadeCuponera;
 import com.entrenamosuy.core.AbstractFacadeActividad;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
+import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.data.DataUsuario;
+import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
@@ -105,6 +107,28 @@ public class ClaseServlet extends HttpServlet {
 		} else if(path.equals("/consulta_dictado_clase")){
 
 			String claseNombre = request.getParameter("clase");
+			
+			HttpSession session = request.getSession();
+            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+			if (usr == null) 
+				request.setAttribute("es_socio", false);
+			else {
+				String nickname = usr.getNickname();
+				boolean esSocio = true;
+				try {
+					DataSocio kienSos = Facades
+						.getFacades()
+						.getFacadeUsuario()
+						.getDataSocio(nickname);
+				} catch (SocioNoEncontradoException e){
+					esSocio = false;
+				}
+				if (esSocio)
+					request.setAttribute("es_socio", true);
+				else 
+					request.setAttribute("es_socio", false);
+			}		
+
             DataClase clase = Facades
                 .getFacades()
                 .getFacadeClase()
