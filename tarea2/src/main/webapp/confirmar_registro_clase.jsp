@@ -14,13 +14,6 @@
     </head>
 	<body class="d-flex flex-column text-center justify-content-center py-12">
     <c:choose>
-      <c:when test="${reg_exito eq true}">
-        <div class="form-login">
-          <h1 class="h3 mb-3 fw-normal">Registro exitoso</h1>
-          <span class="mb-3">Presione para volver al inicio</span>
-          <a class="btn btn-primary" href="/tarea2">Pagina principal</a>
-        </div>
-      </c:when>
       <c:when test="${reg_exito eq false}">
         <div class="form-login">
           <h1 class="h3 mb-3 fw-normal">Ya está registrado a esta clase</h1>

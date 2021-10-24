@@ -218,7 +218,7 @@ public class ClaseServlet extends HttpServlet {
 				}
 				request.setAttribute("reg_exito", true);
 			}
-			request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
+			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
 
         } 
     }
