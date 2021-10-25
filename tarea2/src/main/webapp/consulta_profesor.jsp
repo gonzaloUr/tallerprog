@@ -30,7 +30,6 @@
           List<MiniUsuario> seguidores = (List<MiniUsuario>) request.getAttribute("seguidores");
           Set<DataClase> clases = (Set<DataClase>) request.getAttribute("clases");
           Set<DataActividad> actividades = (Set<DataActividad>) request.getAttribute("actividades");
-          Set<DataActividad> actividadesN = (Set<DataActividad>) request.getAttribute("actividadesNoAceptadas");
           int esSeguidor = (int) request.getAttribute("esSeguidor");
           %>
 	        <jsp:include page="templates/header.jsp"/>
@@ -181,8 +180,9 @@
 	              	<a href="consulta_actividad?nombre=<%= a.getNombre()%>" class="list-group-item list-group-item-action"><%= a.getNombre()%></a>
                    <% } %>
                    <% 
-                   Set<DataActividad> actsNo = (Set<DataActividad>) actividadesN;
-                   for (DataActividad ac: actsNo){
+                   if (request.getAttribute("actividadesNoAceptadas") != null){
+                    Set<DataActividad> actsNo = (Set<DataActividad>) request.getAttribute("actividadesNoAceptadas");
+                    for (DataActividad ac: actsNo){
                  %>
                  <div class="list-group-item d-flex align-items-center">
                 <div class="flex-fill pl-3 pr-3">
@@ -190,7 +190,8 @@
                 <div class="text-muted fs-13px">No aceptada</div>
                 </div>
                  </div>
-                <% } %>
+                <% }
+                 } %>
 	              </div>
 	              </div>
 	              </div>
