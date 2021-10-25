@@ -17,7 +17,10 @@ import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.CategoriaNoEncontradaException;
+import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
+import com.entrenamosuy.core.exceptions.CuponeraNoEncontradaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.core.model.ActividadEstado;
 import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
@@ -340,54 +343,88 @@ public class FacadeActividadTest {
     public void registrarseSinCuponera(){
         Fabrica fabrica = new Fabrica();
         FacadeContainer facades = fabrica.createFacades();
-
+        
         assertDoesNotThrow(() -> {
-            facades.getFacadeInstitucion().crearInstitucion()
-                    .setNombre("i1")
-                    .setDescripcion("i1")
-                    .setUrl(new URL("https://test"))
+        facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+        facades.getFacadeActividad().crearCategoria("cat1");
+        Set<String> categorias = new HashSet<>();
+        categorias.add("cat1");
+        
+        
+        facades.getFacadeActividad().crearActividad()
+        .setNombre("a2")
+        .setInstitucion("i1")
+        .setDescripcion("a2")
+        .setCosto(10f)
+        .setDuracion(Duration.ofHours(1))
+        .setRegistro(LocalDate.of(2000, 1, 1))
+        .setCategorias(categorias)
+        .invoke();
+
+        facades.getFacadeActividad().aceptarActividad("a2");
+
+        facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("p1")
+                    .setNombre("p1")
+                    .setApellido("p1")
+                    .setDescripcion("p1")
+                    .setCorreo(Email.of("test", "mail.com"))
+                    .setNacimiento(LocalDate.of(2000, 1, 1))
+                    .setPassword("pass")
+                    .setInstitucion("i1")
                     .invoke();
 
-            facades.getFacadeActividad().crearCategoria("cat1");
-            Set<String> categorias = new HashSet<>();
-            categorias.add("cat1");
-            
-            
-            facades.getFacadeActividad().crearActividad()
-            .setNombre("a2")
-            .setInstitucion("i1")
-            .setDescripcion("a2")
-            .setCosto(10f)
-            .setDuracion(Duration.ofHours(1))
-            .setRegistro(LocalDate.of(2000, 1, 1))
-            .setCategorias(categorias)
+        facades.getFacadeUsuario().crearSocio()
+            .setNombre("test")
+            .setApellido("test")
+            .setNickname("test")
+            .setPassword("pass")
+            .setCorreo(Email.of("test", "mail.com"))
+            .setNacimiento(LocalDate.of(1999, 1, 1))
             .invoke();
 
-            facades.getFacadeActividad().aceptarActividad("a2");
-            facades.getFacadeUsuario().crearProfesor()
-                        .setNickname("p1")
-                        .setNombre("p1")
-                        .setApellido("p1")
-                        .setDescripcion("p1")
-                        .setCorreo(Email.of("test", "mail.com"))
-                        .setNacimiento(LocalDate.of(2000, 1, 1))
-                        .setPassword("pass")
-                        .setInstitucion("i1")
-                        .invoke();
 
-            Set<String> profesoresNickname = new HashSet<>();
-            profesoresNickname.add("p1");
+        Set<String> profesoresNickname = new HashSet<>();
+        profesoresNickname.add("p1");
 
-            facades.getFacadeClase().crearClase()
-                    .setNombre("c1")
-                    .setNombreActividad("a2")
-                    .setNicknameProfesores(profesoresNickname)
-                    .setFechaRegistro(LocalDate.of(2000, 1, 1))
-                    .setCantMin(1)
-                    .setCantMax(10)
-                    .setAcceso(new URL("https://test"))
-                    .setInicio(LocalDateTime.of(2000, 10, 1, 0, 0))
-                    .invoke();
+        facades.getFacadeClase().crearClase()
+                .setNombre("clase1")
+                .setNombreActividad("a2")
+                .setNicknameProfesores(profesoresNickname)
+                .setFechaRegistro(LocalDate.of(2000, 1, 1))
+                .setCantMin(1)
+                .setCantMax(10)
+                .setAcceso(new URL("https://test"))
+                .setInicio(LocalDateTime.of(2000, 10, 1, 0, 0))
+                .invoke();
+        
+        facades.getFacadeCuponera().crearCuponera()
+                .setNombre("c1")
+                .setDescripcion("test")
+                .setInicio(LocalDate.of(2000, 2, 2))
+                .setFin(LocalDate.of(2000, 2, 5))
+                .setFechaRegistro(LocalDate.of(1999, 2, 2))
+                .setDescuento(50)
+                .setImagen(null)
+                .invoke();
         });
+
+        assertThrows (ClaseNoEncontradaException.class, ()-> {
+            facades.getFacadeActividad().registraseConCuponera("test", null, "c1", LocalDate.now());
+        });
+
+        assertThrows (CuponeraNoEncontradaException.class, ()-> {
+            facades.getFacadeActividad().registraseConCuponera("test", "clase1", null, LocalDate.now());
+        });
+        
+        assertThrows (UsuarioNoEncontradoException.class, ()-> {
+            facades.getFacadeActividad().registraseConCuponera(null, "clase1", "c1", LocalDate.now());
+        });
+    }
     }      
-}
+
