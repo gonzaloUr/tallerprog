@@ -382,15 +382,16 @@ public class FacadeActividadTest {
         facades.getFacadeUsuario().crearSocio()
             .setNombre("test")
             .setApellido("test")
-            .setNickname("test")
+            .setNickname("alfonso")
             .setPassword("pass")
-            .setCorreo(Email.of("test", "mail.com"))
+            .setCorreo(Email.of("jhgjhgtghjfhfdgdhfgdghffgh", "mail.com"))
             .setNacimiento(LocalDate.of(1999, 1, 1))
             .invoke();
 
 
         Set<String> profesoresNickname = new HashSet<>();
         profesoresNickname.add("p1");
+        
 
         facades.getFacadeClase().crearClase()
                 .setNombre("clase1")
@@ -415,16 +416,21 @@ public class FacadeActividadTest {
         });
 
         assertThrows (ClaseNoEncontradaException.class, ()-> {
-            facades.getFacadeActividad().registraseConCuponera("test", null, "c1", LocalDate.now());
+            facades.getFacadeActividad().registraseConCuponera("alfonso", null, "c1", LocalDate.now());
         });
 
         assertThrows (CuponeraNoEncontradaException.class, ()-> {
-            facades.getFacadeActividad().registraseConCuponera("test", "clase1", null, LocalDate.now());
+            facades.getFacadeActividad().registraseConCuponera("alfonso", "clase1", null, LocalDate.now());
         });
         
         assertThrows (UsuarioNoEncontradoException.class, ()-> {
             facades.getFacadeActividad().registraseConCuponera(null, "clase1", "c1", LocalDate.now());
         });
+
+        assertDoesNotThrow(() -> {
+            facades.getFacadeClase().getClases("a2");       
+        });
+
     }
     }      
 
