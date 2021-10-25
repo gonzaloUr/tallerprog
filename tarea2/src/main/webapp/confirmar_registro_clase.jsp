@@ -23,7 +23,7 @@
                     <label for="actividad_Depor">Si desea registrarse con una cuponera, seleccionela:</label>
                     <select name="cuponera" id="cuponera" multiple>
                         <c:forEach var="cup" items="${cuponeras}">
-                            <option value="${cup}">cup</option>
+                            <option value="${cup}">${cup}</option>
                         </c:forEach>
                     </select>
                     <input class="w-100 btn btn-primary mt-3" type="submit" value="Confirmar registro">
