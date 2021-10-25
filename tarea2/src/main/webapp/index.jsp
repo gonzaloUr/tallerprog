@@ -27,7 +27,7 @@
                                                                         <hr>
                                                                         <a href="alta_actividad" class="btn btn-outline-primary">Dar de alta una actividad deportiva</a>
                                                                         <hr>
-                                                                        <a href="alta_dictado" class="btn btn-outline-primary">Dar de alta una clase</a>
+                                                                        <a href="alta_dictado_clase" class="btn btn-outline-primary">Dar de alta una clase</a>
                                                                         <hr>
                                                                 </div>        
                                                         </div>
