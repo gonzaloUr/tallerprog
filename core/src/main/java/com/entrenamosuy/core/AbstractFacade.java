@@ -1,6 +1,6 @@
 package com.entrenamosuy.core;
 
-public abstract class AbstractFacade {
+public class AbstractFacade {
 
     private AbstractRegistry registery;
 

@@ -24,20 +24,20 @@ public class ImagenServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String uri = request.getRequestURI();
-        String id = uri.substring(uri.lastIndexOf("/") + 1);
+        String ident = uri.substring(uri.lastIndexOf("/") + 1);
 
         File img = null;
 
         if (uri.startsWith(request.getContextPath() + "/img/usuario"))
-            img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(id);
+            img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(ident);
         else if (uri.startsWith(request.getContextPath() + "/img/clase"))
-            img = Facades.getFacades().getFacadeClase().getImagenClase(id);
+            img = Facades.getFacades().getFacadeClase().getImagenClase(ident);
         else if (uri.startsWith(request.getContextPath() + "/img/actividad"))
-            img = Facades.getFacades().getFacadeActividad().getImagenActividad(id);
+            img = Facades.getFacades().getFacadeActividad().getImagenActividad(ident);
         else if (uri.startsWith(request.getContextPath() + "/img/institucion"))
-            img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(id);
+            img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(ident);
         else if (uri.startsWith(request.getContextPath() + "/img/cuponera"))
-            img = Facades.getFacades().getFacadeCuponera().getImagenCuponera(id);
+            img = Facades.getFacades().getFacadeCuponera().getImagenCuponera(ident);
 
         response.setContentLength((int) img.length());
 
