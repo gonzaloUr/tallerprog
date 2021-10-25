@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,20 +25,29 @@ public class ImagenServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String uri = request.getRequestURI();
-        String ident = uri.substring(uri.lastIndexOf("/") + 1);
+        URI uri;
+
+        try {
+            uri = new URI(request.getRequestURI());
+        } catch (URISyntaxException e) {
+            e.printStackTrace(response.getWriter());
+            return;
+        }
+
+        String path = uri.getPath();
+        String ident = path.substring(path.lastIndexOf("/") + 1);
 
         File img = null;
 
-        if (uri.startsWith(request.getContextPath() + "/img/usuario"))
+        if (path.startsWith(request.getContextPath() + "/img/usuario"))
             img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(ident);
-        else if (uri.startsWith(request.getContextPath() + "/img/clase"))
+        else if (path.startsWith(request.getContextPath() + "/img/clase"))
             img = Facades.getFacades().getFacadeClase().getImagenClase(ident);
-        else if (uri.startsWith(request.getContextPath() + "/img/actividad"))
+        else if (path.startsWith(request.getContextPath() + "/img/actividad"))
             img = Facades.getFacades().getFacadeActividad().getImagenActividad(ident);
-        else if (uri.startsWith(request.getContextPath() + "/img/institucion"))
+        else if (path.startsWith(request.getContextPath() + "/img/institucion"))
             img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(ident);
-        else if (uri.startsWith(request.getContextPath() + "/img/cuponera"))
+        else if (path.startsWith(request.getContextPath() + "/img/cuponera"))
             img = Facades.getFacades().getFacadeCuponera().getImagenCuponera(ident);
 
         response.setContentLength((int) img.length());

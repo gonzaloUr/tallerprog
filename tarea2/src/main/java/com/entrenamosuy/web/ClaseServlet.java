@@ -9,7 +9,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -25,72 +24,72 @@ import javax.servlet.http.Part;
 
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataProfesor;
-import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
-import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ClaseServlet extends HttpServlet {
-    @Override protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getServletPath();
 
-		if(path.equals("/registrarse_a_clase_1")) {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getServletPath();
+
+        if(path.equals("/registrarse_a_clase_1")) {
             Set<String> inst = Facades
-				.getFacades()
-				.getFacadeInstitucion()
-				.getInstituciones();
+                .getFacades()
+                .getFacadeInstitucion()
+                .getInstituciones();
 
-			Set<String> cats = Facades
-				.getFacades()
-				.getFacadeActividad()
-				.getCategorias();
+            Set<String> cats = Facades
+                .getFacades()
+                .getFacadeActividad()
+                .getCategorias();
 
-			request.setAttribute("instituciones", inst);
-			request.setAttribute("categorias", cats);
+            request.setAttribute("instituciones", inst);
+            request.setAttribute("categorias", cats);
 
-			request.getRequestDispatcher("/registrarse_a_clase_1.jsp")
-				.forward(request, response);
+            request.getRequestDispatcher("/registrarse_a_clase_1.jsp")
+                .forward(request, response);
 
-		} else if (path.equals("/registrarse_a_clase_2")){
-			String inst = request.getParameter("institucion");
+        } else if (path.equals("/registrarse_a_clase_2")){
+            String inst = request.getParameter("institucion");
             String cat = request.getParameter("categoria");
-			Set<String> acts;
-			if (cat == null) {
-				acts = Facades
-				.getFacades()
-				.getFacadeActividad()
-				.getActividadesDeInstitucion(inst);
-			}
-			else {
-				acts = Facades
-				.getFacades()
-				.getFacadeActividad()
-				.getActividadesDeCategoria(cat);
-			}
+            Set<String> acts;
+            if (cat == null) {
+                acts = Facades
+                    .getFacades()
+                    .getFacadeActividad()
+                    .getActividadesDeInstitucion(inst);
+            }
+            else {
+                acts = Facades
+                    .getFacades()
+                    .getFacadeActividad()
+                    .getActividadesDeCategoria(cat);
+            }
 
-			request.setAttribute("actividades", acts);
+            request.setAttribute("actividades", acts);
 
-			request.getRequestDispatcher("/registrarse_a_clase_2.jsp")
-				.forward(request, response);
+            request.getRequestDispatcher("/registrarse_a_clase_2.jsp")
+                .forward(request, response);
 
-		} else if (path.equals("/registrarse_a_clase_3")){
-			String acti = request.getParameter("actividad");
+        } else if (path.equals("/registrarse_a_clase_3")){
+            String acti = request.getParameter("actividad");
 
-			Set<String> clases = Facades
-				.getFacades()
-				.getFacadeClase()
-				.getClases(acti);
+            Set<String> clases = Facades
+                .getFacades()
+                .getFacadeClase()
+                .getClases(acti);
 
-			request.setAttribute("clases", clases);
+            request.setAttribute("clases", clases);
 
-			request.getRequestDispatcher("/registrarse_a_clase_3.jsp")
-				.forward(request, response);
+            request.getRequestDispatcher("/registrarse_a_clase_3.jsp")
+                .forward(request, response);
 
 
-		} else if(path.equals("/confirmar_registro_clase")) {
+        } else if(path.equals("/confirmar_registro_clase")) {
 
             String act = request.getParameter("actividad");
             //String cla = request.getParameter("clase");
@@ -98,56 +97,37 @@ public class ClaseServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
-			String nickname = usr.getNickname();
+            String nickname = usr.getNickname();
 
             Set<String> cupos = Facades
-				.getFacades()
-				.getFacadeCuponera()
-				.cuponerasUsables(act, nickname);
+                .getFacades()
+                .getFacadeCuponera()
+                .cuponerasUsables(act, nickname);
 
-			request.setAttribute("cuponeras", cupos);
-			request.getRequestDispatcher("/confirmar_registro_clase.jsp")
-			.forward(request, response);
+            request.setAttribute("cuponeras", cupos);
+            request.getRequestDispatcher("/confirmar_registro_clase.jsp")
+                .forward(request, response);
 
-		} else if(path.equals("/consulta_dictado_clase")){
-
-			String claseNombre = request.getParameter("clase");
-
-			HttpSession session = request.getSession();
-            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
-			if (usr == null)
-				request.setAttribute("es_socio", false);
-			else {
-				String nickname = usr.getNickname();
-				boolean esSocio = true;
-				try {
-					DataSocio kienSos = Facades
-						.getFacades()
-						.getFacadeUsuario()
-						.getDataSocio(nickname);
-				} catch (SocioNoEncontradoException e){
-					esSocio = false;
-				}
-				if (esSocio)
-					request.setAttribute("es_socio", true);
-				else
-					request.setAttribute("es_socio", false);
-			}
+        } else if(path.equals("/consulta_dictado_clase")){
+            String claseNombre = request.getParameter("clase");
 
             DataClase clase = Facades
                 .getFacades()
                 .getFacadeClase()
                 .getDataClase(claseNombre);
+
             String nombre = clase.getNombre();
             LocalDateTime inicio = clase.getInicio();
             int cantMin = clase.getCantMin();
             int cantMax = clase.getCantMax();
             URL url = clase.getAccesoURL();
             String acti= clase.getActividad().getNombre();
+
             Set<String> profesorNom = clase.getProfesores()
                 .stream()
                 .map(DescProfesor::getNombre)
                 .collect(Collectors.toSet());
+
             Set<String> profesorApe = clase.getProfesores()
                 .stream()
                 .map(DescProfesor::getApellido)
@@ -165,10 +145,10 @@ public class ClaseServlet extends HttpServlet {
             request.setAttribute("profesorApe", profesorApe);
             request.setAttribute("apellido", apellido);
 
-			request.getRequestDispatcher("/consulta_dictado_clase.jsp")
-			.forward(request, response);
+            request.getRequestDispatcher("/consulta_dictado_clase.jsp")
+                .forward(request, response);
 
-		} else if (path.equals("/alta_dictado_clase")) {
+        } else if (path.equals("/alta_dictado_clase")) {
             Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 
             if (esProfesor == null || !esProfesor)
@@ -186,7 +166,7 @@ public class ClaseServlet extends HttpServlet {
             request.setAttribute("actividades", actividades);
             request.setAttribute("profe", profesor.getNickname());
 
-			request.getRequestDispatcher("/alta_dictado_clase.jsp").forward(request, response);
+            request.getRequestDispatcher("/alta_dictado_clase.jsp").forward(request, response);
         }
     }
 
@@ -197,50 +177,73 @@ public class ClaseServlet extends HttpServlet {
         String path = request.getServletPath();
         if(path.equals("/confirmar_registro_clase")) {
 
-			HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
 
-			DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
-			String nickname = usr.getNickname();
+            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+            String nickname = usr.getNickname();
 
-		    String cla = request.getParameter("clase");
-		    String cup = request.getParameter("cuponera");
-			LocalDate fecha = LocalDate.now();
-			response.getWriter().println("antes if");
-			if (cup == null) {
-				response.getWriter().println("cup null");
-				try {
-					Facades
-					.getFacades()
-					.getFacadeActividad()
-					.registarseSinCuponera(nickname, cla, fecha);
+            String cla = request.getParameter("clase");
+            String cup = request.getParameter("cuponera");
+            LocalDate fecha = LocalDate.now();
+            response.getWriter().println("antes if");
+            if (cup == null) {
+                response.getWriter().println("cup null");
+                try {
+                    Facades
+                        .getFacades()
+                        .getFacadeActividad()
+                        .registarseSinCuponera(nickname, cla, fecha);
 
 
-				} catch (RegistroInconsistenteException e) {
-					e.printStackTrace(response.getWriter());
-					request.setAttribute("reg_exito", false);
-					request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
-					return;
-				}
-				request.setAttribute("reg_exito", true);
+                    Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 
-			}
-			else {
-				response.getWriter().println("cup != null");
-				try {
-					Facades
-					.getFacades()
-					.getFacadeActividad()
-					.registraseConCuponera(nickname , cla, cup, fecha);
+                    if (esProfesor != null) {
+                        DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
+                        String nick = usuario.getNickname();
 
-				} catch (RegistroInconsistenteException e) {
-					e.printStackTrace(response.getWriter());
-					request.setAttribute("reg_exito", false);
-					request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
-					return;
-				}
-				request.setAttribute("reg_exito", true);
-			}
-			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+                        if (esProfesor)
+                            request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nick));
+                        else
+                            request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nick));
+                    }
+
+                } catch (RegistroInconsistenteException e) {
+                    request.setAttribute("reg_exito", false);
+                    request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
+                    return;
+                }
+                request.setAttribute("reg_exito", true);
+
+            }
+            else {
+                response.getWriter().println("cup != null");
+                try {
+                    Facades
+                        .getFacades()
+                        .getFacadeActividad()
+                        .registraseConCuponera(nickname , cla, cup, fecha);
+
+                    Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
+
+                    if (esProfesor != null) {
+                        DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
+                        String nick = usuario.getNickname();
+
+                        if (esProfesor)
+                            request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nick));
+                        else
+                            request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nick));
+                    }
+
+                } catch (RegistroInconsistenteException e) {
+                    e.printStackTrace(response.getWriter());
+                    request.setAttribute("reg_exito", false);
+                    request.getRequestDispatcher("confirmar_registro_clase.jsp").forward(request, response);
+                    return;
+                }
+                request.setAttribute("reg_exito", true);
+            }
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
 
         } else if (path.equals("/alta_dictado_clase")) {
             String actividad = request.getParameter("actividad");
@@ -251,9 +254,9 @@ public class ClaseServlet extends HttpServlet {
             URL acceso = new URL(request.getParameter("acceso"));
             LocalDate registro = LocalDate.parse(request.getParameter("fecha_registro"));
 
-			Set<String> profes = new HashSet<String>();
-			DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
-			profes.add(u.getNickname());
+            Set<String> profes = new HashSet<String>();
+            DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
+            profes.add(u.getNickname());
 
             Part imgPart = request.getPart("img");
             InputStream is = imgPart.getInputStream();
@@ -276,13 +279,25 @@ public class ClaseServlet extends HttpServlet {
                     .setFechaRegistro(registro)
                     .setImagen(tmp)
                     .invoke();
+
+                Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
+
+                if (esProfesor != null) {
+                    DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
+                    String nickname = usuario.getNickname();
+
+                    if (esProfesor)
+                        request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nickname));
+                    else
+                        request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nickname));
+                }
             } catch (ClaseInconsistenteException e) {
                 // TODO: terminar.
                 e.printStackTrace(response.getWriter());
                 return;
             }
 
-			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
         }
     }
 
@@ -293,16 +308,4 @@ public class ClaseServlet extends HttpServlet {
         while ((n = is.read(buff)) > -1)
             os.write(buff, 0, n);
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-

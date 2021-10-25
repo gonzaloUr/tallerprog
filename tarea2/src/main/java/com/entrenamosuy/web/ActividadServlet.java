@@ -12,8 +12,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.Collections;
 
-
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -22,40 +20,36 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.entrenamosuy.core.FacadeActividad;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataUsuario;
-import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
 
-
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ActividadServlet extends HttpServlet {
-    
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getServletPath();
 
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getServletPath();
         if(path.equals("/lista_actividades")) {
             Set<DataActividad> acts = Facades
-				.getFacades()
-				.getFacadeActividad()
-				.listarActividadesAceptadas();
+                .getFacades()
+                .getFacadeActividad()
+                .listarActividadesAceptadas();
 
-			request.setAttribute("actividades", acts);
-			request.getRequestDispatcher("/lista_actividades.jsp")
-				.forward(request, response);
+            request.setAttribute("actividades", acts);
+            request.getRequestDispatcher("/lista_actividades.jsp")
+                .forward(request, response);
 
-		} else if(path.equals("/consulta_actividad")) {
-			String act = request.getParameter("nombre");
-			DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
+        } else if(path.equals("/consulta_actividad")) {
+            String act = request.getParameter("nombre");
+            DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
 
             String nombre = actividad.getNombre();
             String descripcion = actividad.getDescripcion();
@@ -80,12 +74,12 @@ public class ActividadServlet extends HttpServlet {
             request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
             request.setAttribute("categoriasAsociadas", categoriasAsociadas);
 
-			request
-				.getRequestDispatcher("/consulta_actividad.jsp")
-				.forward(request, response);
+            request
+                .getRequestDispatcher("/consulta_actividad.jsp")
+                .forward(request, response);
 
-		} else if(path.equals("/consulta_institucion")) {
-            //QUEDO ACA INSTITUCION POR FACILIDAD
+        } else if(path.equals("/consulta_institucion")) {
+            // TODO: cambiar a otro servlet.
 
             String institucionNombre = request.getParameter("institucion");
             DataInstitucion institucion = Facades
@@ -105,10 +99,9 @@ public class ActividadServlet extends HttpServlet {
 
             request.getRequestDispatcher("/consulta_institucion.jsp")
                 .forward(request, response);
-                
-		}   else if (path=="/alta_actividad") { //Cuando quieren llenar el formulario para dar de alta la actividad.
-            processRequest(request, response);
 
+        }  else if (path=="/alta_actividad") {
+            processRequest(request, response);
         } else if (path.equals("/consulta_categoria")) {
             String cat = request.getParameter("categoria");
             Set<String> catActividades = Facades
@@ -116,14 +109,13 @@ public class ActividadServlet extends HttpServlet {
                 .getFacadeActividad()
                 .getActividadesDeCategoria(cat);
 
-            
             request.setAttribute("categorianombre", cat);
             request.setAttribute("catactividades", catActividades);
             request.getRequestDispatcher("/consulta_categoria.jsp")
                 .forward(request, response);
         }
 
-	}
+    }
 
     private static void pipe(InputStream is, OutputStream os) throws IOException {
         int n;
@@ -167,8 +159,20 @@ public class ActividadServlet extends HttpServlet {
                 .setCreador(nick)
                 .setImagen(tmp)
                 .invoke();
-            request.setAttribute("error", "Alta exitosa. ");
-            response.sendRedirect(response.encodeRedirectURL("/tarea2"));
+
+            Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
+
+            if (esProfesor != null) {
+                DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
+                String nickname = usuario.getNickname();
+
+                if (esProfesor)
+                    request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nickname));
+                else
+                    request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nickname));
+            }
+
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             return;
         }
         catch(ActividadRepetidaException are){
@@ -181,9 +185,6 @@ public class ActividadServlet extends HttpServlet {
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
         processRequest(request, response);
-        request.getRequestDispatcher("/alta_actividad.jsp")
-			.forward(request, response);
-
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -194,9 +195,6 @@ public class ActividadServlet extends HttpServlet {
 
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/alta_actividad.jsp")
-			.forward(request, response);
+            .forward(request, response);
     }
-
-
 }
-

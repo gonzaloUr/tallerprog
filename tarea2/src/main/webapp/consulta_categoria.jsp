@@ -3,14 +3,14 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
+    <head>
         <meta charset="UTF-8">
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="styles/sidebar.css">
         <link rel="stylesheet" href="styles/common.css">
     </head>
-	<body class="d-flex flex-column">
+    <body class="d-flex flex-column">
         <jsp:include page="/templates/header.jsp"/>
         <div class="d-flex flex-row">
             <jsp:include page="/templates/aside.jsp"/>
@@ -24,15 +24,15 @@
                         <div class="list-group pb-3">
                             <label class="list-group-item active">Actividades Ofrecidas</label>
                             <c:forEach items="${catactividades}" var="actividad" >
-                            <form action="consulta_actividad">
-                                <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad}">
-                            </form>
+                                <form action="consulta_actividad">
+                                    <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad}">
+                                </form>
                             </c:forEach>
                         </div>
                     </nav>
                 </aside>
             </main>
         </div>
-	</body>
+    </body>
 
 </html>

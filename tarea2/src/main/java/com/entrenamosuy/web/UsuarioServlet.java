@@ -75,15 +75,17 @@ public class UsuarioServlet extends HttpServlet {
         if(path.equals("/consulta_socio")) {
             String nick = request.getParameter("nickname");
             DataSocio socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nick);
+
             request.setAttribute("nombre", socio.getNombre() + " " + socio.getApellido());
             request.setAttribute("mail", socio.getCorreo().toString());
             request.setAttribute("nacimiento", socio.getNacimiento());
             request.setAttribute("clases", socio.getClases());
             request.setAttribute("cuponeras", socio.getCuponeras());
             request.setAttribute("nickname", nick);
-            
+
+
             HttpSession session = request.getSession();
-            
+
             DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
 
             if (usr != null){
@@ -127,9 +129,9 @@ public class UsuarioServlet extends HttpServlet {
             DataProfesor profe = Facades.getFacades().getFacadeUsuario().getDataProfesor(nick);
 
             DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
-            
+
             if (usr != null){
-                String nickS = usr.getNickname(); 
+                String nickS = usr.getNickname();
                 Set<String> seguidosS = usr.getSeguidos();
                 if (seguidosS.contains(nick)){
                     request.setAttribute("esSeguidor", 1);
@@ -139,7 +141,7 @@ public class UsuarioServlet extends HttpServlet {
                 }
                 if(nick.equals(nickS)){
                     request.setAttribute("actividadesNoAceptadas", profe.getSinAceptar());
-                }   
+                }
             }
 
             else {
@@ -187,7 +189,7 @@ public class UsuarioServlet extends HttpServlet {
             else {
                 request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nick2));
             }
-            
+
             if (Facades.getFacades().getFacadeUsuario().getProfesores().contains(nick1)){
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_profesor?nickname=" + nick1));
             }
