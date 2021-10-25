@@ -31,7 +31,7 @@
           Set<DataClase> clases = (Set<DataClase>) request.getAttribute("clases");
           Set<DataActividad> actividades = (Set<DataActividad>) request.getAttribute("actividades");
           Set<DataActividad> actividadesN = (Set<DataActividad>) request.getAttribute("actividadesNoAceptadas");
-          boolean esSeguidor = (boolean) request.getAttribute("esSeguidor");
+          int esSeguidor = (int) request.getAttribute("esSeguidor");
           %>
 	        <jsp:include page="templates/header.jsp"/>
 	        <div class="row gutters-sm">
