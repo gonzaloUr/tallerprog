@@ -218,15 +218,8 @@ public class ClaseServlet extends HttpServlet {
 				}
 				request.setAttribute("reg_exito", true);
 			}
-<<<<<<< Updated upstream
 			response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
 
-=======
-//response.getWriter().println("hola");
-//response.getWriter().println("clase" + cla);
-//response.getWriter().println("cuponera" + cup);
-//getServletContext().getRequestDispatcher("/").forward(request, response);
->>>>>>> Stashed changes
         } 
     }
 	
