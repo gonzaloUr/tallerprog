@@ -6,10 +6,10 @@
         <meta charset="UTF-8">
         <c:if test="${successful_login eq true}">
             <c:if test="${es_profesor eq true}">
-                <meta http-equiv="refresh" content="3; URL=<c:url value="/"/>">
+                <meta http-equiv="refresh" content="0.1; URL=<c:url value="/"/>">
             </c:if>
             <c:if test="${es_profesor eq false}">
-                <meta http-equiv="refresh" content="3; URL=<c:url value="/"/>">
+                <meta http-equiv="refresh" content="0.1; URL=<c:url value="/"/>">
             </c:if>
         </c:if>
         <title>Entrenamos.uy</title>
@@ -19,16 +19,7 @@
 	<body class="d-flex flex-column text-center justify-content-center py-12">
         <c:choose>
             <c:when test="${successful_login eq true}">
-                <div class="form-login">
-                    <h1 class="h3 mb-3 fw-normal">Inicio exitoso</h1>
-                    <span class="mb-3">Sera direccionado automáticamente a la pagina principal en un momento</span>
-                    <c:if test="${es_profesor eq false}">
-                        <a class="btn btn-primary" href="/tarea2">Pagina principal</a>
-                    </c:if>
-                    <c:if test="${es_profesor eq true}">
-                        <a class="btn btn-primary" href="/tarea2">Pagina principal</a>
-                    </c:if>
-                </div>
+                
             </c:when>
             <c:otherwise>
                 <form class="d-flex flex-column form-login" method="post">
