@@ -28,5 +28,5 @@ public abstract class AbstractFacadeInstitucion extends AbstractFacade {
 
     public abstract DataInstitucion getDataInstitucion(String institucion);
 
-    public abstract File getImagenInstitucion(String id);
+    public abstract File getImagenInstitucion(String ident);
 }

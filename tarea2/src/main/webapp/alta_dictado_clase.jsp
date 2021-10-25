@@ -26,18 +26,6 @@
                 </select>
                 <input class="form-control mb-3" placeholder="nombre" name="nombre">
                 <input class="form-control mb-3" placeholder="inicio" name="inicio" type="datetime-local">
-                <select class="form-control mb-3" name="profes" multiple>
-                    <c:forEach var="i" begin="0" end="${profes.size() - 1}">
-                        <c:choose>
-                            <c:when test="${i eq 0}">
-                                <option selected value="${profes.get(i)}">${profes.get(i)}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${profes.get(i)}">${profes.get(i)}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
-                </select>
                 <input class="form-control mb-3" placeholder="cantidad mininima" name="cant_min" type="number" min="0">
                 <input class="form-control mb-3" placeholder="cantidad maxima" name="cant_max" type="number" min="0">
                 <input class="form-control mb-3" placeholder="url de acesso" name="acceso" type="url">

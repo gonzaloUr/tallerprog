@@ -350,8 +350,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public File getImagenActividad(String id) {
-        Actividad actividad = getRegistry().getActividades().get(id);
+    public File getImagenActividad(String ident) {
+        Actividad actividad = getRegistry().getActividades().get(ident);
         return actividad.getImagen();
     }
 }

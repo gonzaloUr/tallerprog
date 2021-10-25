@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.entrenamosuy.core.data.Email;
 
-public abstract class Usuario {
+public class Usuario {
 
     private String nickname;
 

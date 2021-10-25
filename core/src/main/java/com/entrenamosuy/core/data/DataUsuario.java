@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class DataUsuario {
+public class DataUsuario {
 
     private final String nickname;
 
