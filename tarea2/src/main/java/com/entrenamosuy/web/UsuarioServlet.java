@@ -75,7 +75,7 @@ public class UsuarioServlet extends HttpServlet {
         if(path.equals("/consulta_socio")) {
             String nick = request.getParameter("nickname");
             DataSocio socio = Facades.getFacades().getFacadeUsuario().getDataSocio(nick);
-            request.setAttribute("nombre", socio.getNombre() + "" + socio.getApellido());
+            request.setAttribute("nombre", socio.getNombre() + " " + socio.getApellido());
             request.setAttribute("mail", socio.getCorreo().toString());
             request.setAttribute("nacimiento", socio.getNacimiento());
             request.setAttribute("clases", socio.getClases());
@@ -146,7 +146,7 @@ public class UsuarioServlet extends HttpServlet {
                 request.setAttribute("esSeguidor", 0);
             }
 
-            request.setAttribute("nombre", profe.getNombre() + "" + profe.getApellido());
+            request.setAttribute("nombre", profe.getNombre() + " " + profe.getApellido());
             request.setAttribute("mail", profe.getCorreo().toString());
             request.setAttribute("nacimiento", profe.getNacimiento());
             request.setAttribute("clases", profe.getClases());
