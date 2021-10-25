@@ -169,7 +169,7 @@
                     <div class="card mb-3" style="width:300px">
                         <div class="card-body">
                             <div class="list-group" style="list-style-type:none">
-                                <a class="list-group-item active">Actividades</a>
+                                <a class="list-group-item active">Actividades creadas</a>
                                 <hr>
                                 <%
                                 Set<DataActividad> acts = (Set<DataActividad>) actividades;
@@ -197,7 +197,7 @@
                     <div class="card mb-3" style="width:300px">
                         <div class="card-body">
                             <div class="list-group" style="list-style-type:none">
-                                <a class="list-group-item active">Clases</a>
+                                <a class="list-group-item active">Clases dictadas</a>
                                 <hr>
                                 <%
                                 Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");

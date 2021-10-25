@@ -311,6 +311,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k2)
                     .setEstado(ActividadEstado.ACEPTADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/2XpKBkr")))
+                    .setCreador("viktor")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -323,6 +324,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k1)
                     .setEstado(ActividadEstado.ACEPTADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/3vqbAbS")))
+                    .setCreador("denis")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -347,6 +349,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k1)
                     .setEstado(ActividadEstado.ACEPTADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/3jfuKfN")))
+                    .setCreador("TheBoss")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -359,6 +362,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k1)
                     .setEstado(ActividadEstado.ACEPTADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/3n9Tw2l")))
+                    .setCreador("denis")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -370,6 +374,7 @@ public class IndexServlet extends HttpServlet {
                     .setRegistro(LocalDate.of(2021, 7, 31))
                     .setCategorias(k1)
                     .setEstado(ActividadEstado.ACEPTADA)
+                    .setCreador("Nelson")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -393,6 +398,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k3)
                     .setEstado(ActividadEstado.INGRESADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/3DWa6sW")))
+                    .setCreador("clazar")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -405,6 +411,7 @@ public class IndexServlet extends HttpServlet {
                     .setCategorias(k5)
                     .setEstado(ActividadEstado.RECHAZADA)
                     .setImagen(new File(ctx.getRealPath("/img/actividades/3lTd3Ex")))
+                    .setCreador("denis")
                     .invoke();
 
                 facadeActividad.crearActividad()
@@ -416,6 +423,7 @@ public class IndexServlet extends HttpServlet {
                     .setRegistro(LocalDate.of(2021, 9, 7))
                     .setCategorias(k3)
                     .setEstado(ActividadEstado.INGRESADA)
+                    .setCreador("denis")
                     .invoke();
 
                 facadeUsuario.seguirUsuario("guille", "Emi71");
