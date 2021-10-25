@@ -17,6 +17,8 @@
             <main class="d-flex flex-column p-3">
                 <section class="d-flex flex-column">
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
+                    <img src="img/actividad/${nombre}" alt=" " class="w-50">
+                    <p></p>
                     <p class="fs-6">${descripcion}</p>
 
                     <p class="fs-4 fw-bold p-3">Categorias: </p>

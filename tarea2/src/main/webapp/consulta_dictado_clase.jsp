@@ -18,6 +18,8 @@
             <main class="d-flex flex-column p-3">
                 <section class="d-flex flex-column">
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
+                    <img src="img/clase/${nombre}" alt=" " class="consulta_clase">
+                    <p></p>
                     <p class="fs-6"> <b>Fecha y hora de inicio:</b>  ${inicio}</p>
                     <p class="fs-6"><b>Cantidad minima de participantes:</b> ${cantMin}</p>
                     <p class="fs-6"><b>Cantidad maxima de participantes:</b> ${cantMax}</p>
