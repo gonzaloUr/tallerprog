@@ -154,22 +154,10 @@ public class ClaseServlet extends HttpServlet {
             if (esProfesor == null || !esProfesor)
                 throw new IllegalArgumentException("profesor no logeado");
 
-            DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
-            String institucion = profesor.getInstitucion();
-            Set<String> actividadesSet = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(institucion);
-
-            List<String> actividades = new ArrayList<>(actividadesSet.size());
-
-            actividades.addAll(actividadesSet);
-
-            request.setAttribute("institucion", institucion);
-            request.setAttribute("actividades", actividades);
-            request.setAttribute("profe", profesor.getNickname());
-
-            request.getRequestDispatcher("/alta_dictado_clase.jsp").forward(request, response);
+            processRequest(request,response);
+            
         }
     }
-
 
 
     @Override
@@ -246,6 +234,16 @@ public class ClaseServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
 
         } else if (path.equals("/alta_dictado_clase")) {
+            Boolean bool1 = request.getParameter("nombre").equals("");
+            Boolean bool2 = request.getParameter("cant_min").equals("");
+            Boolean bool3 = request.getParameter("cant_max").equals("");
+            Boolean bool4 = request.getParameter("acceso").equals("");
+            if (bool1||bool2||bool3||bool4){
+                request.setAttribute("error", "Por favor llene los campos");
+                processRequest(request, response);
+                return;
+            }
+
             String actividad = request.getParameter("actividad");
             String nombre = request.getParameter("nombre");
             LocalDateTime inicio = LocalDateTime.parse(request.getParameter("inicio"));
@@ -307,17 +305,7 @@ public class ClaseServlet extends HttpServlet {
                         request.setAttribute("error", "La fecha de registro de la clase debe ser posterior a la de registro de la actividad.");
                         break;
                 }
-                DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
-                String institucion = profesor.getInstitucion();
-                Set<String> actividadesSet = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(institucion);
-                List<String> actividades = new ArrayList<>(actividadesSet.size());
-
-                actividades.addAll(actividadesSet);
-                request.setAttribute("institucion", institucion);
-                request.setAttribute("actividades", actividades);
-                request.setAttribute("profe", profesor.getNickname());
-                request.getRequestDispatcher("/alta_dictado_clase.jsp")
-                    .forward(request, response);
+                processRequest(request, response);
                 //e.printStackTrace(response.getWriter());
             }
 
@@ -331,5 +319,21 @@ public class ClaseServlet extends HttpServlet {
 
         while ((n = is.read(buff)) > -1)
             os.write(buff, 0, n);
+    }
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+        DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
+        String institucion = profesor.getInstitucion();
+        Set<String> actividadesSet = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(institucion);
+
+        List<String> actividades = new ArrayList<>(actividadesSet.size());
+
+        actividades.addAll(actividadesSet);
+
+        request.setAttribute("institucion", institucion);
+        request.setAttribute("actividades", actividades);
+        request.setAttribute("profe", profesor.getNickname());
+
+        request.getRequestDispatcher("/alta_dictado_clase.jsp").forward(request, response);
     }
 }

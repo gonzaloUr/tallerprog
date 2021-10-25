@@ -67,12 +67,14 @@ public class ActividadServlet extends HttpServlet {
             Set<String> categoriasAsociadas = actividad.getCategorias()
                 .stream()
                 .collect(Collectors.toSet());
+            Duration duracion = actividad.getDuracion();
 
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("clasesOfrecidas", clasesOfrecidas);
             request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
             request.setAttribute("categoriasAsociadas", categoriasAsociadas);
+            request.setAttribute("duracion", duracion);
 
             request
                 .getRequestDispatcher("/consulta_actividad.jsp")
@@ -127,6 +129,16 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
+        Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
+        Boolean bool3 = request.getParameter("costo_alta_act").equals("");
+        if (bool1||bool2||bool3){
+            request.setAttribute("error", "Por favor llene los campos");
+            processRequest(request, response);
+            return;
+        }
+
         HttpSession session = request.getSession();
         DataProfesor usr = (DataProfesor) session.getAttribute("usuario");
         String nick = usr.getNickname();
@@ -137,6 +149,8 @@ public class ActividadServlet extends HttpServlet {
         Float costo = Float.valueOf(request.getParameter("costo_alta_act"));
         Part imgPart = request.getPart("img");
         InputStream is = imgPart.getInputStream();
+
+        
 
         File tmp = File.createTempFile("img_", null);
         OutputStream os = new FileOutputStream(tmp);

@@ -1,6 +1,7 @@
 <%@page import="java.util.Set"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalDateTime"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -29,7 +30,7 @@
                 <input class="form-control mb-3" placeholder="cantidad mininima" name="cant_min" type="number" min="0">
                 <input class="form-control mb-3" placeholder="cantidad maxima" name="cant_max" type="number" min="0">
                 <input class="form-control mb-3" placeholder="url de acesso" name="acceso" type="url">
-                <input class="form-control mb-3" placeholder="fecha de registro" name="fecha_registro" type="date">
+                <input class="form-control mb-3" placeholder="fecha de registro" name="fecha_registro" type="date" value=<%=LocalDate.now()%>>
                 <input class="form-control mb-3" accept="image/*" name="img" type="file">
                 <input class="btn btn-primary w-100" type="submit" value="Crear">
             </form>

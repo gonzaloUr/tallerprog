@@ -18,6 +18,7 @@
                     <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
                     <img src="img/actividad/${nombre}" alt=" " class="w-50">
                     <p class="fs-6 mt-3">${descripcion}</p>
+                    <p class="fs-6 mt-3">Duracion: ${duracion}</p>
                     <p class="fs-4 fw-bold p-3">Categorias: </p>
                     <ul>
                         <nav class="flex flex-column p-3 ">
