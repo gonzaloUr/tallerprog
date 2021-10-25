@@ -182,6 +182,8 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Clase clas = getRegistry().getClases().get(clase);
         Socio soci = getRegistry().getSocios().get(socio);
 
+        // Hacer lo de la clase ya registrada 
+
         if (clas == null)
             throw new ClaseNoEncontradaException("No existe una clase con nombre: " + clase);
 

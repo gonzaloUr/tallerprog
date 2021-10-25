@@ -119,6 +119,11 @@
         <url-pattern>/consulta_dictado_clase</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/alta_dictado_clase</url-pattern>
+    </servlet-mapping>
+
     <!-- UsuarioServlet mappings -->
 
     <servlet-mapping>
