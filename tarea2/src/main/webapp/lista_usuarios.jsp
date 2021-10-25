@@ -20,7 +20,7 @@
                               </div>
             <c:forEach items="${socios}" var="socio">
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="img/usuario/${socio.nickname}" alt="" height="50px" class="rounded-sm ml-n2" />
+                    <img src="img/usuario/${socio.nickname}" alt=" " class="avatar-img" />
                     <div class="flex-fill pl-5 pr-3">
                         <h class="m-3"><strong>${socio.nombre}</strong></h>
                     </div>
@@ -35,7 +35,7 @@
                             </div>
             <c:forEach items="${profes}" var="profe">
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="img/usuario/${profe.nickname}" alt="" height="50px" class="rounded-sm ml-n2" />
+                    <img src="img/usuario/${profe.nickname}" alt=" " class="avatar-img" />
                     <h class="m-3"><strong>${profe.nombre}</strong></h>
                     <div class="flex-fill pl-5 pr-3">
                         <a href="consulta_institucion?institucion=${profe.institucion}" class="text-muted fs-13px">${profe.institucion}</a>

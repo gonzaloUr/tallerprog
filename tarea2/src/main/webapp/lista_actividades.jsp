@@ -23,7 +23,9 @@
                                     Set<DataActividad> acts = (Set<DataActividad>) request.getAttribute("actividades");
                                     for (DataActividad act: acts){
                               %>
+                              
 				      <div class="list-group-item d-flex align-items-center">
+                        <img src="img/actividad/<%=act.getNombre()%>" alt=" " class="lista_actividad" />
                                     <h4 class="m-5"><strong><%= act.getNombre()%></strong></h4>
                                           <div class="flex-fill pl-5 pr-3">
                                   	      <div class="text-muted fs-13px"><%= act.getDescripcion()%></div>
