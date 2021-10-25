@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -175,18 +176,15 @@ public class ClaseServlet extends HttpServlet {
 
             DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
             String institucion = profesor.getInstitucion();
-            Set<String> profesSet = Facades.getFacades().getFacadeUsuario().getProfesoresDeInstitucion(institucion);
             Set<String> actividadesSet = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(institucion);
 
-            List<String> profes = new ArrayList<>(profesSet.size());
             List<String> actividades = new ArrayList<>(actividadesSet.size());
 
-            profes.addAll(profesSet);
             actividades.addAll(actividadesSet);
 
             request.setAttribute("institucion", institucion);
             request.setAttribute("actividades", actividades);
-            request.setAttribute("profes", profes);
+            request.setAttribute("profe", profesor.getNickname());
 
 			request.getRequestDispatcher("/alta_dictado_clase.jsp").forward(request, response);
         }
@@ -252,9 +250,10 @@ public class ClaseServlet extends HttpServlet {
             int cantMax = Integer.parseInt(request.getParameter("cant_max"));
             URL acceso = new URL(request.getParameter("acceso"));
             LocalDate registro = LocalDate.parse(request.getParameter("fecha_registro"));
-            Set<String> profes = Arrays.asList(request.getParameterValues("profes"))
-                .stream()
-                .collect(Collectors.toSet());
+
+			Set<String> profes = new HashSet<String>();
+			DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
+			profes.add(u.getNickname());
 
             Part imgPart = request.getPart("img");
             InputStream is = imgPart.getInputStream();
