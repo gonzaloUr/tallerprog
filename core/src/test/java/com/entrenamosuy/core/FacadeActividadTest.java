@@ -8,11 +8,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 import com.entrenamosuy.core.data.DataActividad;
+import com.entrenamosuy.core.data.Email;
+import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.CategoriaNoEncontradaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.model.ActividadEstado;
 import com.entrenamosuy.core.util.FacadeContainer;
@@ -111,6 +115,26 @@ public class FacadeActividadTest {
                 .invoke();
         });
 
+        assertThrows(ActividadNoEncontradaException.class, () -> {
+            DataActividad ret = facades.getFacadeActividad().getDataActividad("Coso");
+        });
+
+        assertThrows(CategoriaNoEncontradaException.class, () -> {
+            facades.getFacadeActividad().crearCategoria("cat3");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat4");
+
+            facades.getFacadeActividad().crearActividad()
+                .setNombre("a6")
+                .setInstitucion("i1")
+                .setDescripcion("a1")
+                .setCosto(10f)
+                .setDuracion(Duration.ofHours(1))
+                .setRegistro(LocalDate.of(2000, 1, 1))
+                .setCategorias(categorias)
+                .invoke();
+        });
+
         DataActividad ret = facades.getFacadeActividad().getDataActividad("a1");
         assertEquals("a1", ret.getNombre());
         assertEquals("a1", ret.getDescripcion());
@@ -164,6 +188,7 @@ public class FacadeActividadTest {
             facades.getFacadeActividad().aceptarActividad("a1");
             facades.getFacadeActividad().aceptarActividad("a2");
         });
+
 
         Set<String> ret = facades.getFacadeActividad().getActividadesDeInstitucion("i1");
 
@@ -316,57 +341,53 @@ public class FacadeActividadTest {
         Fabrica fabrica = new Fabrica();
         FacadeContainer facades = fabrica.createFacades();
 
-        
-        facades.getFacadeInstitucion().crearInstitucion()
-                .setNombre("i1")
-                .setDescripcion("i1")
-                .setUrl(new URL("https://test"))
-                .invoke();
-
-        facades.getFacadeActividad().crearCategoria("cat1");
-        Set<String> categorias = new HashSet<>();
-        categorias.add("cat1");
-        
-        
-        facades.getFacadeActividad().crearActividad()
-        .setNombre("a2")
-        .setInstitucion("i1")
-        .setDescripcion("a2")
-        .setCosto(10f)
-        .setDuracion(Duration.ofHours(1))
-        .setRegistro(LocalDate.of(2000, 1, 1))
-        .setCategorias(categorias)
-        .invoke();
-
-        facades.getFacadeActividad().aceptarActividad("a2");
-        facades.getFacadeUsuario().crearProfesor()
-                    .setNickname("p1")
-                    .setNombre("p1")
-                    .setApellido("p1")
-                    .setDescripcion("p1")
-                    .setCorreo(Email.of("test", "mail.com"))
-                    .setNacimiento(LocalDate.of(2000, 1, 1))
-                    .setPassword("pass")
-                    .setInstitucion("i1")
+        assertDoesNotThrow(() -> {
+            facades.getFacadeInstitucion().crearInstitucion()
+                    .setNombre("i1")
+                    .setDescripcion("i1")
+                    .setUrl(new URL("https://test"))
                     .invoke();
 
-        Set<String> profesoresNickname = new HashSet<>();
-        profesoresNickname.add("p1");
+            facades.getFacadeActividad().crearCategoria("cat1");
+            Set<String> categorias = new HashSet<>();
+            categorias.add("cat1");
+            
+            
+            facades.getFacadeActividad().crearActividad()
+            .setNombre("a2")
+            .setInstitucion("i1")
+            .setDescripcion("a2")
+            .setCosto(10f)
+            .setDuracion(Duration.ofHours(1))
+            .setRegistro(LocalDate.of(2000, 1, 1))
+            .setCategorias(categorias)
+            .invoke();
 
-        facades.getFacadeClase().crearClase()
-                .setNombre("c1")
-                .setNombreActividad("a1")
-                .setNicknameProfesores(profesoresNickname)
-                .setFechaRegistro(LocalDate.of(2000, 1, 1))
-                .setCantMin(1)
-                .setCantMax(10)
-                .setAcceso(new URL("https://test"))
-                .setInicio(LocalDateTime.of(2000, 10, 1, 0, 0))
-                .invoke();
+            facades.getFacadeActividad().aceptarActividad("a2");
+            facades.getFacadeUsuario().crearProfesor()
+                        .setNickname("p1")
+                        .setNombre("p1")
+                        .setApellido("p1")
+                        .setDescripcion("p1")
+                        .setCorreo(Email.of("test", "mail.com"))
+                        .setNacimiento(LocalDate.of(2000, 1, 1))
+                        .setPassword("pass")
+                        .setInstitucion("i1")
+                        .invoke();
 
+            Set<String> profesoresNickname = new HashSet<>();
+            profesoresNickname.add("p1");
 
-        assertThrows(() -> {
-
+            facades.getFacadeClase().crearClase()
+                    .setNombre("c1")
+                    .setNombreActividad("a2")
+                    .setNicknameProfesores(profesoresNickname)
+                    .setFechaRegistro(LocalDate.of(2000, 1, 1))
+                    .setCantMin(1)
+                    .setCantMax(10)
+                    .setAcceso(new URL("https://test"))
+                    .setInicio(LocalDateTime.of(2000, 10, 1, 0, 0))
+                    .invoke();
         });
-    }
+    }      
 }

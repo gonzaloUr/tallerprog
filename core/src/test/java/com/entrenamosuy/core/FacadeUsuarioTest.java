@@ -18,7 +18,9 @@ import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.exceptions.EmailParseException;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
+import com.entrenamosuy.core.exceptions.SocioNoEncontradoException;
 import com.entrenamosuy.core.util.FacadeContainer;
 import org.junit.jupiter.api.Test;
 
@@ -137,6 +139,11 @@ public class FacadeUsuarioTest {
         
         Set<String> ret = facades.getFacadeUsuario().getSocios();
         assertTrue(ret.contains("test"));
+
+        assertThrows(SocioNoEncontradoException.class, () -> {
+                facades.getFacadeUsuario().getDataSocio("nickname");
+        });
+
     }
 
     @Test
