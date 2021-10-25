@@ -310,4 +310,63 @@ public class FacadeActividadTest {
             facades.getFacadeActividad().rechazarActividad("a2");
         });
     }
+
+    @Test
+    public void registrarseSinCuponera(){
+        Fabrica fabrica = new Fabrica();
+        FacadeContainer facades = fabrica.createFacades();
+
+        
+        facades.getFacadeInstitucion().crearInstitucion()
+                .setNombre("i1")
+                .setDescripcion("i1")
+                .setUrl(new URL("https://test"))
+                .invoke();
+
+        facades.getFacadeActividad().crearCategoria("cat1");
+        Set<String> categorias = new HashSet<>();
+        categorias.add("cat1");
+        
+        
+        facades.getFacadeActividad().crearActividad()
+        .setNombre("a2")
+        .setInstitucion("i1")
+        .setDescripcion("a2")
+        .setCosto(10f)
+        .setDuracion(Duration.ofHours(1))
+        .setRegistro(LocalDate.of(2000, 1, 1))
+        .setCategorias(categorias)
+        .invoke();
+
+        facades.getFacadeActividad().aceptarActividad("a2");
+        facades.getFacadeUsuario().crearProfesor()
+                    .setNickname("p1")
+                    .setNombre("p1")
+                    .setApellido("p1")
+                    .setDescripcion("p1")
+                    .setCorreo(Email.of("test", "mail.com"))
+                    .setNacimiento(LocalDate.of(2000, 1, 1))
+                    .setPassword("pass")
+                    .setInstitucion("i1")
+                    .invoke();
+
+        Set<String> profesoresNickname = new HashSet<>();
+        profesoresNickname.add("p1");
+
+        facades.getFacadeClase().crearClase()
+                .setNombre("c1")
+                .setNombreActividad("a1")
+                .setNicknameProfesores(profesoresNickname)
+                .setFechaRegistro(LocalDate.of(2000, 1, 1))
+                .setCantMin(1)
+                .setCantMax(10)
+                .setAcceso(new URL("https://test"))
+                .setInicio(LocalDateTime.of(2000, 10, 1, 0, 0))
+                .invoke();
+
+
+        assertThrows(() -> {
+
+        });
+    }
 }
