@@ -31,7 +31,7 @@
           Set<DataClase> clases = (Set<DataClase>) request.getAttribute("clases");
           Set<DataActividad> actividades = (Set<DataActividad>) request.getAttribute("actividades");
           Set<DataActividad> actividadesN = (Set<DataActividad>) request.getAttribute("actividadesNoAceptadas");
-
+          boolean esSeguidor = (boolean) request.getAttribute("esSeguidor");
           %>
 	        <jsp:include page="templates/header.jsp"/>
 	        <div class="row gutters-sm">
@@ -43,7 +43,17 @@
                     <div class="mt-3">
                       <h4><%= nick%></h4>
                       <p class="text-secondary mb-1">Profesor</p>
-                      <button class="btn btn-primary">Seguir</button>
+                      <c:choose>
+                        <c:when test="${esSeguidor eq 0}">
+                          <a href="iniciar_sesion" class="btn btn-primary">Seguir</a>
+                        </c:when>
+                        <c:when test="${esSeguidor eq 1}">
+                          <a href="dejar_seguir_usuario?nickname=<%=nick%>" class="btn btn-primary">Dejar de seguir</a>
+                        </c:when>
+                        <c:when test="${esSeguidor eq 2}">
+                          <a href="seguir_usuario?nickname=<%=nick%>" class="btn btn-primary">Seguir</a>
+                        </c:when>
+                      </c:choose>
                     </div>
                   </div>
                 </div>

@@ -81,6 +81,24 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("clases", socio.getClases());
             request.setAttribute("cuponeras", socio.getCuponeras());
             request.setAttribute("nickname", nick);
+            
+            HttpSession session = request.getSession();
+            
+            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+
+            if (usr != null){
+                Set<String> seguidosS = usr.getSeguidos();
+                if (seguidosS.contains(nick)){
+                    request.setAttribute("esSeguidor", 1);
+                }
+                else {
+                    request.setAttribute("esSeguidor", 2);
+                }
+            }
+
+            else {
+                request.setAttribute("esSeguidor", 0);
+            }
 
             List<MiniUsuario> seguidos = new ArrayList<MiniUsuario>();
             Set<String> seguidosSet = socio.getSeguidos();
@@ -109,11 +127,23 @@ public class UsuarioServlet extends HttpServlet {
             DataProfesor profe = Facades.getFacades().getFacadeUsuario().getDataProfesor(nick);
 
             DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+            
             if (usr != null){
                 String nickS = usr.getNickname(); 
+                Set<String> seguidosS = usr.getSeguidos();
+                if (seguidosS.contains(nick)){
+                    request.setAttribute("esSeguidor", 1);
+                }
+                else {
+                    request.setAttribute("esSeguidor", 2);
+                }
                 if(nick.equals(nickS)){
                     request.setAttribute("actividadesNoAceptadas", profe.getSinAceptar());
                 }   
+            }
+
+            else {
+                request.setAttribute("esSeguidor", 0);
             }
 
             request.setAttribute("nombre", profe.getNombre() + "" + profe.getApellido());
@@ -143,6 +173,47 @@ public class UsuarioServlet extends HttpServlet {
 
             request.getRequestDispatcher("/consulta_profesor.jsp")
 				.forward(request, response);
+        }
+
+        if (path.equals("/seguir_usuario")){
+            String nick1 = request.getParameter("nickname");
+            DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
+            String nick2 = u.getNickname();
+            Facades.getFacades().getFacadeUsuario().seguirUsuario(nick1, nick2);
+            boolean b = (boolean) request.getSession().getAttribute("es_profesor");
+            if(b){
+                request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nick2));
+            }
+            else {
+                request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nick2));
+            }
+            
+            if (Facades.getFacades().getFacadeUsuario().getProfesores().contains(nick1)){
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_profesor?nickname=" + nick1));
+            }
+            else {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_socio?nickname=" + nick1));
+            }
+        }
+
+        if (path.equals("/dejar_seguir_usuario")){
+            String nick1 = request.getParameter("nickname");
+            DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
+            String nick2 = u.getNickname();
+            Facades.getFacades().getFacadeUsuario().dejarDeSeguirUsuario(nick1, nick2);
+            boolean b = (boolean) request.getSession().getAttribute("es_profesor");
+            if(b){
+                request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataProfesor(nick2));
+            }
+            else {
+                request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nick2));
+            }
+            if (Facades.getFacades().getFacadeUsuario().getProfesores().contains(nick1)){
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_profesor?nickname=" + nick1));
+            }
+            else {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_socio?nickname=" + nick1));
+            }
         }
     }
 

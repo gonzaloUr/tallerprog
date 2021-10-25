@@ -123,6 +123,16 @@
 
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/seguir_usuario</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/dejar_seguir_usuario</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/lista_usuarios</url-pattern>
     </servlet-mapping>
 
