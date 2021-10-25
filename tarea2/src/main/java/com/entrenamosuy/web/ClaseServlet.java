@@ -292,9 +292,33 @@ public class ClaseServlet extends HttpServlet {
                         request.getSession().setAttribute("usuario", Facades.getFacades().getFacadeUsuario().getDataSocio(nickname));
                 }
             } catch (ClaseInconsistenteException e) {
-                // TODO: terminar.
-                e.printStackTrace(response.getWriter());
-                return;
+                ClaseInconsistenteException.Restriccion r = e.getInconsistencias().get(0);
+                switch (r) {
+                    case NOMBRE_REPETIDO:
+                        request.setAttribute("error", "Nombre no disponible");
+                        break;
+                    case CANT_MAX_MENOR_MIN:   
+                        request.setAttribute("error","La cantidad minima de socios debe ser menor a la cantidad maxima.");
+                        break;
+                    case INICIO_MENOR_REGISTRO:
+                        request.setAttribute("error","La fecha de inicio debe ser posterior a la de registro.");
+                        break;
+                    case REGISTRO_MENOR_REGISTRO_ACTIVIDAD:
+                        request.setAttribute("error", "La fecha de registro de la clase debe ser posterior a la de registro de la actividad.");
+                        break;
+                }
+                DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
+                String institucion = profesor.getInstitucion();
+                Set<String> actividadesSet = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(institucion);
+                List<String> actividades = new ArrayList<>(actividadesSet.size());
+
+                actividades.addAll(actividadesSet);
+                request.setAttribute("institucion", institucion);
+                request.setAttribute("actividades", actividades);
+                request.setAttribute("profe", profesor.getNickname());
+                request.getRequestDispatcher("/alta_dictado_clase.jsp")
+                    .forward(request, response);
+                //e.printStackTrace(response.getWriter());
             }
 
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));

@@ -25,7 +25,7 @@
                     </c:forEach>
                 </select>
                 <input class="form-control mb-3" placeholder="nombre" name="nombre">
-                <input class="form-control mb-3" placeholder="inicio" name="inicio" type="datetime-local">
+                <input class="form-control mb-3" placeholder="inicio" name="inicio" type="datetime-local" value="2021-10-27T11:00">
                 <input class="form-control mb-3" placeholder="cantidad mininima" name="cant_min" type="number" min="0">
                 <input class="form-control mb-3" placeholder="cantidad maxima" name="cant_max" type="number" min="0">
                 <input class="form-control mb-3" placeholder="url de acesso" name="acceso" type="url">
@@ -33,6 +33,9 @@
                 <input class="form-control mb-3" accept="image/*" name="img" type="file">
                 <input class="btn btn-primary w-100" type="submit" value="Crear">
             </form>
+            <c:if test="${error ne null}">
+            <span class="text-danger mb-3">${error}</span>
+            </c:if>
         </div>
 	</body>
 </html>
