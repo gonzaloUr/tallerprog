@@ -22,11 +22,14 @@ import com.entrenamosuy.core.AbstractFacadeInstitucion;
 import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.model.ActividadEstado;
+import com.entrenamosuy.web.publicar.PublicadorActividad;
+import com.entrenamosuy.web.publicar.PublicadorActividadService;
 
 public class IndexServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        /*
         if (getServletContext().getAttribute("cargado") == null) {
             AbstractFacadeUsuario facadeUsuario = Facades.getFacades().getFacadeUsuario();
             AbstractFacadeActividad facadeActividad = Facades.getFacades().getFacadeActividad();
@@ -804,5 +807,11 @@ public class IndexServlet extends HttpServlet {
         }
 
         request.getRequestDispatcher("/index.jsp").forward(request, response);
+        */
+
+        PublicadorActividadService service = new PublicadorActividadService();
+        PublicadorActividad port = service.getPublicadorActividadPort();
+
+        response.getWriter().println(port.hola());
     }
 }

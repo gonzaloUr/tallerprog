@@ -4,6 +4,7 @@ import com.entrenamosuy.core.*;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataSocio;
+import com.entrenamosuy.core.publicar.PublicadorActividad;
 import com.entrenamosuy.core.util.*;
 
 import javax.swing.JFrame;
@@ -569,5 +570,8 @@ public class App extends JFrame {
     public static void main(String[] args) {
         App app = new App();
         app.setVisible(true);
+
+        PublicadorActividad p = new PublicadorActividad();
+        p.publicar();
     }
 }
