@@ -5,11 +5,12 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
-import java.util.HashSet;
+//import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import javax.servlet.ServletException;
@@ -19,16 +20,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.crypto.Data;
 
-import com.entrenamosuy.core.data.DataActividad;
-import com.entrenamosuy.core.data.DataClase;
-import com.entrenamosuy.core.data.DataCuponera;
+
+// import com.entrenamosuy.core.data.DataActividad;
+// import com.entrenamosuy.core.data.DataClase;
+// import com.entrenamosuy.core.data.DataCuponera;
 import com.entrenamosuy.core.data.DataInstitucion;
-import com.entrenamosuy.core.data.DataProfesor;
-import com.entrenamosuy.core.data.DataUsuario;
-import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.exceptions.SinCategoriaException;
+import com.entrenamosuy.web.publicar.DataActividad;
+import com.entrenamosuy.web.publicar.DataClase;
+import com.entrenamosuy.web.publicar.DataCuponera;
+import com.entrenamosuy.web.publicar.HashSet;
+import com.entrenamosuy.web.publicar.PublicadorActividad;
+import com.entrenamosuy.web.publicar.PublicadorActividadService;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ActividadServlet extends HttpServlet {
@@ -36,12 +40,16 @@ public class ActividadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
+        PublicadorActividadService service = new PublicadorActividadService();
+        PublicadorActividad port = service.getPublicadorActividadPort();
 
         if(path.equals("/lista_actividades")) {
-            Set<DataActividad> acts = Facades
-                .getFacades()
-                .getFacadeActividad()
-                .listarActividadesAceptadas();
+            // Set<DataActividad> acts = Facades
+            //     .getFacades()
+            //     .getFacadeActividad()
+            //     .listarActividadesAceptadas();
+            
+            HashSet acts = port.listarActividadesAceptadas();
 
             request.setAttribute("actividades", acts);
             request.getRequestDispatcher("/lista_actividades.jsp")
@@ -49,7 +57,8 @@ public class ActividadServlet extends HttpServlet {
 
         } else if(path.equals("/consulta_actividad")) {
             String act = request.getParameter("nombre");
-            DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
+            // DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
+            DataActividad actividad = port.getDataActividad(act);
 
             String nombre = actividad.getNombre();
             String descripcion = actividad.getDescripcion();
@@ -67,21 +76,22 @@ public class ActividadServlet extends HttpServlet {
             Set<String> categoriasAsociadas = actividad.getCategorias()
                 .stream()
                 .collect(Collectors.toSet());
-            Duration duracion = actividad.getDuracion();
+            //Duration duracion = actividad.getDuracion();
+            Integer dura = 3;
 
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("clasesOfrecidas", clasesOfrecidas);
             request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
             request.setAttribute("categoriasAsociadas", categoriasAsociadas);
-            request.setAttribute("duracion", duracion);
+            request.setAttribute("duracion", dura);
 
             request
                 .getRequestDispatcher("/consulta_actividad.jsp")
                 .forward(request, response);
 
         } else if(path.equals("/consulta_institucion")) {
-            // TODO: cambiar a otro servlet.
+            // TODO: cambiar a webService.
 
             String institucionNombre = request.getParameter("institucion");
             DataInstitucion institucion = Facades
@@ -129,7 +139,7 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        /*
         Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
         Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
         Boolean bool3 = request.getParameter("costo_alta_act").equals("");
@@ -198,8 +208,8 @@ public class ActividadServlet extends HttpServlet {
         catch(SinCategoriaException sce){
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
-        processRequest(request, response);
-    }
+        processRequest(request, response); */
+    } 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Set<String> categorias = Facades
@@ -210,5 +220,5 @@ public class ActividadServlet extends HttpServlet {
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/alta_actividad.jsp")
             .forward(request, response);
-    }
+    } 
 }

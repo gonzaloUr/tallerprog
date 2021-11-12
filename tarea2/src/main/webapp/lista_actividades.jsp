@@ -1,4 +1,4 @@
-<%@page import="java.util.Set"%>
+<%@page import="com.entrenamosuy.web.publicar.HashSet"%>
 <%@page import="com.entrenamosuy.core.data.DataActividad"%>
 <!DOCTYPE html>
 <html>
@@ -20,8 +20,9 @@
                     <div class="list-group-item d-flex align-items-center active"><h4><strong>Actividades</strong></h4>
                     </div>
                     <%
-                    Set<DataActividad> acts = (Set<DataActividad>) request.getAttribute("actividades");
-                    for (DataActividad act: acts){
+                    HashSet acts = (HashSet) request.getAttribute("actividades");
+                    for (Object obj: acts){
+                        DataActividad act = (DataActividad)obj;
                     %>
 
                     <div class="list-group-item d-flex align-items-center">
