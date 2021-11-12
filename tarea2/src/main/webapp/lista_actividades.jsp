@@ -1,4 +1,4 @@
-<%@page import="com.entrenamosuy.web.publicar.HashSet"%>
+<%@page import="java.utils.ArrayList"%>
 <%@page import="com.entrenamosuy.core.data.DataActividad"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
                     <div class="list-group-item d-flex align-items-center active"><h4><strong>Actividades</strong></h4>
                     </div>
                     <%
-                    HashSet acts = (HashSet) request.getAttribute("actividades");
+                    ArrayList acts = request.getAttribute("actividades");
                     for (Object obj: acts){
                         DataActividad act = (DataActividad)obj;
                     %>

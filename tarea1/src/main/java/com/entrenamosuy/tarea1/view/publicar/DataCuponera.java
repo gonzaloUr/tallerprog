@@ -1,7 +1,7 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -13,11 +13,11 @@ public class DataCuponera {
 
     private final String descripcion;
 
-    private final Set<DescActividad> actividades;
+    private final ArrayList<DescActividad> actividades;
 
-    private final Set<String> categorias;
+    private final ArrayList<String> categorias;
 
-    public DataCuponera(String nombre, String descripcion, Set<DescActividad> actividades, Set<String> categorias) {
+    public DataCuponera(String nombre, String descripcion, ArrayList<DescActividad> actividades, ArrayList<String> categorias) {
         Objects.requireNonNull(nombre, "nombre es null en constructor DataCuponera");
         Objects.requireNonNull(descripcion, "descripcion es null en constructor DataCuponera");
         Objects.requireNonNull(actividades, "actividades es null en constructor DataCuponera");
@@ -37,11 +37,11 @@ public class DataCuponera {
         return descripcion;
     }
 
-    public Set<DescActividad> getActividades() {
+    public ArrayList<DescActividad> getActividades() {
         return actividades;
     }
 
-    public Set<String> getCategorias(){
+    public ArrayList<String> getCategorias(){
         return categorias;
     }
 

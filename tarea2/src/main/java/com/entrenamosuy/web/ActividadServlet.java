@@ -49,7 +49,7 @@ public class ActividadServlet extends HttpServlet {
             //     .getFacadeActividad()
             //     .listarActividadesAceptadas();
             
-            HashSet acts = port.listarActividadesAceptadas();
+            ArrayList<DataActividad> acts = port.listarActividadesAceptadas();
 
             request.setAttribute("actividades", acts);
             request.getRequestDispatcher("/lista_actividades.jsp")
