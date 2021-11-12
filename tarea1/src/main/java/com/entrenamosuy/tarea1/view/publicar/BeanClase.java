@@ -1,9 +1,16 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
 
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.entrenamosuy.core.data.DataClase;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanClase {
 
     private String nombre;
@@ -14,11 +21,9 @@ public class BeanClase {
 
     private URL accesoURL;
 
-    private DescActividad actividad;
+    private BeanDescActividad actividad;
 
-    private Set<DescProfesor> profesores;
-
-    public BeanClase() {}
+    private ArrayList<BeanDescProfesor> profesores;
 
     public String getNombre() {
         return this.nombre;
@@ -60,19 +65,19 @@ public class BeanClase {
         this.accesoURL = accesoURL;
     }
 
-    public DescActividad getActividad() {
+    public BeanDescActividad getActividad() {
         return this.actividad;
     }
 
-    public void setActividad(DescActividad actividad) {
+    public void setActividad(BeanDescActividad actividad) {
         this.actividad = actividad;
     }
 
-    public Set<DescProfesor> getProfesores() {
+    public ArrayList<BeanDescProfesor> getProfesores() {
         return this.profesores;
     }
 
-    public void setProfesores(Set<DescProfesor> profesores) {
+    public void setProfesores(ArrayList<BeanDescProfesor> profesores) {
         this.profesores = profesores;
     }
 
@@ -81,7 +86,16 @@ public class BeanClase {
         setInicio(x.getInicio());
         setCantMax(x.getCantMax());
         setAccesoURL(x.getAccesoURL());
-        setActividad(x.getActividad());
-        setProfesores(x.getProfesores());
+        setActividad(BeanDescActividad.of(x.getActividad()));
+        setProfesores(x.getProfesores()
+            .stream()
+            .map(BeanDescProfesor::of)
+            .collect(Collectors.toCollection(ArrayList::new)));
+    }
+
+    public static BeanClase of(DataClase x) {
+        BeanClase ret = new BeanClase();
+        ret.from(x);
+        return ret;
     }
 }

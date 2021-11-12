@@ -1,5 +1,5 @@
-<%@page import="java.utils.ArrayList"%>
-<%@page import="com.entrenamosuy.core.data.DataActividad"%>
+<%@page import="java.util.List"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanActividad"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -20,9 +20,9 @@
                     <div class="list-group-item d-flex align-items-center active"><h4><strong>Actividades</strong></h4>
                     </div>
                     <%
-                    ArrayList acts = request.getAttribute("actividades");
+                    List acts = (List) request.getAttribute("actividades");
                     for (Object obj: acts){
-                        DataActividad act = (DataActividad)obj;
+                        BeanActividad act = (BeanActividad)obj;
                     %>
 
                     <div class="list-group-item d-flex align-items-center">

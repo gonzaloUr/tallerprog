@@ -1,8 +1,14 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
 
 import java.time.Duration;
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.entrenamosuy.core.data.DescActividad;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanDescActividad {
 
     private String nombre;
@@ -14,8 +20,6 @@ public class BeanDescActividad {
     private LocalDate registro;
 
     private float costo;
-
-    public BeanDescActividad() {}
 
     public String getNombre() {
         return this.nombre;
@@ -63,5 +67,11 @@ public class BeanDescActividad {
         setDuracion(x.getDuracion());
         setRegistro(x.getRegistro());
         setCosto(x.getCosto());
+    }
+
+    public static BeanDescActividad of(DescActividad x) {
+        BeanDescActividad ret = new BeanDescActividad();
+        ret.from(x);
+        return ret;
     }
 }

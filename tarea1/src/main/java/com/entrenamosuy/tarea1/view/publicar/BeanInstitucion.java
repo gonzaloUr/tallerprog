@@ -1,8 +1,15 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
 
 import java.net.URL;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.entrenamosuy.core.data.DataInstitucion;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanInstitucion {
 
     private String nombre;
@@ -11,9 +18,7 @@ public class BeanInstitucion {
 
     private URL url;
 
-    private Set<DataActividad> actividadesOfrecidas;
-
-    public BeanInstitucion() {}
+    private ArrayList<BeanActividad> actividadesOfrecidas;
 
     public String getNombre() {
         return this.nombre;
@@ -39,11 +44,11 @@ public class BeanInstitucion {
         this.url = url;
     }
 
-    public Set<DataActividad> getActividadesOfrecidas() {
+    public ArrayList<BeanActividad> getActividadesOfrecidas() {
         return this.actividadesOfrecidas;
     }
 
-    public void setActividadesOfrecidas(Set<DataActividad> actividadesOfrecidas) {
+    public void setActividadesOfrecidas(ArrayList<BeanActividad> actividadesOfrecidas) {
         this.actividadesOfrecidas = actividadesOfrecidas;
     }
 
@@ -51,6 +56,15 @@ public class BeanInstitucion {
         setNombre(x.getNombre());
         setDescripcion(x.getDescripcion());
         setUrl(x.getUrl());
-        setActividadesOfrecidas(x.getActividadesOfrecidas());
+        setActividadesOfrecidas(x.getActividadesOfrecidas()
+            .stream()
+            .map(BeanActividad::of)
+            .collect(Collectors.toCollection(ArrayList::new)));
+    }
+
+    public static BeanInstitucion of(DataInstitucion x) {
+        BeanInstitucion ret = new BeanInstitucion();
+        ret.from(x);
+        return ret;
     }
 }

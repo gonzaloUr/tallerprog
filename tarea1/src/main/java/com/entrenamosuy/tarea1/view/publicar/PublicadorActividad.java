@@ -3,37 +3,18 @@ package com.entrenamosuy.tarea1.view.publicar;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.jws.soap.SOAPBinding;
-import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.jws.soap.SOAPBinding.Style;
+import javax.jws.soap.SOAPBinding.Use;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
 import javax.xml.ws.Endpoint;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Collectors;
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 
-import com.entrenamosuy.core.Fabrica;
-import com.entrenamosuy.core.data.DataActividad;
-import com.entrenamosuy.core.data.DataClase;
-import com.entrenamosuy.core.data.DataCuponera;
-import com.entrenamosuy.core.data.DataInstitucion;
-import com.entrenamosuy.core.data.DataProfesor;
-import com.entrenamosuy.core.data.DataUsuario;
-import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
-import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
-@SOAPBinding(style = Style.RPC, parameterStyle = ParameterStyle.WRAPPED)
+@SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL, parameterStyle = ParameterStyle.WRAPPED)
 public class PublicadorActividad {
 
     private FacadeContainer facades;
@@ -54,18 +35,18 @@ public class PublicadorActividad {
     }
 
     @WebMethod
-    public ArrayList<DataActividad> listarActividadesAceptadas(){
-        Set<DataActividad> acts = facades
+    public ArrayList<BeanActividad> listarActividadesAceptadas(){
+        return facades
             .getFacadeActividad()
-            .listarActividadesAceptadas();
-        
-        ArrayList<DataActividad> res = new ArrayList<>(acts);
-        return res;
+            .listarActividadesAceptadas()
+            .stream()
+            .map(BeanActividad::of)
+            .collect(Collectors.toCollection(ArrayList::new));
     }
 
     @WebMethod
-    public DataActividad getDataActividad(String act){
-        DataActividad actividad = facades.getFacadeActividad().getDataActividad(act);
+    public BeanActividad getDataActividad(String act){
+        BeanActividad actividad = BeanActividad.of(facades.getFacadeActividad().getDataActividad(act));
         return actividad;
     }
 }

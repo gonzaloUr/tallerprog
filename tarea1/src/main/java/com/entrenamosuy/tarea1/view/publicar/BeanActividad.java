@@ -1,9 +1,16 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import com.entrenamosuy.core.data.DataActividad;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanActividad {
 
     private String nombre;
@@ -16,13 +23,11 @@ public class BeanActividad {
 
     private float costo;
 
-    private Set<DataClase> clases;
+    private ArrayList<BeanClase> clases;
 
-    private Set<DataCuponera> cuponeras;
+    private ArrayList<BeanCuponera> cuponeras;
 
-    private Set<String> categorias;
-
-    public BeanActividad() {}
+    private ArrayList<String> categorias;
 
     public String getNombre() {
         return this.nombre;
@@ -64,27 +69,27 @@ public class BeanActividad {
         this.costo = costo;
     }
 
-    public Set<DataClase> getClases() {
+    public ArrayList<BeanClase> getClases() {
         return this.clases;
     }
 
-    public void setClases(Set<DataClase> clases) {
+    public void setClases(ArrayList<BeanClase> clases) {
         this.clases = clases;
     }
 
-    public Set<DataCuponera> getCuponeras() {
+    public ArrayList<BeanCuponera> getCuponeras() {
         return this.cuponeras;
     }
 
-    public void setCuponeras(Set<DataCuponera> cuponeras) {
+    public void setCuponeras(ArrayList<BeanCuponera> cuponeras) {
         this.cuponeras = cuponeras;
     }
 
-    public Set<String> getCategorias() {
+    public ArrayList<String> getCategorias() {
         return this.categorias;
     }
 
-    public void setCategorias(Set<String> categorias) {
+    public void setCategorias(ArrayList<String> categorias) {
         this.categorias = categorias;
     }
 
@@ -94,8 +99,20 @@ public class BeanActividad {
         setDuracion(x.getDuracion());
         setRegistro(x.getRegistro());
         setCosto(x.getCosto());
-        setClases(x.getClases());
-        setCuponeras(x.getCuponeras());
-        setCategorias(x.getCategorias());
+        setClases(x.getClases()
+            .stream()
+            .map(BeanClase::of)
+            .collect(Collectors.toCollection(ArrayList::new)));
+        setCuponeras(x.getCuponeras()
+            .stream()
+            .map(BeanCuponera::of)
+            .collect(Collectors.toCollection(ArrayList::new)));
+        setCategorias(new ArrayList<>(x.getCategorias()));
+    }
+
+    public static BeanActividad of(DataActividad x) {
+        BeanActividad ret = new BeanActividad();
+        ret.from(x);
+        return ret;
     }
 }

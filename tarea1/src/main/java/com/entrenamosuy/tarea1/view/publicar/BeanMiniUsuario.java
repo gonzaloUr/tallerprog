@@ -1,12 +1,15 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
+import com.entrenamosuy.core.data.MiniUsuario;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanMiniUsuario {
 
     private String nombre;
 
     private boolean esSocio;
-
-    public BeanMiniUsuario() {}
 
     public String getNombre() {
         return this.nombre;
@@ -27,5 +30,11 @@ public class BeanMiniUsuario {
     public void from(MiniUsuario x) {
         setNombre(x.getNombre());
         setEsSocio(x.getEsSocio());
+    }
+
+    public static BeanMiniUsuario of(MiniUsuario x) {
+        BeanMiniUsuario ret = new BeanMiniUsuario();
+        ret.from(x);
+        return ret;
     }
 }

@@ -1,7 +1,13 @@
-package com.entrenamosuy.core.data;
+package com.entrenamosuy.tarea1.view.publicar;
 
 import java.net.URL;
 
+import com.entrenamosuy.core.data.DescProfesor;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class BeanDescProfesor {
 
     private String nickname;
@@ -11,8 +17,6 @@ public class BeanDescProfesor {
     private String apellido;
 
     private URL sitioWeb;
-
-    public BeanDescProfesor() {}
 
     public String getNickname() {
         return this.nickname;
@@ -51,5 +55,11 @@ public class BeanDescProfesor {
         setNombre(x.getNombre());
         setApellido(x.getApellido());
         setSitioWeb(x.getSitioWeb());
+    }
+
+    public static BeanDescProfesor of(DescProfesor x) {
+        BeanDescProfesor ret = new BeanDescProfesor();
+        ret.from(x);
+        return ret;
     }
 }
