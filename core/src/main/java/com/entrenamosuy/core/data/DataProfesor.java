@@ -7,13 +7,13 @@ import java.util.Objects;
 import java.util.Set;
 
 public class DataProfesor extends DataUsuario {
-    
+
     public static Builder builder() {
         return new Builder();
     }
-    
+
     public static class Builder {
-        
+
         private String nickname;
 
         private String nombre;
@@ -27,7 +27,7 @@ public class DataProfesor extends DataUsuario {
         private Set<String> seguidores = Collections.emptySet();
 
         private Set<String> seguidos = Collections.emptySet();
-        
+
         private String descripcion;
 
         private String biografia;
@@ -39,10 +39,10 @@ public class DataProfesor extends DataUsuario {
         private Set<DataActividad> actividades = Collections.emptySet();
 
         private Set<DataClase> clases = Collections.emptySet();
-        
+
         private Set<DataActividad> aceptadas = Collections.emptySet();
 
-        private Set<DataActividad> sinAceptar = Collections.emptySet(); 
+        private Set<DataActividad> sinAceptar = Collections.emptySet();
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -98,7 +98,7 @@ public class DataProfesor extends DataUsuario {
             this.institucion = institucion;
             return this;
         }
-        
+
         public Builder setActividades(Set<DataActividad> actividades) {
             this.actividades = actividades;
             return this;
@@ -118,7 +118,7 @@ public class DataProfesor extends DataUsuario {
             this.sinAceptar = sinAceptar;
             return this;
         }
-        
+
         public DataProfesor build() {
             return new DataProfesor(nickname, nombre, apellido, correo, nacimiento,
                     institucion, actividades, clases, descripcion, biografia, sitioWeb, seguidores, seguidos, aceptadas, sinAceptar);
@@ -139,13 +139,13 @@ public class DataProfesor extends DataUsuario {
 
     private final Set<DataActividad> aceptadas;
 
-    private final Set<DataActividad> sinAceptar; 
+    private final Set<DataActividad> sinAceptar;
 
 
     protected DataProfesor(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-            String institucion, Set<DataActividad> actividades, Set<DataClase> clases, String descripcion, 
+            String institucion, Set<DataActividad> actividades, Set<DataClase> clases, String descripcion,
             String biografia, URL sitioWeb, Set<String> seguidores, Set<String> seguidos, Set<DataActividad> aceptadas, Set<DataActividad> sinAceptar) {
-        
+
         super(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos);
 
         Objects.requireNonNull(institucion, "institucion es null en constructor DataProfesor");
@@ -155,7 +155,7 @@ public class DataProfesor extends DataUsuario {
         Objects.requireNonNull(aceptadas, "aceptadas es null en constructor DataProfesor");
         Objects.requireNonNull(sinAceptar, "sinAceptar es null en constructor DataProfesor");
 
-        
+
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
@@ -213,9 +213,9 @@ public class DataProfesor extends DataUsuario {
         if (!super.equals(obj) || getClass() != obj.getClass())
             return false;
         DataProfesor other = (DataProfesor) obj;
-        return Objects.equals(biografia, other.biografia) 
-                && Objects.equals(descripcion, other.descripcion)
-                && Objects.equals(institucion, other.institucion) 
-                && Objects.equals(sitioWeb, other.sitioWeb);
+        return Objects.equals(biografia, other.biografia)
+            && Objects.equals(descripcion, other.descripcion)
+            && Objects.equals(institucion, other.institucion)
+            && Objects.equals(sitioWeb, other.sitioWeb);
     }
 }

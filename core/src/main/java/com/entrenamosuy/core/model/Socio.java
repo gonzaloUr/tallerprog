@@ -13,10 +13,6 @@ import com.entrenamosuy.core.data.Email;
 
 public class Socio extends Usuario {
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
     public static class Builder {
 
         private String nickname;
@@ -40,6 +36,12 @@ public class Socio extends Usuario {
         private Set<Registro> registros = new HashSet<>();
 
         private Set<Compra> compras = new HashSet<>();
+
+        private Set<Actividad> activiadesFavoritas = new HashSet<>();
+
+        private Set<Puntaje> puntajes = new HashSet<>();
+
+        private Set<Clase> clasesGanadas = new HashSet<>();
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -76,6 +78,16 @@ public class Socio extends Usuario {
             return this;
         }
 
+        public Builder setActividadesFavoritas(Set<Actividad> actividadesFavoritas) {
+            this.activiadesFavoritas = actividadesFavoritas;
+            return this;
+        }
+
+        public Builder setPuntajes(Set<Puntaje> puntajes) {
+            this.puntajes = puntajes;
+            return this;
+        }
+
         public Builder setPassword(String password) {
             this.password = password;
             return this;
@@ -96,9 +108,14 @@ public class Socio extends Usuario {
             return this;
         }
 
+        public Builder setClasesGanadas(Set<Clase> clasesGanadas) {
+            this.clasesGanadas = clasesGanadas;
+            return this;
+        }
+
         public Socio build() {
             return new Socio(nickname, nombre, apellido, correo, nacimiento, registros, compras,
-                    password, usuariosSeguidos, seguidores, imagen);
+                    activiadesFavoritas, puntajes, clasesGanadas, password, usuariosSeguidos, seguidores, imagen);
         }
     }
 
@@ -106,17 +123,37 @@ public class Socio extends Usuario {
 
     private Set<Compra> compras;
 
+    private Set<Actividad> actividadesFavoritas;
+
+    private Set<Puntaje> puntajes;
+
+    private Set<Clase> clasesGanadas;
+
     protected Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-                 Set<Registro> registros, Set<Compra> compras, String password, Set<Usuario> usuariosSeguidos,
+                 Set<Registro> registros, Set<Compra> compras, Set<Actividad> actividadesFavoritas,
+                 Set<Puntaje> puntajes, Set<Clase> clasesGanadas, String password, Set<Usuario> usuariosSeguidos,
                  Set<Usuario> seguidores, File imagen) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 
         Objects.requireNonNull(registros, "registros es null en constructor Socio");
         Objects.requireNonNull(compras, "compras es null en constructor Socio");
+        Objects.requireNonNull(actividadesFavoritas, "actividadesFavoritas es null en constructor Socio");
+        Objects.requireNonNull(puntajes, "puntajes es null en constructor Socio");
 
         this.registros = registros;
         this.compras = compras;
+        this.actividadesFavoritas = actividadesFavoritas;
+        this.puntajes = puntajes;
+        this.setClasesGanadas(clasesGanadas);
+    }
+
+    public Set<Clase> getClasesGanadas() {
+        return clasesGanadas;
+    }
+
+    public void setClasesGanadas(Set<Clase> clasesGanadas) {
+        this.clasesGanadas = clasesGanadas;
     }
 
     public Set<Registro> getRegistros() {
@@ -133,6 +170,26 @@ public class Socio extends Usuario {
 
     public void setCompras(Set<Compra> compras) {
         this.compras = compras;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public Set<Actividad> getActividadesFavoritas() {
+        return actividadesFavoritas;
+    }
+
+    public void setActividadesFavoritas(Set<Actividad> actividadesFavoritas) {
+        this.actividadesFavoritas = actividadesFavoritas;
+    }
+
+    public Set<Puntaje> getPuntajes() {
+        return puntajes;
+    }
+
+    public void setPuntajes(Set<Puntaje> puntajes) {
+        this.puntajes = puntajes;
     }
 
     public void agregarCompra(Compra compra){
@@ -167,7 +224,7 @@ public class Socio extends Usuario {
                 continue;
 
             Clase claseRegistro = reg.getClaseAsociada();
-            
+
             if (reg.getCuponera().equals(cup) && activ.getClases().contains(claseRegistro))
                 ret++;
         }

@@ -3,7 +3,6 @@ package com.entrenamosuy.core.data;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.Collections;
-//import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
