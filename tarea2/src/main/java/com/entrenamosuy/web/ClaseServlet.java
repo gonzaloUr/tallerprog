@@ -8,7 +8,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
@@ -28,6 +27,11 @@ import com.entrenamosuy.core.data.DataUsuario;
 import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
+import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanInstitucion;
+import com.entrenamosuy.web.publicar.Publicador;
+import com.entrenamosuy.web.publicar.PublicadorService; //TODO 
+import com.entrenamosuy.web.publicar.ArrayList;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ClaseServlet extends HttpServlet {
@@ -35,17 +39,17 @@ public class ClaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
+        PublicadorService service = new PublicadorService(); //TODO
+        Publicador port = service.getPublicadorServicePort();
 
-        if(path.equals("/registrarse_a_clase_1")) {
-            Set<String> inst = Facades
-                .getFacades()
-                .getFacadeInstitucion()
-                .getInstituciones();
+        if(path.equals("/registrarse_a_clase_1")) {  
+            Set<String> inst = port.getInstituciones()
+            .stream()
+            .collect(Collectors.toSet());
 
-            Set<String> cats = Facades
-                .getFacades()
-                .getFacadeActividad()
-                .getCategorias();
+            Set<String> cats = port.getCategorias()
+            .stream()
+            .collect(Collectors.toSet());
 
             request.setAttribute("instituciones", inst);
             request.setAttribute("categorias", cats);
