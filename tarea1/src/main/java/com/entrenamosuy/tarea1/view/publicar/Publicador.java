@@ -66,13 +66,6 @@ public class Publicador {
     }
 
     @WebMethod
-    public ArrayList<String> getCategorias(){
-        return new ArrayList<>(facades
-            .getFacadeActividad()
-            .getCategorias());
-    }
-
-    @WebMethod
     public ArrayList<String> getInstituciones(){
         return new ArrayList<>(facades
             .getFacadeInstitucion()
