@@ -23,7 +23,7 @@ import com.entrenamosuy.core.AbstractFacadeUsuario;
 import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.core.model.ActividadEstado;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorActividadService;
+import com.entrenamosuy.web.publicar.PublicadorService;
 
 public class IndexServlet extends HttpServlet {
 

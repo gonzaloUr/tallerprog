@@ -31,7 +31,7 @@ import com.entrenamosuy.web.publicar.BeanCuponera;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorActividadService;
+import com.entrenamosuy.web.publicar.PublicadorService;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ActividadServlet extends HttpServlet {
@@ -39,8 +39,8 @@ public class ActividadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorActividadService service = new PublicadorActividadService();
-        Publicador port = service.getPublicadorActividadPort();
+        PublicadorService service = new PublicadorService();
+        Publicador port = service.getPublicadorPort();
 
         if(path.equals("/lista_actividades")) {
             List<BeanActividad> acts = port.listarActividadesAceptadas();
@@ -203,8 +203,8 @@ public class ActividadServlet extends HttpServlet {
     } 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PublicadorActividadService service = new PublicadorActividadService();
-        Publicador port = service.getPublicadorActividadPort();
+        PublicadorService service = new PublicadorService();
+        Publicador port = service.getPublicadorPort();
         List<String> categorias = port.getCategorias();
 
         request.setAttribute("categorias", categorias);

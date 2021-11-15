@@ -17,14 +17,14 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "PublicadorActividadService", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", wsdlLocation = "http://localhost:9128/webservices?wsdl")
-public class PublicadorActividadService
+@WebServiceClient(name = "PublicadorService", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", wsdlLocation = "http://localhost:9128/webservices?wsdl")
+public class PublicadorService
     extends Service
 {
 
     private final static URL PUBLICADORACTIVIDADSERVICE_WSDL_LOCATION;
     private final static WebServiceException PUBLICADORACTIVIDADSERVICE_EXCEPTION;
-    private final static QName PUBLICADORACTIVIDADSERVICE_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadService");
+    private final static QName PUBLICADORACTIVIDADSERVICE_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorService");
 
     static {
         URL url = null;
@@ -38,27 +38,27 @@ public class PublicadorActividadService
         PUBLICADORACTIVIDADSERVICE_EXCEPTION = e;
     }
 
-    public PublicadorActividadService() {
+    public PublicadorService() {
         super(__getWsdlLocation(), PUBLICADORACTIVIDADSERVICE_QNAME);
     }
 
-    public PublicadorActividadService(WebServiceFeature... features) {
+    public PublicadorService(WebServiceFeature... features) {
         super(__getWsdlLocation(), PUBLICADORACTIVIDADSERVICE_QNAME, features);
     }
 
-    public PublicadorActividadService(URL wsdlLocation) {
+    public PublicadorService(URL wsdlLocation) {
         super(wsdlLocation, PUBLICADORACTIVIDADSERVICE_QNAME);
     }
 
-    public PublicadorActividadService(URL wsdlLocation, WebServiceFeature... features) {
+    public PublicadorService(URL wsdlLocation, WebServiceFeature... features) {
         super(wsdlLocation, PUBLICADORACTIVIDADSERVICE_QNAME, features);
     }
 
-    public PublicadorActividadService(URL wsdlLocation, QName serviceName) {
+    public PublicadorService(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public PublicadorActividadService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public PublicadorService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 
@@ -67,9 +67,9 @@ public class PublicadorActividadService
      * @return
      *     returns Publicador
      */
-    @WebEndpoint(name = "PublicadorActividadPort")
-    public Publicador getPublicadorActividadPort() {
-        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), Publicador.class);
+    @WebEndpoint(name = "PublicadorPort")
+    public Publicador getPublicadorPort() {
+        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorPort"), Publicador.class);
     }
 
     /**
@@ -79,9 +79,9 @@ public class PublicadorActividadService
      * @return
      *     returns Publicador
      */
-    @WebEndpoint(name = "PublicadorActividadPort")
-    public Publicador getPublicadorActividadPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), Publicador.class, features);
+    @WebEndpoint(name = "PublicadorPort")
+    public Publicador getPublicadorPort(WebServiceFeature... features) {
+        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorPort"), Publicador.class, features);
     }
 
     private static URL __getWsdlLocation() {
