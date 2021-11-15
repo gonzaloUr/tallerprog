@@ -24,10 +24,12 @@ import javax.xml.crypto.Data;
 
 import com.entrenamosuy.core.data.DataInstitucion;
 import com.entrenamosuy.web.publicar.DataActividad;
+import com.entrenamosuy.web.publicar.ArrayList;
 import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCuponera;
-import com.entrenamosuy.web.publicar.PublicadorActividad;
+import com.entrenamosuy.web.publicar.BeanInstitucion;
+import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorActividadService;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
@@ -37,14 +39,9 @@ public class ActividadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         PublicadorActividadService service = new PublicadorActividadService();
-        PublicadorActividad port = service.getPublicadorActividadPort();
+        Publicador port = service.getPublicadorActividadPort();
 
         if(path.equals("/lista_actividades")) {
-            // Set<DataActividad> acts = Facades
-            //     .getFacades()
-            //     .getFacadeActividad()
-            //     .listarActividadesAceptadas();
-            
             List<BeanActividad> acts = port.listarActividadesAceptadas();
 
             request.setAttribute("actividades", acts);
@@ -53,7 +50,6 @@ public class ActividadServlet extends HttpServlet {
 
         } else if(path.equals("/consulta_actividad")) {
             String act = request.getParameter("nombre");
-            // DataActividad actividad = Facades.getFacades().getFacadeActividad().getDataActividad(act);
             BeanActividad actividad = port.getDataActividad(act);
 
             String nombre = actividad.getNombre();
@@ -72,15 +68,15 @@ public class ActividadServlet extends HttpServlet {
             Set<String> categoriasAsociadas = actividad.getCategorias()
                 .stream()
                 .collect(Collectors.toSet());
-            //Duration duracion = actividad.getDuracion();
-            Integer dura = 3;
+                
+            int duracion = actividad.getDuracion();
 
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("clasesOfrecidas", clasesOfrecidas);
             request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
             request.setAttribute("categoriasAsociadas", categoriasAsociadas);
-            request.setAttribute("duracion", dura);
+            request.setAttribute("duracion", duracion);
 
             request
                 .getRequestDispatcher("/consulta_actividad.jsp")
@@ -90,16 +86,14 @@ public class ActividadServlet extends HttpServlet {
             // TODO: cambiar a webService.
 
             String institucionNombre = request.getParameter("institucion");
-            DataInstitucion institucion = Facades
-                .getFacades()
-                .getFacadeInstitucion()
-                .getDataInstitucion(institucionNombre);
-
+            BeanInstitucion institucion = port.getDataInstitucion(institucionNombre);
             String nombre = institucion.getNombre();
             String descripcion = institucion.getDescripcion();
             String url = institucion.getUrl().toString();
-            Set<String> actividadesOfrecidas = Facades.getFacades().getFacadeActividad().getActividadesDeInstitucion(nombre);
 
+            List actividadesOfrecidas = port.getActividadesDeInstitucion(institucionNombre);
+             
+            
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("url", url);
@@ -208,10 +202,9 @@ public class ActividadServlet extends HttpServlet {
     } 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Set<String> categorias = Facades
-            .getFacades()
-            .getFacadeActividad()
-            .getCategorias();
+        PublicadorActividadService service = new PublicadorActividadService();
+        Publicador port = service.getPublicadorActividadPort();
+        List<String> categorias = port.getCategorias();
 
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/alta_actividad.jsp")

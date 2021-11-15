@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="descripcion" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="duracion" type="{http://publicar.view.tarea1.entrenamosuy.com/}duration" minOccurs="0"/>
+ *         &lt;element name="duracion" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="registro" type="{http://publicar.view.tarea1.entrenamosuy.com/}localDate" minOccurs="0"/>
  *         &lt;element name="costo" type="{http://www.w3.org/2001/XMLSchema}float"/>
  *         &lt;element name="clases" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanClase" maxOccurs="unbounded" minOccurs="0"/>
@@ -50,7 +50,7 @@ public class BeanActividad {
 
     protected String nombre;
     protected String descripcion;
-    protected Duration duracion;
+    protected int duracion;
     protected LocalDate registro;
     protected float costo;
     @XmlElement(nillable = true)
@@ -111,24 +111,16 @@ public class BeanActividad {
     /**
      * Gets the value of the duracion property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Duration }
-     *     
      */
-    public Duration getDuracion() {
+    public int getDuracion() {
         return duracion;
     }
 
     /**
      * Sets the value of the duracion property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Duration }
-     *     
      */
-    public void setDuracion(Duration value) {
+    public void setDuracion(int value) {
         this.duracion = value;
     }
 

@@ -65,11 +65,11 @@ public class PublicadorActividadService
     /**
      * 
      * @return
-     *     returns PublicadorActividad
+     *     returns Publicador
      */
     @WebEndpoint(name = "PublicadorActividadPort")
-    public PublicadorActividad getPublicadorActividadPort() {
-        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), PublicadorActividad.class);
+    public Publicador getPublicadorActividadPort() {
+        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), Publicador.class);
     }
 
     /**
@@ -77,11 +77,11 @@ public class PublicadorActividadService
      * @param features
      *     A list of {@link javax.xml.ws.WebServiceFeature} to configure on the proxy.  Supported features not in the <code>features</code> parameter will have their default values.
      * @return
-     *     returns PublicadorActividad
+     *     returns Publicador
      */
     @WebEndpoint(name = "PublicadorActividadPort")
-    public PublicadorActividad getPublicadorActividadPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), PublicadorActividad.class, features);
+    public Publicador getPublicadorActividadPort(WebServiceFeature... features) {
+        return super.getPort(new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PublicadorActividadPort"), Publicador.class, features);
     }
 
     private static URL __getWsdlLocation() {

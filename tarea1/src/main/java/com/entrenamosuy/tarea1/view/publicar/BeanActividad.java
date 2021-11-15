@@ -17,7 +17,7 @@ public class BeanActividad {
 
     private String descripcion;
 
-    private Duration duracion;
+    private int duracion;
 
     private LocalDate registro;
 
@@ -45,11 +45,11 @@ public class BeanActividad {
         this.descripcion = descripcion;
     }
 
-    public Duration getDuracion() {
+    public int getDuracion() {
         return this.duracion;
     }
 
-    public void setDuracion(Duration duracion) {
+    public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
@@ -96,7 +96,7 @@ public class BeanActividad {
     public void from(DataActividad x) {
         setNombre(x.getNombre());
         setDescripcion(x.getDescripcion());
-        setDuracion(x.getDuracion());
+        setDuracion((int)x.getDuracion().toMinutes());
         setRegistro(x.getRegistro());
         setCosto(x.getCosto());
         setClases(x.getClases()

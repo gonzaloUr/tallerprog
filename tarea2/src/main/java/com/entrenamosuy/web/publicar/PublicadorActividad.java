@@ -18,12 +18,27 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "PublicadorActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/")
+@WebService(name = "Publicador", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
-public interface PublicadorActividad {
+public interface Publicador {
 
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<java.lang.String>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getActividadesDeInstitucion", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetActividadesDeInstitucion")
+    @ResponseWrapper(localName = "getActividadesDeInstitucionResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetActividadesDeInstitucionResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getActividadesDeInstitucionRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getActividadesDeInstitucionResponse")
+    public List<String> getActividadesDeInstitucion(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
     /**
      * 
@@ -35,7 +50,7 @@ public interface PublicadorActividad {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getDataActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetDataActividad")
     @ResponseWrapper(localName = "getDataActividadResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetDataActividadResponse")
-    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/PublicadorActividad/getDataActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/PublicadorActividad/getDataActividadResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getDataActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getDataActividadResponse")
     public BeanActividad getDataActividad(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0);
@@ -49,7 +64,22 @@ public interface PublicadorActividad {
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "listarActividadesAceptadas", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.ListarActividadesAceptadas")
     @ResponseWrapper(localName = "listarActividadesAceptadasResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.ListarActividadesAceptadasResponse")
-    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/PublicadorActividad/listarActividadesAceptadasRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/PublicadorActividad/listarActividadesAceptadasResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/listarActividadesAceptadasRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/listarActividadesAceptadasResponse")
     public List<BeanActividad> listarActividadesAceptadas();
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns com.entrenamosuy.web.publicar.BeanInstitucion
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getDataInstitucion", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetDataInstitucion")
+    @ResponseWrapper(localName = "getDataInstitucionResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetDataInstitucionResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getDataInstitucionRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getDataInstitucionResponse")
+    public BeanInstitucion getDataInstitucion(
+        @WebParam(name = "arg0", targetNamespace = "")
+        String arg0);
 
 }

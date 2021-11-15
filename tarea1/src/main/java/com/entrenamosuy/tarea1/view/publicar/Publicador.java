@@ -49,4 +49,26 @@ public class PublicadorActividad {
         BeanActividad actividad = BeanActividad.of(facades.getFacadeActividad().getDataActividad(act));
         return actividad;
     }
+
+    @WebMethod
+    public BeanInstitucion getDataInstitucion(String ins){
+        BeanInstitucion institucion = BeanInstitucion.of(facades.getFacadeInstitucion().getDataInstitucion(ins));
+        return institucion;
+    }
+
+    @WebMethod
+    public ArrayList<String> getActividadesDeInstitucion(String institucion){
+
+        return new ArrayList<String>(facades
+            .getFacadeActividad()
+            .getActividadesDeInstitucion(institucion));
+            
+    }
+
+    @WebMethod
+    public ArrayList<String> getCategorias(){
+        return new ArrayList<>(facades
+            .getFacadeActividad()
+            .getCategorias());
+    }
 }
