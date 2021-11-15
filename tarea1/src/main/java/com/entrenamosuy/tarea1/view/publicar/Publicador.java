@@ -15,12 +15,12 @@ import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
 @SOAPBinding(style = Style.DOCUMENT, use=Use.LITERAL, parameterStyle = ParameterStyle.WRAPPED)
-public class PublicadorActividad {
+public class Publicador {
 
     private FacadeContainer facades;
     private Endpoint endpoint = null;
 
-    public PublicadorActividad(FacadeContainer facades) {
+    public Publicador(FacadeContainer facades) {
         this.facades = facades;
     }
 

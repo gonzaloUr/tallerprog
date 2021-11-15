@@ -29,6 +29,7 @@ import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCuponera;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
+import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorActividadService;
 
@@ -129,7 +130,7 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*
+        
         Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
         Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
         Boolean bool3 = request.getParameter("costo_alta_act").equals("");
@@ -140,7 +141,7 @@ public class ActividadServlet extends HttpServlet {
         }
 
         HttpSession session = request.getSession();
-        DataProfesor usr = (DataProfesor) session.getAttribute("usuario");
+        BeanProfesor usr = (BeanProfesor) session.getAttribute("usuario");
         String nick = usr.getNickname();
         String inst = usr.getInstitucion();
         String nombre = (String)request.getParameter("nombre_alta_act");
@@ -198,7 +199,7 @@ public class ActividadServlet extends HttpServlet {
         catch(SinCategoriaException sce){
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
-        processRequest(request, response); */
+        processRequest(request, response); 
     } 
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
