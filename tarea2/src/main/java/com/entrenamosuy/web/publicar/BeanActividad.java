@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanActividad complex type.
+ * <p>Clase Java para beanActividad complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanActividad">
@@ -61,7 +61,7 @@ public class BeanActividad {
     protected List<String> categorias;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -73,7 +73,7 @@ public class BeanActividad {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -85,7 +85,7 @@ public class BeanActividad {
     }
 
     /**
-     * Gets the value of the descripcion property.
+     * Obtiene el valor de la propiedad descripcion.
      * 
      * @return
      *     possible object is
@@ -97,7 +97,7 @@ public class BeanActividad {
     }
 
     /**
-     * Sets the value of the descripcion property.
+     * Define el valor de la propiedad descripcion.
      * 
      * @param value
      *     allowed object is
@@ -109,7 +109,7 @@ public class BeanActividad {
     }
 
     /**
-     * Gets the value of the duracion property.
+     * Obtiene el valor de la propiedad duracion.
      * 
      */
     public int getDuracion() {
@@ -117,7 +117,7 @@ public class BeanActividad {
     }
 
     /**
-     * Sets the value of the duracion property.
+     * Define el valor de la propiedad duracion.
      * 
      */
     public void setDuracion(int value) {
@@ -125,7 +125,7 @@ public class BeanActividad {
     }
 
     /**
-     * Gets the value of the registro property.
+     * Obtiene el valor de la propiedad registro.
      * 
      * @return
      *     possible object is
@@ -137,7 +137,7 @@ public class BeanActividad {
     }
 
     /**
-     * Sets the value of the registro property.
+     * Define el valor de la propiedad registro.
      * 
      * @param value
      *     allowed object is
@@ -149,7 +149,7 @@ public class BeanActividad {
     }
 
     /**
-     * Gets the value of the costo property.
+     * Obtiene el valor de la propiedad costo.
      * 
      */
     public float getCosto() {
@@ -157,7 +157,7 @@ public class BeanActividad {
     }
 
     /**
-     * Sets the value of the costo property.
+     * Define el valor de la propiedad costo.
      * 
      */
     public void setCosto(float value) {

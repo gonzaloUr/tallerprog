@@ -24,13 +24,17 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetInstitucionesResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getInstitucionesResponse");
     private final static QName _GetDataActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataActividad");
     private final static QName _GetActividadesDeInstitucion_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getActividadesDeInstitucion");
     private final static QName _GetActividadesDeInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getActividadesDeInstitucionResponse");
     private final static QName _ListarActividadesAceptadas_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "listarActividadesAceptadas");
+    private final static QName _GetCategorias_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategorias");
     private final static QName _GetDataActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataActividadResponse");
     private final static QName _GetDataInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataInstitucionResponse");
+    private final static QName _GetCategoriasResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategoriasResponse");
     private final static QName _GetDataInstitucion_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataInstitucion");
+    private final static QName _GetInstituciones_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getInstituciones");
     private final static QName _ListarActividadesAceptadasResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "listarActividadesAceptadasResponse");
 
     /**
@@ -38,6 +42,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetCategorias }
+     * 
+     */
+    public GetCategorias createGetCategorias() {
+        return new GetCategorias();
     }
 
     /**
@@ -57,6 +69,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetCategoriasResponse }
+     * 
+     */
+    public GetCategoriasResponse createGetCategoriasResponse() {
+        return new GetCategoriasResponse();
+    }
+
+    /**
      * Create an instance of {@link GetDataInstitucion }
      * 
      */
@@ -65,11 +85,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetInstituciones }
+     * 
+     */
+    public GetInstituciones createGetInstituciones() {
+        return new GetInstituciones();
+    }
+
+    /**
      * Create an instance of {@link ListarActividadesAceptadasResponse }
      * 
      */
     public ListarActividadesAceptadasResponse createListarActividadesAceptadasResponse() {
         return new ListarActividadesAceptadasResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetInstitucionesResponse }
+     * 
+     */
+    public GetInstitucionesResponse createGetInstitucionesResponse() {
+        return new GetInstitucionesResponse();
     }
 
     /**
@@ -177,6 +213,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInstitucionesResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getInstitucionesResponse")
+    public JAXBElement<GetInstitucionesResponse> createGetInstitucionesResponse(GetInstitucionesResponse value) {
+        return new JAXBElement<GetInstitucionesResponse>(_GetInstitucionesResponse_QNAME, GetInstitucionesResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDataActividad }{@code >}}
      * 
      */
@@ -213,6 +258,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCategorias }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getCategorias")
+    public JAXBElement<GetCategorias> createGetCategorias(GetCategorias value) {
+        return new JAXBElement<GetCategorias>(_GetCategorias_QNAME, GetCategorias.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDataActividadResponse }{@code >}}
      * 
      */
@@ -231,12 +285,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetCategoriasResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getCategoriasResponse")
+    public JAXBElement<GetCategoriasResponse> createGetCategoriasResponse(GetCategoriasResponse value) {
+        return new JAXBElement<GetCategoriasResponse>(_GetCategoriasResponse_QNAME, GetCategoriasResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDataInstitucion }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getDataInstitucion")
     public JAXBElement<GetDataInstitucion> createGetDataInstitucion(GetDataInstitucion value) {
         return new JAXBElement<GetDataInstitucion>(_GetDataInstitucion_QNAME, GetDataInstitucion.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetInstituciones }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getInstituciones")
+    public JAXBElement<GetInstituciones> createGetInstituciones(GetInstituciones value) {
+        return new JAXBElement<GetInstituciones>(_GetInstituciones_QNAME, GetInstituciones.class, null, value);
     }
 
     /**

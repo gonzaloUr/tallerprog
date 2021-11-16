@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanDescProfesor complex type.
+ * <p>Clase Java para beanDescProfesor complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanDescProfesor">
@@ -45,7 +45,7 @@ public class BeanDescProfesor {
     protected String sitioWeb;
 
     /**
-     * Gets the value of the nickname property.
+     * Obtiene el valor de la propiedad nickname.
      * 
      * @return
      *     possible object is
@@ -57,7 +57,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Sets the value of the nickname property.
+     * Define el valor de la propiedad nickname.
      * 
      * @param value
      *     allowed object is
@@ -69,7 +69,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -81,7 +81,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -93,7 +93,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Gets the value of the apellido property.
+     * Obtiene el valor de la propiedad apellido.
      * 
      * @return
      *     possible object is
@@ -105,7 +105,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Sets the value of the apellido property.
+     * Define el valor de la propiedad apellido.
      * 
      * @param value
      *     allowed object is
@@ -117,7 +117,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Gets the value of the sitioWeb property.
+     * Obtiene el valor de la propiedad sitioWeb.
      * 
      * @return
      *     possible object is
@@ -129,7 +129,7 @@ public class BeanDescProfesor {
     }
 
     /**
-     * Sets the value of the sitioWeb property.
+     * Define el valor de la propiedad sitioWeb.
      * 
      * @param value
      *     allowed object is

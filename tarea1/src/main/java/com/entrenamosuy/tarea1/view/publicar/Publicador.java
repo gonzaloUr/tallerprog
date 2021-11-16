@@ -65,17 +65,46 @@ public class Publicador {
             
     }
 
+     @WebMethod
+    public ArrayList<String> getActividadesDeCategoria(String categoria){
+
+        return new ArrayList<String>(facades
+            .getFacadeActividad()
+            .getActividadesDeCategoria(categoria));
+    }
+
     @WebMethod
     public ArrayList<String> getInstituciones(){
-        return new ArrayList<>(facades
+        return new ArrayList<String>(facades
             .getFacadeInstitucion()
             .getInstituciones());
     }
 
     @WebMethod
     public ArrayList<String> getCategorias(){
-        return new ArrayList<>(facades
+        return new ArrayList<String>(facades
             .getFacadeActividad()
             .getCategorias());
     }  
+
+    @WebMethod
+    public ArrayList<String> getClasesDeActividad(String actividad){
+        return new ArrayList<String>(facades
+            .getFacadeClase()
+            .getClases(actividad));
+    }
+
+    @WebMethod
+    public ArrayList<String> getCuponerasUsablesActividad(String act, String nickname){
+        return new ArrayList<String>(facades
+        .getFacadeCuponera()
+        .cuponerasUsables(act, nickname));
+    }
+
+    @WebMethod
+    public BeanClase getDataClase(String cla){
+        BeanClase clase = BeanClase.of(facades.getFacadeClase().getDataClase(cla));
+        return clase;
+    }
+
 }

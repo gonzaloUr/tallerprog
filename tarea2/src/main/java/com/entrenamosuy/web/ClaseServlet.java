@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.stream.Collectors;
+import java.util.ArrayList; 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.xml.crypto.Data;
 
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataProfesor;
@@ -28,10 +30,11 @@ import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService; //TODO 
-import com.entrenamosuy.web.publicar.ArrayList;
+import com.entrenamosuy.web.publicar.PublicadorService; 
+//import com.entrenamosuy.web.publicar.ArrayList;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ClaseServlet extends HttpServlet {
@@ -39,8 +42,8 @@ public class ClaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService(); //TODO
-        Publicador port = service.getPublicadorServicePort();
+        PublicadorService service = new PublicadorService(); 
+        Publicador port = service.getPublicadorPort();
 
         if(path.equals("/registrarse_a_clase_1")) {  
             Set<String> inst = port.getInstituciones()
@@ -62,16 +65,14 @@ public class ClaseServlet extends HttpServlet {
             String cat = request.getParameter("categoria");
             Set<String> acts;
             if (cat == null) {
-                acts = Facades
-                    .getFacades()
-                    .getFacadeActividad()
-                    .getActividadesDeInstitucion(inst);
+                acts = port.getActividadesDeInstitucion(inst)
+                    .stream()
+                    .collect(Collectors.toSet());
             }
             else {
-                acts = Facades
-                    .getFacades()
-                    .getFacadeActividad()
-                    .getActividadesDeCategoria(cat);
+                acts = port.getActividadesDeCategoria(cat)
+                    .stream()
+                    .collect(Collectors.toSet());
             }
 
             request.setAttribute("actividades", acts);
@@ -82,10 +83,10 @@ public class ClaseServlet extends HttpServlet {
         } else if (path.equals("/registrarse_a_clase_3")){
             String acti = request.getParameter("actividad");
 
-            Set<String> clases = Facades
-                .getFacades()
-                .getFacadeClase()
-                .getClases(acti);
+            Set<String> clases = port.getClasesDeActividad(acti)
+                .stream()
+                .collect(Collectors.toSet());
+                
 
             request.setAttribute("clases", clases);
 
@@ -96,17 +97,15 @@ public class ClaseServlet extends HttpServlet {
         } else if(path.equals("/confirmar_registro_clase")) {
 
             String act = request.getParameter("actividad");
-            //String cla = request.getParameter("clase");
 
             HttpSession session = request.getSession();
 
-            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
+            BeanSocio usr = (BeanSocio) session.getAttribute("usuario");
             String nickname = usr.getNickname();
 
-            Set<String> cupos = Facades
-                .getFacades()
-                .getFacadeCuponera()
-                .cuponerasUsables(act, nickname);
+            Set<String> cupos = port.getCuponerasUsablesActividad(act, nickname)
+                .stream()
+                .collect(Collectors.toSet());
 
             request.setAttribute("cuponeras", cupos);
             request.getRequestDispatcher("/confirmar_registro_clase.jsp")
@@ -115,10 +114,8 @@ public class ClaseServlet extends HttpServlet {
         } else if(path.equals("/consulta_dictado_clase")){
             String claseNombre = request.getParameter("clase");
 
-            DataClase clase = Facades
-                .getFacades()
-                .getFacadeClase()
-                .getDataClase(claseNombre);
+            BeanClase clase = port.getDataClase(claseNombre);
+
 
             String nombre = clase.getNombre();
             LocalDateTime inicio = clase.getInicio();
@@ -127,14 +124,14 @@ public class ClaseServlet extends HttpServlet {
             URL url = clase.getAccesoURL();
             String acti= clase.getActividad().getNombre();
 
-            Set<String> profesorNom = clase.getProfesores()
+            Set<String> profesorNom = clase.getProfesores() //TODO revisar este
                 .stream()
-                .map(DescProfesor::getNombre)
+                .map(BeanDescProfesor::getNombre)
                 .collect(Collectors.toSet());
 
-            Set<String> profesorApe = clase.getProfesores()
+            Set<String> profesorApe = clase.getProfesores() //TODO revisar este
                 .stream()
-                .map(DescProfesor::getApellido)
+                .map(BeanDescProfesor::getApellido)
                 .collect(Collectors.toSet());
 
             String apellido = profesorApe.iterator().next();
@@ -163,7 +160,7 @@ public class ClaseServlet extends HttpServlet {
         }
     }
 
-
+//TODO
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
