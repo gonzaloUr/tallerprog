@@ -50,8 +50,8 @@ public class CargarDatosLambda implements ActionListener {
             os.write(buff, 0, n);
     }
 
-    private File resourceToFile(String path) {
-        InputStream is = getClass().getResourceAsStream(path);
+    private static File resourceToFile(String path) {
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(path);
         File tmp = null;
 
         try {
@@ -89,7 +89,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCorreo(Email.of("emi71", "gmail.com"))
                 .setNacimiento(LocalDate.of(1971, 12, 31))
                 .setPassword("asdfg456")
-                .setImagen(resourceToFile("/img/usuarios/3lxoBvZ"))
+                .setImagen(resourceToFile("img/usuarios/3lxoBvZ"))
                 .invoke();
 
             facadeUsuario.crearSocio()
@@ -99,7 +99,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCorreo(Email.of("caro", "gmail.com"))
                 .setNacimiento(LocalDate.of(1983, 11, 15))
                 .setPassword("123rtgfdv")
-                .setImagen(resourceToFile("/img/usuarios/3AfcJER"))
+                .setImagen(resourceToFile("img/usuarios/3AfcJER"))
                 .invoke();
 
             facadeUsuario.crearSocio()
@@ -108,7 +108,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Williams")
                 .setCorreo(Email.of("e.will", "gmail.com"))
                 .setNacimiento(LocalDate.of(1990, 4, 15))
-                .setImagen(resourceToFile("/img/usuarios/3Afz59x"))
+                .setImagen(resourceToFile("img/usuarios/3Afz59x"))
                 .setPassword("poiuy086")
                 .invoke();
 
@@ -118,7 +118,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Hector")
                 .setCorreo(Email.of("ghector", "gmail.com"))
                 .setNacimiento(LocalDate.of(1959, 5, 15))
-                .setImagen(resourceToFile("/img/usuarios/2XkrKH9"))
+                .setImagen(resourceToFile("img/usuarios/2XkrKH9"))
                 .setPassword("GTO468")
                 .invoke();
 
@@ -128,7 +128,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Perez")
                 .setCorreo(Email.of("sergi", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1950, 1, 28))
-                .setImagen(resourceToFile("/img/usuarios/3ElkVG2"))
+                .setImagen(resourceToFile("img/usuarios/3ElkVG2"))
                 .setPassword("HGF135")
                 .invoke();
 
@@ -138,7 +138,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Roman")
                 .setCorreo(Email.of("chino", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1976, 3, 17))
-                .setImagen(resourceToFile("/img/usuarios/3hDWgTD"))
+                .setImagen(resourceToFile("img/usuarios/3hDWgTD"))
                 .setPassword("lkj65D")
                 .invoke();
 
@@ -148,7 +148,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Paz")
                 .setCorreo(Email.of("eltony", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1955, 2, 14))
-                .setImagen(resourceToFile("/img/usuarios/3Ai4jMW"))
+                .setImagen(resourceToFile("img/usuarios/3Ai4jMW"))
                 .setPassword("jhvf395")
                 .invoke();
 
@@ -158,7 +158,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Lopez")
                 .setCorreo(Email.of("mika", "gmail.ar"))
                 .setNacimiento(LocalDate.of(1987, 2, 23))
-                .setImagen(resourceToFile("/img/usuarios/3zglsWf"))
+                .setImagen(resourceToFile("img/usuarios/3zglsWf"))
                 .setPassword("ijngr024")
                 .invoke();
 
@@ -168,7 +168,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Boston")
                 .setCorreo(Email.of("emi71", "gmail.uy"))
                 .setNacimiento(LocalDate.of(1937, 3, 8))
-                .setImagen(resourceToFile("/img/usuarios/2YRWDTQ"))
+                .setImagen(resourceToFile("img/usuarios/2YRWDTQ"))
                 .setPassword("987mnbgh")
                 .invoke();
 
@@ -201,7 +201,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Victor")
                 .setApellido("Perez")
                 .setCorreo(Email.of("vperez", "fuerza.com"))
-                .setImagen(resourceToFile("/img/usuarios/3zetdMl"))
+                .setImagen(resourceToFile("img/usuarios/3zetdMl"))
                 .setNacimiento(LocalDate.of(1977, 1, 1))
                 .setInstitucion("Fuerza Bruta")
                 .setDescripcion("Victor es un apasionado de los musculos. " +
@@ -218,7 +218,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Denis")
                 .setApellido("Miguel")
                 .setCorreo(Email.of("den80", "fuerza.com"))
-                .setImagen(resourceToFile("/img/usuarios/3lKq8Px"))
+                .setImagen(resourceToFile("img/usuarios/3lKq8Px"))
                 .setNacimiento(LocalDate.of(1977, 1, 1))
                 .setNacimiento(LocalDate.of(1980, 6, 14))
                 .setInstitucion("Telon")
@@ -233,7 +233,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Carlos")
                 .setApellido("Lazaro")
                 .setCorreo(Email.of("claz4r0", "hotmail.com"))
-                .setImagen(resourceToFile("/img/usuarios/2VJvT6S"))
+                .setImagen(resourceToFile("img/usuarios/2VJvT6S"))
                 .setNacimiento(LocalDate.of(1953, 6, 22))
                 .setInstitucion("Instituto Natural")
                 .setDescripcion("Carlos es un profesor muy divertido, cuyas clases de aerobica estan cargadas de energia.")
@@ -248,7 +248,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Bruno")
                 .setApellido("Sosa")
                 .setCorreo(Email.of("bruceTheBoss", "gmail.com"))
-                .setImagen(resourceToFile("/img/usuarios/3kdT9TV"))
+                .setImagen(resourceToFile("img/usuarios/3kdT9TV"))
                 .setNacimiento(LocalDate.of(1949, 9, 23))
                 .setInstitucion("Fuerza Bruta")
                 .setDescripcion("Bruno es un ex-boxeador que busca entrenar futuros campeones.")
@@ -262,7 +262,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Luis")
                 .setApellido("Nelson")
                 .setCorreo(Email.of("nelson", "hotmail.com"))
-                .setImagen(resourceToFile("/img/usuarios/3lxsDo7"))
+                .setImagen(resourceToFile("img/usuarios/3lxsDo7"))
                 .setNacimiento(LocalDate.of(1998, 1, 1))
                 .setInstitucion("Telon")
                 .setDescripcion("Profesor de natacion, especializado en braza y mariposa.")
@@ -276,7 +276,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Laura")
                 .setApellido("Leyes")
                 .setCorreo(Email.of("la_le", "outlook.com"))
-                .setImagen(resourceToFile("/img/usuarios/3EmlY8F"))
+                .setImagen(resourceToFile("img/usuarios/3EmlY8F"))
                 .setNacimiento(LocalDate.of(1987, 2, 14))
                 .setInstitucion("Telon")
                 .setDescripcion("Luego de una exitosa carrera como jugadora de futbol profesional. Laura" +
@@ -304,7 +304,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Diana")
                 .setApellido("Agostini")
                 .setCorreo(Email.of("d_1940_ago", "gmail.com"))
-                .setImagen(resourceToFile("/img/usuarios/3hB3zvo"))
+                .setImagen(resourceToFile("img/usuarios/3hB3zvo"))
                 .setNacimiento(LocalDate.of(1940, 3, 5))
                 .setInstitucion("Olympic")
                 .setDescripcion("Profesora dedicada y exigente. No acepta un no puedo como respuesta.")
@@ -318,7 +318,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Aldo")
                 .setApellido("Vivaldi")
                 .setCorreo(Email.of("aldo", "outlook.com"))
-                .setImagen(resourceToFile("/img/usuarios/2VLnzUj"))
+                .setImagen(resourceToFile("img/usuarios/2VLnzUj"))
                 .setNacimiento(LocalDate.of(1952, 7, 17))
                 .setInstitucion("Telon")
                 .setDescripcion("Dada su gran estatura, aldo siempre jugo al basquetbol. Ahora se dedica a enseñarlo.")
@@ -355,7 +355,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 3, 31))
                 .setCategorias(k2)
                 .setEstado(ActividadEstado.ACEPTADA)
-                .setImagen(resourceToFile("/img/actividades/2XpKBkr"))
+                .setImagen(resourceToFile("img/actividades/2XpKBkr"))
                 .setCreador("viktor")
                 .invoke();
 
@@ -368,7 +368,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 4, 20))
                 .setCategorias(k1)
                 .setEstado(ActividadEstado.ACEPTADA)
-                .setImagen(resourceToFile("/img/actividades/3vqbAbS"))
+                .setImagen(resourceToFile("img/actividades/3vqbAbS"))
                 .setCreador("denis")
                 .invoke();
 
@@ -381,7 +381,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 5, 30))
                 .setCategorias(k4)
                 .setEstado(ActividadEstado.ACEPTADA)
-                .setImagen(resourceToFile("/img/actividades/3ANzEXq"))
+                .setImagen(resourceToFile("img/actividades/3ANzEXq"))
                 .invoke();
 
             facadeActividad.crearActividad()
@@ -393,7 +393,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 6, 7))
                 .setCategorias(k1)
                 .setEstado(ActividadEstado.ACEPTADA)
-                .setImagen(resourceToFile("/img/actividades/3jfuKfN"))
+                .setImagen(resourceToFile("img/actividades/3jfuKfN"))
                 .setCreador("TheBoss")
                 .invoke();
 
@@ -406,7 +406,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 7, 8))
                 .setCategorias(k1)
                 .setEstado(ActividadEstado.ACEPTADA)
-                .setImagen(resourceToFile("/img/actividades/3n9Tw2l"))
+                .setImagen(resourceToFile("img/actividades/3n9Tw2l"))
                 .setCreador("denis")
                 .invoke();
 
@@ -442,7 +442,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 8, 30))
                 .setCategorias(k3)
                 .setEstado(ActividadEstado.INGRESADA)
-                .setImagen(resourceToFile("/img/actividades/3DWa6sW"))
+                .setImagen(resourceToFile("img/actividades/3DWa6sW"))
                 .setCreador("clazar")
                 .invoke();
 
@@ -455,7 +455,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setRegistro(LocalDate.of(2021, 9, 1))
                 .setCategorias(k5)
                 .setEstado(ActividadEstado.RECHAZADA)
-                .setImagen(resourceToFile("/img/actividades/3lTd3Ex"))
+                .setImagen(resourceToFile("img/actividades/3lTd3Ex"))
                 .setCreador("denis")
                 .invoke();
 
@@ -545,7 +545,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(1)
                 .setCantMax(5)
                 .setAcceso(new URL("https://www.musculos.com/Calistenia"))
-                .setImagen(resourceToFile("/img/clases/3pj6mxJ"))
+                .setImagen(resourceToFile("img/clases/3pj6mxJ"))
                 .setFechaRegistro(LocalDate.of(2021, 3, 31))
                 .invoke();
 
@@ -582,7 +582,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(21)
                 .setAcceso(new URL("https://telon.com.uy/voley"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
-                .setImagen(resourceToFile("/img/clases/3lTd3Ex"))
+                .setImagen(resourceToFile("img/clases/3lTd3Ex"))
                 .invoke();
 
             Set<String> p3 = new HashSet<>();
@@ -597,7 +597,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(6)
                 .setAcceso(new URL("https://telon.com.uy/natacionB"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
-                .setImagen(resourceToFile("/img/clases/3lTe1AF"))
+                .setImagen(resourceToFile("img/clases/3lTe1AF"))
                 .invoke();
 
             facadeClase.crearClase()
@@ -609,7 +609,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(6)
                 .setAcceso(new URL("https://telon.com.uy/natacionM"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
-                .setImagen(resourceToFile("/img/clases/3jeSUam"))
+                .setImagen(resourceToFile("img/clases/3jeSUam"))
                 .invoke();
 
             Set<String> p4 = new HashSet<>();
@@ -659,7 +659,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(1)
                 .setCantMax(4)
                 .setAcceso(new URL("https://www.musculos.com/boxeo1"))
-                .setImagen(resourceToFile("/img/clases/3aPbRM9"))
+                .setImagen(resourceToFile("img/clases/3aPbRM9"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
                 .invoke();
 
@@ -671,7 +671,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(2)
                 .setCantMax(2)
                 .setAcceso(new URL("https://www.musculos.com/boxeo2"))
-                .setImagen(resourceToFile("/img/clases/3n9UOKJ"))
+                .setImagen(resourceToFile("img/clases/3n9UOKJ"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
                 .invoke();
 
@@ -683,7 +683,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(1)
                 .setCantMax(5)
                 .setAcceso(new URL("https://www.musculos.com/muscbox"))
-                .setImagen(resourceToFile("/img/clases/3n9UOKJ"))
+                .setImagen(resourceToFile("img/clases/3n9UOKJ"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
                 .invoke();
 
@@ -698,7 +698,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(3)
                 .setCantMax(10)
                 .setAcceso(new URL("https://telon.com.uy/100m"))
-                .setImagen(resourceToFile("/img/clases/3aRuy1Y"))
+                .setImagen(resourceToFile("img/clases/3aRuy1Y"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
                 .invoke();
 
@@ -710,7 +710,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(3)
                 .setCantMax(10)
                 .setAcceso(new URL("https://telon.com.uy/200m"))
-                .setImagen(resourceToFile("/img/clases/3aRuy1Y"))
+                .setImagen(resourceToFile("img/clases/3aRuy1Y"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
                 .invoke();
 
@@ -722,7 +722,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMin(8)
                 .setCantMax(16)
                 .setAcceso(new URL("https://telon.com.uy/posta"))
-                .setImagen(resourceToFile("/img/clases/3DTD3S"))
+                .setImagen(resourceToFile("img/clases/3DTDm3S"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
                 .invoke();
 
@@ -805,7 +805,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setFin(LocalDate.of(2021, 7, 31))
                 .setDescuento(20)
                 .setFechaRegistro(LocalDate.of(2021, 4, 30))
-                .setImagen(resourceToFile("/img/cuponeras/3lUCYvu"))
+                .setImagen(resourceToFile("img/cuponeras/3lUCYvu"))
                 .invoke();
 
             facadeCuponera.crearCuponera()
@@ -815,7 +815,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setFin(LocalDate.of(2021, 9, 30))
                 .setDescuento(30)
                 .setFechaRegistro(LocalDate.of(2021, 7, 15))
-                .setImagen(resourceToFile("/img/cuponeras/3aO80yO"))
+                .setImagen(resourceToFile("img/cuponeras/3aO80yO"))
                 .invoke();
 
             facadeCuponera.crearCuponera()
@@ -825,7 +825,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setFin(LocalDate.of(2021, 11, 15))
                 .setDescuento(10)
                 .setFechaRegistro(LocalDate.of(2021, 8, 1))
-                .setImagen(resourceToFile("/img/cuponeras/3pj6mxJ"))
+                .setImagen(resourceToFile("img/cuponeras/3pj6mxJ"))
                 .invoke();
 
             facadeCuponera.agregarACuponera("Pelota", "Voleibol", 7);

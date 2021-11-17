@@ -155,7 +155,7 @@ public class ActividadServlet extends HttpServlet {
             args.setNombre(nombre);
             args.setDescripcion(descripcion);
             args.setInstitucion(inst);
-            args.setDuracion(duracion.toMinutesPart());
+            args.setDuracion((int) duracion.toMinutes());
             args.setCosto(costo);
             args.setRegistro(Utils.beanFromLocalDate(LocalDate.now()));
             args.getCategorias().addAll(categorias);
