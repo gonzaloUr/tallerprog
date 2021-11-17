@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.entrenamosuy.web.publicar.Exception_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 
@@ -34,42 +33,16 @@ public class ImagenServlet extends HttpServlet {
 
         byte[] data = null;
 
-        if (path.startsWith(request.getContextPath() + "/img/usuario")) {
-            try {
-                data = port.getImagenUsuario(ident);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        } else if (path.startsWith(request.getContextPath() + "/img/clase")) {
-            try {
-                data = port.getImagenClase(ident);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        } else if (path.startsWith(request.getContextPath() + "/img/actividad")) {
-            try {
-                data = port.getImagenActividad(ident);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        } else if (path.startsWith(request.getContextPath() + "/img/institucion")) {
-            try {
-                data = port.getImagenInstitucion(ident);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        } else if (path.startsWith(request.getContextPath() + "/img/cuponera")) {
-            try {
-                data = port.getImagenCuponera(ident);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
-            }
-        }
+        if (path.startsWith(request.getContextPath() + "/img/usuario"))
+            data = port.getImagenUsuario(ident);
+        else if (path.startsWith(request.getContextPath() + "/img/clase"))
+            data = port.getImagenClase(ident);
+        else if (path.startsWith(request.getContextPath() + "/img/actividad"))
+            data = port.getImagenActividad(ident);
+        else if (path.startsWith(request.getContextPath() + "/img/institucion"))
+            data = port.getImagenInstitucion(ident);
+        else if (path.startsWith(request.getContextPath() + "/img/cuponera"))
+            data = port.getImagenCuponera(ident);
 
         response.setContentLength(data.length);
         response.getOutputStream().write(data);

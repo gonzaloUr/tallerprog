@@ -334,9 +334,10 @@ public class UsuarioServlet extends HttpServlet {
 
             try {
                 port.crearProfesor(args);
-            } catch (Exception_Exception e) {
-                e.printStackTrace();
-                return;
+            } catch (UsuarioRepetidoException_Exception e) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "usuario_repetido");
+			    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
             }
 
             BeanProfesor profesor = port.getDataProfesor(nickname);

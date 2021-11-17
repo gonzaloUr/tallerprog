@@ -1,7 +1,6 @@
 <%@page import="java.util.Set"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.time.LocalDate"%>
-<%@page import="java.time.LocalDateTime"%>
 <!DOCTYPE html>
 <html>
 	<head>

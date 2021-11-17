@@ -22,7 +22,9 @@ import javax.jws.soap.SOAPBinding.Use;
 import javax.xml.ws.Endpoint;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
+import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
@@ -301,5 +303,56 @@ public class Publicador {
     @WebMethod
     public void validarCredenciales(String nickname, String password) throws PasswordInvalidaException {
         facades.getFacadeUsuario().validarCredenciales(nickname, password);
+    }
+
+    @WebMethod
+    public void registrarseSinCuponera(String nickname, String clase, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
+        try {
+            facades.getFacadeActividad().registarseSinCuponera(nickname, clase, fecha.toLocalDate());
+        } catch (RegistroInconsistenteException e) {
+            throw new RegistroInconsistenteExceptionWrapper(e);
+        }
+    }
+
+    @WebMethod
+    public void registrarseConCuponera(String nickname, String clase, String cuponera, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
+        try {
+            facades.getFacadeActividad().registraseConCuponera(nickname, clase, cuponera, fecha.toLocalDate());
+        } catch (RegistroInconsistenteException e) {
+            throw new RegistroInconsistenteExceptionWrapper(e);
+        }
+    }
+
+    @WebMethod
+    public void crearClase(BeanCrearClaseArgs args) throws ClaseInconsistenteExceptionWrapper {
+        File img = null;
+
+        try {
+            if (args.getImagen() != null) {
+                InputStream is = new ByteArrayInputStream(args.getImagen());
+                img = File.createTempFile("img_", null);
+                OutputStream os = new FileOutputStream(img);
+                pipe(is, os);
+                os.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            facades.getFacadeClase().crearClase()
+                .setNombreActividad(args.getActividad())
+                .setNombre(args.getNombre())
+                .setInicio(args.getInicio().toLocalDateTime())
+                .setNicknameProfesores(new HashSet<>(args.getNicknameProfesores()))
+                .setCantMin(args.getCantMin())
+                .setCantMax(args.getCantMax())
+                .setAcceso(args.getAcceso())
+                .setFechaRegistro(args.getRegistro().toLocalDate())
+                .setImagen(img)
+                .invoke();
+        } catch (ClaseInconsistenteException e) {
+            throw new ClaseInconsistenteExceptionWrapper(e);
+        }
     }
 }
