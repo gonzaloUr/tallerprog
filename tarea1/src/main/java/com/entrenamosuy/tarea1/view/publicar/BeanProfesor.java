@@ -3,7 +3,6 @@ package com.entrenamosuy.tarea1.view.publicar;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
 
 import com.entrenamosuy.core.data.DataProfesor;
 
@@ -21,7 +20,7 @@ public class BeanProfesor {
 
     private BeanEmail correo;
 
-    private LocalDate nacimiento;
+    private BeanLocalDate nacimiento;
 
     private ArrayList<String> seguidores;
 
@@ -67,11 +66,11 @@ public class BeanProfesor {
 		this.seguidores = seguidores;
 	}
 
-	public LocalDate getNacimiento() {
+	public BeanLocalDate getNacimiento() {
 		return nacimiento;
 	}
 
-	public void setNacimiento(LocalDate nacimiento) {
+	public void setNacimiento(BeanLocalDate nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 
@@ -168,7 +167,7 @@ public class BeanProfesor {
         setNombre(x.getNombre());
         setApellido(x.getApellido());
         setCorreo(BeanEmail.of(x.getCorreo()));
-        setNacimiento(x.getNacimiento());
+        setNacimiento(BeanLocalDate.of(x.getNacimiento()));
         setSeguidores(new ArrayList<>(x.getSeguidores()));
         setSeguidos(new ArrayList<>(x.getSeguidos()));
         setDescripcion(x.getDescripcion());

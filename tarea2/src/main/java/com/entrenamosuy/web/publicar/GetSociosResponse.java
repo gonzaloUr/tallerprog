@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for listarActividadesAceptadasResponse complex type.
+ * <p>Java class for getSociosResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="listarActividadesAceptadasResponse">
+ * &lt;complexType name="getSociosResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanActividad" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "listarActividadesAceptadasResponse", propOrder = {
+@XmlType(name = "getSociosResponse", propOrder = {
     "_return"
 })
-public class ListarActividadesAceptadasResponse {
+public class GetSociosResponse {
 
     @XmlElement(name = "return")
-    protected List<BeanActividad> _return;
+    protected List<String> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class ListarActividadesAceptadasResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link BeanActividad }
+     * {@link String }
      * 
      * 
      */
-    public List<BeanActividad> getReturn() {
+    public List<String> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<BeanActividad>();
+            _return = new ArrayList<String>();
         }
         return this._return;
     }

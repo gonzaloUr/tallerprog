@@ -11,9 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para beanClase complex type.
+ * <p>Java class for beanClase complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="beanClase">
@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}localDateTime" minOccurs="0"/>
+ *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/>
  *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="accesoURL" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlType;
 public class BeanClase {
 
     protected String nombre;
-    protected LocalDateTime inicio;
+    protected BeanLocalDateTime inicio;
     protected int cantMin;
     protected int cantMax;
     @XmlSchemaType(name = "anyURI")
@@ -58,7 +58,7 @@ public class BeanClase {
     protected List<BeanDescProfesor> profesores;
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -70,7 +70,7 @@ public class BeanClase {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -82,31 +82,31 @@ public class BeanClase {
     }
 
     /**
-     * Obtiene el valor de la propiedad inicio.
+     * Gets the value of the inicio property.
      * 
      * @return
      *     possible object is
-     *     {@link LocalDateTime }
+     *     {@link BeanLocalDateTime }
      *     
      */
-    public LocalDateTime getInicio() {
+    public BeanLocalDateTime getInicio() {
         return inicio;
     }
 
     /**
-     * Define el valor de la propiedad inicio.
+     * Sets the value of the inicio property.
      * 
      * @param value
      *     allowed object is
-     *     {@link LocalDateTime }
+     *     {@link BeanLocalDateTime }
      *     
      */
-    public void setInicio(LocalDateTime value) {
+    public void setInicio(BeanLocalDateTime value) {
         this.inicio = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad cantMin.
+     * Gets the value of the cantMin property.
      * 
      */
     public int getCantMin() {
@@ -114,7 +114,7 @@ public class BeanClase {
     }
 
     /**
-     * Define el valor de la propiedad cantMin.
+     * Sets the value of the cantMin property.
      * 
      */
     public void setCantMin(int value) {
@@ -122,7 +122,7 @@ public class BeanClase {
     }
 
     /**
-     * Obtiene el valor de la propiedad cantMax.
+     * Gets the value of the cantMax property.
      * 
      */
     public int getCantMax() {
@@ -130,7 +130,7 @@ public class BeanClase {
     }
 
     /**
-     * Define el valor de la propiedad cantMax.
+     * Sets the value of the cantMax property.
      * 
      */
     public void setCantMax(int value) {
@@ -138,7 +138,7 @@ public class BeanClase {
     }
 
     /**
-     * Obtiene el valor de la propiedad accesoURL.
+     * Gets the value of the accesoURL property.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class BeanClase {
     }
 
     /**
-     * Define el valor de la propiedad accesoURL.
+     * Sets the value of the accesoURL property.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class BeanClase {
     }
 
     /**
-     * Obtiene el valor de la propiedad actividad.
+     * Gets the value of the actividad property.
      * 
      * @return
      *     possible object is
@@ -174,7 +174,7 @@ public class BeanClase {
     }
 
     /**
-     * Define el valor de la propiedad actividad.
+     * Sets the value of the actividad property.
      * 
      * @param value
      *     allowed object is

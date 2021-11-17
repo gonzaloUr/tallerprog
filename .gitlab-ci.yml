@@ -45,3 +45,23 @@ test tarea1:
     paths:
       - tarea1/build
       - .gradle
+
+build tarea2:
+  stage: build
+  script: gradle --build-cache :tarea2:assemble
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: push
+    paths:
+      - tarea2/build
+      - .gradle
+
+test tarea2:
+  stage: test
+  script: gradle :tarea2:check
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    policy: pull
+    paths:
+      - tarea2/build
+      - .gradle

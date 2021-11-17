@@ -11,6 +11,7 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Collections;
+import java.util.HashSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,12 +20,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import javax.xml.crypto.Data;
 
 
-import com.entrenamosuy.core.data.DataInstitucion;
-import com.entrenamosuy.web.publicar.DataActividad;
-import com.entrenamosuy.web.publicar.ArrayList;
+import com.entrenamosuy.core.data.DataUsuario;
+import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCuponera;
@@ -69,7 +70,7 @@ public class ActividadServlet extends HttpServlet {
             Set<String> categoriasAsociadas = actividad.getCategorias()
                 .stream()
                 .collect(Collectors.toSet());
-                
+
             int duracion = actividad.getDuracion();
 
             request.setAttribute("nombre", nombre);
@@ -92,9 +93,8 @@ public class ActividadServlet extends HttpServlet {
             String descripcion = institucion.getDescripcion();
             String url = institucion.getUrl().toString();
 
-            List actividadesOfrecidas = port.getActividadesDeInstitucion(institucionNombre);
-             
-            
+            List<String> actividadesOfrecidas = port.getActividadesDeInstitucion(institucionNombre);
+
             request.setAttribute("nombre", nombre);
             request.setAttribute("descripcion", descripcion);
             request.setAttribute("url", url);
@@ -130,7 +130,7 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
         Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
         Boolean bool3 = request.getParameter("costo_alta_act").equals("");
@@ -151,7 +151,7 @@ public class ActividadServlet extends HttpServlet {
         Part imgPart = request.getPart("img");
         InputStream is = imgPart.getInputStream();
 
-        
+
 
         File tmp = File.createTempFile("img_", null);
         OutputStream os = new FileOutputStream(tmp);
@@ -199,8 +199,8 @@ public class ActividadServlet extends HttpServlet {
         catch(SinCategoriaException sce){
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
-        processRequest(request, response); 
-    } 
+        processRequest(request, response);
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PublicadorService service = new PublicadorService();
@@ -210,5 +210,5 @@ public class ActividadServlet extends HttpServlet {
         request.setAttribute("categorias", categorias);
         request.getRequestDispatcher("/alta_actividad.jsp")
             .forward(request, response);
-    } 
+    }
 }

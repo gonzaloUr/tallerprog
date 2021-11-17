@@ -1,5 +1,7 @@
 package com.entrenamosuy.web;
 
+import static com.entrenamosuy.web.Utils.localDateTimeFromBean;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,11 +10,11 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.HashSet;
 import java.util.stream.Collectors;
-import java.util.ArrayList; 
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -21,20 +23,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
-import javax.xml.crypto.Data;
 
-import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataUsuario;
-import com.entrenamosuy.core.data.DescProfesor;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanDescProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
-import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService; 
-//import com.entrenamosuy.web.publicar.ArrayList;
+import com.entrenamosuy.web.publicar.PublicadorService;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ClaseServlet extends HttpServlet {
@@ -42,10 +40,10 @@ public class ClaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService(); 
+        PublicadorService service = new PublicadorService();
         Publicador port = service.getPublicadorPort();
 
-        if(path.equals("/registrarse_a_clase_1")) {  
+        if(path.equals("/registrarse_a_clase_1")) {
             Set<String> inst = port.getInstituciones()
             .stream()
             .collect(Collectors.toSet());
@@ -86,7 +84,7 @@ public class ClaseServlet extends HttpServlet {
             Set<String> clases = port.getClasesDeActividad(acti)
                 .stream()
                 .collect(Collectors.toSet());
-                
+
 
             request.setAttribute("clases", clases);
 
@@ -116,12 +114,11 @@ public class ClaseServlet extends HttpServlet {
 
             BeanClase clase = port.getDataClase(claseNombre);
 
-
             String nombre = clase.getNombre();
-            LocalDateTime inicio = clase.getInicio();
+            LocalDateTime inicio = localDateTimeFromBean(clase.getInicio());
             int cantMin = clase.getCantMin();
             int cantMax = clase.getCantMax();
-            URL url = clase.getAccesoURL();
+            URL url = new URL(clase.getAccesoURL());
             String acti= clase.getActividad().getNombre();
 
             Set<String> profesorNom = clase.getProfesores() //TODO revisar este
@@ -156,11 +153,11 @@ public class ClaseServlet extends HttpServlet {
                 throw new IllegalArgumentException("profesor no logeado");
 
             processRequest(request,response);
-            
+
         }
     }
 
-//TODO
+    //TODO
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
@@ -296,7 +293,7 @@ public class ClaseServlet extends HttpServlet {
                     case NOMBRE_REPETIDO:
                         request.setAttribute("error", "Nombre no disponible");
                         break;
-                    case CANT_MAX_MENOR_MIN:   
+                    case CANT_MAX_MENOR_MIN:
                         request.setAttribute("error","La cantidad minima de socios debe ser menor a la cantidad maxima.");
                         break;
                     case INICIO_MENOR_REGISTRO:

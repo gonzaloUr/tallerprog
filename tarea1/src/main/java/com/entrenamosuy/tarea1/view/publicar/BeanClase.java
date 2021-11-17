@@ -1,7 +1,6 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,7 @@ public class BeanClase {
 
     private String nombre;
 
-    private LocalDateTime inicio;
+    private BeanLocalDateTime inicio;
 
     private int cantMin, cantMax;
 
@@ -33,11 +32,11 @@ public class BeanClase {
         this.nombre = nombre;
     }
 
-    public LocalDateTime getInicio() {
+    public BeanLocalDateTime getInicio() {
         return this.inicio;
     }
 
-    public void setInicio(LocalDateTime inicio) {
+    public void setInicio(BeanLocalDateTime inicio) {
         this.inicio = inicio;
     }
 
@@ -83,7 +82,7 @@ public class BeanClase {
 
     public void from(DataClase x) {
         setNombre(x.getNombre());
-        setInicio(x.getInicio());
+        setInicio(BeanLocalDateTime.of(x.getInicio()));
         setCantMax(x.getCantMax());
         setAccesoURL(x.getAccesoURL());
         setActividad(BeanDescActividad.of(x.getActividad()));

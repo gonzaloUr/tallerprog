@@ -3,21 +3,20 @@ package com.entrenamosuy.web.publicar;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getDataActividadResponse complex type.
+ * <p>Java class for getDataProfesor complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getDataActividadResponse">
+ * &lt;complexType name="getDataProfesor">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanActividad" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getDataActividadResponse", propOrder = {
-    "_return"
+@XmlType(name = "getDataProfesor", propOrder = {
+    "arg0"
 })
-public class GetDataActividadResponse {
+public class GetDataProfesor {
 
-    @XmlElement(name = "return")
-    protected BeanActividad _return;
+    protected String arg0;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the arg0 property.
      * 
      * @return
      *     possible object is
-     *     {@link BeanActividad }
+     *     {@link String }
      *     
      */
-    public BeanActividad getReturn() {
-        return _return;
+    public String getArg0() {
+        return arg0;
     }
 
     /**
-     * Sets the value of the return property.
+     * Sets the value of the arg0 property.
      * 
      * @param value
      *     allowed object is
-     *     {@link BeanActividad }
+     *     {@link String }
      *     
      */
-    public void setReturn(BeanActividad value) {
-        this._return = value;
+    public void setArg0(String value) {
+        this.arg0 = value;
     }
 
 }

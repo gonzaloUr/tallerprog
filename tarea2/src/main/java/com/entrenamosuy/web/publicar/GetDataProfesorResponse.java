@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getDataActividadResponse complex type.
+ * <p>Java class for getDataProfesorResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getDataActividadResponse">
+ * &lt;complexType name="getDataProfesorResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanActividad" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanProfesor" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getDataActividadResponse", propOrder = {
+@XmlType(name = "getDataProfesorResponse", propOrder = {
     "_return"
 })
-public class GetDataActividadResponse {
+public class GetDataProfesorResponse {
 
     @XmlElement(name = "return")
-    protected BeanActividad _return;
+    protected BeanProfesor _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link BeanActividad }
+     *     {@link BeanProfesor }
      *     
      */
-    public BeanActividad getReturn() {
+    public BeanProfesor getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class GetDataActividadResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link BeanActividad }
+     *     {@link BeanProfesor }
      *     
      */
-    public void setReturn(BeanActividad value) {
+    public void setReturn(BeanProfesor value) {
         this._return = value;
     }
 

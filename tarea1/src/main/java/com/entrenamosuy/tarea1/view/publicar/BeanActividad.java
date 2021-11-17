@@ -1,7 +1,5 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
-import java.time.Duration;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -19,7 +17,7 @@ public class BeanActividad {
 
     private int duracion;
 
-    private LocalDate registro;
+    private BeanLocalDate registro;
 
     private float costo;
 
@@ -53,11 +51,11 @@ public class BeanActividad {
         this.duracion = duracion;
     }
 
-    public LocalDate getRegistro() {
+    public BeanLocalDate getRegistro() {
         return this.registro;
     }
 
-    public void setRegistro(LocalDate registro) {
+    public void setRegistro(BeanLocalDate registro) {
         this.registro = registro;
     }
 
@@ -97,7 +95,7 @@ public class BeanActividad {
         setNombre(x.getNombre());
         setDescripcion(x.getDescripcion());
         setDuracion((int)x.getDuracion().toMinutes());
-        setRegistro(x.getRegistro());
+        setRegistro(BeanLocalDate.of(x.getRegistro()));
         setCosto(x.getCosto());
         setClases(x.getClases()
             .stream()

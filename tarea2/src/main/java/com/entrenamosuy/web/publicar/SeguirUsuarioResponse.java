@@ -3,17 +3,16 @@ package com.entrenamosuy.web.publicar;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for abstractCollection complex type.
+ * <p>Java class for seguirUsuarioResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="abstractCollection">
+ * &lt;complexType name="seguirUsuarioResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -26,11 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "abstractCollection")
-@XmlSeeAlso({
-    AbstractList.class
-})
-public abstract class AbstractCollection {
+@XmlType(name = "seguirUsuarioResponse")
+public class SeguirUsuarioResponse {
 
 
 }

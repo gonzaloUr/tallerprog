@@ -1,7 +1,6 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
 import java.time.Duration;
-import java.time.LocalDate;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +16,7 @@ public class BeanDescActividad {
 
     private Duration duracion;
 
-    private LocalDate registro;
+    private BeanLocalDate registro;
 
     private float costo;
 
@@ -45,11 +44,11 @@ public class BeanDescActividad {
         this.duracion = duracion;
     }
 
-    public LocalDate getRegistro() {
+    public BeanLocalDate getRegistro() {
         return this.registro;
     }
 
-    public void setRegistro(LocalDate registro) {
+    public void setRegistro(BeanLocalDate registro) {
         this.registro = registro;
     }
 
@@ -65,7 +64,7 @@ public class BeanDescActividad {
         setNombre(x.getNombre());
         setDescripcion(x.getDescripcion());
         setDuracion(x.getDuracion());
-        setRegistro(x.getRegistro());
+        setRegistro(BeanLocalDate.of(x.getRegistro()));
         setCosto(x.getCosto());
     }
 
