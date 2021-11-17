@@ -1,7 +1,17 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.stream.Collectors;
+import java.time.LocalDate;
+import java.time.Duration;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -11,6 +21,9 @@ import javax.jws.soap.SOAPBinding.Style;
 import javax.jws.soap.SOAPBinding.Use;
 import javax.xml.ws.Endpoint;
 
+import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
+import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
+import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
@@ -33,6 +46,35 @@ public class Publicador {
     @WebMethod(exclude = true)
     public Endpoint getEndpoint(){
         return endpoint;
+    }
+
+    @WebMethod
+    public void crearActividad(BeanCrearActividadArgs args) throws ActividadRepetidaException {
+        File img = null;
+
+        try {
+            if (args.getImagen() != null) {
+                InputStream is = new ByteArrayInputStream(args.getImagen());
+                img = File.createTempFile("img_", null);
+                OutputStream os = new FileOutputStream(img);
+                pipe(is, os);
+                os.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        facades.getFacadeActividad().crearActividad()
+            .setNombre(args.getNombre())
+            .setDescripcion(args.getDescripcion())
+            .setInstitucion(args.getInstitucion())
+            .setDuracion(Duration.ofMinutes(args.getDuracion()))
+            .setCosto(args.getCosto())
+            .setRegistro(LocalDate.now())
+            .setCategorias(new HashSet<>(args.getCategorias()))
+            .setCreador(args.getCreadorNickname())
+            .setImagen(img)
+            .invoke();
     }
 
     @WebMethod
@@ -137,48 +179,59 @@ public class Publicador {
         facades.getFacadeUsuario().dejarDeSeguirUsuario(seguido, seguidor);
     }
 
-    /*
     @WebMethod
-    public void crearSocio(BeanCrearSocioArgs args) throws Exception {
+    public void crearSocio(BeanCrearSocioArgs args) throws UsuarioRepetidoException {
         File img = null;
 
-        if (args.getImagen() != null) {
-            InputStream is = args.getImagen().openStream();
-            img = File.createTempFile("img_", null);
-            OutputStream os = new FileOutputStream(img);
-            pipe(is, os);
-            os.close();
+        try {
+            if (args.getImagen() != null) {
+                InputStream is = new ByteArrayInputStream(args.getImagen());
+                img = File.createTempFile("img_", null);
+                OutputStream os = new FileOutputStream(img);
+                pipe(is, os);
+                os.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        System.out.println("imagen de socio: " + img.getAbsolutePath());
 
         facades.getFacadeUsuario().crearSocio()
             .setNickname(args.getNickname())
             .setNombre(args.getNombre())
             .setApellido(args.getApellido())
-            .setCorreo(args.getCorreo())
-            .setNacimiento(args.getNacimiento())
+            .setCorreo(args.getCorreo().toEmail())
+            .setNacimiento(args.getNacimiento().toLocalDate())
             .setPassword(args.getPassword())
             .setImagen(img)
             .invoke();
     }
 
     @WebMethod
-    public void crearProfesor(BeanCrearProfesorArgs args) throws Exception {
+    public void crearProfesor(BeanCrearProfesorArgs args) throws UsuarioRepetidoException {
         File img = null;
 
-        if (args.getImagen() != null) {
-            InputStream is = args.getImagen().openStream();
-            img = File.createTempFile("img_", null);
-            OutputStream os = new FileOutputStream(img);
-            pipe(is, os);
-            os.close();
+        try {
+            if (args.getImagen() != null) {
+                InputStream is = new ByteArrayInputStream(args.getImagen());
+                img = File.createTempFile("img_", null);
+                OutputStream os = new FileOutputStream(img);
+                pipe(is, os);
+                os.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        System.out.println("imagen de profesor: " + img.getAbsolutePath());
 
         facades.getFacadeUsuario().crearProfesor()
             .setNickname(args.getNickname())
             .setNombre(args.getNombre())
             .setApellido(args.getApellido())
-            .setCorreo(args.getCorreo())
-            .setNacimiento(args.getNacimiento())
+            .setCorreo(args.getCorreo().toEmail())
+            .setNacimiento(args.getNacimiento().toLocalDate())
             .setInstitucion(args.getInstitucion())
             .setDescripcion(args.getDescripcion())
             .setBiografia(args.getBio())
@@ -188,6 +241,24 @@ public class Publicador {
             .invoke();
     }
 
+    private static byte[] getImagen(File img) {
+        if (img == null)
+            return null;
+
+        byte[] ret = null;
+
+        try {
+            FileInputStream is = new FileInputStream(img);
+            ret = new byte[(int) img.length()];
+            is.read(ret);
+            is.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+    }
+
     private static void pipe(InputStream is, OutputStream os) throws IOException {
         int n;
         byte[] buff = new byte[1024];
@@ -195,5 +266,40 @@ public class Publicador {
         while ((n = is.read(buff)) > -1)
             os.write(buff, 0, n);
     }
-    */
+
+    @WebMethod
+    public byte[] getImagenUsuario(String nickname) {
+        File img = facades.getFacadeUsuario().getImagenUsuario(nickname);
+        return getImagen(img);
+    }
+
+
+    @WebMethod
+    public byte[] getImagenClase(String nombre) {
+        File img = facades.getFacadeClase().getImagenClase(nombre);
+        return getImagen(img);
+    }
+
+    @WebMethod
+    public byte[] getImagenActividad(String nombre) {
+        File img = facades.getFacadeActividad().getImagenActividad(nombre);
+        return getImagen(img);
+    }
+
+    @WebMethod
+    public byte[] getImagenInstitucion(String nombre) {
+        File img = facades.getFacadeInstitucion().getImagenInstitucion(nombre);
+        return getImagen(img);
+    }
+
+    @WebMethod
+    public byte[] getImagenCuponera(String nombre) {
+        File img = facades.getFacadeCuponera().getImagenCuponera(nombre);
+        return getImagen(img);
+    }
+
+    @WebMethod
+    public void validarCredenciales(String nickname, String password) throws PasswordInvalidaException {
+        facades.getFacadeUsuario().validarCredenciales(nickname, password);
+    }
 }

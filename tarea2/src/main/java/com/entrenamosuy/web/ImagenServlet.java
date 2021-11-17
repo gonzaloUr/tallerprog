@@ -1,10 +1,6 @@
 package com.entrenamosuy.web;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -13,15 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.entrenamosuy.web.publicar.Exception_Exception;
+import com.entrenamosuy.web.publicar.Publicador;
+import com.entrenamosuy.web.publicar.PublicadorService;
+
 public class ImagenServlet extends HttpServlet {
-
-    private static void pipe(InputStream is, OutputStream os) throws IOException {
-        int n;
-        byte[] buff = new byte[1024];
-
-        while ((n = is.read(buff)) > -1)
-            os.write(buff, 0, n);
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -37,26 +29,49 @@ public class ImagenServlet extends HttpServlet {
         String path = uri.getPath();
         String ident = path.substring(path.lastIndexOf("/") + 1);
 
-        File img = null;
+        PublicadorService service = new PublicadorService();
+        Publicador port = service.getPublicadorPort();
 
-        if (path.startsWith(request.getContextPath() + "/img/usuario"))
-            img = Facades.getFacades().getFacadeUsuario().getImagenUsuario(ident);
-        else if (path.startsWith(request.getContextPath() + "/img/clase"))
-            img = Facades.getFacades().getFacadeClase().getImagenClase(ident);
-        else if (path.startsWith(request.getContextPath() + "/img/actividad"))
-            img = Facades.getFacades().getFacadeActividad().getImagenActividad(ident);
-        else if (path.startsWith(request.getContextPath() + "/img/institucion"))
-            img = Facades.getFacades().getFacadeInstitucion().getImagenInstitucion(ident);
-        else if (path.startsWith(request.getContextPath() + "/img/cuponera"))
-            img = Facades.getFacades().getFacadeCuponera().getImagenCuponera(ident);
+        byte[] data = null;
 
-        response.setContentLength((int) img.length());
+        if (path.startsWith(request.getContextPath() + "/img/usuario")) {
+            try {
+                data = port.getImagenUsuario(ident);
+            } catch (Exception_Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        } else if (path.startsWith(request.getContextPath() + "/img/clase")) {
+            try {
+                data = port.getImagenClase(ident);
+            } catch (Exception_Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        } else if (path.startsWith(request.getContextPath() + "/img/actividad")) {
+            try {
+                data = port.getImagenActividad(ident);
+            } catch (Exception_Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        } else if (path.startsWith(request.getContextPath() + "/img/institucion")) {
+            try {
+                data = port.getImagenInstitucion(ident);
+            } catch (Exception_Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        } else if (path.startsWith(request.getContextPath() + "/img/cuponera")) {
+            try {
+                data = port.getImagenCuponera(ident);
+            } catch (Exception_Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        }
 
-        InputStream is = new FileInputStream(img);
-        OutputStream os = response.getOutputStream();
-
-        pipe(is, os);
-        is.close();
-        os.close();
+        response.setContentLength(data.length);
+        response.getOutputStream().write(data);
     }
 }

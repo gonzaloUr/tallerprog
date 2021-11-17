@@ -28,11 +28,15 @@ public class BeanEmail {
         this.domain = domain;
     }
 
+    public Email toEmail() {
+        return Email.of(prefix, domain);
+    }
+
     public void from(Email x) {
         setPrefix(x.getPrefix());
         setDomain(x.getDomain());
     }
-    
+
     public static BeanEmail of(Email x) {
         BeanEmail ret = new BeanEmail();
         ret.from(x);

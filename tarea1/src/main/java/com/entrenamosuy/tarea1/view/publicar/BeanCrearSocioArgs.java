@@ -1,9 +1,5 @@
 package com.entrenamosuy.tarea1.view.publicar;
 
-import java.net.URL;
-
-import com.entrenamosuy.core.data.Email;
-
 public class BeanCrearSocioArgs {
 
     private String nickname;
@@ -12,13 +8,13 @@ public class BeanCrearSocioArgs {
 
     private String apellido;
 
-    private Email correo;
+    private BeanEmail correo;
 
     private BeanLocalDate nacimiento;
 
     private String password;
 
-    private URL imagen;
+    private byte[] imagen;
 
     public String getNickname() {
         return nickname;
@@ -44,11 +40,11 @@ public class BeanCrearSocioArgs {
         this.apellido = apellido;
     }
 
-    public Email getCorreo() {
+    public BeanEmail getCorreo() {
         return correo;
     }
 
-    public void setCorreo(Email correo) {
+    public void setCorreo(BeanEmail correo) {
         this.correo = correo;
     }
 
@@ -68,11 +64,11 @@ public class BeanCrearSocioArgs {
         this.password = password;
     }
 
-    public URL getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(URL imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
 }

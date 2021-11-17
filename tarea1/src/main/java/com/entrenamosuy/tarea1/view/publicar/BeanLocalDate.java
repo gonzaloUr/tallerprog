@@ -34,6 +34,10 @@ public class BeanLocalDate {
         this.dayOfMonth = dayOfMonth;
     }
 
+    public LocalDate toLocalDate() {
+        return LocalDate.of(getYear(), getMonth(), getDayOfMonth());
+    }
+
     public void from(LocalDate x) {
         setYear(x.getYear());
         setMonth(x.getMonthValue());
