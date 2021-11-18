@@ -590,5 +590,12 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     	Socio s = mapa.get(socio);
     	s.eliminarFavorita(actividad);
     }
+
+    @Override
+    public void agregarPremioASocio(String socio, String clase){
+        Socio sochi = getRegistry().getSocios().get(socio);
+        Clase clachi = getRegistry().getClases().get(clase);
+        sochi.agregarPremio(clachi);
+    }
     
 }
