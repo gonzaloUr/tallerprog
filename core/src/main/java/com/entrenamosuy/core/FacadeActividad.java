@@ -177,7 +177,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) throws RegistroInconsistenteException {
+    public void registrarseSinCuponera(String socio, String clase, LocalDate fechaRegistro) throws RegistroInconsistenteException {
 
         Clase clas = getRegistry().getClases().get(clase);
         Socio soci = getRegistry().getSocios().get(socio);
@@ -213,7 +213,7 @@ public class FacadeActividad extends AbstractFacadeActividad {
     }
 
     @Override
-    public void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
+    public void registrarseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
         throws RegistroInconsistenteException {
 
         Clase clas = getRegistry().getClases().get(clase);

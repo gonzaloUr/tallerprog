@@ -27,6 +27,8 @@ import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
@@ -43,7 +45,7 @@ public class Publicador {
 
     @WebMethod(exclude = true)
     public void publicar() {
-        endpoint = Endpoint.publish("http://localhost:9128/webservices", this);
+        endpoint = Endpoint.publish("http://localhost:9128/webservices", this); //Cambiar a dinámica la dirrección. Se recomienda usar java.properties
     }
 
     @WebMethod(exclude = true)
@@ -52,7 +54,7 @@ public class Publicador {
     }
 
     @WebMethod
-    public void crearActividad(BeanCrearActividadArgs args) throws ActividadRepetidaException {
+    public void crearActividad(BeanCrearActividadArgs args) throws ActividadRepetidaException, InstitucionNoEncontradaException, SinCategoriaException {
         File img = null;
 
         try {
@@ -309,7 +311,7 @@ public class Publicador {
     @WebMethod
     public void registrarseSinCuponera(String nickname, String clase, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
         try {
-            facades.getFacadeActividad().registarseSinCuponera(nickname, clase, fecha.toLocalDate());
+            facades.getFacadeActividad().registrarseSinCuponera(nickname, clase, fecha.toLocalDate());
         } catch (RegistroInconsistenteException e) {
             throw new RegistroInconsistenteExceptionWrapper(e);
         }
@@ -318,7 +320,7 @@ public class Publicador {
     @WebMethod
     public void registrarseConCuponera(String nickname, String clase, String cuponera, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
         try {
-            facades.getFacadeActividad().registraseConCuponera(nickname, clase, cuponera, fecha.toLocalDate());
+            facades.getFacadeActividad().registrarseConCuponera(nickname, clase, cuponera, fecha.toLocalDate());
         } catch (RegistroInconsistenteException e) {
             throw new RegistroInconsistenteExceptionWrapper(e);
         }

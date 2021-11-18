@@ -41,10 +41,10 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract CrearActividadChain crearActividad();
 
-    public abstract void registarseSinCuponera(String socio, String clase, LocalDate fechaRegistro)
+    public abstract void registrarseSinCuponera(String socio, String clase, LocalDate fechaRegistro)
             throws RegistroInconsistenteException;
 
-    public abstract void registraseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
+    public abstract void registrarseConCuponera(String socio, String clase, String cuponera, LocalDate fechaRegistro)
             throws RegistroInconsistenteException;
 
     public abstract Set<String> getActividadesDeInstitucion(String institucion);

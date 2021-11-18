@@ -44,7 +44,9 @@ public class Clase {
         
         private String premio;
         
-        private int cantPremios;
+        private int cantPremios = 0;
+
+        private LocalDate fechaSorteo = null;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -106,9 +108,14 @@ public class Clase {
             return this;
         }
 
+        public Builder setFechaSorteo(LocalDate fechaSorteo){
+            this.fechaSorteo = fechaSorteo;
+            return this;
+        }
+
         public Clase build() {
             return new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro,
-                    registros, profesores, actividad, imagen, premio, cantPremios);
+                    registros, profesores, actividad, imagen, premio, cantPremios, fechaSorteo);
         }
     }
 
@@ -144,7 +151,7 @@ public class Clase {
 
     protected Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
                  URL acceso, LocalDate fechaRegistro, Set<Registro> registros,
-                 Set<Profesor> profesores, Actividad actividad, File imagen, String premio, int cantPremios) {
+                 Set<Profesor> profesores, Actividad actividad, File imagen, String premio, int cantPremios, LocalDate fechaSorteo) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Clase");
         Objects.requireNonNull(inicio, "inicio es null en constructor Clase");
@@ -166,7 +173,7 @@ public class Clase {
         this.imagen = imagen;
         this.premio = premio;
         this.cantPremios = cantPremios;
-        fechaSorteo = null;
+        this.fechaSorteo = fechaSorteo;
         puntaje = 0;
         premiados = null;
         puntajes = new HashSet<Puntaje>();

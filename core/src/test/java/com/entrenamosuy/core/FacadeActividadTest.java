@@ -416,15 +416,15 @@ public class FacadeActividadTest {
         });
 
         assertThrows (ClaseNoEncontradaException.class, ()-> {
-            facades.getFacadeActividad().registraseConCuponera("alfonso", null, "c1", LocalDate.now());
+            facades.getFacadeActividad().registrarseConCuponera("alfonso", null, "c1", LocalDate.now());
         });
 
         assertThrows (CuponeraNoEncontradaException.class, ()-> {
-            facades.getFacadeActividad().registraseConCuponera("alfonso", "clase1", null, LocalDate.now());
+            facades.getFacadeActividad().registrarseConCuponera("alfonso", "clase1", null, LocalDate.now());
         });
         
         assertThrows (UsuarioNoEncontradoException.class, ()-> {
-            facades.getFacadeActividad().registraseConCuponera(null, "clase1", "c1", LocalDate.now());
+            facades.getFacadeActividad().registrarseConCuponera(null, "clase1", "c1", LocalDate.now());
         });
 
         assertDoesNotThrow(() -> {
