@@ -50,6 +50,11 @@
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
+        <url-pattern>*.js</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
@@ -58,6 +63,11 @@
     <servlet-mapping>
         <servlet-name>SesionServlet</servlet-name>
         <url-pattern>/iniciar_sesion</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SesionServlet</servlet-name>
+        <url-pattern>/index_m</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanCrearActividadArgs complex type.
+ * <p>Clase Java para beanCrearActividadArgs complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanCrearActividadArgs">
@@ -91,7 +91,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the costo property.
+     * Obtiene el valor de la propiedad costo.
      * 
      */
     public float getCosto() {
@@ -99,7 +99,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the costo property.
+     * Define el valor de la propiedad costo.
      * 
      */
     public void setCosto(float value) {
@@ -107,7 +107,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the creadorNickname property.
+     * Obtiene el valor de la propiedad creadorNickname.
      * 
      * @return
      *     possible object is
@@ -119,7 +119,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the creadorNickname property.
+     * Define el valor de la propiedad creadorNickname.
      * 
      * @param value
      *     allowed object is
@@ -131,7 +131,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the descripcion property.
+     * Obtiene el valor de la propiedad descripcion.
      * 
      * @return
      *     possible object is
@@ -143,7 +143,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the descripcion property.
+     * Define el valor de la propiedad descripcion.
      * 
      * @param value
      *     allowed object is
@@ -155,7 +155,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the duracion property.
+     * Obtiene el valor de la propiedad duracion.
      * 
      */
     public int getDuracion() {
@@ -163,7 +163,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the duracion property.
+     * Define el valor de la propiedad duracion.
      * 
      */
     public void setDuracion(int value) {
@@ -171,7 +171,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the imagen property.
+     * Obtiene el valor de la propiedad imagen.
      * 
      * @return
      *     possible object is
@@ -182,7 +182,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the imagen property.
+     * Define el valor de la propiedad imagen.
      * 
      * @param value
      *     allowed object is
@@ -193,7 +193,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the institucion property.
+     * Obtiene el valor de la propiedad institucion.
      * 
      * @return
      *     possible object is
@@ -205,7 +205,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the institucion property.
+     * Define el valor de la propiedad institucion.
      * 
      * @param value
      *     allowed object is
@@ -217,7 +217,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -229,7 +229,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -241,7 +241,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Gets the value of the registro property.
+     * Obtiene el valor de la propiedad registro.
      * 
      * @return
      *     possible object is
@@ -253,7 +253,7 @@ public class BeanCrearActividadArgs {
     }
 
     /**
-     * Sets the value of the registro property.
+     * Define el valor de la propiedad registro.
      * 
      * @param value
      *     allowed object is
