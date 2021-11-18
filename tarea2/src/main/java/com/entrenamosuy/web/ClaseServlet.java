@@ -20,6 +20,8 @@ import javax.servlet.http.Part;
 
 import com.entrenamosuy.core.data.DataProfesor;
 import com.entrenamosuy.core.data.DataUsuario;
+import com.entrenamosuy.core.exceptions.ClaseNoDictadaException;
+import com.entrenamosuy.core.exceptions.SorteoRealizadoException;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCrearClaseArgs;
 import com.entrenamosuy.web.publicar.BeanDescProfesor;
@@ -141,7 +143,28 @@ public class ClaseServlet extends HttpServlet {
             request.getRequestDispatcher("/consulta_dictado_clase.jsp")
                 .forward(request, response);
 
-        } else if (path.equals("/alta_dictado_clase")) {
+        } else if (path.equals("realizar_sorteo")) {
+        	String clase = request.getParameter("clase");
+        	int estadoS = port.getEstadoSorteo(clase);
+        	request.setAttribute("estadoSorteo", estadoS);
+        	if (estadoS == 0) {
+            	request.setAttribute("registrados", port.getRegistrados(clase));
+        	}
+        	else if (estadoS == 1) {
+        		request.setAttribute("ganadores", port.getGanadores(clase));
+        	}
+        	request.setAttribute("clase", clase);
+        	request.getRequestDispatcher("realizar_sorteo.jsp").forward(request, response);
+  
+    	} else if (path.equals("/confirmar_sorteo")) {
+    		String clase = (String) request.getParameter("clase");
+    		port.realizarSorteo(clase);
+    		request.setAttribute("ganadores", port.getGanadores(clase));
+    		request.setAttribute("estadoSorteo", 1);
+        	request.setAttribute("clase", clase);
+        	request.getRequestDispatcher("realizar_sorteo.jsp").forward(request, response);
+        	
+    	} else if (path.equals("/alta_dictado_clase")) {
             Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 
             if (esProfesor == null || !esProfesor)

@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.time.LocalDate;
 import java.time.Duration;
@@ -356,5 +357,35 @@ public class Publicador {
         } catch (ClaseInconsistenteException e) {
             throw new ClaseInconsistenteExceptionWrapper(e);
         }
+    }
+
+    @WebMethod
+    public void realizarSorteo(String clase){
+        facades.getFacadeClase().realizarSorteo(clase); 
+    }
+
+    @WebMethod
+    public List<BeanSocio> getGanadores(String clase){
+        return facades
+                .getFacadeClase()
+                .getGanadores(clase)
+                .stream()
+                .map(BeanSocio::of)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    @WebMethod
+    public List<BeanSocio> getRegistrados(String clase){
+        return facades
+                .getFacadeClase()
+                .getRegistrados(clase)
+                .stream()
+                .map(BeanSocio::of)
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+    
+    @WebMethod
+    public int getEstadoSorteo(String clase) {
+    	return facades.getFacadeClase().getEstadoSorteo(clase);
     }
 }

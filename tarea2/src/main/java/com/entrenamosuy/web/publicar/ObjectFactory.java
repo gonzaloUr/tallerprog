@@ -29,6 +29,7 @@ public class ObjectFactory {
     private final static QName _ActividadRepetidaException_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "ActividadRepetidaException");
     private final static QName _GetCategorias_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategorias");
     private final static QName _GetCategoriasResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategoriasResponse");
+    private final static QName _GetRegistrados_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getRegistrados");
     private final static QName _GetInstituciones_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getInstituciones");
     private final static QName _GetProfesores_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getProfesores");
     private final static QName _ValidarCredencialesResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredencialesResponse");
@@ -36,8 +37,10 @@ public class ObjectFactory {
     private final static QName _GetDataSocioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataSocioResponse");
     private final static QName _GetCuponerasUsablesActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCuponerasUsablesActividad");
     private final static QName _GetDataActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataActividad");
+    private final static QName _GetGanadoresResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getGanadoresResponse");
     private final static QName _CrearActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearActividadResponse");
     private final static QName _GetImagenActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenActividad");
+    private final static QName _RealizarSorteoResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "realizarSorteoResponse");
     private final static QName _GetDataActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataActividadResponse");
     private final static QName _GetDataInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataInstitucionResponse");
     private final static QName _GetActividadesDeCategoriaResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getActividadesDeCategoriaResponse");
@@ -64,7 +67,9 @@ public class ObjectFactory {
     private final static QName _GetImagenClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenClase");
     private final static QName _RegistrarseConCuponeraResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseConCuponeraResponse");
     private final static QName _RegistrarseConCuponera_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseConCuponera");
+    private final static QName _GetRegistradosResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getRegistradosResponse");
     private final static QName _CrearSocioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearSocioResponse");
+    private final static QName _GetEstadoSorteoResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getEstadoSorteoResponse");
     private final static QName _CrearProfesorResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearProfesorResponse");
     private final static QName _GetSociosResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getSociosResponse");
     private final static QName _CrearActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearActividad");
@@ -77,11 +82,14 @@ public class ObjectFactory {
     private final static QName _RegistrarseSinCuponeraResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseSinCuponeraResponse");
     private final static QName _CrearClaseResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearClaseResponse");
     private final static QName _GetDataInstitucion_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataInstitucion");
+    private final static QName _GetEstadoSorteo_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getEstadoSorteo");
     private final static QName _GetProfesoresResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getProfesoresResponse");
     private final static QName _GetClasesDeActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getClasesDeActividad");
     private final static QName _GetImagenClaseResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenClaseResponse");
+    private final static QName _RealizarSorteo_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "realizarSorteo");
     private final static QName _GetClasesDeActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getClasesDeActividadResponse");
     private final static QName _GetDataProfesorResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataProfesorResponse");
+    private final static QName _GetGanadores_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getGanadores");
     private final static QName _GetDataProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataProfesor");
     private final static QName _CrearSocio_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearSocio");
     private final static QName _RegistrarseSinCuponera_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseSinCuponera");
@@ -92,6 +100,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link RealizarSorteoResponse }
+     * 
+     */
+    public RealizarSorteoResponse createRealizarSorteoResponse() {
+        return new RealizarSorteoResponse();
     }
 
     /**
@@ -167,6 +183,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetGanadoresResponse }
+     * 
+     */
+    public GetGanadoresResponse createGetGanadoresResponse() {
+        return new GetGanadoresResponse();
+    }
+
+    /**
      * Create an instance of {@link CrearActividadResponse }
      * 
      */
@@ -204,6 +228,14 @@ public class ObjectFactory {
      */
     public GetCategoriasResponse createGetCategoriasResponse() {
         return new GetCategoriasResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetRegistrados }
+     * 
+     */
+    public GetRegistrados createGetRegistrados() {
+        return new GetRegistrados();
     }
 
     /**
@@ -423,11 +455,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetRegistradosResponse }
+     * 
+     */
+    public GetRegistradosResponse createGetRegistradosResponse() {
+        return new GetRegistradosResponse();
+    }
+
+    /**
      * Create an instance of {@link CrearSocioResponse }
      * 
      */
     public CrearSocioResponse createCrearSocioResponse() {
         return new CrearSocioResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetEstadoSorteoResponse }
+     * 
+     */
+    public GetEstadoSorteoResponse createGetEstadoSorteoResponse() {
+        return new GetEstadoSorteoResponse();
     }
 
     /**
@@ -463,6 +511,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link RealizarSorteo }
+     * 
+     */
+    public RealizarSorteo createRealizarSorteo() {
+        return new RealizarSorteo();
+    }
+
+    /**
      * Create an instance of {@link GetClasesDeActividadResponse }
      * 
      */
@@ -476,6 +532,14 @@ public class ObjectFactory {
      */
     public GetDataProfesorResponse createGetDataProfesorResponse() {
         return new GetDataProfesorResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetGanadores }
+     * 
+     */
+    public GetGanadores createGetGanadores() {
+        return new GetGanadores();
     }
 
     /**
@@ -548,6 +612,14 @@ public class ObjectFactory {
      */
     public GetDataInstitucion createGetDataInstitucion() {
         return new GetDataInstitucion();
+    }
+
+    /**
+     * Create an instance of {@link GetEstadoSorteo }
+     * 
+     */
+    public GetEstadoSorteo createGetEstadoSorteo() {
+        return new GetEstadoSorteo();
     }
 
     /**
@@ -756,6 +828,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRegistrados }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getRegistrados")
+    public JAXBElement<GetRegistrados> createGetRegistrados(GetRegistrados value) {
+        return new JAXBElement<GetRegistrados>(_GetRegistrados_QNAME, GetRegistrados.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetInstituciones }{@code >}}
      * 
      */
@@ -819,6 +900,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetGanadoresResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getGanadoresResponse")
+    public JAXBElement<GetGanadoresResponse> createGetGanadoresResponse(GetGanadoresResponse value) {
+        return new JAXBElement<GetGanadoresResponse>(_GetGanadoresResponse_QNAME, GetGanadoresResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CrearActividadResponse }{@code >}}
      * 
      */
@@ -834,6 +924,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getImagenActividad")
     public JAXBElement<GetImagenActividad> createGetImagenActividad(GetImagenActividad value) {
         return new JAXBElement<GetImagenActividad>(_GetImagenActividad_QNAME, GetImagenActividad.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RealizarSorteoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "realizarSorteoResponse")
+    public JAXBElement<RealizarSorteoResponse> createRealizarSorteoResponse(RealizarSorteoResponse value) {
+        return new JAXBElement<RealizarSorteoResponse>(_RealizarSorteoResponse_QNAME, RealizarSorteoResponse.class, null, value);
     }
 
     /**
@@ -1071,12 +1170,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetRegistradosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getRegistradosResponse")
+    public JAXBElement<GetRegistradosResponse> createGetRegistradosResponse(GetRegistradosResponse value) {
+        return new JAXBElement<GetRegistradosResponse>(_GetRegistradosResponse_QNAME, GetRegistradosResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CrearSocioResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "crearSocioResponse")
     public JAXBElement<CrearSocioResponse> createCrearSocioResponse(CrearSocioResponse value) {
         return new JAXBElement<CrearSocioResponse>(_CrearSocioResponse_QNAME, CrearSocioResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEstadoSorteoResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getEstadoSorteoResponse")
+    public JAXBElement<GetEstadoSorteoResponse> createGetEstadoSorteoResponse(GetEstadoSorteoResponse value) {
+        return new JAXBElement<GetEstadoSorteoResponse>(_GetEstadoSorteoResponse_QNAME, GetEstadoSorteoResponse.class, null, value);
     }
 
     /**
@@ -1188,6 +1305,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetEstadoSorteo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getEstadoSorteo")
+    public JAXBElement<GetEstadoSorteo> createGetEstadoSorteo(GetEstadoSorteo value) {
+        return new JAXBElement<GetEstadoSorteo>(_GetEstadoSorteo_QNAME, GetEstadoSorteo.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetProfesoresResponse }{@code >}}
      * 
      */
@@ -1215,6 +1341,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link RealizarSorteo }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "realizarSorteo")
+    public JAXBElement<RealizarSorteo> createRealizarSorteo(RealizarSorteo value) {
+        return new JAXBElement<RealizarSorteo>(_RealizarSorteo_QNAME, RealizarSorteo.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetClasesDeActividadResponse }{@code >}}
      * 
      */
@@ -1230,6 +1365,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getDataProfesorResponse")
     public JAXBElement<GetDataProfesorResponse> createGetDataProfesorResponse(GetDataProfesorResponse value) {
         return new JAXBElement<GetDataProfesorResponse>(_GetDataProfesorResponse_QNAME, GetDataProfesorResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetGanadores }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getGanadores")
+    public JAXBElement<GetGanadores> createGetGanadores(GetGanadores value) {
+        return new JAXBElement<GetGanadores>(_GetGanadores_QNAME, GetGanadores.class, null, value);
     }
 
     /**
@@ -1272,9 +1416,18 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenInstitucionResponse.class)
-    public JAXBElement<byte[]> createGetImagenInstitucionResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenCuponeraResponseReturn_QNAME, byte[].class, GetImagenInstitucionResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
+    public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenCuponeraResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
+    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenCuponeraResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
     }
 
     /**
@@ -1293,15 +1446,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
     public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
         return new JAXBElement<byte[]>(_GetImagenCuponeraResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
-    public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenCuponeraResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
     }
 
 }
