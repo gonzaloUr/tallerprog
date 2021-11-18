@@ -497,6 +497,20 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     }
 
     @Override
+    public void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException {
+        Map<String, Socio> socios = getRegistry().getSocios();
+        Usuario usuario;
+
+        if (socios.containsKey(nickname))
+            usuario = socios.get(nickname);
+        else
+            throw new SocioNoEncontradoException(nickname);
+
+        if (!usuario.getPassword().equals(password))
+            throw new PasswordInvalidaException();
+    }
+
+    @Override
     public void seguirUsuario(String seguido, String seguidor) {
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();

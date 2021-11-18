@@ -11,9 +11,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanClase complex type.
+ * <p>Clase Java para beanClase complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanClase">
@@ -58,7 +58,7 @@ public class BeanClase {
     protected List<BeanDescProfesor> profesores;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -70,7 +70,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -82,7 +82,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the inicio property.
+     * Obtiene el valor de la propiedad inicio.
      * 
      * @return
      *     possible object is
@@ -94,7 +94,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the inicio property.
+     * Define el valor de la propiedad inicio.
      * 
      * @param value
      *     allowed object is
@@ -106,7 +106,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the cantMin property.
+     * Obtiene el valor de la propiedad cantMin.
      * 
      */
     public int getCantMin() {
@@ -114,7 +114,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the cantMin property.
+     * Define el valor de la propiedad cantMin.
      * 
      */
     public void setCantMin(int value) {
@@ -122,7 +122,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the cantMax property.
+     * Obtiene el valor de la propiedad cantMax.
      * 
      */
     public int getCantMax() {
@@ -130,7 +130,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the cantMax property.
+     * Define el valor de la propiedad cantMax.
      * 
      */
     public void setCantMax(int value) {
@@ -138,7 +138,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the accesoURL property.
+     * Obtiene el valor de la propiedad accesoURL.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the accesoURL property.
+     * Define el valor de la propiedad accesoURL.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the actividad property.
+     * Obtiene el valor de la propiedad actividad.
      * 
      * @return
      *     possible object is
@@ -174,7 +174,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the actividad property.
+     * Define el valor de la propiedad actividad.
      * 
      * @param value
      *     allowed object is

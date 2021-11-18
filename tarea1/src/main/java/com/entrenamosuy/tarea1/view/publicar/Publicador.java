@@ -324,6 +324,15 @@ public class Publicador {
     }
 
     @WebMethod
+    public void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException, UsuarioNoEncontradoExceptionWrapper {
+        try {
+            facades.getFacadeUsuario().validarCredencialesMovil(nickname, password);
+        } catch (UsuarioNoEncontradoException e) {
+            new UsuarioNoEncontradoExceptionWrapper(e);
+        }
+    }
+
+    @WebMethod
     public void registrarseSinCuponera(String nickname, String clase, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
         try {
             facades.getFacadeActividad().registrarseSinCuponera(nickname, clase, fecha.toLocalDate());

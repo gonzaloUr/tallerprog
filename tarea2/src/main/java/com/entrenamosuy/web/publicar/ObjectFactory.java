@@ -64,6 +64,7 @@ public class ObjectFactory {
     private final static QName _SeguirUsuario_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "seguirUsuario");
     private final static QName _PasswordInvalidaException_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "PasswordInvalidaException");
     private final static QName _ListarActividadesAceptadas_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "listarActividadesAceptadas");
+    private final static QName _ValidarCredencialesMovilResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredencialesMovilResponse");
     private final static QName _GetImagenActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenActividadResponse");
     private final static QName _GetImagenClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenClase");
     private final static QName _InstitucionNoEncontradaExceptionWrapper_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "InstitucionNoEncontradaExceptionWrapper");
@@ -78,6 +79,7 @@ public class ObjectFactory {
     private final static QName _GetImagenCuponeraResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenCuponeraResponse");
     private final static QName _GetImagenUsuarioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenUsuarioResponse");
     private final static QName _GetImagenInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenInstitucionResponse");
+    private final static QName _ValidarCredencialesMovil_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredencialesMovil");
     private final static QName _CrearProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearProfesor");
     private final static QName _CrearClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearClase");
     private final static QName _GetActividadesDeCategoria_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getActividadesDeCategoria");
@@ -96,7 +98,7 @@ public class ObjectFactory {
     private final static QName _GetDataProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataProfesor");
     private final static QName _CrearSocio_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearSocio");
     private final static QName _RegistrarseSinCuponera_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseSinCuponera");
-    private final static QName _GetImagenInstitucionResponseReturn_QNAME = new QName("", "return");
+    private final static QName _GetImagenClaseResponseReturn_QNAME = new QName("", "return");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.entrenamosuy.web.publicar
@@ -295,6 +297,14 @@ public class ObjectFactory {
      */
     public GetDataClase createGetDataClase() {
         return new GetDataClase();
+    }
+
+    /**
+     * Create an instance of {@link ValidarCredencialesMovilResponse }
+     * 
+     */
+    public ValidarCredencialesMovilResponse createValidarCredencialesMovilResponse() {
+        return new ValidarCredencialesMovilResponse();
     }
 
     /**
@@ -655,6 +665,14 @@ public class ObjectFactory {
      */
     public GetImagenInstitucionResponse createGetImagenInstitucionResponse() {
         return new GetImagenInstitucionResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidarCredencialesMovil }
+     * 
+     */
+    public ValidarCredencialesMovil createValidarCredencialesMovil() {
+        return new ValidarCredencialesMovil();
     }
 
     /**
@@ -1170,6 +1188,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidarCredencialesMovilResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "validarCredencialesMovilResponse")
+    public JAXBElement<ValidarCredencialesMovilResponse> createValidarCredencialesMovilResponse(ValidarCredencialesMovilResponse value) {
+        return new JAXBElement<ValidarCredencialesMovilResponse>(_ValidarCredencialesMovilResponse_QNAME, ValidarCredencialesMovilResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetImagenActividadResponse }{@code >}}
      * 
      */
@@ -1293,6 +1320,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "getImagenInstitucionResponse")
     public JAXBElement<GetImagenInstitucionResponse> createGetImagenInstitucionResponse(GetImagenInstitucionResponse value) {
         return new JAXBElement<GetImagenInstitucionResponse>(_GetImagenInstitucionResponse_QNAME, GetImagenInstitucionResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidarCredencialesMovil }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "validarCredencialesMovil")
+    public JAXBElement<ValidarCredencialesMovil> createValidarCredencialesMovil(ValidarCredencialesMovil value) {
+        return new JAXBElement<ValidarCredencialesMovil>(_ValidarCredencialesMovil_QNAME, ValidarCredencialesMovil.class, null, value);
     }
 
     /**
@@ -1461,18 +1497,18 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenInstitucionResponse.class)
-    public JAXBElement<byte[]> createGetImagenInstitucionResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenInstitucionResponseReturn_QNAME, byte[].class, GetImagenInstitucionResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
+    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
-    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenInstitucionResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenInstitucionResponse.class)
+    public JAXBElement<byte[]> createGetImagenInstitucionResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenInstitucionResponse.class, ((byte[]) value));
     }
 
     /**
@@ -1481,16 +1517,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
     public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenInstitucionResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenCuponeraResponse.class)
-    public JAXBElement<byte[]> createGetImagenCuponeraResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenInstitucionResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
     }
 
     /**
@@ -1499,7 +1526,16 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenUsuarioResponse.class)
     public JAXBElement<byte[]> createGetImagenUsuarioResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenInstitucionResponseReturn_QNAME, byte[].class, GetImagenUsuarioResponse.class, ((byte[]) value));
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenUsuarioResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenCuponeraResponse.class)
+    public JAXBElement<byte[]> createGetImagenCuponeraResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
     }
 
 }

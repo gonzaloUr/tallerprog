@@ -6,12 +6,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <c:if test="${successful_login eq true}">
-            <c:if test="${es_profesor eq true}">
-                <meta http-equiv="refresh" content="0.1; URL=<c:url value="/"/>">
-            </c:if>
-            <c:if test="${es_profesor eq false}">
-                <meta http-equiv="refresh" content="0.1; URL=<c:url value="/"/>">
-            </c:if>
+            <meta http-equiv="refresh" content="0.1; URL=<c:url value="/inicio_movil"/>">
         </c:if>
         <title>Entrenamos.uy</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
@@ -30,10 +25,10 @@
                     <input class="form-control mb-3" placeholder="contraseña" name="pass" type="password">
                     <c:if test="${attempted_login}">
                         <c:if test="${reason == 'nickname'}">
-                            <span class="text-danger mb-3">Nickname invalido</span>
+                            <span class="text-danger mb-3">Nickname o contraseña invalido</span>
                         </c:if>
                         <c:if test="${reason == 'password'}">
-                            <span class="text-danger mb-3">Contraseña invalida</span>
+                            <span class="text-danger mb-3">Nickname o contraseña invalido</span>
                         </c:if>
                     </c:if>
                     <input class="w-100 btn btn-primary" type="submit" value="Iniciar sesión">

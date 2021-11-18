@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ClaseInconsistenteExceptionWrapper complex type.
+ * <p>Clase Java para ClaseInconsistenteExceptionWrapper complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="ClaseInconsistenteExceptionWrapper">
@@ -70,7 +70,7 @@ public class ClaseInconsistenteExceptionWrapper {
     }
 
     /**
-     * Gets the value of the message property.
+     * Obtiene el valor de la propiedad message.
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class ClaseInconsistenteExceptionWrapper {
     }
 
     /**
-     * Sets the value of the message property.
+     * Define el valor de la propiedad message.
      * 
      * @param value
      *     allowed object is

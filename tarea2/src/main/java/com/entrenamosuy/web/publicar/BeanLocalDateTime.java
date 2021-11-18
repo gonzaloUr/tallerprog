@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanLocalDateTime complex type.
+ * <p>Clase Java para beanLocalDateTime complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanLocalDateTime">
@@ -52,7 +52,7 @@ public class BeanLocalDateTime {
     protected int year;
 
     /**
-     * Gets the value of the dayOfMonth property.
+     * Obtiene el valor de la propiedad dayOfMonth.
      * 
      */
     public int getDayOfMonth() {
@@ -60,7 +60,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the dayOfMonth property.
+     * Define el valor de la propiedad dayOfMonth.
      * 
      */
     public void setDayOfMonth(int value) {
@@ -68,7 +68,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the hour property.
+     * Obtiene el valor de la propiedad hour.
      * 
      */
     public int getHour() {
@@ -76,7 +76,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the hour property.
+     * Define el valor de la propiedad hour.
      * 
      */
     public void setHour(int value) {
@@ -84,7 +84,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the minute property.
+     * Obtiene el valor de la propiedad minute.
      * 
      */
     public int getMinute() {
@@ -92,7 +92,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the minute property.
+     * Define el valor de la propiedad minute.
      * 
      */
     public void setMinute(int value) {
@@ -100,7 +100,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the month property.
+     * Obtiene el valor de la propiedad month.
      * 
      */
     public int getMonth() {
@@ -108,7 +108,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the month property.
+     * Define el valor de la propiedad month.
      * 
      */
     public void setMonth(int value) {
@@ -116,7 +116,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the nano property.
+     * Obtiene el valor de la propiedad nano.
      * 
      */
     public int getNano() {
@@ -124,7 +124,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the nano property.
+     * Define el valor de la propiedad nano.
      * 
      */
     public void setNano(int value) {
@@ -132,7 +132,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the second property.
+     * Obtiene el valor de la propiedad second.
      * 
      */
     public int getSecond() {
@@ -140,7 +140,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the second property.
+     * Define el valor de la propiedad second.
      * 
      */
     public void setSecond(int value) {
@@ -148,7 +148,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Gets the value of the year property.
+     * Obtiene el valor de la propiedad year.
      * 
      */
     public int getYear() {
@@ -156,7 +156,7 @@ public class BeanLocalDateTime {
     }
 
     /**
-     * Sets the value of the year property.
+     * Define el valor de la propiedad year.
      * 
      */
     public void setYear(int value) {
