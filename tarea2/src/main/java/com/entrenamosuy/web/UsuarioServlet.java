@@ -1,6 +1,5 @@
 package com.entrenamosuy.web;
 
-import static com.entrenamosuy.web.Utils.beanFromEmail;
 import static com.entrenamosuy.web.Utils.beanFromLocalDate;
 
 import java.io.IOException;
@@ -19,10 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.entrenamosuy.core.data.Email;
-import com.entrenamosuy.core.exceptions.EmailParseException;
 import com.entrenamosuy.web.publicar.BeanCrearProfesorArgs;
 import com.entrenamosuy.web.publicar.BeanCrearSocioArgs;
+import com.entrenamosuy.web.publicar.BeanEmail;
 import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.Publicador;
@@ -228,12 +226,11 @@ public class UsuarioServlet extends HttpServlet {
             String pass = (String) request.getParameter("pass");
             String passConfirm = (String) request.getParameter("pass_confirm");
 
-            // TODO: mover esto a la logica de tarea2, parsear la string a un BeanEmail
-            Email email = null;
+            BeanEmail email = null;
 
             try {
-                email = Email.parse(emailStr);
-            } catch (EmailParseException e1) {
+                email = Utils.parse(emailStr);
+            } catch (IllegalArgumentException e1) {
                 request.setAttribute("failed", true);
                 request.setAttribute("reason", "email_format");
 			    request.getRequestDispatcher("/alta_socio.jsp").forward(request, response);
@@ -258,7 +255,7 @@ public class UsuarioServlet extends HttpServlet {
             args.setNickname(nickname);
             args.setNombre(nombre);
             args.setApellido(apellido);
-            args.setCorreo(beanFromEmail(email));
+            args.setCorreo(email);
             args.setPassword(pass);
             args.setImagen(data);
             args.setNacimiento(beanFromLocalDate(nacimiento));
@@ -290,12 +287,11 @@ public class UsuarioServlet extends HttpServlet {
             String pass = (String) request.getParameter("pass");
             String passConfirm = (String) request.getParameter("pass_confirm");
 
-            // TODO: mover esto a la logica de tarea2, parsear la string a un BeanEmail
-            Email email = null;
+            BeanEmail email = null;
 
             try {
-                email = Email.parse(emailStr);
-            } catch (EmailParseException e1) {
+                email = Utils.parse(emailStr);
+            } catch (IllegalArgumentException e1) {
                 request.setAttribute("failed", true);
                 request.setAttribute("reason", "email_format");
 			    request.getRequestDispatcher("/alta_profesor.jsp").forward(request, response);
@@ -323,7 +319,7 @@ public class UsuarioServlet extends HttpServlet {
             args.setNickname(nickname);
             args.setNombre(nombre);
             args.setApellido(apellido);
-            args.setCorreo(beanFromEmail(email));
+            args.setCorreo(email);
             args.setPassword(pass);
             args.setImagen(data);
             args.setNacimiento(beanFromLocalDate(nacimiento));

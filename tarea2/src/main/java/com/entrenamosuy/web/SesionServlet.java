@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.web.publicar.PasswordInvalidaException_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
+import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 
 public class SesionServlet extends HttpServlet {
 
@@ -59,7 +59,7 @@ public class SesionServlet extends HttpServlet {
         } catch (PasswordInvalidaException_Exception e) {
             request.setAttribute("reason", "password");
             request.setAttribute("successful_login", false);
-        } catch (UsuarioNoEncontradoException e) {
+        } catch (UsuarioNoEncontradoExceptionWrapper_Exception e) {
             request.setAttribute("reason", "nickname");
             request.setAttribute("nickname", nickname);
             request.setAttribute("successful_login", false);

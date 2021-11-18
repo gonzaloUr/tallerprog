@@ -3,13 +3,12 @@ package com.entrenamosuy.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
-import java.time.LocalDate; //Usar Gregorian Calendar
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,8 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
-import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.web.publicar.ActividadRepetidaException_Exception;
 import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
@@ -29,8 +26,10 @@ import com.entrenamosuy.web.publicar.BeanCuponera;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
+import com.entrenamosuy.web.publicar.InstitucionNoEncontradaExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
+import com.entrenamosuy.web.publicar.SinCategoriaExceptionWrapper_Exception;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ActividadServlet extends HttpServlet {
@@ -182,13 +181,13 @@ public class ActividadServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             return;
         }
-        catch(ActividadRepetidaException_Exception are){ //TODO cambiar a beans
+        catch(ActividadRepetidaException_Exception are) {
             request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
         }
-        catch(InstitucionNoEncontradaException inee){
+        catch(InstitucionNoEncontradaExceptionWrapper_Exception inee){
             request.setAttribute("error", "No existe una institucion con ese nombre. ");
         }
-        catch(SinCategoriaException sce){
+        catch(SinCategoriaExceptionWrapper_Exception sce){
             request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
         }
 
