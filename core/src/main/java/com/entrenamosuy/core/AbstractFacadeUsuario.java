@@ -129,4 +129,6 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
     public abstract void marcarComoFav(String socio, String actividad);
     
     public abstract void desmarcarComoFav(String socio, String actividad);
+
+    public abstract void agregarPremioASocio(String socio, String clase);
 }
