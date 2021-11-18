@@ -295,17 +295,21 @@ public interface Publicador {
      * 
      * @param arg0
      * @throws ActividadRepetidaException_Exception
+     * @throws InstitucionNoEncontradaExceptionWrapper_Exception
+     * @throws SinCategoriaExceptionWrapper_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "crearActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearActividad")
     @ResponseWrapper(localName = "crearActividadResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearActividadResponse")
     @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividadResponse", fault = {
-        @FaultAction(className = ActividadRepetidaException_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividad/Fault/ActividadRepetidaException")
+        @FaultAction(className = ActividadRepetidaException_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividad/Fault/ActividadRepetidaException"),
+        @FaultAction(className = InstitucionNoEncontradaExceptionWrapper_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividad/Fault/InstitucionNoEncontradaExceptionWrapper"),
+        @FaultAction(className = SinCategoriaExceptionWrapper_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearActividad/Fault/SinCategoriaExceptionWrapper")
     })
     public void crearActividad(
         @WebParam(name = "arg0", targetNamespace = "")
         BeanCrearActividadArgs arg0)
-        throws ActividadRepetidaException_Exception
+        throws ActividadRepetidaException_Exception, InstitucionNoEncontradaExceptionWrapper_Exception, SinCategoriaExceptionWrapper_Exception
     ;
 
     /**
@@ -410,6 +414,8 @@ public interface Publicador {
      * 
      * @param arg1
      * @param arg0
+     * @throws PasswordInvalidaException_Exception
+     * @throws UsuarioNoEncontradoExceptionWrapper_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "marcarComoFav", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.MarcarComoFav")

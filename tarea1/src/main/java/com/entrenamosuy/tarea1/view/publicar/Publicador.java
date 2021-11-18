@@ -29,6 +29,7 @@ import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
+import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
@@ -54,7 +55,11 @@ public class Publicador {
     }
 
     @WebMethod
-    public void crearActividad(BeanCrearActividadArgs args) throws ActividadRepetidaException, InstitucionNoEncontradaException, SinCategoriaException {
+    public void crearActividad(BeanCrearActividadArgs args) throws
+        ActividadRepetidaException,
+        InstitucionNoEncontradaExceptionWrapper,
+        SinCategoriaExceptionWrapper {
+
         File img = null;
 
         try {
@@ -69,17 +74,23 @@ public class Publicador {
             e.printStackTrace();
         }
 
-        facades.getFacadeActividad().crearActividad()
-            .setNombre(args.getNombre())
-            .setDescripcion(args.getDescripcion())
-            .setInstitucion(args.getInstitucion())
-            .setDuracion(Duration.ofMinutes(args.getDuracion()))
-            .setCosto(args.getCosto())
-            .setRegistro(LocalDate.now())
-            .setCategorias(new HashSet<>(args.getCategorias()))
-            .setCreador(args.getCreadorNickname())
-            .setImagen(img)
-            .invoke();
+        try {
+            facades.getFacadeActividad().crearActividad()
+                .setNombre(args.getNombre())
+                .setDescripcion(args.getDescripcion())
+                .setInstitucion(args.getInstitucion())
+                .setDuracion(Duration.ofMinutes(args.getDuracion()))
+                .setCosto(args.getCosto())
+                .setRegistro(LocalDate.now())
+                .setCategorias(new HashSet<>(args.getCategorias()))
+                .setCreador(args.getCreadorNickname())
+                .setImagen(img)
+                .invoke();
+        } catch (InstitucionNoEncontradaException e) {
+            throw new InstitucionNoEncontradaExceptionWrapper(e);
+        } catch (SinCategoriaException e) {
+            throw new SinCategoriaExceptionWrapper(e);
+        }
     }
 
     @WebMethod
@@ -112,7 +123,7 @@ public class Publicador {
 
     }
 
-     @WebMethod
+    @WebMethod
     public ArrayList<String> getActividadesDeCategoria(String categoria){
 
         return new ArrayList<String>(facades
@@ -304,8 +315,21 @@ public class Publicador {
     }
 
     @WebMethod
-    public void validarCredenciales(String nickname, String password) throws PasswordInvalidaException {
-        facades.getFacadeUsuario().validarCredenciales(nickname, password);
+    public void validarCredenciales(String nickname, String password) throws PasswordInvalidaException, UsuarioNoEncontradoExceptionWrapper {
+        try {
+            facades.getFacadeUsuario().validarCredenciales(nickname, password);
+        } catch (UsuarioNoEncontradoException e) {
+            new UsuarioNoEncontradoExceptionWrapper(e);
+        }
+    }
+
+    @WebMethod
+    public void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException, UsuarioNoEncontradoExceptionWrapper {
+        try {
+            facades.getFacadeUsuario().validarCredencialesMovil(nickname, password);
+        } catch (UsuarioNoEncontradoException e) {
+            new UsuarioNoEncontradoExceptionWrapper(e);
+        }
     }
 
     @WebMethod

@@ -14,20 +14,32 @@ import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 
-public class SesionServlet extends HttpServlet {
+public class MovilServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
 
-        if (path.equals("/iniciar_sesion")) {
+        if (path.equals("/index_movil")) {
             getServletContext()
-                .getRequestDispatcher("/iniciar_sesion.jsp")
+                .getRequestDispatcher("/index_movil.jsp")
                 .forward(request, response);
-        } else if (path.equals("/cerrar_sesion")) {
+
+        } else if (path.equals("/cerrar_sesion_movil")) {
             request.getSession().removeAttribute("nickname");
             request.getSession().removeAttribute("usuario");
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
+
+        } else if (path.equals("/inicio_movil")) {
+            String nombre = (String) request.getParameter("nombre");
+            String apellido = (String) request.getParameter("apellido");
+
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("apellido", apellido);
+
+            request
+                .getRequestDispatcher("/inicio_movil.jsp")
+                .forward(request, response);
         }
     }
 
@@ -42,18 +54,12 @@ public class SesionServlet extends HttpServlet {
         request.setAttribute("attempted_login", true);
 
         try {
-            port.validarCredenciales(nickname, password);
+            port.validarCredencialesMovil(nickname, password);
 
             HttpSession session = request.getSession();
-            List<String> socios = port.getSocios();
 
-            if (socios.contains(nickname)) {
-                session.setAttribute("usuario", port.getDataSocio(nickname));
-                session.setAttribute("es_profesor", false);
-            } else {
-                session.setAttribute("usuario", port.getDataProfesor(nickname));
-                session.setAttribute("es_profesor", true);
-            }
+            session.setAttribute("usuario", port.getDataSocio(nickname));
+            session.setAttribute("es_profesor", false);
 
             request.setAttribute("successful_login", true);
         } catch (PasswordInvalidaException_Exception e) {
@@ -66,7 +72,7 @@ public class SesionServlet extends HttpServlet {
         }
 
         getServletContext()
-            .getRequestDispatcher("/iniciar_sesion.jsp")
+            .getRequestDispatcher("/index_movil.jsp")
             .forward(request, response);
     }
 }

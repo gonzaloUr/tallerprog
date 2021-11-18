@@ -4,10 +4,8 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import com.entrenamosuy.core.data.DataSocio;
@@ -40,6 +38,10 @@ public class Socio extends Usuario {
         private Set<Registro> registros = new HashSet<>();
 
         private Set<Compra> compras = new HashSet<>();
+
+        private Map<String, Actividad> actividadesFavoritas = new HashMap<>();
+
+        private Set<Clase> clasesGanadas = new HashSet<>(); 
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -96,9 +98,19 @@ public class Socio extends Usuario {
             return this;
         }
 
+        public Builder setActividadesFavoritas(Map<String,Actividad> actividadesFavoritas){
+            this.actividadesFavoritas = actividadesFavoritas;
+            return this;
+        }
+        
+        public Builder setClasesGanadas(Set<Clase> clasesGanadas){
+            this.clasesGanadas = clasesGanadas;
+            return this;
+        } 
+
         public Socio build() {
             return new Socio(nickname, nombre, apellido, correo, nacimiento, registros, compras,
-            		password, usuariosSeguidos, seguidores, imagen);
+            		password, usuariosSeguidos, seguidores, imagen, actividadesFavoritas, clasesGanadas);
         }
     }
 
@@ -110,29 +122,32 @@ public class Socio extends Usuario {
 
     private Set<Puntaje> puntajes;
 
-    private List<Clase> clasesGanadas;
+    private Set<Clase> clasesGanadas;
 
     protected Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
                  Set<Registro> registros, Set<Compra> compras , String password,
-                 Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, File imagen) {
+                 Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, File imagen, Map<String,Actividad> actividadesFavoritas, Set<Clase> clasesGanadas) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 
         Objects.requireNonNull(registros, "registros es null en constructor Socio");
         Objects.requireNonNull(compras, "compras es null en constructor Socio");
+        Objects.requireNonNull(clasesGanadas, "clasesGanadas es null en constructor Socio");
+        Objects.requireNonNull(actividadesFavoritas, "actividadesFavoritas es null en constructor Socio");
 
         this.registros = registros;
         this.compras = compras;
-        clasesGanadas = new ArrayList<Clase>();
+        this.clasesGanadas = clasesGanadas;
+        this.actividadesFavoritas = actividadesFavoritas;
         puntajes = new HashSet<Puntaje>();
-        actividadesFavoritas = new HashMap<String, Actividad>();
+        
     }
 
-    public List<Clase> getClasesGanadas() {
+    public Set<Clase> getClasesGanadas() {
         return clasesGanadas;
     }
 
-    public void setClasesGanadas(List<Clase> clasesGanadas) {
+    public void setClasesGanadas(Set<Clase> clasesGanadas) {
         this.clasesGanadas = clasesGanadas;
     }
 
@@ -256,7 +271,7 @@ public class Socio extends Usuario {
     }
     
     public void agregarPremio(Clase clase) {
-    	clasesGanadas.add(0, clase);
+    	clasesGanadas.add(clase);
     }
     
     public void agregarPuntaje(Puntaje p) {

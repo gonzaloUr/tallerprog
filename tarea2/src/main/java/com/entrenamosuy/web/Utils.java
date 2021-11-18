@@ -2,13 +2,16 @@ package com.entrenamosuy.web;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import com.entrenamosuy.core.data.Email;
 import com.entrenamosuy.web.publicar.BeanEmail;
 import com.entrenamosuy.web.publicar.BeanLocalDate;
 import com.entrenamosuy.web.publicar.BeanLocalDateTime;
 
 public class Utils {
+
+    private static final Pattern pattern = Pattern.compile("(.+)@(.+)");
 
     public static LocalDateTime localDateTimeFromBean(BeanLocalDateTime bean) {
         return LocalDateTime.of(bean.getYear(),
@@ -48,13 +51,20 @@ public class Utils {
         return ret;
     }
 
-    // TODO: no usar core en tarea2
-    public static BeanEmail beanFromEmail(Email e) {
-        BeanEmail ret = new BeanEmail();
+    public static BeanEmail parse(String email) throws IllegalArgumentException {
+        Matcher matcher = pattern.matcher(email);
 
-        ret.setDomain(e.getDomain());
-        ret.setPrefix(e.getPrefix());
+        if (matcher.find()) {
+            String prefix = matcher.group(1);
+            String domain = matcher.group(2);
 
-        return ret;
+            BeanEmail ret = new BeanEmail();
+            ret.setPrefix(prefix);
+            ret.setDomain(domain);
+
+            return ret;
+        }
+
+        throw new IllegalArgumentException();
     }
 }

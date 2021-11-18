@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
-import com.entrenamosuy.core.data.DataProfesor;
-import com.entrenamosuy.core.data.DataUsuario;
-import com.entrenamosuy.core.exceptions.ClaseNoDictadaException;
-import com.entrenamosuy.core.exceptions.SorteoRealizadoException;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCrearClaseArgs;
 import com.entrenamosuy.web.publicar.BeanDescProfesor;
@@ -34,6 +30,21 @@ import com.entrenamosuy.web.publicar.RegistroInconsistenteExceptionWrapper_Excep
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
 public class ClaseServlet extends HttpServlet {
+
+    private void updateUsuario(Publicador port, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String nickname = null;
+
+        if ((boolean) session.getAttribute("es_profesor")) {
+            BeanProfesor p = (BeanProfesor) session.getAttribute("usuario");
+            nickname = p.getNickname();
+            request.getSession().setAttribute("usuario", port.getDataProfesor(nickname));
+        } else {
+            BeanSocio s = (BeanSocio) session.getAttribute("usuario");
+            nickname = s.getNickname();
+            request.getSession().setAttribute("usuario", port.getDataSocio(nickname));
+        }
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -208,29 +219,28 @@ public class ClaseServlet extends HttpServlet {
 
             HttpSession session = request.getSession();
 
-            DataUsuario usr = (DataUsuario) session.getAttribute("usuario");
-            String nickname = usr.getNickname();
+            String nickname = null;
+
+            if ((boolean) session.getAttribute("es_profesor")) {
+                BeanProfesor p = (BeanProfesor) session.getAttribute("usuario");
+                nickname = p.getNickname();
+            } else {
+                BeanSocio s = (BeanSocio) session.getAttribute("usuario");
+                nickname = s.getNickname();
+            }
 
             String cla = request.getParameter("clase");
             String cup = request.getParameter("cuponera");
             LocalDate fecha = LocalDate.now();
-            response.getWriter().println("antes if");
+
             if (cup == null) {
                 response.getWriter().println("cup null");
                 try {
                     port.registrarseSinCuponera(nickname, cla, Utils.beanFromLocalDate(fecha));
 
                     Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
-
-                    if (esProfesor != null) {
-                        DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
-                        String nick = usuario.getNickname();
-
-                        if (esProfesor)
-                            request.getSession().setAttribute("usuario", port.getDataProfesor(nick));
-                        else
-                            request.getSession().setAttribute("usuario", port.getDataSocio(nick));
-                    }
+                    if (esProfesor != null)
+                        updateUsuario(port, request);
 
                 } catch (RegistroInconsistenteExceptionWrapper_Exception e) {
                     request.setAttribute("reg_exito", false);
@@ -246,16 +256,8 @@ public class ClaseServlet extends HttpServlet {
                     port.registrarseConCuponera(nickname, cla, cup, Utils.beanFromLocalDate(fecha));
 
                     Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
-
-                    if (esProfesor != null) {
-                        DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
-                        String nick = usuario.getNickname();
-
-                        if (esProfesor)
-                            request.getSession().setAttribute("usuario", port.getDataProfesor(nick));
-                        else
-                            request.getSession().setAttribute("usuario", port.getDataSocio(nick));
-                    }
+                    if (esProfesor != null)
+                        updateUsuario(port, request);
 
                 } catch (RegistroInconsistenteExceptionWrapper_Exception e) {
                     e.printStackTrace(response.getWriter());
@@ -287,8 +289,18 @@ public class ClaseServlet extends HttpServlet {
             LocalDate registro = LocalDate.parse(request.getParameter("fecha_registro"));
 
             Set<String> profes = new HashSet<String>();
-            DataUsuario u = (DataUsuario) request.getSession().getAttribute("usuario");
-            profes.add(u.getNickname());
+
+            HttpSession session = request.getSession();
+            String nickname;
+            if ((boolean) session.getAttribute("es_profesor")) {
+                BeanProfesor p = (BeanProfesor) session.getAttribute("usuario");
+                nickname = p.getNickname();
+            } else {
+                BeanSocio s = (BeanSocio) session.getAttribute("usuario");
+                nickname = s.getNickname();
+            }
+
+            profes.add(nickname);
 
             Part imgPart = request.getPart("img");
             InputStream is = imgPart.getInputStream();
@@ -313,15 +325,9 @@ public class ClaseServlet extends HttpServlet {
 
                 Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 
-                if (esProfesor != null) {
-                    DataUsuario usuario = (DataUsuario) request.getSession().getAttribute("usuario");
-                    String nickname = usuario.getNickname();
+                if (esProfesor != null)
+                    updateUsuario(port, request);
 
-                    if (esProfesor)
-                        request.getSession().setAttribute("usuario", port.getDataProfesor(nickname));
-                    else
-                        request.getSession().setAttribute("usuario", port.getDataSocio(nickname));
-                }
             } catch (ClaseInconsistenteExceptionWrapper_Exception e) {
                 String r = e.getFaultInfo().getInconsistencias().get(0);
                 switch (r) {
@@ -346,11 +352,11 @@ public class ClaseServlet extends HttpServlet {
         }
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         PublicadorService service = new PublicadorService();
         Publicador port = service.getPublicadorPort();
 
-        DataProfesor profesor = (DataProfesor) request.getSession().getAttribute("usuario");
+        BeanProfesor profesor = (BeanProfesor) request.getSession().getAttribute("usuario");
         String institucion = profesor.getInstitucion();
         List<String> actividades = port.getActividadesDeInstitucion(institucion);
 
