@@ -4,7 +4,11 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.Objects;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DataClase;
@@ -36,12 +40,6 @@ public class Socio extends Usuario {
         private Set<Registro> registros = new HashSet<>();
 
         private Set<Compra> compras = new HashSet<>();
-
-        private Set<Actividad> activiadesFavoritas = new HashSet<>();
-
-        private Set<Puntaje> puntajes = new HashSet<>();
-
-        private Set<Clase> clasesGanadas = new HashSet<>();
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -78,16 +76,6 @@ public class Socio extends Usuario {
             return this;
         }
 
-        public Builder setActividadesFavoritas(Set<Actividad> actividadesFavoritas) {
-            this.activiadesFavoritas = actividadesFavoritas;
-            return this;
-        }
-
-        public Builder setPuntajes(Set<Puntaje> puntajes) {
-            this.puntajes = puntajes;
-            return this;
-        }
-
         public Builder setPassword(String password) {
             this.password = password;
             return this;
@@ -108,14 +96,9 @@ public class Socio extends Usuario {
             return this;
         }
 
-        public Builder setClasesGanadas(Set<Clase> clasesGanadas) {
-            this.clasesGanadas = clasesGanadas;
-            return this;
-        }
-
         public Socio build() {
             return new Socio(nickname, nombre, apellido, correo, nacimiento, registros, compras,
-                    activiadesFavoritas, puntajes, clasesGanadas, password, usuariosSeguidos, seguidores, imagen);
+            		password, usuariosSeguidos, seguidores, imagen);
         }
     }
 
@@ -123,16 +106,15 @@ public class Socio extends Usuario {
 
     private Set<Compra> compras;
 
-    private Set<Actividad> actividadesFavoritas;
+    private Map<String, Actividad> actividadesFavoritas;
 
     private Set<Puntaje> puntajes;
 
-    private Set<Clase> clasesGanadas;
+    private List<Clase> clasesGanadas;
 
     protected Socio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento,
-                 Set<Registro> registros, Set<Compra> compras, Set<Actividad> actividadesFavoritas,
-                 Set<Puntaje> puntajes, Set<Clase> clasesGanadas, String password, Set<Usuario> usuariosSeguidos,
-                 Set<Usuario> seguidores, File imagen) {
+                 Set<Registro> registros, Set<Compra> compras , String password,
+                 Set<Usuario> usuariosSeguidos, Set<Usuario> seguidores, File imagen) {
 
         super(nickname, nombre, apellido, correo, nacimiento, password, usuariosSeguidos, seguidores, imagen);
 
@@ -143,16 +125,16 @@ public class Socio extends Usuario {
 
         this.registros = registros;
         this.compras = compras;
-        this.actividadesFavoritas = actividadesFavoritas;
-        this.puntajes = puntajes;
-        this.setClasesGanadas(clasesGanadas);
+        clasesGanadas = new ArrayList<Clase>();
+        puntajes = new HashSet<Puntaje>();
+        actividadesFavoritas = new HashMap<String, Actividad>();
     }
 
-    public Set<Clase> getClasesGanadas() {
+    public List<Clase> getClasesGanadas() {
         return clasesGanadas;
     }
 
-    public void setClasesGanadas(Set<Clase> clasesGanadas) {
+    public void setClasesGanadas(List<Clase> clasesGanadas) {
         this.clasesGanadas = clasesGanadas;
     }
 
@@ -176,11 +158,11 @@ public class Socio extends Usuario {
         return new Builder();
     }
 
-    public Set<Actividad> getActividadesFavoritas() {
+    public Map<String, Actividad> getActividadesFavoritas() {
         return actividadesFavoritas;
     }
 
-    public void setActividadesFavoritas(Set<Actividad> actividadesFavoritas) {
+    public void setActividadesFavoritas(Map<String, Actividad> actividadesFavoritas) {
         this.actividadesFavoritas = actividadesFavoritas;
     }
 
@@ -272,5 +254,21 @@ public class Socio extends Usuario {
 
     public void asociarSocioRegistro(Registro reg) {
         registros.add(reg);
+    }
+    
+    public void agregarPremio(Clase clase) {
+    	clasesGanadas.add(0, clase);
+    }
+    
+    public void agregarPuntaje(Puntaje p) {
+    	puntajes.add(p);
+    }
+    
+    public void agregarFav(Actividad a) {
+    	actividadesFavoritas.put(a.getNombre(), a);
+    }
+    
+    public void eliminarFavorita(String a) {
+    	actividadesFavoritas.remove(a);
     }
 }

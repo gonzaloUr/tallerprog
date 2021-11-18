@@ -354,4 +354,10 @@ public class FacadeActividad extends AbstractFacadeActividad {
         Actividad actividad = getRegistry().getActividades().get(ident);
         return actividad.getImagen();
     }
+    
+    public void finalizarActividad(String actividad) {
+    	Map<String, Actividad> mapa = getRegistry().getActividades();
+    	Actividad a = mapa.get(actividad);
+    	a.finalizar();
+    }
 }

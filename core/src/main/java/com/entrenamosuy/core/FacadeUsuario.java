@@ -21,6 +21,9 @@ import com.entrenamosuy.core.model.Institucion;
 import com.entrenamosuy.core.model.Profesor;
 import com.entrenamosuy.core.model.Socio;
 import com.entrenamosuy.core.model.Usuario;
+import com.entrenamosuy.core.model.Actividad;
+import com.entrenamosuy.core.model.Clase;
+import com.entrenamosuy.core.model.Puntaje;
 
 public class FacadeUsuario extends AbstractFacadeUsuario {
 
@@ -559,4 +562,33 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
 
         return usuario.getImagen();
     }
+    
+    
+    @Override
+    public void puntuarClase(String socio, String clase, int puntaje) {
+    	Map<String, Clase> mapaC = getRegistry().getClases();
+    	Map<String, Socio> mapa = getRegistry().getSocios();
+    	Socio s = mapa.get(socio);
+    	Clase c = mapaC.get(clase);
+    	Puntaje p = new Puntaje(s, c, puntaje);
+    	s.agregarPuntaje(p);
+    	c.agregarPuntaje(p);
+    }
+    
+    @Override
+    public void marcarComoFav(String socio, String actividad) {
+    	Map<String, Socio> mapa = getRegistry().getSocios();
+    	Socio s = mapa.get(socio);
+    	Map<String, Actividad> mapaA = getRegistry().getActividades();
+    	Actividad a = mapaA.get(actividad);
+    	s.agregarFav(a);
+    }
+    
+    @Override
+    public void desmarcarComoFav(String socio, String actividad) {
+    	Map<String, Socio> mapa = getRegistry().getSocios();
+    	Socio s = mapa.get(socio);
+    	s.eliminarFavorita(actividad);
+    }
+    
 }

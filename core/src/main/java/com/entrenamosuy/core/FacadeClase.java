@@ -16,6 +16,8 @@ import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ProfesorNoEncontradoException;
+import com.entrenamosuy.core.exceptions.ClaseNoDictadaException;
+import com.entrenamosuy.core.exceptions.SorteoRealizadoException;
 import com.entrenamosuy.core.model.Actividad;
 import com.entrenamosuy.core.model.Clase;
 import com.entrenamosuy.core.model.Profesor;
@@ -193,5 +195,17 @@ public class FacadeClase extends AbstractFacadeClase {
             throw new ClaseNoEncontradaException("No existe clase con nombre:" + ident);
 
         return clase.getImagen();
+    }
+    
+    @Override 
+    public void realizarSorteo(String clase) throws ClaseNoDictadaException, SorteoRealizadoException{
+        Clase c = getRegistry().getClases().get(clase);
+    	if(c.getFechaSorteo() != null) {
+    		throw new SorteoRealizadoException("Sorteo ya realizado"); 
+    	}
+    	if(c.getInicio().isAfter(LocalDateTime.now())) {
+    		throw new ClaseNoDictadaException("No se puede sortear los premios de una clase no dictada");
+    	}
+    	c.realizarSorteo();
     }
 }

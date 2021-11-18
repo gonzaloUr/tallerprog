@@ -121,4 +121,10 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
     public abstract void dejarDeSeguirUsuario(String seguido, String seguidor);
 
     public abstract File getImagenUsuario(String nickname);
+    
+    public abstract void puntuarClase(String socio, String clase, int puntaje);
+    
+    public abstract void marcarComoFav(String socio, String actividad);
+    
+    public abstract void desmarcarComoFav(String socio, String actividad);
 }

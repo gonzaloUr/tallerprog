@@ -286,4 +286,8 @@ public class Actividad {
         int desc = cup.getDescuento();
         return costo - (costo * desc);
     }
+    
+    public void finalizar() {
+    	estado = ActividadEstado.FINALIZADA;
+    }
 }

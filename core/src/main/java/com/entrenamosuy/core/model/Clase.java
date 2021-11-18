@@ -5,11 +5,14 @@ import java.time.LocalDateTime;
 import java.net.URL;
 import java.io.File;
 import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 
 import com.entrenamosuy.core.data.DataClase;
 import com.entrenamosuy.core.data.DescProfesor;
+
 
 public class Clase {
 
@@ -36,6 +39,10 @@ public class Clase {
         private Actividad actividad;
 
         private File imagen;
+        
+        private String premio;
+        
+        private int cantPremios;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -86,10 +93,20 @@ public class Clase {
             this.imagen = imagen;
             return this;
         }
+        
+        public Builder setPremio(String premio) {
+            this.premio = premio;
+            return this;
+        }
+        
+        public Builder setCantPremios(int cantPremios) {
+            this.cantPremios = cantPremios;
+            return this;
+        }
 
         public Clase build() {
             return new Clase(nombre, inicio, cantMin, cantMax, acceso, fechaRegistro,
-                    registros, profesores, actividad, imagen);
+                    registros, profesores, actividad, imagen, premio, cantPremios);
         }
     }
 
@@ -104,16 +121,28 @@ public class Clase {
     private LocalDate fechaRegistro;
 
     private Set<Registro> registros;
+    
+    private Set<Registro> premiados;
 
     private Set<Profesor> profesores;
 
     private Actividad actividad;
 
     private File imagen;
+    
+    private String premio;
+    
+    private int cantPremios;
+    
+    private Set<Puntaje> puntajes;
+    
+    private double puntaje;
+    
+    private LocalDate fechaSorteo;
 
     protected Clase(String nombre, LocalDateTime inicio, int cantMin, int cantMax,
                  URL acceso, LocalDate fechaRegistro, Set<Registro> registros,
-                 Set<Profesor> profesores, Actividad actividad, File imagen) {
+                 Set<Profesor> profesores, Actividad actividad, File imagen, String premio, int cantPremios) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor Clase");
         Objects.requireNonNull(inicio, "inicio es null en constructor Clase");
@@ -133,6 +162,12 @@ public class Clase {
         this.profesores = profesores;
         this.actividad = actividad;
         this.imagen = imagen;
+        this.premio = premio;
+        this.cantPremios = cantPremios;
+        fechaSorteo = null;
+        puntaje = 0;
+        premiados = null;
+        puntajes = new HashSet<Puntaje>();
     }
 
     public String getNombre() {
@@ -214,7 +249,39 @@ public class Clase {
     public void setImagen(File imagen) {
         this.imagen = imagen;
     }
+    
+    public String getPremio() {
+        return premio;
+    }
 
+    public void setPremio(String premio) {
+        this.premio = premio;
+    }
+    
+    public int getCantPremios() {
+        return cantPremios;
+    }
+
+    public void setCantPremios(int cantPremios) {
+        this.cantPremios = cantPremios;
+    }
+    
+    public LocalDate getFechaSorteo() {
+        return fechaSorteo;
+    }
+    
+    public double getPuntaje() {
+        return puntaje;
+    }
+    
+    public Set<Socio> getPremiados(){
+    	Set<Socio> res = new HashSet<>();
+    	for(Registro r : premiados) {
+    		res.add(r.getSocio());
+    	}
+    	return res;
+    }
+    
     @Override
     public int hashCode() {
         return Objects.hash(nombre);
@@ -266,5 +333,22 @@ public class Clase {
             .setActividad(actividad.getDescActividad())
             .setProfesores(descProfes)
             .build();
+    }
+    
+    public void realizarSorteo() {
+    	fechaSorteo = LocalDate.now();
+        ArrayList<Registro> list = new ArrayList<Registro>();
+        for (Registro r : registros) {
+        	list.add(r);
+        }
+        Collections.shuffle(list);
+        for (int i=0; i<cantPremios; i++) {
+        	premiados.add(list.get(i));
+            list.get(i).getSocio().agregarPremio(this);
+        }    			
+    }
+    
+    public void agregarPuntaje(Puntaje p) {
+    	puntajes.add(p);
     }
 }
