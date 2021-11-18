@@ -118,7 +118,7 @@ public class FacadeCuponeraTest {
             facades.getFacadeCuponera().agregarACuponera("c2", "a2", 3);
             facades.getFacadeCuponera().agregarACuponera("c2", "a1", 1);
 
-            facades.getFacadeActividad().registraseConCuponera("test", "clase1", "c2", LocalDate.of(1999, 9, 9));
+            facades.getFacadeActividad().registrarseConCuponera("test", "clase1", "c2", LocalDate.of(1999, 9, 9));
         });
 
         Set<String> ret = facades.getFacadeCuponera().cuponerasUsables("a1", "test");

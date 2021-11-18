@@ -331,7 +331,7 @@ public class FacadeUsuarioTest {
 
             facades.getFacadeCuponera().comprarCuponera("s1", "cup1");
 
-            facades.getFacadeActividad().registarseSinCuponera("s1", "c1", LocalDate.of(2000, 1, 1));
+            facades.getFacadeActividad().registrarseSinCuponera("s1", "c1", LocalDate.of(2000, 1, 1));
         });
 
         DataSocio ret = facades.getFacadeUsuario().getDataSocio("s1");

@@ -126,7 +126,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNickname("sergiop")
                 .setNombre("Sergio")
                 .setApellido("Perez")
-                .setCorreo(Email.of("sergi", "gmail.uy"))
+                .setCorreo(Email.of("sergi", "gmail.com.uy"))
                 .setNacimiento(LocalDate.of(1950, 1, 28))
                 .setImagen(resourceToFile("img/usuarios/3ElkVG2"))
                 .setPassword("HGF135")
@@ -136,7 +136,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNickname("andy")
                 .setNombre("Andres")
                 .setApellido("Roman")
-                .setCorreo(Email.of("chino", "gmail.uy"))
+                .setCorreo(Email.of("chino", "gmail.org.uy"))
                 .setNacimiento(LocalDate.of(1976, 3, 17))
                 .setImagen(resourceToFile("img/usuarios/3hDWgTD"))
                 .setPassword("lkj65D")
@@ -146,7 +146,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNickname("tonyp")
                 .setNombre("Antonio")
                 .setApellido("Paz")
-                .setCorreo(Email.of("eltony", "gmail.uy"))
+                .setCorreo(Email.of("eltony", "gmail.org.uy"))
                 .setNacimiento(LocalDate.of(1955, 2, 14))
                 .setImagen(resourceToFile("img/usuarios/3Ai4jMW"))
                 .setPassword("jhvf395")
@@ -156,7 +156,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNickname("m1k4")
                 .setNombre("Micaela")
                 .setApellido("Lopez")
-                .setCorreo(Email.of("mika", "gmail.ar"))
+                .setCorreo(Email.of("mika", "gmail.com.ar"))
                 .setNacimiento(LocalDate.of(1987, 2, 23))
                 .setImagen(resourceToFile("img/usuarios/3zglsWf"))
                 .setPassword("ijngr024")
@@ -166,7 +166,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setNickname("charly")
                 .setNombre("Carlos")
                 .setApellido("Boston")
-                .setCorreo(Email.of("emi71", "gmail.uy"))
+                .setCorreo(Email.of("charly", "gmail.com.uy"))
                 .setNacimiento(LocalDate.of(1937, 3, 8))
                 .setImagen(resourceToFile("img/usuarios/2YRWDTQ"))
                 .setPassword("987mnbgh")
@@ -219,7 +219,6 @@ public class CargarDatosLambda implements ActionListener {
                 .setApellido("Miguel")
                 .setCorreo(Email.of("den80", "fuerza.com"))
                 .setImagen(resourceToFile("img/usuarios/3lKq8Px"))
-                .setNacimiento(LocalDate.of(1977, 1, 1))
                 .setNacimiento(LocalDate.of(1980, 6, 14))
                 .setInstitucion("Telon")
                 .setDescripcion("A Denis le interesan los deportes con pelota, principalmente el voleibol y el hanball.")
@@ -367,7 +366,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCosto(750)
                 .setRegistro(LocalDate.of(2021, 4, 20))
                 .setCategorias(k1)
-                .setEstado(ActividadEstado.ACEPTADA)
+                .setEstado(ActividadEstado.FINALIZADA)
                 .setImagen(resourceToFile("img/actividades/3vqbAbS"))
                 .setCreador("denis")
                 .invoke();
@@ -547,6 +546,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://www.musculos.com/Calistenia"))
                 .setImagen(resourceToFile("img/clases/3pj6mxJ"))
                 .setFechaRegistro(LocalDate.of(2021, 3, 31))
+                .setCantPremios(0) 
                 .invoke();
 
             facadeClase.crearClase()
@@ -558,6 +558,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(5)
                 .setAcceso(new URL("https://www.musculos.com/pesolibre"))
                 .setFechaRegistro(LocalDate.of(2021, 3, 31))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
@@ -569,6 +570,9 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(7)
                 .setAcceso(new URL("https://www.musculos.com/aparatos"))
                 .setFechaRegistro(LocalDate.of(2021, 3, 31))
+                .setCantPremios(3)
+                .setPremio("Rueda de Abdominales")
+                .setFechaSorteo(LocalDate.of(2021,6,2))
                 .invoke();
 
             Set<String> p2 = new HashSet<>();
@@ -583,6 +587,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://telon.com.uy/voley"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
                 .setImagen(resourceToFile("img/clases/3lTd3Ex"))
+                .setCantPremios(0)
                 .invoke();
 
             Set<String> p3 = new HashSet<>();
@@ -598,6 +603,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://telon.com.uy/natacionB"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
                 .setImagen(resourceToFile("img/clases/3lTe1AF"))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
@@ -610,6 +616,9 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://telon.com.uy/natacionM"))
                 .setFechaRegistro(LocalDate.of(2021, 4, 20))
                 .setImagen(resourceToFile("img/clases/3jeSUam"))
+                .setCantPremios(2)
+                .setPremio("lentes natacion")
+                .setFechaSorteo(LocalDate.of(2021, 8, 11))
                 .invoke();
 
             Set<String> p4 = new HashSet<>();
@@ -624,6 +633,9 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(10)
                 .setAcceso(new URL("https://www.inatural.com/aeroni"))
                 .setFechaRegistro(LocalDate.of(2021, 5, 30))
+                .setCantPremios(3)
+                .setPremio("caramañola infantil")
+                .setFechaSorteo(LocalDate.of(2021, 8, 16))
                 .invoke();
 
             facadeClase.crearClase()
@@ -635,6 +647,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(12)
                 .setAcceso(new URL("https://www.inatural.com/aeroam"))
                 .setFechaRegistro(LocalDate.of(2021, 5, 30))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
@@ -646,6 +659,9 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(20)
                 .setAcceso(new URL("https://www.inatural.com/aerogral"))
                 .setFechaRegistro(LocalDate.of(2021, 5, 30))
+                .setCantPremios(2)
+                .setPremio("caramañola")
+                .setFechaSorteo(LocalDate.of(2021,10,1))
                 .invoke();
 
             Set<String> p5 = new HashSet<>();
@@ -661,6 +677,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://www.musculos.com/boxeo1"))
                 .setImagen(resourceToFile("img/clases/3aPbRM9"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
@@ -673,6 +690,9 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://www.musculos.com/boxeo2"))
                 .setImagen(resourceToFile("img/clases/3n9UOKJ"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
+                .setCantPremios(2)
+                .setPremio("guantillas")
+                .setFechaSorteo(LocalDate.of(2021,10,1))
                 .invoke();
 
             facadeClase.crearClase()
@@ -685,6 +705,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://www.musculos.com/muscbox"))
                 .setImagen(resourceToFile("img/clases/3n9UOKJ"))
                 .setFechaRegistro(LocalDate.of(2021, 6, 7))
+                .setCantPremios(0)
                 .invoke();
 
             Set<String> p6 = new HashSet<>();
@@ -700,6 +721,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://telon.com.uy/100m"))
                 .setImagen(resourceToFile("img/clases/3aRuy1Y"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
@@ -712,18 +734,20 @@ public class CargarDatosLambda implements ActionListener {
                 .setAcceso(new URL("https://telon.com.uy/200m"))
                 .setImagen(resourceToFile("img/clases/3aRuy1Y"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
                 .setNombreActividad("Atletismo")
                 .setNombre("Posta")
-                .setInicio(LocalDateTime.of(2021, 11, 25, 17, 45))
+                .setInicio(LocalDateTime.of(2021, 11, 29, 17, 45))
                 .setNicknameProfesores(p6)
                 .setCantMin(8)
                 .setCantMax(16)
                 .setAcceso(new URL("https://telon.com.uy/posta"))
                 .setImagen(resourceToFile("img/clases/3DTDm3S"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 8))
+                .setCantPremios(0)
                 .invoke();
 
             Set<String> p7 = new HashSet<>();
@@ -738,65 +762,95 @@ public class CargarDatosLambda implements ActionListener {
                 .setCantMax(15)
                 .setAcceso(new URL("https://telon.com.uy/bball1"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 31))
+                .setCantPremios(0)
                 .invoke();
 
             facadeClase.crearClase()
                 .setNombreActividad("Basquetbol")
                 .setNombre("Basquet II")
-                .setInicio(LocalDateTime.of(2021, 11, 1, 21, 00))
+                .setInicio(LocalDateTime.of(2021, 11, 27, 21, 00))
                 .setNicknameProfesores(p7)
                 .setCantMin(10)
-                .setCantMax(15)
+                .setCantMax(10)
                 .setAcceso(new URL("https://telon.com.uy/bball2"))
                 .setFechaRegistro(LocalDate.of(2021, 7, 31))
+                .setCantPremios(5)
+                .setPremio("juego de muñequeras")
                 .invoke();
 
-            facadeActividad.registarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
-            facadeActividad.registarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
-            facadeActividad.registarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
-            facadeActividad.registarseSinCuponera("andy", "Peso libre", LocalDate.of(2021, 4, 15));
-            facadeActividad.registarseSinCuponera("tonyp", "Peso libre", LocalDate.of(2021, 4, 20));
-            facadeActividad.registarseSinCuponera("caro", "Peso libre", LocalDate.of(2021, 4, 25));
-            facadeActividad.registarseSinCuponera("m1k4", "Peso libre", LocalDate.of(2021, 4, 28));
-            facadeActividad.registarseSinCuponera("charly", "Aparatos", LocalDate.of(2021, 4, 16));
-            facadeActividad.registarseSinCuponera("caro", "Aparatos", LocalDate.of(2021, 5, 15));
-            facadeActividad.registarseSinCuponera("m1k4", "Aparatos", LocalDate.of(2021, 5, 20));
-            facadeActividad.registarseSinCuponera("Emi71", "Voleibol", LocalDate.of(2021, 5, 5));
-            facadeActividad.registarseSinCuponera("euge", "Voleibol", LocalDate.of(2021, 5, 10));
-            facadeActividad.registarseSinCuponera("sergiop", "Voleibol", LocalDate.of(2021, 5, 15));
-            facadeActividad.registarseSinCuponera("tonyp", "Voleibol", LocalDate.of(2021, 5, 20));
-            facadeActividad.registarseSinCuponera("guille", "Braza", LocalDate.of(2021, 6, 8));
-            facadeActividad.registarseSinCuponera("euge", "Braza", LocalDate.of(2021, 6, 13));
-            facadeActividad.registarseSinCuponera("m1k4", "Braza", LocalDate.of(2021, 6, 25));
-            facadeActividad.registarseSinCuponera("charly", "Mariposa", LocalDate.of(2021, 7, 5));
-            facadeActividad.registarseSinCuponera("sergiop", "Mariposa", LocalDate.of(2021, 7, 11));
-            facadeActividad.registarseSinCuponera("andy", "Mariposa", LocalDate.of(2021, 7, 18));
-            facadeActividad.registarseSinCuponera("m1k4", "Aerobica niños", LocalDate.of(2021, 7, 19));
-            facadeActividad.registarseSinCuponera("Emi71", "Aerobica adulto mayor", LocalDate.of(2021, 8, 17));
-            facadeActividad.registarseSinCuponera("guille", "Aerobica adulto mayor", LocalDate.of(2021, 8, 20));
-            facadeActividad.registarseSinCuponera("andy", "Aerobica adulto mayor", LocalDate.of(2021, 8, 23));
-            facadeActividad.registarseSinCuponera("caro", "Aerobica", LocalDate.of(2021, 8, 15));
-            facadeActividad.registarseSinCuponera("euge", "Aerobica", LocalDate.of(2021, 8, 26));
-            facadeActividad.registarseSinCuponera("andy", "Boxeo I", LocalDate.of(2021, 7, 19));
-            facadeActividad.registarseSinCuponera("tonyp", "Boxeo I", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("m1k4", "Boxeo I", LocalDate.of(2021, 8, 24));
-            facadeActividad.registarseSinCuponera("sergiop", "Boxeo II", LocalDate.of(2021, 8, 1));
-            facadeActividad.registarseSinCuponera("guille", "Boxeo II", LocalDate.of(2021, 8, 30));
-            facadeActividad.registarseSinCuponera("Emi71", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("caro", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("euge", "Musculos para boxeo", LocalDate.of(2021, 9, 1));
-            facadeActividad.registarseSinCuponera("sergiop", "Musculos para boxeo", LocalDate.of(2021, 9, 5));
-            facadeActividad.registarseSinCuponera("guille", "100 M", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("charly", "100 M", LocalDate.of(2021, 9, 3));
-            facadeActividad.registarseSinCuponera("Emi71", "200 M", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("charly", "200 M", LocalDate.of(2021, 9, 6));
-            facadeActividad.registarseSinCuponera("caro", "Posta", LocalDate.of(2021, 9, 1));
-            facadeActividad.registarseSinCuponera("sergiop", "Basquet I", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("Emi71", "Basquet I", LocalDate.of(2021, 8, 20));
-            facadeActividad.registarseSinCuponera("tonyp", "Basquet I", LocalDate.of(2021, 8, 31));
-            facadeActividad.registarseSinCuponera("andy", "Basquet II", LocalDate.of(2021, 8, 16));
-            facadeActividad.registarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
-            facadeActividad.registarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
+            facadeClase.crearClase()
+                .setNombreActividad("Aparatos y pesas")
+                .setNombre("Aparatos II")
+                .setInicio(LocalDateTime.of(2021, 11, 30, 20, 00))
+                .setNicknameProfesores(p1)
+                .setCantMin(1)
+                .setCantMax(5)
+                .setAcceso(new URL("https://www.musculos.com/aparatos"))
+                .setFechaRegistro(LocalDate.of(2021, 11, 15))
+                .setCantPremios(2)
+                .setPremio("pesa rusa 5K")
+                .invoke();
+
+            facadeClase.crearClase()
+                .setNombreActividad("Kickboxing")
+                .setNombre("Boxeo III")
+                .setInicio(LocalDateTime.of(2021, 12, 1, 19, 00))
+                .setNicknameProfesores(p5)
+                .setCantMin(2)
+                .setCantMax(6)
+                .setAcceso(new URL("https://www.musculos.com/boxeo2"))
+                .setImagen(resourceToFile("img/clases/3n9UOKJ"))
+                .setFechaRegistro(LocalDate.of(2021, 11, 10))
+                .setCantPremios(2)
+                .setPremio("guantillas")
+                .invoke();
+
+            facadeActividad.registrarseSinCuponera("caro", "Calistenia", LocalDate.of(2021, 4, 9));
+            facadeActividad.registrarseSinCuponera("sergiop", "Calistenia", LocalDate.of(2021, 4, 10));
+            facadeActividad.registrarseSinCuponera("andy", "Calistenia", LocalDate.of(2021, 4, 12));
+            facadeActividad.registrarseSinCuponera("andy", "Peso libre", LocalDate.of(2021, 4, 15));
+            facadeActividad.registrarseSinCuponera("tonyp", "Peso libre", LocalDate.of(2021, 4, 20));
+            facadeActividad.registrarseSinCuponera("caro", "Peso libre", LocalDate.of(2021, 4, 25));
+            facadeActividad.registrarseSinCuponera("m1k4", "Peso libre", LocalDate.of(2021, 4, 28));
+            facadeActividad.registrarseSinCuponera("charly", "Aparatos", LocalDate.of(2021, 4, 16));
+            facadeActividad.registrarseSinCuponera("caro", "Aparatos", LocalDate.of(2021, 5, 15));
+            facadeActividad.registrarseSinCuponera("m1k4", "Aparatos", LocalDate.of(2021, 5, 20));
+            facadeActividad.registrarseSinCuponera("Emi71", "Voleibol", LocalDate.of(2021, 5, 5));
+            facadeActividad.registrarseSinCuponera("euge", "Voleibol", LocalDate.of(2021, 5, 10));
+            facadeActividad.registrarseSinCuponera("sergiop", "Voleibol", LocalDate.of(2021, 5, 15));
+            facadeActividad.registrarseSinCuponera("tonyp", "Voleibol", LocalDate.of(2021, 5, 20));
+            facadeActividad.registrarseSinCuponera("guille", "Braza", LocalDate.of(2021, 6, 8));
+            facadeActividad.registrarseSinCuponera("euge", "Braza", LocalDate.of(2021, 6, 13));
+            facadeActividad.registrarseSinCuponera("m1k4", "Braza", LocalDate.of(2021, 6, 25));
+            facadeActividad.registrarseSinCuponera("charly", "Mariposa", LocalDate.of(2021, 7, 5));
+            facadeActividad.registrarseSinCuponera("sergiop", "Mariposa", LocalDate.of(2021, 7, 11));
+            facadeActividad.registrarseSinCuponera("andy", "Mariposa", LocalDate.of(2021, 7, 18));
+            //facadeActividad.registrarseSinCuponera("m1k4", "Aerobica niños", LocalDate.of(2021, 7, 19));
+            facadeActividad.registrarseSinCuponera("Emi71", "Aerobica adulto mayor", LocalDate.of(2021, 8, 17));
+            facadeActividad.registrarseSinCuponera("guille", "Aerobica adulto mayor", LocalDate.of(2021, 8, 20));
+            facadeActividad.registrarseSinCuponera("andy", "Aerobica adulto mayor", LocalDate.of(2021, 8, 23));
+            //facadeActividad.registrarseSinCuponera("caro", "Aerobica", LocalDate.of(2021, 8, 15));
+            facadeActividad.registrarseSinCuponera("euge", "Aerobica", LocalDate.of(2021, 8, 26));
+            //facadeActividad.registrarseSinCuponera("andy", "Boxeo I", LocalDate.of(2021, 7, 19));
+            facadeActividad.registrarseSinCuponera("tonyp", "Boxeo I", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("m1k4", "Boxeo I", LocalDate.of(2021, 8, 24));
+            //facadeActividad.registrarseSinCuponera("sergiop", "Boxeo II", LocalDate.of(2021, 8, 1));
+            facadeActividad.registrarseSinCuponera("guille", "Boxeo II", LocalDate.of(2021, 8, 30));
+            facadeActividad.registrarseSinCuponera("Emi71", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("caro", "Musculos para boxeo", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("euge", "Musculos para boxeo", LocalDate.of(2021, 9, 1));
+            facadeActividad.registrarseSinCuponera("sergiop", "Musculos para boxeo", LocalDate.of(2021, 9, 5));
+            facadeActividad.registrarseSinCuponera("guille", "100 M", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("charly", "100 M", LocalDate.of(2021, 9, 3));
+            facadeActividad.registrarseSinCuponera("Emi71", "200 M", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("charly", "200 M", LocalDate.of(2021, 9, 6));
+            //facadeActividad.registrarseSinCuponera("caro", "Posta", LocalDate.of(2021, 9, 1));
+            facadeActividad.registrarseSinCuponera("sergiop", "Basquet I", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("Emi71", "Basquet I", LocalDate.of(2021, 8, 20));
+            facadeActividad.registrarseSinCuponera("tonyp", "Basquet I", LocalDate.of(2021, 8, 31));
+            facadeActividad.registrarseSinCuponera("andy", "Basquet II", LocalDate.of(2021, 8, 16));
+            facadeActividad.registrarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
+            facadeActividad.registrarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
 
             facadeCuponera.crearCuponera()
                 .setNombre("Pelota")
@@ -822,11 +876,22 @@ public class CargarDatosLambda implements ActionListener {
                 .setNombre("Musculos")
                 .setDescripcion("Pesas.")
                 .setInicio(LocalDate.of(2021, 8, 15))
-                .setFin(LocalDate.of(2021, 11, 15))
+                .setFin(LocalDate.of(2021, 12, 15))
                 .setDescuento(10)
-                .setFechaRegistro(LocalDate.of(2021, 8, 1))
+                .setFechaRegistro(LocalDate.of(2021, 7, 18))
                 .setImagen(resourceToFile("img/cuponeras/3pj6mxJ"))
                 .invoke();
+
+            facadeCuponera.crearCuponera()
+                .setNombre("Pista")
+                .setDescripcion("Entrenamiento de Atletismo")
+                .setInicio(LocalDate.of(2021, 10, 1))
+                .setFin(LocalDate.of(2021, 12, 31))
+                .setDescuento(15)
+                .setFechaRegistro(LocalDate.of(2021, 9, 1))
+                .setImagen(resourceToFile("img/cuponeras/3c76d8L")) //agregar file
+                .invoke();
+
 
             facadeCuponera.agregarACuponera("Pelota", "Voleibol", 7);
             facadeCuponera.agregarACuponera("Pelota", "Basquetbol", 18);
@@ -834,6 +899,7 @@ public class CargarDatosLambda implements ActionListener {
             facadeCuponera.agregarACuponera("Gimnasia", "Aparatos y pesas", 8);
             facadeCuponera.agregarACuponera("Musculos", "Kickboxing", 11);
             facadeCuponera.agregarACuponera("Musculos", "Aparatos y pesas", 12);
+            facadeCuponera.agregarACuponera("Pista", "Atletismo", 20);
 
             facadeCuponera.comprarCuponera("guille", "Pelota");
             facadeCuponera.comprarCuponera("m1k4", "Gimnasia");
@@ -841,6 +907,13 @@ public class CargarDatosLambda implements ActionListener {
             facadeCuponera.comprarCuponera("sergiop", "Musculos");
             facadeCuponera.comprarCuponera("andy", "Musculos");
             facadeCuponera.comprarCuponera("Emi71", "Pelota");
+            facadeCuponera.comprarCuponera("caro", "Pista");
+
+            facadeActividad.registrarseConCuponera("m1k4", "Aerobica niños", "Gimnasia", LocalDate.of(2021, 7, 19));
+            facadeActividad.registrarseConCuponera("caro", "Aerobica", "Gimnasia", LocalDate.of(2021, 8, 15));
+            facadeActividad.registrarseConCuponera("andy", "Boxeo I", "Musculos", LocalDate.of(2021, 7, 19));
+            facadeActividad.registrarseConCuponera("sergiop", "Boxeo II", "Musculos", LocalDate.of(2021, 8, 1));
+            facadeActividad.registrarseConCuponera("caro", "Posta", "Pista", LocalDate.of(2021, 9, 1));
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -45,6 +45,12 @@ public class FacadeClase extends AbstractFacadeClase {
 
             private File imagen;
 
+            private String premio;
+
+            private int cantPremios;
+
+            private LocalDate fechaSorteo = null;
+
             @Override
             public CrearClaseChain setNombreActividad(String nombreActividad) {
                 this.nombreActividad = nombreActividad;
@@ -100,6 +106,25 @@ public class FacadeClase extends AbstractFacadeClase {
             }
 
             @Override
+            public CrearClaseChain setPremio(String premio) {
+                this.premio = premio;
+                return this;
+            }
+
+            @Override
+            public CrearClaseChain setCantPremios(int cantPremios) {
+                this.cantPremios = cantPremios;
+                return this;
+            }
+
+            @Override
+            public CrearClaseChain setFechaSorteo(LocalDate fechaSorteo) {
+                this.fechaSorteo = fechaSorteo;
+                return this;
+            }
+
+
+            @Override
             public void invoke() throws ClaseInconsistenteException {
                 Map<String, Actividad> actividades = getRegistry().getActividades();
                 Map<String, Clase> clases = getRegistry().getClases();
@@ -151,6 +176,9 @@ public class FacadeClase extends AbstractFacadeClase {
                         .setProfesores(profes)
                         .setActividad(actividad)
                         .setImagen(imagen)
+                        .setPremio(premio)
+                        .setCantPremios(cantPremios)
+                        .setFechaSorteo(fechaSorteo)
                         .build();
 
                 for (Profesor p : profes) {

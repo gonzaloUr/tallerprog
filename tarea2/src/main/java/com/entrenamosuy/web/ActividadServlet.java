@@ -3,12 +3,13 @@ package com.entrenamosuy.web;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.Duration;
-import java.time.LocalDate;
+import java.time.LocalDate; //Usar Gregorian Calendar
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -181,7 +182,7 @@ public class ActividadServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             return;
         }
-        catch(ActividadRepetidaException_Exception are){
+        catch(ActividadRepetidaException_Exception are){ //TODO cambiar a beans
             request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
         }
         catch(InstitucionNoEncontradaException inee){

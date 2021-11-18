@@ -602,8 +602,8 @@ src/main/java/com/entrenamosuy/core/FacadeActividad.java:167:	LawOfDemeter:	LawO
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:167:	LawOfDemeter:	LawOfDemeter: Potential violation of Law of Demeter (object not created locally)
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:168:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cat' could be declared final
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:168:	LocalVariableCouldBeFinal:	LocalVariableCouldBeFinal: Local variable 'cat' could be declared final
-src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registarseSinCuponera(String, String, LocalDate)' has a cyclomatic complexity of 11.
-src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registarseSinCuponera(String, String, LocalDate)' has a cyclomatic complexity of 11.
+src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registrarseSinCuponera(String, String, LocalDate)' has a cyclomatic complexity of 11.
+src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registrarseSinCuponera(String, String, LocalDate)' has a cyclomatic complexity of 11.
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'clase' is not assigned and could be declared final
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'clase' is not assigned and could be declared final
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:180:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'fechaRegistro' is not assigned and could be declared final
@@ -668,8 +668,8 @@ src/main/java/com/entrenamosuy/core/FacadeActividad.java:210:	ControlStatementBr
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:210:	ControlStatementBraces:	ControlStatementBraces: This statement should have braces
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:212:	LawOfDemeter:	LawOfDemeter: Potential violation of Law of Demeter (object not created locally)
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:212:	LawOfDemeter:	LawOfDemeter: Potential violation of Law of Demeter (object not created locally)
-src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registraseConCuponera(String, String, String, LocalDate)' has a cyclomatic complexity of 13.
-src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registraseConCuponera(String, String, String, LocalDate)' has a cyclomatic complexity of 13.
+src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registrarseConCuponera(String, String, String, LocalDate)' has a cyclomatic complexity of 13.
+src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	CyclomaticComplexity:	CyclomaticComplexity: The method 'registrarseConCuponera(String, String, String, LocalDate)' has a cyclomatic complexity of 13.
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'clase' is not assigned and could be declared final
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'clase' is not assigned and could be declared final
 src/main/java/com/entrenamosuy/core/FacadeActividad.java:216:	MethodArgumentCouldBeFinal:	MethodArgumentCouldBeFinal: Parameter 'cuponera' is not assigned and could be declared final

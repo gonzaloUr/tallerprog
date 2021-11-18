@@ -33,6 +33,12 @@ public abstract class AbstractFacadeClase extends AbstractFacade {
 
         CrearClaseChain setImagen(File imagen);
 
+        CrearClaseChain setPremio(String premio);
+
+        CrearClaseChain setCantPremios(int cantPremios);
+
+        CrearClaseChain setFechaSorteo(LocalDate fechaSorteo);
+
         void invoke() throws ClaseInconsistenteException;
     }
 

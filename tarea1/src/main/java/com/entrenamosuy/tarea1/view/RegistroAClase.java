@@ -87,7 +87,7 @@ public class RegistroAClase extends JInternalFrame {
 
             if (utilizarCheckBox.isSelected() && !cuponeraSelecionada.equals("")) {
                 try {
-                    facades.getFacadeActividad().registraseConCuponera(socio, clase, cuponeraSelecionada, fecha);
+                    facades.getFacadeActividad().registrarseConCuponera(socio, clase, cuponeraSelecionada, fecha);
                 } catch (RegistroInconsistenteException e) {
 
                     for (RegistroInconsistenteException.Restriccion r : e.getInconsistencias()) {
@@ -113,7 +113,7 @@ public class RegistroAClase extends JInternalFrame {
                 }
             } else {
                 try {
-                    facades.getFacadeActividad().registarseSinCuponera(socio, clase, fecha);
+                    facades.getFacadeActividad().registrarseSinCuponera(socio, clase, fecha);
                 } catch (RegistroInconsistenteException e) {
 
                     for (RegistroInconsistenteException.Restriccion r : e.getInconsistencias()) {
