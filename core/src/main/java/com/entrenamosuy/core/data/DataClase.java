@@ -24,6 +24,8 @@ public class DataClase {
 
         private DescActividad actividad;
 
+        private int cantPremios;
+
         private Set<DescProfesor> profesores = Collections.emptySet();
 
         public Builder setNombre(String nombre) {
@@ -56,13 +58,18 @@ public class DataClase {
             return this;
         }
 
+        public Builder setCantPremios(int cantPremios) {
+            this.cantPremios = cantPremios;
+            return this;
+        }
+
         public Builder setProfesores(Set<DescProfesor> profesores) {
             this.profesores = profesores;
             return this;
         }
 
         public DataClase build() {
-            return new DataClase(nombre, inicio, cantMin, cantMax, accesoURL, actividad, profesores);
+            return new DataClase(nombre, inicio, cantMin, cantMax, accesoURL, actividad, cantPremios, profesores);
         }
     }
 
@@ -76,10 +83,12 @@ public class DataClase {
 
     private final DescActividad actividad;
 
+    private final int cantPremios;
+
     private final Set<DescProfesor> profesores;
 
     protected DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
-            DescActividad actividad, Set<DescProfesor> profesores) {
+            DescActividad actividad, int cantPremios, Set<DescProfesor> profesores) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor DataClase");
         Objects.requireNonNull(inicio, "inicio es null en constructor DataClase");
@@ -93,6 +102,7 @@ public class DataClase {
         this.cantMax = cantMax;
         this.accesoURL = accesoURL;
         this.actividad = actividad;
+        this.cantPremios = cantPremios;
         this.profesores = profesores;
     }
 
@@ -118,6 +128,10 @@ public class DataClase {
 
     public DescActividad getActividad() {
         return actividad;
+    }
+
+    public int getCantPremios(){
+        return cantPremios;
     }
 
     public Set<DescProfesor> getProfesores() {

@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanSocio complex type.
+ * <p>Clase Java para beanSocio complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanSocio">
@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="seguidos" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="clases" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanClase" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="cuponeras" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanCuponera" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="favoritas" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -46,7 +47,8 @@ import javax.xml.bind.annotation.XmlType;
     "seguidores",
     "seguidos",
     "clases",
-    "cuponeras"
+    "cuponeras",
+    "favoritas"
 })
 public class BeanSocio {
 
@@ -63,9 +65,11 @@ public class BeanSocio {
     protected List<BeanClase> clases;
     @XmlElement(nillable = true)
     protected List<BeanCuponera> cuponeras;
+    @XmlElement(nillable = true)
+    protected List<String> favoritas;
 
     /**
-     * Gets the value of the nickname property.
+     * Obtiene el valor de la propiedad nickname.
      * 
      * @return
      *     possible object is
@@ -77,7 +81,7 @@ public class BeanSocio {
     }
 
     /**
-     * Sets the value of the nickname property.
+     * Define el valor de la propiedad nickname.
      * 
      * @param value
      *     allowed object is
@@ -89,7 +93,7 @@ public class BeanSocio {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -101,7 +105,7 @@ public class BeanSocio {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -113,7 +117,7 @@ public class BeanSocio {
     }
 
     /**
-     * Gets the value of the apellido property.
+     * Obtiene el valor de la propiedad apellido.
      * 
      * @return
      *     possible object is
@@ -125,7 +129,7 @@ public class BeanSocio {
     }
 
     /**
-     * Sets the value of the apellido property.
+     * Define el valor de la propiedad apellido.
      * 
      * @param value
      *     allowed object is
@@ -137,7 +141,7 @@ public class BeanSocio {
     }
 
     /**
-     * Gets the value of the correo property.
+     * Obtiene el valor de la propiedad correo.
      * 
      * @return
      *     possible object is
@@ -149,7 +153,7 @@ public class BeanSocio {
     }
 
     /**
-     * Sets the value of the correo property.
+     * Define el valor de la propiedad correo.
      * 
      * @param value
      *     allowed object is
@@ -161,7 +165,7 @@ public class BeanSocio {
     }
 
     /**
-     * Gets the value of the nacimiento property.
+     * Obtiene el valor de la propiedad nacimiento.
      * 
      * @return
      *     possible object is
@@ -173,7 +177,7 @@ public class BeanSocio {
     }
 
     /**
-     * Sets the value of the nacimiento property.
+     * Define el valor de la propiedad nacimiento.
      * 
      * @param value
      *     allowed object is
@@ -298,6 +302,35 @@ public class BeanSocio {
             cuponeras = new ArrayList<BeanCuponera>();
         }
         return this.cuponeras;
+    }
+
+    /**
+     * Gets the value of the favoritas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the favoritas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFavoritas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getFavoritas() {
+        if (favoritas == null) {
+            favoritas = new ArrayList<String>();
+        }
+        return this.favoritas;
     }
 
 }

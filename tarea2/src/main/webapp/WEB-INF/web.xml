@@ -186,6 +186,17 @@
         <url-pattern>/alta_profesor</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/marcar_fav</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/desmarcar_fav</url-pattern>
+    </servlet-mapping>
+
     <!-- IndexServlet mappings -->
 
     <servlet-mapping>

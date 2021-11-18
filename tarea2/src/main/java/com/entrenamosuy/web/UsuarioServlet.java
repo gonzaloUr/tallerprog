@@ -210,6 +210,20 @@ public class UsuarioServlet extends HttpServlet {
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_socio?nickname=" + nick1));
             }
         }
+        else if (path.equals("/desmarcar_fav")){
+            String nombreAct = request.getParameter("nombre");
+            HttpSession session = request.getSession();
+            BeanSocio s = (BeanSocio) session.getAttribute("usuario");
+            port.desmarcarComoFav(s.getNickname(), nombreAct);
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad?nombre=" + nombreAct));
+        }
+        else if (path.equals("/marcar_fav")){
+            String nombreAct = request.getParameter("nombre");
+            HttpSession session = request.getSession();
+            BeanSocio s = (BeanSocio) session.getAttribute("usuario");
+            port.marcarComoFav(s.getNickname(), nombreAct);
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad?nombre=" + nombreAct));
+        }
     }
 
     @Override

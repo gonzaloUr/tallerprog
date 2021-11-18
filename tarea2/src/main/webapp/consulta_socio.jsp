@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="com.entrenamosuy.core.data.MiniUsuario"%>
+<%@page import="com.entrenamosuy.web.MiniUsuario"%>
 <%@page import="com.entrenamosuy.core.data.DataClase"%>
 <%@page import="com.entrenamosuy.core.data.DataCuponera"%>
 <%@page import="java.time.LocalDate"%>

@@ -13,24 +13,35 @@
         <jsp:include page="/templates/header.jsp"/>
         <div class="d-flex flex-row">
             <jsp:include page="/templates/aside.jsp"/>
-            <main class="d-flex flex-column p-3">
-                <section class="d-flex flex-column">
-                    <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
-                    <img src="img/actividad/${nombre}" alt=" " class="w-50">
-                    <p class="fs-6 mt-3">${descripcion}</p>
-                    <p class="fs-6 mt-3">Duracion: ${duracion}</p>
-                    <p class="fs-4 fw-bold p-3">Categorias: </p>
-                    <ul>
-                        <nav class="flex flex-column p-3 ">
-                            <div class="list-group pb-3">
-                                <c:forEach items="${categoriasAsociadas}" var="cat" >
-                                    <form action="consulta_categoria">
-                                        <input class="list-group-item list-group-item-action" type="submit" name="categoria" value="${cat}">
-                                    </form>
-                                </c:forEach>
-                            </div>
-                        </nav>
-                    </ul>
+            <div class="col-md-6 mb-3">
+                        <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
+                        <img src="img/actividad/${nombre}" alt=" " class="w-50">
+                        <p class="fs-6 mt-3">${descripcion}</p>
+                        <p class="fs-6 mt-3">Duracion: ${duracion}</p>
+                        <% int f = (int) request.getAttribute("tipoFav");
+                            if(f == 0){ %>
+                                <a href="/tarea2/marcar_fav?nombre=${nombre}" class="btn btn-primary"> Favorita
+                                </a>
+                            <% } 
+                            else if(f == 1){ %>
+                                <a href="/tarea2/desmarcar_fav?nombre=${nombre}" class="btn btn-primary"> Desmarcar como Favorita
+                                    <span class="glyphicon glyphicon-star"></span> 
+                                </a>
+                            <% } %>
+                        <p class="fs-4 fw-bold p-3">Categorias: </p>
+                        <ul>
+                            <nav class="flex flex-column p-3 ">
+                                <div class="list-group pb-3">
+                                    <c:forEach items="${categoriasAsociadas}" var="cat" >
+                                        <form action="consulta_categoria">
+                                            <input class="list-group-item list-group-item-action" type="submit" name="categoria" value="${cat}">
+                                        </form>
+                                    </c:forEach>
+                                </div>
+                            </nav>
+                        </ul>
+            </div>
+
                     <aside id="clase_cuponera">
                         <nav class="flex flex-column p-3 bg-light">
                             <div class="list-group pb-3">

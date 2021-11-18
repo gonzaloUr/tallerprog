@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanDescActividad complex type.
+ * <p>Clase Java para beanDescActividad complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
  * &lt;complexType name="beanDescActividad">
@@ -46,7 +46,7 @@ public class BeanDescActividad {
     protected float costo;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -58,7 +58,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -70,7 +70,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Gets the value of the descripcion property.
+     * Obtiene el valor de la propiedad descripcion.
      * 
      * @return
      *     possible object is
@@ -82,7 +82,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Sets the value of the descripcion property.
+     * Define el valor de la propiedad descripcion.
      * 
      * @param value
      *     allowed object is
@@ -94,7 +94,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Gets the value of the duracion property.
+     * Obtiene el valor de la propiedad duracion.
      * 
      * @return
      *     possible object is
@@ -106,7 +106,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Sets the value of the duracion property.
+     * Define el valor de la propiedad duracion.
      * 
      * @param value
      *     allowed object is
@@ -118,7 +118,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Gets the value of the registro property.
+     * Obtiene el valor de la propiedad registro.
      * 
      * @return
      *     possible object is
@@ -130,7 +130,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Sets the value of the registro property.
+     * Define el valor de la propiedad registro.
      * 
      * @param value
      *     allowed object is
@@ -142,7 +142,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Gets the value of the costo property.
+     * Obtiene el valor de la propiedad costo.
      * 
      */
     public float getCosto() {
@@ -150,7 +150,7 @@ public class BeanDescActividad {
     }
 
     /**
-     * Sets the value of the costo property.
+     * Define el valor de la propiedad costo.
      * 
      */
     public void setCosto(float value) {

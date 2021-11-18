@@ -388,4 +388,19 @@ public class Publicador {
     public int getEstadoSorteo(String clase) {
     	return facades.getFacadeClase().getEstadoSorteo(clase);
     }
+
+    @WebMethod
+    public void marcarComoFav(String socio, String actividad){
+        facades.getFacadeUsuario().marcarComoFav(socio, actividad); 
+    }
+
+    @WebMethod
+    public void desmarcarComoFav(String socio, String actividad){
+        facades.getFacadeUsuario().desmarcarComoFav(socio, actividad); 
+    }
+
+    @WebMethod
+    public boolean esFav(String socio, String actividad){
+        return facades.getFacadeUsuario().esFav(socio, actividad); 
+    }
 }

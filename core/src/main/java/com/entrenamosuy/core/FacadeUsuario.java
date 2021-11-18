@@ -591,4 +591,10 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     	s.eliminarFavorita(actividad);
     }
     
+    @Override
+    public boolean esFav(String socio, String actividad){
+        Map<String, Socio> mapa = getRegistry().getSocios();
+    	Socio s = mapa.get(socio);
+        return s.getActividadesFavoritas().containsKey(actividad);
+    }
 }

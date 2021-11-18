@@ -247,6 +247,7 @@ public class Socio extends Usuario {
             .setSeguidos(seguidosString)
             .setClases(dataClases)
             .setCuponeras(dataCuponeras)
+            .setFavoritas(actividadesFavoritas)
             .build();
     }
 

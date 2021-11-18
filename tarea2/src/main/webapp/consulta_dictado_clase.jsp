@@ -27,6 +27,15 @@
                             <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
                         </c:when>
                     </c:choose>
+                    <c:choose>
+                        <c:when test="${es_profesor_que_dicta eq true}">
+                            <c:choose>
+                                <c:when test="${cantPremios ne 0}">
+                                        <p><a href="realizar_sorteo?clase=${nombre}"> Realizar sorteo </a></p>
+                                </c:when>
+                            </c:choose>
+                        </c:when>
+                    </c:choose>
                     <c:forEach items="${profesorNom}" var="profesorNom" >
                         <p><b>Profesor: </b>${profesorNom} ${apellido}</p>
                     </c:forEach>

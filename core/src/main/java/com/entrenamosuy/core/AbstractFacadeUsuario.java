@@ -127,4 +127,6 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
     public abstract void marcarComoFav(String socio, String actividad);
     
     public abstract void desmarcarComoFav(String socio, String actividad);
+
+    public abstract boolean esFav(String socio, String actividad);
 }

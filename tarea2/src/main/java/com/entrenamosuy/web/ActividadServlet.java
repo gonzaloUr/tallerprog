@@ -49,7 +49,28 @@ public class ActividadServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_actividad")) {
-            String act = request.getParameter("nombre");
+            String act = (String) request.getParameter("nombre");
+
+            HttpSession session = request.getSession();
+
+            Object u = session.getAttribute("usuario");
+
+            request.setAttribute("tipoFav", 2);
+
+            if(u != null){
+                boolean b = (boolean) session.getAttribute("es_profesor");
+                if(b == false){
+                    BeanSocio socio = (BeanSocio) u;
+                    boolean esFav = port.esFav(socio.getNickname(), act);
+                    if(esFav){
+                        request.setAttribute("tipoFav", 1);
+                    }
+                    else{
+                        request.setAttribute("tipoFav", 0);
+                    }   
+                }
+            }
+
             BeanActividad actividad = port.getDataActividad(act);
 
             String nombre = actividad.getNombre();
