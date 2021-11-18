@@ -120,8 +120,6 @@ public class Socio extends Usuario {
 
         Objects.requireNonNull(registros, "registros es null en constructor Socio");
         Objects.requireNonNull(compras, "compras es null en constructor Socio");
-        Objects.requireNonNull(actividadesFavoritas, "actividadesFavoritas es null en constructor Socio");
-        Objects.requireNonNull(puntajes, "puntajes es null en constructor Socio");
 
         this.registros = registros;
         this.compras = compras;
