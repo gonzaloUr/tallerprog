@@ -1,15 +1,15 @@
 package com.entrenamosuy.core;
 
 import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
-import com.entrenamosuy.core.exceptions.ClaseNoDictadaException;
-import com.entrenamosuy.core.exceptions.SorteoRealizadoException;
 
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.List;
 
 public abstract class AbstractFacadeClase extends AbstractFacade {
 
@@ -44,5 +44,11 @@ public abstract class AbstractFacadeClase extends AbstractFacade {
 
     public abstract File getImagenClase(String ident);
     
-    public abstract void realizarSorteo(String clase) throws ClaseNoDictadaException, SorteoRealizadoException;
+    public abstract void realizarSorteo(String clase);
+
+    public abstract List<DataSocio> getGanadores(String clase);
+    
+    public abstract List<DataSocio> getRegistrados(String clase);
+    
+    public abstract int getEstadoSorteo(String clase);
 }

@@ -8,9 +8,11 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.data.DescProfesor;
 
 
@@ -350,5 +352,21 @@ public class Clase {
     
     public void agregarPuntaje(Puntaje p) {
     	puntajes.add(p);
+    }
+    
+    public List<DataSocio> getGanadores(){
+    	List<DataSocio> list = new ArrayList<DataSocio>();
+    	for (Registro r : premiados) {
+    		list.add(r.getSocio().getDataSocio());
+    	}
+    	return list;
+    }
+    
+    public List<DataSocio> getRegistrados(){
+    	List<DataSocio> list = new ArrayList<DataSocio>();
+    	for (Registro r : registros) {
+    		list.add(r.getSocio().getDataSocio());
+    	}
+    	return list;
     }
 }

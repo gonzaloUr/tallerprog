@@ -12,12 +12,11 @@ import java.util.Map;
 import java.util.Set;
 
 import com.entrenamosuy.core.data.DataClase;
+import com.entrenamosuy.core.data.DataSocio;
 import com.entrenamosuy.core.exceptions.ActividadNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.core.exceptions.ProfesorNoEncontradoException;
-import com.entrenamosuy.core.exceptions.ClaseNoDictadaException;
-import com.entrenamosuy.core.exceptions.SorteoRealizadoException;
 import com.entrenamosuy.core.model.Actividad;
 import com.entrenamosuy.core.model.Clase;
 import com.entrenamosuy.core.model.Profesor;
@@ -198,14 +197,32 @@ public class FacadeClase extends AbstractFacadeClase {
     }
     
     @Override 
-    public void realizarSorteo(String clase) throws ClaseNoDictadaException, SorteoRealizadoException{
+    public void realizarSorteo(String clase){
         Clase c = getRegistry().getClases().get(clase);
+    	c.realizarSorteo();
+    }
+
+    @Override 
+    public List<DataSocio> getGanadores(String clase){
+    	Clase c = getRegistry().getClases().get(clase);
+    	return c.getGanadores();
+    }
+    
+    @Override 
+    public List<DataSocio> getRegistrados(String clase){
+    	Clase c = getRegistry().getClases().get(clase);
+    	return c.getRegistrados();
+    }
+    
+    @Override
+    public int getEstadoSorteo(String clase) {
+    	Clase c = getRegistry().getClases().get(clase);
     	if(c.getFechaSorteo() != null) {
-    		throw new SorteoRealizadoException("Sorteo ya realizado"); 
+    		return 1; 
     	}
     	if(c.getInicio().isAfter(LocalDateTime.now())) {
-    		throw new ClaseNoDictadaException("No se puede sortear los premios de una clase no dictada");
+    		return 2;
     	}
-    	c.realizarSorteo();
+    	return 0;
     }
 }
