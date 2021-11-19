@@ -7,12 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
-import java.time.LocalDate;
-import java.time.Duration;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
@@ -24,12 +25,12 @@ import javax.xml.ws.Endpoint;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
+import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
-import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
-import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.exceptions.UsuarioRepetidoException;
 import com.entrenamosuy.core.util.FacadeContainer;
 
 @WebService
@@ -46,7 +47,31 @@ public class Publicador {
 
     @WebMethod(exclude = true)
     public void publicar() {
-        endpoint = Endpoint.publish("http://localhost:9128/webservices", this); //Cambiar a dinámica la dirrección. Se recomienda usar java.properties
+        String path = System.getProperty("user.home") + File.separator + ".estacionrc";
+        File config = new File(path);
+
+        String host = null;
+        String port = null;
+        String webservicePath = null;
+
+        try {
+            FileInputStream is = new FileInputStream(config);
+            Properties configProps = new Properties();
+            configProps.load(is);
+
+            host = configProps.getProperty("host", "localhost");
+            port = configProps.getProperty("port", "9128");
+            webservicePath = configProps.getProperty("path", "webservice");
+        } catch (Exception e) {
+            host = "localhost";
+            port = "9128";
+            webservicePath = "webservice";
+        }
+
+        if (webservicePath.startsWith("/"))
+            endpoint = Endpoint.publish("http://" + host + ":" + port + webservicePath, this);
+        else
+            endpoint = Endpoint.publish("http://" + host + ":" + port + "/" + webservicePath, this);
     }
 
     @WebMethod(exclude = true)
@@ -376,7 +401,7 @@ public class Publicador {
 
     @WebMethod
     public void realizarSorteo(String clase){
-        facades.getFacadeClase().realizarSorteo(clase); 
+        facades.getFacadeClase().realizarSorteo(clase);
     }
 
     @WebMethod
@@ -388,7 +413,7 @@ public class Publicador {
                 .map(BeanSocio::of)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
-    
+
     @WebMethod
     public List<BeanSocio> getRegistrados(String clase){
         return facades
@@ -398,7 +423,7 @@ public class Publicador {
                 .map(BeanSocio::of)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
-    
+
     @WebMethod
     public int getEstadoSorteo(String clase) {
     	return facades.getFacadeClase().getEstadoSorteo(clase);
