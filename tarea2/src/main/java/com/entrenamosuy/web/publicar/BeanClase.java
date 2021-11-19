@@ -11,27 +11,27 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanClase complex type.
+ * <p>Clase Java para beanClase complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="beanClase">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/>
- *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="accesoURL" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="actividad" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescActividad" minOccurs="0"/>
- *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="profesores" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescProfesor" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="beanClase"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/&gt;
+ *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="accesoURL" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/&gt;
+ *         &lt;element name="actividad" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescActividad" minOccurs="0"/&gt;
+ *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="profesores" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescProfesor" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -61,7 +61,7 @@ public class BeanClase {
     protected List<BeanDescProfesor> profesores;
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -73,7 +73,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -85,7 +85,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the inicio property.
+     * Obtiene el valor de la propiedad inicio.
      * 
      * @return
      *     possible object is
@@ -97,7 +97,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the inicio property.
+     * Define el valor de la propiedad inicio.
      * 
      * @param value
      *     allowed object is
@@ -109,7 +109,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the cantMin property.
+     * Obtiene el valor de la propiedad cantMin.
      * 
      */
     public int getCantMin() {
@@ -117,7 +117,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the cantMin property.
+     * Define el valor de la propiedad cantMin.
      * 
      */
     public void setCantMin(int value) {
@@ -125,7 +125,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the cantMax property.
+     * Obtiene el valor de la propiedad cantMax.
      * 
      */
     public int getCantMax() {
@@ -133,7 +133,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the cantMax property.
+     * Define el valor de la propiedad cantMax.
      * 
      */
     public void setCantMax(int value) {
@@ -141,7 +141,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the accesoURL property.
+     * Obtiene el valor de la propiedad accesoURL.
      * 
      * @return
      *     possible object is
@@ -153,7 +153,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the accesoURL property.
+     * Define el valor de la propiedad accesoURL.
      * 
      * @param value
      *     allowed object is
@@ -165,7 +165,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the actividad property.
+     * Obtiene el valor de la propiedad actividad.
      * 
      * @return
      *     possible object is
@@ -177,7 +177,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the actividad property.
+     * Define el valor de la propiedad actividad.
      * 
      * @param value
      *     allowed object is
@@ -189,7 +189,7 @@ public class BeanClase {
     }
 
     /**
-     * Gets the value of the cantPremios property.
+     * Obtiene el valor de la propiedad cantPremios.
      * 
      */
     public int getCantPremios() {
@@ -197,7 +197,7 @@ public class BeanClase {
     }
 
     /**
-     * Sets the value of the cantPremios property.
+     * Define el valor de la propiedad cantPremios.
      * 
      */
     public void setCantPremios(int value) {

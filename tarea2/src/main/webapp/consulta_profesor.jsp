@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.entrenamosuy.web.MiniUsuario"%>
-<%@page import="com.entrenamosuy.web.BeanClase"%>
-<%@page import="com.entrenamosuy.web.BeanActividad"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanClase"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanActividad"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanLocalDate"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -72,7 +73,7 @@
                                 <h6 class="mb-0">Fecha de nacimiento</h6>
                             </div>
                             <div class="col-sm-7 text-secondary">
-                                ${nacimiento.dayOfMonth}/${nacimiento.monthValue}/${nacimiento.year}
+                                ${nacimiento.dayOfMonth}/${nacimiento.month}/${nacimiento.year}
                             </div>
                         </div>
                         <hr>
@@ -109,21 +110,25 @@
                 <div class="space" style="height:60px"></div>
                 <div class="list-group">
                     <div class="list-group-item d-flex align-items-center active">Siguiendo</div>
-                    <c:forEach var="s" items="${seguidos}">
-                        <div class="list-group-item d-flex align-items-center">
-                            <div class="flex-fill pl-3 pr-3">
-                                <div><strong><%= s.getNombre()%></strong></div>
-                                <% if (s.getEsSocio()){
-                                h = "socio"; %>
-                                <div class="text-muted fs-13px">Socio</div>
-                                <%} else {
-                                h = "profesor";%>
-                                <div class="text-muted fs-13px">Profesor</div>
-                                <% } %>
-                            </div>
-                            <a href="consulta_<%=h%>?nickname=<%= s.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                    <%
+                    String h;
+                    List<MiniUsuario> sig = (List<MiniUsuario>) request.getAttribute("seguidos");
+                    for (MiniUsuario a: sig){
+                    %>
+                    <div class="list-group-item d-flex align-items-center">
+                        <div class="flex-fill pl-3 pr-3">
+                            <div><strong><%= a.getNombre()%></strong></div>
+                            <% if (a.getEsSocio()){
+                            h = "socio";%>
+                            <div class="text-muted fs-13px">Socio</div>
+                            <%} else {
+                            h = "profesor";%>
+                            <div class="text-muted fs-13px">Profesor</div>
+                            <% } %>
                         </div>
-                    </c:forEach>
+                        <a href="consulta_<%=h%>?nickname=<%= a.getNombre()%>" class="btn btn-outline-primary">Ver Perfil</a>
+                    </div>
+                    <% } %>
                 </div>
                 <div class="space" style="height:30px"></div>
                 <div class="list-group">

@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.Set" %>
 <%@ page import="java.net.URL" %>
-<%@ page import="com.entrenamosuy.web.Facades" %>
-<%@ page import="com.entrenamosuy.core.AbstractFacadeInstitucion" %>
-<%@ page import="com.entrenamosuy.core.AbstractFacadeActividad" %>
+<%@ page import="java.util.stream.Collectors" %>
+<%@page import="com.entrenamosuy.web.publicar.GetCategorias"%>
+<%@page import="com.entrenamosuy.web.publicar.GetInstituciones"%>
+<%@page import="com.entrenamosuy.web.publicar.Publicador"%>
+<%@page import="com.entrenamosuy.web.publicar.PublicadorService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    AbstractFacadeInstitucion facadeInstitucion = Facades.getFacades().getFacadeInstitucion();
-    Set<String> instituciones = facadeInstitucion.getInstituciones();
+    PublicadorService service = new PublicadorService();
+    Publicador port = service.getPublicadorPort();
+    
+    Set<String> instituciones = port.getInstituciones()
+        .stream()
+        .collect(Collectors.toSet());
+    Set<String> categorias = port.getCategorias()
+        .stream()
+        .collect(Collectors.toSet());
+    
     request.setAttribute("instituciones", instituciones);
 
-    AbstractFacadeActividad facadeActividad = Facades.getFacades().getFacadeActividad();
-    Set<String> categorias = facadeActividad.getCategorias();
     request.setAttribute("categorias", categorias);
 %>
 <aside id="aside">

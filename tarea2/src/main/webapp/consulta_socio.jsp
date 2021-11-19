@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.entrenamosuy.web.MiniUsuario"%>
-<%@page import="com.entrenamosuy.core.data.DataClase"%>
-<%@page import="com.entrenamosuy.core.data.DataCuponera"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanClase"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanCuponera"%>
+<%@page import="com.entrenamosuy.web.publicar.BeanLocalDate"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.Set"%>
@@ -21,11 +22,11 @@
         String nick = (String) request.getAttribute("nickname");
         String nombre = (String) request.getAttribute("nombre");
         String mail = (String) request.getAttribute("mail");
-        LocalDate nacimiento = (LocalDate) request.getAttribute("nacimiento");
+        BeanLocalDate nacimiento = (BeanLocalDate) request.getAttribute("nacimiento");
         List<MiniUsuario> seguidos = (List<MiniUsuario>) request.getAttribute("seguidos");
         List<MiniUsuario> seguidores = (List<MiniUsuario>) request.getAttribute("seguidores");
-        Set<DataClase> clases = (Set<DataClase>) request.getAttribute("clases");
-        Set<DataCuponera> cuponeras = (Set<DataCuponera>) request.getAttribute("cuponeras");
+        Set<BeanClase> clases = (Set<BeanClase>) request.getAttribute("clases");
+        Set<BeanCuponera> cuponeras = (Set<BeanCuponera>) request.getAttribute("cuponeras");
         int esSeguidor = (int) request.getAttribute("esSeguidor");
         %>
         <jsp:include page="templates/header.jsp"/>
@@ -78,7 +79,7 @@
                                 <h6 class="mb-0">Fecha de nacimiento</h6>
                             </div>
                             <div class="col-sm-7 text-secondary">
-                                <%= nacimiento.getDayOfMonth()%>/<%= nacimiento.getMonthValue()%>/<%= nacimiento.getYear()%>
+                                <%= nacimiento.getDayOfMonth()%>/<%= nacimiento.getMonth()%>/<%= nacimiento.getYear()%>
                             </div>
                         </div>
                     </div>
@@ -142,8 +143,8 @@
                                 <a class="list-group-item active">Clases acudidas</a>
                                 <hr>
                                 <%
-                                Set<DataClase> cls = (Set<DataClase>) request.getAttribute("clases");
-                                for (DataClase c: cls){
+                                Set<BeanClase> cls = (Set<BeanClase>) request.getAttribute("clases");
+                                for (BeanClase c: cls){
                                 %>
                                 <a href="consulta_dictado_clase?clase=<%= c.getNombre()%>" class="list-group-item list-group-item-action"><%= c.getNombre()%></a>
                                 <% } %>
@@ -157,8 +158,8 @@
                                 <a class="list-group-item active">Cuponeras compradas</a>
                                 <hr>
                                 <%
-                                Set<DataCuponera> cups = (Set<DataCuponera>) request.getAttribute("cuponeras");
-                                for (DataCuponera cup: cups){
+                                Set<BeanCuponera> cups = (Set<BeanCuponera>) request.getAttribute("cuponeras");
+                                for (BeanCuponera cup: cups){
                                 %>
                                 <a href="consulta_cuponera?nombre=<%= cup.getNombre()%>" class="list-group-item list-group-item-action"><%= cup.getNombre()%></a>
                                 <% } %>

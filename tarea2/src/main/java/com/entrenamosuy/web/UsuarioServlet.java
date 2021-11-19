@@ -22,7 +22,11 @@ import com.entrenamosuy.web.publicar.BeanCrearProfesorArgs;
 import com.entrenamosuy.web.publicar.BeanCrearSocioArgs;
 import com.entrenamosuy.web.publicar.BeanEmail;
 import com.entrenamosuy.web.publicar.BeanProfesor;
+import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanSocio;
+import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanCuponera;
+import com.entrenamosuy.web.publicar.BeanLocalDate;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioRepetidoException_Exception;
@@ -69,12 +73,14 @@ public class UsuarioServlet extends HttpServlet {
         } else if(path.equals("/consulta_socio")) {
             String nick = request.getParameter("nickname");
             BeanSocio socio = port.getDataSocio(nick);
+            Set<BeanClase> clases = socio.getClases().stream().collect(Collectors.toSet());
+            Set<BeanCuponera> cuponeras = socio.getCuponeras().stream().collect(Collectors.toSet());
 
             request.setAttribute("nombre", socio.getNombre() + " " + socio.getApellido());
             request.setAttribute("mail", socio.getCorreo().toString());
             request.setAttribute("nacimiento", socio.getNacimiento());
-            request.setAttribute("clases", socio.getClases());
-            request.setAttribute("cuponeras", socio.getCuponeras());
+            request.setAttribute("clases", clases);
+            request.setAttribute("cuponeras", cuponeras);
             request.setAttribute("nickname", nick);
 
             HttpSession session = request.getSession();
@@ -109,12 +115,15 @@ public class UsuarioServlet extends HttpServlet {
             String nick = request.getParameter("nickname");
             BeanProfesor profe = port.getDataProfesor(nick);
 
+            Set<BeanClase> clases = profe.getClases().stream().collect(Collectors.toSet());
+            Set<BeanActividad> actividades = profe.getAceptadas().stream().collect(Collectors.toSet());
+
             request.setAttribute("nombre", profe.getNombre());
             request.setAttribute("apellido", profe.getApellido());
             request.setAttribute("mail", profe.getCorreo().toString());
             request.setAttribute("nacimiento", profe.getNacimiento());
-            request.setAttribute("clases", profe.getClases());
-            request.setAttribute("actividades", profe.getAceptadas());
+            request.setAttribute("clases", clases);
+            request.setAttribute("actividades", actividades);
             request.setAttribute("nickname", nick);
             request.setAttribute("institucion", profe.getInstitucion());
             request.setAttribute("descripcion", profe.getDescripcion());

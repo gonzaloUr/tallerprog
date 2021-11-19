@@ -11,28 +11,28 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanCrearClaseArgs complex type.
+ * <p>Clase Java para beanCrearClaseArgs complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="beanCrearClaseArgs">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="acceso" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
- *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/>
- *         &lt;element name="nicknameProfesores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="registro" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDate" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="beanCrearClaseArgs"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="acceso" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/&gt;
+ *         &lt;element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/&gt;
+ *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/&gt;
+ *         &lt;element name="nicknameProfesores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="registro" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDate" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -64,7 +64,7 @@ public class BeanCrearClaseArgs {
     protected BeanLocalDate registro;
 
     /**
-     * Gets the value of the acceso property.
+     * Obtiene el valor de la propiedad acceso.
      * 
      * @return
      *     possible object is
@@ -76,7 +76,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the acceso property.
+     * Define el valor de la propiedad acceso.
      * 
      * @param value
      *     allowed object is
@@ -88,7 +88,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the actividad property.
+     * Obtiene el valor de la propiedad actividad.
      * 
      * @return
      *     possible object is
@@ -100,7 +100,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the actividad property.
+     * Define el valor de la propiedad actividad.
      * 
      * @param value
      *     allowed object is
@@ -112,7 +112,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the cantMax property.
+     * Obtiene el valor de la propiedad cantMax.
      * 
      */
     public int getCantMax() {
@@ -120,7 +120,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the cantMax property.
+     * Define el valor de la propiedad cantMax.
      * 
      */
     public void setCantMax(int value) {
@@ -128,7 +128,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the cantMin property.
+     * Obtiene el valor de la propiedad cantMin.
      * 
      */
     public int getCantMin() {
@@ -136,7 +136,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the cantMin property.
+     * Define el valor de la propiedad cantMin.
      * 
      */
     public void setCantMin(int value) {
@@ -144,7 +144,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the imagen property.
+     * Obtiene el valor de la propiedad imagen.
      * 
      * @return
      *     possible object is
@@ -155,7 +155,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the imagen property.
+     * Define el valor de la propiedad imagen.
      * 
      * @param value
      *     allowed object is
@@ -166,7 +166,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the inicio property.
+     * Obtiene el valor de la propiedad inicio.
      * 
      * @return
      *     possible object is
@@ -178,7 +178,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the inicio property.
+     * Define el valor de la propiedad inicio.
      * 
      * @param value
      *     allowed object is
@@ -219,7 +219,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the nombre property.
+     * Obtiene el valor de la propiedad nombre.
      * 
      * @return
      *     possible object is
@@ -231,7 +231,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the nombre property.
+     * Define el valor de la propiedad nombre.
      * 
      * @param value
      *     allowed object is
@@ -243,7 +243,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Gets the value of the registro property.
+     * Obtiene el valor de la propiedad registro.
      * 
      * @return
      *     possible object is
@@ -255,7 +255,7 @@ public class BeanCrearClaseArgs {
     }
 
     /**
-     * Sets the value of the registro property.
+     * Define el valor de la propiedad registro.
      * 
      * @param value
      *     allowed object is

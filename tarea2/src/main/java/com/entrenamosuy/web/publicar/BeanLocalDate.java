@@ -7,22 +7,22 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for beanLocalDate complex type.
+ * <p>Clase Java para beanLocalDate complex type.
  * 
- * <p>The following schema fragment specifies the expected content contained within this class.
+ * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="beanLocalDate">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="dayOfMonth" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="month" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="year" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="beanLocalDate"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="dayOfMonth" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="month" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="year" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -40,7 +40,7 @@ public class BeanLocalDate {
     protected int year;
 
     /**
-     * Gets the value of the dayOfMonth property.
+     * Obtiene el valor de la propiedad dayOfMonth.
      * 
      */
     public int getDayOfMonth() {
@@ -48,7 +48,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Sets the value of the dayOfMonth property.
+     * Define el valor de la propiedad dayOfMonth.
      * 
      */
     public void setDayOfMonth(int value) {
@@ -56,7 +56,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Gets the value of the month property.
+     * Obtiene el valor de la propiedad month.
      * 
      */
     public int getMonth() {
@@ -64,7 +64,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Sets the value of the month property.
+     * Define el valor de la propiedad month.
      * 
      */
     public void setMonth(int value) {
@@ -72,7 +72,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Gets the value of the year property.
+     * Obtiene el valor de la propiedad year.
      * 
      */
     public int getYear() {
@@ -80,7 +80,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Sets the value of the year property.
+     * Define el valor de la propiedad year.
      * 
      */
     public void setYear(int value) {
