@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para beanCrearSocioArgs complex type.
+ * <p>Java class for beanCrearSocioArgs complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="beanCrearSocioArgs">
@@ -52,7 +52,7 @@ public class BeanCrearSocioArgs {
     protected String password;
 
     /**
-     * Obtiene el valor de la propiedad apellido.
+     * Gets the value of the apellido property.
      * 
      * @return
      *     possible object is
@@ -64,7 +64,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad apellido.
+     * Sets the value of the apellido property.
      * 
      * @param value
      *     allowed object is
@@ -76,7 +76,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad correo.
+     * Gets the value of the correo property.
      * 
      * @return
      *     possible object is
@@ -88,7 +88,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad correo.
+     * Sets the value of the correo property.
      * 
      * @param value
      *     allowed object is
@@ -100,7 +100,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad imagen.
+     * Gets the value of the imagen property.
      * 
      * @return
      *     possible object is
@@ -111,7 +111,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad imagen.
+     * Sets the value of the imagen property.
      * 
      * @param value
      *     allowed object is
@@ -122,7 +122,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nacimiento.
+     * Gets the value of the nacimiento property.
      * 
      * @return
      *     possible object is
@@ -134,7 +134,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad nacimiento.
+     * Sets the value of the nacimiento property.
      * 
      * @param value
      *     allowed object is
@@ -146,7 +146,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nickname.
+     * Gets the value of the nickname property.
      * 
      * @return
      *     possible object is
@@ -158,7 +158,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad nickname.
+     * Sets the value of the nickname property.
      * 
      * @param value
      *     allowed object is
@@ -170,7 +170,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -182,7 +182,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -194,7 +194,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad password.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
@@ -206,7 +206,7 @@ public class BeanCrearSocioArgs {
     }
 
     /**
-     * Define el valor de la propiedad password.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is
