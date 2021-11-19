@@ -2,8 +2,11 @@ package com.entrenamosuy.core.data;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
+import com.entrenamosuy.core.model.Actividad;
 
 public class DataSocio extends DataUsuario {
 
@@ -30,6 +33,8 @@ public class DataSocio extends DataUsuario {
         private Set<DataClase> clases = Collections.emptySet();
 
         private Set<DataCuponera> cuponeras = Collections.emptySet();
+
+        private Map<String, Actividad> actividadesFavoritas;
 
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
@@ -76,20 +81,28 @@ public class DataSocio extends DataUsuario {
             return this;
         }
 
+        public Builder setFavoritas(Map<String, Actividad> favoritas) {
+            actividadesFavoritas = favoritas;
+            return this;
+        }
+
         public DataSocio build() {
-            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos, clases, cuponeras);
+            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos, clases, cuponeras, actividadesFavoritas);
         }
     }
 
     private final Set<DataClase> clases;
     private final Set<DataCuponera> cuponeras;
+    private final Map<String, Actividad> favoritas;
 
     protected DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Set<String> seguidores, 
-        Set<String> seguidos, Set<DataClase> clases, Set<DataCuponera> cuponeras) {
+        Set<String> seguidos, Set<DataClase> clases, Set<DataCuponera> cuponeras, Map<String, Actividad> favoritas) {
 
         super(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos);
         this.clases = clases;
         this.cuponeras = cuponeras;
+        this.favoritas = favoritas;
+
     }
 
     public Set<DataClase> getClases() {
@@ -98,6 +111,10 @@ public class DataSocio extends DataUsuario {
 
     public Set<DataCuponera> getCuponeras() {
         return cuponeras;
+    }
+
+    public Map<String, Actividad> getFavoritas(){
+        return favoritas;
     }
 
     @Override

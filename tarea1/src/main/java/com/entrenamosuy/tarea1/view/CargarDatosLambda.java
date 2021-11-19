@@ -91,6 +91,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setPassword("asdfg456")
                 .setImagen(resourceToFile("img/usuarios/3lxoBvZ"))
                 .invoke();
+            
 
             facadeUsuario.crearSocio()
                 .setNickname("caro")
@@ -101,6 +102,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setPassword("123rtgfdv")
                 .setImagen(resourceToFile("img/usuarios/3AfcJER"))
                 .invoke();
+            
 
             facadeUsuario.crearSocio()
                 .setNickname("euge")
@@ -121,6 +123,7 @@ public class CargarDatosLambda implements ActionListener {
                 .setImagen(resourceToFile("img/usuarios/2XkrKH9"))
                 .setPassword("GTO468")
                 .invoke();
+            
 
             facadeUsuario.crearSocio()
                 .setNickname("sergiop")
@@ -470,6 +473,46 @@ public class CargarDatosLambda implements ActionListener {
                 .setCreador("denis")
                 .invoke();
 
+
+
+            facadeUsuario.marcarComoFav("Emi71", "Voleibol");
+            facadeUsuario.marcarComoFav("caro", "Atletismo");
+            facadeUsuario.marcarComoFav("caro", "Aparatos y pesas");
+            facadeUsuario.marcarComoFav("guille", "Kickboxing");
+            facadeUsuario.marcarComoFav("sergiop", "Aparatos y pesas");
+            facadeUsuario.marcarComoFav("andy", "Voleibol");
+            facadeUsuario.marcarComoFav("andy", "Kickboxing");
+            facadeUsuario.marcarComoFav("m1k4", "Voleibol");
+            facadeUsuario.marcarComoFav("m1k4", "Kickboxing");
+
+            facadeUsuario.agregarPremioASocio("charly", "Aparatos");
+            facadeUsuario.agregarPremioASocio("caro", "Aparatos");
+            facadeUsuario.agregarPremioASocio("m1k4", "Aparatos");
+            facadeUsuario.agregarPremioASocio("charly", "Mariposa");
+            facadeUsuario.agregarPremioASocio("sergiop", "Mariposa");
+            facadeUsuario.agregarPremioASocio("m1k4", "Aerobica niños");
+            facadeUsuario.agregarPremioASocio("caro", "Aerobica");
+            facadeUsuario.agregarPremioASocio("euge", "Aerobica");
+            facadeUsuario.agregarPremioASocio("sergiop", "Boxeo II");
+            facadeUsuario.agregarPremioASocio("guille", "Boxeo II" );
+            
+            facadeUsuario.puntuarClase("Emi71", "Voleibol", 4);
+            facadeUsuario.puntuarClase("Emi71", "Aerobico adulto mayor", 5);
+            facadeUsuario.puntuarClase("caro", "Calistenia", 4);
+            facadeUsuario.puntuarClase("caro", "Peso libre", 5);
+            facadeUsuario.puntuarClase("caro", "Aparatos", 4);
+            facadeUsuario.puntuarClase("guille", "Braza", 5);
+            facadeUsuario.puntuarClase("guille", "Aerobico adulto mayor", 3);
+            facadeUsuario.puntuarClase("sergiop", "Mariposa", 4);
+            facadeUsuario.puntuarClase("andy", "Mariposa", 2);
+            facadeUsuario.puntuarClase("andy", "Boxeo I", 4);
+            facadeUsuario.puntuarClase("m1k4", "Aerobica niños", 5);
+            facadeUsuario.puntuarClase("m1k4", "Boxeo I", 5);
+            
+
+            
+
+
             facadeUsuario.seguirUsuario("guille", "Emi71");
             facadeUsuario.seguirUsuario("euge", "caro");
             facadeUsuario.seguirUsuario("guille", "caro");
@@ -768,7 +811,7 @@ public class CargarDatosLambda implements ActionListener {
             facadeClase.crearClase()
                 .setNombreActividad("Basquetbol")
                 .setNombre("Basquet II")
-                .setInicio(LocalDateTime.of(2021, 11, 27, 21, 00))
+                .setInicio(LocalDateTime.of(2021, 11, 1, 21, 00))
                 .setNicknameProfesores(p7)
                 .setCantMin(10)
                 .setCantMax(10)

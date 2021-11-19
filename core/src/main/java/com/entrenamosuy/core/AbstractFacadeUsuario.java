@@ -116,6 +116,8 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
 
     public abstract void validarCredenciales(String nickname, String password) throws PasswordInvalidaException;
 
+    public abstract void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException;
+
     public abstract void seguirUsuario(String seguido, String seguidor);
 
     public abstract void dejarDeSeguirUsuario(String seguido, String seguidor);
@@ -127,4 +129,8 @@ public abstract class AbstractFacadeUsuario extends AbstractFacade {
     public abstract void marcarComoFav(String socio, String actividad);
     
     public abstract void desmarcarComoFav(String socio, String actividad);
+
+    public abstract boolean esFav(String socio, String actividad);
+    
+    public abstract void agregarPremioASocio(String socio, String clase);
 }

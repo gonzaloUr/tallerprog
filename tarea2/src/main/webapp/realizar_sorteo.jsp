@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="com.entrenamosuy.web.publicar.BeanSocio"%>
@@ -75,7 +75,7 @@ else {%>
                 </div>
                 <%}%>
             </div>
-            <a href="consulta_clase?nombre=<%=clase%>" class="btn btn-primary">Cancelar</a>
+            <a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Cancelar</a>
             <a href="confirmar_sorteo?clase=<%=clase%>" class="btn btn-primary">Realizar Sorteo</a>
 		</div>
 	</div>

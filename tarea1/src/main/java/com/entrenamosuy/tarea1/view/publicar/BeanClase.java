@@ -22,6 +22,8 @@ public class BeanClase {
 
     private BeanDescActividad actividad;
 
+    private int cantPremios;
+
     private ArrayList<BeanDescProfesor> profesores;
 
     public String getNombre() {
@@ -72,6 +74,14 @@ public class BeanClase {
         this.actividad = actividad;
     }
 
+    public int getCantPremios(){
+        return cantPremios;
+    }
+
+    public void setCantPremios(int cantPremios){
+        this.cantPremios = cantPremios;
+    }
+
     public ArrayList<BeanDescProfesor> getProfesores() {
         return this.profesores;
     }
@@ -86,6 +96,7 @@ public class BeanClase {
         setCantMax(x.getCantMax());
         setAccesoURL(x.getAccesoURL());
         setActividad(BeanDescActividad.of(x.getActividad()));
+        setCantPremios(x.getCantPremios());
         setProfesores(x.getProfesores()
             .stream()
             .map(BeanDescProfesor::of)

@@ -41,6 +41,11 @@
         <servlet-class>com.entrenamosuy.web.SesionServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>MovilServlet</servlet-name>
+        <servlet-class>com.entrenamosuy.web.MovilServlet</servlet-class>
+    </servlet>
+
     <!-- Default servlet mappings -->
 
     <servlet-mapping>
@@ -67,12 +72,24 @@
 
     <servlet-mapping>
         <servlet-name>SesionServlet</servlet-name>
-        <url-pattern>/index_m</url-pattern>
+        <url-pattern>/cerrar_sesion</url-pattern>
+    </servlet-mapping>
+
+    <!-- MovilServlet mappings -->
+
+    <servlet-mapping>
+        <servlet-name>MovilServlet</servlet-name>
+        <url-pattern>/index_movil</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>SesionServlet</servlet-name>
-        <url-pattern>/cerrar_sesion</url-pattern>
+        <servlet-name>MovilServlet</servlet-name>
+        <url-pattern>/inicio_movil</url-pattern>
+    
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>MovilServlet</servlet-name>
+        <url-pattern>/cerrar_sesion_movil</url-pattern>
     </servlet-mapping>
 
     <!-- ActividadServlet mappings -->
@@ -184,6 +201,17 @@
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/alta_profesor</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/marcar_fav</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/desmarcar_fav</url-pattern>
     </servlet-mapping>
 
     <!-- IndexServlet mappings -->

@@ -130,6 +130,26 @@ public class ClaseServlet extends HttpServlet {
             URL url = new URL(clase.getAccesoURL());
             String acti= clase.getActividad().getNombre();
 
+            Set<String> profesorNick = clase.getProfesores()
+            .stream()
+            .map(BeanDescProfesor::getNickname)
+            .collect(Collectors.toSet());
+
+            String nickname = profesorNick.iterator().next();
+
+            boolean esDicta = false;
+
+            HttpSession session = request.getSession();
+
+            Object usr = session.getAttribute("usuario");
+
+
+            if(usr != null){
+                BeanProfesor profe = (BeanProfesor) usr;
+                boolean b = (boolean) session.getAttribute("es_profesor");    
+                esDicta = (b) && (profe.getNickname().equals(nickname));        
+            }
+            
             Set<String> profesorNom = clase.getProfesores()
                 .stream()
                 .map(BeanDescProfesor::getNombre)
@@ -151,11 +171,13 @@ public class ClaseServlet extends HttpServlet {
             request.setAttribute("profesorNom", profesorNom);
             request.setAttribute("profesorApe", profesorApe);
             request.setAttribute("apellido", apellido);
+            request.setAttribute("es_profesor_que_dicta", esDicta);
+            request.setAttribute("cantPremios", clase.getCantPremios());
 
             request.getRequestDispatcher("/consulta_dictado_clase.jsp")
                 .forward(request, response);
 
-        } else if (path.equals("realizar_sorteo")) {
+        } else if (path.equals("/realizar_sorteo")) {
         	String clase = request.getParameter("clase");
         	int estadoS = port.getEstadoSorteo(clase);
         	request.setAttribute("estadoSorteo", estadoS);
@@ -166,16 +188,16 @@ public class ClaseServlet extends HttpServlet {
         		request.setAttribute("ganadores", port.getGanadores(clase));
         	}
         	request.setAttribute("clase", clase);
-        	request.getRequestDispatcher("realizar_sorteo.jsp").forward(request, response);
-
+        	request.getRequestDispatcher("/realizar_sorteo.jsp").forward(request, response);
+  
     	} else if (path.equals("/confirmar_sorteo")) {
     		String clase = (String) request.getParameter("clase");
     		port.realizarSorteo(clase);
     		request.setAttribute("ganadores", port.getGanadores(clase));
     		request.setAttribute("estadoSorteo", 1);
         	request.setAttribute("clase", clase);
-        	request.getRequestDispatcher("realizar_sorteo.jsp").forward(request, response);
-
+        	request.getRequestDispatcher("/realizar_sorteo.jsp").forward(request, response);
+        	
     	} else if (path.equals("/alta_dictado_clase")) {
             Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 

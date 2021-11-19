@@ -497,6 +497,20 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     }
 
     @Override
+    public void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException {
+        Map<String, Socio> socios = getRegistry().getSocios();
+        Usuario usuario;
+
+        if (socios.containsKey(nickname))
+            usuario = socios.get(nickname);
+        else
+            throw new SocioNoEncontradoException(nickname);
+
+        if (!usuario.getPassword().equals(password))
+            throw new PasswordInvalidaException();
+    }
+
+    @Override
     public void seguirUsuario(String seguido, String seguidor) {
         Map<String, Socio> socios = getRegistry().getSocios();
         Map<String, Profesor> profes = getRegistry().getProfesores();
@@ -590,5 +604,18 @@ public class FacadeUsuario extends AbstractFacadeUsuario {
     	Socio s = mapa.get(socio);
     	s.eliminarFavorita(actividad);
     }
+
+    @Override
+    public void agregarPremioASocio(String socio, String clase){
+        Socio sochi = getRegistry().getSocios().get(socio);
+        Clase clachi = getRegistry().getClases().get(clase);
+        sochi.agregarPremio(clachi);
+    }
     
+    @Override
+    public boolean esFav(String socio, String actividad){
+        Map<String, Socio> mapa = getRegistry().getSocios();
+    	Socio s = mapa.get(socio);
+        return s.getActividadesFavoritas().containsKey(actividad);
+    }
 }

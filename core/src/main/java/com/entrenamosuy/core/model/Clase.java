@@ -340,6 +340,7 @@ public class Clase {
             .setCantMax(cantMax)
             .setAccesoURL(acceso)
             .setActividad(actividad.getDescActividad())
+            .setCantPremios(cantPremios)
             .setProfesores(descProfes)
             .build();
     }
@@ -351,7 +352,7 @@ public class Clase {
         	list.add(r);
         }
         Collections.shuffle(list);
-        for (int i=0; i<cantPremios; i++) {
+        for (int i=0; (i<cantPremios && i<registros.size()); i++) {
         	premiados.add(list.get(i));
             list.get(i).getSocio().agregarPremio(this);
         }    			

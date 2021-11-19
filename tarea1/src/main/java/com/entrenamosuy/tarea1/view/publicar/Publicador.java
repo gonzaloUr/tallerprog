@@ -349,6 +349,15 @@ public class Publicador {
     }
 
     @WebMethod
+    public void validarCredencialesMovil(String nickname, String password) throws PasswordInvalidaException, UsuarioNoEncontradoExceptionWrapper {
+        try {
+            facades.getFacadeUsuario().validarCredencialesMovil(nickname, password);
+        } catch (UsuarioNoEncontradoException e) {
+            new UsuarioNoEncontradoExceptionWrapper(e);
+        }
+    }
+
+    @WebMethod
     public void registrarseSinCuponera(String nickname, String clase, BeanLocalDate fecha) throws RegistroInconsistenteExceptionWrapper {
         try {
             facades.getFacadeActividad().registrarseSinCuponera(nickname, clase, fecha.toLocalDate());
@@ -427,5 +436,20 @@ public class Publicador {
     @WebMethod
     public int getEstadoSorteo(String clase) {
     	return facades.getFacadeClase().getEstadoSorteo(clase);
+    }
+
+    @WebMethod
+    public void marcarComoFav(String socio, String actividad){
+        facades.getFacadeUsuario().marcarComoFav(socio, actividad); 
+    }
+
+    @WebMethod
+    public void desmarcarComoFav(String socio, String actividad){
+        facades.getFacadeUsuario().desmarcarComoFav(socio, actividad); 
+    }
+
+    @WebMethod
+    public boolean esFav(String socio, String actividad){
+        return facades.getFacadeUsuario().esFav(socio, actividad); 
     }
 }
