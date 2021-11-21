@@ -17,6 +17,8 @@ import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.BeanActividad;
+import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanCuponera;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
 
 public class MovilServlet extends HttpServlet {
@@ -97,11 +99,6 @@ public class MovilServlet extends HttpServlet {
 
             request.getRequestDispatcher("/consulta_actividad_cat_movil.jsp")
                 .forward(request, response);
-        
-
-
-
-
 
         } else if(path.equals("/ver_actividad_movil")) {
             Set<String> instituciones = port.getInstituciones()
@@ -116,6 +113,40 @@ public class MovilServlet extends HttpServlet {
             request.setAttribute("categorias", categorias);
 
             request.getRequestDispatcher("/ver_actividad_movil.jsp")
+                .forward(request, response);
+
+        } else if(path.equals("/consulta_actividad_movil")) {
+
+            String act = (String) request.getParameter("nombre");
+            BeanActividad actividad = port.getDataActividad(act);
+
+            String nombre = actividad.getNombre();
+            String descripcion = actividad.getDescripcion();
+
+            Set<String> clasesOfrecidas = actividad.getClases()
+                .stream()
+                .map(BeanClase::getNombre)
+                .collect(Collectors.toSet());
+
+            Set<String> cuponerasAsociadas = actividad.getCuponeras()
+                .stream()
+                .map(BeanCuponera::getNombre)
+                .collect(Collectors.toSet());
+
+            Set<String> categoriasAsociadas = actividad.getCategorias()
+                .stream()
+                .collect(Collectors.toSet());
+
+            int duracion = actividad.getDuracion();
+
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("descripcion", descripcion);
+            request.setAttribute("clasesOfrecidas", clasesOfrecidas);
+            request.setAttribute("cuponerasAsociadas", cuponerasAsociadas);
+            request.setAttribute("categoriasAsociadas", categoriasAsociadas);
+            request.setAttribute("duracion", duracion);
+
+            request.getRequestDispatcher("/consulta_actividad_movil.jsp")
                 .forward(request, response);
         }
         

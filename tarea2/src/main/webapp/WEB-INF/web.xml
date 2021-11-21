@@ -111,6 +111,7 @@
         <servlet-name>MovilServlet</servlet-name>
         <url-pattern>/consulta_actividad_cat_movil</url-pattern>
     </servlet-mapping>
+    
 
     <!-- ActividadServlet mappings -->
 

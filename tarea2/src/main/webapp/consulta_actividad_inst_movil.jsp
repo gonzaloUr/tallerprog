@@ -29,7 +29,7 @@
         <nav class="flex flex-column p-3 bg-light">
             <div class="list-group pb-3">
                 <c:forEach items="${actividades}" var="actividad" >
-                <form action="consulta_actividad">
+                <form action="consulta_actividad_movil">
                     <img src="img/actividad/${actividad.nombre}" alt=" " class="w-50">
                     <input class="list-group-item list-group-item-action" type="submit" name="nombre" value="${actividad.nombre}">
                 </form>
