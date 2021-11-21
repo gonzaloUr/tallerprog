@@ -33,7 +33,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                 <c:forEach items="${categorias}" var="categoria">
-                    <li><a class="dropdown-item" href="consulta_categoria?categoria=${categoria}">${categoria}</a></li>
+                    <li><a class="dropdown-item" href="consulta_actividad_cat_movil?categoria=${categoria}">${categoria}</a></li>
                 </c:forEach>
             </ul>
         </div>

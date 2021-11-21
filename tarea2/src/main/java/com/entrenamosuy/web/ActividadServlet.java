@@ -121,6 +121,7 @@ public class ActividadServlet extends HttpServlet {
 
         }  else if (path=="/alta_actividad") {
             processRequest(request, response);
+            
         } else if (path.equals("/consulta_categoria")) {
             String cat = request.getParameter("categoria");
             List<String> catActividades = port.getActividadesDeCategoria(cat);

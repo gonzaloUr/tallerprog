@@ -1,6 +1,7 @@
 package com.entrenamosuy.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -77,9 +78,31 @@ public class MovilServlet extends HttpServlet {
             request.getRequestDispatcher("/consulta_actividad_inst_movil.jsp")
                 .forward(request, response);
 
+        } else if(path.equals("/consulta_actividad_cat_movil")) {
+            Set<String> categorias = port.getCategorias()
+                .stream()
+                .collect(Collectors.toSet());
+    
+            String categoriaNombre = request.getParameter("categoria");
 
 
+            List<String> catActividades = port.getActividadesDeCategoria(categoriaNombre);
+            List<BeanActividad> acts = new ArrayList<>();
+            for (String acti : catActividades) {
+                acts.add(port.getDataActividad(acti));
+            }
+            
+            request.setAttribute("categorias", categorias);
+            request.setAttribute("actividades", acts);
+
+            request.getRequestDispatcher("/consulta_actividad_cat_movil.jsp")
+                .forward(request, response);
         
+
+
+
+
+
         } else if(path.equals("/ver_actividad_movil")) {
             Set<String> instituciones = port.getInstituciones()
                 .stream()
