@@ -1,6 +1,8 @@
 package com.entrenamosuy.web;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +21,9 @@ import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Excepti
 import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCuponera;
+import com.entrenamosuy.web.publicar.BeanDescProfesor;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
+import com.entrenamosuy.web.publicar.BeanProfesor;
 
 public class MovilServlet extends HttpServlet {
 
@@ -51,17 +55,70 @@ public class MovilServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_dictado_clase_movil")) {
-            String institucionNombre = request.getParameter("institucion");
-            BeanInstitucion institucion = port.getDataInstitucion(institucionNombre);
-            String nombre = institucion.getNombre();
 
-            List<String> actividadesOfrecidas = port.getActividadesDeInstitucion(institucionNombre);
+
+
+            String claseNombre = request.getParameter("clase");
+
+            BeanClase clase = port.getDataClase(claseNombre);
+
+            String nombre = clase.getNombre();
+            LocalDateTime inicio = Utils.localDateTimeFromBean(clase.getInicio());
+            int cantMin = clase.getCantMin();
+            int cantMax = clase.getCantMax();
+            URL url = new URL(clase.getAccesoURL());
+            String acti= clase.getActividad().getNombre();
+
+            Set<String> profesorNick = clase.getProfesores()
+            .stream()
+            .map(BeanDescProfesor::getNickname)
+            .collect(Collectors.toSet());
+
+            String nickname = profesorNick.iterator().next();
+
+            boolean esDicta = false;
+
+            HttpSession session = request.getSession();
+
+            Object usr = session.getAttribute("usuario");
+
+
+            if(usr != null){ //TODO revisar esto que da error consulta dictado a clase
+                BeanProfesor profe = (BeanProfesor) usr;
+                boolean b = (boolean) session.getAttribute("es_profesor");    
+                esDicta = (b) && (profe.getNickname().equals(nickname));        
+            }
+            
+            Set<String> profesorNom = clase.getProfesores()
+                .stream()
+                .map(BeanDescProfesor::getNombre)
+                .collect(Collectors.toSet());
+
+            Set<String> profesorApe = clase.getProfesores()
+                .stream()
+                .map(BeanDescProfesor::getApellido)
+                .collect(Collectors.toSet());
+
+            String apellido = profesorApe.iterator().next();
 
             request.setAttribute("nombre", nombre);
-            request.setAttribute("actividadesOfrecidas", actividadesOfrecidas);
+            request.setAttribute("inicio", inicio);
+            request.setAttribute("cantMin", cantMin);
+            request.setAttribute("cantMax", cantMax);
+            request.setAttribute("url", url);
+            request.setAttribute("acti", acti);
+            request.setAttribute("profesorNom", profesorNom);
+            request.setAttribute("profesorApe", profesorApe);
+            request.setAttribute("apellido", apellido);
+            request.setAttribute("es_profesor_que_dicta", esDicta);
+            request.setAttribute("cantPremios", clase.getCantPremios());
 
             request.getRequestDispatcher("/consulta_dictado_clase_movil.jsp")
                 .forward(request, response);
+
+
+
+
 
         } else if(path.equals("/consulta_actividad_inst_movil")) {
             Set<String> instituciones = port.getInstituciones()

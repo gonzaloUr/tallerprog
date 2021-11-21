@@ -112,6 +112,11 @@
         <url-pattern>/consulta_actividad_cat_movil</url-pattern>
     </servlet-mapping>
     
+    <servlet-mapping>
+        <servlet-name>MovilServlet</servlet-name>
+        <url-pattern>/consulta_dictado_clase_movil</url-pattern>
+    </servlet-mapping>
+    
 
     <!-- ActividadServlet mappings -->
 
