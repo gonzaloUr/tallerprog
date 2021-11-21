@@ -15,7 +15,7 @@ import com.entrenamosuy.web.publicar.PasswordInvalidaException_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
-
+import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanInstitucion;
 
 public class MovilServlet extends HttpServlet {
@@ -60,21 +60,26 @@ public class MovilServlet extends HttpServlet {
             request.getRequestDispatcher("/consulta_dictado_clase_movil.jsp")
                 .forward(request, response);
 
-        } else if(path.equals("/consulta_actividad_movil")) {
+        } else if(path.equals("/consulta_actividad_inst_movil")) {
             Set<String> instituciones = port.getInstituciones()
                 .stream()
                 .collect(Collectors.toSet());
 
-            Set<String> categorias = port.getCategorias()
-                .stream()
-                .collect(Collectors.toSet());
+            String institucionNombre = request.getParameter("institucion");
+
+            BeanInstitucion ins = port.getDataInstitucion(institucionNombre);
+            List<BeanActividad> acts = ins.getActividadesOfrecidas();
+            
 
             request.setAttribute("instituciones", instituciones);
-            request.setAttribute("categorias", categorias);
+            request.setAttribute("actividades", acts);
 
-            request.getRequestDispatcher("/consulta_actividad_movil.jsp")
+            request.getRequestDispatcher("/consulta_actividad_inst_movil.jsp")
                 .forward(request, response);
 
+
+
+        
         } else if(path.equals("/ver_actividad_movil")) {
             Set<String> instituciones = port.getInstituciones()
                 .stream()
