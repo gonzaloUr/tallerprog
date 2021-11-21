@@ -9,13 +9,13 @@
   
   <div class="container">
     <nav class="nav-main">
-        <a href="/tarea2/index_m.jsp" class="active" style="color:black"> <h4>Entrenamos.uy</h4></a>
+        <a href="/tarea2/index_movil" class="active" style="color:black"> <h4>Entrenamos.uy</h4></a>
         <ul class="nav-menu">
         <li>
-          <a href="#Acti">Actividades</a>
+          <a href="ver_actividad_movil">Actividades</a>
         </li>
         <li>
-          <a href="#clase">Clases</a>
+          <a href="ver_actividad_movil">Clases</a>
         </li>
         <li>
           <a href="cerrar_sesion_movil">Cerrar sesión</a>

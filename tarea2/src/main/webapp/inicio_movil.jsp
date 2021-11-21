@@ -13,11 +13,10 @@
         <jsp:include page="/templates/top_mobil.jsp"/>
         <c:choose>
             <c:when test="${usuario == null}">
-                <a class="btn btn-outline-light ms-3" href="index_movil">Debe iniciar sesión</a>
+                <a class="w-100 btn btn-primary" href="index_movil">Debe iniciar sesión</a>
             </c:when>
             <c:otherwise>
-                <span class="ms-3">${usuario.nombre} ${usuario.apellido}</span>
-                <a href="consulta_socio?nickname=${usuario.nickname}">
+                <span class="ms-3">Bienvenido ${usuario.nombre} ${usuario.apellido}</span>
                 </a>
             </c:otherwise>
         </c:choose>

@@ -2,6 +2,8 @@ package com.entrenamosuy.web;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,11 +16,15 @@ import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 
+import com.entrenamosuy.web.publicar.BeanInstitucion;
+
 public class MovilServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
+        PublicadorService service = new PublicadorService();
+        Publicador port = service.getPublicadorPort();
 
         if (path.equals("/index_movil")) {
             getServletContext()
@@ -40,7 +46,51 @@ public class MovilServlet extends HttpServlet {
             request
                 .getRequestDispatcher("/inicio_movil.jsp")
                 .forward(request, response);
+
+        } else if(path.equals("/consulta_dictado_clase_movil")) {
+            String institucionNombre = request.getParameter("institucion");
+            BeanInstitucion institucion = port.getDataInstitucion(institucionNombre);
+            String nombre = institucion.getNombre();
+
+            List<String> actividadesOfrecidas = port.getActividadesDeInstitucion(institucionNombre);
+
+            request.setAttribute("nombre", nombre);
+            request.setAttribute("actividadesOfrecidas", actividadesOfrecidas);
+
+            request.getRequestDispatcher("/consulta_dictado_clase_movil.jsp")
+                .forward(request, response);
+
+        } else if(path.equals("/consulta_actividad_movil")) {
+            Set<String> instituciones = port.getInstituciones()
+                .stream()
+                .collect(Collectors.toSet());
+
+            Set<String> categorias = port.getCategorias()
+                .stream()
+                .collect(Collectors.toSet());
+
+            request.setAttribute("instituciones", instituciones);
+            request.setAttribute("categorias", categorias);
+
+            request.getRequestDispatcher("/consulta_actividad_movil.jsp")
+                .forward(request, response);
+
+        } else if(path.equals("/ver_actividad_movil")) {
+            Set<String> instituciones = port.getInstituciones()
+                .stream()
+                .collect(Collectors.toSet());
+
+            Set<String> categorias = port.getCategorias()
+                .stream()
+                .collect(Collectors.toSet());
+
+            request.setAttribute("instituciones", instituciones);
+            request.setAttribute("categorias", categorias);
+
+            request.getRequestDispatcher("/ver_actividad_movil.jsp")
+                .forward(request, response);
         }
+        
     }
 
     @Override

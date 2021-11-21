@@ -12,21 +12,21 @@ import javax.xml.bind.annotation.XmlType;
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="beanLocalDateTime"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="dayOfMonth" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="hour" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="minute" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="month" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="nano" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="second" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *         &lt;element name="year" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * &lt;complexType name="beanLocalDateTime">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="dayOfMonth" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="hour" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="minute" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="month" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="nano" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="second" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="year" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
  * </pre>
  * 
  * 
