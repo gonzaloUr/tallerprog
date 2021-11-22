@@ -49,8 +49,7 @@ public class ClaseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if(path.equals("/registrarse_a_clase_1")) {
             Set<String> inst = port.getInstituciones()
@@ -151,7 +150,7 @@ public class ClaseServlet extends HttpServlet {
                     esDicta = (b) && (profe.getNickname().equals(nickname));        
                 }
             }
-            
+
             Set<String> profesorNom = clase.getProfesores()
                 .stream()
                 .map(BeanDescProfesor::getNombre)
@@ -191,7 +190,7 @@ public class ClaseServlet extends HttpServlet {
         	}
         	request.setAttribute("clase", clase);
         	request.getRequestDispatcher("/realizar_sorteo.jsp").forward(request, response);
-  
+
     	} else if (path.equals("/confirmar_sorteo")) {
     		String clase = (String) request.getParameter("clase");
     		port.realizarSorteo(clase);
@@ -199,7 +198,7 @@ public class ClaseServlet extends HttpServlet {
     		request.setAttribute("estadoSorteo", 1);
         	request.setAttribute("clase", clase);
         	request.getRequestDispatcher("/realizar_sorteo.jsp").forward(request, response);
-        	
+
     	} else if (path.equals("/alta_dictado_clase")) {
             Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
 
@@ -214,8 +213,7 @@ public class ClaseServlet extends HttpServlet {
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if(path.equals("/confirmar_registro_clase")) {
 
@@ -355,8 +353,7 @@ public class ClaseServlet extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         BeanProfesor profesor = (BeanProfesor) request.getSession().getAttribute("usuario");
         String institucion = profesor.getInstitucion();

@@ -28,7 +28,6 @@ import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.InstitucionNoEncontradaExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.SinCategoriaExceptionWrapper_Exception;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
@@ -37,8 +36,7 @@ public class ActividadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if(path.equals("/lista_actividades")) {
             List<BeanActividad> acts = port.listarActividadesAceptadas();
@@ -66,7 +64,7 @@ public class ActividadServlet extends HttpServlet {
                     }
                     else{
                         request.setAttribute("tipoFav", 0);
-                    }   
+                    }
                 }
             }
 
@@ -121,7 +119,7 @@ public class ActividadServlet extends HttpServlet {
 
         }  else if (path=="/alta_actividad") {
             processRequest(request, response);
-            
+
         } else if (path.equals("/consulta_categoria")) {
             String cat = request.getParameter("categoria");
             List<String> catActividades = port.getActividadesDeCategoria(cat);
@@ -136,8 +134,7 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
         Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
@@ -217,8 +214,7 @@ public class ActividadServlet extends HttpServlet {
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
         List<String> categorias = port.getCategorias();
 
         request.setAttribute("categorias", categorias);
