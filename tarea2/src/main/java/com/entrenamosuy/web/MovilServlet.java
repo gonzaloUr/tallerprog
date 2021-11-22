@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import com.entrenamosuy.web.publicar.PasswordInvalidaException_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanClase;
@@ -30,8 +29,7 @@ public class MovilServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if (path.equals("/index_movil")) {
             getServletContext()
@@ -85,10 +83,10 @@ public class MovilServlet extends HttpServlet {
 
             if(usr != null){ //TODO revisar esto que da error consulta dictado a clase
                 BeanProfesor profe = (BeanProfesor) usr;
-                boolean b = (boolean) session.getAttribute("es_profesor");    
-                esDicta = (b) && (profe.getNickname().equals(nickname));        
+                boolean b = (boolean) session.getAttribute("es_profesor");
+                esDicta = (b) && (profe.getNickname().equals(nickname));
             }
-            
+
             Set<String> profesorNom = clase.getProfesores()
                 .stream()
                 .map(BeanDescProfesor::getNombre)
@@ -129,7 +127,7 @@ public class MovilServlet extends HttpServlet {
 
             BeanInstitucion ins = port.getDataInstitucion(institucionNombre);
             List<BeanActividad> acts = ins.getActividadesOfrecidas();
-            
+
 
             request.setAttribute("instituciones", instituciones);
             request.setAttribute("actividades", acts);
@@ -141,7 +139,7 @@ public class MovilServlet extends HttpServlet {
             Set<String> categorias = port.getCategorias()
                 .stream()
                 .collect(Collectors.toSet());
-    
+
             String categoriaNombre = request.getParameter("categoria");
 
 
@@ -150,7 +148,7 @@ public class MovilServlet extends HttpServlet {
             for (String acti : catActividades) {
                 acts.add(port.getDataActividad(acti));
             }
-            
+
             request.setAttribute("categorias", categorias);
             request.setAttribute("actividades", acts);
 
@@ -206,13 +204,12 @@ public class MovilServlet extends HttpServlet {
             request.getRequestDispatcher("/consulta_actividad_movil.jsp")
                 .forward(request, response);
         }
-        
+
     }
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         String nickname = request.getParameter("nick");
         String password = request.getParameter("pass");

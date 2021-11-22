@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService;
 
 public class ImagenServlet extends HttpServlet {
 
@@ -28,8 +27,7 @@ public class ImagenServlet extends HttpServlet {
         String path = uri.getPath();
         String ident = path.substring(path.lastIndexOf("/") + 1);
 
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         byte[] data = null;
 

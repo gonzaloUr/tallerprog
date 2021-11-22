@@ -8,16 +8,15 @@
 <%@page import="com.entrenamosuy.web.publicar.PublicadorService"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    PublicadorService service = new PublicadorService();
-    Publicador port = service.getPublicadorPort();
-    
+    Publicador port = Webservice.getPort();
+
     Set<String> instituciones = port.getInstituciones()
         .stream()
         .collect(Collectors.toSet());
     Set<String> categorias = port.getCategorias()
         .stream()
         .collect(Collectors.toSet());
-    
+
     request.setAttribute("instituciones", instituciones);
 
     request.setAttribute("categorias", categorias);

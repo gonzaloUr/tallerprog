@@ -26,9 +26,7 @@ import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCuponera;
-import com.entrenamosuy.web.publicar.BeanLocalDate;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioRepetidoException_Exception;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*10, maxFileSize=1024*1024*50, maxRequestSize=1024*1024*100)
@@ -37,8 +35,7 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if (path.equals("/lista_usuarios")) {
             Set<BeanSocio> socios = port
@@ -236,8 +233,7 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         if (path.equals("/alta_socio")) {
             String nickname = (String) request.getParameter("nick");

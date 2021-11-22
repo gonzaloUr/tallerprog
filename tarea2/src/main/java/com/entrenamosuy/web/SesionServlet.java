@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import com.entrenamosuy.web.publicar.PasswordInvalidaException_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
-import com.entrenamosuy.web.publicar.PublicadorService;
 import com.entrenamosuy.web.publicar.UsuarioNoEncontradoExceptionWrapper_Exception;
 
 public class SesionServlet extends HttpServlet {
@@ -33,8 +32,7 @@ public class SesionServlet extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PublicadorService service = new PublicadorService();
-        Publicador port = service.getPublicadorPort();
+        Publicador port = Webservice.getPort();
 
         String nickname = request.getParameter("nick");
         String password = request.getParameter("pass");
