@@ -117,7 +117,7 @@ public class BeanSocio {
         setCorreo(BeanEmail.of(x.getCorreo()));
         setNacimiento(BeanLocalDate.of(x.getNacimiento()));
         setSeguidores(new ArrayList<>(x.getSeguidores()));
-        setSeguidos(new ArrayList<>(x.getSeguidores()));
+        setSeguidos(new ArrayList<>(x.getSeguidos()));
         setClases(x.getClases()
             .stream()
             .map(BeanClase::of)

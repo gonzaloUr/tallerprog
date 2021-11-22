@@ -92,8 +92,7 @@
                     </div>
                     <%
                     String h;
-                    List<MiniUsuario> sig = (List<MiniUsuario>) request.getAttribute("seguidos");
-                    for (MiniUsuario s: sig){
+                    for (MiniUsuario s: seguidos){
                     %>
                     <div class="list-group-item d-flex align-items-center">
                         <div class="flex-fill pl-3 pr-3">
@@ -115,8 +114,7 @@
                     <div class="list-group-item d-flex align-items-center active">Seguidores
                     </div>
                     <%
-                    List<MiniUsuario> seg = (List<MiniUsuario>) request.getAttribute("seguidores");
-                    for (MiniUsuario a: seg){
+                    for (MiniUsuario a: seguidores){
                     %>
                     <div class="list-group-item d-flex align-items-center">
                         <div class="flex-fill pl-3 pr-3">

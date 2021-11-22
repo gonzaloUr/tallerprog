@@ -53,6 +53,9 @@
                         <div class="row">
                             <div class="col-sm-5">
                                 <h6 class="mb-0">Nombre completo</h6>
+                                Socio
+                                Ver Perfil
+                                
                             </div>
                             <div class="col-sm-7 text-secondary">
                                 ${nombre}
@@ -112,8 +115,7 @@
                     <div class="list-group-item d-flex align-items-center active">Siguiendo</div>
                     <%
                     String h;
-                    List<MiniUsuario> sig = (List<MiniUsuario>) request.getAttribute("seguidos");
-                    for (MiniUsuario a: sig){
+                    for (MiniUsuario a: seguidos){
                     %>
                     <div class="list-group-item d-flex align-items-center">
                         <div class="flex-fill pl-3 pr-3">
@@ -136,8 +138,7 @@
                     <div class="list-group-item d-flex align-items-center active">Seguidores
                     </div>
                     <%
-                    List<MiniUsuario> seg = (List<MiniUsuario>) request.getAttribute("seguidores");
-                    for (MiniUsuario a: seg){
+                    for (MiniUsuario a: seguidores){
                     %>
                     <div class="list-group-item d-flex align-items-center">
                         <div class="flex-fill pl-3 pr-3">

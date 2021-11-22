@@ -12,24 +12,29 @@
         <link rel="stylesheet" href="styles/common.css">
 </head>
 <body>
+    <jsp:include page="templates/header.jsp"/>
+    <div class="d-flex justify-content-center">
 <%
 int estadoS = (int) request.getAttribute("estadoSorteo");
-String clase = (String) request.getAttribute("clase");
+String clase = (String) request.getParameter("clase");
 
 if(estadoS == 2){
 %>
 <div class = "d-flex flex-column text-center justify-content-center py-12">
+    <div class="space" style="height:100px"></div>
 	<div class= "card">
 		<div class= "card-body">
 			<h4>Clase no dictada.</h4>
-			<a href="consulta_clase?nombre=<%=clase%>" class="btn btn-primary">Volver</a>
+			<a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Volver</a>
 		</div>
 	</div>
 </div>
 <% } 
 else if (estadoS == 1){
 %>
-<div class = "d-flex flex-column text-center justify-content-center py-12">
+<div class=col-3></div>
+<div class=col-6>
+    <div class="space" style="height:60px"></div>
 	<div class= "card">
 		<div class= "card-body">
 			<h4>Sorteo ya realizado.</h4>
@@ -41,7 +46,7 @@ else if (estadoS == 1){
                 List<BeanSocio> socios = (List<BeanSocio>) request.getAttribute("ganadores");
                 for (BeanSocio s : socios){ %>
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="img/usuario/<%=s.getNickname()%> %>" alt=" " class="avatar-img" />
+                    <img src="img/usuario/<%=s.getNickname()%>" alt=" " class="avatar-img" />
                     <div class="flex-fill pl-5 pr-3">
                     	<h class="m-3"><strong><%=s.getNickname()%></strong></h>
                     </div>
@@ -49,13 +54,16 @@ else if (estadoS == 1){
                 </div>
                 <%}%>
             </div>
-            <a href="consulta_clase?nombre=<%=clase%>" class="btn btn-primary">Volver</a>
+            <a href="consulta_dictado_clase?clase=${clase}" class="btn btn-primary">Volver</a>
 		</div>
 	</div>
 </div>
+<div class=col-3></div>
 <%}
 else {%>
-<div class = "d-flex flex-column text-center justify-content-center py-12">
+<div class=col-3></div>
+<div class=col-6>
+    <div class="space" style="height:60px"></div>
 	<div class= "card">
 		<div class= "card-body">
 			<h4>Sorteo no realizado.</h4>
@@ -67,7 +75,7 @@ else {%>
                 List<BeanSocio> socios = (List<BeanSocio>) request.getAttribute("registrados");
                 for (BeanSocio s : socios){ %>
                 <div class="list-group-item d-flex align-items-center">
-                    <img src="img/usuario/<%=s.getNickname()%> %>" alt=" " class="avatar-img" />
+                    <img src="img/usuario/<%=s.getNickname()%>" alt=" " class="avatar-img" />
                     <div class="flex-fill pl-5 pr-3">
                     	<h class="m-3"><strong><%=s.getNickname()%></strong></h>
                     </div>
@@ -75,11 +83,13 @@ else {%>
                 </div>
                 <%}%>
             </div>
+            <div class="space" style="height:10px"></div>
             <a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Cancelar</a>
             <a href="confirmar_sorteo?clase=<%=clase%>" class="btn btn-primary">Realizar Sorteo</a>
 		</div>
 	</div>
 </div>
+<div class=col-3></div>
 <%}%>
 </body>
 </html>

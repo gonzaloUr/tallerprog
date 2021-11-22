@@ -145,9 +145,11 @@ public class ClaseServlet extends HttpServlet {
 
 
             if(usr != null){ //TODO revisar esto que da error consulta dictado a clase
-                BeanProfesor profe = (BeanProfesor) usr;
                 boolean b = (boolean) session.getAttribute("es_profesor");    
-                esDicta = (b) && (profe.getNickname().equals(nickname));        
+                if(b){
+                    BeanProfesor profe = (BeanProfesor) usr;
+                    esDicta = (b) && (profe.getNickname().equals(nickname));        
+                }
             }
             
             Set<String> profesorNom = clase.getProfesores()

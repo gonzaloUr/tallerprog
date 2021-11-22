@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -77,7 +78,7 @@ public class UsuarioServlet extends HttpServlet {
             Set<BeanCuponera> cuponeras = socio.getCuponeras().stream().collect(Collectors.toSet());
 
             request.setAttribute("nombre", socio.getNombre() + " " + socio.getApellido());
-            request.setAttribute("mail", socio.getCorreo().toString());
+            request.setAttribute("mail", socio.getCorreo().getPrefix()+"@"+socio.getCorreo().getDomain());
             request.setAttribute("nacimiento", socio.getNacimiento());
             request.setAttribute("clases", clases);
             request.setAttribute("cuponeras", cuponeras);
@@ -86,18 +87,18 @@ public class UsuarioServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             Object usr = session.getAttribute("usuario");
-            List<String> seguidos = null;
+            List<String> seguidos1 = null;
 
             if (usr != null) {
                 if ((boolean) session.getAttribute("es_profesor")) {
                     BeanProfesor p = (BeanProfesor) usr;
-                    seguidos = p.getSeguidos();
+                    seguidos1 = p.getSeguidos();
                 } else {
                     BeanSocio s = (BeanSocio) usr;
-                    seguidos = s.getSeguidos();
+                    seguidos1 = s.getSeguidos();
                 }
 
-                if (seguidos.contains(nick)){
+                if (seguidos1.contains(nick)){
                     request.setAttribute("esSeguidor", 1);
                 }
                 else {
@@ -107,8 +108,24 @@ public class UsuarioServlet extends HttpServlet {
                 request.setAttribute("esSeguidor", 0);
             }
 
-            request.setAttribute("seguidos", socio.getSeguidos());
-            request.setAttribute("seguidores", socio.getSeguidores());
+            List<String> seguidos = socio.getSeguidos();
+            List<String> seguidores = socio.getSeguidores();
+
+            List<MiniUsuario> seguidosMU = new ArrayList<MiniUsuario>();
+            List<MiniUsuario> seguidoresMU = new ArrayList<MiniUsuario>();
+
+            List<String> socios = port.getSocios();
+
+            for(String s: seguidos){
+                seguidosMU.add(new MiniUsuario(s,socios.contains(s)));
+            }
+
+            for(String s: seguidores){
+                seguidoresMU.add(new MiniUsuario(s,socios.contains(s)));
+            }
+
+            request.setAttribute("seguidos", seguidosMU);
+            request.setAttribute("seguidores", seguidoresMU);
 
             request.getRequestDispatcher("/consulta_socio.jsp").forward(request, response);
         } else if(path.equals("/consulta_profesor")) {
@@ -120,7 +137,7 @@ public class UsuarioServlet extends HttpServlet {
 
             request.setAttribute("nombre", profe.getNombre());
             request.setAttribute("apellido", profe.getApellido());
-            request.setAttribute("mail", profe.getCorreo().toString());
+            request.setAttribute("mail", profe.getCorreo().getPrefix()+"@"+profe.getCorreo().getDomain());
             request.setAttribute("nacimiento", profe.getNacimiento());
             request.setAttribute("clases", clases);
             request.setAttribute("actividades", actividades);
@@ -132,18 +149,19 @@ public class UsuarioServlet extends HttpServlet {
             HttpSession session = request.getSession();
 
             Object usr = session.getAttribute("usuario");
-            List<String> seguidos = null;
+            List<String> seguidos1 = null;
 
             if (usr != null) {
-                if ((boolean) session.getAttribute("es_profesor")) {
+                boolean b = (boolean) session.getAttribute("es_profesor");
+                if (b) {
                     BeanProfesor p = (BeanProfesor) usr;
-                    seguidos = p.getSeguidos();
+                    seguidos1 = p.getSeguidos();
                 } else {
-                    BeanSocio p = (BeanSocio) usr;
-                    seguidos = p.getSeguidos();
+                    BeanSocio s = (BeanSocio) usr;
+                    seguidos1 = s.getSeguidos();
                 }
 
-                if (seguidos.contains(nick)){
+                if (seguidos1.contains(nick)){
                     request.setAttribute("esSeguidor", 1);
                 }
                 else {
@@ -153,8 +171,24 @@ public class UsuarioServlet extends HttpServlet {
                 request.setAttribute("esSeguidor", 0);
             }
 
-            request.setAttribute("seguidos", profe.getSeguidos());
-            request.setAttribute("seguidores", profe.getSeguidores());
+            List<String> seguidos = profe.getSeguidos();
+            List<String> seguidores = profe.getSeguidores();
+
+            List<MiniUsuario> seguidosMU = new ArrayList<MiniUsuario>();
+            List<MiniUsuario> seguidoresMU = new ArrayList<MiniUsuario>();
+
+            List<String> socios = port.getSocios();
+
+            for(String s: seguidos){
+                seguidosMU.add(new MiniUsuario(s,socios.contains(s)));
+            }
+
+            for(String s: seguidores){
+                seguidoresMU.add(new MiniUsuario(s,socios.contains(s)));
+            }
+
+            request.setAttribute("seguidos", seguidosMU);
+            request.setAttribute("seguidores", seguidoresMU);
 
             request.getRequestDispatcher("/consulta_profesor.jsp").forward(request, response);
         } else if (path.equals("/seguir_usuario")){

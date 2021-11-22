@@ -175,7 +175,7 @@ public class Clase {
         this.cantPremios = cantPremios;
         this.fechaSorteo = fechaSorteo;
         puntaje = 0;
-        premiados = null;
+        premiados = new HashSet<Registro>();
         puntajes = new HashSet<Puntaje>();
     }
 
@@ -352,9 +352,11 @@ public class Clase {
         	list.add(r);
         }
         Collections.shuffle(list);
-        for (int i=0; (i<cantPremios && i<registros.size()); i++) {
+        int i=0;
+        while ((i<registros.size()) && (i<cantPremios)) {
         	premiados.add(list.get(i));
             list.get(i).getSocio().agregarPremio(this);
+            i++;
         }    			
     }
     
