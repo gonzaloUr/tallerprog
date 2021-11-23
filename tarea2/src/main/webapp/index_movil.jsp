@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="javax.servlet.http.Cookie"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -21,14 +22,30 @@
             <c:otherwise>
                 <form class="d-flex flex-column form-login" method="post">
                     <h1 class="h3 mb-3 fw-normal">Inicio de sesión</h1>
-                    <input class="form-control mb-3" placeholder="nickname" name="nick">
-                    <input class="form-control mb-3" placeholder="contraseña" name="pass" type="password">
+                        <% 
+                        String nickCookieAtr = "";
+                        String passCookieAtr = "";
+                        Cookie [] oreos = request.getCookies();
+                        if (oreos != null){
+                            for (Cookie ck : oreos){
+                                if (ck.getName().equals("nickCookie"))
+                                    nickCookieAtr = ck.getValue();
+                                else if (ck.getName().equals("passCookie"))
+                                    passCookieAtr = ck.getValue();
+                            }
+                        } %> 
+                    <input class="form-control mb-3" placeholder="nickname" name="nick" value="<%=nickCookieAtr%>">
+                    <input class="form-control mb-3" placeholder="contraseña" name="pass" type="password" value="<%=passCookieAtr%>">
+                    
+                    <span>Recordar</span> 
+                    <input type="checkbox" name="cookie_login" value="1">
+                    
                     <c:if test="${attempted_login}">
                         <c:if test="${reason == 'nickname'}">
-                            <span class="text-danger mb-3">Nickname o contraseña invalido</span>
+                            <span class="text-danger mb-3">Nickname o contraseña invalida</span>
                         </c:if>
                         <c:if test="${reason == 'password'}">
-                            <span class="text-danger mb-3">Nickname o contraseña invalido</span>
+                            <span class="text-danger mb-3"> Nickname o contraseña invalida</span>
                         </c:if>
                     </c:if>
                     <input class="w-100 btn btn-primary" type="submit" value="Iniciar sesión">
@@ -38,3 +55,5 @@
 	</body>
     <script src="styles/mio.js"></script>
 </html>
+
+

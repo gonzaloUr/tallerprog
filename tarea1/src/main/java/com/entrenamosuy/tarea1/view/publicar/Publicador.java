@@ -26,6 +26,7 @@ import javax.xml.ws.Endpoint;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.ClaseInconsistenteException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.NoFinalizableException;
 import com.entrenamosuy.core.exceptions.PasswordInvalidaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
@@ -452,5 +453,14 @@ public class Publicador {
     @WebMethod
     public boolean esFav(String socio, String actividad){
         return facades.getFacadeUsuario().esFav(socio, actividad); 
+    }
+
+    @WebMethod
+    public void finalizarActividad(String actividad) throws NoFinalizableExceptionWrapper{
+        try {
+            facades.getFacadeActividad().finalizarActividad(actividad);
+        } catch (NoFinalizableException e) {
+            throw new NoFinalizableExceptionWrapper(e);
+        } 
     }
 }

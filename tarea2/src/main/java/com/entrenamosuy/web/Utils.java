@@ -67,4 +67,9 @@ public class Utils {
 
         throw new IllegalArgumentException();
     }
+
+    public static boolean esMobile(String userAgent) {
+        String lowerCase = userAgent.toLowerCase();
+        return lowerCase.contains("android") || lowerCase.contains("iphone") || lowerCase.contains("ipad");
+    }
 }

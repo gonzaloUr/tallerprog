@@ -27,6 +27,7 @@ import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.InstitucionNoEncontradaExceptionWrapper_Exception;
+import com.entrenamosuy.web.publicar.NoFinalizableExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.SinCategoriaExceptionWrapper_Exception;
 
@@ -46,10 +47,16 @@ public class ActividadServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_actividad")) {
+            String userAgent = request.getHeader("User-Agent");
+
+            if (Utils.esMobile(userAgent)) {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_movil"));
+                return;
+            }
+
             String act = (String) request.getParameter("nombre");
 
             HttpSession session = request.getSession();
-
             Object u = session.getAttribute("usuario");
 
             request.setAttribute("tipoFav", 2);
@@ -120,7 +127,43 @@ public class ActividadServlet extends HttpServlet {
         }  else if (path=="/alta_actividad") {
             processRequest(request, response);
 
+        }  else if (path=="/finalizar_actividad") {
+
+            HttpSession session = request.getSession();
+            BeanProfesor profeSesion = (BeanProfesor) session.getAttribute("usuario");
+            String nick = profeSesion.getNickname();
+            BeanProfesor profe = port.getDataProfesor(nick);
+
+
+
+            
+            Set<BeanActividad> actividadesAceptadas = profe.getAceptadas().stream().collect(Collectors.toSet());
+            request.setAttribute("actividadesAceptadas", actividadesAceptadas);
+
+            request.getRequestDispatcher("/finalizar_actividad.jsp").forward(request, response);
+
+
+        }   else if (path.equals("/terminar_actividad")){
+
+            String acti = request.getParameter("finalizar");
+            try {
+                port.finalizarActividad(acti);
+            } catch (NoFinalizableExceptionWrapper_Exception e) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "no_finalizable");
+                request.getRequestDispatcher("finalizar_actividad.jsp").forward(request, response);
+                return;
+            }
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/finalizar_actividad"));
+
         } else if (path.equals("/consulta_categoria")) {
+            String userAgent = request.getHeader("User-Agent");
+
+            if (Utils.esMobile(userAgent)) {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_cat_movil"));
+                return;
+            }
+
             String cat = request.getParameter("categoria");
             List<String> catActividades = port.getActividadesDeCategoria(cat);
 
@@ -134,83 +177,90 @@ public class ActividadServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getServletPath();
         Publicador port = Webservice.getPort();
 
-        Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
-        Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
-        Boolean bool3 = request.getParameter("costo_alta_act").equals("");
+        if(path.equals("/alta_actividad")) {
 
-        if (bool1||bool2||bool3){
-            request.setAttribute("error", "Por favor llene los campos");
-            processRequest(request, response);
-            return;
-        }
+            Boolean bool1 = request.getParameter("nombre_alta_act").equals("");
+            Boolean bool2 = request.getParameter("duracion_alta_act").equals("");
+            Boolean bool3 = request.getParameter("costo_alta_act").equals("");
 
-        HttpSession session = request.getSession();
-        BeanProfesor usr = (BeanProfesor) session.getAttribute("usuario");
-        String nick = usr.getNickname();
-        String inst = usr.getInstitucion();
-        String nombre = (String)request.getParameter("nombre_alta_act");
-        String descripcion = (String)request.getParameter("descripcion_alta_act");
-        Duration duracion = (Duration.ofMinutes(Long.parseLong(request.getParameter("duracion_alta_act"))));
-        Float costo = Float.valueOf(request.getParameter("costo_alta_act"));
-
-        Part imgPart = request.getPart("img");
-        InputStream is = imgPart.getInputStream();
-        long size = imgPart.getSize();
-        byte[] data = new byte[(int) size];
-        is.read(data);
-
-        Set<String> categorias = new HashSet<String>();
-        String[] array = request.getParameterValues("select_categorias");
-
-        if (array!=null && array.length!=0)
-            Collections.addAll(categorias, array);
-
-        try {
-
-            BeanCrearActividadArgs args = new BeanCrearActividadArgs();
-
-            args.setNombre(nombre);
-            args.setDescripcion(descripcion);
-            args.setInstitucion(inst);
-            args.setDuracion((int) duracion.toMinutes());
-            args.setCosto(costo);
-            args.setRegistro(Utils.beanFromLocalDate(LocalDate.now()));
-            args.getCategorias().addAll(categorias);
-            args.setCreadorNickname(nick);
-            args.setImagen(data);
-
-            port.crearActividad(args);
-
-            Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
-
-            if (esProfesor != null) {
-                if (esProfesor) {
-                    BeanProfesor p = (BeanProfesor) request.getSession().getAttribute("usuario");
-                    String nickname = p.getNickname();
-                    request.getSession().setAttribute("usuario", port.getDataProfesor(nickname));
-                } else {
-                    BeanSocio s = (BeanSocio) request.getSession().getAttribute("usuario");
-                    String nickname = s.getNickname();
-                    request.getSession().setAttribute("usuario", port.getDataSocio(nickname));
-                }
+            if (bool1||bool2||bool3){
+                request.setAttribute("error", "Por favor llene los campos");
+                processRequest(request, response);
+                return;
             }
 
-            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
-            return;
-        }
-        catch(ActividadRepetidaException_Exception are) {
-            request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
-        }
-        catch(InstitucionNoEncontradaExceptionWrapper_Exception inee){
-            request.setAttribute("error", "No existe una institucion con ese nombre. ");
-        }
-        catch(SinCategoriaExceptionWrapper_Exception sce){
-            request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
-        }
+            HttpSession session = request.getSession();
+            BeanProfesor usr = (BeanProfesor) session.getAttribute("usuario");
+            String nick = usr.getNickname();
+            String inst = usr.getInstitucion();
+            String nombre = (String)request.getParameter("nombre_alta_act");
+            String descripcion = (String)request.getParameter("descripcion_alta_act");
+            Duration duracion = (Duration.ofMinutes(Long.parseLong(request.getParameter("duracion_alta_act"))));
+            Float costo = Float.valueOf(request.getParameter("costo_alta_act"));
 
-        processRequest(request, response);
+            Part imgPart = request.getPart("img");
+            InputStream is = imgPart.getInputStream();
+            long size = imgPart.getSize();
+            byte[] data = new byte[(int) size];
+            is.read(data);
+
+            Set<String> categorias = new HashSet<String>();
+            String[] array = request.getParameterValues("select_categorias");
+
+            if (array!=null && array.length!=0)
+                Collections.addAll(categorias, array);
+
+            try {
+
+                BeanCrearActividadArgs args = new BeanCrearActividadArgs();
+
+                args.setNombre(nombre);
+                args.setDescripcion(descripcion);
+                args.setInstitucion(inst);
+                args.setDuracion((int) duracion.toMinutes());
+                args.setCosto(costo);
+                args.setRegistro(Utils.beanFromLocalDate(LocalDate.now()));
+                args.getCategorias().addAll(categorias);
+                args.setCreadorNickname(nick);
+                args.setImagen(data);
+
+                port.crearActividad(args);
+
+                Boolean esProfesor = (Boolean) request.getSession().getAttribute("es_profesor");
+
+                if (esProfesor != null) {
+                    if (esProfesor) {
+                        BeanProfesor p = (BeanProfesor) request.getSession().getAttribute("usuario");
+                        String nickname = p.getNickname();
+                        request.getSession().setAttribute("usuario", port.getDataProfesor(nickname));
+                    } else {
+                        BeanSocio s = (BeanSocio) request.getSession().getAttribute("usuario");
+                        String nickname = s.getNickname();
+                        request.getSession().setAttribute("usuario", port.getDataSocio(nickname));
+                    }
+                }
+
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+                return;
+            }
+            catch(ActividadRepetidaException_Exception are) {
+                request.setAttribute("error", "Ya existe una actividad con ese nombre. ");
+            }
+            catch(InstitucionNoEncontradaExceptionWrapper_Exception inee){
+                request.setAttribute("error", "No existe una institucion con ese nombre. ");
+            }
+            catch(SinCategoriaExceptionWrapper_Exception sce){
+                request.setAttribute("error", "Debe seleccionar al menos una categoria. ");
+            }
+
+            processRequest(request, response);
+            
+        } else if(path.equals("/confirmar_registro_clase")) {
+
+        }
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

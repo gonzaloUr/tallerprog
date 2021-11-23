@@ -27,6 +27,7 @@ public class ObjectFactory {
     private final static QName _ValidarCredenciales_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredenciales");
     private final static QName _GetDataClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataClase");
     private final static QName _ActividadRepetidaException_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "ActividadRepetidaException");
+    private final static QName _FinalizarActividad_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "finalizarActividad");
     private final static QName _GetCategorias_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategorias");
     private final static QName _GetCategoriasResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCategoriasResponse");
     private final static QName _GetRegistrados_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getRegistrados");
@@ -59,6 +60,7 @@ public class ObjectFactory {
     private final static QName _GetCuponerasUsablesActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getCuponerasUsablesActividadResponse");
     private final static QName _DejarDeSeguirUsuarioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "dejarDeSeguirUsuarioResponse");
     private final static QName _GetDataSocio_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataSocio");
+    private final static QName _FinalizarActividadResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "finalizarActividadResponse");
     private final static QName _GetDataClaseResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataClaseResponse");
     private final static QName _SeguirUsuarioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "seguirUsuarioResponse");
     private final static QName _GetActividadesDeInstitucion_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getActividadesDeInstitucion");
@@ -85,6 +87,7 @@ public class ObjectFactory {
     private final static QName _GetImagenUsuarioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenUsuarioResponse");
     private final static QName _GetImagenInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenInstitucionResponse");
     private final static QName _ValidarCredencialesMovil_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredencialesMovil");
+    private final static QName _NoFinalizableExceptionWrapper_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "NoFinalizableExceptionWrapper");
     private final static QName _CrearProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearProfesor");
     private final static QName _CrearClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearClase");
     private final static QName _MarcarComoFav_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "marcarComoFav");
@@ -104,7 +107,7 @@ public class ObjectFactory {
     private final static QName _GetDataProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getDataProfesor");
     private final static QName _CrearSocio_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearSocio");
     private final static QName _RegistrarseSinCuponera_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "registrarseSinCuponera");
-    private final static QName _GetImagenClaseResponseReturn_QNAME = new QName("", "return");
+    private final static QName _GetImagenActividadResponseReturn_QNAME = new QName("", "return");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.entrenamosuy.web.publicar
@@ -231,6 +234,14 @@ public class ObjectFactory {
      */
     public ActividadRepetidaException createActividadRepetidaException() {
         return new ActividadRepetidaException();
+    }
+
+    /**
+     * Create an instance of {@link FinalizarActividad }
+     * 
+     */
+    public FinalizarActividad createFinalizarActividad() {
+        return new FinalizarActividad();
     }
 
     /**
@@ -407,6 +418,14 @@ public class ObjectFactory {
      */
     public GetDataSocio createGetDataSocio() {
         return new GetDataSocio();
+    }
+
+    /**
+     * Create an instance of {@link FinalizarActividadResponse }
+     * 
+     */
+    public FinalizarActividadResponse createFinalizarActividadResponse() {
+        return new FinalizarActividadResponse();
     }
 
     /**
@@ -722,6 +741,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link NoFinalizableExceptionWrapper }
+     * 
+     */
+    public NoFinalizableExceptionWrapper createNoFinalizableExceptionWrapper() {
+        return new NoFinalizableExceptionWrapper();
+    }
+
+    /**
      * Create an instance of {@link CrearProfesor }
      * 
      */
@@ -754,22 +781,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BeanInstitucion }
-     * 
-     */
-    public BeanInstitucion createBeanInstitucion() {
-        return new BeanInstitucion();
-    }
-
-    /**
-     * Create an instance of {@link BeanLocalDateTime }
-     * 
-     */
-    public BeanLocalDateTime createBeanLocalDateTime() {
-        return new BeanLocalDateTime();
-    }
-
-    /**
      * Create an instance of {@link BeanCrearClaseArgs }
      * 
      */
@@ -783,14 +794,6 @@ public class ObjectFactory {
      */
     public BeanProfesor createBeanProfesor() {
         return new BeanProfesor();
-    }
-
-    /**
-     * Create an instance of {@link BeanCrearProfesorArgs }
-     * 
-     */
-    public BeanCrearProfesorArgs createBeanCrearProfesorArgs() {
-        return new BeanCrearProfesorArgs();
     }
 
     /**
@@ -815,6 +818,54 @@ public class ObjectFactory {
      */
     public BeanCrearActividadArgs createBeanCrearActividadArgs() {
         return new BeanCrearActividadArgs();
+    }
+
+    /**
+     * Create an instance of {@link BeanCuponera }
+     * 
+     */
+    public BeanCuponera createBeanCuponera() {
+        return new BeanCuponera();
+    }
+
+    /**
+     * Create an instance of {@link BeanDescActividad }
+     * 
+     */
+    public BeanDescActividad createBeanDescActividad() {
+        return new BeanDescActividad();
+    }
+
+    /**
+     * Create an instance of {@link BeanActividad }
+     * 
+     */
+    public BeanActividad createBeanActividad() {
+        return new BeanActividad();
+    }
+
+    /**
+     * Create an instance of {@link BeanInstitucion }
+     * 
+     */
+    public BeanInstitucion createBeanInstitucion() {
+        return new BeanInstitucion();
+    }
+
+    /**
+     * Create an instance of {@link BeanLocalDateTime }
+     * 
+     */
+    public BeanLocalDateTime createBeanLocalDateTime() {
+        return new BeanLocalDateTime();
+    }
+
+    /**
+     * Create an instance of {@link BeanCrearProfesorArgs }
+     * 
+     */
+    public BeanCrearProfesorArgs createBeanCrearProfesorArgs() {
+        return new BeanCrearProfesorArgs();
     }
 
     /**
@@ -850,30 +901,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BeanCuponera }
-     * 
-     */
-    public BeanCuponera createBeanCuponera() {
-        return new BeanCuponera();
-    }
-
-    /**
-     * Create an instance of {@link BeanDescActividad }
-     * 
-     */
-    public BeanDescActividad createBeanDescActividad() {
-        return new BeanDescActividad();
-    }
-
-    /**
-     * Create an instance of {@link BeanActividad }
-     * 
-     */
-    public BeanActividad createBeanActividad() {
-        return new BeanActividad();
-    }
-
-    /**
      * Create an instance of {@link BeanCrearSocioArgs }
      * 
      */
@@ -906,6 +933,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "ActividadRepetidaException")
     public JAXBElement<ActividadRepetidaException> createActividadRepetidaException(ActividadRepetidaException value) {
         return new JAXBElement<ActividadRepetidaException>(_ActividadRepetidaException_QNAME, ActividadRepetidaException.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FinalizarActividad }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "finalizarActividad")
+    public JAXBElement<FinalizarActividad> createFinalizarActividad(FinalizarActividad value) {
+        return new JAXBElement<FinalizarActividad>(_FinalizarActividad_QNAME, FinalizarActividad.class, null, value);
     }
 
     /**
@@ -1197,6 +1233,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link FinalizarActividadResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "finalizarActividadResponse")
+    public JAXBElement<FinalizarActividadResponse> createFinalizarActividadResponse(FinalizarActividadResponse value) {
+        return new JAXBElement<FinalizarActividadResponse>(_FinalizarActividadResponse_QNAME, FinalizarActividadResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetDataClaseResponse }{@code >}}
      * 
      */
@@ -1431,6 +1476,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link NoFinalizableExceptionWrapper }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "NoFinalizableExceptionWrapper")
+    public JAXBElement<NoFinalizableExceptionWrapper> createNoFinalizableExceptionWrapper(NoFinalizableExceptionWrapper value) {
+        return new JAXBElement<NoFinalizableExceptionWrapper>(_NoFinalizableExceptionWrapper_QNAME, NoFinalizableExceptionWrapper.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CrearProfesor }{@code >}}
      * 
      */
@@ -1605,18 +1659,18 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
-    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
+    public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
     }
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenInstitucionResponse.class)
-    public JAXBElement<byte[]> createGetImagenInstitucionResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenInstitucionResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
+    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
     }
 
     /**
@@ -1643,7 +1697,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenCuponeraResponse.class)
     public JAXBElement<byte[]> createGetImagenCuponeraResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
+        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
     }
 
 }

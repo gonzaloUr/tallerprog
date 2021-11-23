@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.io.File;
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.InstitucionNoEncontradaException;
+import com.entrenamosuy.core.exceptions.NoFinalizableException;
 import com.entrenamosuy.core.exceptions.SinCategoriaException;
 import com.entrenamosuy.core.exceptions.ClaseNoEncontradaException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
@@ -355,9 +357,15 @@ public class FacadeActividad extends AbstractFacadeActividad {
         return actividad.getImagen();
     }
     
-    public void finalizarActividad(String actividad) {
+    public void finalizarActividad(String actividad) throws NoFinalizableException{
     	Map<String, Actividad> mapa = getRegistry().getActividades();
     	Actividad a = mapa.get(actividad);
+        Set<Clase> clases = a.getClases();
+        Duration duracion = a.getDuracion();
+        for (Clase clase : clases){
+            if (clase.getInicio().plus(duracion).isAfter(LocalDateTime.now()))
+                throw new NoFinalizableException("La actividad " + a + " aun tiene clases vigentes.");
+        }
     	a.finalizar();
     }
 }

@@ -17,7 +17,7 @@
                 <div class="list-group pb-3" style="display: block;">
                     <img src="img/actividad/${nombre}" alt=" " class="w-50">
                     <p class="fs-6 mt-3">${descripcion}</p>
-                    <p class="fs-6 mt-3">Duracion: ${duracion}</p>
+                    <p class="fs-6 mt-3">Duracion: ${duracion} minutos</p>
                 </div>
 
                 <p class="fs-4 fw-bold p-3">Categorias: </p>
