@@ -53,6 +53,11 @@ public class ClaseServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         Publicador port = Webservice.getPort();
+        String userAgent = request.getHeader("User-Agent");
+        if (Utils.esMobile(userAgent)) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
+            return;
+        }
 
         if(path.equals("/registrarse_a_clase_1")) {
             Set<String> inst = port.getInstituciones()
@@ -125,12 +130,6 @@ public class ClaseServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_dictado_clase")){
-            String userAgent = request.getHeader("User-Agent");
-
-            if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_dictado_clase_movil"));
-                return;
-            }
             String claseNombre = request.getParameter("clase");
 
             BeanClase clase = port.getDataClase(claseNombre);

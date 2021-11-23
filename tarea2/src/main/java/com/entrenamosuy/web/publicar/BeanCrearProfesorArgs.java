@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para beanCrearProfesorArgs complex type.
+ * <p>Java class for beanCrearProfesorArgs complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="beanCrearProfesorArgs">
@@ -66,7 +66,7 @@ public class BeanCrearProfesorArgs {
     protected String password;
 
     /**
-     * Obtiene el valor de la propiedad apellido.
+     * Gets the value of the apellido property.
      * 
      * @return
      *     possible object is
@@ -78,7 +78,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad apellido.
+     * Sets the value of the apellido property.
      * 
      * @param value
      *     allowed object is
@@ -90,7 +90,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad bio.
+     * Gets the value of the bio property.
      * 
      * @return
      *     possible object is
@@ -102,7 +102,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad bio.
+     * Sets the value of the bio property.
      * 
      * @param value
      *     allowed object is
@@ -114,7 +114,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad correo.
+     * Gets the value of the correo property.
      * 
      * @return
      *     possible object is
@@ -126,7 +126,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad correo.
+     * Sets the value of the correo property.
      * 
      * @param value
      *     allowed object is
@@ -138,7 +138,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad descripcion.
+     * Gets the value of the descripcion property.
      * 
      * @return
      *     possible object is
@@ -150,7 +150,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad descripcion.
+     * Sets the value of the descripcion property.
      * 
      * @param value
      *     allowed object is
@@ -162,7 +162,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad imagen.
+     * Gets the value of the imagen property.
      * 
      * @return
      *     possible object is
@@ -173,7 +173,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad imagen.
+     * Sets the value of the imagen property.
      * 
      * @param value
      *     allowed object is
@@ -184,7 +184,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad institucion.
+     * Gets the value of the institucion property.
      * 
      * @return
      *     possible object is
@@ -196,7 +196,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad institucion.
+     * Sets the value of the institucion property.
      * 
      * @param value
      *     allowed object is
@@ -208,7 +208,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad link.
+     * Gets the value of the link property.
      * 
      * @return
      *     possible object is
@@ -220,7 +220,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad link.
+     * Sets the value of the link property.
      * 
      * @param value
      *     allowed object is
@@ -232,7 +232,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nacimiento.
+     * Gets the value of the nacimiento property.
      * 
      * @return
      *     possible object is
@@ -244,7 +244,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad nacimiento.
+     * Sets the value of the nacimiento property.
      * 
      * @param value
      *     allowed object is
@@ -256,7 +256,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nickname.
+     * Gets the value of the nickname property.
      * 
      * @return
      *     possible object is
@@ -268,7 +268,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad nickname.
+     * Sets the value of the nickname property.
      * 
      * @param value
      *     allowed object is
@@ -280,7 +280,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad nombre.
+     * Gets the value of the nombre property.
      * 
      * @return
      *     possible object is
@@ -292,7 +292,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad nombre.
+     * Sets the value of the nombre property.
      * 
      * @param value
      *     allowed object is
@@ -304,7 +304,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Obtiene el valor de la propiedad password.
+     * Gets the value of the password property.
      * 
      * @return
      *     possible object is
@@ -316,7 +316,7 @@ public class BeanCrearProfesorArgs {
     }
 
     /**
-     * Define el valor de la propiedad password.
+     * Sets the value of the password property.
      * 
      * @param value
      *     allowed object is

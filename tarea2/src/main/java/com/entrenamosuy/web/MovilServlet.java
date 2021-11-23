@@ -32,6 +32,11 @@ public class MovilServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         Publicador port = Webservice.getPort();
+        String userAgent = request.getHeader("User-Agent");
+        if (!Utils.esMobile(userAgent)) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+            return;
+        }
 
         if (path.equals("/index_movil")) {
             getServletContext()

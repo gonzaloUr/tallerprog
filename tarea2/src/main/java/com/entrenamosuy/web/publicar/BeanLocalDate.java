@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para beanLocalDate complex type.
+ * <p>Java class for beanLocalDate complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="beanLocalDate">
@@ -40,7 +40,7 @@ public class BeanLocalDate {
     protected int year;
 
     /**
-     * Obtiene el valor de la propiedad dayOfMonth.
+     * Gets the value of the dayOfMonth property.
      * 
      */
     public int getDayOfMonth() {
@@ -48,7 +48,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Define el valor de la propiedad dayOfMonth.
+     * Sets the value of the dayOfMonth property.
      * 
      */
     public void setDayOfMonth(int value) {
@@ -56,7 +56,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Obtiene el valor de la propiedad month.
+     * Gets the value of the month property.
      * 
      */
     public int getMonth() {
@@ -64,7 +64,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Define el valor de la propiedad month.
+     * Sets the value of the month property.
      * 
      */
     public void setMonth(int value) {
@@ -72,7 +72,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Obtiene el valor de la propiedad year.
+     * Gets the value of the year property.
      * 
      */
     public int getYear() {
@@ -80,7 +80,7 @@ public class BeanLocalDate {
     }
 
     /**
-     * Define el valor de la propiedad year.
+     * Sets the value of the year property.
      * 
      */
     public void setYear(int value) {

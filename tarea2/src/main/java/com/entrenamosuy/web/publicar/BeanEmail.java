@@ -7,9 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para beanEmail complex type.
+ * <p>Java class for beanEmail complex type.
  * 
- * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
+ * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
  * &lt;complexType name="beanEmail">
@@ -37,7 +37,7 @@ public class BeanEmail {
     protected String domain;
 
     /**
-     * Obtiene el valor de la propiedad prefix.
+     * Gets the value of the prefix property.
      * 
      * @return
      *     possible object is
@@ -49,7 +49,7 @@ public class BeanEmail {
     }
 
     /**
-     * Define el valor de la propiedad prefix.
+     * Sets the value of the prefix property.
      * 
      * @param value
      *     allowed object is
@@ -61,7 +61,7 @@ public class BeanEmail {
     }
 
     /**
-     * Obtiene el valor de la propiedad domain.
+     * Gets the value of the domain property.
      * 
      * @return
      *     possible object is
@@ -73,7 +73,7 @@ public class BeanEmail {
     }
 
     /**
-     * Define el valor de la propiedad domain.
+     * Sets the value of the domain property.
      * 
      * @param value
      *     allowed object is

@@ -18,26 +18,17 @@ public class SesionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
+        String userAgent = request.getHeader("User-Agent");
+        if (Utils.esMobile(userAgent)) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
+            return;
+        }
 
         if (path.equals("/iniciar_sesion")) {
-            String userAgent = request.getHeader("User-Agent");
-
-            if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
-                return;
-            }
-
             getServletContext()
                 .getRequestDispatcher("/iniciar_sesion.jsp")
                 .forward(request, response);
         } else if (path.equals("/cerrar_sesion")) {
-            String userAgent = request.getHeader("User-Agent");
-
-            if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/cerrar_sesion_movil"));
-                return;
-            }
-
             request.getSession().removeAttribute("nickname");
             request.getSession().removeAttribute("usuario");
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));

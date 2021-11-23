@@ -38,6 +38,11 @@ public class ActividadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         Publicador port = Webservice.getPort();
+        String userAgent = request.getHeader("User-Agent");
+        if (Utils.esMobile(userAgent)) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
+            return;
+        }
 
         if(path.equals("/lista_actividades")) {
             List<BeanActividad> acts = port.listarActividadesAceptadas();
@@ -47,12 +52,6 @@ public class ActividadServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_actividad")) {
-            String userAgent = request.getHeader("User-Agent");
-
-            if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_movil"));
-                return;
-            }
 
             String act = (String) request.getParameter("nombre");
 
@@ -160,13 +159,6 @@ public class ActividadServlet extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/finalizar_actividad"));
 
         } else if (path.equals("/consulta_categoria")) {
-            String userAgent = request.getHeader("User-Agent");
-
-            if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_cat_movil"));
-                return;
-            }
-
             String cat = request.getParameter("categoria");
             List<String> catActividades = port.getActividadesDeCategoria(cat);
 

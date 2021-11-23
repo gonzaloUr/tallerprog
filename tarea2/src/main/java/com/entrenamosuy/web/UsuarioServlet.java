@@ -38,6 +38,11 @@ public class UsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = request.getServletPath();
         Publicador port = Webservice.getPort();
+        String userAgent = request.getHeader("User-Agent");
+        if (Utils.esMobile(userAgent)) {
+            response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
+            return;
+        }
 
         if (path.equals("/lista_usuarios")) {
             Set<BeanSocio> socios = port
