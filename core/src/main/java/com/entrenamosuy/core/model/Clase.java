@@ -131,7 +131,7 @@ public class Clase {
 
     private Set<Registro> registros;
     
-    private Set<Registro> premiados;
+    private Set<Socio> premiados;
 
     private Set<Profesor> profesores;
 
@@ -175,7 +175,7 @@ public class Clase {
         this.cantPremios = cantPremios;
         this.fechaSorteo = fechaSorteo;
         puntaje = 0;
-        premiados = new HashSet<Registro>();
+        premiados = new HashSet<Socio>();
         puntajes = new HashSet<Puntaje>();
     }
 
@@ -283,13 +283,6 @@ public class Clase {
         return puntaje;
     }
     
-    public Set<Socio> getPremiados(){
-    	Set<Socio> res = new HashSet<>();
-    	for(Registro r : premiados) {
-    		res.add(r.getSocio());
-    	}
-    	return res;
-    }
     
     @Override
     public int hashCode() {
@@ -354,7 +347,7 @@ public class Clase {
         Collections.shuffle(list);
         int i=0;
         while ((i<registros.size()) && (i<cantPremios)) {
-        	premiados.add(list.get(i));
+        	premiados.add(list.get(i).getSocio());
             list.get(i).getSocio().agregarPremio(this);
             i++;
         }    			
@@ -366,8 +359,8 @@ public class Clase {
     
     public List<DataSocio> getGanadores(){
     	List<DataSocio> list = new ArrayList<DataSocio>();
-    	for (Registro r : premiados) {
-    		list.add(r.getSocio().getDataSocio());
+    	for (Socio r : premiados) {
+    		list.add(r.getDataSocio());
     	}
     	return list;
     }
@@ -378,5 +371,9 @@ public class Clase {
     		list.add(r.getSocio().getDataSocio());
     	}
     	return list;
+    }
+
+    public void agregarGanador(Socio socio) {
+        premiados.add(socio);
     }
 }

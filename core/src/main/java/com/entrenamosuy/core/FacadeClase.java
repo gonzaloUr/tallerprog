@@ -254,4 +254,9 @@ public class FacadeClase extends AbstractFacadeClase {
     	}
     	return 0;
     }
+
+    @Override
+    public void agregarSocioAGanadores(String socio, String clase){
+        getRegistry().getClases().get(clase).agregarGanador(getRegistry().getSocios().get(socio));
+    }
 }
