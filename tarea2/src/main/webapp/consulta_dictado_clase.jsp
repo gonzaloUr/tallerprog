@@ -21,13 +21,20 @@
                     <p class="fs-6"><b>Cantidad minima de participantes:</b> ${cantMin}</p>
                     <p class="fs-6"><b>Cantidad maxima de participantes:</b> ${cantMax}</p>
                     <p><a href=${url}>Pagina web de ${nombre}</a></p>
-                    <p><a href="consulta_actividad?nombre=${acti}"> Ver Información Actividad Deportiva </a>  </p>
+                    <c:choose>
+                        <c:when test="${esAceptada eq true}">
+                            <p><a href="consulta_actividad?nombre=${acti}"> Ver Información Actividad Deportiva </a> </p>
+                        </c:when>
+                        <c:when test="${esAceptada eq false}">
+                            <p class="fs-6"><b>Actividad deportiva finalizada</b></p>
+                        </c:when>
+                    </c:choose>
                     <c:choose>
                         <c:when test="${es_profesor eq false}">
                             <c:choose>
                                 <c:when test="${esAceptada eq true}">
                                     <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
-                                </c:when>    
+                                </c:when> 
                             </c:choose>
                         </c:when>
                     </c:choose>
@@ -35,7 +42,11 @@
                         <c:when test="${es_profesor_que_dicta eq true}">
                             <c:choose>
                                 <c:when test="${cantPremios ne 0}">
-                                        <p><a href="realizar_sorteo?clase=${nombre}"> Realizar sorteo </a></p>
+                                    <c:choose>
+                                        <c:when test="${esAceptada eq true}">
+                                            <p><a href="realizar_sorteo?clase=${nombre}"> Realizar sorteo </a></p>
+                                        </c:when> 
+                                    </c:choose>    
                                 </c:when>
                             </c:choose>
                         </c:when>
