@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="java.util.stream.Collectors" %>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Set" %>
+<%@page import="java.net.URL" %>
+<%@page import="java.util.stream.Collectors" %>
+<%@page import="com.entrenamosuy.web.Webservice"%>
 <%@page import="com.entrenamosuy.web.publicar.GetCategorias"%>
 <%@page import="com.entrenamosuy.web.publicar.GetInstituciones"%>
 <%@page import="com.entrenamosuy.web.publicar.Publicador"%>

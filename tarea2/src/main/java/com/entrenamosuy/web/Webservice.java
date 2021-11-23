@@ -46,7 +46,7 @@ public class Webservice {
                 endpoint = "http://" + host + ":" + port + "/" + webservicePath;
 
             try {
-                service = new PublicadorService(new URL(endpoint));
+                service = new PublicadorService(new URL(endpoint + "?wsdl"));
             } catch (MalformedURLException e) {
                 e.printStackTrace();
                 return null;
