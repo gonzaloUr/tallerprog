@@ -118,6 +118,12 @@ public class ClaseServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_dictado_clase")){
+            String userAgent = request.getHeader("User-Agent");
+
+            if (Utils.esMobile(userAgent)) {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_dictado_clase_movil"));
+                return;
+            }
             String claseNombre = request.getParameter("clase");
 
             BeanClase clase = port.getDataClase(claseNombre);
@@ -144,10 +150,10 @@ public class ClaseServlet extends HttpServlet {
 
 
             if(usr != null){ //TODO revisar esto que da error consulta dictado a clase
-                boolean b = (boolean) session.getAttribute("es_profesor");    
+                boolean b = (boolean) session.getAttribute("es_profesor");
                 if(b){
                     BeanProfesor profe = (BeanProfesor) usr;
-                    esDicta = (b) && (profe.getNickname().equals(nickname));        
+                    esDicta = (b) && (profe.getNickname().equals(nickname));
                 }
             }
 

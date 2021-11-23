@@ -13,16 +13,18 @@
             <form class="d-flex flex-column" method="post" action="alta_dictado_clase" enctype="multipart/form-data">
                 <h1 class="h3 mb-3 fw-normal">Alta de clase</h1>
                 <select class="form-control mb-3" name="actividad">
-                    <c:forEach var="i" begin="0" end="${actividades.size() - 1}">
-                        <c:choose>
-                            <c:when test="${i eq 0}">
-                                <option selected value="${actividades.get(i)}">${actividades.get(i)}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${actividades.get(i)}">${actividades.get(i)}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
+                    <c:if test="${not empty actividades}">
+                        <c:forEach var="i" begin="0" end="${actividades.size() - 1}">
+                            <c:choose>
+                                <c:when test="${i eq 0}">
+                                    <option selected value="${actividades.get(i)}">${actividades.get(i)}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${actividades.get(i)}">${actividades.get(i)}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </c:if>
                 </select>
                 <input class="form-control mb-3" placeholder="nombre" name="nombre">
                 <input class="form-control mb-3" placeholder="inicio" name="inicio" type="datetime-local" value="2021-10-27T11:00">

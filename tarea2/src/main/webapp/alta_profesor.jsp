@@ -17,16 +17,18 @@
                 <input class="form-control mb-3" placeholder="email" name="email" type="email">
                 <input class="form-control mb-3" name="nacimiento" type="date">
                 <select class="form-control mb-3" name="institucion">
-                    <c:forEach var="i" begin="0" end="${instituciones.size() - 1}">
-                        <c:choose>
-                            <c:when test="${i eq 0}">
-                                <option selected value="${instituciones.get(i)}">${instituciones.get(i)}</option>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="${instituciones.get(i)}">${instituciones.get(i)}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </c:forEach>
+                    <c:if test="${not empty instituciones}">
+                        <c:forEach var="i" begin="0" end="${instituciones.size() - 1}">
+                            <c:choose>
+                                <c:when test="${i eq 0}">
+                                    <option selected value="${instituciones.get(i)}">${instituciones.get(i)}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${instituciones.get(i)}">${instituciones.get(i)}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </c:forEach>
+                    </c:if>
                 </select>
                 <input class="form-control mb-3" placeholder="descripción" name="desc">
                 <input class="form-control mb-3" placeholder="biografia" name="bio">

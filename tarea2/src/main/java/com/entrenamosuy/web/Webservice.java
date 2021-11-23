@@ -16,7 +16,7 @@ public class Webservice {
     private static Publicador servicePort;
 
     public static Publicador getPort() {
-        if (service != null) {
+        if (service == null) {
             String path = System.getProperty("user.home") + File.separator + ".serverrc";
             File config = new File(path);
 

@@ -46,10 +46,16 @@ public class ActividadServlet extends HttpServlet {
                 .forward(request, response);
 
         } else if(path.equals("/consulta_actividad")) {
+            String userAgent = request.getHeader("User-Agent");
+
+            if (Utils.esMobile(userAgent)) {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_movil"));
+                return;
+            }
+
             String act = (String) request.getParameter("nombre");
 
             HttpSession session = request.getSession();
-
             Object u = session.getAttribute("usuario");
 
             request.setAttribute("tipoFav", 2);
@@ -121,6 +127,13 @@ public class ActividadServlet extends HttpServlet {
             processRequest(request, response);
 
         } else if (path.equals("/consulta_categoria")) {
+            String userAgent = request.getHeader("User-Agent");
+
+            if (Utils.esMobile(userAgent)) {
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/consulta_actividad_cat_movil"));
+                return;
+            }
+
             String cat = request.getParameter("categoria");
             List<String> catActividades = port.getActividadesDeCategoria(cat);
 
