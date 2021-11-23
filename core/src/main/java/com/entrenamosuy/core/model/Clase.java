@@ -377,4 +377,8 @@ public class Clase {
     public void agregarGanador(Socio socio) {
         premiados.add(socio);
     }
+
+    public boolean chequearSiClaseDictada() {
+        return inicio.isBefore(LocalDateTime.now());
+    }
 }

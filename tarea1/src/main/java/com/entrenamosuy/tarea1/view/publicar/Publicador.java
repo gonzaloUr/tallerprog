@@ -462,4 +462,9 @@ public class Publicador {
             throw new NoFinalizableExceptionWrapper(e);
         } 
     }
+
+    @WebMethod
+    public boolean chequearSiClaseDictada(String cla){
+        return facades.getFacadeClase().chequearSiClaseDictada(cla);
+    }
 }

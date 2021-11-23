@@ -9,6 +9,15 @@
         <link rel="stylesheet" href="styles/alta_usuario.css">
     </head>
     <body class="d-flex flex-column text-center justify-content-center py-12">
+        <% boolean d = (boolean) request.getAttribute("yaDictada");
+            if(d){ %>
+                <div class="form-login">
+                    <h1 class="h3 mb-3 fw-normal">Esta clase ya fue dictada.</h1>
+                    <span class="mb-3">Presione para volver al inicio</span>
+                    <a class="btn btn-primary" href="/tarea2">Pagina principal</a>
+                </div>
+        <%  }
+            else { %>
         <c:choose>
             <c:when test="${reg_exito eq false}">
                 <div class="form-login">
@@ -30,5 +39,6 @@
                 </form>
             </c:otherwise>
         </c:choose>
+        <% } %>
     </body>
 </html>

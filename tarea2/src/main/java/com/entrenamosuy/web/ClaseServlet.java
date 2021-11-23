@@ -116,6 +116,10 @@ public class ClaseServlet extends HttpServlet {
                 .stream()
                 .collect(Collectors.toSet());
 
+            String cla = (String) request.getParameter("clase");
+            boolean b = port.chequearSiClaseDictada(cla);
+            request.setAttribute("yaDictada", b);
+
             request.setAttribute("cuponeras", cupos);
             request.getRequestDispatcher("/confirmar_registro_clase.jsp")
                 .forward(request, response);
