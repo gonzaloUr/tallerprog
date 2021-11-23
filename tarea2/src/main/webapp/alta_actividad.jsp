@@ -18,16 +18,9 @@
             <input class="form-control mb-3" accept="image/*" name="img" type="file">
             <label for="categorias">Elija categorias (para multiples Ctrl+click) :</label>
             <select name="select_categorias" multiple>
-                <c:if test="${not empty instituciones}">
-                    <c:forEach var="i" begin="0" end="${instituciones.size() - 1}">
-                        <c:when test="${i eq 0}">
-                            <option selected value="${instituciones.get(i)}"></option>
-                        </c:when>
-                        <c:otherwise>
-                            <option value="${instituciones.get(i)}"></option>
-                        </c:otherwise>
-                    </c:forEach>
-                </c:if>
+                <c:forEach items="${categorias}" var="categoria">
+                    <option value="${categoria}"> ${categoria} </option>
+                </c:forEach>
             </select>
             <input class="w-100 btn btn-primary mt-3" type="submit" value="Dar de alta">
         </form>

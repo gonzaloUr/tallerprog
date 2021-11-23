@@ -125,6 +125,9 @@ public class ActividadServlet extends HttpServlet {
                 .forward(request, response);
 
         }  else if (path=="/alta_actividad") {
+            List<String> categorias = port.getCategorias();
+
+            request.setAttribute("categorias", categorias);
             processRequest(request, response);
 
         }  else if (path=="/finalizar_actividad") {
