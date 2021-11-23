@@ -275,6 +275,7 @@ public class Actividad {
                 .setClases(dataClases)
                 .setCuponeras(cuponeras)
                 .setCategorias(categoriasString)
+                .setEstado(estado)
                 .build();
     }
 

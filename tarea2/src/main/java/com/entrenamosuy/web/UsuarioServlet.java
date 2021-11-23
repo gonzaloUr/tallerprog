@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -131,17 +132,29 @@ public class UsuarioServlet extends HttpServlet {
 
             Set<BeanClase> clases = profe.getClases().stream().collect(Collectors.toSet());
             Set<BeanActividad> actividades = profe.getAceptadas().stream().collect(Collectors.toSet());
-
+            Set<BeanActividad> actividadesNoAceptadas = profe.getSinAceptar().stream().collect(Collectors.toSet());
+            Set<BeanActividad> actividadesIngresadas = actividadesNoAceptadas.stream().filter((BeanActividad x) -> x.getEstado().equals("INGRESADA"))
+                .collect(Collectors.toSet());
+            Set<BeanActividad> actividadesRechazadas = actividadesNoAceptadas.stream().filter((BeanActividad x) -> x.getEstado().equals("RECHAZADA"))
+                .collect(Collectors.toSet());
+            Set<BeanActividad> actividadesFinalizadas = actividadesNoAceptadas.stream().filter((BeanActividad x) -> x.getEstado().equals("FINALIZADA"))
+                .collect(Collectors.toSet());
             request.setAttribute("nombre", profe.getNombre());
             request.setAttribute("apellido", profe.getApellido());
             request.setAttribute("mail", profe.getCorreo().getPrefix()+"@"+profe.getCorreo().getDomain());
             request.setAttribute("nacimiento", profe.getNacimiento());
             request.setAttribute("clases", clases);
+            request.setAttribute("actividadesNoAceptadas", actividadesNoAceptadas);
+            request.setAttribute("actividadesIngresadas", actividadesIngresadas);
+            request.setAttribute("actividadesRechazadas", actividadesRechazadas);
+            request.setAttribute("actividadesFinalizadas", actividadesFinalizadas);
             request.setAttribute("actividades", actividades);
             request.setAttribute("nickname", nick);
             request.setAttribute("institucion", profe.getInstitucion());
             request.setAttribute("descripcion", profe.getDescripcion());
             request.setAttribute("biografia", profe.getBiografia());
+
+
 
             HttpSession session = request.getSession();
 

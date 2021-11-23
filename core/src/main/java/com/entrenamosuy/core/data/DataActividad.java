@@ -5,11 +5,16 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import com.entrenamosuy.core.model.ActividadEstado;
 
 public class DataActividad {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    public ActividadEstado getEstado() {
+        return estado;
     }
 
     public static class Builder {
@@ -23,6 +28,8 @@ public class DataActividad {
         private LocalDate registro;
 
         private float costo;
+
+        private ActividadEstado estado;
 
         private Set<DataClase> clases = new HashSet<>();
 
@@ -55,6 +62,11 @@ public class DataActividad {
             return this;
         }
 
+        public Builder setEstado(ActividadEstado estado) {
+            this.estado = estado;
+            return this;
+        }
+
         public Builder setClases(Set<DataClase> clases) {
             this.clases = clases;
             return this;
@@ -72,7 +84,7 @@ public class DataActividad {
 
         public DataActividad build() {
             return new DataActividad(nombre, descripcion, duracion, registro, costo,
-                    clases, cuponeras, categorias);
+                    estado, clases, cuponeras, categorias);
         }
     }
 
@@ -86,6 +98,8 @@ public class DataActividad {
 
     private final float costo;
 
+    private final ActividadEstado estado;
+
     private final Set<DataClase> clases;
 
     private final Set<DataCuponera> cuponeras;
@@ -93,7 +107,7 @@ public class DataActividad {
     private final Set<String> categorias;
 
     protected DataActividad(String nombre, String descripcion, Duration duracion,
-            LocalDate registro, float costo, Set<DataClase> clases,
+            LocalDate registro, float costo, ActividadEstado estado, Set<DataClase> clases,
             Set<DataCuponera> cuponeras, Set<String> categorias) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor DataActividad");
@@ -109,6 +123,7 @@ public class DataActividad {
         this.duracion = duracion;
         this.registro = registro;
         this.costo = costo;
+        this.estado = estado;
         this.clases = clases;
         this.cuponeras = cuponeras;
         this.categorias = categorias;
@@ -148,7 +163,7 @@ public class DataActividad {
 
     @Override
     public int hashCode() {
-        return Objects.hash(costo, descripcion, duracion, nombre, registro);
+        return Objects.hash(costo, descripcion, duracion, nombre, registro, estado);
     }
 
     @Override
@@ -164,6 +179,7 @@ public class DataActividad {
                 && Objects.equals(descripcion, other.descripcion)
                 && Objects.equals(duracion, other.duracion)
                 && Objects.equals(nombre, other.nombre)
-                && Objects.equals(registro, other.registro);
+                && Objects.equals(registro, other.registro)
+                && Objects.equals(estado, other.estado);
     }
 }

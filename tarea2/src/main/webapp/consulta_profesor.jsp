@@ -21,6 +21,10 @@
         List<MiniUsuario> seguidores = (List<MiniUsuario>) request.getAttribute("seguidores");
         Set<BeanClase> clases = (Set<BeanClase>) request.getAttribute("clases");
         Set<BeanActividad> actividades = (Set<BeanActividad>) request.getAttribute("actividades");
+        Set<BeanActividad> actividadesNoAceptadas = (Set<BeanActividad>) request.getAttribute("actividadesNoAceptadas");
+        Set<BeanActividad> actividadesRechazadas = (Set<BeanActividad>) request.getAttribute("actividadesRechazadas"); 
+        Set<BeanActividad> actividadesIngresadas = (Set<BeanActividad>) request.getAttribute("actividadesIngresadas");   
+        Set<BeanActividad> actividadesFinalizada = (Set<BeanActividad>) request.getAttribute("actividadesFinalizada");             
         int esSeguidor = (int) request.getAttribute("esSeguidor");
         %>
         <jsp:include page="templates/header.jsp"/>
@@ -171,14 +175,42 @@
                                 <a href="consulta_actividad?nombre=<%= a.getNombre()%>" class="list-group-item list-group-item-action"><%= a.getNombre()%></a>
                                 <% } %>
                                 <%
-                                if (request.getAttribute("actividadesNoAceptadas") != null){
-                                Set<BeanActividad> actsNo = (Set<BeanActividad>) request.getAttribute("actividadesNoAceptadas");
-                                for (BeanActividad ac: actsNo){
+                                if (request.getAttribute("actividadesIngresadas") != null){
+                                    Set<BeanActividad> actsIng = (Set<BeanActividad>) request.getAttribute("actividadesIngresadas");
+                                    for (BeanActividad ac: actsIng){
                                 %>
                                 <div class="list-group-item d-flex align-items-center">
                                     <div class="flex-fill pl-3 pr-3">
                                         <div><%= ac.getNombre()%></div>
-                                        <div class="text-muted fs-13px">No aceptada</div>
+                                        <div class="text-muted fs-13px">Ingresada</div>
+                                    </div>
+                                </div>
+                                <% }
+                                } %>
+                                
+                                <%
+                                if (request.getAttribute("actividadesNoAceptadas") != null){
+                                Set<BeanActividad> actsR = (Set<BeanActividad>) request.getAttribute("actividadesRechazadas");
+                                for (BeanActividad ac: actsR){
+                                %>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="flex-fill pl-3 pr-3">
+                                        <div><%= ac.getNombre()%></div>
+                                        <div class="text-muted fs-13px">Rechazada</div>
+                                    </div>
+                                </div>
+                                <% }
+                                } %>
+
+                                <%
+                                if (request.getAttribute("actividadesFinalizadas") != null){
+                                Set<BeanActividad> actsFin = (Set<BeanActividad>) request.getAttribute("actividadesFinalizadas");
+                                for (BeanActividad ac: actsFin){
+                                %>
+                                <div class="list-group-item d-flex align-items-center">
+                                    <div class="flex-fill pl-3 pr-3">
+                                        <div><%= ac.getNombre()%></div>
+                                        <div class="text-muted fs-13px">Finalizada</div>
                                     </div>
                                 </div>
                                 <% }

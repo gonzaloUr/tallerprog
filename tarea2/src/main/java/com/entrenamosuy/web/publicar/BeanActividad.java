@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="clases" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanClase" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="cuponeras" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanCuponera" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="categorias" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="estado" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,7 +45,8 @@ import javax.xml.bind.annotation.XmlType;
     "costo",
     "clases",
     "cuponeras",
-    "categorias"
+    "categorias",
+    "estado"
 })
 public class BeanActividad {
 
@@ -59,6 +61,7 @@ public class BeanActividad {
     protected List<BeanCuponera> cuponeras;
     @XmlElement(nillable = true)
     protected List<String> categorias;
+    protected String estado;
 
     /**
      * Obtiene el valor de la propiedad nombre.
@@ -249,6 +252,30 @@ public class BeanActividad {
             categorias = new ArrayList<String>();
         }
         return this.categorias;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad estado.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getEstado() {
+        return estado;
+    }
+
+    /**
+     * Define el valor de la propiedad estado.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setEstado(String value) {
+        this.estado = value;
     }
 
 }

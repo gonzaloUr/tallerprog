@@ -27,8 +27,18 @@ public class BeanActividad {
 
     private ArrayList<String> categorias;
 
+    private String estado;
+
     public String getNombre() {
         return this.nombre;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public void setNombre(String nombre) {
@@ -106,6 +116,7 @@ public class BeanActividad {
             .map(BeanCuponera::of)
             .collect(Collectors.toCollection(ArrayList::new)));
         setCategorias(new ArrayList<>(x.getCategorias()));
+        setEstado(x.getEstado().name());
     }
 
     public static BeanActividad of(DataActividad x) {
