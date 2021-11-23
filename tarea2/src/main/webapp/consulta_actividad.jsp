@@ -17,7 +17,7 @@
                         <h1 class="fs-1 fw-bold p-3">${nombre}</h1>
                         <img src="img/actividad/${nombre}" alt=" " class="w-50">
                         <p class="fs-6 mt-3">${descripcion}</p>
-                        <p class="fs-6 mt-3">Duracion: ${duracion}</p>
+                        <p class="fs-6 mt-3">Duracion: ${duracion} minutos</p>
                         <% int f = (int) request.getAttribute("tipoFav");
                             if(f == 0){ %>
                                 <a href="/tarea2/marcar_fav?nombre=${nombre}" class="btn btn-primary"> Favorita
