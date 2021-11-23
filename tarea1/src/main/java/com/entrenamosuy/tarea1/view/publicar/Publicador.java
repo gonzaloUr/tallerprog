@@ -344,7 +344,7 @@ public class Publicador {
         try {
             facades.getFacadeUsuario().validarCredenciales(nickname, password);
         } catch (UsuarioNoEncontradoException e) {
-            new UsuarioNoEncontradoExceptionWrapper(e);
+            throw new UsuarioNoEncontradoExceptionWrapper(e);
         }
     }
 
@@ -353,7 +353,7 @@ public class Publicador {
         try {
             facades.getFacadeUsuario().validarCredencialesMovil(nickname, password);
         } catch (UsuarioNoEncontradoException e) {
-            new UsuarioNoEncontradoExceptionWrapper(e);
+            throw new UsuarioNoEncontradoExceptionWrapper(e);
         }
     }
 
@@ -441,16 +441,16 @@ public class Publicador {
 
     @WebMethod
     public void marcarComoFav(String socio, String actividad){
-        facades.getFacadeUsuario().marcarComoFav(socio, actividad); 
+        facades.getFacadeUsuario().marcarComoFav(socio, actividad);
     }
 
     @WebMethod
     public void desmarcarComoFav(String socio, String actividad){
-        facades.getFacadeUsuario().desmarcarComoFav(socio, actividad); 
+        facades.getFacadeUsuario().desmarcarComoFav(socio, actividad);
     }
 
     @WebMethod
     public boolean esFav(String socio, String actividad){
-        return facades.getFacadeUsuario().esFav(socio, actividad); 
+        return facades.getFacadeUsuario().esFav(socio, actividad);
     }
 }
