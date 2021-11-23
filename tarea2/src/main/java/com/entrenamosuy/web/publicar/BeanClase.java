@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="actividad" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescActividad" minOccurs="0"/>
  *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="profesores" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescProfesor" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="fechaSorteo" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDate" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,7 +46,8 @@ import javax.xml.bind.annotation.XmlType;
     "accesoURL",
     "actividad",
     "cantPremios",
-    "profesores"
+    "profesores",
+    "fechaSorteo"
 })
 public class BeanClase {
 
@@ -59,6 +61,7 @@ public class BeanClase {
     protected int cantPremios;
     @XmlElement(nillable = true)
     protected List<BeanDescProfesor> profesores;
+    protected BeanLocalDate fechaSorteo;
 
     /**
      * Gets the value of the nombre property.
@@ -231,6 +234,30 @@ public class BeanClase {
             profesores = new ArrayList<BeanDescProfesor>();
         }
         return this.profesores;
+    }
+
+    /**
+     * Gets the value of the fechaSorteo property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BeanLocalDate }
+     *     
+     */
+    public BeanLocalDate getFechaSorteo() {
+        return fechaSorteo;
+    }
+
+    /**
+     * Sets the value of the fechaSorteo property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BeanLocalDate }
+     *     
+     */
+    public void setFechaSorteo(BeanLocalDate value) {
+        this.fechaSorteo = value;
     }
 
 }

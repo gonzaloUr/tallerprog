@@ -867,29 +867,6 @@ public class CargarDatosLambda implements ActionListener {
             facadeActividad.registrarseSinCuponera("tonyp", "Basquet II", LocalDate.of(2021, 8, 20));
             facadeActividad.registrarseSinCuponera("caro", "Basquet II", LocalDate.of(2021, 9, 2));
 
-            facadeUsuario.agregarPremioASocio("charly", "Aparatos");
-            facadeUsuario.agregarPremioASocio("caro", "Aparatos");
-            facadeUsuario.agregarPremioASocio("m1k4", "Aparatos");
-            facadeUsuario.agregarPremioASocio("charly", "Mariposa");
-            facadeUsuario.agregarPremioASocio("sergiop", "Mariposa");
-            facadeUsuario.agregarPremioASocio("m1k4", "Aerobica niños");
-            facadeUsuario.agregarPremioASocio("caro", "Aerobica");
-            facadeUsuario.agregarPremioASocio("euge", "Aerobica");
-            facadeUsuario.agregarPremioASocio("sergiop", "Boxeo II");
-            facadeUsuario.agregarPremioASocio("guille", "Boxeo II" );
-            
-            facadeUsuario.puntuarClase("Emi71", "Voleibol", 4);
-            facadeUsuario.puntuarClase("Emi71", "Aerobica adulto mayor", 5);
-            facadeUsuario.puntuarClase("caro", "Calistenia", 4);
-            facadeUsuario.puntuarClase("caro", "Peso libre", 5);
-            facadeUsuario.puntuarClase("caro", "Aparatos", 4);
-            facadeUsuario.puntuarClase("guille", "Braza", 5);
-            facadeUsuario.puntuarClase("guille", "Aerobica adulto mayor", 3);
-            facadeUsuario.puntuarClase("sergiop", "Mariposa", 4);
-            facadeUsuario.puntuarClase("andy", "Mariposa", 2);
-            facadeUsuario.puntuarClase("andy", "Boxeo I", 4);
-            facadeUsuario.puntuarClase("m1k4", "Aerobica niños", 5);
-            facadeUsuario.puntuarClase("m1k4", "Boxeo I", 5);
 
             facadeCuponera.crearCuponera()
                 .setNombre("Pelota")
@@ -954,6 +931,43 @@ public class CargarDatosLambda implements ActionListener {
             facadeActividad.registrarseConCuponera("sergiop", "Boxeo II", "Musculos", LocalDate.of(2021, 8, 1));
             facadeActividad.registrarseConCuponera("caro", "Posta", "Pista", LocalDate.of(2021, 9, 1));
 
+
+            facadeUsuario.agregarPremioASocio("charly", "Aparatos");
+            facadeUsuario.agregarPremioASocio("caro", "Aparatos");
+            facadeUsuario.agregarPremioASocio("m1k4", "Aparatos");
+            facadeUsuario.agregarPremioASocio("charly", "Mariposa");
+            facadeUsuario.agregarPremioASocio("sergiop", "Mariposa");
+            facadeUsuario.agregarPremioASocio("m1k4", "Aerobica niños");
+            facadeUsuario.agregarPremioASocio("caro", "Aerobica");
+            facadeUsuario.agregarPremioASocio("euge", "Aerobica");
+            facadeUsuario.agregarPremioASocio("sergiop", "Boxeo II");
+            facadeUsuario.agregarPremioASocio("guille", "Boxeo II" );
+
+            facadeClase.agregarSocioAGanadores("charly", "Aparatos");
+            facadeClase.agregarSocioAGanadores("caro", "Aparatos");
+            facadeClase.agregarSocioAGanadores("m1k4", "Aparatos");
+            facadeClase.agregarSocioAGanadores("charly", "Mariposa");
+            facadeClase.agregarSocioAGanadores("sergiop", "Mariposa");
+            facadeClase.agregarSocioAGanadores("m1k4", "Aerobica niños");
+            facadeClase.agregarSocioAGanadores("caro", "Aerobica");
+            facadeClase.agregarSocioAGanadores("euge", "Aerobica");
+            facadeClase.agregarSocioAGanadores("sergiop", "Boxeo II");
+            facadeClase.agregarSocioAGanadores("guille", "Boxeo II");
+            
+            facadeUsuario.puntuarClase("Emi71", "Voleibol", 4);
+            facadeUsuario.puntuarClase("Emi71", "Aerobica adulto mayor", 5);
+            facadeUsuario.puntuarClase("caro", "Calistenia", 4);
+            facadeUsuario.puntuarClase("caro", "Peso libre", 5);
+            facadeUsuario.puntuarClase("caro", "Aparatos", 4);
+            facadeUsuario.puntuarClase("guille", "Braza", 5);
+            facadeUsuario.puntuarClase("guille", "Aerobica adulto mayor", 3);
+            facadeUsuario.puntuarClase("sergiop", "Mariposa", 4);
+            facadeUsuario.puntuarClase("andy", "Mariposa", 2);
+            facadeUsuario.puntuarClase("andy", "Boxeo I", 4);
+            facadeUsuario.puntuarClase("m1k4", "Aerobica niños", 5);
+            facadeUsuario.puntuarClase("m1k4", "Boxeo I", 5);
+
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

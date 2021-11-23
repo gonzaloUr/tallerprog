@@ -26,6 +26,8 @@
                             <hr>
                             <a href="alta_dictado_clase" class="btn btn-outline-primary">Dar de alta una clase</a>
                             <hr>
+                            <a href="finalizar_actividad" class="btn btn-outline-primary">Finalizar una actividad</a>
+                            <hr>
                         </div>
                     </div>
                 </section>
@@ -37,6 +39,8 @@
                         <div class="list-group" style="list-style-type:none">
                             <hr>
                             <a href="registrarse_a_clase_1" class="btn btn-outline-primary">Registrearse a una clase</a>
+                            <hr>
+                            <a href="visualizar_premios?nick=${usuario.nickname}" class="btn btn-outline-primary">Visualizar premios</a>
                             <hr>
                         </div>
                     </div>

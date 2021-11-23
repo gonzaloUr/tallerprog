@@ -25,6 +25,7 @@ if(estadoS == 2){
 	<div class= "card">
 		<div class= "card-body">
 			<h4>Clase no dictada.</h4>
+            <div class="space" style="height:10px"></div>
 			<a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Volver</a>
 		</div>
 	</div>
@@ -54,6 +55,7 @@ else if (estadoS == 1){
                 </div>
                 <%}%>
             </div>
+            <div class="space" style="height:10px"></div>
             <a href="consulta_dictado_clase?clase=${clase}" class="btn btn-primary">Volver</a>
 		</div>
 	</div>
@@ -84,8 +86,8 @@ else {%>
                 <%}%>
             </div>
             <div class="space" style="height:10px"></div>
-            <a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Cancelar</a>
             <a href="confirmar_sorteo?clase=<%=clase%>" class="btn btn-primary">Realizar Sorteo</a>
+            <a href="consulta_dictado_clase?clase=<%=clase%>" class="btn btn-primary">Cancelar</a>
 		</div>
 	</div>
 </div>

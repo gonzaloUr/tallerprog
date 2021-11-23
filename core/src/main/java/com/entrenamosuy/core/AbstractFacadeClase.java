@@ -57,4 +57,8 @@ public abstract class AbstractFacadeClase extends AbstractFacade {
     public abstract List<DataSocio> getRegistrados(String clase);
     
     public abstract int getEstadoSorteo(String clase);
+
+    public abstract void agregarSocioAGanadores(String socio, String clase);
+
+    public abstract boolean chequearSiClaseDictada(String cla);
 }

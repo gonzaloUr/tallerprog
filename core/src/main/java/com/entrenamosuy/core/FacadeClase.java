@@ -226,7 +226,6 @@ public class FacadeClase extends AbstractFacadeClase {
     
     @Override 
     public void realizarSorteo(String clase){
-        System.out.println("adentro de RealizarSorteo");
         Clase c = getRegistry().getClases().get(clase);
     	c.realizarSorteo();
     }
@@ -253,5 +252,15 @@ public class FacadeClase extends AbstractFacadeClase {
     		return 2;
     	}
     	return 0;
+    }
+
+    @Override
+    public void agregarSocioAGanadores(String socio, String clase){
+        getRegistry().getClases().get(clase).agregarGanador(getRegistry().getSocios().get(socio));
+    }
+
+    @Override
+    public boolean chequearSiClaseDictada(String cla){
+        return getRegistry().getClases().get(cla).chequearSiClaseDictada();
     }
 }

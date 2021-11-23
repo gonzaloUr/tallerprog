@@ -6,6 +6,7 @@ import java.util.Set;
 import com.entrenamosuy.core.data.DataActividad;
 import com.entrenamosuy.core.exceptions.ActividadRepetidaException;
 import com.entrenamosuy.core.exceptions.CategoriaRepetidaException;
+import com.entrenamosuy.core.exceptions.NoFinalizableException;
 import com.entrenamosuy.core.exceptions.RegistroInconsistenteException;
 import com.entrenamosuy.core.model.ActividadEstado;
 
@@ -67,5 +68,5 @@ public abstract class AbstractFacadeActividad extends AbstractFacade {
 
     public abstract File getImagenActividad(String ident);
     
-    public abstract void finalizarActividad(String actividad);
+    public abstract void finalizarActividad(String actividad) throws NoFinalizableException;
 }

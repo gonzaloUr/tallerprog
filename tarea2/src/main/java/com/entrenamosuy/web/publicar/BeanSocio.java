@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="clases" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanClase" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="cuponeras" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanCuponera" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="favoritas" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="clasesGanadas" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -48,7 +49,8 @@ import javax.xml.bind.annotation.XmlType;
     "seguidos",
     "clases",
     "cuponeras",
-    "favoritas"
+    "favoritas",
+    "clasesGanadas"
 })
 public class BeanSocio {
 
@@ -67,6 +69,8 @@ public class BeanSocio {
     protected List<BeanCuponera> cuponeras;
     @XmlElement(nillable = true)
     protected List<String> favoritas;
+    @XmlElement(nillable = true)
+    protected List<String> clasesGanadas;
 
     /**
      * Gets the value of the nickname property.
@@ -331,6 +335,35 @@ public class BeanSocio {
             favoritas = new ArrayList<String>();
         }
         return this.favoritas;
+    }
+
+    /**
+     * Gets the value of the clasesGanadas property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the clasesGanadas property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getClasesGanadas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getClasesGanadas() {
+        if (clasesGanadas == null) {
+            clasesGanadas = new ArrayList<String>();
+        }
+        return this.clasesGanadas;
     }
 
 }
