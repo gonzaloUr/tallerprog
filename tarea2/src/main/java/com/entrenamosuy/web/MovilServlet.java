@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+
 
 import com.entrenamosuy.web.publicar.PasswordInvalidaException_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
@@ -81,10 +83,12 @@ public class MovilServlet extends HttpServlet {
             Object usr = session.getAttribute("usuario");
 
 
-            if(usr != null){ //TODO revisar esto que da error consulta dictado a clase
-                BeanProfesor profe = (BeanProfesor) usr;
-                boolean b = (boolean) session.getAttribute("es_profesor");
-                esDicta = (b) && (profe.getNickname().equals(nickname));
+            if(usr != null){ 
+                boolean b = (boolean) session.getAttribute("es_profesor");    
+                if (b){
+                    BeanProfesor profe = (BeanProfesor) usr;
+                    esDicta = profe.getNickname().equals(nickname); 
+                }       
             }
 
             Set<String> profesorNom = clase.getProfesores()
@@ -225,6 +229,32 @@ public class MovilServlet extends HttpServlet {
             session.setAttribute("es_profesor", false);
 
             request.setAttribute("successful_login", true);
+
+            Cookie [] oreos = request.getCookies(); //Se loggeo alguien -> expiramos las cookies que guardamos del anterior
+                    if (oreos != null){
+                        for (Cookie ck : oreos){
+                            if (ck.getName().equals("nickCookie")){
+                                ck.setMaxAge(0);
+                                response.addCookie(ck);
+                            }
+                            else if (ck.getName().equals("passCookie")){
+                                ck.setMaxAge(0);
+                                response.addCookie(ck);
+                            }
+                        }
+                    }
+        
+            if (request.getParameter("cookie_login")!=null){
+                Cookie ckNick = new Cookie("nickCookie", nickname); //Se crean las nuevas cookies para este usuario
+                ckNick.setMaxAge(60*60*24);
+                ckNick.setSecure(true);
+                Cookie ckPass = new Cookie("passCookie", password);
+                ckPass.setMaxAge(60*60*24);
+                ckPass.setSecure(true);
+                response.addCookie(ckNick);
+                response.addCookie(ckPass);                   
+                
+            }
         } catch (PasswordInvalidaException_Exception e) {
             request.setAttribute("reason", "password");
             request.setAttribute("successful_login", false);

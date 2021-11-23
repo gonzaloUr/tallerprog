@@ -288,6 +288,6 @@ public class Actividad {
     }
     
     public void finalizar() {
-    	estado = ActividadEstado.FINALIZADA;
+    	estado = ActividadEstado.FINALIZADA; //TODO: Excepcion si hay clases vigentes
     }
 }
