@@ -410,7 +410,6 @@ public class Publicador {
 
     @WebMethod
     public void realizarSorteo(String clase){
-        System.out.println("antes de realizarSorteo");
         facades.getFacadeClase().realizarSorteo(clase);
     }
 

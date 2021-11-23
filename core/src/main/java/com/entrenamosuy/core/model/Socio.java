@@ -234,6 +234,7 @@ public class Socio extends Usuario {
         Set<DataCuponera> dataCuponeras = new HashSet<>(compras.size());
         Set<String> seguidoresString = new HashSet<>();
         Set<String> seguidosString = new HashSet<>();
+        Set<String> clasGan = new HashSet<>();
 
         for (Usuario u : getSeguidores()){
             seguidoresString.add(u.getNickname());
@@ -252,6 +253,10 @@ public class Socio extends Usuario {
             dataCuponeras.add(cup.getDataCuponera());
         }
 
+        for (Clase c : getClasesGanadas()) {
+            clasGan.add(c.getNombre());
+        }
+
         return DataSocio.builder()
             .setNickname(getNickname())
             .setNombre(getNombre())
@@ -263,6 +268,7 @@ public class Socio extends Usuario {
             .setClases(dataClases)
             .setCuponeras(dataCuponeras)
             .setFavoritas(actividadesFavoritas)
+            .setClasesGanadas(clasGan)
             .build();
     }
 

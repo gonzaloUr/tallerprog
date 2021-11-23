@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,7 @@ import com.entrenamosuy.web.publicar.BeanClase;
 import com.entrenamosuy.web.publicar.BeanCrearClaseArgs;
 import com.entrenamosuy.web.publicar.BeanDescProfesor;
 import com.entrenamosuy.web.publicar.BeanProfesor;
+import com.entrenamosuy.web.publicar.BeanLocalDate;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.ClaseInconsistenteExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
@@ -213,6 +215,32 @@ public class ClaseServlet extends HttpServlet {
 
             processRequest(request,response);
 
+        } else if (path.equals("/visualizar_premios")) {
+            String nick = request.getParameter("nick");
+            BeanSocio socio = port.getDataSocio(nick);
+            Set<String> clasesGanadas = socio.getClasesGanadas().stream().collect(Collectors.toSet());
+            List<BeanClase> clasesGanadasOrdenadas = new ArrayList<BeanClase>();
+            while(!clasesGanadas.isEmpty()) {
+                String s = "";
+                for(String c: clasesGanadas){
+                    if (s.equals(""))
+                        s = c;
+                    else {
+                        BeanLocalDate lc = port.getDataClase(c).getFechaSorteo();
+                        BeanLocalDate ls = port.getDataClase(s).getFechaSorteo();
+                       /* if (lc.toLocalDate().isBefore(ls.toLocalDate()))
+                            s = c; */
+                        if( (lc.getYear()>ls.getYear()) || ((lc.getYear()==ls.getYear() && lc.getMonth()>ls.getMonth()) || 
+                            (lc.getYear()==ls.getYear() && lc.getMonth()==ls.getMonth() && lc.getDayOfMonth()>ls.getDayOfMonth())) )  
+                            s = c;   
+                    }          
+                }
+                clasesGanadasOrdenadas.add(port.getDataClase(s));
+                clasesGanadas.remove(s);
+            }
+            request.setAttribute("clasesGanadasOrdenadas", clasesGanadasOrdenadas);    
+            request.getRequestDispatcher("/visualizar_premios.jsp")
+            .forward(request, response);
         }
     }
 

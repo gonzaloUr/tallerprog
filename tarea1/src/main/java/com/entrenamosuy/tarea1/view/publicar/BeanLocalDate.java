@@ -45,8 +45,10 @@ public class BeanLocalDate {
     }
 
     public static BeanLocalDate of(LocalDate x) {
-        BeanLocalDate ret = new BeanLocalDate();
-        ret.from(x);
-        return ret;
+        if (x != null) {
+            BeanLocalDate ret = new BeanLocalDate();
+            ret.from(x);
+            return ret;
+        } else return null;    
     }
 }

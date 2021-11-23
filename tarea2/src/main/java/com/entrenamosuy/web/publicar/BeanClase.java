@@ -16,22 +16,23 @@ import javax.xml.bind.annotation.XmlType;
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="beanClase">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/>
- *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="accesoURL" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/>
- *         &lt;element name="actividad" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescActividad" minOccurs="0"/>
- *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="profesores" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescProfesor" maxOccurs="unbounded" minOccurs="0"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
+ * &lt;complexType name="beanClase"&gt;
+ *   &lt;complexContent&gt;
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
+ *       &lt;sequence&gt;
+ *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/&gt;
+ *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/&gt;
+ *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="accesoURL" type="{http://www.w3.org/2001/XMLSchema}anyURI" minOccurs="0"/&gt;
+ *         &lt;element name="actividad" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescActividad" minOccurs="0"/&gt;
+ *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="profesores" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanDescProfesor" maxOccurs="unbounded" minOccurs="0"/&gt;
+ *         &lt;element name="fechaSorteo" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDate" minOccurs="0"/&gt;
+ *       &lt;/sequence&gt;
+ *     &lt;/restriction&gt;
+ *   &lt;/complexContent&gt;
+ * &lt;/complexType&gt;
  * </pre>
  * 
  * 
@@ -45,7 +46,8 @@ import javax.xml.bind.annotation.XmlType;
     "accesoURL",
     "actividad",
     "cantPremios",
-    "profesores"
+    "profesores",
+    "fechaSorteo"
 })
 public class BeanClase {
 
@@ -59,6 +61,7 @@ public class BeanClase {
     protected int cantPremios;
     @XmlElement(nillable = true)
     protected List<BeanDescProfesor> profesores;
+    protected BeanLocalDate fechaSorteo;
 
     /**
      * Obtiene el valor de la propiedad nombre.
@@ -231,6 +234,30 @@ public class BeanClase {
             profesores = new ArrayList<BeanDescProfesor>();
         }
         return this.profesores;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad fechaSorteo.
+     * 
+     * @return
+     *     possible object is
+     *     {@link BeanLocalDate }
+     *     
+     */
+    public BeanLocalDate getFechaSorteo() {
+        return fechaSorteo;
+    }
+
+    /**
+     * Define el valor de la propiedad fechaSorteo.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link BeanLocalDate }
+     *     
+     */
+    public void setFechaSorteo(BeanLocalDate value) {
+        this.fechaSorteo = value;
     }
 
 }

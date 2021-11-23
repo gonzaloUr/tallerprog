@@ -30,6 +30,8 @@ public class BeanSocio {
 
     private ArrayList<String> favoritas;
 
+    private ArrayList<String> clasesGanadas;
+
     public String getNombre() {
 		return nombre;
 	}
@@ -110,6 +112,14 @@ public class BeanSocio {
         this.favoritas = favoritas;
     }
 
+    public ArrayList<String> getClasesGanadas(){
+        return this.clasesGanadas;
+    }
+
+    public void setClasesGanadas(ArrayList<String> clasesGanadas){
+        this.clasesGanadas = clasesGanadas;
+    }
+
     public void from(DataSocio x) {
         setNickname(x.getNickname());
         setNombre(x.getNombre());
@@ -127,6 +137,7 @@ public class BeanSocio {
             .map(BeanCuponera::of)
             .collect(Collectors.toCollection(ArrayList::new)));
         setFavoritas(x.getFavoritas().keySet().stream().collect(Collectors.toCollection(ArrayList::new)));
+        setClasesGanadas(new ArrayList<>(x.getClasesGanadas()));
     }
 
     public static BeanSocio of(DataSocio x) {
