@@ -159,6 +159,11 @@
     
     <servlet-mapping>
         <servlet-name>ClaseServlet</servlet-name>
+        <url-pattern>/visualizar_premios</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>ClaseServlet</servlet-name>
         <url-pattern>/confirmar_sorteo</url-pattern>
     </servlet-mapping>
 

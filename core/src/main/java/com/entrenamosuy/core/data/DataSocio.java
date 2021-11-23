@@ -36,6 +36,9 @@ public class DataSocio extends DataUsuario {
 
         private Map<String, Actividad> actividadesFavoritas;
 
+        private Set<String> clasesGanadas = Collections.emptySet();
+
+
         public Builder setNickname(String nickname) {
             this.nickname = nickname;
             return this;
@@ -86,22 +89,29 @@ public class DataSocio extends DataUsuario {
             return this;
         }
 
+        public Builder setClasesGanadas(Set<String> clasesGanadas) {
+            this.clasesGanadas = clasesGanadas;
+            return this;
+        }
+
         public DataSocio build() {
-            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos, clases, cuponeras, actividadesFavoritas);
+            return new DataSocio(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos, clases, cuponeras, actividadesFavoritas, clasesGanadas);
         }
     }
 
     private final Set<DataClase> clases;
     private final Set<DataCuponera> cuponeras;
     private final Map<String, Actividad> favoritas;
+    private final Set<String> clasesGanadas;
 
     protected DataSocio(String nickname, String nombre, String apellido, Email correo, LocalDate nacimiento, Set<String> seguidores, 
-        Set<String> seguidos, Set<DataClase> clases, Set<DataCuponera> cuponeras, Map<String, Actividad> favoritas) {
+        Set<String> seguidos, Set<DataClase> clases, Set<DataCuponera> cuponeras, Map<String, Actividad> favoritas, Set<String> clasesGanadas) {
 
         super(nickname, nombre, apellido, correo, nacimiento, seguidores, seguidos);
         this.clases = clases;
         this.cuponeras = cuponeras;
         this.favoritas = favoritas;
+        this.clasesGanadas = clasesGanadas;
 
     }
 
@@ -115,6 +125,10 @@ public class DataSocio extends DataUsuario {
 
     public Map<String, Actividad> getFavoritas(){
         return favoritas;
+    }
+
+    public Set<String> getClasesGanadas(){
+        return clasesGanadas;
     }
 
     @Override

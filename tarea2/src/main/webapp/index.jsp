@@ -40,6 +40,8 @@
                             <hr>
                             <a href="registrarse_a_clase_1" class="btn btn-outline-primary">Registrearse a una clase</a>
                             <hr>
+                            <a href="visualizar_premios?nick=${usuario.nickname}" class="btn btn-outline-primary">Visualizar premios</a>
+                            <hr>
                         </div>
                     </div>
                 </section>

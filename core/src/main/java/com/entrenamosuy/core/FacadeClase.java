@@ -226,7 +226,6 @@ public class FacadeClase extends AbstractFacadeClase {
     
     @Override 
     public void realizarSorteo(String clase){
-        System.out.println("adentro de RealizarSorteo");
         Clase c = getRegistry().getClases().get(clase);
     	c.realizarSorteo();
     }

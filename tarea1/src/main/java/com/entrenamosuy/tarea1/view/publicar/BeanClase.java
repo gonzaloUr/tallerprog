@@ -26,6 +26,8 @@ public class BeanClase {
 
     private ArrayList<BeanDescProfesor> profesores;
 
+    private BeanLocalDate fechaSorteo;
+
     public String getNombre() {
         return this.nombre;
     }
@@ -90,6 +92,14 @@ public class BeanClase {
         this.profesores = profesores;
     }
 
+    public BeanLocalDate getFechaSorteo() {
+        return this.fechaSorteo;
+    }
+
+    public void setFechaSorteo(BeanLocalDate fechaSorteo) {
+        this.fechaSorteo = fechaSorteo;
+    }
+
     public void from(DataClase x) {
         setNombre(x.getNombre());
         setInicio(BeanLocalDateTime.of(x.getInicio()));
@@ -101,6 +111,7 @@ public class BeanClase {
             .stream()
             .map(BeanDescProfesor::of)
             .collect(Collectors.toCollection(ArrayList::new)));
+        setFechaSorteo(BeanLocalDate.of(x.getFechaSorteo()));    
     }
 
     public static BeanClase of(DataClase x) {

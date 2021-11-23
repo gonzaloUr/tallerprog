@@ -2,6 +2,7 @@ package com.entrenamosuy.core.data;
 
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
@@ -27,6 +28,8 @@ public class DataClase {
         private int cantPremios;
 
         private Set<DescProfesor> profesores = Collections.emptySet();
+
+        private LocalDate fechaSorteo = null;
 
         public Builder setNombre(String nombre) {
             this.nombre = nombre;
@@ -68,8 +71,13 @@ public class DataClase {
             return this;
         }
 
+        public Builder setFechaSorteo(LocalDate fechaSorteo){
+            this.fechaSorteo = fechaSorteo;
+            return this;
+        }
+
         public DataClase build() {
-            return new DataClase(nombre, inicio, cantMin, cantMax, accesoURL, actividad, cantPremios, profesores);
+            return new DataClase(nombre, inicio, cantMin, cantMax, accesoURL, actividad, cantPremios, profesores, fechaSorteo);
         }
     }
 
@@ -87,8 +95,10 @@ public class DataClase {
 
     private final Set<DescProfesor> profesores;
 
+    private LocalDate fechaSorteo;
+
     protected DataClase(String nombre, LocalDateTime inicio, int cantMin, int cantMax, URL accesoURL,
-            DescActividad actividad, int cantPremios, Set<DescProfesor> profesores) {
+            DescActividad actividad, int cantPremios, Set<DescProfesor> profesores, LocalDate fechaSorteo) {
 
         Objects.requireNonNull(nombre, "nombre es null en constructor DataClase");
         Objects.requireNonNull(inicio, "inicio es null en constructor DataClase");
@@ -104,6 +114,7 @@ public class DataClase {
         this.actividad = actividad;
         this.cantPremios = cantPremios;
         this.profesores = profesores;
+        this.fechaSorteo = fechaSorteo;
     }
 
     public String getNombre() {
@@ -136,6 +147,10 @@ public class DataClase {
 
     public Set<DescProfesor> getProfesores() {
         return profesores;
+    }
+
+    public LocalDate getFechaSorteo(){
+        return fechaSorteo;
     }
 
     @Override

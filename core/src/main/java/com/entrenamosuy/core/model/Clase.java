@@ -335,6 +335,7 @@ public class Clase {
             .setActividad(actividad.getDescActividad())
             .setCantPremios(cantPremios)
             .setProfesores(descProfes)
+            .setFechaSorteo(fechaSorteo)
             .build();
     }
     
