@@ -27,6 +27,7 @@ import com.entrenamosuy.web.publicar.BeanInstitucion;
 import com.entrenamosuy.web.publicar.BeanProfesor;
 import com.entrenamosuy.web.publicar.BeanSocio;
 import com.entrenamosuy.web.publicar.InstitucionNoEncontradaExceptionWrapper_Exception;
+import com.entrenamosuy.web.publicar.NoFinalizableExceptionWrapper_Exception;
 import com.entrenamosuy.web.publicar.Publicador;
 import com.entrenamosuy.web.publicar.SinCategoriaExceptionWrapper_Exception;
 
@@ -145,7 +146,14 @@ public class ActividadServlet extends HttpServlet {
         }   else if (path.equals("/terminar_actividad")){
 
             String acti = request.getParameter("finalizar");
-            port.finalizarActividad(acti);
+            try {
+                port.finalizarActividad(acti);
+            } catch (NoFinalizableExceptionWrapper_Exception e) {
+                request.setAttribute("failed", true);
+                request.setAttribute("reason", "no_finalizable");
+                request.getRequestDispatcher("finalizar_actividad.jsp").forward(request, response);
+                return;
+            }
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/finalizar_actividad"));
 
         } else if (path.equals("/consulta_categoria")) {

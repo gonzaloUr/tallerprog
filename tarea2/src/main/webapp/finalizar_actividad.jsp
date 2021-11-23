@@ -27,5 +27,13 @@
                 </c:forEach>
             </div>
         </div>
+        <div class="col-md-6 mb-3">
+            <c:if test="${failed eq true}">
+                <c:if test="${reason == 'no_finalizable'}">
+                    <span class="text-danger mb-3">Error: Esa actividad aun tiene clases vigentes.</span>
+                    <a href="finalizar_actividad" class="btn btn-primary">Volver atras</a>
+                </c:if>
+            </c:if>
+        </div>
     </body>
 </html>

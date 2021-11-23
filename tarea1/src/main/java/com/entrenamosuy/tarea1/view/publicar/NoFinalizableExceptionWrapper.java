@@ -1,5 +1,5 @@
 package com.entrenamosuy.tarea1.view.publicar;
-import com.entrenamosuy.core.exceptions.UsuarioNoEncontradoException;
+import com.entrenamosuy.core.exceptions.NoFinalizableException;
 
 
 public class NoFinalizableExceptionWrapper extends Exception {
@@ -7,7 +7,7 @@ public class NoFinalizableExceptionWrapper extends Exception {
         super(msg);
     }
 
-    public NoFinalizableExceptionWrapper(UsuarioNoEncontradoException e) {
+    public NoFinalizableExceptionWrapper(NoFinalizableException e) {
         this(e.getMessage());
     }
 }

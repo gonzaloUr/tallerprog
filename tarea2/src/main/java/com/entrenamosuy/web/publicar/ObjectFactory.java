@@ -87,6 +87,7 @@ public class ObjectFactory {
     private final static QName _GetImagenUsuarioResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenUsuarioResponse");
     private final static QName _GetImagenInstitucionResponse_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "getImagenInstitucionResponse");
     private final static QName _ValidarCredencialesMovil_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "validarCredencialesMovil");
+    private final static QName _NoFinalizableExceptionWrapper_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "NoFinalizableExceptionWrapper");
     private final static QName _CrearProfesor_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearProfesor");
     private final static QName _CrearClase_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "crearClase");
     private final static QName _MarcarComoFav_QNAME = new QName("http://publicar.view.tarea1.entrenamosuy.com/", "marcarComoFav");
@@ -737,6 +738,14 @@ public class ObjectFactory {
      */
     public ValidarCredencialesMovil createValidarCredencialesMovil() {
         return new ValidarCredencialesMovil();
+    }
+
+    /**
+     * Create an instance of {@link NoFinalizableExceptionWrapper }
+     * 
+     */
+    public NoFinalizableExceptionWrapper createNoFinalizableExceptionWrapper() {
+        return new NoFinalizableExceptionWrapper();
     }
 
     /**
@@ -1467,6 +1476,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link NoFinalizableExceptionWrapper }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://publicar.view.tarea1.entrenamosuy.com/", name = "NoFinalizableExceptionWrapper")
+    public JAXBElement<NoFinalizableExceptionWrapper> createNoFinalizableExceptionWrapper(NoFinalizableExceptionWrapper value) {
+        return new JAXBElement<NoFinalizableExceptionWrapper>(_NoFinalizableExceptionWrapper_QNAME, NoFinalizableExceptionWrapper.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CrearProfesor }{@code >}}
      * 
      */
@@ -1650,9 +1668,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenCuponeraResponse.class)
-    public JAXBElement<byte[]> createGetImagenCuponeraResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
+    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
     }
 
     /**
@@ -1677,9 +1695,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenClaseResponse.class)
-    public JAXBElement<byte[]> createGetImagenClaseResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenClaseResponse.class, ((byte[]) value));
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenCuponeraResponse.class)
+    public JAXBElement<byte[]> createGetImagenCuponeraResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenActividadResponseReturn_QNAME, byte[].class, GetImagenCuponeraResponse.class, ((byte[]) value));
     }
 
 }
