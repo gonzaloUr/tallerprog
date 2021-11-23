@@ -453,4 +453,9 @@ public class Publicador {
     public boolean esFav(String socio, String actividad){
         return facades.getFacadeUsuario().esFav(socio, actividad); 
     }
+    
+    @WebMethod
+    public void finalizarActividad(String actividad){
+        facades.getFacadeActividad().finalizarActividad(actividad); 
+    }
 }
