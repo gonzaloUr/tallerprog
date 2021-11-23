@@ -84,11 +84,6 @@
 
     <servlet-mapping>
         <servlet-name>MovilServlet</servlet-name>
-        <url-pattern>/inicio_movil</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
-        <servlet-name>MovilServlet</servlet-name>
         <url-pattern>/cerrar_sesion_movil</url-pattern>
     </servlet-mapping>
 

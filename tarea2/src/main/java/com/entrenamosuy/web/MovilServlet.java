@@ -43,17 +43,6 @@ public class MovilServlet extends HttpServlet {
             request.getSession().removeAttribute("usuario");
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
 
-        } else if (path.equals("/inicio_movil")) {
-            String nombre = (String) request.getParameter("nombre");
-            String apellido = (String) request.getParameter("apellido");
-
-            request.setAttribute("nombre", nombre);
-            request.setAttribute("apellido", apellido);
-
-            request
-                .getRequestDispatcher("/inicio_movil.jsp")
-                .forward(request, response);
-
         } else if(path.equals("/consulta_dictado_clase_movil")) {
 
 
@@ -227,7 +216,6 @@ public class MovilServlet extends HttpServlet {
 
             session.setAttribute("usuario", port.getDataSocio(nickname));
             session.setAttribute("es_profesor", false);
-
             request.setAttribute("successful_login", true);
 
             Cookie [] oreos = request.getCookies(); //Se loggeo alguien -> expiramos las cookies que guardamos del anterior

@@ -23,7 +23,7 @@ public class SesionServlet extends HttpServlet {
             String userAgent = request.getHeader("User-Agent");
 
             if (Utils.esMobile(userAgent)) {
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/inicio_movil"));
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/index_movil"));
                 return;
             }
 
