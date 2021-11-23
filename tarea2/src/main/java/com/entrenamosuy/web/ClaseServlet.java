@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.entrenamosuy.web.publicar.BeanClase;
+import com.entrenamosuy.web.publicar.BeanActividad;
 import com.entrenamosuy.web.publicar.BeanCrearClaseArgs;
 import com.entrenamosuy.web.publicar.BeanDescProfesor;
 import com.entrenamosuy.web.publicar.BeanProfesor;
@@ -136,6 +137,15 @@ public class ClaseServlet extends HttpServlet {
             int cantMax = clase.getCantMax();
             URL url = new URL(clase.getAccesoURL());
             String acti= clase.getActividad().getNombre();
+            
+            Boolean esAceptada = false;
+            Set<BeanActividad> actsAceptadas = port.listarActividadesAceptadas().stream().collect(Collectors.toSet());  
+            for(BeanActividad a : actsAceptadas){
+                if(a.getNombre().equals(acti)){
+                    esAceptada = true;
+                    break;
+                }
+            }
 
             Set<String> profesorNick = clase.getProfesores()
             .stream()
@@ -182,6 +192,7 @@ public class ClaseServlet extends HttpServlet {
             request.setAttribute("apellido", apellido);
             request.setAttribute("es_profesor_que_dicta", esDicta);
             request.setAttribute("cantPremios", clase.getCantPremios());
+            request.setAttribute("esAceptada", esAceptada);
 
             request.getRequestDispatcher("/consulta_dictado_clase.jsp")
                 .forward(request, response);
@@ -228,8 +239,6 @@ public class ClaseServlet extends HttpServlet {
                     else {
                         BeanLocalDate lc = port.getDataClase(c).getFechaSorteo();
                         BeanLocalDate ls = port.getDataClase(s).getFechaSorteo();
-                       /* if (lc.toLocalDate().isBefore(ls.toLocalDate()))
-                            s = c; */
                         if( (lc.getYear()>ls.getYear()) || ((lc.getYear()==ls.getYear() && lc.getMonth()>ls.getMonth()) || 
                             (lc.getYear()==ls.getYear() && lc.getMonth()==ls.getMonth() && lc.getDayOfMonth()>ls.getDayOfMonth())) )  
                             s = c;   

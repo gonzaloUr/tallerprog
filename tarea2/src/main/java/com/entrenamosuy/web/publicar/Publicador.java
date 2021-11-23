@@ -33,18 +33,6 @@ public interface Publicador {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getCategorias", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetCategorias")
-    @ResponseWrapper(localName = "getCategoriasResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetCategoriasResponse")
-    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getCategoriasRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getCategoriasResponse")
-    public List<String> getCategorias();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<java.lang.String>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getInstituciones", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetInstituciones")
     @ResponseWrapper(localName = "getInstitucionesResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetInstitucionesResponse")
     @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getInstitucionesRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getInstitucionesResponse")
@@ -217,6 +205,23 @@ public interface Publicador {
     /**
      * 
      * @param arg0
+     * @throws ClaseInconsistenteExceptionWrapper_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "crearClase", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearClase")
+    @ResponseWrapper(localName = "crearClaseResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearClaseResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClaseRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClaseResponse", fault = {
+        @FaultAction(className = ClaseInconsistenteExceptionWrapper_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClase/Fault/ClaseInconsistenteExceptionWrapper")
+    })
+    public void crearClase(
+        @WebParam(name = "arg0", targetNamespace = "")
+        BeanCrearClaseArgs arg0)
+        throws ClaseInconsistenteExceptionWrapper_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
      * @return
      *     returns com.entrenamosuy.web.publicar.BeanProfesor
      */
@@ -246,21 +251,18 @@ public interface Publicador {
 
     /**
      * 
-     * @param arg1
      * @param arg0
-     * @throws ClaseInconsistenteExceptionWrapper_Exception
+     * @return
+     *     returns java.util.List<java.lang.String>
      */
     @WebMethod
-    @RequestWrapper(localName = "crearClase", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearClase")
-    @ResponseWrapper(localName = "crearClaseResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearClaseResponse")
-    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClaseRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClaseResponse", fault = {
-        @FaultAction(className = ClaseInconsistenteExceptionWrapper_Exception.class, value = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/crearClase/Fault/ClaseInconsistenteExceptionWrapper")
-    })
-    public void crearClase(
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getClasesDeActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetClasesDeActividad")
+    @ResponseWrapper(localName = "getClasesDeActividadResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetClasesDeActividadResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getClasesDeActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getClasesDeActividadResponse")
+    public List<String> getClasesDeActividad(
         @WebParam(name = "arg0", targetNamespace = "")
-        BeanCrearClaseArgs arg0)
-        throws ClaseInconsistenteExceptionWrapper_Exception
-    ;
+        String arg0);
 
     /**
      * 
@@ -324,9 +326,9 @@ public interface Publicador {
     /**
      * 
      * @param arg0
-     * @throws SinCategoriaExceptionWrapper_Exception
-     * @throws InstitucionNoEncontradaExceptionWrapper_Exception
      * @throws ActividadRepetidaException_Exception
+     * @throws InstitucionNoEncontradaExceptionWrapper_Exception
+     * @throws SinCategoriaExceptionWrapper_Exception
      */
     @WebMethod
     @RequestWrapper(localName = "crearActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.CrearActividad")
@@ -598,17 +600,20 @@ public interface Publicador {
 
     /**
      * 
+     * @param arg1
      * @param arg0
      * @return
      *     returns java.util.List<java.lang.String>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getClasesDeActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetClasesDeActividad")
-    @ResponseWrapper(localName = "getClasesDeActividadResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetClasesDeActividadResponse")
-    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getClasesDeActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getClasesDeActividadResponse")
-    public List<String> getClasesDeActividad(
+    @RequestWrapper(localName = "getCuponerasUsablesActividad", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetCuponerasUsablesActividad")
+    @ResponseWrapper(localName = "getCuponerasUsablesActividadResponse", targetNamespace = "http://publicar.view.tarea1.entrenamosuy.com/", className = "com.entrenamosuy.web.publicar.GetCuponerasUsablesActividadResponse")
+    @Action(input = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getCuponerasUsablesActividadRequest", output = "http://publicar.view.tarea1.entrenamosuy.com/Publicador/getCuponerasUsablesActividadResponse")
+    public List<String> getCuponerasUsablesActividad(
         @WebParam(name = "arg0", targetNamespace = "")
-        String arg0);
+        String arg0,
+        @WebParam(name = "arg1", targetNamespace = "")
+        String arg1);
 
 }

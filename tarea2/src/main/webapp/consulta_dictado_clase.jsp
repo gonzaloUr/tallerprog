@@ -24,7 +24,11 @@
                     <p><a href="consulta_actividad?nombre=${acti}"> Ver Información Actividad Deportiva </a>  </p>
                     <c:choose>
                         <c:when test="${es_profesor eq false}">
-                            <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
+                            <c:choose>
+                                <c:when test="${esAceptada eq true}">
+                                    <p><a href="confirmar_registro_clase?actividad=${acti}&clase=${nombre}"> Registrarme a la clase </a>  </p>
+                                </c:when>    
+                            </c:choose>
                         </c:when>
                     </c:choose>
                     <c:choose>
