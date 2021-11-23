@@ -30,6 +30,8 @@
                 <input class="form-control mb-3" placeholder="inicio" name="inicio" type="datetime-local" value="2021-10-27T11:00">
                 <input class="form-control mb-3" placeholder="cantidad mininima" name="cant_min" type="number" min="0">
                 <input class="form-control mb-3" placeholder="cantidad maxima" name="cant_max" type="number" min="0">
+                <input class="form-control mb-3" placeholder="cantidad de premios" name="cant_premios" type="number" min="0">
+                <input class="form-control mb-3" placeholder="descripcion del premio (en caso de no haber premios escribir 'No hay')" name="desc_premio">
                 <input class="form-control mb-3" placeholder="url de acesso" name="acceso" type="url">
                 <input class="form-control mb-3" placeholder="fecha de registro" name="fecha_registro" type="date" value=<%=LocalDate.now()%>>
                 <input class="form-control mb-3" accept="image/*" name="img" type="file">

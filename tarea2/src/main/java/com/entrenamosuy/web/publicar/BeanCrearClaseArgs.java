@@ -24,6 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="actividad" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="cantMax" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="cantMin" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="cantPremios" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="descPremio" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="imagen" type="{http://www.w3.org/2001/XMLSchema}base64Binary" minOccurs="0"/>
  *         &lt;element name="inicio" type="{http://publicar.view.tarea1.entrenamosuy.com/}beanLocalDateTime" minOccurs="0"/>
  *         &lt;element name="nicknameProfesores" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
@@ -43,6 +45,8 @@ import javax.xml.bind.annotation.XmlType;
     "actividad",
     "cantMax",
     "cantMin",
+    "cantPremios",
+    "descPremio",
     "imagen",
     "inicio",
     "nicknameProfesores",
@@ -56,6 +60,8 @@ public class BeanCrearClaseArgs {
     protected String actividad;
     protected int cantMax;
     protected int cantMin;
+    protected int cantPremios;
+    protected String descPremio;
     protected byte[] imagen;
     protected BeanLocalDateTime inicio;
     @XmlElement(nillable = true)
@@ -141,6 +147,46 @@ public class BeanCrearClaseArgs {
      */
     public void setCantMin(int value) {
         this.cantMin = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad cantPremios.
+     * 
+     */
+    public int getCantPremios() {
+        return cantPremios;
+    }
+
+    /**
+     * Define el valor de la propiedad cantPremios.
+     * 
+     */
+    public void setCantPremios(int value) {
+        this.cantPremios = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad descPremio.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getDescPremio() {
+        return descPremio;
+    }
+
+    /**
+     * Define el valor de la propiedad descPremio.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDescPremio(String value) {
+        this.descPremio = value;
     }
 
     /**

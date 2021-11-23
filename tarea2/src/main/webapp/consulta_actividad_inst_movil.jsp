@@ -11,7 +11,7 @@
     
 
 </head>
-<body class="d-flex flex-column text-center justify-content-center py-12">
+<body class="flex-column text-center justify-content-center py-12">
     <jsp:include page="/templates/top_mobil.jsp"/>
         
         <div class="dropdown">

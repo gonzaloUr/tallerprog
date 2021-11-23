@@ -334,7 +334,9 @@ public class ClaseServlet extends HttpServlet {
             int cantMax = Integer.parseInt(request.getParameter("cant_max"));
             URL acceso = new URL(request.getParameter("acceso"));
             LocalDate registro = LocalDate.parse(request.getParameter("fecha_registro"));
-
+            String descPremio = request.getParameter("desc_premio");
+            int cantPremios = Integer.parseInt(request.getParameter("cant_premios"));
+            
             Set<String> profes = new HashSet<String>();
 
             HttpSession session = request.getSession();
@@ -366,6 +368,8 @@ public class ClaseServlet extends HttpServlet {
             args.setAcceso(acceso.toString());
             args.setRegistro(Utils.beanFromLocalDate(registro));
             args.setImagen(data);
+            args.setDescPremio(descPremio);
+            args.setCantPremios(cantPremios);
 
             try {
                 port.crearClase(args);

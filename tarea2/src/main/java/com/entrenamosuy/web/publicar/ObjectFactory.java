@@ -1704,6 +1704,15 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
+    public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
+        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenInstitucionResponse.class)
     public JAXBElement<byte[]> createGetImagenInstitucionResponseReturn(byte[] value) {
         return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenInstitucionResponse.class, ((byte[]) value));
@@ -1716,15 +1725,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "return", scope = GetImagenUsuarioResponse.class)
     public JAXBElement<byte[]> createGetImagenUsuarioResponseReturn(byte[] value) {
         return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenUsuarioResponse.class, ((byte[]) value));
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "", name = "return", scope = GetImagenActividadResponse.class)
-    public JAXBElement<byte[]> createGetImagenActividadResponseReturn(byte[] value) {
-        return new JAXBElement<byte[]>(_GetImagenClaseResponseReturn_QNAME, byte[].class, GetImagenActividadResponse.class, ((byte[]) value));
     }
 
     /**

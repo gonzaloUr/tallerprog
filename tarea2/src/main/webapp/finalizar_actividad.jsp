@@ -20,7 +20,7 @@
                     <h4> ${actividad.nombre}</h4>
                     <p> ${actividad.descripcion}</p>
                     <p> Costo: ${actividad.costo}</p>
-                    <p>Duración: ${actividad.duracion}</p>
+                    <p>Duración: ${actividad.duracion} minutos</p>
                     <a href="terminar_actividad?finalizar=${actividad.nombre}" class="btn btn-primary">Finalizar</a>
 
                     <p>  </p>

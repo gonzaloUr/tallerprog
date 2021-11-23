@@ -403,6 +403,8 @@ public class Publicador {
                 .setAcceso(args.getAcceso())
                 .setFechaRegistro(args.getRegistro().toLocalDate())
                 .setImagen(img)
+                .setPremio(args.getDescPremio())
+                .setCantPremios(args.getCantPremios())
                 .invoke();
         } catch (ClaseInconsistenteException e) {
             throw new ClaseInconsistenteExceptionWrapper(e);

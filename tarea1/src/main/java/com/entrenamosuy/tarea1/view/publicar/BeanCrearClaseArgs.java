@@ -23,8 +23,28 @@ public class BeanCrearClaseArgs {
 
     private byte[] imagen;
 
+    private String descPremio;
+
+    private int cantPremios;
+
     public String getActividad() {
         return actividad;
+    }
+
+    public String getDescPremio() {
+        return descPremio;
+    }
+
+    public void setDescPremio(String descPremio) {
+        this.descPremio = descPremio;
+    }
+
+    public int getCantPremios() {
+        return cantPremios;
+    }
+
+    public void setCantPremios(int cantPremios) {
+        this.cantPremios = cantPremios;
     }
 
     public void setActividad(String actividad) {

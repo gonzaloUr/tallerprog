@@ -175,7 +175,8 @@
                                 <a href="consulta_actividad?nombre=<%= a.getNombre()%>" class="list-group-item list-group-item-action"><%= a.getNombre()%></a>
                                 <% } %>
                                 <%
-                                if (request.getAttribute("actividadesIngresadas") != null){
+                                boolean esDicta = (boolean) request.getAttribute("esDicta");
+                                if ((request.getAttribute("actividadesIngresadas") != null) && (esDicta)){
                                     Set<BeanActividad> actsIng = (Set<BeanActividad>) request.getAttribute("actividadesIngresadas");
                                     for (BeanActividad ac: actsIng){
                                 %>
@@ -189,7 +190,7 @@
                                 } %>
                                 
                                 <%
-                                if (request.getAttribute("actividadesNoAceptadas") != null){
+                                if ((request.getAttribute("actividadesNoAceptadas") != null) && (esDicta)){
                                 Set<BeanActividad> actsR = (Set<BeanActividad>) request.getAttribute("actividadesRechazadas");
                                 for (BeanActividad ac: actsR){
                                 %>
@@ -203,7 +204,7 @@
                                 } %>
 
                                 <%
-                                if (request.getAttribute("actividadesFinalizadas") != null){
+                                if ((request.getAttribute("actividadesFinalizadas") != null) && (esDicta)){
                                 Set<BeanActividad> actsFin = (Set<BeanActividad>) request.getAttribute("actividadesFinalizadas");
                                 for (BeanActividad ac: actsFin){
                                 %>

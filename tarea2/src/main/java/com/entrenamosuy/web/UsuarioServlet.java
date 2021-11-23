@@ -129,6 +129,7 @@ public class UsuarioServlet extends HttpServlet {
         } else if(path.equals("/consulta_profesor")) {
             String nick = request.getParameter("nickname");
             BeanProfesor profe = port.getDataProfesor(nick);
+            HttpSession session = request.getSession();
 
             Set<BeanClase> clases = profe.getClases().stream().collect(Collectors.toSet());
             Set<BeanActividad> actividades = profe.getAceptadas().stream().collect(Collectors.toSet());
@@ -139,6 +140,7 @@ public class UsuarioServlet extends HttpServlet {
                 .collect(Collectors.toSet());
             Set<BeanActividad> actividadesFinalizadas = actividadesNoAceptadas.stream().filter((BeanActividad x) -> x.getEstado().equals("FINALIZADA"))
                 .collect(Collectors.toSet());
+            
             request.setAttribute("nombre", profe.getNombre());
             request.setAttribute("apellido", profe.getApellido());
             request.setAttribute("mail", profe.getCorreo().getPrefix()+"@"+profe.getCorreo().getDomain());
@@ -154,10 +156,6 @@ public class UsuarioServlet extends HttpServlet {
             request.setAttribute("descripcion", profe.getDescripcion());
             request.setAttribute("biografia", profe.getBiografia());
 
-
-
-            HttpSession session = request.getSession();
-
             Object usr = session.getAttribute("usuario");
             List<String> seguidos1 = null;
 
@@ -165,8 +163,10 @@ public class UsuarioServlet extends HttpServlet {
                 boolean b = (boolean) session.getAttribute("es_profesor");
                 if (b) {
                     BeanProfesor p = (BeanProfesor) usr;
+                    request.setAttribute("esDicta", nick.equals(p.getNickname()));
                     seguidos1 = p.getSeguidos();
                 } else {
+                    request.setAttribute("esDicta", false);
                     BeanSocio s = (BeanSocio) usr;
                     seguidos1 = s.getSeguidos();
                 }
@@ -179,7 +179,10 @@ public class UsuarioServlet extends HttpServlet {
                 }
             } else {
                 request.setAttribute("esSeguidor", 0);
+                request.setAttribute("esDicta", false);
             }
+
+            
 
             List<String> seguidos = profe.getSeguidos();
             List<String> seguidores = profe.getSeguidores();
